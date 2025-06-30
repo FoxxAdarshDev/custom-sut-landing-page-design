@@ -246,9 +246,12 @@
             <div class="promo-featured-products">
                 <h3 class="promo-featured-title">🎆 FEATURED BIOPROCESS DEALS 🎆</h3>
                 <div class="promo-products-grid">
+                    {% comment %} First try to show products from sale collections {% endcomment %}
+                    {% assign featured_products_count = 0 %}
                     {% for collection in collections %}
                         {% if collection.first contains 'us-independence-day-sale-25' and (collection.first contains 'pc-' or collection.first contains 'ezbio' or collection.first contains 'bioprocess' or collection.first contains 'vent') %}
                             {% for product in collection.last.products limit: 2 %}
+                            {% assign featured_products_count = featured_products_count | plus: 1 %}
                             <div class="promo-product-card">
                                 <div class="promo-product-image">
                                     {% if product.featured_image %}
@@ -273,6 +276,61 @@
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
+                    
+                    {% comment %} Fallback: If no sale collection products found, show from assigned collections {% endcomment %}
+                    {% if featured_products_count == 0 %}
+                        {% assign fallback_collections = pc_carboy_collection.products | concat: pc_tr_carboy_collection.products | concat: ezbio_bottles_collection.products | concat: bioprocess_components_collection.products | concat: vent_filters_collection.products %}
+                        {% for product in fallback_collections limit: 6 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% endif %}
+                                <div class="promo-sale-badge">🇺🇸 SALE</div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% comment %} Ultimate fallback: Show from main Independence Day sale collection {% endcomment %}
+                    {% if featured_products_count == 0 and fallback_collections.size == 0 %}
+                        {% for product in us_independence_sale_collection.products limit: 6 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% endif %}
+                                <div class="promo-sale-badge">🇺🇸 SALE</div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
