@@ -45,349 +45,272 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Animated Flag Background -->
+        <div class="flag-background">
+            <div class="flag-wave flag-wave-1"></div>
+            <div class="flag-wave flag-wave-2"></div>
+            <div class="flag-wave flag-wave-3"></div>
+        </div>
+        
+        <!-- Floating Elements -->
         <div class="hero-decoration">
             <div class="star star-1">⭐</div>
             <div class="star star-2">⭐</div>
             <div class="star star-3">⭐</div>
             <div class="firework firework-1">🎆</div>
             <div class="firework firework-2">🎆</div>
+            <div class="flag-icon flag-icon-1">🇺🇸</div>
+            <div class="flag-icon flag-icon-2">🇺🇸</div>
         </div>
     </section>
 
+    {% comment %} Dynamic Product Collections {% endcomment %}
+    {% assign pc_carboy_collection = collections['pc-rectangular-carboy'] %}
+    {% assign tr_carboy_collection = collections['pc-tr-carboy'] %}
+    {% assign ezbio_collection = collections['ezbio-bottles-pc'] %}
+    {% assign components_collection = collections['bioprocess-components'] %}
+    {% assign filters_collection = collections['vent-filters'] %}
+
     <!-- PC Rectangular Carboy Section -->
+    {% if pc_carboy_collection.products.size > 0 %}
     <section class="category-section carboy-section">
         <div class="container">
             <div class="section-header">
                 <div class="discount-banner">20% OFF</div>
-                <h2>PC Rectangular Carboy Collection</h2>
-                <p>Space-saving design with superior durability for your bioprocess applications</p>
+                <h2>{{ pc_carboy_collection.title | default: 'PC Rectangular Carboy Collection' }}</h2>
+                <p>{{ pc_carboy_collection.description | default: 'Space-saving design with superior durability for your bioprocess applications' }}</p>
                 <div class="mini-timer">
                     <span>⏰ Limited Time: <span id="carboy-timer">30:22:48</span></span>
                 </div>
             </div>
             
             <div class="products-grid">
+                {% for product in pc_carboy_collection.products limit: 3 %}
                 <div class="product-card">
                     <div class="product-discount">20% OFF</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=PC+Carboy+2.5L" alt="PC Carboy 2.5L">
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
+                        {% endif %}
                     </div>
                     <div class="product-info">
-                        <h3>PC Rectangular Carboy 2.5L</h3>
-                        <p>Perfect for small-scale applications with excellent visibility</p>
+                        <h3>{{ product.title }}</h3>
+                        <p>{{ product.description | truncate: 60 }}</p>
                         <div class="price-info">
-                            <span class="original-price">$89.99</span>
-                            <span class="sale-price">$71.99</span>
+                            {% if product.compare_at_price > product.price %}
+                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% else %}
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% endif %}
                         </div>
-                        <div class="savings">Save $18.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
+                        {% if product.compare_at_price > product.price %}
+                            {% assign savings = product.compare_at_price | minus: product.price %}
+                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
+                        {% endif %}
+                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-discount">20% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=PC+Carboy+5L" alt="PC Carboy 5L">
-                    </div>
-                    <div class="product-info">
-                        <h3>PC Rectangular Carboy 5L</h3>
-                        <p>Mid-range capacity for versatile laboratory use</p>
-                        <div class="price-info">
-                            <span class="original-price">$129.99</span>
-                            <span class="sale-price">$103.99</span>
-                        </div>
-                        <div class="savings">Save $26.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-discount">20% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=PC+Carboy+10L" alt="PC Carboy 10L">
-                    </div>
-                    <div class="product-info">
-                        <h3>PC Rectangular Carboy 10L</h3>
-                        <p>Large capacity for industrial bioprocess applications</p>
-                        <div class="price-info">
-                            <span class="original-price">$199.99</span>
-                            <span class="sale-price">$159.99</span>
-                        </div>
-                        <div class="savings">Save $40.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- PC TR Carboy Section -->
+    {% if tr_carboy_collection.products.size > 0 %}
     <section class="category-section tr-carboy-section">
         <div class="container">
             <div class="section-header">
                 <div class="discount-banner">15% OFF</div>
-                <h2>PC TR Carboy Collection</h2>
-                <p>Titanium Round series for enhanced performance and reliability</p>
+                <h2>{{ tr_carboy_collection.title | default: 'PC TR Carboy Collection' }}</h2>
+                <p>{{ tr_carboy_collection.description | default: 'Titanium Round series for enhanced performance and reliability' }}</p>
                 <div class="mini-timer">
                     <span>⏰ Limited Time: <span id="tr-timer">30:22:48</span></span>
                 </div>
             </div>
             
             <div class="products-grid">
+                {% for product in tr_carboy_collection.products limit: 3 %}
                 <div class="product-card">
                     <div class="product-discount">15% OFF</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=TR+Carboy+1L" alt="TR Carboy 1L">
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
+                        {% endif %}
                     </div>
                     <div class="product-info">
-                        <h3>PC TR Carboy 1L</h3>
-                        <p>Compact round design for space-efficient storage</p>
+                        <h3>{{ product.title }}</h3>
+                        <p>{{ product.description | truncate: 60 }}</p>
                         <div class="price-info">
-                            <span class="original-price">$79.99</span>
-                            <span class="sale-price">$67.99</span>
+                            {% if product.compare_at_price > product.price %}
+                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% else %}
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% endif %}
                         </div>
-                        <div class="savings">Save $12.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
+                        {% if product.compare_at_price > product.price %}
+                            {% assign savings = product.compare_at_price | minus: product.price %}
+                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
+                        {% endif %}
+                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-discount">15% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=TR+Carboy+5L" alt="TR Carboy 5L">
-                    </div>
-                    <div class="product-info">
-                        <h3>PC TR Carboy 5L</h3>
-                        <p>Enhanced titanium coating for superior durability</p>
-                        <div class="price-info">
-                            <span class="original-price">$149.99</span>
-                            <span class="sale-price">$127.49</span>
-                        </div>
-                        <div class="savings">Save $22.50</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-discount">15% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=TR+Carboy+20L" alt="TR Carboy 20L">
-                    </div>
-                    <div class="product-info">
-                        <h3>PC TR Carboy 20L</h3>
-                        <p>High-capacity solution for large-scale operations</p>
-                        <div class="price-info">
-                            <span class="original-price">$299.99</span>
-                            <span class="sale-price">$254.99</span>
-                        </div>
-                        <div class="savings">Save $45.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- EZBio Bottles Section -->
+    {% if ezbio_collection.products.size > 0 %}
     <section class="category-section ezbio-section">
         <div class="container">
             <div class="section-header">
                 <div class="discount-banner">12% OFF</div>
-                <h2>EZBio Bottles PC Collection</h2>
-                <p>Autoclavable media bottles for sterile applications and laboratory use</p>
+                <h2>{{ ezbio_collection.title | default: 'EZBio Bottles PC Collection' }}</h2>
+                <p>{{ ezbio_collection.description | default: 'Autoclavable media bottles for sterile applications and laboratory use' }}</p>
                 <div class="mini-timer">
                     <span>⏰ Limited Time: <span id="ezbio-timer">30:22:48</span></span>
                 </div>
             </div>
             
             <div class="products-grid">
+                {% for product in ezbio_collection.products limit: 3 %}
                 <div class="product-card">
                     <div class="product-discount">12% OFF</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=EZBio+250ml" alt="EZBio 250ml">
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
+                        {% endif %}
                     </div>
                     <div class="product-info">
-                        <h3>EZBio Bottle 250ml</h3>
-                        <p>Compact autoclavable bottle for small batch processing</p>
+                        <h3>{{ product.title }}</h3>
+                        <p>{{ product.description | truncate: 60 }}</p>
                         <div class="price-info">
-                            <span class="original-price">$24.99</span>
-                            <span class="sale-price">$21.99</span>
+                            {% if product.compare_at_price > product.price %}
+                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% else %}
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% endif %}
                         </div>
-                        <div class="savings">Save $3.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
+                        {% if product.compare_at_price > product.price %}
+                            {% assign savings = product.compare_at_price | minus: product.price %}
+                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
+                        {% endif %}
+                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-discount">12% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=EZBio+500ml" alt="EZBio 500ml">
-                    </div>
-                    <div class="product-info">
-                        <h3>EZBio Bottle 500ml</h3>
-                        <p>Medium capacity with excellent chemical resistance</p>
-                        <div class="price-info">
-                            <span class="original-price">$34.99</span>
-                            <span class="sale-price">$30.79</span>
-                        </div>
-                        <div class="savings">Save $4.20</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-discount">12% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=EZBio+1000ml" alt="EZBio 1000ml">
-                    </div>
-                    <div class="product-info">
-                        <h3>EZBio Bottle 1000ml</h3>
-                        <p>Large capacity for media preparation and storage</p>
-                        <div class="price-info">
-                            <span class="original-price">$44.99</span>
-                            <span class="sale-price">$39.59</span>
-                        </div>
-                        <div class="savings">Save $5.40</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- Bioprocess Components Section -->
+    {% if components_collection.products.size > 0 %}
     <section class="category-section components-section">
         <div class="container">
             <div class="section-header">
                 <div class="discount-banner biggest-savings">40% OFF</div>
-                <h2>Bioprocess Components</h2>
-                <p>Essential components for your bioprocess setup with maximum savings</p>
+                <h2>{{ components_collection.title | default: 'Bioprocess Components' }}</h2>
+                <p>{{ components_collection.description | default: 'Essential components for your bioprocess setup with maximum savings' }}</p>
                 <div class="mini-timer">
                     <span>⏰ Limited Time: <span id="components-timer">30:22:48</span></span>
                 </div>
             </div>
             
             <div class="products-grid">
+                {% for product in components_collection.products limit: 3 %}
                 <div class="product-card featured">
                     <div class="product-discount biggest">40% OFF</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=Filter+Assembly" alt="Filter Assembly">
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
+                        {% endif %}
                     </div>
                     <div class="product-info">
-                        <h3>Sterile Filter Assembly</h3>
-                        <p>High-performance filtration for sterile processing</p>
+                        <h3>{{ product.title }}</h3>
+                        <p>{{ product.description | truncate: 60 }}</p>
                         <div class="price-info">
-                            <span class="original-price">$199.99</span>
-                            <span class="sale-price">$119.99</span>
+                            {% if product.compare_at_price > product.price %}
+                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% else %}
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% endif %}
                         </div>
-                        <div class="savings">Save $80.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
+                        {% if product.compare_at_price > product.price %}
+                            {% assign savings = product.compare_at_price | minus: product.price %}
+                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
+                        {% endif %}
+                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
                     </div>
                 </div>
-
-                <div class="product-card featured">
-                    <div class="product-discount biggest">40% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=Tubing+Set" alt="Tubing Set">
-                    </div>
-                    <div class="product-info">
-                        <h3>Silicone Tubing Set</h3>
-                        <p>Flexible, autoclavable tubing for fluid transfer</p>
-                        <div class="price-info">
-                            <span class="original-price">$89.99</span>
-                            <span class="sale-price">$53.99</span>
-                        </div>
-                        <div class="savings">Save $36.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-
-                <div class="product-card featured">
-                    <div class="product-discount biggest">40% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=Connector+Kit" alt="Connector Kit">
-                    </div>
-                    <div class="product-info">
-                        <h3>Universal Connector Kit</h3>
-                        <p>Complete connector set for seamless integration</p>
-                        <div class="price-info">
-                            <span class="original-price">$149.99</span>
-                            <span class="sale-price">$89.99</span>
-                        </div>
-                        <div class="savings">Save $60.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- Vent Filters Section -->
+    {% if filters_collection.products.size > 0 %}
     <section class="category-section vent-filters-section">
         <div class="container">
             <div class="section-header">
                 <div class="discount-banner maximum-savings">50% OFF</div>
-                <h2>Vent Filters Collection</h2>
-                <p>Premium vent filters with maximum savings for Independence Day</p>
+                <h2>{{ filters_collection.title | default: 'Vent Filters Collection' }}</h2>
+                <p>{{ filters_collection.description | default: 'Premium vent filters with maximum savings for Independence Day' }}</p>
                 <div class="mini-timer">
                     <span>⏰ Limited Time: <span id="vent-timer">30:22:48</span></span>
                 </div>
             </div>
             
             <div class="products-grid">
+                {% for product in filters_collection.products limit: 3 %}
                 <div class="product-card featured">
                     <div class="product-discount maximum">50% OFF</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=PTFE+Vent+Filter" alt="PTFE Vent Filter">
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
+                        {% endif %}
                     </div>
                     <div class="product-info">
-                        <h3>PTFE Vent Filter 0.2μm</h3>
-                        <p>High-efficiency sterile air filtration system</p>
+                        <h3>{{ product.title }}</h3>
+                        <p>{{ product.description | truncate: 60 }}</p>
                         <div class="price-info">
-                            <span class="original-price">$79.99</span>
-                            <span class="sale-price">$39.99</span>
+                            {% if product.compare_at_price > product.price %}
+                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% else %}
+                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                            {% endif %}
                         </div>
-                        <div class="savings">Save $40.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
+                        {% if product.compare_at_price > product.price %}
+                            {% assign savings = product.compare_at_price | minus: product.price %}
+                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
+                        {% endif %}
+                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
                     </div>
                 </div>
-
-                <div class="product-card featured">
-                    <div class="product-discount maximum">50% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=Hydrophobic+Filter" alt="Hydrophobic Filter">
-                    </div>
-                    <div class="product-info">
-                        <h3>Hydrophobic Vent Filter</h3>
-                        <p>Water-resistant filtration for challenging environments</p>
-                        <div class="price-info">
-                            <span class="original-price">$99.99</span>
-                            <span class="sale-price">$49.99</span>
-                        </div>
-                        <div class="savings">Save $50.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-
-                <div class="product-card featured">
-                    <div class="product-discount maximum">50% OFF</div>
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200?text=Multi-Layer+Filter" alt="Multi-Layer Filter">
-                    </div>
-                    <div class="product-info">
-                        <h3>Multi-Layer Vent Filter</h3>
-                        <p>Advanced multi-stage filtration technology</p>
-                        <div class="price-info">
-                            <span class="original-price">$129.99</span>
-                            <span class="sale-price">$64.99</span>
-                        </div>
-                        <div class="savings">Save $65.00</div>
-                        <a href="#" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- Final CTA Section -->
     <section class="final-cta-section">
@@ -415,7 +338,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="cta-button">Shop All Sale Items</a>
+                <a href="{{ collections.all-products.url }}" class="cta-button">Shop All Sale Items</a>
             </div>
         </div>
     </section>
@@ -441,12 +364,57 @@
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 50%, #1e3a8a 100%);
+            background: linear-gradient(135deg, #001f3f 0%, #1e3a8a 25%, #dc2626 50%, #b91c1c 75%, #001f3f 100%);
             color: white;
             padding: 80px 0;
             position: relative;
             overflow: hidden;
             text-align: center;
+        }
+
+        /* Animated Flag Background */
+        .flag-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .flag-wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .flag-wave-1 {
+            background: linear-gradient(0deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
+            animation: waveFlag 8s ease-in-out infinite;
+        }
+
+        .flag-wave-2 {
+            background: linear-gradient(45deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
+            animation: waveFlag 6s ease-in-out infinite reverse;
+            animation-delay: -2s;
+        }
+
+        .flag-wave-3 {
+            background: linear-gradient(-45deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
+            animation: waveFlag 10s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        @keyframes waveFlag {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg); 
+                opacity: 0.15; 
+            }
+            50% { 
+                transform: scale(1.1) rotate(2deg); 
+                opacity: 0.25; 
+            }
         }
 
         .hero-content {
@@ -463,30 +431,61 @@
             font-weight: 600;
             margin-bottom: 20px;
             backdrop-filter: blur(10px);
+            animation: patrioticGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes patrioticGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(220,38,38,0.3); }
+            33% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+            66% { box-shadow: 0 0 20px rgba(30,58,138,0.3); }
         }
 
         .hero-title {
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: titlePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .hero-highlight {
             color: #fbbf24;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.6), 0 0 10px rgba(251,191,36,0.8); }
+            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.6), 0 0 20px rgba(251,191,36,1), 0 0 30px rgba(251,191,36,0.5); }
         }
 
         .hero-subtitle {
             font-size: 1.2rem;
             margin-bottom: 40px;
             opacity: 0.9;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 0.9; transform: translateY(0); }
         }
 
         .hero-timer h3 {
             font-size: 1.5rem;
             margin-bottom: 20px;
             color: #fbbf24;
+            animation: timerGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes timerGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(251,191,36,0.8); }
+            50% { text-shadow: 0 0 20px rgba(251,191,36,1), 0 0 30px rgba(251,191,36,0.5); }
         }
 
         .timer-display {
@@ -504,6 +503,12 @@
             min-width: 80px;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255,255,255,0.3);
+            animation: timerBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes timerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .timer-unit span {
@@ -525,12 +530,29 @@
             right: 0;
             bottom: 0;
             pointer-events: none;
+            z-index: 1;
         }
 
-        .star, .firework {
+        .star, .firework, .flag-icon {
             position: absolute;
             font-size: 2rem;
             animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .flag-icon {
+            font-size: 3rem;
+            animation: flagWave 3s ease-in-out infinite;
+        }
+
+        @keyframes flagWave {
+            0%, 100% { 
+                opacity: 0.6; 
+                transform: scale(1) rotate(0deg); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.1) rotate(5deg); 
+            }
         }
 
         .star-1 { top: 20%; left: 10%; animation-delay: 0s; }
@@ -538,6 +560,8 @@
         .star-3 { bottom: 30%; left: 20%; animation-delay: 1s; }
         .firework-1 { top: 40%; right: 10%; animation-delay: 1.5s; }
         .firework-2 { bottom: 20%; right: 25%; animation-delay: 2s; }
+        .flag-icon-1 { top: 15%; right: 5%; animation-delay: 0.8s; }
+        .flag-icon-2 { bottom: 15%; left: 5%; animation-delay: 2.5s; }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
@@ -551,67 +575,23 @@
         }
 
         .carboy-section {
-            background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%);
+            background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 50%, #dbeafe 100%);
             position: relative;
-        }
-
-        .carboy-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(220,38,38,0.1)"/></svg>') repeat;
-            animation: float 20s linear infinite;
         }
 
         .tr-carboy-section {
-            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #f0fdf4 100%);
             position: relative;
-        }
-
-        .tr-carboy-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 60,40 40,40" fill="rgba(30,58,138,0.1)"/></svg>') repeat;
-            animation: float 15s linear infinite reverse;
         }
 
         .ezbio-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #fef3c7 100%);
             position: relative;
-        }
-
-        .ezbio-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="40" y="40" width="20" height="20" fill="rgba(34,197,94,0.1)"/></svg>') repeat;
-            animation: float 25s linear infinite;
         }
 
         .components-section {
-            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 20%, #f59e0b 100%);
+            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 20%, #f59e0b 80%, #dc2626 100%);
             position: relative;
-        }
-
-        .components-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 L60,40 L40,40 Z M50,60 L60,80 L40,80 Z" fill="rgba(251,191,36,0.2)"/></svg>') repeat;
-            animation: float 18s linear infinite;
         }
 
         .vent-filters-section {
@@ -693,6 +673,12 @@
             border-radius: 20px;
             font-weight: 600;
             color: #dc2626;
+            animation: timerPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0%, 100% { background: rgba(220,38,38,0.1); }
+            50% { background: rgba(220,38,38,0.2); }
         }
 
         .products-grid {
@@ -712,10 +698,16 @@
             position: relative;
             overflow: hidden;
             border: 2px solid transparent;
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             border-color: #0071ce;
         }
@@ -827,16 +819,35 @@
 
         /* Final CTA Section */
         .final-cta-section {
-            background: linear-gradient(135deg, #001f3f 0%, #0071ce 100%);
+            background: linear-gradient(135deg, #001f3f 0%, #1e3a8a 25%, #dc2626 50%, #b91c1c 75%, #001f3f 100%);
             color: white;
             padding: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 60,40 40,40" fill="rgba(251,191,36,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
         }
 
         .cta-content h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             margin-bottom: 15px;
+            animation: titlePulse 4s ease-in-out infinite;
         }
 
         .cta-content p {
@@ -860,6 +871,12 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(220,38,38,0.3);
+            animation: ctaGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes ctaGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(220,38,38,0.3); }
+            50% { box-shadow: 0 15px 40px rgba(220,38,38,0.5), 0 0 20px rgba(220,38,38,0.8); }
         }
 
         .cta-button:hover {
@@ -901,15 +918,20 @@
             .section-header h2 {
                 font-size: 2rem;
             }
+
+            .flag-icon {
+                font-size: 2rem;
+            }
         }
     </style>
 
     <script>
-        // Countdown Timer
+        // Countdown Timer Function
         function updateCountdown() {
-            const endDate = new Date('July 31, 2025 23:59:59').getTime();
+            // Set the target date (July 4, 2024 23:59:59)
+            const targetDate = new Date('July 4, 2024 23:59:59').getTime();
             const now = new Date().getTime();
-            const timeLeft = endDate - now;
+            const timeLeft = targetDate - now;
 
             if (timeLeft > 0) {
                 const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -917,35 +939,45 @@
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                // Update all timers
-                const timerElements = [
-                    ['days', 'hours', 'minutes', 'seconds'],
-                    ['final-days', 'final-hours', 'final-minutes', 'final-seconds']
-                ];
+                // Update main timer
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 
-                timerElements.forEach(timers => {
-                    document.getElementById(timers[0]).textContent = days.toString().padStart(2, '0');
-                    document.getElementById(timers[1]).textContent = hours.toString().padStart(2, '0');
-                    document.getElementById(timers[2]).textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById(timers[3]).textContent = seconds.toString().padStart(2, '0');
-                });
+                // Update final timer
+                document.getElementById('final-days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('final-hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('final-minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('final-seconds').textContent = seconds.toString().padStart(2, '0');
 
                 // Update mini timers
                 const timeString = `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-                document.getElementById('carboy-timer').textContent = timeString;
-                document.getElementById('tr-timer').textContent = timeString;
-                document.getElementById('ezbio-timer').textContent = timeString;
-                document.getElementById('components-timer').textContent = timeString;
-                document.getElementById('vent-timer').textContent = timeString;
+                const miniTimers = ['carboy-timer', 'tr-timer', 'ezbio-timer', 'components-timer', 'vent-timer'];
+                miniTimers.forEach(timerId => {
+                    const element = document.getElementById(timerId);
+                    if (element) {
+                        element.textContent = timeString;
+                    }
+                });
+            } else {
+                // Timer expired
+                const expiredElements = ['days', 'hours', 'minutes', 'seconds', 'final-days', 'final-hours', 'final-minutes', 'final-seconds'];
+                expiredElements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = '00';
+                    }
+                });
             }
         }
 
-        // Update countdown every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // Add loading animation for product images
+        // Initialize and run countdown
         document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Add loading animation for product images
             const images = document.querySelectorAll('.product-image img');
             images.forEach(img => {
                 img.addEventListener('load', function() {
@@ -956,12 +988,12 @@
                 img.style.transform = 'scale(0.8)';
                 img.style.transition = 'all 0.3s ease';
             });
-        });
 
-        // Add click tracking for analytics
-        document.querySelectorAll('.product-cta, .cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                console.log('Button clicked:', this.textContent.trim());
+            // Add click tracking for analytics
+            document.querySelectorAll('.product-cta, .cta-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Button clicked:', this.textContent.trim());
+                });
             });
         });
     </script>
