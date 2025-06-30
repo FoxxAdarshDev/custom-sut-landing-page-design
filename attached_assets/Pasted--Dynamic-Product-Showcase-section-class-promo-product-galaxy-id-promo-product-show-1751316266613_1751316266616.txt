@@ -1,0 +1,197 @@
+ <!-- Dynamic Product Showcase -->
+    <section class="promo-product-galaxy" id="promo-product-showcase">
+        <!-- Bioprocess Galaxy -->
+        <div class="promo-galaxy promo-bioprocess-galaxy" id="bioprocess-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🧬 BIOPROCESS UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Five revolutionary categories, infinite possibilities</p>
+            </div>
+            
+            <div class="promo-orbit-system">
+                <!-- Center Hub -->
+                <div class="promo-orbit-center">
+                    <div class="promo-center-core">
+                        <span class="promo-core-text">BIOPROCESS</span>
+                        <span class="promo-core-subtext">REVOLUTION</span>
+                    </div>
+                </div>
+                
+                <!-- Orbiting Categories -->
+                {% if pc_carboy_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-1">
+                    <div class="promo-category-planet" data-category="pc-rectangular-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚗️</span>
+                            <span class="promo-planet-name">PC Rectangular</span>
+                            <span class="promo-planet-count">{{ pc_carboy_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if pc_tr_carboy_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-2">
+                    <div class="promo-category-planet" data-category="pc-tr-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🔄</span>
+                            <span class="promo-planet-name">PC TR Carboy</span>
+                            <span class="promo-planet-count">{{ pc_tr_carboy_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if ezbio_bottles_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-3">
+                    <div class="promo-category-planet" data-category="ezbio-bottles-pc">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🧪</span>
+                            <span class="promo-planet-name">EZBio Bottles</span>
+                            <span class="promo-planet-count">{{ ezbio_bottles_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">30% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if bioprocess_components_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-4">
+                    <div class="promo-category-planet" data-category="bioprocess-components">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚙️</span>
+                            <span class="promo-planet-name">Components</span>
+                            <span class="promo-planet-count">{{ bioprocess_components_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">40% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if vent_filters_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-5">
+                    <div class="promo-category-planet" data-category="vent-filters">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🌪️</span>
+                            <span class="promo-planet-name">Vent Filters</span>
+                            <span class="promo-planet-count">{{ vent_filters_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">50% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Featured Bioprocess Products -->
+            <div class="promo-featured-products">
+                <h3 class="promo-featured-title">🎆 FEATURED BIOPROCESS DEALS 🎆</h3>
+                <div class="promo-products-grid">
+                    {% for collection in collections %}
+                        {% if collection.first contains 'pc-' or collection.first contains 'ezbio' or collection.first contains 'bioprocess' or collection.first contains 'vent' %}
+                            {% for product in collection.last.products limit: 2 %}
+                            <div class="promo-product-card">
+                                <div class="promo-product-image">
+                                    {% if product.featured_image %}
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                    <div class="promo-sale-badge">🇺🇸 SALE</div>
+                                </div>
+                                <div class="promo-product-content">
+                                    <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                    <div class="promo-product-price">
+                                        {% if product.compare_at_price > product.price %}
+                                            <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                            <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                        {% else %}
+                                            <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Laboratory Galaxy -->
+        <div class="promo-galaxy promo-laboratory-galaxy" id="laboratory-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🔬 LABORATORY UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Premium laboratory essentials for every breakthrough</p>
+            </div>
+            
+            <div class="promo-lab-constellation">
+                <div class="promo-constellation-center">
+                    <div class="promo-lab-core">
+                        <span class="promo-lab-icon">🔬</span>
+                        <span class="promo-lab-title">LABORATORY</span>
+                        <span class="promo-lab-subtitle">EXCELLENCE</span>
+                    </div>
+                </div>
+                
+                <!-- Dynamic Laboratory Products -->
+                {% if laboratory_collection.products.size > 0 %}
+                    <div class="promo-lab-products">
+                        {% for product in laboratory_collection.products limit: 6 %}
+                        <div class="promo-lab-star" data-product="{{ product.id }}">
+                            <div class="promo-star-glow"></div>
+                            <div class="promo-star-content">
+                                <div class="promo-star-image">
+                                    {% if product.featured_image %}
+                                        <img src="{{ product.featured_image | img_url: '200x200' }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                    <div class="promo-star-badge">🎆</div>
+                                </div>
+                                <h4 class="promo-star-title">{{ product.title | truncate: 30 }}</h4>
+                                <div class="promo-star-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-star-cta">DISCOVER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Featured Laboratory Products Grid -->
+            <div class="promo-featured-products">
+                <h3 class="promo-featured-title">🎆 FEATURED LABORATORY DEALS 🎆</h3>
+                <div class="promo-products-grid">
+                    {% for product in laboratory_collection.products limit: 4 %}
+                    <div class="promo-product-card">
+                        <div class="promo-product-image">
+                            {% if product.featured_image %}
+                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                            {% endif %}
+                            <div class="promo-sale-badge">🇺🇸 SALE</div>
+                        </div>
+                        <div class="promo-product-content">
+                            <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                            <div class="promo-product-price">
+                                {% if product.compare_at_price > product.price %}
+                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                {% else %}
+                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                {% endif %}
+                            </div>
+                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>

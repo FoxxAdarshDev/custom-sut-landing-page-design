@@ -1,0 +1,42 @@
+ <!-- Independence Day Special Collection -->
+    {% if us_independence_sale_collection.products.size > 0 %}
+    <section class="promo-special-collection">
+        <div class="promo-special-header">
+            <h2 class="promo-special-title">🇺🇸 INDEPENDENCE DAY EXCLUSIVE DEALS 🇺🇸</h2>
+            <p class="promo-special-subtitle">Limited-time offers celebrating America's freedom and innovation</p>
+        </div>
+        
+        <div class="promo-special-grid">
+            {% for product in us_independence_sale_collection.products limit: 8 %}
+            <div class="promo-special-card">
+                <div class="promo-special-image">
+                    {% if product.featured_image %}
+                        <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}">
+                    {% endif %}
+                    <div class="promo-special-badge">
+                        <span class="promo-badge-flag">🇺🇸</span>
+                        <span class="promo-badge-text">EXCLUSIVE</span>
+                    </div>
+                </div>
+                <div class="promo-special-content">
+                    <h4 class="promo-special-product-title">{{ product.title }}</h4>
+                    <div class="promo-special-price">
+                        {% if product.compare_at_price > product.price %}
+                            <span class="promo-special-original">${{ product.compare_at_price | money_without_currency }}</span>
+                            <span class="promo-special-sale">${{ product.price | money_without_currency }}</span>
+                            <div class="promo-special-savings">
+                                Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+                            </div>
+                        {% else %}
+                            <span class="promo-special-sale">${{ product.price | money_without_currency }}</span>
+                        {% endif %}
+                    </div>
+                    <a href="{{ product.url }}" class="promo-special-cta">
+                        🎆 CELEBRATE FREEDOM
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
