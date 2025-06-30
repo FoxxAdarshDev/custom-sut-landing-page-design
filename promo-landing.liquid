@@ -1,0 +1,1049 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇺🇸 Independence Day Sale 2025 | Foxx BioProcess</title>
+    <meta name="description" content="Celebrate Independence Day with massive savings! Up to 50% off bioprocess equipment. Limited time offer - July 2025 only!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="flag-animation">
+            <div class="flag">
+                <div class="stripe red"></div>
+                <div class="stripe white"></div>
+                <div class="stripe red"></div>
+                <div class="stripe white"></div>
+                <div class="stripe red"></div>
+                <div class="stripe white"></div>
+                <div class="stripe red"></div>
+                <div class="blue-canton">
+                    <div class="stars">
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-text">🇺🇸 Independence Day Special</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line-1">FREEDOM TO</span>
+                <span class="title-line-2">SAVE BIG!</span>
+                <span class="discount-highlight">UP TO 50% OFF</span>
+            </h1>
+            <p class="hero-subtitle">
+                Celebrate America's independence with our biggest sale of the year!<br>
+                <strong>Premium bioprocess equipment at unbeatable prices.</strong>
+            </p>
+            <div class="countdown-timer">
+                <div class="timer-text">Sale ends in:</div>
+                <div class="timer-display">
+                    <div class="timer-unit">
+                        <span id="days">00</span>
+                        <label>Days</label>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="hours">00</span>
+                        <label>Hours</label>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="minutes">00</span>
+                        <label>Minutes</label>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="seconds">00</span>
+                        <label>Seconds</label>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#product-categories" class="cta-button primary">
+                    🛒 SHOP NOW & SAVE
+                </a>
+                <a href="#deals" class="cta-button secondary">
+                    View All Deals
+                </a>
+            </div>
+        </div>
+        
+        <div class="fireworks">
+            <div class="firework" style="--delay: 0s;"></div>
+            <div class="firework" style="--delay: 2s;"></div>
+            <div class="firework" style="--delay: 4s;"></div>
+        </div>
+    </section>
+
+    <!-- Product Categories Grid -->
+    <section id="product-categories" class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎆 EXCLUSIVE JULY DEALS 🎆</h2>
+                <p>Each category features special Independence Day pricing!</p>
+            </div>
+            
+            <div class="categories-grid">
+                <!-- PC Rectangular Carboy -->
+                <div class="category-card" data-discount="20">
+                    <div class="discount-badge">20% OFF</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign pc_carboy_collection = collections['pc-rectangular-carboy-us-independence-day-sale'] %}
+                            {% if pc_carboy_collection.products.size > 0 %}
+                                {% for product in pc_carboy_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.8 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>PC Rectangular Carboy</h3>
+                        <p>Space-saving design with superior durability</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $60</span>
+                        </div>
+                        <a href="{{ collections['pc-rectangular-carboy-us-independence-day-sale'].url }}" class="category-cta">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PC TR Carboy -->
+                <div class="category-card" data-discount="15">
+                    <div class="discount-badge">15% OFF</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign pc_tr_collection = collections['pc-tr-carboy-us-independence-day-sale'] %}
+                            {% if pc_tr_collection.products.size > 0 %}
+                                {% for product in pc_tr_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.85 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>PC TR Carboy</h3>
+                        <p>Titanium Round series for enhanced performance</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $47</span>
+                        </div>
+                        <a href="{{ collections['pc-tr-carboy-us-independence-day-sale'].url }}" class="category-cta">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- EZBio Bottles PC -->
+                <div class="category-card" data-discount="12">
+                    <div class="discount-badge">12% OFF</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign ezbio_pc_collection = collections['ezbio-bottles-pc-us-independence-day-sale'] %}
+                            {% if ezbio_pc_collection.products.size > 0 %}
+                                {% for product in ezbio_pc_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.88 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>EZBio Bottles PC</h3>
+                        <p>Autoclavable media bottles for sterile applications</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $36</span>
+                        </div>
+                        <a href="{{ collections['ezbio-bottles-pc-us-independence-day-sale'].url }}" class="category-cta">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- EZBio TS Bottles -->
+                <div class="category-card" data-discount="12">
+                    <div class="discount-badge">12% OFF</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign ezbio_ts_collection = collections['ezbio-ts-bottles-us-independence-day-sale'] %}
+                            {% if ezbio_ts_collection.products.size > 0 %}
+                                {% for product in ezbio_ts_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.88 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>EZBio TS Bottles</h3>
+                        <p>Titanium Square PETG bottles for versatility</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $61</span>
+                        </div>
+                        <a href="{{ collections['ezbio-ts-bottles-us-independence-day-sale'].url }}" class="category-cta">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PFA Bottles -->
+                <div class="category-card" data-discount="40" data-featured="true">
+                    <div class="discount-badge featured">40% OFF</div>
+                    <div class="featured-label">🔥 BIGGEST SAVINGS</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign pfa_collection = collections['pfa-bottles-us-independence-day-sale'] %}
+                            {% if pfa_collection.products.size > 0 %}
+                                {% for product in pfa_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.6 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>PFA Bottles</h3>
+                        <p>Ultra-clean, low temperature resistant bottles</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $255</span>
+                        </div>
+                        <a href="{{ collections['pfa-bottles-us-independence-day-sale'].url }}" class="category-cta featured">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AQG -->
+                <div class="category-card" data-discount="50" data-featured="true">
+                    <div class="discount-badge featured">50% OFF</div>
+                    <div class="featured-label">🔥 MAXIMUM SAVINGS</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign aqg_collection = collections['aqg-us-independence-day-sale'] %}
+                            {% if aqg_collection.products.size > 0 %}
+                                {% for product in aqg_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.5 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>AQG Connectors</h3>
+                        <p>AseptiQuik G sanitary connectors</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $2,872</span>
+                        </div>
+                        <a href="{{ collections['aqg-us-independence-day-sale'].url }}" class="category-cta featured">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CPC Steam Thru Connectors -->
+                <div class="category-card" data-discount="50" data-featured="true">
+                    <div class="discount-badge featured">50% OFF</div>
+                    <div class="featured-label">🔥 MAXIMUM SAVINGS</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign cpc_collection = collections['cpc-steam-thru-connectors-us-independence-day-sale'] %}
+                            {% if cpc_collection.products.size > 0 %}
+                                {% for product in cpc_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.5 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>CPC Steam Thru</h3>
+                        <p>SteamThru sanitary SIP connectors</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $2,889</span>
+                        </div>
+                        <a href="{{ collections['cpc-steam-thru-connectors-us-independence-day-sale'].url }}" class="category-cta featured">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- EZBio Bottle Assembly PC -->
+                <div class="category-card" data-discount="12">
+                    <div class="discount-badge">12% OFF</div>
+                    <div class="category-image">
+                        <div class="product-preview">
+                            {% assign assembly_collection = collections['ezbio-bottle-assembly-pc-us-independence-day-sale'] %}
+                            {% if assembly_collection.products.size > 0 %}
+                                {% for product in assembly_collection.products limit: 3 %}
+                                    <div class="product-item">
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                        <div class="price-info">
+                                            <span class="original-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="sale-price">${{ product.price | times: 0.88 | money_without_currency }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>EZBio Bottle Assembly</h3>
+                        <p>Complete sterile sampling solutions</p>
+                        <div class="savings-highlight">
+                            <span class="save-text">Save up to $165</span>
+                        </div>
+                        <a href="{{ collections['ezbio-bottle-assembly-pc-us-independence-day-sale'].url }}" class="category-cta">
+                            Shop Collection →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Banner -->
+    <section class="special-offers">
+        <div class="container">
+            <div class="offers-content">
+                <h2>🇺🇸 EXCLUSIVE INDEPENDENCE DAY PERKS 🇺🇸</h2>
+                <div class="perks-grid">
+                    <div class="perk-item">
+                        <div class="perk-icon">🚚</div>
+                        <h3>FREE SHIPPING</h3>
+                        <p>On all orders over $500</p>
+                    </div>
+                    <div class="perk-item">
+                        <div class="perk-icon">⚡</div>
+                        <h3>FAST DELIVERY</h3>
+                        <p>Express shipping available</p>
+                    </div>
+                    <div class="perk-item">
+                        <div class="perk-icon">💰</div>
+                        <h3>BULK DISCOUNTS</h3>
+                        <p>Additional savings on large orders</p>
+                    </div>
+                    <div class="perk-item">
+                        <div class="perk-icon">🔒</div>
+                        <h3>SECURE CHECKOUT</h3>
+                        <p>Safe & encrypted transactions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Don't Miss Out on America's Biggest Bioprocess Sale!</h2>
+                    <p>Limited quantities available. Sale ends July 31st, 2025.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#product-categories" class="cta-button primary large">
+                        🛒 SHOP ALL DEALS NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001f3f 0%, #0071ce 50%, #e74c3c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flag-animation {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            opacity: 0.3;
+            animation: flagWave 3s ease-in-out infinite;
+        }
+
+        .flag {
+            width: 120px;
+            height: 80px;
+            position: relative;
+            transform-origin: left center;
+        }
+
+        .stripe {
+            height: 11.43%;
+            width: 100%;
+        }
+
+        .stripe.red {
+            background: #B22234;
+        }
+
+        .stripe.white {
+            background: #FFFFFF;
+        }
+
+        .blue-canton {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 53%;
+            background: #3C3B6E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .star {
+            color: white;
+            font-size: 8px;
+        }
+
+        @keyframes flagWave {
+            0%, 100% { transform: rotate(0deg) scaleX(1); }
+            25% { transform: rotate(2deg) scaleX(0.95); }
+            75% { transform: rotate(-2deg) scaleX(0.95); }
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 800px;
+            padding: 40px 20px;
+        }
+
+        .hero-badge {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 0.9;
+        }
+
+        .title-line-1, .title-line-2 {
+            display: block;
+            background: linear-gradient(45deg, #ffffff, #f8f9fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .discount-highlight {
+            display: block;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1) drop-shadow(0 0 10px #ffd700); }
+            to { filter: brightness(1.2) drop-shadow(0 0 20px #ffd700); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Countdown Timer */
+        .countdown-timer {
+            margin: 40px 0;
+            color: white;
+        }
+
+        .timer-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timer-unit {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 20px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            min-width: 80px;
+        }
+
+        .timer-unit span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffd700;
+        }
+
+        .timer-unit label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* CTA Buttons */
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+
+        .cta-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(40,167,69,0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .cta-button.large {
+            padding: 20px 40px;
+            font-size: 1.3rem;
+        }
+
+        /* Fireworks Animation */
+        .fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: firework 6s ease-out infinite;
+            animation-delay: var(--delay);
+        }
+
+        .firework:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            background: #ff6b6b;
+        }
+
+        .firework:nth-child(2) {
+            top: 30%;
+            right: 20%;
+            background: #4ecdc4;
+        }
+
+        .firework:nth-child(3) {
+            top: 60%;
+            left: 70%;
+            background: #ffe66d;
+        }
+
+        @keyframes firework {
+            0% { transform: scale(0); opacity: 1; }
+            20% { transform: scale(1); }
+            40% { transform: scale(1.5); opacity: 0.7; }
+            60% { transform: scale(2); opacity: 0.4; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            color: #0071ce;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: #0071ce;
+        }
+
+        .category-card[data-featured="true"] {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+            border: 2px solid #dc2626;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        .discount-badge.featured {
+            background: #dc2626;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .featured-label {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(-10deg);
+            border-radius: 10px;
+        }
+
+        .category-image {
+            height: 200px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #f8f9fa;
+        }
+
+        .product-preview {
+            display: flex;
+            gap: 10px;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .product-item {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .price-info {
+            font-size: 0.8rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            margin-right: 5px;
+        }
+
+        .sale-price {
+            color: #28a745;
+            font-weight: 700;
+        }
+
+        .category-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0071ce;
+            margin-bottom: 10px;
+        }
+
+        .category-content p {
+            color: #6c757d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .savings-highlight {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .category-cta {
+            display: inline-block;
+            background: #0071ce;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-cta:hover {
+            background: #005bb5;
+            transform: translateX(5px);
+        }
+
+        .category-cta.featured {
+            background: #dc2626;
+        }
+
+        .category-cta.featured:hover {
+            background: #b91c1c;
+        }
+
+        /* Special Offers */
+        .special-offers {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0071ce 0%, #28a745 100%);
+            color: white;
+        }
+
+        .offers-content h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 50px;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .perk-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .perk-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .perk-item h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .perk-item p {
+            opacity: 0.9;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #001f3f 0%, #0071ce 100%);
+            color: white;
+        }
+
+        .cta-content {
+            text-align: center;
+        }
+
+        .cta-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timer-display {
+                gap: 10px;
+            }
+            
+            .timer-unit {
+                padding: 10px 15px;
+                min-width: 60px;
+            }
+            
+            .timer-unit span {
+                font-size: 1.5rem;
+            }
+            
+            .perks-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Scroll Animation */
+        .category-card {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+        .category-card:nth-child(5) { animation-delay: 0.5s; }
+        .category-card:nth-child(6) { animation-delay: 0.6s; }
+        .category-card:nth-child(7) { animation-delay: 0.7s; }
+        .category-card:nth-child(8) { animation-delay: 0.8s; }
+        .category-card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date('July 31, 2025 23:59:59').getTime();
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation for product images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.product-item img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1)';
+                });
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.8)';
+                img.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        // Add click tracking for analytics
+        document.querySelectorAll('.category-cta, .cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Add your analytics tracking code here
+                console.log('Button clicked:', this.textContent.trim());
+            });
+        });
+    </script>
+</body>
+</html>
