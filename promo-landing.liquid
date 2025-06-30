@@ -4,376 +4,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Independence Day Sale - Freedom to Save Big!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Independence Day Freedom Sale - Revolutionary Bioprocess & Laboratory Equipment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-badge">
-                🇺🇸 Independence Day Special
+<body class="promo-independence-body">
+    <!-- Revolutionary Hero Section -->
+    <section class="promo-hero-revolution">
+        <div class="promo-patriotic-canvas">
+            <div class="promo-star-field">
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
             </div>
-            <h1 class="hero-title">
-                FREEDOM TO<br>
-                <span class="hero-highlight">SAVE BIG!</span>
+            <div class="promo-flag-waves">
+                <div class="promo-wave promo-wave-red"></div>
+                <div class="promo-wave promo-wave-white"></div>
+                <div class="promo-wave promo-wave-blue"></div>
+            </div>
+            <div class="promo-fireworks">
+                <div class="promo-firework promo-firework-1"></div>
+                <div class="promo-firework promo-firework-2"></div>
+                <div class="promo-firework promo-firework-3"></div>
+            </div>
+        </div>
+        
+        <div class="promo-hero-content">
+            <div class="promo-liberty-badge">
+                🗽 Independence Day Freedom Sale
+            </div>
+            
+            <h1 class="promo-revolutionary-title">
+                <span class="promo-word promo-word-1">FREEDOM</span>
+                <span class="promo-word promo-word-2">TO</span>
+                <span class="promo-word promo-word-3">REVOLUTIONIZE</span>
+                <span class="promo-hero-subtitle-text">YOUR LABORATORY</span>
             </h1>
-            <p class="hero-subtitle">
-                Celebrate America's independence with our biggest sale of the year!<br>
-                Premium bioprocess equipment at unbeatable prices.
+            
+            <div class="promo-savings-explosion">
+                <div class="promo-explosion-text">UP TO</div>
+                <div class="promo-mega-discount">70% OFF</div>
+                <div class="promo-explosion-subtext">ON PREMIUM EQUIPMENT</div>
+            </div>
+            
+            <div class="promo-countdown-revolution">
+                <div class="promo-countdown-label">⚡ REVOLUTION ENDS IN ⚡</div>
+                <div class="promo-timer-grid">
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-days">30</span>
+                            <label>DAYS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-hours">22</span>
+                            <label>HOURS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-minutes">48</span>
+                            <label>MINS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-seconds">02</span>
+                            <label>SECS</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revolutionary Category Navigation -->
+    <section class="promo-category-universe">
+        <div class="promo-universe-header">
+            <h2 class="promo-universe-title">Choose Your Revolution</h2>
+            <p class="promo-universe-subtitle">Two worlds of innovation, infinite possibilities</p>
+        </div>
+        
+        <div class="promo-dual-worlds">
+            <!-- Bioprocess World -->
+            <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
+                <div class="promo-world-background">
+                    <div class="promo-bioprocess-particles"></div>
+                </div>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🧬</div>
+                    <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
+                    <p class="promo-world-desc">9 Categories of Cutting-Edge Equipment</p>
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">500+</span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 50%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
+                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
+                        EXPLORE BIOPROCESS
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Laboratory World -->
+            <div class="promo-world promo-laboratory-world" data-world="laboratory">
+                <div class="promo-world-background">
+                    <div class="promo-laboratory-particles"></div>
+                </div>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🔬</div>
+                    <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
+                    <p class="promo-world-desc">Premium Laboratory Essentials</p>
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">100+</span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 40%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
+                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
+                        EXPLORE LABORATORY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Product Showcase -->
+    <section class="promo-product-galaxy" id="promo-product-showcase">
+        <!-- Bioprocess Galaxy -->
+        <div class="promo-galaxy promo-bioprocess-galaxy" id="bioprocess-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🧬 BIOPROCESS UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Nine revolutionary categories, infinite possibilities</p>
+            </div>
+            
+            <div class="promo-orbit-system">
+                <!-- Center Hub -->
+                <div class="promo-orbit-center">
+                    <div class="promo-center-core">
+                        <span class="promo-core-text">BIOPROCESS</span>
+                        <span class="promo-core-subtext">REVOLUTION</span>
+                    </div>
+                </div>
+                
+                <!-- Orbiting Categories -->
+                <div class="promo-orbit promo-orbit-1">
+                    <div class="promo-category-planet" data-category="pc-rectangular-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚗️</span>
+                            <span class="promo-planet-name">PC Rectangular</span>
+                            <span class="promo-planet-discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="promo-orbit promo-orbit-2">
+                    <div class="promo-category-planet" data-category="pc-tr-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🔄</span>
+                            <span class="promo-planet-name">PC TR Carboy</span>
+                            <span class="promo-planet-discount">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="promo-orbit promo-orbit-3">
+                    <div class="promo-category-planet" data-category="ezbio-bottles-pc">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🧪</span>
+                            <span class="promo-planet-name">EZBio Bottles</span>
+                            <span class="promo-planet-discount">30% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="promo-orbit promo-orbit-4">
+                    <div class="promo-category-planet" data-category="bioprocess-components">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚙️</span>
+                            <span class="promo-planet-name">Components</span>
+                            <span class="promo-planet-discount">40% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="promo-orbit promo-orbit-5">
+                    <div class="promo-category-planet" data-category="vent-filters">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🌪️</span>
+                            <span class="promo-planet-name">Vent Filters</span>
+                            <span class="promo-planet-discount">50% OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Laboratory Galaxy -->
+        <div class="promo-galaxy promo-laboratory-galaxy" id="laboratory-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🔬 LABORATORY UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Premium laboratory essentials for every breakthrough</p>
+            </div>
+            
+            <div class="promo-lab-constellation">
+                <div class="promo-constellation-center">
+                    <div class="promo-lab-core">
+                        <span class="promo-lab-icon">🔬</span>
+                        <span class="promo-lab-title">LABORATORY</span>
+                        <span class="promo-lab-subtitle">EXCELLENCE</span>
+                    </div>
+                </div>
+                
+                <!-- Laboratory products will be populated dynamically -->
+                {% assign laboratory_collection = collections['laboratory-products'] %}
+                {% if laboratory_collection.products.size > 0 %}
+                    <div class="promo-lab-products">
+                        {% for product in laboratory_collection.products limit: 6 %}
+                        <div class="promo-lab-star" data-product="{{ product.id }}">
+                            <div class="promo-star-glow"></div>
+                            <div class="promo-star-content">
+                                <div class="promo-star-image">
+                                    {% if product.featured_image %}
+                                        <img src="{{ product.featured_image | img_url: '200x200' }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                </div>
+                                <h4 class="promo-star-title">{{ product.title | truncate: 30 }}</h4>
+                                <div class="promo-star-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-star-cta">DISCOVER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Revolutionary Product Grid -->
+    <section class="promo-featured-showcase" id="promo-featured-products">
+        <!-- This will be populated dynamically based on selected category -->
+    </section>
+
+    <!-- Final Revolutionary CTA -->
+    <section class="promo-freedom-finale">
+        <div class="promo-finale-background">
+            <div class="promo-finale-flag"></div>
+            <div class="promo-finale-sparks">
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+            </div>
+        </div>
+        
+        <div class="promo-finale-content">
+            <h2 class="promo-finale-title">
+                🇺🇸 JOIN THE REVOLUTION 🇺🇸
+            </h2>
+            <p class="promo-finale-subtitle">
+                Don't let freedom pass you by! Revolutionary savings end soon.
             </p>
             
-            <div class="hero-timer">
-                <h3>Sale ends in:</h3>
-                <div class="timer-display">
-                    <div class="timer-unit">
-                        <span id="days">30</span>
-                        <label>Days</label>
+            <div class="promo-finale-timer">
+                <div class="promo-finale-timer-grid">
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-days">30</span>
+                        <label>DAYS</label>
                     </div>
-                    <div class="timer-unit">
-                        <span id="hours">22</span>
-                        <label>Hours</label>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-hours">22</span>
+                        <label>HOURS</label>
                     </div>
-                    <div class="timer-unit">
-                        <span id="minutes">48</span>
-                        <label>Minutes</label>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-minutes">48</span>
+                        <label>MINUTES</label>
                     </div>
-                    <div class="timer-unit">
-                        <span id="seconds">02</span>
-                        <label>Seconds</label>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-seconds">02</span>
+                        <label>SECONDS</label>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Animated Flag Background -->
-        <div class="flag-background">
-            <div class="flag-wave flag-wave-1"></div>
-            <div class="flag-wave flag-wave-2"></div>
-            <div class="flag-wave flag-wave-3"></div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="hero-decoration">
-            <div class="star star-1">⭐</div>
-            <div class="star star-2">⭐</div>
-            <div class="star star-3">⭐</div>
-            <div class="firework firework-1">🎆</div>
-            <div class="firework firework-2">🎆</div>
-            <div class="flag-icon flag-icon-1">🇺🇸</div>
-            <div class="flag-icon flag-icon-2">🇺🇸</div>
-        </div>
-    </section>
-
-    {% comment %} Dynamic Product Collections {% endcomment %}
-    {% assign pc_carboy_collection = collections['pc-rectangular-carboy'] %}
-    {% assign tr_carboy_collection = collections['pc-tr-carboy'] %}
-    {% assign ezbio_collection = collections['ezbio-bottles-pc'] %}
-    {% assign components_collection = collections['bioprocess-components'] %}
-    {% assign filters_collection = collections['vent-filters'] %}
-
-    <!-- PC Rectangular Carboy Section -->
-    {% if pc_carboy_collection.products.size > 0 %}
-    <section class="category-section carboy-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="discount-banner">20% OFF</div>
-                <h2>{{ pc_carboy_collection.title | default: 'PC Rectangular Carboy Collection' }}</h2>
-                <p>{{ pc_carboy_collection.description | default: 'Space-saving design with superior durability for your bioprocess applications' }}</p>
-                <div class="mini-timer">
-                    <span>⏰ Limited Time: <span id="carboy-timer">30:22:48</span></span>
                 </div>
             </div>
             
-            <div class="products-grid">
-                {% for product in pc_carboy_collection.products limit: 3 %}
-                <div class="product-card">
-                    <div class="product-discount">20% OFF</div>
-                    <div class="product-image">
-                        {% if product.featured_image %}
-                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.title }}</h3>
-                        <p>{{ product.description | truncate: 60 }}</p>
-                        <div class="price-info">
-                            {% if product.compare_at_price > product.price %}
-                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% else %}
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% endif %}
-                        </div>
-                        {% if product.compare_at_price > product.price %}
-                            {% assign savings = product.compare_at_price | minus: product.price %}
-                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
-                        {% endif %}
-                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- PC TR Carboy Section -->
-    {% if tr_carboy_collection.products.size > 0 %}
-    <section class="category-section tr-carboy-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="discount-banner">15% OFF</div>
-                <h2>{{ tr_carboy_collection.title | default: 'PC TR Carboy Collection' }}</h2>
-                <p>{{ tr_carboy_collection.description | default: 'Titanium Round series for enhanced performance and reliability' }}</p>
-                <div class="mini-timer">
-                    <span>⏰ Limited Time: <span id="tr-timer">30:22:48</span></span>
-                </div>
-            </div>
-            
-            <div class="products-grid">
-                {% for product in tr_carboy_collection.products limit: 3 %}
-                <div class="product-card">
-                    <div class="product-discount">15% OFF</div>
-                    <div class="product-image">
-                        {% if product.featured_image %}
-                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.title }}</h3>
-                        <p>{{ product.description | truncate: 60 }}</p>
-                        <div class="price-info">
-                            {% if product.compare_at_price > product.price %}
-                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% else %}
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% endif %}
-                        </div>
-                        {% if product.compare_at_price > product.price %}
-                            {% assign savings = product.compare_at_price | minus: product.price %}
-                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
-                        {% endif %}
-                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- EZBio Bottles Section -->
-    {% if ezbio_collection.products.size > 0 %}
-    <section class="category-section ezbio-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="discount-banner">12% OFF</div>
-                <h2>{{ ezbio_collection.title | default: 'EZBio Bottles PC Collection' }}</h2>
-                <p>{{ ezbio_collection.description | default: 'Autoclavable media bottles for sterile applications and laboratory use' }}</p>
-                <div class="mini-timer">
-                    <span>⏰ Limited Time: <span id="ezbio-timer">30:22:48</span></span>
-                </div>
-            </div>
-            
-            <div class="products-grid">
-                {% for product in ezbio_collection.products limit: 3 %}
-                <div class="product-card">
-                    <div class="product-discount">12% OFF</div>
-                    <div class="product-image">
-                        {% if product.featured_image %}
-                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.title }}</h3>
-                        <p>{{ product.description | truncate: 60 }}</p>
-                        <div class="price-info">
-                            {% if product.compare_at_price > product.price %}
-                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% else %}
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% endif %}
-                        </div>
-                        {% if product.compare_at_price > product.price %}
-                            {% assign savings = product.compare_at_price | minus: product.price %}
-                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
-                        {% endif %}
-                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- Bioprocess Components Section -->
-    {% if components_collection.products.size > 0 %}
-    <section class="category-section components-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="discount-banner biggest-savings">40% OFF</div>
-                <h2>{{ components_collection.title | default: 'Bioprocess Components' }}</h2>
-                <p>{{ components_collection.description | default: 'Essential components for your bioprocess setup with maximum savings' }}</p>
-                <div class="mini-timer">
-                    <span>⏰ Limited Time: <span id="components-timer">30:22:48</span></span>
-                </div>
-            </div>
-            
-            <div class="products-grid">
-                {% for product in components_collection.products limit: 3 %}
-                <div class="product-card featured">
-                    <div class="product-discount biggest">40% OFF</div>
-                    <div class="product-image">
-                        {% if product.featured_image %}
-                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.title }}</h3>
-                        <p>{{ product.description | truncate: 60 }}</p>
-                        <div class="price-info">
-                            {% if product.compare_at_price > product.price %}
-                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% else %}
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% endif %}
-                        </div>
-                        {% if product.compare_at_price > product.price %}
-                            {% assign savings = product.compare_at_price | minus: product.price %}
-                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
-                        {% endif %}
-                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- Vent Filters Section -->
-    {% if filters_collection.products.size > 0 %}
-    <section class="category-section vent-filters-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="discount-banner maximum-savings">50% OFF</div>
-                <h2>{{ filters_collection.title | default: 'Vent Filters Collection' }}</h2>
-                <p>{{ filters_collection.description | default: 'Premium vent filters with maximum savings for Independence Day' }}</p>
-                <div class="mini-timer">
-                    <span>⏰ Limited Time: <span id="vent-timer">30:22:48</span></span>
-                </div>
-            </div>
-            
-            <div class="products-grid">
-                {% for product in filters_collection.products limit: 3 %}
-                <div class="product-card featured">
-                    <div class="product-discount maximum">50% OFF</div>
-                    <div class="product-image">
-                        {% if product.featured_image %}
-                            <img src="{{ product.featured_image | img_url: '300x200' }}" alt="{{ product.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200?text={{ product.title | url_encode }}" alt="{{ product.title }}">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.title }}</h3>
-                        <p>{{ product.description | truncate: 60 }}</p>
-                        <div class="price-info">
-                            {% if product.compare_at_price > product.price %}
-                                <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% else %}
-                                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                            {% endif %}
-                        </div>
-                        {% if product.compare_at_price > product.price %}
-                            {% assign savings = product.compare_at_price | minus: product.price %}
-                            <div class="savings">Save ${{ savings | money_without_currency }}</div>
-                        {% endif %}
-                        <a href="{{ product.url }}" class="product-cta">Shop Now</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- Final CTA Section -->
-    <section class="final-cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Don't Miss Out on These Independence Day Savings!</h2>
-                <p>Premium bioprocess equipment at unbeatable prices. Sale ends soon!</p>
-                <div class="final-timer">
-                    <div class="timer-display">
-                        <div class="timer-unit">
-                            <span id="final-days">30</span>
-                            <label>Days</label>
-                        </div>
-                        <div class="timer-unit">
-                            <span id="final-hours">22</span>
-                            <label>Hours</label>
-                        </div>
-                        <div class="timer-unit">
-                            <span id="final-minutes">48</span>
-                            <label>Minutes</label>
-                        </div>
-                        <div class="timer-unit">
-                            <span id="final-seconds">02</span>
-                            <label>Seconds</label>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ collections.all-products.url }}" class="cta-button">Shop All Sale Items</a>
+            <div class="promo-finale-ctas">
+                <a href="{{ collections.all-products.url }}" class="promo-finale-btn promo-btn-primary">
+                    🚀 SHOP ALL DEALS
+                </a>
+                <a href="#promo-product-showcase" class="promo-finale-btn promo-btn-secondary">
+                    🔍 EXPLORE CATEGORIES
+                </a>
             </div>
         </div>
     </section>
 
     <style>
-        * {
+        .promo-independence-body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #001f3f 0%, #1e3a8a 25%, #dc2626 50%, #b91c1c 75%, #001f3f 100%);
+            background: #000011;
             color: white;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
+            overflow-x: hidden;
         }
 
-        /* Animated Flag Background */
-        .flag-background {
+        /* Revolutionary Hero Section */
+        .promo-hero-revolution {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #001122 0%, #000011 50%, #000000 100%);
+            overflow: hidden;
+        }
+
+        .promo-patriotic-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -382,553 +352,1123 @@
             z-index: 1;
         }
 
-        .flag-wave {
+        .promo-star-field {
             position: absolute;
             width: 100%;
             height: 100%;
-            opacity: 0.15;
         }
 
-        .flag-wave-1 {
-            background: linear-gradient(0deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
-            animation: waveFlag 8s ease-in-out infinite;
+        .promo-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: promo-twinkle 3s ease-in-out infinite;
         }
 
-        .flag-wave-2 {
-            background: linear-gradient(45deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
-            animation: waveFlag 6s ease-in-out infinite reverse;
-            animation-delay: -2s;
+        .promo-star:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .promo-star:nth-child(2) { top: 30%; left: 80%; animation-delay: 0.5s; }
+        .promo-star:nth-child(3) { top: 60%; left: 15%; animation-delay: 1s; }
+        .promo-star:nth-child(4) { top: 70%; left: 70%; animation-delay: 1.5s; }
+        .promo-star:nth-child(5) { top: 40%; left: 90%; animation-delay: 2s; }
+        .promo-star:nth-child(6) { top: 80%; left: 20%; animation-delay: 2.5s; }
+        .promo-star:nth-child(7) { top: 15%; left: 60%; animation-delay: 3s; }
+        .promo-star:nth-child(8) { top: 85%; left: 50%; animation-delay: 3.5s; }
+        .promo-star:nth-child(9) { top: 25%; left: 40%; animation-delay: 4s; }
+        .promo-star:nth-child(10) { top: 55%; left: 85%; animation-delay: 4.5s; }
+
+        @keyframes promo-twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
         }
 
-        .flag-wave-3 {
-            background: linear-gradient(-45deg, transparent 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #1e3a8a 66%);
-            animation: waveFlag 10s ease-in-out infinite;
-            animation-delay: -4s;
+        .promo-flag-waves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
         }
 
-        @keyframes waveFlag {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 0.15; 
+        .promo-wave {
+            position: absolute;
+            width: 100%;
+            height: 33.33%;
+            animation: promo-wave-motion 8s ease-in-out infinite;
+        }
+
+        .promo-wave-red {
+            top: 0;
+            background: linear-gradient(45deg, #dc2626, transparent);
+            animation-delay: 0s;
+        }
+
+        .promo-wave-white {
+            top: 33.33%;
+            background: linear-gradient(45deg, #ffffff, transparent);
+            animation-delay: 2s;
+        }
+
+        .promo-wave-blue {
+            top: 66.66%;
+            background: linear-gradient(45deg, #1e40af, transparent);
+            animation-delay: 4s;
+        }
+
+        @keyframes promo-wave-motion {
+            0%, 100% { transform: translateX(-10px) skewX(0deg); }
+            50% { transform: translateX(10px) skewX(2deg); }
+        }
+
+        .promo-fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ffd700, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            animation: promo-firework-burst 4s ease-out infinite;
+        }
+
+        .promo-firework-1 { top: 25%; left: 20%; animation-delay: 0s; }
+        .promo-firework-2 { top: 35%; right: 25%; animation-delay: 2s; }
+        .promo-firework-3 { bottom: 30%; left: 60%; animation-delay: 4s; }
+
+        @keyframes promo-firework-burst {
+            0% { 
+                opacity: 0; 
+                transform: scale(0); 
+                box-shadow: 0 0 0 0 currentColor;
             }
-            50% { 
-                transform: scale(1.1) rotate(2deg); 
-                opacity: 0.25; 
+            20% { 
+                opacity: 1; 
+                transform: scale(1); 
+                box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.8);
+            }
+            100% { 
+                opacity: 0; 
+                transform: scale(2); 
+                box-shadow: 0 0 50px 25px rgba(255, 215, 0, 0);
             }
         }
 
-        .hero-content {
+        .promo-hero-content {
             position: relative;
             z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 40px 20px;
         }
 
-        .hero-badge {
+        .promo-liberty-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            animation: patrioticGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes patrioticGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(220,38,38,0.3); }
-            33% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
-            66% { box-shadow: 0 0 20px rgba(30,58,138,0.3); }
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            animation: titlePulse 4s ease-in-out infinite;
-        }
-
-        @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .hero-highlight {
-            color: #fbbf24;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.6), 0 0 10px rgba(251,191,36,0.8); }
-            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.6), 0 0 20px rgba(251,191,36,1), 0 0 30px rgba(251,191,36,0.5); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
+            background: linear-gradient(45deg, #dc2626, #1e40af);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 40px;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out;
+            animation: promo-liberty-glow 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 0.9; transform: translateY(0); }
+        @keyframes promo-liberty-glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(30, 64, 175, 0.8), 0 0 70px rgba(220, 38, 38, 0.3); }
         }
 
-        .hero-timer h3 {
-            font-size: 1.5rem;
+        .promo-revolutionary-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 20px;
+            perspective: 1000px;
+        }
+
+        .promo-word {
+            display: inline-block;
+            margin: 0 10px;
+            animation: promo-word-revolution 6s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-word-1 {
+            background: linear-gradient(45deg, #dc2626, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation-delay: 0s;
+        }
+
+        .promo-word-2 {
+            color: #ffffff;
+            animation-delay: 0.5s;
+        }
+
+        .promo-word-3 {
+            background: linear-gradient(45deg, #1e40af, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation-delay: 1s;
+        }
+
+        .promo-hero-subtitle-text {
+            display: block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: #fbbf24;
-            animation: timerGlow 2s ease-in-out infinite;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
         }
 
-        @keyframes timerGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(251,191,36,0.8); }
-            50% { text-shadow: 0 0 20px rgba(251,191,36,1), 0 0 30px rgba(251,191,36,0.5); }
+        @keyframes promo-word-revolution {
+            0%, 100% { transform: rotateY(0deg) scale(1); }
+            25% { transform: rotateY(10deg) scale(1.05); }
+            50% { transform: rotateY(-5deg) scale(1.1); }
+            75% { transform: rotateY(5deg) scale(1.05); }
         }
 
-        .timer-display {
+        .promo-savings-explosion {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .promo-explosion-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .promo-mega-discount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #dc2626, #fbbf24, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
+            animation: promo-mega-pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        .promo-mega-discount::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3), transparent);
+            animation: promo-explosion-ring 3s ease-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes promo-mega-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes promo-explosion-ring {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        .promo-explosion-subtext {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        .promo-countdown-revolution {
+            margin-top: 60px;
+        }
+
+        .promo-countdown-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 30px;
+            animation: promo-lightning 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-lightning {
+            0%, 100% { text-shadow: 0 0 10px rgba(251, 191, 36, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(251, 191, 36, 1), 0 0 30px rgba(255, 255, 255, 0.5); }
+        }
+
+        .promo-timer-grid {
             display: flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
         }
 
-        .timer-unit {
-            background: rgba(255,255,255,0.2);
-            padding: 15px 20px;
+        .promo-timer-cube {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+            animation: promo-cube-float 4s ease-in-out infinite;
+        }
+
+        .promo-timer-cube:nth-child(1) { animation-delay: 0s; }
+        .promo-timer-cube:nth-child(2) { animation-delay: 0.5s; }
+        .promo-timer-cube:nth-child(3) { animation-delay: 1s; }
+        .promo-timer-cube:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes promo-cube-float {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(10deg); }
+        }
+
+        .promo-timer-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af, #06b6d4);
+            border: 2px solid #fbbf24;
             border-radius: 15px;
-            text-align: center;
-            min-width: 80px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.3);
-            animation: timerBounce 2s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+            animation: promo-timer-glow 2s ease-in-out infinite;
         }
 
-        @keyframes timerBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes promo-timer-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(30, 64, 175, 0.6), 0 0 20px rgba(251, 191, 36, 0.5); }
         }
 
-        .timer-unit span {
-            display: block;
-            font-size: 2rem;
-            font-weight: 800;
+        .promo-timer-face span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-timer-face label {
+            font-size: 0.7rem;
+            font-weight: 600;
             color: #fbbf24;
+            margin-top: 5px;
         }
 
-        .timer-unit label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        /* Category Universe Section */
+        .promo-category-universe {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #000011 0%, #001122 50%, #000011 100%);
+            position: relative;
         }
 
-        .hero-decoration {
+        .promo-universe-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .promo-universe-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #06b6d4, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .promo-universe-subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        .promo-dual-worlds {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .promo-world {
+            position: relative;
+            background: radial-gradient(circle at center, rgba(30, 64, 175, 0.2), rgba(0, 0, 17, 0.8));
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            animation: promo-world-pulse 6s ease-in-out infinite;
+        }
+
+        .promo-world:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: #fbbf24;
+            box-shadow: 0 30px 60px rgba(251, 191, 36, 0.3);
+        }
+
+        .promo-bioprocess-world {
+            animation-delay: 0s;
+        }
+
+        .promo-laboratory-world {
+            animation-delay: 3s;
+        }
+
+        @keyframes promo-world-pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(30, 64, 175, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(6, 182, 212, 0.5), 0 0 70px rgba(30, 64, 175, 0.2); }
+        }
+
+        .promo-world-background {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            pointer-events: none;
-            z-index: 1;
+            overflow: hidden;
+            border-radius: 28px;
         }
 
-        .star, .firework, .flag-icon {
+        .promo-bioprocess-particles,
+        .promo-laboratory-particles {
             position: absolute;
-            font-size: 2rem;
-            animation: twinkle 2s ease-in-out infinite;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(251,191,36,0.3)"/><circle cx="80" cy="40" r="1.5" fill="rgba(6,182,212,0.4)"/><circle cx="40" cy="80" r="1" fill="rgba(220,38,38,0.3)"/></svg>') repeat;
+            animation: promo-particles-drift 20s linear infinite;
         }
 
-        .flag-icon {
-            font-size: 3rem;
-            animation: flagWave 3s ease-in-out infinite;
-        }
-
-        @keyframes flagWave {
-            0%, 100% { 
-                opacity: 0.6; 
-                transform: scale(1) rotate(0deg); 
-            }
-            50% { 
-                opacity: 1; 
-                transform: scale(1.1) rotate(5deg); 
-            }
-        }
-
-        .star-1 { top: 20%; left: 10%; animation-delay: 0s; }
-        .star-2 { top: 30%; right: 15%; animation-delay: 0.5s; }
-        .star-3 { bottom: 30%; left: 20%; animation-delay: 1s; }
-        .firework-1 { top: 40%; right: 10%; animation-delay: 1.5s; }
-        .firework-2 { bottom: 20%; right: 25%; animation-delay: 2s; }
-        .flag-icon-1 { top: 15%; right: 5%; animation-delay: 0.8s; }
-        .flag-icon-2 { bottom: 15%; left: 5%; animation-delay: 2.5s; }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Category Sections */
-        .category-section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .carboy-section {
-            background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 50%, #dbeafe 100%);
-            position: relative;
-        }
-
-        .tr-carboy-section {
-            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #f0fdf4 100%);
-            position: relative;
-        }
-
-        .ezbio-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #fef3c7 100%);
-            position: relative;
-        }
-
-        .components-section {
-            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 20%, #f59e0b 80%, #dc2626 100%);
-            position: relative;
-        }
-
-        .vent-filters-section {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #7f1d1d 100%);
-            color: white;
-            position: relative;
-        }
-
-        .vent-filters-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 22s linear infinite reverse;
-        }
-
-        .vent-filters-section .section-header h2,
-        .vent-filters-section .product-info h3 {
-            color: white;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
+        @keyframes promo-particles-drift {
+            0% { transform: translateY(0); }
             100% { transform: translateY(-100px); }
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+        .promo-world-content {
             position: relative;
             z-index: 2;
         }
 
-        .discount-banner {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            animation: pulse 2s ease-in-out infinite;
+        .promo-world-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            animation: promo-icon-bounce 3s ease-in-out infinite;
         }
 
-        .discount-banner.biggest-savings {
-            background: linear-gradient(45deg, #dc2626, #b91c1c);
-            font-size: 1.2rem;
-            padding: 12px 30px;
+        @keyframes promo-icon-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
 
-        .discount-banner.maximum-savings {
-            background: linear-gradient(45deg, #7f1d1d, #dc2626);
-            font-size: 1.2rem;
-            padding: 12px 30px;
-            box-shadow: 0 0 20px rgba(220,38,38,0.5);
-        }
-
-        .section-header h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
+        .promo-world-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fbbf24;
             margin-bottom: 15px;
-            color: #1e3a8a;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
         }
 
-        .section-header p {
-            font-size: 1.2rem;
-            color: #6b7280;
-            margin-bottom: 20px;
+        .promo-world-desc {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
 
-        .mini-timer {
-            display: inline-block;
-            background: rgba(220,38,38,0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            color: #dc2626;
-            animation: timerPulse 3s ease-in-out infinite;
+        .promo-world-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
         }
 
-        @keyframes timerPulse {
-            0%, 100% { background: rgba(220,38,38,0.1); }
-            50% { background: rgba(220,38,38,0.2); }
+        .promo-stat {
+            text-align: center;
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 2;
+        .promo-stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #06b6d4;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
         }
 
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: cardFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .product-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            border-color: #0071ce;
-        }
-
-        .product-card.featured {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
-            border: 2px solid #dc2626;
-        }
-
-        .product-discount {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #28a745;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-weight: 700;
+        .promo-stat-label {
             font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .promo-world-cta {
+            background: linear-gradient(45deg, #dc2626, #fbbf24);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+
+        .promo-world-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5);
+            background: linear-gradient(45deg, #b91c1c, #f59e0b);
+        }
+
+        /* Product Galaxy Section */
+        .promo-product-galaxy {
+            padding: 100px 20px;
+            background: radial-gradient(ellipse at center, #001122 0%, #000011 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .promo-galaxy {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .promo-galaxy.active {
+            display: block;
+            animation: promo-galaxy-appear 1s ease-out;
+        }
+
+        @keyframes promo-galaxy-appear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .promo-galaxy-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .promo-galaxy-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .promo-galaxy-subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        /* Orbit System */
+        .promo-orbit-system {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            margin: 0 auto;
+        }
+
+        .promo-orbit-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
             z-index: 10;
         }
 
-        .product-discount.biggest {
-            background: #dc2626;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .product-discount.maximum {
-            background: linear-gradient(45deg, #7f1d1d, #dc2626);
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 15px rgba(220,38,38,0.5);
-        }
-
-        .product-image {
-            height: 200px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 15px;
-            background: #f8f9fa;
-        }
-
-        .product-image img {
+        .promo-center-core {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            background: radial-gradient(circle, #fbbf24, #dc2626);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #06b6d4;
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.8);
+            animation: promo-core-rotation 20s linear infinite;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
+        @keyframes promo-core-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .product-info h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0071ce;
-            margin-bottom: 10px;
-        }
-
-        .product-info p {
-            color: #6c757d;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .price-info {
-            margin-bottom: 10px;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #6c757d;
-            margin-right: 10px;
-            font-size: 1.1rem;
-        }
-
-        .sale-price {
-            color: #28a745;
-            font-weight: 700;
-            font-size: 1.3rem;
-        }
-
-        .savings {
-            background: linear-gradient(45deg, #28a745, #20c997);
+        .promo-core-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
             color: white;
-            padding: 6px 12px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .promo-core-subtext {
+            font-size: 0.8rem;
+            color: #000011;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .promo-orbit {
+            position: absolute;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: promo-orbit-rotation 30s linear infinite;
+        }
+
+        .promo-orbit-1 {
+            width: 300px;
+            height: 300px;
+            animation-duration: 25s;
+        }
+
+        .promo-orbit-2 {
+            width: 400px;
+            height: 400px;
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        .promo-orbit-3 {
+            width: 500px;
+            height: 500px;
+            animation-duration: 45s;
+        }
+
+        .promo-orbit-4 {
+            width: 600px;
+            height: 600px;
+            animation-duration: 55s;
+            animation-direction: reverse;
+        }
+
+        .promo-orbit-5 {
+            width: 700px;
+            height: 700px;
+            animation-duration: 65s;
+        }
+
+        @keyframes promo-orbit-rotation {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .promo-category-planet {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            animation: promo-planet-counter-rotation 30s linear infinite;
+        }
+
+        .promo-orbit-1 .promo-category-planet { animation-duration: 25s; }
+        .promo-orbit-2 .promo-category-planet { animation-duration: 35s; animation-direction: normal; }
+        .promo-orbit-3 .promo-category-planet { animation-duration: 45s; }
+        .promo-orbit-4 .promo-category-planet { animation-duration: 55s; animation-direction: normal; }
+        .promo-orbit-5 .promo-category-planet { animation-duration: 65s; }
+
+        @keyframes promo-planet-counter-rotation {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(-360deg); }
+        }
+
+        .promo-planet-core {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #1e40af, #06b6d4);
+            border: 2px solid #fbbf24;
             border-radius: 15px;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
         }
 
-        .product-cta {
-            display: inline-block;
-            background: #0071ce;
+        .promo-category-planet:hover .promo-planet-core {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+            background: linear-gradient(135deg, #dc2626, #fbbf24);
+        }
+
+        .promo-planet-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .promo-planet-name {
+            font-size: 0.8rem;
+            font-weight: 700;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .promo-planet-discount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 900;
+            color: #fbbf24;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.8);
+        }
+
+        /* Laboratory Constellation */
+        .promo-lab-constellation {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .promo-constellation-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .promo-lab-core {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #06b6d4, #1e40af);
+            border-radius: 50%;
+            border: 3px solid #fbbf24;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+            animation: promo-lab-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-lab-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(6, 182, 212, 0.8); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(6, 182, 212, 1); }
+        }
+
+        .promo-lab-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .promo-lab-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .promo-lab-subtitle {
+            font-size: 0.7rem;
+            color: #fbbf24;
             font-weight: 600;
+        }
+
+        .promo-lab-products {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+
+        .promo-lab-star {
+            position: absolute;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .product-cta:hover {
-            background: #005bb5;
-            transform: translateX(5px);
+        .promo-lab-star:nth-child(1) { top: 10%; left: 20%; }
+        .promo-lab-star:nth-child(2) { top: 20%; right: 15%; }
+        .promo-lab-star:nth-child(3) { top: 60%; left: 10%; }
+        .promo-lab-star:nth-child(4) { bottom: 20%; right: 20%; }
+        .promo-lab-star:nth-child(5) { bottom: 30%; left: 30%; }
+        .promo-lab-star:nth-child(6) { top: 40%; right: 30%; }
+
+        .promo-star-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.8), transparent);
+            border-radius: 50%;
+            animation: promo-star-glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-star-glow-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+        }
+
+        .promo-star-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(30, 64, 175, 0.9);
+            border: 2px solid #fbbf24;
+            border-radius: 15px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .promo-lab-star:hover .promo-star-content {
+            transform: scale(1.05);
+            background: rgba(220, 38, 38, 0.9);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+        }
+
+        .promo-star-image {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .promo-star-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .promo-star-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .promo-star-price {
+            margin-bottom: 15px;
+        }
+
+        .promo-original-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+
+        .promo-sale-price {
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .promo-star-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #fbbf24, #06b6d4);
+            color: #000011;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .promo-star-cta:hover {
+            background: linear-gradient(45deg, #dc2626, #fbbf24);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* Final CTA Section */
-        .final-cta-section {
-            background: linear-gradient(135deg, #001f3f 0%, #1e3a8a 25%, #dc2626 50%, #b91c1c 75%, #001f3f 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
+        .promo-freedom-finale {
             position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #000011 0%, #001122 50%, #000000 100%);
+            text-align: center;
             overflow: hidden;
         }
 
-        .final-cta-section::before {
-            content: '';
+        .promo-finale-background {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 60,40 40,40" fill="rgba(251,191,36,0.1)"/></svg>') repeat;
-            animation: float 20s linear infinite;
+            z-index: 1;
         }
 
-        .cta-content {
+        .promo-finale-flag {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                rgba(220, 38, 38, 0.1) 0%, 
+                rgba(220, 38, 38, 0.1) 15%, 
+                rgba(255, 255, 255, 0.05) 15%, 
+                rgba(255, 255, 255, 0.05) 85%, 
+                rgba(30, 64, 175, 0.1) 85%, 
+                rgba(30, 64, 175, 0.1) 100%);
+            animation: promo-finale-wave 10s ease-in-out infinite;
+        }
+
+        @keyframes promo-finale-wave {
+            0%, 100% { transform: skewX(0deg); }
+            50% { transform: skewX(2deg); }
+        }
+
+        .promo-finale-sparks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: promo-spark-twinkle 2s ease-in-out infinite;
+        }
+
+        .promo-spark:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .promo-spark:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.5s; }
+        .promo-spark:nth-child(3) { bottom: 30%; left: 25%; animation-delay: 1s; }
+        .promo-spark:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 1.5s; }
+        .promo-spark:nth-child(5) { top: 50%; left: 50%; animation-delay: 2s; }
+
+        @keyframes promo-spark-twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(2); box-shadow: 0 0 20px #fbbf24; }
+        }
+
+        .promo-finale-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .cta-content h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 15px;
-            animation: titlePulse 4s ease-in-out infinite;
+        .promo-finale-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #dc2626, #fbbf24, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: promo-finale-title-glow 3s ease-in-out infinite;
         }
 
-        .cta-content p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 40px;
+        @keyframes promo-finale-title-glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(251, 191, 36, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(251, 191, 36, 0.8), 0 0 60px rgba(220, 38, 38, 0.3); }
         }
 
-        .final-timer {
-            margin-bottom: 40px;
+        .promo-finale-subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin-bottom: 50px;
+            font-weight: 300;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #dc2626, #b91c1c);
+        .promo-finale-timer {
+            margin-bottom: 50px;
+        }
+
+        .promo-finale-timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .promo-finale-unit {
+            background: linear-gradient(135deg, #1e40af, #06b6d4);
+            border: 2px solid #fbbf24;
+            border-radius: 20px;
+            padding: 20px;
+            min-width: 90px;
+            text-align: center;
+            animation: promo-finale-unit-float 4s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .promo-finale-unit:nth-child(1) { animation-delay: 0s; }
+        .promo-finale-unit:nth-child(2) { animation-delay: 0.5s; }
+        .promo-finale-unit:nth-child(3) { animation-delay: 1s; }
+        .promo-finale-unit:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes promo-finale-unit-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .promo-finale-unit span {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fbbf24;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+        }
+
+        .promo-finale-unit label {
+            font-size: 0.8rem;
             color: white;
-            padding: 15px 30px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .promo-finale-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .promo-finale-btn {
+            display: inline-block;
+            padding: 18px 35px;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(220,38,38,0.3);
-            animation: ctaGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes ctaGlow {
-            0%, 100% { box-shadow: 0 10px 30px rgba(220,38,38,0.3); }
-            50% { box-shadow: 0 15px 40px rgba(220,38,38,0.5), 0 0 20px rgba(220,38,38,0.8); }
+        .promo-btn-primary {
+            background: linear-gradient(45deg, #dc2626, #fbbf24);
+            color: white;
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4);
         }
 
-        .cta-button:hover {
-            background: linear-gradient(45deg, #b91c1c, #7f1d1d);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(220,38,38,0.4);
+        .promo-btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(220, 38, 38, 0.6);
+            background: linear-gradient(45deg, #b91c1c, #f59e0b);
         }
 
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .promo-btn-secondary {
+            background: linear-gradient(45deg, #1e40af, #06b6d4);
+            color: white;
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.4);
         }
 
-        /* Responsive Design */
+        .promo-btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.6);
+            background: linear-gradient(45deg, #1e3a8a, #0891b2);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .products-grid {
+            .promo-dual-worlds {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 40px;
             }
-            
-            .timer-display {
-                gap: 10px;
+
+            .promo-orbit-system {
+                width: 100%;
+                height: 600px;
+                transform: scale(0.8);
             }
-            
-            .timer-unit {
-                padding: 10px 15px;
-                min-width: 60px;
+
+            .promo-timer-grid,
+            .promo-finale-timer-grid {
+                gap: 15px;
             }
-            
-            .timer-unit span {
+
+            .promo-timer-cube,
+            .promo-finale-unit {
+                width: 80px;
+                height: 80px;
+                min-width: 80px;
+            }
+
+            .promo-timer-face span,
+            .promo-finale-unit span {
                 font-size: 1.5rem;
             }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
+
+            .promo-finale-ctas {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .flag-icon {
-                font-size: 2rem;
+            .promo-lab-star {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                margin: 20px auto;
+                display: block;
+            }
+
+            .promo-lab-products {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .promo-constellation-center {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .promo-hero-content {
+                padding: 20px 15px;
+            }
+
+            .promo-world {
+                padding: 40px 25px;
+            }
+
+            .promo-orbit-system {
+                transform: scale(0.6);
             }
         }
     </style>
 
     <script>
-        // Countdown Timer Function
+        // Enhanced countdown timer
         function updateCountdown() {
-            // Set the target date (July 4, 2024 23:59:59)
             const targetDate = new Date('July 4, 2024 23:59:59').getTime();
             const now = new Date().getTime();
             const timeLeft = targetDate - now;
@@ -939,61 +1479,121 @@
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                // Update main timer
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-
-                // Update final timer
-                document.getElementById('final-days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('final-hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('final-minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('final-seconds').textContent = seconds.toString().padStart(2, '0');
-
-                // Update mini timers
-                const timeString = `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-                const miniTimers = ['carboy-timer', 'tr-timer', 'ezbio-timer', 'components-timer', 'vent-timer'];
-                miniTimers.forEach(timerId => {
-                    const element = document.getElementById(timerId);
-                    if (element) {
-                        element.textContent = timeString;
-                    }
-                });
-            } else {
-                // Timer expired
-                const expiredElements = ['days', 'hours', 'minutes', 'seconds', 'final-days', 'final-hours', 'final-minutes', 'final-seconds'];
-                expiredElements.forEach(id => {
+                // Update all timers
+                ['promo-days', 'promo-finale-days'].forEach(id => {
                     const element = document.getElementById(id);
-                    if (element) {
-                        element.textContent = '00';
-                    }
+                    if (element) element.textContent = days.toString().padStart(2, '0');
+                });
+
+                ['promo-hours', 'promo-finale-hours'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = hours.toString().padStart(2, '0');
+                });
+
+                ['promo-minutes', 'promo-finale-minutes'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = minutes.toString().padStart(2, '0');
+                });
+
+                ['promo-seconds', 'promo-finale-seconds'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = seconds.toString().padStart(2, '0');
                 });
             }
         }
 
-        // Initialize and run countdown
+        // World exploration functionality
+        function exploreWorld(worldType) {
+            const galaxies = document.querySelectorAll('.promo-galaxy');
+            galaxies.forEach(galaxy => galaxy.classList.remove('active'));
+            
+            const targetGalaxy = document.getElementById(worldType + '-galaxy');
+            if (targetGalaxy) {
+                targetGalaxy.classList.add('active');
+                
+                // Smooth scroll to product showcase
+                document.getElementById('promo-product-showcase').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Enhanced planet click functionality
+        function selectCategory(categoryName) {
+            // Add visual feedback for planet selection
+            document.querySelectorAll('.promo-category-planet').forEach(planet => {
+                planet.classList.remove('selected');
+            });
+            
+            event.currentTarget.classList.add('selected');
+            
+            // Load featured products for this category
+            loadFeaturedProducts(categoryName);
+        }
+
+        // Load featured products
+        function loadFeaturedProducts(categoryName) {
+            const showcase = document.getElementById('promo-featured-products');
+            // This would typically load products via AJAX
+            // For now, we'll show a placeholder
+            showcase.innerHTML = `
+                <div class="promo-featured-header">
+                    <h3>Featured Products from ${categoryName}</h3>
+                    <p>Discover revolutionary equipment with unprecedented savings</p>
+                </div>
+                <div class="promo-featured-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+            `;
+            
+            showcase.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize the revolutionary experience
         document.addEventListener('DOMContentLoaded', function() {
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Add loading animation for product images
-            const images = document.querySelectorAll('.product-image img');
-            images.forEach(img => {
-                img.addEventListener('load', function() {
-                    this.style.opacity = '1';
-                    this.style.transform = 'scale(1)';
+            // Add planet click events
+            document.querySelectorAll('.promo-category-planet').forEach(planet => {
+                planet.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    selectCategory(category);
                 });
-                img.style.opacity = '0';
-                img.style.transform = 'scale(0.8)';
-                img.style.transition = 'all 0.3s ease';
             });
 
-            // Add click tracking for analytics
-            document.querySelectorAll('.product-cta, .cta-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    console.log('Button clicked:', this.textContent.trim());
+            // Show bioprocess galaxy by default
+            document.getElementById('bioprocess-galaxy').classList.add('active');
+
+            // Add stellar parallax effect
+            document.addEventListener('mousemove', function(e) {
+                const stars = document.querySelectorAll('.promo-star');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                stars.forEach((star, index) => {
+                    const speed = (index + 1) * 0.5;
+                    star.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
                 });
+            });
+
+            // Add enhanced scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('promo-animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all major sections
+            document.querySelectorAll('.promo-world, .promo-galaxy, .promo-finale-content').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
