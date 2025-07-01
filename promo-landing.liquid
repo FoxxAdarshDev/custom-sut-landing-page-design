@@ -1034,21 +1034,30 @@
             .promo-products-grid {
                 grid-template-columns: 1fr;
                 max-width: 100%;
-                gap: 20px;
+                gap: 30px;
+                position: relative;
+            }
+
+            /* Enhanced mobile arrows */
+            .promo-products-grid .promo-product-card:nth-child(even)::after,
+            .promo-products-grid .promo-product-card:nth-child(odd)::before {
+                animation: promo-enhanced-pulse 3s ease-in-out infinite;
             }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .promo-products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+                gap: 20px;
+                position: relative;
             }
         }
 
         @media (min-width: 1025px) {
             .promo-products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 25px;
+                position: relative;
             }
         }
 
@@ -1075,53 +1084,102 @@
             position: relative;
         }
 
+        /* Enhanced Arrow SVG Icons */
         .promo-product-card:nth-child(even)::after {
-            content: '→';
+            content: '';
             position: absolute;
-            left: -25px;
+            left: -35px;
             top: 50%;
             transform: translateY(-50%);
-            color: #BF0A30;
-            font-size: 1.5rem;
-            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BF0A30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'%3E%3C/line%3E%3Cpolyline points='7,7 17,7 17,17'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             z-index: 2;
             animation: promo-arrow-pulse 2s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(191, 10, 48, 0.5);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .promo-product-card:nth-child(odd)::before {
-            content: '←';
+            content: '';
             position: absolute;
-            right: -25px;
+            right: -35px;
             top: 50%;
             transform: translateY(-50%);
-            color: #095ea7;
-            font-size: 1.5rem;
-            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='17' y1='7' x2='7' y2='17'%3E%3C/line%3E%3Cpolyline points='17,7 7,7 7,17'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             z-index: 2;
             animation: promo-arrow-pulse 2s ease-in-out infinite 0.5s;
-            text-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Additional arrows for mobile - simplified */
+        @media (max-width: 768px) {
+            .promo-products-grid::before {
+                display: none;
+            }
+
+            .promo-product-card:nth-child(even)::after {
+                left: -20px;
+                width: 20px;
+                height: 20px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BF0A30' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9,18 15,12 9,6'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+
+            .promo-product-card:nth-child(odd)::before {
+                right: -20px;
+                width: 20px;
+                height: 20px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15,18 9,12 15,6'%3E%3C/polyline%3E%3C/svg%3E");
+            }
         }
 
         @keyframes promo-arrow-pulse {
             0%, 100% { 
-                opacity: 0.6; 
+                opacity: 0.7; 
                 transform: translateY(-50%) scale(1); 
             }
             50% { 
                 opacity: 1; 
-                transform: translateY(-50%) scale(1.2); 
+                transform: translateY(-50%) scale(1.1); 
             }
         }
 
-        /* Hide arrows on mobile */
-        @media (max-width: 768px) {
-            .promo-products-grid::before,
-            .promo-product-card::after,
-            .promo-product-card::before {
-                display: none;
+        /* Connecting lines between products */
+        .promo-product-card:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(9, 94, 167, 0.6), transparent);
+            z-index: 1;
+        }
+
+        /* Enhanced pulse animation for better visibility */
+        @keyframes promo-enhanced-pulse {
+            0% { 
+                opacity: 0.5; 
+                transform: translateY(-50%) scale(0.9);
+                filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
+            }
+            50% { 
+                opacity: 1; 
+                transform: translateY(-50%) scale(1.2);
+                filter: drop-shadow(0 0 15px rgba(191, 10, 48, 0.8));
+            }
+            100% { 
+                opacity: 0.5; 
+                transform: translateY(-50%) scale(0.9);
+                filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
             }
         }
 
@@ -1158,6 +1216,53 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             border-color: #BF0A30;
+        }
+
+        /* Enhanced hover effect for arrows */
+        .promo-product-card:hover::after,
+        .promo-product-card:hover::before {
+            animation: promo-enhanced-pulse 1s ease-in-out infinite;
+            transform: translateY(-50%) scale(1.3);
+        }
+
+        /* Ensure arrows appear in all product grids */
+        .promo-products-grid .promo-product-card {
+            position: relative;
+        }
+
+        /* Additional arrow styles for better visibility */
+        .promo-products-grid .promo-product-card:nth-child(2n)::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23BF0A30' stroke='%23BF0A30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3Cpath d='M12 1v6m0 6v6m11-7h-6m-6 0H1'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .promo-products-grid .promo-product-card:nth-child(2n+1)::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23095ea7' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3Cpath d='M12 1v6m0 6v6m11-7h-6m-6 0H1'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        /* Flow indicators for product journey */
+        .promo-products-grid::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            animation: promo-flow-indicator 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-flow-indicator {
+            0%, 100% { 
+                transform: translateY(0); 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: translateY(10px); 
+                opacity: 1; 
+            }
         }
 
         .promo-product-image {
