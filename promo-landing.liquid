@@ -1669,6 +1669,8 @@
             align-items: center;
             scroll-behavior: smooth;
             flex-wrap: nowrap;
+            flex-direction: row;
+            min-height: 120px;
         }
 
         .promo-sticky-carousel::-webkit-scrollbar {
@@ -1678,6 +1680,8 @@
         .promo-sticky-card {
             flex: 0 0 auto;
             width: 90px;
+            min-width: 90px;
+            max-width: 90px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(9, 94, 167, 0.3);
@@ -1687,6 +1691,8 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 40, 104, 0.15);
+            display: flex;
+            flex-direction: column;
         }
 
         .promo-sticky-card:hover {
@@ -2895,7 +2901,10 @@
 
             .promo-sticky-card {
                 width: 70px;
+                min-width: 70px;
+                max-width: 70px;
                 flex-shrink: 0;
+                flex: 0 0 70px;
             }
 
             .promo-sticky-card-image {
@@ -2936,6 +2945,9 @@
                 scroll-snap-type: x mandatory;
                 flex-wrap: nowrap;
                 overflow-x: auto;
+                flex-direction: row;
+                display: flex;
+                min-height: 100px;
             }
 
             .promo-sticky-card {
