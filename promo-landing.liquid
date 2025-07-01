@@ -1,4 +1,4 @@
-<section id="christmas-offer-landing-page-home" class="promo-independence-wrapper promo-layout-container">
+<section class="promo-independence-wrapper">
     {% comment %} Dynamic Product Collections {% endcomment %}
     {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
     {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
@@ -451,7 +451,7 @@
     </section>
 
     <!-- Bioprocess Categories Sections -->
-    <div class="promo-bioprocess-sections promo-sections-container" id="bioprocess-sections">
+    <div class="promo-bioprocess-sections" id="bioprocess-sections">
 
         <!-- PC Rectangular Carboy Section -->
         {% if pc_carboy_collection.products.size > 0 %}
@@ -1347,7 +1347,7 @@
     </div>
 
     <!-- Laboratory Sections -->
-    <div class="promo-laboratory-sections promo-sections-container" id="laboratory-sections" style="display: none;">
+    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
 
         <!-- EZLabpure 20L Round Carboy Section -->
         {% if ezlabpure_carboy_collection.products.size > 0 %}
@@ -1907,11 +1907,10 @@
     </div>
 
     <!-- Final Revolutionary CTA -->
-    <div class="promo-freedom-finale">
-        <div class="promo-finale-flag">🇺🇸</div>
+    <section class="promo-freedom-finale">
         <div class="promo-finale-content">
             <h2 class="promo-finale-title">
-                🇺🇸 JOIN THE AMERICAN REVOLUTION 🇺🇸
+               JOIN THE AMERICAN REVOLUTION
             </h2>
             <p class="promo-finale-subtitle">
                 Don't let this Independence Day pass you by! Revolutionary savings end soon.
@@ -1947,7 +1946,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </section>
 
     <style>
         .promo-independence-wrapper {
@@ -1957,47 +1956,7 @@
             color: #1a1a2e;
             overflow-x: hidden;
             width: 100%;
-            max-width: 100%;
             min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* Layout container to respect theme bounds */
-        .promo-layout-container {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* Ensure all promo sections stay within container bounds */
-        .promo-independence-wrapper * {
-            box-sizing: border-box;
-        }
-
-        .promo-independence-wrapper > * {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* Force all direct children to respect container width */
-        .promo-independence-wrapper > section,
-        .promo-independence-wrapper > div {
-            max-width: 100%;
-            width: 100%;
-        }
-
-        /* Sections container styling */
-        .promo-sections-container {
-            max-width: 100%;
-            width: 100%;
-            margin: 0 auto;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        /* Ensure no elements break out of the layout */
-        .promo-sections-container > * {
-            max-width: 100%;
-            box-sizing: border-box;
         }
 
 
@@ -2012,18 +1971,16 @@
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
             padding-top: 20px;
-            max-width: 100%;
-            width: 100%;
-            margin: 0 auto;
         }
 
         /* Enhanced Sticky Navigation Styles */
         .promo-sticky-nav {
             position: fixed;
             bottom: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: min(1000px, calc(100vw - 40px));
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            max-width: 1000px;
             width: 100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
@@ -2466,10 +2423,6 @@
         .promo-category-universe {
             padding: 80px 20px;
             background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-            max-width: 100%;
-            width: 100%;
-            margin: 0 auto;
-            box-sizing: border-box;
         }
 
         .promo-universe-header {
@@ -2493,13 +2446,10 @@
 
         .promo-dual-worlds {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 40px;
-            max-width: 100%;
-            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            box-sizing: border-box;
         }
 
         .promo-world {
@@ -2604,11 +2554,6 @@
             margin-bottom: 40px;
             overflow: hidden;
             background: rgba(255,255,255,0.95);
-            max-width: 100%;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            box-sizing: border-box;
         }
 
         .promo-collection-section::before {
@@ -2688,11 +2633,9 @@
         .promo-section-container {
             position: relative;
             z-index: 2;
-            max-width: 100%;
-            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            box-sizing: border-box;
         }
 
         .promo-section-content {
@@ -3350,9 +3293,6 @@
 
             .promo-sticky-nav {
                 bottom: -120px;
-                left: 0;
-                right: 0;
-                transform: none;
                 width: 100%;
                 max-width: none;
                 border-radius: 0;
