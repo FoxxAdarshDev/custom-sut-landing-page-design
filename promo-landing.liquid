@@ -1,432 +1,536 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tubing Sets - Custom SUT Solutions for Bioprocess Applications</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Independence Day Freedom Sale - Revolutionary Bioprocess & Laboratory Equipment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="tubing-sets-body">
-    {% comment %} Dynamic Product Collections for Tubing Sets {% endcomment %}
-    {% assign tubing_sets_collection = collections['tubing-sets'] %}
-    {% assign bioprocess_tubing_collection = collections['bioprocess-tubing-sets'] %}
-    {% assign custom_sut_collection = collections['custom-sut-tubing'] %}
-    {% assign sterile_tubing_collection = collections['sterile-tubing-sets'] %}
-    {% assign all_tubing_products = collections['all-tubing-products'] %}
+<body class="promo-independence-body">
+    {% comment %} Dynamic Product Collections {% endcomment %}
+    {% assign pc_carboy_collection = collections['pc-rectangular-carboy-us-independence-day-sale-25'] %}
+    {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-us-independence-day-sale-25'] %}
+    {% assign ezbio_bottles_collection = collections['ezbio-bottles-pc-us-independence-day-sale-25'] %}
+    {% assign bioprocess_components_collection = collections['bioprocess-components-us-independence-day-sale-25'] %}
+    {% assign vent_filters_collection = collections['vent-filters-us-independence-day-sale-25'] %}
+    {% assign laboratory_collection = collections['laboratory-products-us-independence-day-sale-25'] %}
+    {% assign us_independence_sale_collection = collections['us-independence-day-sale-25'] %}
 
-    <!-- Hero Section -->
-    <section class="tubing-hero">
-        <div class="hero-background">
-            <div class="hero-particles"></div>
+    <!-- Revolutionary Hero Section -->
+    <section class="promo-hero-revolution">
+        <div class="promo-patriotic-canvas">
+            <div class="promo-star-field">
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+                <div class="promo-star"></div>
+            </div>
+            <div class="promo-flag-waves">
+                <div class="promo-wave promo-wave-red"></div>
+                <div class="promo-wave promo-wave-white"></div>
+                <div class="promo-wave promo-wave-blue"></div>
+            </div>
+            <div class="promo-fireworks">
+                <div class="promo-firework promo-firework-1"></div>
+                <div class="promo-firework promo-firework-2"></div>
+                <div class="promo-firework promo-firework-3"></div>
+            </div>
         </div>
 
-        <div class="hero-content">
-            <div class="hero-badge">
-                🔗 Custom SUT Solutions
+        <div class="promo-hero-content">
+            <div class="promo-liberty-badge">
+                🗽 Independence Day Freedom Sale 🇺🇸
             </div>
 
-            <h1 class="hero-title">
-                <span class="title-word">TUBING</span>
-                <span class="title-word">SETS</span>
+            <h1 class="promo-revolutionary-title">
+                <span class="promo-word promo-word-1">FREEDOM</span>
+                <span class="promo-word promo-word-2">TO</span>
+                <span class="promo-word promo-word-3">REVOLUTIONIZE</span>
+                <span class="promo-hero-subtitle-text">YOUR LABORATORY</span>
             </h1>
 
-            <p class="hero-description">
-                Tubing sets enable secure, sterile, and seamless transfer of fluids between components. 
-                Designed for flexibility and compatibility, they help maintain a closed, contamination-free 
-                environment, while supporting scalability and efficient changeovers.
-            </p>
-
-            <div class="hero-image">
-                <img src="https://foxxbioprocess.com/cdn/shop/files/bioprocess-web-custom-sut-area-cfd-diagrams-tubing-sets_free_size_vvdwcv.png?v=1728504409&width=1920" 
-                     alt="Tubing Sets - Custom SUT Solutions" 
-                     loading="eager">
-            </div>
-        </div>
-    </section>
-
-    <!-- CFD Diagrams Tabs Section -->
-    <section class="cfd-section">
-        <div class="cfd-container">
-            <div class="cfd-header">
-                <h2 class="cfd-title">CFD Flow Diagrams</h2>
-                <p class="cfd-subtitle">Explore our comprehensive tubing set configurations</p>
+            <div class="promo-savings-explosion">
+                <div class="promo-explosion-text">UP TO</div>
+                <div class="promo-mega-discount">70% OFF</div>
+                <div class="promo-explosion-subtext">ON PREMIUM EQUIPMENT</div>
             </div>
 
-            <div class="cfd-tabs">
-                <button class="cfd-tab active" data-tab="cfd1">
-                    <svg class="tab-icon" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7v10l10 5 10-5V7l-10-5zM12 4.8L18.8 8 12 11.2 5.2 8 12 4.8zM4 9.5l7 3.5v7l-7-3.5v-7zm16 0v7l-7 3.5v-7l7-3.5z"/>
-                    </svg>
-                    <span>CFD 1</span>
-                    <div class="tab-indicator"></div>
-                </button>
-
-                <button class="cfd-tab" data-tab="cfd2">
-                    <svg class="tab-icon" viewBox="0 0 24 24">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                    </svg>
-                    <span>CFD 2</span>
-                    <div class="tab-indicator"></div>
-                </button>
-            </div>
-
-            <div class="cfd-content">
-                <div class="cfd-panel active" id="cfd1">
-                    <div class="cfd-diagram">
-                        <svg class="diagram-svg" viewBox="0 0 800 600">
-                            <!-- CFD 1 Diagram -->
-                            <defs>
-                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#074a82"/>
-                                    <stop offset="100%" style="stop-color:#095ea7"/>
-                                </linearGradient>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                                    <feMerge>
-                                        <feMergeNode in="coloredBlur"/>
-                                        <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                </filter>
-                            </defs>
-
-                            <!-- Main Container -->
-                            <rect x="50" y="150" width="120" height="80" rx="10" fill="url(#gradient1)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="110" y="195" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Source Container</text>
-
-                            <!-- Tubing Path -->
-                            <path d="M170 190 Q250 190 250 250 Q250 310 330 310" stroke="#4CAF50" stroke-width="4" fill="none" filter="url(#glow)"/>
-
-                            <!-- Flow Direction Arrows -->
-                            <polygon points="200,185 210,190 200,195" fill="#4CAF50"/>
-                            <polygon points="280,305 290,310 280,315" fill="#4CAF50"/>
-
-                            <!-- Intermediate Component -->
-                            <circle cx="250" cy="250" r="30" fill="url(#gradient1)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="250" y="255" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Filter</text>
-
-                            <!-- Destination Container -->
-                            <rect x="330" y="270" width="120" height="80" rx="10" fill="url(#gradient1)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="390" y="315" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Destination</text>
-
-                            <!-- Connector Points -->
-                            <circle cx="170" cy="190" r="5" fill="#FF9800"/>
-                            <circle cx="330" cy="310" r="5" fill="#FF9800"/>
-
-                            <!-- Flow Rate Indicator -->
-                            <rect x="500" y="200" width="200" height="60" rx="8" fill="rgba(7, 74, 130, 0.1)" stroke="#074a82" stroke-width="1"/>
-                            <text x="600" y="220" text-anchor="middle" fill="#074a82" font-size="12" font-weight="bold">Flow Rate</text>
-                            <text x="600" y="240" text-anchor="middle" fill="#074a82" font-size="16" font-weight="bold">2.5 L/min</text>
-                        </svg>
+            <div class="promo-countdown-revolution">
+                <div class="promo-countdown-label">⚡ REVOLUTION ENDS IN ⚡</div>
+                <div class="promo-timer-grid">
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-days">30</span>
+                            <label>DAYS</label>
+                        </div>
                     </div>
-
-                    <div class="cfd-info">
-                        <h3>Standard Transfer Configuration</h3>
-                        <p>Basic tubing set configuration for standard fluid transfer applications with integrated filtration.</p>
-                        <ul class="cfd-features">
-                            <li>Single path fluid transfer</li>
-                            <li>Integrated sterile filtration</li>
-                            <li>Optimized flow rate control</li>
-                            <li>Contamination-free environment</li>
-                        </ul>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-hours">22</span>
+                            <label>HOURS</label>
+                        </div>
                     </div>
-                </div>
-
-                <div class="cfd-panel" id="cfd2">
-                    <div class="cfd-diagram">
-                        <svg class="diagram-svg" viewBox="0 0 800 600">
-                            <!-- CFD 2 Diagram -->
-                            <defs>
-                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#074a82"/>
-                                    <stop offset="100%" style="stop-color:#095ea7"/>
-                                </linearGradient>
-                            </defs>
-
-                            <!-- Multiple Source Containers -->
-                            <rect x="50" y="100" width="80" height="60" rx="8" fill="url(#gradient2)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="90" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Source A</text>
-
-                            <rect x="50" y="200" width="80" height="60" rx="8" fill="url(#gradient2)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="90" y="235" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Source B</text>
-
-                            <!-- Manifold -->
-                            <rect x="200" y="150" width="100" height="100" rx="12" fill="url(#gradient2)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="250" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Manifold</text>
-
-                            <!-- Multiple Output Paths -->
-                            <rect x="400" y="100" width="80" height="60" rx="8" fill="url(#gradient2)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="440" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Output 1</text>
-
-                            <rect x="400" y="200" width="80" height="60" rx="8" fill="url(#gradient2)" stroke="#4CAF50" stroke-width="2"/>
-                            <text x="440" y="235" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Output 2</text>
-
-                            <!-- Complex Tubing Paths -->
-                            <path d="M130 130 L200 180" stroke="#4CAF50" stroke-width="3" fill="none"/>
-                            <path d="M130 230 L200 220" stroke="#4CAF50" stroke-width="3" fill="none"/>
-                            <path d="M300 170 L400 130" stroke="#4CAF50" stroke-width="3" fill="none"/>
-                            <path d="M300 230 L400 230" stroke="#4CAF50" stroke-width="3" fill="none"/>
-
-                            <!-- Valves -->
-                            <circle cx="165" cy="155" r="8" fill="#FF9800" stroke="#074a82" stroke-width="2"/>
-                            <circle cx="165" cy="225" r="8" fill="#FF9800" stroke="#074a82" stroke-width="2"/>
-                            <circle cx="350" cy="150" r="8" fill="#FF9800" stroke="#074a82" stroke-width="2"/>
-                            <circle cx="350" cy="230" r="8" fill="#FF9800" stroke="#074a82" stroke-width="2"/>
-
-                            <!-- Process Parameters -->
-                            <rect x="550" y="150" width="180" height="100" rx="8" fill="rgba(7, 74, 130, 0.1)" stroke="#074a82" stroke-width="1"/>
-                            <text x="640" y="170" text-anchor="middle" fill="#074a82" font-size="12" font-weight="bold">Multi-Path Configuration</text>
-                            <text x="560" y="190" fill="#074a82" font-size="10">• Parallel Processing</text>
-                            <text x="560" y="205" fill="#074a82" font-size="10">• Variable Flow Control</text>
-                            <text x="560" y="220" fill="#074a82" font-size="10">• Independent Monitoring</text>
-                            <text x="560" y="235" fill="#074a82" font-size="10">• Scalable Architecture</text>
-                        </svg>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-minutes">48</span>
+                            <label>MINS</label>
+                        </div>
                     </div>
-
-                    <div class="cfd-info">
-                        <h3>Multi-Path Distribution System</h3>
-                        <p>Advanced tubing set configuration for complex multi-stream processing with independent flow control.</p>
-                        <ul class="cfd-features">
-                            <li>Multiple source integration</li>
-                            <li>Parallel processing capabilities</li>
-                            <li>Independent flow monitoring</li>
-                            <li>Scalable distribution network</li>
-                        </ul>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-seconds">02</span>
+                            <label>SECS</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Key Features Section -->
-    <section class="features-section">
-        <div class="features-container">
-            <h2 class="features-title">Key Features</h2>
+    <!-- Revolutionary Category Navigation -->
+    <section class="promo-category-universe">
+        <div class="promo-universe-header">
+            <h2 class="promo-universe-title">Choose Your Revolution</h2>
+            <p class="promo-universe-subtitle">Two worlds of innovation, infinite possibilities</p>
+        </div>
 
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>Sterile & Secure</h4>
-                        <p>Maintains contamination-free environment with sterile connections</p>
-                    </div>
+        <div class="promo-dual-worlds">
+            <!-- Bioprocess World -->
+            <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
+                <div class="promo-world-background">
+                    <div class="promo-bioprocess-particles"></div>
                 </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🧬</div>
+                    <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
+                    <p class="promo-world-desc">5 Categories of Cutting-Edge Equipment</p>
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">
+                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: bioprocess_components_collection.products.size | plus: vent_filters_collection.products.size %}
+                                {{ bioprocess_total }}+
+                            </span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 50%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h4>Flexible Design</h4>
-                        <p>Adaptable configurations for diverse bioprocess applications</p>
-                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
+                        EXPLORE BIOPROCESS
+                    </button>
                 </div>
+            </div>
 
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>Scalable Solutions</h4>
-                        <p>Supports efficient changeovers and process scaling</p>
-                    </div>
+            <!-- Laboratory World -->
+            <div class="promo-world promo-laboratory-world" data-world="laboratory">
+                <div class="promo-world-background">
+                    <div class="promo-laboratory-particles"></div>
                 </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-3.293-6.707l1.586 1.586a1 1 0 001.414 0l6-6a1 1 0 10-1.414-1.414L10 13.586l-.879-.879a1 1 0 10-1.414 1.414l1 1z"/>
-                        </svg>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🔬</div>
+                    <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
+                    <p class="promo-world-desc">Premium Laboratory Essentials</p>
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">{{ laboratory_collection.products.size }}+</span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 40%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h4>Certified Quality</h4>
-                        <p>Manufactured and tested to meet strict industry standards</p>
-                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
+                        EXPLORE LABORATORY
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Showcase Section -->
-    <section class="products-section">
-        <div class="products-container">
-            <h2 class="products-title">Featured Tubing Sets</h2>
+    <!-- Dynamic Product Showcase -->
+    <section class="promo-product-galaxy" id="promo-product-showcase">
+        <!-- Bioprocess Galaxy -->
+        <div class="promo-galaxy promo-bioprocess-galaxy" id="bioprocess-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🧬 BIOPROCESS UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Five revolutionary categories, infinite possibilities</p>
+            </div>
 
-            <div class="products-grid">
-                {% comment %} Display products from tubing sets collections {% endcomment %}
-                {% assign featured_products = tubing_sets_collection.products | concat: bioprocess_tubing_collection.products | concat: sterile_tubing_collection.products %}
+            <div class="promo-orbit-system">
+                <!-- Center Hub -->
+                <div class="promo-orbit-center">
+                    <div class="promo-center-core">
+                        <span class="promo-core-text">BIOPROCESS</span>
+                        <span class="promo-core-subtext">REVOLUTION</span>
+                    </div>
+                </div>
 
-                {% if featured_products.size > 0 %}
-                    {% for product in featured_products limit: 6 %}
-                    <div class="product-card">
-                        <div class="product-image">
-                            {% if product.featured_image %}
-                                <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}">
-                            {% else %}
-                                <div class="product-placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                    </svg>
-                                </div>
-                            {% endif %}
-                            <div class="product-badge">Custom SUT</div>
-                        </div>
-
-                        <div class="product-content">
-                            <h4 class="product-title">{{ product.title | truncate: 60 }}</h4>
-
-                            <div class="product-price">
-                                {% if product.compare_at_price > product.price %}
-                                    <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                    <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                                    <span class="savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                {% else %}
-                                    <span class="current-price">${{ product.price | money_without_currency }}</span>
-                                {% endif %}
-                            </div>
-
-                            {% if product.description != blank %}
-                                <p class="product-description">{{ product.description | strip_html | truncate: 120 }}</p>
-                            {% endif %}
-
-                            <a href="{{ product.url }}" class="product-cta">View Details</a>
+                <!-- Orbiting Categories -->
+                {% if pc_carboy_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-1">
+                    <div class="promo-category-planet" data-category="pc-rectangular-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚗️</span>
+                            <span class="promo-planet-name">PC Rectangular</span>
+                            <span class="promo-planet-count">{{ pc_carboy_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">20% OFF</span>
                         </div>
                     </div>
-                    {% endfor %}
-                {% else %}
-                    {% comment %} Fallback if no specific collections found {% endcomment %}
-                    {% for product in all_products limit: 6 %}
-                        {% if product.tags contains 'tubing' or product.title contains 'tubing' or product.title contains 'Tubing' %}
-                        <div class="product-card">
-                            <div class="product-image">
-                                {% if product.featured_image %}
-                                    <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}">
-                                {% else %}
-                                    <div class="product-placeholder">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                        </svg>
-                                    </div>
-                                {% endif %}
-                                <div class="product-badge">Tubing Set</div>
-                            </div>
+                </div>
+                {% endif %}
 
-                            <div class="product-content">
-                                <h4 class="product-title">{{ product.title | truncate: 60 }}</h4>
-
-                                <div class="product-price">
-                                    <span class="current-price">${{ product.price | money_without_currency }}</span>
-                                </div>
-
-                                <a href="{{ product.url }}" class="product-cta">View Details</a>
-                            </div>
+                {% if pc_tr_carboy_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-2">
+                    <div class="promo-category-planet" data-category="pc-tr-carboy">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🔄</span>
+                            <span class="promo-planet-name">PC TR Carboy</span>
+                            <span class="promo-planet-count">{{ pc_tr_carboy_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">25% OFF</span>
                         </div>
-                        {% endif %}
-                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_bottles_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-3">
+                    <div class="promo-category-planet" data-category="ezbio-bottles-pc">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🧪</span>
+                            <span class="promo-planet-name">EZBio Bottles</span>
+                            <span class="promo-planet-count">{{ ezbio_bottles_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">30% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if bioprocess_components_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-4">
+                    <div class="promo-category-planet" data-category="bioprocess-components">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">⚙️</span>
+                            <span class="promo-planet-name">Components</span>
+                            <span class="promo-planet-count">{{ bioprocess_components_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">40% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if vent_filters_collection.products.size > 0 %}
+                <div class="promo-orbit promo-orbit-5">
+                    <div class="promo-category-planet" data-category="vent-filters">
+                        <div class="promo-planet-core">
+                            <span class="promo-planet-icon">🌪️</span>
+                            <span class="promo-planet-name">Vent Filters</span>
+                            <span class="promo-planet-count">{{ vent_filters_collection.products.size }} Products</span>
+                            <span class="promo-planet-discount">50% OFF</span>
+                        </div>
+                    </div>
+                </div>
                 {% endif %}
             </div>
+
+            <!-- Featured Bioprocess Products -->
+            <div class="promo-featured-products">
+                <h3 class="promo-featured-title">🎆 FEATURED BIOPROCESS DEALS 🎆</h3>
+                <div class="promo-products-grid">
+                    {% comment %} First try to show products from sale collections {% endcomment %}
+                    {% assign featured_products_count = 0 %}
+                    {% for collection in collections %}
+                        {% if collection.first contains 'us-independence-day-sale-25' and (collection.first contains 'pc-' or collection.first contains 'ezbio' or collection.first contains 'bioprocess' or collection.first contains 'vent') %}
+                            {% for product in collection.last.products limit: 2 %}
+                            {% assign featured_products_count = featured_products_count | plus: 1 %}
+                            <div class="promo-product-card">
+                                <div class="promo-product-image">
+                                    {% if product.featured_image %}
+                                        <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                    <div class="promo-sale-badge">🇺🇸 SALE</div>
+                                </div>
+                                <div class="promo-product-content">
+                                    <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                    <div class="promo-product-price">
+                                        {% if product.compare_at_price > product.price %}
+                                            <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                            <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                            <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                        {% else %}
+                                            <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% comment %} Fallback: If no sale collection products found, show from assigned collections {% endcomment %}
+                    {% if featured_products_count == 0 %}
+                        {% assign fallback_collections = pc_carboy_collection.products | concat: pc_tr_carboy_collection.products | concat: ezbio_bottles_collection.products | concat: bioprocess_components_collection.products | concat: vent_filters_collection.products %}
+                        {% for product in fallback_collections limit: 6 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% endif %}
+                                <div class="promo-sale-badge">🇺🇸 SALE</div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% comment %} Ultimate fallback: Show from main Independence Day sale collection {% endcomment %}
+                    {% if featured_products_count == 0 and fallback_collections.size == 0 %}
+                        {% for product in us_independence_sale_collection.products limit: 6 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% endif %}
+                                <div class="promo-sale-badge">🇺🇸 SALE</div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Metrics Section -->
-    <section class="metrics-section">
-        <div class="metrics-container">
-            <h2 class="metrics-title">Tubing Set Metrics</h2>
+        <!-- Laboratory Galaxy -->
+        <div class="promo-galaxy promo-laboratory-galaxy" id="laboratory-galaxy">
+            <div class="promo-galaxy-header">
+                <h2 class="promo-galaxy-title">🔬 LABORATORY UNIVERSE</h2>
+                <p class="promo-galaxy-subtitle">Premium laboratory essentials for every breakthrough</p>
+            </div>
 
-            <div class="metrics-grid">
-                <div class="metric-block">
-                    <div class="metric-header">
-                        <h4>Available Configurations</h4>
-                        <div class="metric-circles">
-                            <div class="circle blue"></div>
-                            <div class="circle green"></div>
-                            <div class="circle orange"></div>
-                        </div>
-                    </div>
-                    <div class="metric-content">
-                        <div class="metric-row">
-                            <span class="metric-label">Standard Sets</span>
-                            <span class="metric-value">{{ tubing_sets_collection.products.size | default: 15 }}+</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Custom Configurations</span>
-                            <span class="metric-value">{{ custom_sut_collection.products.size | default: 25 }}+</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Sterile Options</span>
-                            <span class="metric-value">{{ sterile_tubing_collection.products.size | default: 12 }}+</span>
-                        </div>
+            <div class="promo-lab-constellation">
+                <div class="promo-constellation-center">
+                    <div class="promo-lab-core">
+                        <span class="promo-lab-icon">🔬</span>
+                        <span class="promo-lab-title">LABORATORY</span>
+                        <span class="promo-lab-subtitle">EXCELLENCE</span>
                     </div>
                 </div>
 
-                <div class="metric-block">
-                    <div class="metric-header">
-                        <h4>Flow Specifications</h4>
-                        <div class="metric-circles">
-                            <div class="circle purple"></div>
-                            <div class="circle teal"></div>
+                <!-- Dynamic Laboratory Products -->
+                {% if laboratory_collection.products.size > 0 %}
+                    <div class="promo-lab-products">
+                        {% for product in laboratory_collection.products limit: 6 %}
+                        <div class="promo-lab-star" data-product="{{ product.id }}">
+                            <div class="promo-star-glow"></div>
+                            <div class="promo-star-content">
+                                <div class="promo-star-image">
+                                    {% if product.featured_image %}
+                                        <img src="{{ product.featured_image | img_url: '200x200' }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                    <div class="promo-star-badge">🎆</div>
+                                </div>
+                                <h4 class="promo-star-title">{{ product.title | truncate: 30 }}</h4>
+                                <div class="promo-star-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-star-cta">DISCOVER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Featured Laboratory Products Grid -->
+            <div class="promo-featured-products">
+                <h3 class="promo-featured-title">🎆 FEATURED LABORATORY DEALS 🎆</h3>
+                <div class="promo-products-grid">
+                    {% for product in laboratory_collection.products limit: 4 %}
+                    <div class="promo-product-card">
+                        <div class="promo-product-image">
+                            {% if product.featured_image %}
+                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                            {% endif %}
+                            <div class="promo-sale-badge">🇺🇸 SALE</div>
+                        </div>
+                        <div class="promo-product-content">
+                            <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
+                            <div class="promo-product-price">
+                                {% if product.compare_at_price > product.price %}
+                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+                                {% else %}
+                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                {% endif %}
+                            </div>
+                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
                         </div>
                     </div>
-                    <div class="metric-content">
-                        <div class="metric-row">
-                            <span class="metric-label">Flow Rate Range</span>
-                            <span class="metric-value">0.1-50 L/min</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Pressure Rating</span>
-                            <span class="metric-value">Up to 30 PSI</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Temperature Range</span>
-                            <span class="metric-value">-40°C to 140°C</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container">
-            <div class="cta-content">
-                <h3>Ready to find the perfect tubing set for your application?</h3>
-                <a href="https://custom-sut-catalog.foxxbioprocess.com/v1/portal/csutc/dashboard/tubing-sets" class="cta-button">
-                    Explore Tubing Sets
+    <!-- Independence Day Special Collection -->
+    {% if us_independence_sale_collection.products.size > 0 %}
+    <section class="promo-special-collection">
+        <div class="promo-special-header">
+            <h2 class="promo-special-title">🇺🇸 INDEPENDENCE DAY EXCLUSIVE DEALS 🇺🇸</h2>
+            <p class="promo-special-subtitle">Limited-time offers celebrating America's freedom and innovation</p>
+        </div>
+
+        <div class="promo-special-grid">
+            {% for product in us_independence_sale_collection.products limit: 8 %}
+            <div class="promo-special-card">
+                <div class="promo-special-image">
+                    {% if product.featured_image %}
+                        <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}">
+                    {% endif %}
+                    <div class="promo-special-badge">
+                        <span class="promo-badge-flag">🇺🇸</span>
+                        <span class="promo-badge-text">EXCLUSIVE</span>
+                    </div>
+                </div>
+                <div class="promo-special-content">
+                    <h4 class="promo-special-product-title">{{ product.title }}</h4>
+                    <div class="promo-special-price">
+                        {% if product.compare_at_price > product.price %}
+                            <span class="promo-special-original">${{ product.compare_at_price | money_without_currency }}</span>
+                            <span class="promo-special-sale">${{ product.price | money_without_currency }}</span>
+                            <div class="promo-special-savings">
+                                Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+                            </div>
+                        {% else %}
+                            <span class="promo-special-sale">${{ product.price | money_without_currency }}</span>
+                        {% endif %}
+                    </div>
+                    <a href="{{ product.url }}" class="promo-special-cta">
+                        🎆 CELEBRATE FREEDOM
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Final Revolutionary CTA -->
+    <section class="promo-freedom-finale">
+        <div class="promo-finale-background">
+            <div class="promo-finale-flag"></div>
+            <div class="promo-finale-sparks">
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+                <div class="promo-spark"></div>
+            </div>
+        </div>
+
+        <div class="promo-finale-content">
+            <h2 class="promo-finale-title">
+                🇺🇸 JOIN THE REVOLUTION 🇺🇸
+            </h2>
+            <p class="promo-finale-subtitle">
+                Don't let freedom pass you by! Revolutionary savings end soon.
+            </p>
+
+            <div class="promo-finale-timer">
+                <div class="promo-finale-timer-grid">
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-days">30</span>
+                        <label>DAYS</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-hours">22</span>
+                        <label>HOURS</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-minutes">48</span>
+                        <label>MINUTES</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-seconds">02</span>
+                        <label>SECONDS</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promo-finale-ctas">
+                <a href="{{ collections.all-products.url }}" class="promo-finale-btn promo-btn-primary">
+                    🚀 SHOP ALL DEALS
+                </a>
+                <a href="#promo-product-showcase" class="promo-finale-btn promo-btn-secondary">
+                    🔍 EXPLORE CATEGORIES
                 </a>
             </div>
         </div>
     </section>
 
     <style>
-        .tubing-sets-body {
+        .promo-independence-body {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            overflow-x: hidden;
         }
 
-        /* Hero Section */
-        .tubing-hero {
+        /* Revolutionary Hero Section */
+        .promo-hero-revolution {
             position: relative;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #074a82 0%, #095ea7 100%);
-            color: white;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 70%, #e53e3e 100%);
             overflow: hidden;
         }
 
-        .hero-background {
+        .promo-patriotic-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -435,647 +539,1575 @@
             z-index: 1;
         }
 
-        .hero-particles {
+        .promo-star-field {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.3)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.2)"/></svg>') repeat;
-            animation: particles-drift 20s linear infinite;
         }
 
-        @keyframes particles-drift {
+        .promo-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: promo-twinkle 3s ease-in-out infinite;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        .promo-star:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .promo-star:nth-child(2) { top: 30%; left: 80%; animation-delay: 0.5s; }
+        .promo-star:nth-child(3) { top: 60%; left: 15%; animation-delay: 1s; }
+        .promo-star:nth-child(4) { top: 70%; left: 70%; animation-delay: 1.5s; }
+        .promo-star:nth-child(5) { top: 40%; left: 90%; animation-delay: 2s; }
+        .promo-star:nth-child(6) { top: 80%; left: 20%; animation-delay: 2.5s; }
+        .promo-star:nth-child(7) { top: 15%; left: 60%; animation-delay: 3s; }
+        .promo-star:nth-child(8) { top: 85%; left: 50%; animation-delay: 3.5s; }
+        .promo-star:nth-child(9) { top: 25%; left: 40%; animation-delay: 4s; }
+        .promo-star:nth-child(10) { top: 55%; left: 85%; animation-delay: 4.5s; }
+
+        @keyframes promo-twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.8); box-shadow: 0 0 20px #ffd700; }
+        }
+
+        .promo-flag-waves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .promo-wave {
+            position: absolute;
+            width: 100%;
+            height: 33.33%;
+            animation: promo-wave-motion 8s ease-in-out infinite;
+        }
+
+        .promo-wave-red {
+            top: 0;
+            background: linear-gradient(45deg, #e53e3e, transparent);
+            animation-delay: 0s;
+        }
+
+        .promo-wave-white {
+            top: 33.33%;
+            background: linear-gradient(45deg, #ffffff, transparent);
+            animation-delay: 2s;
+        }
+
+        .promo-wave-blue {
+            top: 66.66%;
+            background: linear-gradient(45deg, #3182ce, transparent);
+            animation-delay: 4s;
+        }
+
+        @keyframes promo-wave-motion {
+            0%, 100% { transform: translateX(-10px) skewX(0deg); }
+            50% { transform: translateX(10px) skewX(2deg); }
+        }
+
+        .promo-fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffd700, #e53e3e, #3182ce);
+            border-radius: 50%;
+            animation: promo-firework-burst 4s ease-out infinite;
+        }
+
+        .promo-firework-1 { top: 25%; left: 20%; animation-delay: 0s; }
+        .promo-firework-2 { top: 35%; right: 25%; animation-delay: 2s; }
+        .promo-firework-3 { bottom: 30%; left: 60%; animation-delay: 4s; }
+
+        @keyframes promo-firework-burst {
+            0% { 
+                opacity: 0; 
+                transform: scale(0); 
+                box-shadow: 0 0 0 0 currentColor;
+            }
+            20% { 
+                opacity: 1; 
+                transform: scale(1); 
+                box-shadow: 0 0 30px 15px rgba(255, 215, 0, 0.8);
+            }
+            100% { 
+                opacity: 0; 
+                transform: scale(3); 
+                box-shadow: 0 0 80px 40px rgba(255, 215, 0, 0);
+            }
+        }
+
+        .promo-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 40px 20px;
+        }
+
+        .promo-liberty-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e53e3e, #3182ce);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            animation: promo-liberty-glow 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(229, 62, 62, 0.6);
+            border: 2px solid #ffd700;
+        }
+
+        @keyframes promo-liberty-glow {
+            0%, 100% { box-shadow: 0 0 40px rgba(229, 62, 62, 0.6); }
+            50% { box-shadow: 0 0 60px rgba(49, 130, 206, 0.8), 0 0 80px rgba(229, 62, 62, 0.4); }
+        }
+
+        .promo-revolutionary-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            perspective: 1000px;
+        }
+
+        .promo-word {
+            display: inline-block;
+            margin: 0 10px;
+            animation: promo-word-revolution 6s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-word-1 {
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation-delay: 0s;
+        }
+
+        .promo-word-2 {
+            color: #ffffff;
+            animation-delay: 0.5s;
+        }
+
+        .promo-word-3 {
+            background: linear-gradient(45deg, #3182ce, #38b2ac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation-delay: 1s;
+        }
+
+        .promo-hero-subtitle-text {
+            display: block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #ffd700;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes promo-word-revolution {
+            0%, 100% { transform: rotateY(0deg) scale(1); }
+            25% { transform: rotateY(10deg) scale(1.05); }
+            50% { transform: rotateY(-5deg) scale(1.1); }
+            75% { transform: rotateY(5deg) scale(1.05); }
+        }
+
+        .promo-savings-explosion {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .promo-explosion-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .promo-mega-discount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #e53e3e, #ffd700, #e53e3e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(229, 62, 62, 0.8);
+            animation: promo-mega-pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        .promo-mega-discount::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(229, 62, 62, 0.3), transparent);
+            animation: promo-explosion-ring 3s ease-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes promo-mega-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes promo-explosion-ring {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        .promo-explosion-subtext {
+            font-size: 1.2rem;
+            color: #cbd5e0;
+            margin-top: 10px;
+        }
+
+        .promo-countdown-revolution {
+            margin-top: 60px;
+        }
+
+        .promo-countdown-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 30px;
+            animation: promo-lightning 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-lightning {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 255, 255, 0.5); }
+        }
+
+        .promo-timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .promo-timer-cube {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+            animation: promo-cube-float 4s ease-in-out infinite;
+        }
+
+        .promo-timer-cube:nth-child(1) { animation-delay: 0s; }
+        .promo-timer-cube:nth-child(2) { animation-delay: 0.5s; }
+        .promo-timer-cube:nth-child(3) { animation-delay: 1s; }
+        .promo-timer-cube:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes promo-cube-float {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(10deg); }
+        }
+
+        .promo-timer-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3182ce, #38b2ac);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(49, 130, 206, 0.4);
+            animation: promo-timer-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-timer-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(49, 130, 206, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(49, 130, 206, 0.7), 0 0 20px rgba(255, 215, 0, 0.5); }
+        }
+
+        .promo-timer-face span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-timer-face label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+
+        /* Category Universe Section */
+        .promo-category-universe {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+            position: relative;
+        }
+
+        .promo-universe-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .promo-universe-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #38b2ac, #e53e3e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .promo-universe-subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e0;
+            font-weight: 300;
+        }
+
+        .promo-dual-worlds {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .promo-world {
+            position: relative;
+            background: radial-gradient(circle at center, rgba(49, 130, 206, 0.3), rgba(26, 26, 46, 0.8));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            animation: promo-world-pulse 6s ease-in-out infinite;
+        }
+
+        .promo-world:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .promo-bioprocess-world {
+            animation-delay: 0s;
+        }
+
+        .promo-laboratory-world {
+            animation-delay: 3s;
+        }
+
+        @keyframes promo-world-pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(49, 130, 206, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(56, 178, 172, 0.6), 0 0 70px rgba(49, 130, 206, 0.3); }
+        }
+
+        .promo-world-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+
+        .promo-bioprocess-particles,
+        .promo-laboratory-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,215,0,0.4)"/><circle cx="80" cy="40" r="1.5" fill="rgba(56,178,172,0.5)"/><circle cx="40" cy="80" r="1" fill="rgba(229,62,62,0.4)"/></svg>') repeat;
+            animation: promo-particles-drift 20s linear infinite;
+        }
+
+        @keyframes promo-particles-drift {
             0% { transform: translateY(0); }
             100% { transform: translateY(-100px); }
         }
 
-        .hero-content {
+        .promo-world-content {
             position: relative;
             z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-            text-align: center;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
+        .promo-world-icon {
+            font-size: 4rem;
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: promo-icon-bounce 3s ease-in-out infinite;
         }
 
-        .hero-title {
+        @keyframes promo-icon-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .promo-world-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: 1.8rem;
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 30px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
         }
 
-        .title-word {
-            display: inline-block;
-            margin: 0 15px;
-            background: linear-gradient(45deg, #ffffff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-        }
-
-        .hero-description {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 50px;
-            opacity: 0.9;
+        .promo-world-desc {
+            font-size: 1.1rem;
+            color: #cbd5e0;
+            margin-bottom: 40px;
             font-weight: 300;
         }
 
-        .hero-image {
-            max-width: 100%;
-            margin-top: 50px;
+        .promo-world-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
         }
 
-        .hero-image img {
-            width: 100%;
-            max-width: 1000px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        .promo-stat {
+            text-align: center;
         }
 
-        /* CFD Section */
-        .cfd-section {
+        .promo-stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #38b2ac;
+            text-shadow: 0 0 10px rgba(56, 178, 172, 0.8);
+        }
+
+        .promo-stat-label {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            font-weight: 500;
+        }
+
+        .promo-world-cta {
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(229, 62, 62, 0.4);
+        }
+
+        .promo-world-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(229, 62, 62, 0.6);
+            background: linear-gradient(45deg, #c53030, #ecc94b);
+        }
+
+        /* Product Galaxy Section */
+        .promo-product-galaxy {
             padding: 100px 20px;
-            background: #f8fafc;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            min-height: 100vh;
         }
 
-        .cfd-container {
+        .promo-galaxy {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .promo-galaxy.active {
+            display: block;
+            animation: promo-galaxy-appear 1s ease-out;
+        }
+
+        @keyframes promo-galaxy-appear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .promo-galaxy-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .promo-galaxy-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #38b2ac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .promo-galaxy-subtitle {
+            font-size: 1.2rem;
+            color: #cbd5e0;
+            font-weight: 300;
+        }
+
+        /* Orbit System */
+        .promo-orbit-system {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .promo-orbit-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            z-index: 10;
+        }
+
+        .promo-center-core {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ffd700, #e53e3e);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #38b2ac;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            animation: promo-core-rotation 20s linear infinite;
+        }
+
+        @keyframes promo-core-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .promo-core-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .promo-core-subtext {
+            font-size: 0.8rem;
+            color: #1a1a2e;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .promo-orbit {
+            position: absolute;
+            border: 2px solid rgba(56, 178, 172, 0.4);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: promo-orbit-rotation 30s linear infinite;
+        }
+
+        .promo-orbit-1 {
+            width: 300px;
+            height: 300px;
+            animation-duration: 25s;
+        }
+
+        .promo-orbit-2 {
+            width: 400px;
+            height: 400px;
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        .promo-orbit-3 {
+            width: 500px;
+            height: 500px;
+            animation-duration: 45s;
+        }
+
+        .promo-orbit-4 {
+            width: 600px;
+            height: 600px;
+            animation-duration: 55s;
+            animation-direction: reverse;
+        }
+
+        .promo-orbit-5 {
+            width: 700px;
+            height: 700px;
+            animation-duration: 65s;
+        }
+
+        @keyframes promo-orbit-rotation {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .promo-category-planet {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            animation: promo-planet-counter-rotation 30s linear infinite;
+        }
+
+        .promo-orbit-1 .promo-category-planet { animation-duration: 25s; }
+        .promo-orbit-2 .promo-category-planet { animation-duration: 35s; animation-direction: normal; }
+        .promo-orbit-3 .promo-category-planet { animation-duration: 45s; }
+        .promo-orbit-4 .promo-category-planet { animation-duration: 55s; animation-direction: normal; }
+        .promo-orbit-5 .promo-category-planet { animation-duration: 65s; }
+
+        @keyframes promo-planet-counter-rotation {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(-360deg); }
+        }
+
+        .promo-planet-core {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #3182ce, #38b2ac);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(49, 130, 206, 0.4);
+        }
+
+        .promo-category-planet:hover .promo-planet-core {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, #e53e3e, #ffd700);
+        }
+
+        .promo-planet-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .promo-planet-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .promo-planet-count {
+            font-size: 0.6rem;
+            color: #cbd5e0;
+            margin-bottom: 5px;
+        }
+
+        .promo-planet-discount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Featured Products */
+        .promo-featured-products {
+            margin-top: 80px;
+        }
+
+        .promo-featured-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            color: #ffd700;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .promo-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .cfd-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .cfd-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: #074a82;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .cfd-subtitle {
-            font-size: 1.2rem;
-            color: #64748b;
-            font-weight: 400;
-        }
-
-        .cfd-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-            background: white;
-            border-radius: 12px;
-            padding: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .cfd-tab {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            cursor: pointer;
+        .promo-product-card {
+            background: linear-gradient(135deg, rgba(49, 130, 206, 0.1), rgba(26, 26, 46, 0.8));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
             transition: all 0.3s ease;
+            animation: promo-card-float 6s ease-in-out infinite;
+        }
+
+        .promo-product-card:nth-child(odd) { animation-delay: 0s; }
+        .promo-product-card:nth-child(even) { animation-delay: 3s; }
+
+        @keyframes promo-card-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .promo-product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .promo-product-image {
             position: relative;
-            color: #64748b;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .promo-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-product-card:hover .promo-product-image img {
+            transform: scale(1.05);
+        }
+
+        .promo-sale-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            animation: promo-badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .promo-product-content {
+            padding: 25px;
+        }
+
+        .promo-product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .promo-product-price {
+            margin-bottom: 20px;
+        }
+
+        .promo-original-price {
+            text-decoration: line-through;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .promo-sale-price {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .promo-savings {
+            display: block;
+            color: #38b2ac;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .promo-product-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.4);
+        }
+
+        .promo-product-cta:hover {
+            background: linear-gradient(45deg, #c53030, #ecc94b);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.6);
+        }
+
+        /* Laboratory Constellation */
+        .promo-lab-constellation {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            margin-bottom: 80px;
+        }
+
+        .promo-constellation-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .promo-lab-core {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #38b2ac, #3182ce);
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(56, 178, 172, 0.8);
+            animation: promo-lab-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-lab-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(56, 178, 172, 0.8); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(56, 178, 172, 1); }
+        }
+
+        .promo-lab-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .promo-lab-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .promo-lab-subtitle {
+            font-size: 0.7rem;
+            color: #ffd700;
             font-weight: 600;
         }
 
-        .cfd-tab.active {
-            background: #074a82;
-            color: white;
-        }
-
-        .tab-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .tab-indicator {
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: #074a82;
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cfd-tab.active .tab-indicator {
-            opacity: 1;
-        }
-
-        .cfd-content {
+        .promo-lab-products {
             position: relative;
-        }
-
-        .cfd-panel {
-            display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .cfd-panel.active {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .cfd-diagram {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        .diagram-svg {
             width: 100%;
-            height: auto;
-            max-height: 400px;
+            height: 600px;
         }
 
-        .cfd-info h3 {
-            font-size: 1.8rem;
-            color: #074a82;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .cfd-info p {
-            color: #64748b;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
-        .cfd-features {
-            list-style: none;
-            padding: 0;
-        }
-
-        .cfd-features li {
-            padding: 8px 0;
-            color: #374151;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .cfd-features li::before {
-            content: "✓";
+        .promo-lab-star {
             position: absolute;
-            left: 0;
-            color: #4CAF50;
-            font-weight: bold;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 100px 20px;
-            background: white;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            text-align: center;
-            color: #074a82;
-            margin-bottom: 60px;
-            font-weight: 700;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 30px;
-            background: #f8fafc;
-            border-radius: 15px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(7, 74, 130, 0.1);
+        .promo-lab-star:nth-child(1) { top: 10%; left: 20%; }
+        .promo-lab-star:nth-child(2) { top: 20%; right: 15%; }
+        .promo-lab-star:nth-child(3) { top: 60%; left: 10%; }
+        .promo-lab-star:nth-child(4) { bottom: 20%; right: 20%; }
+        .promo-lab-star:nth-child(5) { bottom: 30%; left: 30%; }
+        .promo-lab-star:nth-child(6) { top: 40%; right: 30%; }
+
+        .promo-star-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8), transparent);
+            border-radius: 50%;
+            animation: promo-star-glow-pulse 3s ease-in-out infinite;
         }
 
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: #074a82;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        @keyframes promo-star-glow-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
         }
 
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-
-        .feature-content h4 {
-            font-size: 1.3rem;
-            color: #074a82;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .feature-content p {
-            color: #64748b;
-            font-size: 1rem;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 100px 20px;
-            background: #f8fafc;
-        }
-
-        .products-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .products-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            text-align: center;
-            color: #074a82;
-            margin-bottom: 60px;
-            font-weight: 700;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(7, 74, 130, 0.15);
-        }
-
-        .product-image {
+        .promo-star-content {
             position: relative;
-            height: 250px;
-            overflow: hidden;
-            background: #f8fafc;
+            z-index: 2;
+            background: rgba(49, 130, 206, 0.9);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .product-image img {
+        .promo-lab-star:hover .promo-star-content {
+            transform: scale(1.05);
+            background: rgba(229, 62, 62, 0.9);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .promo-star-image {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .promo-star-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .product-placeholder {
+        .promo-star-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 1.2rem;
+            animation: promo-star-badge-spin 3s linear infinite;
+        }
+
+        @keyframes promo-star-badge-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .promo-star-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .promo-star-price {
+            margin-bottom: 15px;
+        }
+
+        .promo-star-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #38b2ac);
+            color: #1a1a2e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .promo-star-cta:hover {
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Special Collection Section */
+        .promo-special-collection {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #e53e3e 0%, #3182ce 50%, #1a1a2e 100%);
+            position: relative;
+        }
+
+        .promo-special-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .promo-special-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            animation: promo-special-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-special-glow {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            50% { text-shadow: 0 0 50px rgba(255, 215, 0, 1), 0 0 70px rgba(229, 62, 62, 0.5); }
+        }
+
+        .promo-special-subtitle {
+            font-size: 1.3rem;
+            color: white;
+            font-weight: 300;
+        }
+
+        .promo-special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .promo-special-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(26, 26, 46, 0.9));
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: promo-special-float 8s ease-in-out infinite;
+        }
+
+        .promo-special-card:nth-child(odd) { animation-delay: 0s; }
+        .promo-special-card:nth-child(even) { animation-delay: 4s; }
+
+        @keyframes promo-special-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .promo-special-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: #ffd700;
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.4);
+        }
+
+        .promo-special-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .promo-special-image img {
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .product-placeholder svg {
-            width: 60px;
-            height: 60px;
-            fill: #64748b;
+        .promo-special-card:hover .promo-special-image img {
+            transform: scale(1.1) rotate(2deg);
         }
 
-        .product-badge {
+        .promo-special-badge {
             position: absolute;
             top: 15px;
-            right: 15px;
-            background: #074a82;
+            left: 15px;
+            background: linear-gradient(45deg, #e53e3e, #3182ce);
             color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: promo-special-badge-glow 2s ease-in-out infinite;
         }
 
-        .product-content {
+        @keyframes promo-special-badge-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(229, 62, 62, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(49, 130, 206, 0.8); }
+        }
+
+        .promo-badge-flag {
+            font-size: 1.2rem;
+            animation: promo-flag-wave 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-flag-wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .promo-badge-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .promo-special-content {
             padding: 30px;
         }
 
-        .product-title {
+        .promo-special-product-title {
             font-size: 1.2rem;
-            color: #074a82;
-            margin-bottom: 15px;
             font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
             line-height: 1.3;
         }
 
-        .product-price {
-            margin-bottom: 15px;
+        .promo-special-price {
+            margin-bottom: 25px;
         }
 
-        .original-price {
+        .promo-special-original {
             text-decoration: line-through;
-            color: #94a3b8;
-            margin-right: 10px;
+            color: #cbd5e0;
+            font-size: 1rem;
+            margin-right: 12px;
         }
 
-        .sale-price,
-        .current-price {
-            color: #074a82;
-            font-weight: 700;
-            font-size: 1.3rem;
+        .promo-special-sale {
+            color: #ffd700;
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .savings {
-            display: block;
-            color: #059669;
+        .promo-special-savings {
+            color: #38b2ac;
             font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 8px;
+            animation: promo-savings-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-savings-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .promo-special-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #e53e3e);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-special-cta:hover {
+            background: linear-gradient(45deg, #ecc94b, #c53030);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Final CTA Section */
+        .promo-freedom-finale {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .promo-finale-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .promo-finale-flag {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                rgba(229, 62, 62, 0.15) 0%, 
+                rgba(229, 62, 62, 0.15) 15%, 
+                rgba(255, 255, 255, 0.08) 15%, 
+                rgba(255, 255, 255, 0.08) 85%, 
+                rgba(49, 130, 206, 0.15) 85%, 
+                rgba(49, 130, 206, 0.15) 100%);
+            animation: promo-finale-wave 10s ease-in-out infinite;
+        }
+
+        @keyframes promo-finale-wave {
+            0%, 100% { transform: skewX(0deg); }
+            50% { transform: skewX(2deg); }
+        }
+
+        .promo-finale-sparks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: promo-spark-twinkle 2s ease-in-out infinite;
+        }
+
+        .promo-spark:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .promo-spark:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.5s; }
+        .promo-spark:nth-child(3) { bottom: 30%; left: 25%; animation-delay: 1s; }
+        .promo-spark:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 1.5s; }
+        .promo-spark:nth-child(5) { top: 50%; left: 50%; animation-delay: 2s; }
+
+        @keyframes promo-spark-twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(3); box-shadow: 0 0 25px #ffd700; }
+        }
+
+        .promo-finale-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promo-finale-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #e53e3e, #ffd700, #3182ce);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: promo-finale-title-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-finale-title-glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.9), 0 0 60px rgba(229, 62, 62, 0.4); }
+        }
+
+        .promo-finale-subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e0;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .promo-finale-timer {
+            margin-bottom: 50px;
+        }
+
+        .promo-finale-timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .promo-finale-unit {
+            background: linear-gradient(135deg, #3182ce, #38b2ac);
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 20px;
+            min-width: 90px;
+            text-align: center;
+            animation: promo-finale-unit-float 4s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(49, 130, 206, 0.4);
+        }
+
+        .promo-finale-unit:nth-child(1) { animation-delay: 0s; }
+        .promo-finale-unit:nth-child(2) { animation-delay: 0.5s; }
+        .promo-finale-unit:nth-child(3) { animation-delay: 1s; }
+        .promo-finale-unit:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes promo-finale-unit-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .promo-finale-unit span {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+
+        .promo-finale-unit label {
+            font-size: 0.8rem;
+            color: white;
             font-weight: 600;
             margin-top: 5px;
         }
 
-        .product-description {
-            color: #64748b;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+        .promo-finale-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
-        .product-cta {
+        .promo-finale-btn {
             display: inline-block;
-            background: #074a82;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .product-cta:hover {
-            background: #095ea7;
-            transform: translateY(-2px);
-        }
-
-        /* Metrics Section */
-        .metrics-section {
-            padding: 100px 20px;
-            background: white;
-        }
-
-        .metrics-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .metrics-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            text-align: center;
-            color: #074a82;
-            margin-bottom: 60px;
-            font-weight: 700;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-        }
-
-        .metric-block {
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 30px;
-        }
-
-        .metric-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .metric-header h4 {
-            color: #074a82;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .metric-circles {
-            display: flex;
-            gap: 8px;
-        }
-
-        .circle {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .circle.blue { background: #074a82; }
-        .circle.green { background: #059669; }
-        .circle.orange { background: #ea580c; }
-        .circle.purple { background: #7c3aed; }
-        .circle.teal { background: #0891b2; }
-
-        .metric-content {
-            space-y: 15px;
-        }
-
-        .metric-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .metric-row:last-child {
-            border-bottom: none;
-        }
-
-        .metric-label {
-            color: #64748b;
-            font-weight: 500;
-        }
-
-        .metric-value {
-            color: #074a82;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #074a82 0%, #095ea7 100%);
-            color: white;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .cta-content h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #074a82;
-            padding: 15px 35px;
+            padding: 18px 35px;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        .promo-btn-primary {
+            background: linear-gradient(45deg, #e53e3e, #ffd700);
+            color: white;
+            box-shadow: 0 15px 40px rgba(229, 62, 62, 0.5);
+        }
+
+        .promo-btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(229, 62, 62, 0.7);
+            background: linear-gradient(45deg, #c53030, #ecc94b);
+        }
+
+        .promo-btn-secondary {
+            background: linear-gradient(45deg, #3182ce, #38b2ac);
+            color: white;
+            box-shadow: 0 15px 40px rgba(49, 130, 206, 0.5);
+        }
+
+        .promo-btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(49, 130, 206, 0.7);
+            background: linear-gradient(45deg, #2c5aa0, #319795);
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .cfd-panel.active {
+            .promo-dual-worlds {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 40px;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .promo-orbit-system {
+                width: 100%;
+                height: 600px;
+                transform: scale(0.8);
             }
 
-            .products-grid {
-                grid-template-columns: 1fr;
+            .promo-timer-grid,
+            .promo-finale-timer-grid {
+                gap: 15px;
             }
 
-            .metrics-grid {
-                grid-template-columns: 1fr;
+            .promo-timer-cube,
+            .promo-finale-unit {
+                width: 80px;
+                height: 80px;
+                min-width: 80px;
             }
 
-            .cfd-tabs {
+            .promo-timer-face span,
+            .promo-finale-unit span {
+                font-size: 1.5rem;
+            }
+
+            .promo-finale-ctas {
                 flex-direction: column;
-                gap: 8px;
+                align-items: center;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .title-word {
+            .promo-lab-star {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                margin: 20px auto;
                 display: block;
-                margin: 10px 0;
+            }
+
+            .promo-lab-products {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .promo-constellation-center {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+
+            .promo-products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .promo-special-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .promo-hero-content {
+                padding: 20px 15px;
+            }
+
+            .promo-world {
+                padding: 40px 25px;
+            }
+
+            .promo-orbit-system {
+                transform: scale(0.6);
             }
         }
     </style>
 
     <script>
+        // Enhanced countdown timer
+        function updateCountdown() {
+            const targetDate = new Date('July 4, 2024 23:59:59').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Update all timers
+                ['promo-days', 'promo-finale-days'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = days.toString().padStart(2, '0');
+                });
+
+                ['promo-hours', 'promo-finale-hours'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = hours.toString().padStart(2, '0');
+                });
+
+                ['promo-minutes', 'promo-finale-minutes'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = minutes.toString().padStart(2, '0');
+                });
+
+                ['promo-seconds', 'promo-finale-seconds'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = seconds.toString().padStart(2, '0');
+                });
+            }
+        }
+
+        // World exploration functionality
+        function exploreWorld(worldType) {
+            const galaxies = document.querySelectorAll('.promo-galaxy');
+            galaxies.forEach(galaxy => galaxy.classList.remove('active'));
+
+            const targetGalaxy = document.getElementById(worldType + '-galaxy');
+            if (targetGalaxy) {
+                targetGalaxy.classList.add('active');
+
+                // Smooth scroll to product showcase
+                document.getElementById('promo-product-showcase').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Enhanced planet click functionality
+        function selectCategory(categoryName) {
+            // Add visual feedback for planet selection
+            document.querySelectorAll('.promo-category-planet').forEach(planet => {
+                planet.classList.remove('selected');
+            });
+
+            event.currentTarget.classList.add('selected');
+
+            // Load featured products for this category
+            loadFeaturedProducts(categoryName);
+        }
+
+        // Load featured products
+        function loadFeaturedProducts(categoryName) {
+            // This would typically load products via AJAX
+            console.log('Loading products for category:', categoryName);
+        }
+
+        // Initialize the revolutionary experience
         document.addEventListener('DOMContentLoaded', function() {
-            // CFD Tab Functionality
-            const tabs = document.querySelectorAll('.cfd-tab');
-            const panels = document.querySelectorAll('.cfd-panel');
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-
-                    // Remove active class from all tabs and panels
-                    tabs.forEach(t => t.classList.remove('active'));
-                    panels.forEach(p => p.classList.remove('active'));
-
-                    // Add active class to clicked tab and corresponding panel
-                    this.classList.add('active');
-                    document.getElementById(targetTab).classList.add('active');
+            // Add planet click events
+            document.querySelectorAll('.promo-category-planet').forEach(planet => {
+                planet.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    selectCategory(category);
                 });
             });
 
-            // Smooth scrolling for internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+            // Show bioprocess galaxy by default
+            const bioprocessGalaxy = document.getElementById('bioprocess-galaxy');
+            if (bioprocessGalaxy) {
+                bioprocessGalaxy.classList.add('active');
+            }
+
+            // Add stellar parallax effect
+            document.addEventListener('mousemove', function(e) {
+                const stars = document.querySelectorAll('.promo-star');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                stars.forEach((star, index) => {
+                    const speed = (index + 1) * 0.5;
+                    star.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
                 });
             });
 
-            // Intersection Observer for animations
+            // Add enhanced scroll animations
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                rootMargin: '0px 0px -100px 0px'
             };
 
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('promo-animate-in');
                     }
                 });
             }, observerOptions);
 
-            // Observe elements for animation
-            document.querySelectorAll('.feature-item, .product-card, .metric-block').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            // Observe all major sections
+            document.querySelectorAll('.promo-world, .promo-galaxy, .promo-finale-content').forEach(el => {
                 observer.observe(el);
             });
         });
