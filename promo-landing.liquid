@@ -1517,6 +1517,54 @@
                 padding-top: 10px;
             }
 
+            /* Mobile Liberty & Flag Composition */
+            .promo-liberty-flag-composition {
+                transform: translate(-50%, -60%);
+                scale: 0.7;
+            }
+
+            .promo-detailed-liberty {
+                width: 180px;
+                height: 270px;
+            }
+
+            .promo-majestic-flag {
+                left: -50%;
+                top: -15%;
+                scale: 0.8;
+            }
+
+            /* Mobile Floating Elements */
+            .promo-floating-star {
+                font-size: 1.2rem;
+            }
+
+            .promo-floating-firework {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile Scroll Encourager */
+            .promo-scroll-encourager {
+                bottom: 8%;
+                scale: 0.9;
+            }
+
+            .promo-scroll-arrow {
+                font-size: 2rem;
+            }
+
+            .promo-scroll-text {
+                font-size: 0.9rem;
+            }
+
+            /* Reduce floating element count on mobile for performance */
+            .promo-star-float-4,
+            .promo-star-float-5,
+            .promo-firework-3 {
+                display: none;
+            }
+        }
+
             .promo-section-container {
                 padding: 0 15px;
                 max-width: 100%;
@@ -1746,110 +1794,278 @@
     <!-- Revolutionary Hero Section -->
     <section class="promo-hero-revolution">
         <div class="promo-patriotic-canvas">
-            <!-- Dynamic SVG American Flag -->
-            <div class="promo-svg-flag" style="position: absolute; top: 10%; right: 15%; animation: promo-flag-wave 3s ease-in-out infinite; filter: drop-shadow(0 4px 8px rgba(191, 10, 48, 0.3)); z-index: 2;">
-                <svg width="80" height="50" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="60" height="40" fill="#B22234"/>
-                    <rect y="3" width="60" height="3" fill="white"/>
-                    <rect y="9" width="60" height="3" fill="white"/>
-                    <rect y="15" width="60" height="3" fill="white"/>
-                    <rect y="21" width="60" height="3" fill="white"/>
-                    <rect y="27" width="60" height="3" fill="white"/>
-                    <rect y="33" width="60" height="3" fill="white"/>
-                    <rect width="24" height="21" fill="#3C3B6E"/>
-                    <g fill="white">
-                        <circle cx="4" cy="3" r="0.8"/>
-                        <circle cx="8" cy="3" r="0.8"/>
-                        <circle cx="12" cy="3" r="0.8"/>
-                        <circle cx="16" cy="3" r="0.8"/>
-                        <circle cx="20" cy="3" r="0.8"/>
-                        <circle cx="6" cy="6" r="0.8"/>
-                        <circle cx="10" cy="6" r="0.8"/>
-                        <circle cx="14" cy="6" r="0.8"/>
-                        <circle cx="18" cy="6" r="0.8"/>
-                        <circle cx="4" cy="9" r="0.8"/>
-                        <circle cx="8" cy="9" r="0.8"/>
-                        <circle cx="12" cy="9" r="0.8"/>
-                        <circle cx="16" cy="9" r="0.8"/>
-                        <circle cx="20" cy="9" r="0.8"/>
-                        <circle cx="6" cy="12" r="0.8"/>
-                        <circle cx="10" cy="12" r="0.8"/>
-                        <circle cx="14" cy="12" r="0.8"/>
-                        <circle cx="18" cy="12" r="0.8"/>
-                        <circle cx="4" cy="15" r="0.8"/>
-                        <circle cx="8" cy="15" r="0.8"/>
-                        <circle cx="12" cy="15" r="0.8"/>
-                        <circle cx="16" cy="15" r="0.8"/>
-                        <circle cx="20" cy="15" r="0.8"/>
-                        <circle cx="6" cy="18" r="0.8"/>
-                        <circle cx="10" cy="18" r="0.8"/>
-                        <circle cx="14" cy="18" r="0.8"/>
-                        <circle cx="18" cy="18" r="0.8"/>
-                    </g>
-                </svg>
+            <!-- Floating Elements Background -->
+            <div class="promo-floating-elements">
+                <!-- Floating Stars -->
+                <div class="promo-floating-star promo-star-float-1">⭐</div>
+                <div class="promo-floating-star promo-star-float-2">✨</div>
+                <div class="promo-floating-star promo-star-float-3">🌟</div>
+                <div class="promo-floating-star promo-star-float-4">⭐</div>
+                <div class="promo-floating-star promo-star-float-5">✨</div>
+                
+                <!-- Liberty & Flag Composition - Main Centerpiece -->
+                <div class="promo-liberty-flag-composition">
+                    <!-- Grand Statue of Liberty -->
+                    <div class="promo-grand-liberty">
+                        <svg class="promo-detailed-liberty" viewBox="0 0 300 450" width="220" height="330">
+                            <defs>
+                                <!-- Enhanced gradients for professional look -->
+                                <linearGradient id="statueMainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#2E8B57;stop-opacity:1" />
+                                    <stop offset="25%" style="stop-color:#3CB371;stop-opacity:1" />
+                                    <stop offset="75%" style="stop-color:#228B22;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#006400;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <radialGradient id="torchFlameGradient" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                    <stop offset="40%" style="stop-color:#FFA500;stop-opacity:1" />
+                                    <stop offset="80%" style="stop-color:#FF6347;stop-opacity:0.9" />
+                                    <stop offset="100%" style="stop-color:#DC143C;stop-opacity:0.7" />
+                                </radialGradient>
+                                
+                                <linearGradient id="crownDetailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <filter id="heroGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge> 
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                                
+                                <filter id="heroShadow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feDropShadow dx="4" dy="8" stdDeviation="6" flood-opacity="0.3"/>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Statue Base/Pedestal -->
+                            <rect x="100" y="380" width="100" height="50" fill="#696969" rx="8" filter="url(#heroShadow)"/>
+                            <rect x="105" y="375" width="90" height="45" fill="#808080" rx="6"/>
+                            <rect x="110" y="370" width="80" height="40" fill="#A9A9A9" rx="4"/>
+                            
+                            <!-- Main Robe/Dress -->
+                            <path d="M120 380 L110 280 Q105 240, 130 220 L140 210 L160 210 L170 220 Q195 240, 190 280 L180 380 Q170 400, 150 405 L130 405 Q110 400, 120 380 Z" 
+                                  fill="url(#statueMainGradient)" 
+                                  stroke="#1F4F2F" 
+                                  stroke-width="3" 
+                                  filter="url(#heroShadow)"/>
+                            
+                            <!-- Detailed Robe Folds -->
+                            <path d="M130 340 Q150 335, 170 340" fill="none" stroke="#1F4F2F" stroke-width="2" opacity="0.8"/>
+                            <path d="M125 360 Q145 355, 165 360" fill="none" stroke="#1F4F2F" stroke-width="2" opacity="0.8"/>
+                            <path d="M135 320 Q150 315, 165 320" fill="none" stroke="#1F4F2F" stroke-width="1.5" opacity="0.6"/>
+                            
+                            <!-- Left Arm with Tablet -->
+                            <ellipse cx="105" cy="260" rx="15" ry="45" fill="url(#statueMainGradient)" transform="rotate(-25 105 260)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Declaration Tablet -->
+                            <rect x="70" y="270" width="45" height="60" fill="#8B7355" rx="3" transform="rotate(-20 92.5 300)" filter="url(#heroShadow)"/>
+                            <rect x="73" y="273" width="39" height="54" fill="#D2B48C" rx="2" transform="rotate(-20 92.5 300)"/>
+                            <g transform="rotate(-20 92.5 300)">
+                                <line x1="76" y1="280" x2="106" y2="280" stroke="#8B4513" stroke-width="1"/>
+                                <line x1="76" y1="285" x2="106" y2="285" stroke="#8B4513" stroke-width="1"/>
+                                <line x1="76" y1="290" x2="106" y2="290" stroke="#8B4513" stroke-width="1"/>
+                                <line x1="76" y1="295" x2="106" y2="295" stroke="#8B4513" stroke-width="1"/>
+                                <text x="78" y="278" font-family="serif" font-size="4" fill="#8B4513">JULY IV</text>
+                                <text x="78" y="283" font-family="serif" font-size="4" fill="#8B4513">MDCCLXXVI</text>
+                            </g>
+                            
+                            <!-- Right Arm with Torch -->
+                            <ellipse cx="195" cy="240" rx="12" ry="38" fill="url(#statueMainGradient)" transform="rotate(25 195 240)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Torch Handle -->
+                            <rect x="200" y="180" width="10" height="65" fill="#8B7355" rx="5" transform="rotate(20 205 212.5)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Torch Bowl -->
+                            <ellipse cx="210" cy="175" rx="15" ry="10" fill="#B8860B" transform="rotate(20 210 175)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Animated Torch Flame with layers -->
+                            <g class="promo-enhanced-flame" transform="rotate(20 210 160)">
+                                <ellipse cx="210" cy="160" rx="12" ry="20" fill="url(#torchFlameGradient)" opacity="0.9"/>
+                                <ellipse cx="210" cy="155" rx="9" ry="16" fill="#FFD700" opacity="0.8"/>
+                                <ellipse cx="210" cy="150" rx="6" ry="12" fill="#FFF8DC" opacity="0.6"/>
+                                <ellipse cx="210" cy="148" rx="3" ry="8" fill="#FFFFFF" opacity="0.4"/>
+                            </g>
+                            
+                            <!-- Body/Torso -->
+                            <ellipse cx="150" cy="240" rx="32" ry="50" fill="url(#statueMainGradient)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Chest Drapery -->
+                            <path d="M130 220 Q150 225, 170 220 Q165 245, 150 250 Q135 245, 130 220" fill="url(#statueMainGradient)" opacity="0.9"/>
+                            
+                            <!-- Neck -->
+                            <ellipse cx="150" cy="205" rx="10" ry="15" fill="url(#statueMainGradient)"/>
+                            
+                            <!-- Head -->
+                            <circle cx="150" cy="185" r="22" fill="url(#statueMainGradient)" filter="url(#heroShadow)"/>
+                            
+                            <!-- Facial Features -->
+                            <ellipse cx="142" cy="178" rx="3" ry="2" fill="#1F4F2F"/>
+                            <ellipse cx="158" cy="178" rx="3" ry="2" fill="#1F4F2F"/>
+                            <path d="M147 185 Q150 188, 153 185" fill="none" stroke="#1F4F2F" stroke-width="1.5"/>
+                            <path d="M145 192 Q150 195, 155 192" fill="none" stroke="#1F4F2F" stroke-width="2"/>
+                            
+                            <!-- Crown with Detailed Spikes -->
+                            <g class="promo-enhanced-crown">
+                                <ellipse cx="150" cy="165" rx="25" ry="5" fill="url(#crownDetailGradient)" filter="url(#heroShadow)"/>
+                                
+                                <!-- Crown Spikes -->
+                                <polygon points="150,155 145,165 155,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="135,157 130,165 140,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="165,157 160,165 170,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="125,158 120,165 130,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="175,158 170,165 180,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="115,159 110,165 120,165" fill="url(#crownDetailGradient)"/>
+                                <polygon points="185,159 180,165 190,165" fill="url(#crownDetailGradient)"/>
+                                
+                                <!-- Crown Gems -->
+                                <circle cx="150" cy="163" r="2" fill="#FF6347"/>
+                                <circle cx="135" cy="163" r="1.5" fill="#4169E1"/>
+                                <circle cx="165" cy="163" r="1.5" fill="#4169E1"/>
+                                <circle cx="125" cy="163" r="1" fill="#32CD32"/>
+                                <circle cx="175" cy="163" r="1" fill="#32CD32"/>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    <!-- Majestic American Flag Behind -->
+                    <div class="promo-majestic-flag">
+                        <svg class="promo-waving-flag" viewBox="0 0 400 240" width="320" height="192">
+                            <defs>
+                                <linearGradient id="redStripeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#B22234;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#DC143C;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#B22234;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <linearGradient id="blueFieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3C3B6E;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#1E1B3C;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Flag Pole -->
+                            <rect x="10" y="0" width="6" height="240" fill="#8B4513" filter="url(#heroShadow)"/>
+                            <rect x="8" y="0" width="2" height="240" fill="#A0522D"/>
+                            
+                            <!-- Waving Flag Body -->
+                            <g class="promo-flag-wave-animation">
+                                <!-- Red Stripes -->
+                                <path d="M16 20 Q100 18, 200 20 Q300 22, 380 20 L380 35 Q300 37, 200 35 Q100 33, 16 35 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 50 Q100 48, 200 50 Q300 52, 380 50 L380 65 Q300 67, 200 65 Q100 63, 16 65 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 80 Q100 78, 200 80 Q300 82, 380 80 L380 95 Q300 97, 200 95 Q100 93, 16 95 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 110 Q100 108, 200 110 Q300 112, 380 110 L380 125 Q300 127, 200 125 Q100 123, 16 125 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 140 Q100 138, 200 140 Q300 142, 380 140 L380 155 Q300 157, 200 155 Q100 153, 16 155 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 170 Q100 168, 200 170 Q300 172, 380 170 L380 185 Q300 187, 200 185 Q100 183, 16 185 Z" fill="url(#redStripeGradient)"/>
+                                <path d="M16 200 Q100 198, 200 200 Q300 202, 380 200 L380 215 Q300 217, 200 215 Q100 213, 16 215 Z" fill="url(#redStripeGradient)"/>
+                                
+                                <!-- White Stripes -->
+                                <path d="M16 35 Q100 33, 200 35 Q300 37, 380 35 L380 50 Q300 52, 200 50 Q100 48, 16 50 Z" fill="white"/>
+                                <path d="M16 65 Q100 63, 200 65 Q300 67, 380 65 L380 80 Q300 82, 200 80 Q100 78, 16 80 Z" fill="white"/>
+                                <path d="M16 95 Q100 93, 200 95 Q300 97, 380 95 L380 110 Q300 112, 200 110 Q100 108, 16 110 Z" fill="white"/>
+                                <path d="M16 125 Q100 123, 200 125 Q300 127, 380 125 L380 140 Q300 142, 200 140 Q100 138, 16 140 Z" fill="white"/>
+                                <path d="M16 155 Q100 153, 200 155 Q300 157, 380 155 L380 170 Q300 172, 200 170 Q100 168, 16 170 Z" fill="white"/>
+                                <path d="M16 185 Q100 183, 200 185 Q300 187, 380 185 L380 200 Q300 202, 200 200 Q100 198, 16 200 Z" fill="white"/>
+                                
+                                <!-- Blue Field -->
+                                <path d="M16 20 Q80 18, 140 20 Q140 22, 140 35 Q140 37, 140 50 Q140 52, 140 65 Q140 67, 140 80 Q140 82, 140 95 Q140 97, 140 110 Q140 112, 140 125 Q80 123, 16 125 Z" fill="url(#blueFieldGradient)"/>
+                                
+                                <!-- Stars -->
+                                <g fill="white" class="promo-sparkling-stars">
+                                    <!-- Row 1 -->
+                                    <circle cx="25" cy="28" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="40" cy="28" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="55" cy="28" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="70" cy="28" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="85" cy="28" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="100" cy="28" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <!-- Row 2 -->
+                                    <circle cx="32.5" cy="38" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="47.5" cy="38" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="62.5" cy="38" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="77.5" cy="38" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="92.5" cy="38" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <!-- Continue pattern for remaining rows -->
+                                    <circle cx="25" cy="48" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="40" cy="48" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="55" cy="48" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="70" cy="48" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="85" cy="48" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="100" cy="48" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="32.5" cy="58" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="47.5" cy="58" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="62.5" cy="58" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="77.5" cy="58" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="92.5" cy="58" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="25" cy="68" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="40" cy="68" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="55" cy="68" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="70" cy="68" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="85" cy="68" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="100" cy="68" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="32.5" cy="78" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="47.5" cy="78" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="62.5" cy="78" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="77.5" cy="78" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="92.5" cy="78" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="25" cy="88" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="40" cy="88" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="55" cy="88" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="70" cy="88" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="85" cy="88" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="100" cy="88" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="32.5" cy="98" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="47.5" cy="98" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="62.5" cy="98" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="77.5" cy="98" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="92.5" cy="98" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="25" cy="108" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="40" cy="108" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="55" cy="108" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="70" cy="108" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="85" cy="108" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="100" cy="108" r="2" class="promo-star-twinkle"/>
+                                    
+                                    <circle cx="32.5" cy="118" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="47.5" cy="118" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="62.5" cy="118" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="77.5" cy="118" r="2" class="promo-star-twinkle"/>
+                                    <circle cx="92.5" cy="118" r="2" class="promo-star-twinkle"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Floating Fireworks -->
+                <div class="promo-floating-firework promo-firework-1">💥</div>
+                <div class="promo-floating-firework promo-firework-2">🎆</div>
+                <div class="promo-floating-firework promo-firework-3">✨</div>
+                
+                <!-- Scroll Encouragement Arrow -->
+                <div class="promo-scroll-encourager">
+                    <div class="promo-scroll-arrow">⬇</div>
+                    <div class="promo-scroll-text">Discover Freedom</div>
+                </div>
             </div>
-
-            <!-- Liberty Bell with animated swing -->
-            <div class="promo-liberty-symbol" style="position: absolute; top: 20%; left: 10%; animation: promo-flag-wave 3s ease-in-out infinite; animation-delay: 1s; filter: drop-shadow(0 4px 8px rgba(0, 40, 104, 0.3)); z-index: 2;">
-                <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="bellGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Bell body -->
-                    <path d="M50 20 C35 20, 25 35, 25 50 C25 65, 30 75, 50 75 C70 75, 75 65, 75 50 C75 35, 65 20, 50 20 Z" fill="url(#bellGradient)" stroke="#8B4513" stroke-width="2"/>
-                    <!-- Bell crack -->
-                    <path d="M45 30 L42 45 L48 55 L45 70" stroke="#654321" stroke-width="2" fill="none"/>
-                    <!-- Bell top -->
-                    <rect x="45" y="15" width="10" height="8" rx="2" fill="#8B4513"/>
-                    <!-- Clapper -->
-                    <circle cx="50" cy="65" r="3" fill="#696969"/>
-                    <line x1="50" y1="25" x2="50" y2="62" stroke="#8B4513" stroke-width="2"/>
-                </svg>
-            </div>
+            
             <div class="promo-fireworks-display">
                 <div class="promo-firework promo-fw1"></div>
                 <div class="promo-firework promo-fw2"></div>
                 <div class="promo-firework promo-fw3"></div>
-            </div>
-
-            <!-- Statue of Liberty silhouette -->
-            <div class="promo-liberty-statue" style="position: absolute; bottom: 15%; right: 5%; animation: promo-gentle-sway 4s ease-in-out infinite; filter: drop-shadow(0 2px 6px rgba(0, 40, 104, 0.3)); z-index: 2;">
-                <svg width="40" height="80" viewBox="0 0 50 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="libertyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#2E8B57;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#006400;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Base -->
-                    <rect x="15" y="85" width="20" height="15" fill="#696969"/>
-                    <!-- Body -->
-                    <path d="M20 85 L20 45 Q20 40, 25 40 Q30 40, 30 45 L30 85 Z" fill="url(#libertyGradient)"/>
-                    <!-- Head -->
-                    <circle cx="25" cy="35" r="8" fill="url(#libertyGradient)"/>
-                    <!-- Crown -->
-                    <path d="M17 30 L20 20 L23 25 L25 18 L27 25 L30 20 L33 30" fill="#FFD700" stroke="#B8860B"/>
-                    <!-- Torch arm -->
-                    <path d="M30 45 L40 30" stroke="url(#libertyGradient)" stroke-width="3"/>
-                    <!-- Torch -->
-                    <ellipse cx="40" cy="25" rx="3" ry="6" fill="#FFD700"/>
-                    <!-- Flame -->
-                    <path d="M37 22 Q40 15, 43 22 Q40 18, 40 25" fill="#FF6347"/>
-                </svg>
-            </div>
-
-            <!-- Stars and Stripes pattern -->
-            <div class="promo-patriotic-stars" style="position: absolute; top: 5%; left: 50%; transform: translateX(-50%); animation: promo-star-sparkle 2s ease-in-out infinite; z-index: 2;">
-                <svg width="100" height="30" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
-                    <g fill="#FFD700" stroke="#FF6347" stroke-width="0.5">
-                        <path d="M15 5 L17 11 L23 11 L18 15 L20 21 L15 17 L10 21 L12 15 L7 11 L13 11 Z"/>
-                        <path d="M50 8 L51.5 12 L56 12 L52.5 15 L54 19 L50 16 L46 19 L47.5 15 L44 12 L48.5 12 Z"/>
-                        <path d="M85 5 L87 11 L93 11 L88 15 L90 21 L85 17 L80 21 L82 15 L77 11 L83 11 Z"/>
-                    </g>
-                </svg>
             </div>
         </div>
 
@@ -4066,7 +4282,335 @@
             filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
         }
 
-        /* Main statue floating animation */
+        /* Enhanced Floating Elements */
+        .promo-floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .promo-floating-star {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: promo-float-sparkle 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+        }
+
+        .promo-star-float-1 { 
+            top: 15%; 
+            left: 8%; 
+            animation-delay: 0s; 
+            animation-duration: 7s;
+        }
+        .promo-star-float-2 { 
+            top: 25%; 
+            right: 12%; 
+            animation-delay: 1.5s; 
+            animation-duration: 5s;
+        }
+        .promo-star-float-3 { 
+            bottom: 30%; 
+            left: 15%; 
+            animation-delay: 3s; 
+            animation-duration: 6s;
+        }
+        .promo-star-float-4 { 
+            top: 45%; 
+            left: 85%; 
+            animation-delay: 2s; 
+            animation-duration: 8s;
+        }
+        .promo-star-float-5 { 
+            bottom: 45%; 
+            right: 8%; 
+            animation-delay: 4s; 
+            animation-duration: 5.5s;
+        }
+
+        @keyframes promo-float-sparkle {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(90deg) scale(1.2);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg) scale(1.4);
+                opacity: 0.8;
+            }
+            75% { 
+                transform: translateY(-15px) rotate(270deg) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        /* Liberty & Flag Composition */
+        .promo-liberty-flag-composition {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: promo-grand-entrance 2s ease-out;
+        }
+
+        @keyframes promo-grand-entrance {
+            0% { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3) rotate(-10deg);
+            }
+            60% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        /* Grand Liberty Statue */
+        .promo-grand-liberty {
+            position: relative;
+            z-index: 5;
+            animation: promo-liberty-majesty 8s ease-in-out infinite;
+        }
+
+        @keyframes promo-liberty-majesty {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            }
+            25% { 
+                transform: translateY(-8px) rotate(1deg) scale(1.02);
+                filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
+            }
+            50% { 
+                transform: translateY(-15px) rotate(0deg) scale(1.05);
+                filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+            }
+            75% { 
+                transform: translateY(-8px) rotate(-1deg) scale(1.02);
+                filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
+            }
+        }
+
+        .promo-detailed-liberty {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 25px rgba(0, 40, 104, 0.3));
+        }
+
+        /* Enhanced Torch Flame */
+        .promo-enhanced-flame {
+            animation: promo-flame-dance 3s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        @keyframes promo-flame-dance {
+            0%, 100% { 
+                transform: rotate(20deg) scale(1) skewX(0deg);
+                opacity: 1;
+            }
+            20% { 
+                transform: rotate(24deg) scale(1.15) skewX(3deg);
+                opacity: 0.9;
+            }
+            40% { 
+                transform: rotate(16deg) scale(1.08) skewX(-2deg);
+                opacity: 0.95;
+            }
+            60% { 
+                transform: rotate(22deg) scale(0.95) skewX(2deg);
+                opacity: 0.85;
+            }
+            80% { 
+                transform: rotate(18deg) scale(1.12) skewX(-1deg);
+                opacity: 0.92;
+            }
+        }
+
+        /* Enhanced Crown */
+        .promo-enhanced-crown {
+            animation: promo-crown-majesty 5s ease-in-out infinite;
+        }
+
+        @keyframes promo-crown-majesty {
+            0%, 100% { 
+                filter: brightness(1) drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            }
+            50% { 
+                filter: brightness(1.3) drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+            }
+        }
+
+        /* Majestic Flag */
+        .promo-majestic-flag {
+            position: absolute;
+            top: -20%;
+            left: -60%;
+            z-index: 2;
+            opacity: 0.85;
+            animation: promo-flag-presence 6s ease-in-out infinite;
+        }
+
+        @keyframes promo-flag-presence {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.85;
+            }
+            50% { 
+                transform: scale(1.05) rotate(1deg);
+                opacity: 0.95;
+            }
+        }
+
+        .promo-waving-flag {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 20px rgba(191, 10, 48, 0.3));
+        }
+
+        /* Flag Wave Animation */
+        .promo-flag-wave-animation {
+            animation: promo-flag-ripple 4s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        @keyframes promo-flag-ripple {
+            0%, 100% { 
+                transform: perspective(400px) rotateY(0deg) skewY(0deg);
+            }
+            25% { 
+                transform: perspective(400px) rotateY(-8deg) skewY(1deg);
+            }
+            50% { 
+                transform: perspective(400px) rotateY(0deg) skewY(0deg);
+            }
+            75% { 
+                transform: perspective(400px) rotateY(8deg) skewY(-1deg);
+            }
+        }
+
+        /* Sparkling Stars */
+        .promo-sparkling-stars .promo-star-twinkle {
+            animation: promo-star-sparkle-enhanced 4s ease-in-out infinite;
+        }
+
+        .promo-sparkling-stars .promo-star-twinkle:nth-child(even) {
+            animation-delay: 0.5s;
+        }
+
+        .promo-sparkling-stars .promo-star-twinkle:nth-child(3n) {
+            animation-delay: 1s;
+        }
+
+        .promo-sparkling-stars .promo-star-twinkle:nth-child(4n) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes promo-star-sparkle-enhanced {
+            0%, 100% { 
+                opacity: 0.8;
+                transform: scale(1);
+                filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.4);
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+            }
+        }
+
+        /* Floating Fireworks */
+        .promo-floating-firework {
+            position: absolute;
+            font-size: 2rem;
+            animation: promo-firework-float 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+        }
+
+        .promo-firework-1 { 
+            top: 20%; 
+            right: 15%; 
+            animation-delay: 0s; 
+        }
+        .promo-firework-2 { 
+            bottom: 25%; 
+            left: 10%; 
+            animation-delay: 2s; 
+        }
+        .promo-firework-3 { 
+            top: 60%; 
+            right: 25%; 
+            animation-delay: 4s; 
+        }
+
+        @keyframes promo-firework-float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            25% { 
+                transform: translateY(-20px) rotate(90deg) scale(1.3);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(-40px) rotate(180deg) scale(1.6);
+                opacity: 0.9;
+            }
+            75% { 
+                transform: translateY(-20px) rotate(270deg) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* Scroll Encouragement */
+        .promo-scroll-encourager {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 4;
+            animation: promo-scroll-bounce 2s ease-in-out infinite;
+        }
+
+        .promo-scroll-arrow {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+        }
+
+        .promo-scroll-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes promo-scroll-bounce {
+            0%, 100% { 
+                transform: translateX(-50%) translateY(0px);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateX(-50%) translateY(-15px);
+                opacity: 1;
+            }
+        }
+
+        /* Main statue floating animation - keep existing */
         .promo-statue-main {
             animation: promo-statue-float 6s ease-in-out infinite;
             transform-origin: center center;
