@@ -1668,9 +1668,10 @@
             justify-content: flex-start;
             align-items: center;
             scroll-behavior: smooth;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             flex-direction: row;
             min-height: 100px;
+            max-height: 120px;
         }
 
         .promo-sticky-carousel::-webkit-scrollbar {
@@ -1693,7 +1694,7 @@
             box-shadow: 0 2px 8px rgba(0, 40, 104, 0.15);
             display: flex;
             flex-direction: column;
-            margin-right: 2px;
+            margin: 2px;
         }
 
         .promo-sticky-card:hover {
@@ -2361,7 +2362,7 @@
             min-width: 0;
             max-width: 55%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.95);
@@ -2373,6 +2374,19 @@
             overflow: hidden;
             max-height: 800px;
             overflow-y: auto;
+        }
+
+        /* Ensure minimum width for cards even with many products */
+        @media (min-width: 769px) {
+            .promo-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .promo-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
         }
 
         .promo-products-grid::before {
@@ -2957,11 +2971,13 @@
                 flex-direction: row;
                 display: flex;
                 min-height: 80px;
+                max-height: 80px;
             }
 
             .promo-sticky-card {
                 scroll-snap-align: center;
                 flex-shrink: 0;
+                margin: 1px;
             }
 
             .promo-american-eagle {
@@ -3002,8 +3018,8 @@
 
             .promo-products-grid {
                 max-width: 100%;
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 10px;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
                 padding: 15px;
             }
 
