@@ -1,0 +1,1429 @@
+{% include 'shogun-content-handler' %}
+<!doctype html>
+  <html class="no-js" lang="{{ request.locale.iso_code }}"> 
+  <head>
+ <script>/* start spd config */window._spt_delay_keywords=["/gtag/js,gtag(,/checkouts,/tiktok-track.js,/hotjar-,/smile-,/adoric.js,/wpm/,fbq("];/* end spd config */</script> 
+ {%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%} 
+ <!-- Added by TAPITA SEO SCHEMA-->
+{% comment %} {% if content_for_header contains 'tapita-seo-script-tags' %}
+  {% include 'tapita-seo-schema' %}
+{% endif %} {% endcomment %}
+<!-- /Added by TAPITA SEO SCHEMA --> 
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <!-- Title and description ================================================== -->
+  <title>
+    {{ page_title }}{% if current_tags %}
+      {% assign meta_tags = current_tags | join: ', ' %} &ndash; {{
+  'general.meta.tags' | t: tags: meta_tags }}{% endif %}
+    {% if current_page != 1 %}
+      &ndash; {{ 'general.meta.page' | t:
+  page: current_page }}{% endif %}
+    {% unless page_title contains shop.name %}
+      &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% if settings.favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png"/>
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="canonical" href="{{ canonical_url }}" canonical-shop-url="{{ shop.url }}/">
+
+   <!-- Social Meta Tags ================================================== -->
+   {% include 'social-meta-tags' %}
+   <!--  ================================================== -->
+   <!-- Hreflang Tags -->
+  {% comment %} <link rel="alternate" href="{{ shop.url }}" hreflang="x-default" />
+  <link rel="alternate" href="{{ shop.url }}" hreflang="en" />
+  {% if localization.languages %}
+    {% for lang in localization.languages %}
+      <link rel="alternate" href="{{ shop.url }}{{ lang.url }}" hreflang="{{ lang.code }}" />
+    {% endfor %}
+  {% endif %} {% endcomment %}
+    <!-- -->
+    <!-- Helpers ================================================== -->
+    <meta name="p:domain_verify" content="c815e9da5d2e2011227a064d13e707cf"/>
+    <meta name="google-site-verification" content="O2XfJcSz5LxA74UvARnlnGWtHmu7kwyRrslIUH66ptY"/>
+    <meta name="google-site-verification" content="Y0oVcuW_ztHSAUCKdL36vANv2Yu24Wm3dAIvukTixzM"/>
+    <meta name="msvalidate.01" content="62CC704ED0FE8C619133D48BBFD3AE3D" />
+    <meta name="yandex-verification" content="1e6f91b768a1ca24" />
+
+    <!--  ================================================== -->
+
+    <!-- No Robots ================================================== -->
+    {% if handle contains 'thank-you-special-pricing' %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+
+    <!-- Script to replce  the first slide image -->
+   <script>
+          window.addEventListener('load', function() {
+              const firstSlideImg = document.querySelector('.slick-slide[data-slick-index="0"] img');
+              if(firstSlideImg) {
+                  firstSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Rhino_carboy_and_bottles_promo-foxx-life-sciences-home-slideshow-v2.jpg?v=1750361081';
+              }
+              const secondSlideImg = document.querySelector('.slick-slide[data-slick-index="1"] img');
+              if(secondSlideImg) {
+               secondSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Website_ISO_13485_Banner-foxx-life-sciences-HomeSlideshow.jpg?v=1750425783';
+               }
+          });
+
+      </script>
+
+    <!-- -->
+
+     <!--  ================================================== -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105486628-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-105486628-1');
+    </script>
+
+    <!-- Thomas Tag-->
+    <script type="text/javascript">
+      var wto = wto || [];
+      wto.push(['setWTID', 'wt-73a6eb9b-3f07-41bd-b2d5-6c15c385f546']);
+      wto.push(['webTraxs']);
+      (function() {
+        var wt = document.createElement('script');
+        wt.src = document.location.protocol + '//www.webtraxs.com/wt.php';
+        wt.type = 'text/javascript';
+        wt.async = true;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wt, s);
+      })();
+    </script>
+    <noscript><img src="https://www.webtraxs.com/webtraxs.php?id=wt-73a6eb9b-3f07-41bd-b2d5-6c15c385f546&st=img" alt=""/></noscript>
+
+    <!-- SEOptiks Tag Manager From Mark Manuel  -->
+
+    <script type="text/javascript">
+      var _mtm = _mtm || [];
+      _mtm.push({
+        'mtm.startTime': (new Date().getTime()),
+        'event': 'mtm.Start'
+      });
+      var d = document,
+        g = d.createElement('script'),
+        s = d.getElementsByTagName('script')[0];
+      g.type = 'text/javascript';
+      g.async = true;
+      g.defer = true;
+      g.src = 'https://analytics.seoptiks.com/js/container_PUh6PE8U.js';
+      s.parentNode.insertBefore(g, s);
+    </script>
+    <!-- End SEOptiks Tag Manager -->
+
+      <!-- Halloweeen font family  -->
+      {% comment %} <style>
+        @font-face {
+            font-family: 'Halloween Day';
+            src: url('https://cdn.shopify.com/s/files/1/1064/0118/files/Halloween_Day.otf?v=1728342369') format('opentype'),
+                /* For .otf files */
+                url('https://cdn.shopify.com/s/files/1/1064/0118/files/Halloween_Day.ttf?v=1728342370') format('truetype');
+            /* For .ttf files */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Poppins ExtraBold';
+            src: url('https://cdn.shopify.com/s/files/1/1064/0118/files/Poppins-ExtraBold.ttf?v=1728343462') format('truetype');
+            font-weight: extra-bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Poppins Bold';
+            src: url('https://cdn.shopify.com/s/files/1/1064/0118/files/Poppins-Bold.ttf?v=1728343462') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Poppins Black';
+            src: url('https://cdn.shopify.com/s/files/1/1064/0118/files/Poppins-Black.ttf?v=1728343461') format('truetype');
+            font-weight: 900;
+            /* Or your preferred weight value */
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Poppins Medium';
+            src: url('https://cdn.shopify.com/s/files/1/1064/0118/files/Poppins-Medium.ttf?v=1728343604') format('truetype');
+            font-weight: 500;
+            /* Medium weight */
+            font-style: normal;
+        }
+
+    </style> {% endcomment %}
+      <!-- -->
+
+
+    <!-- Custom Schema Tag ================================================== -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ shop.name | escape }}",  
+        "description": "{{ shop.description | escape }}", 
+        "logo": "{{ shop.url }}/cdn/shop/t/38/assets/logo.png",
+        "url": "{{ shop.url }}",
+        "keywords": "Made to Order (MTO), Single Use Assemblies, Laboratory Product, Laboratory Equipment, sterile bottle assemblies, sterile carboy assemblies, sterile carboys, bioprocess components, bioprocess lab products, bottle assemblies, laboratory carboys, bottle top filters, media bottles, ps laboratory bottles, caps and adapters, hdpe carboys, bioprocess single use, polycarbonate laboratory bottles, syringe filters, sterile laboratory bottle, largest carboy, sterile storage bottles for laboratory, single use technology, single use systems"
+    }
+    </script>
+
+    {% if template contains 'index' %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ shop.name | escape }}",
+        "description": "{{ shop.description | escape }}", 
+        "keywords": "Made to Order (MTO), Single Use Assemblies, Laboratory Product,  Laboratory Equipment, sterile bottle assemblies, sterile carboy assemblies, sterile carboys, bioprocess components, bioprocess lab products, bottle assemblies, laboratory carboys, bottle top filters, media bottles, ps laboratory bottles, caps and adapters, hdpe carboys, bioprocess single use, polycarbonate laboratory bottles, syringe filters, sterile laboratory bottle, largest carboy, sterile storage bottles for laboratory, single use technology, single use systems",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ shop.url }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "url": "{{ shop.url }}"
+    }
+    </script>  
+    {% include 'breadcrumb' %}
+    {% endif %}
+
+
+  {% if template contains 'product' %}
+    <!-- product template schema ================================================== -->
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org/",
+    "@type": "Product",
+    "name": "{{ product.title | truncate: 100 }}",
+    "url": "{{ request.origin }}{{ product.url }}",
+    "merchant": {
+        "@type": "Organization",
+        "name": "{{ shop.name | escape }}"
+    },
+    {% if seo_media != blank %}
+    "image": [
+        "https:{{ seo_media | image_url: width: seo_media.preview_image.width }}"
+    ],
+    {% endif %}
+    "description": {{ product.description | strip_html | escape | strip_newlines | json }},
+    "sku": "{{ current_variant.sku | default: current_variant.id }}",
+    "mpn": "{{ current_variant.barcode }}",
+    "productID": "{{ product.id }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "{{ product.vendor | escape }}"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "{{ 'https://www.foxxlifesciences.com/cdn/shop/files/' | append: featured_image.src }}"
+    },
+    {% if product.price_varies %}
+    "offers": [
+        {
+            "@type": "Offer",
+            "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+            "priceCurrency": "{{ cart.currency.iso_code }}",
+            "itemCondition": "https://schema.org/NewCondition",
+            "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | uri_encode | replace:'+','%20' }}",
+            "sku": "{{ current_variant.sku | default: current_variant.id }}",
+            "price": "{{ product.price | divided_by: 100.00 }}",
+            "mpn": "{{ current_variant.barcode }}",
+            "url": "{{ request.origin }}{{ product.url }}"
+            {%- assign barcode_size = current_variant.barcode.size -%}
+            {%- if barcode_size == 12 or barcode_size == 13 or barcode_size == 14 -%}
+            "gtin{{ barcode_size }}": "{{ current_variant.barcode }}"{% if forloop.last %}{% else %},{% endif %}
+            {%- endif -%}
+            "shippingDetails": {
+           "@type": "OfferShippingDetails",
+             "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "TBD",
+              "currency": "{{ cart.currency.iso_code }}"
+             },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "Worldwide"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 5,
+                    "unitCode": "DAY" 
+                },
+                "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 1,
+                "maxValue": 5,
+                "unitCode": "DAY"
+            } 
+            }
+          },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "url": "{{ request.origin }}/pages/return-and-refund-policy",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 30,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn",    
+                "applicableCountry": {
+                    "@type": "Country",
+                    "name": "US"
+                }
+              }
+        }
+    ],
+    {% else %}
+    "offers": {
+        "@type": "Offer",
+        "sku": "{{ current_variant.sku | default: current_variant.id }}",
+        "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price": "{{ product.price | divided_by: 100.00 }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "itemCondition": "https://schema.org/NewCondition",
+        "url": "{{ request.origin }}{{ product.url }}",
+        "mpn": "{{ current_variant.barcode }}",
+        {%- assign barcode_size = current_variant.barcode.size -%}
+        {%- if barcode_size == 12 or barcode_size == 13 or barcode_size == 14 -%}
+        "gtin{{ barcode_size }}": "{{ current_variant.barcode }}"
+        {%- endif -%}
+        "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | uri_encode | replace:'+','%20' }}",
+        "shippingDetails": {
+           "@type": "OfferShippingDetails",
+             "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "{{ product.shipping_rate | default: '0.00' }}",
+              "currency": "{{ cart.currency.iso_code }}"
+             },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 5,
+                    "unitCode": "DAY" 
+                },
+                "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 1,
+                "maxValue": 5,
+                "unitCode": "DAY"
+            } 
+            } 
+          },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "url": "{{ request.origin }}/pages/return-and-refund-policy",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 30,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn",
+                "applicableCountry": {
+                    "@type": "Country",
+                    "name": "US"
+                }
+              }
+    },
+    {% endif %}
+
+
+    {%- assign ratingValue = product.metafields.spr.reviews | split: '"ratingValue": "' | last | split: '"' | first | plus: 0 -%}
+    {%- assign ratingCount = product.metafields.spr.reviews | split: '"reviewCount": "' | last | split: '"' | first | plus: 0 -%}
+
+    {%- if ratingCount > 0 and ratingValue >= 1 and ratingValue <= 5 -%}
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ ratingValue }},
+        "ratingCount": {{ ratingCount }}
+    },
+    {%- endif -%} 
+
+    {%- if ratingValue >= 1 and ratingValue <= 5 -%}
+    "review": {
+        "@type": "Review",
+        "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": {{ ratingValue }}, 
+            "bestRating": "5"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Persons" 
+        }
+    },
+    {%- endif -%}    
+    "shippingPolicy": {
+        "@type": "ShippingPolicy",
+        "url": "{{ request.origin }}/pages/shipping-policy"
+    }
+}
+</script>
+
+    <!-- product template schema end ================================================== -->
+  {% endif %}
+  {% if template contains 'collection' and template != 'collection.subcategory' %}
+     <!-- collection template schema ================================================== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "{{ collection.title | escape }}",  
+        "itemListElement": [
+            {% for product in collection.products %}
+            {
+                "@type": "ListItem",
+                "position": {{ forloop.index }},
+                "url": "{{ request.origin }}{{ product.url }}",
+                "name": "{{ product.title | escape }}"
+            }{% if forloop.last == false %},{% endif %}
+            {% endfor %}
+        ]
+    }
+    </script>    
+      <!-- collection template schema end ================================================== -->
+ {% endif %}
+
+ {% if template contains 'blog' %}
+ <!-- Blog Post template schema ================================================== -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": {{ blog.title | json }},
+    "url": "{{ request.origin }}{{ blog.url }}",
+    "description": "{{ blog.description | escape }}",
+    "blogPosts": [
+        {% for article in blog.articles %}
+        {
+            "@type": "BlogPosting",
+            "headline": {{ article.title | json }},
+            "url": "{{ request.origin }}{{ article.url }}",
+            "datePublished": "{{ article.published_at | date: '%Y-%m-%d' }}",
+            "dateModified": "{{ article.updated_at | date: '%Y-%m-%d' }}",
+            "author": {
+                "@type": "Person",
+                "name": "{{ article.author | escape }}"
+            },
+            "description": {{ article.content | strip_html | truncatewords: 100 | escape | json }},
+            "image": {
+                "@type": "ImageObject",
+                "url": "{{ article.image | image_url }}",
+                "name": {{ article.title | json }}
+            },
+            "keywords": "{{ article.tags | join: ', ' | escape }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ]
+}
+</script>
+<!-- Blog Post template schema end ================================================== -->
+{% endif %}
+   {% if template contains 'article' %}
+     <!-- Blog Post template schema ================================================== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": "{{ request.origin }}{{ article.url }}",
+        "articleSection": "Blog",
+        "keywords": "{{ article.tags | join: ', ' }}",
+        "headline": "{{ article.title }}",
+        "description": {{ article.content | strip_html | truncatewords: 30 | escape | json }},
+        "dateCreated": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+        "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+        "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+        "image": {
+            "@type": "ImageObject",
+            "url": "{{ article.image | image_url }}",
+            "name": "{{ article.title }}",
+            "width": "1024",
+            "height": "1024"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "{{ article.author | escape }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ shop.name | escape }}"
+        },
+        "commentCount": "{{ article.comments_count }}"
+    }
+    </script>
+      <!-- Blog Post template schema end ================================================== -->
+    {% endif %}
+
+      {% if template contains 'page' %}
+         <!-- Page template schema start-->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+            {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | json }},
+            "item": "{{ request.origin }}{{ page.url }}"
+            }
+            ]
+        }
+        </script>
+          <!--  page template schema end -->
+        {% endif %}
+
+
+      <!-- Custom Schema Tag  End ================================================== -->
+
+
+    {% if settings.ajax_cart_method != 'page' %}
+      <!-- Ajaxify Cart Plugin ================================================== -->
+      {{ 'ajaxify.scss.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    <!-- CSS ================================================== -->
+    {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+    {% include 'google-fonts' %}
+    <!-- Header hook for plugins ================================================== -->
+
+    {% include 'buddha-megamenu' %}
+    {{ content_for_header }}
+    {%- include 'bold-common' -%}
+    {%- include 'bold-product' with product, hide_action: 'header' -%}
+
+    {% include 'oldIE-js' %}
+
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+    {{ 'modernizr.min.js' | asset_url | script_tag }}
+
+    {% comment %}
+      If you store has customer accounts disabled, you can remove the following JS file
+    {% endcomment %}
+    {% if template contains 'customers' %}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+    <script src="https://cdn.shopify.com/s/files/1/1064/0118/files/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/1064/0118/files/jquery-ui.css"/>
+    <script>
+      $(function() {
+        $("#tabs").tabs();
+      });
+    </script>
+
+
+    <script src="//staticxx.s3.amazonaws.com/aio_stats_lib_v1.min.js?v=1.0"></script>
+    <script src="//staticxx.s3.amazonaws.com/aio_stats_lib_v1.min.js?v=1.0"></script>
+    {% render 'shogun-head' %}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<meta name="google-site-verification" content="ZPdzWJahbHfPn6dS4WhZ0l0EkMs2fZbjOA1e50nVKLA" />
+ <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "hz6yrwsjb5");
+</script>
+
+ <!-- Google Tag Manager added on 12/10/2024 (shared by prashant) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5WV78CPM');</script>
+  <!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) --> 
+ <script async src="https://www.googletagmanager.com/gtag/js?id=AW-833795636"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'AW-833795636'); </script>
+{% comment %} {% render 'bfs-timer-model-bphs', product: product %} {% endcomment %}
+
+  </head>
+
+  <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
+{% comment %} {% if content_for_header contains 'tapita-seo-script-tags' %}
+{%- capture tapita-seo-snippets -%}
+{% include 'tapita-page-speed-status' %}
+{%- if tapitaPageSpeedStatus -%}
+{% include 'tapita-splash-img' %}
+{%- endif -%}
+{%- endcapture -%}
+{%- unless tapita-seo-snippets contains 'Liquid error' -%}
+{{ tapita-seo-snippets }}
+{%- endunless -%}
+{% endif %} {% endcomment %}
+
+
+
+
+    {% comment %} <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PK948N9" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript> {% endcomment %}
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Google Tag Manager (noscript) added on 12/10/2024 (shared by prashant) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5WV78CPM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {% include 'header-bar-sold-out' %}
+
+    {% include 'header-bar' %}
+
+    {% comment %} <canvas id="heartsCanvas"></canvas> {% endcomment %}
+    {% comment %} <style>
+
+      #heartsCanvas {
+  position: fixed; /* or absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999; /* Make sure it is above other content */
+}
+
+    </style> {% endcomment %}
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+          <style>
+           #site_header { width:100%!important } .site-header { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */ padding-bottom:0px!important;margin-bottom:20px;padding-top:0px!important } .header-container-mobile { display: flex; justify-content: center; padding: 10px; gap: 20px; /* Spacing between logo, message, and button */}.header-container-mobile .header-content { display: flex; align-items: center; flex-wrap: wrap; /* Wrap items on small screens */ justify-content: center; width: 100%;}.header-container-mobile .logo-container a img { max-height: 40px; /* Adjust as needed */}.header-container-mobile .header-message { margin: 0; font-size: 0.9rem; color: #333;}/* Mobile-specific adjustments */@media (max-width: 767px) { .header-container-mobile .header-content { gap: 5px; /* Smaller spacing for mobile */ } 
+           .mobile-black-friday-sale a {
+  background: linear-gradient(60deg, rgb(255, 229, 242) 0%, rgb(224, 123, 159) 30%, rgb(185, 102, 130) 50%, rgb(185, 102, 130) 80%, rgb(224, 123, 159) 100%);
+  background-size: 300% 300%; /* Larger than the element to enable movement */
+  color: #ffffff;
+  padding: 10px 5px;
+  font-weight: 500;
+  font-size: 11px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: inline-block;
+  animation: movingBackground 5s linear infinite; /* Add background animation */
+  text-decoration: none; /* Ensure the link looks clean */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+ /* Add a subtle shadow */}
+           .mobile-black-friday-sale a:hover { color:#ffff}@keyframes movingBackground { 0% { background-position: 0% 50%; /* Start at the left */ } 50% { background-position: 100% 50%; /* Move to the right */ } 100% { background-position: 0% 50%; /* Move back to the left */ }} 
+           .site-header {padding-bottom:0px!important;margin-bottom:20px;padding-top:0px!important }}
+          </style>
+        <div class="grid--full large--display-table header-container-main">
+          <div class="grid__item large--one-third large--display-table-cell header-container-mobile" >
+            {% if template == 'index' %}
+              <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              {% else %}
+                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization" style="position:relative">
+                {% endif %}
+                  {% comment %} <img src="https://assets.codepen.io/4175254/santa-hat-test-9.png" alt="Santa Hat" class="santa-hat-header hidden"> {% endcomment %}
+                  {% if settings.logo_use_image %}
+                    <a href="/" itemprop="url">
+                      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="shop-logo">
+                    </a>
+                  {% else %}
+                    <a href="/" itemprop="url" class="shop-name">{{ shop.name }}</a>
+                  {% endif %}    
+
+                {% if template == 'index' %}
+                </h1>
+            {% else %}
+              </div>
+            {% endif %}
+            {% if settings.header_message != blank %}
+               <div style="display:flex;flex-direction:column">
+                <p class="header-message large--hide">
+                  <small>{{ settings.header_message }}</small>
+                </p>
+                  <style>
+                  @media screen and (max-width:767px) {
+                    .mobile-black-friday-sale {
+                      display:flex; align-items:center; justify-content:center;margin-top:8px;
+                      font-size:10px
+                    }
+                  }
+                            @media (min-width: 768px) {
+                      .hide-on-desktop {
+                          display: none;
+                      }
+                  }
+                    </style>
+                {% comment %} <div class="mobile-black-friday-sale hide-on-desktop">
+                    {% assign page_id = page.id %}
+                    {% if page_id != 94092132507 %}
+                      <a href="/pages/foxx-open-house-registration-2025">Foxx Open House</a> 
+                    {% endif %}  
+                  </div>   {% endcomment %}
+               </div>
+            {% endif %}
+          </div>
+          <div class="grid__item large--two-thirds large--display-table-cell medium-down--hide" id="site_header">
+            {% include 'site-nav' %}
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="wrapper main-content" role="main">
+      <div class="sticky-grid">
+        {% if settings.sidebar_enable %}
+          <div class="grid__item large--one-fifth medium-down--hide sticky-content c-sticky-content">
+            <div class="sticky-items">
+              <nav class="sidebar-module" style="margin-bottom: -10px;">
+                <div class="section-header">
+                  <p class="section-header__title h4" style="margin-bottom: -10px;">
+                    <a href="/pages/why-foxx-bioprocess" style="background-color:unset;">Why Foxx BioProcess?</a>
+                  </p>
+                </div>
+                {%- comment -%} <div class="section-header">
+                  <p class="section-header__title h4" style="background-color:#ce0000;">
+                    <a href="/collections/covid-19" style="background-color:#ce0000;">COVID-19</a>
+                  </p>
+                </div>
+                <div class="section-header" style="margin-top:-10px;">
+                  <p class="section-header__title h4" style="background-color:#008646;">
+                    <a href="/collections/custom-kitting" style="background-color:#008646;">Sample Collection Supplies</a>
+                  </p>
+                </div> {%- endcomment -%}
+              </nav>
+              {% include 'sidebar' %}
+            </div>
+          </div>
+          <div class="grid__item large--four-fifths">
+            {{ content_for_layout }}
+          </div>
+        {% else %}
+          <div class="grid__item">
+            {{ content_for_layout }}
+          </div>
+        {% endif %}
+      </div>
+    </main>
+
+    <footer class="site-footer small--text-center" role="contentinfo">
+
+       <!-- Linkedin Tag (New Shared by Prashant) -->
+       <script type="text/javascript">
+       _linkedin_partner_id = "5785228";
+       window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+       window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+       </script><script type="text/javascript">
+       (function(l) {
+       if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+       window.lintrk.q=[]}
+       var s = document.getElementsByTagName("script")[0];
+       var b = document.createElement("script");
+       b.type = "text/javascript";b.async = true;
+       b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+       s.parentNode.insertBefore(b, s);})(window.lintrk);
+       </script>
+       <noscript>
+       <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=5785228&fmt=gif" />
+       </noscript>
+
+      {% comment %}
+        <div class="fullwidth-ftsectit">
+
+        <div class="wrapper">
+        <div class="grid grid-uniform">
+        <div class="grid__item large--one-quarter medium--one-half">
+        <div class="a-footer-logo">
+        <img src="{{'logo.png' | asset_url }}" alt="Secure Transaction">
+        </div>
+        </div>
+        <div class="grid__item large--one-quarter medium--one-half">
+        <h4 class="footer-headings">{{ 'layout.footer.linklist_title' | t }}</h4>
+        </div>
+        <div class="grid__item large--one-quarter medium--one-half">
+        <h4 class="footer-headings">Products</h4>
+        </div>
+        <div class="grid__item large--one-quarter medium--one-half">
+        <h4 class="footer-headings">{{ 'layout.footer.contact_title' | t }}</h4>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="a-footer-logo mobile-show hide-desktop">
+        <img src="{{'logo.png' | asset_url }}" alt="Secure Transaction">
+        </div>
+      {% endcomment %}
+
+      <div class="footer-trust-badge">
+
+        <div class="wrapper">
+          <div class="grid grid-uniform">
+            <div class="footer-trust-badge__header">
+              <h4 class="footer-headings">{{ settings.trusted-badge-heading}}</h4>
+            </div>
+
+            <div class="grid__item">
+              <span class="secureveri-img">
+
+                {% if settings.badge_1 %}
+                  <img src="{{ settings.badge_1 | img_url : '200x200'}}">
+                {% endif %}
+                {% if settings.badge_2 %}
+                  <img src="{{ settings.badge_2 | img_url : '200x200'}}">
+                {% endif %}
+                {% if settings.badge_3 %}
+                  <img src="{{ settings.badge_3 | img_url : '200x200'}}">
+                {% endif %}
+                {% if settings.badge_4 %}
+                  <img src="{{ settings.badge_4 | img_url : '200x200'}}">
+                {% endif %}
+                {% if settings.badge_5 %}
+                  <img src="{{ settings.badge_5 | img_url : '200x200'}}">
+                {% endif %}
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="footertop-sec">
+
+        <div class="grid-uniform ">
+
+          {% comment %}
+            Calculate the number of footer columns shown
+          {% endcomment %}
+          {% assign num_footer_columns = 1 %}
+          {% if settings.footer_quicklinks_enable %}
+            {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+          {% endif %}
+          {% if settings.footer_social_enable %}
+            {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+          {% endif %}
+          {% if settings.footer_contact_enable %}
+            {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+          {% endif %}
+          {% if settings.footer_newsletter_enable %}
+            {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+          {% endif %}
+
+          {% case num_footer_columns %}
+            {% when 0 %}
+            {% when 1 %}
+              {% assign footer_column_width = '' %}
+            {% when 2 %}
+              {% assign footer_column_width = 'large--one-half medium--one-half' %}
+            {% when 3 %}
+              {% assign footer_column_width = 'large--one-third medium--one-third' %}
+            {% when 4 %}
+              {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+
+          {% endcase %}
+
+          <div class="grid__item {{ footer_column_width }} footer-logoabc">
+            <!--           <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/SecureTransactions_Foxx.png?13745569439066315301" alt="Secure Transaction" /> -->
+
+            <div class="a-footer-logo hide-desktop">
+              <img src="{{'logo.png' | asset_url }}" alt="Secure Transaction">
+            </div>
+
+
+            <div class="footer-content">
+              <span id="cdSiteSeal1">
+                <script type="text/javascript" src="//tracedseals.starfieldtech.com/siteseal/get?scriptId=cdSiteSeal1&amp;cdSealType=Seal1&amp;sealId=55e4ye7y7mb73b59a828cdd69d8e06ayhqy7mb7355e4ye725b7a713310024413"></script>
+              </span>
+
+              {% if settings.footer_logo_underneath_enable %}
+                <div class="underneath-detail">{{ settings.footer_logo_underneath_text }}</div>
+              {% endif %}
+
+              {% if settings.footer_social_enable %}
+                <div class="a_footer_socialicon">
+                  <!--           <div class="grid__item {{ footer_column_width }}"> -->
+                  {% comment %}
+                    <h4 class="footer-headings">{{ 'layout.footer.social_title' | t }}</h4>
+
+                    Loop through the social network links
+                  {% endcomment %}
+                  <ul class="inline-list social-icons">
+                    {% if settings.social_twitter_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                          {% include 'icon-twitter-f' %}
+                          <span class="fallback-text">Twitter</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_facebook_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                          {% include 'icon-facebook-f' %}
+                          <span class="fallback-text">Facebook</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_pinterest_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                          <!--                       <span class="icon icon-pinterest" aria-hidden="true"></span> -->
+
+                          {% include 'icon-pinterest-f' %}
+                          <span class="fallback-text">Pinterest</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_linkedin_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_linkedin_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Linkedin' }}">
+                          {% include 'icon-linkedin-f' %}
+                          {%comment%}<img src="{{'linkedin.png' | asset_url }}">{%endcomment%}
+                          <span class="fallback-text">Linkedin</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_google_plus_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_google_plus_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}" rel="publisher">
+                          <!--                       <span class="icon icon-google" aria-hidden="true"></span> -->
+                          <!--                        <img src="{{'google-plus.png' | asset_url }}"> -->
+
+                          {% include 'icon-google-plus-f' %}<span class="fallback-text"> Google</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_instagram_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                          <!--                       <span class="icon icon-instagram" aria-hidden="true"></span> -->
+
+                          {% include 'icon-insta-f' %}
+                          <span class="fallback-text">Instagram</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_tumblr_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                          <!--                       <span class="icon icon-tumblr" aria-hidden="true"></span> -->
+                          {% include 'icon-tumblr-f' %}
+                          <span class="fallback-text">Tumblr</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_youtube_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text youtubeicon" href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                          {% include 'icon-youtube-f' %}
+                          <span class="fallback-text">YouTube</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_vimeo_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                          <!--                       <span class="icon icon-vimeo" aria-hidden="true"></span> -->
+                          {% include 'icon-vimeo-f' %}
+                          <span class="fallback-text">Vimeo</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_fancy_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                          <span class="icon icon-fancy" aria-hidden="true"></span>
+                          <span class="fallback-text">Fancy</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_rss_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_rss_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'RSS' }}">
+                          <!--                       <span class="icon icon-rss" aria-hidden="true"></span> -->
+
+                          {% include 'icon-rss-f' %}
+                          <span class="fallback-text">RSS</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                  <!--           </div> -->
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          {% if settings.footer_quicklinks_enable %}
+            <div class="grid__item {{ footer_column_width }}">
+              <div class="footer-head">
+                <h4 class="footer-headings formblmenufx">{{ 'layout.footer.linklist_title' | t }}</h4>
+              </div>
+              <div class="footer-content">
+                <ul class="site-footer__links" id="footerLinksColumn">
+                  {% for link in linklists[settings.footer_quicklinks_linklist].links %}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if settings.footer_products_enable %}
+            <div class="grid__item {{ footer_column_width }}">
+              <div class="footer-head">
+                <h4 class="footer-headings formblmenufx">Products</h4>
+              </div>
+              <div class="footer-content">
+                <ul class="site-footer__links" id="footerMenuColumn">
+                  {% for link in linklists[settings.footer_products_linklist].links %}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+
+
+          {% if settings.footer_map_enable %}
+            <div class="grid__item {{ footer_column_width }}">
+              {% if settings.map_title_1 != blank or settings.map_title_2 != blank or settings.map_title_3 != blank %}
+                <div id="footer-map-tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+                  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                    {% if settings.map_title_1 != blank %}
+                      <li class="ui-state-default ui-corner-top">
+                        <a href="javascript:void(0);" onclick="showTab(1)">{{ settings.map_title_1}}</a>
+                      </li>
+                    {% endif %}
+                    {% if settings.map_title_2 != blank %}
+                      <li class="ui-state-default ui-corner-top">
+                        <a href="javascript:void(0);" onclick="showTab(2)">{{ settings.map_title_2}}</a>
+                      </li>
+                    {% endif %}
+                    {% if settings.map_title_3 != blank %}
+                      <li class="ui-state-default ui-corner-top">
+                        <a href="javascript:void(0);" onclick="showTab(3)">{{ settings.map_title_3}}</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                  {% if settings.map_title_1 != blank %}
+                    <div id="tabs-1" class="ui-tabs-panel map-tab" role="tabpanel" style="display:none;">
+                      <div class="tabs__name">
+                        <p>{{ settings.map_title_1}}</p>
+                      </div>
+                      <iframe class="map_frame" src="{{settings.footer_map_url_1}}" width="600" height="450" style="border:0;padding-top:25px;" allowfullscreen=""></iframe>
+                    </div>
+                  {% endif %}
+                  {% if settings.map_title_2 != blank %}
+                    <div id="tabs-2" class="ui-tabs-panel map-tab" role="tabpanel" style="display:none;">
+                      <div class="tabs__name">
+                        <p>{{ settings.map_title_2}}</p>
+                      </div>
+                      <iframe class="map_frame" src="{{settings.footer_map_url_2}}" width="600" height="450" style="border:0;padding-top:25px;" allowfullscreen=""></iframe>
+                    </div>
+                  {% endif %}
+                  {% if settings.map_title_3 != blank %}
+                    <div id="tabs-3" class="ui-tabs-panel map-tab" role="tabpanel" style="display:none;">
+                      <div class="tabs__name">
+                        <p>{{ settings.map_title_3}}</p>
+                      </div>
+                      <iframe class="map_frame" src="{{settings.footer_map_url_3}}" width="600" height="450" style="border:0;padding-top:25px;" allowfullscreen=""></iframe>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <script>
+            function showTab(tabIndex) {
+              const tabs = document.querySelectorAll('.map-tab');
+              const links = document.querySelectorAll('#footer-map-tabs ul li a');
+
+              tabs.forEach((tab, index) => {
+                if (index === tabIndex - 1) {
+                  tab.style.display = 'block';
+                  links[index].classList.add('ui-tabs-active');
+                } else {
+                  tab.style.display = 'none';
+                  links[index].classList.remove('ui-tabs-active');
+                }
+              });
+            }
+
+            // Show the first tab by default
+            showTab(1);
+          </script>
+
+
+          {% if settings.footer_contact_enable %}
+
+            <div class="grid__item {{ footer_column_width }}">
+              <div class="footer-head">
+                <h4 class="footer-headings">Locate us</h4>
+              </div>
+              <div class="footer-content">
+                <div class="rte">{{ settings.footer_contact_text }}</div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if settings.footer_newsletter_enable %}
+            <div class="grid__item {{ footer_column_width }}">
+              <div class="footer-head">
+                <h4 class="footer-headings formblmenufx">{{ 'layout.footer.newsletter_title' | t }}</h4>
+              </div>
+              <div class="footer-content">
+                <p>{{ 'layout.footer.newsletter_caption' | t }}</p>
+                {% include 'newsletter-form' %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="footerbottom-sec">
+        <div class="wrapper">
+          <div class="grid">
+            <div class="grid__item large--one-half large--text-left medium-down--text-center">
+              <p class="site-footer__links">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{
+              shop.name | link_to: '/' }}.
+
+                <span class="secureveri-img">
+                  {% if settings.footer_badge_1 != blank %}
+                    <img src="{{ settings.footer_badge_1 | img_url : '200x200'}}">
+                  {% endif %}
+                  {% if settings.footer_badge_2 != blank %}
+                    <img src="{{ settings.footer_badge_2 | img_url : '200x200'}}">
+                  {% endif %}
+                  {% if settings.footer_badge_3 != blank %}
+                    <img src="{{ settings.footer_badge_3 | img_url : '200x200'}}">
+                  {% endif %}
+                </span>
+
+              </p>
+            </div>
+            {% unless shop.enabled_payment_types == empty %}
+              <div class="grid__item large--one-half large--text-right medium-down--text-center">
+                <ul class="inline-list payment-icons">
+                  {% for type in shop.enabled_payment_types %}
+                    <li>
+                      <!-- <span class="icon-fallback-text">
+                      <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                      <span class="fallback-text">{{type | replace: '_',' '}}</span>
+                      </span>  -->
+                      <img class="footer_payment_icons" width="38" height="24" src="{{ type | payment_type_img_url }}">
+
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endunless %}
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+
+    {% for i in (1..4) %}
+      {% capture home_section %}home_section_{{ i }}{% endcapture %}
+      {% if settings[home_section] == 'slider' %}
+        {% assign slider_home_enable = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}
+      {% if slider_home_enable %}
+      {{ 'jquery.flexslider.min.js' | asset_url | script_tag }}
+      {{ 'slider.js' | asset_url | script_tag }}
+      {% endif %}
+    {% endcomment %}
+
+    {{ 'fastclick.min.js' | asset_url | script_tag }}
+    {{ 'timber.js' | asset_url | script_tag }}
+    {{ 'theme.js' | asset_url | script_tag }}
+
+    {{'//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js' | script_tag }}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% if template contains 'article' or template contains 'product' %}
+      {% if settings.social_sharing_blog or settings.social_sharing_products %}
+        {{ 'social-buttons.js' | asset_url | script_tag }}
+      {% endif %}
+    {% endif %}
+
+    {% if settings.ajax_cart_method != 'page' %}
+      {{ 'handlebars.min.js' | asset_url | script_tag }}
+      {% include 'ajax-cart-template' %}
+      {{ 'ajaxify.js' | asset_url | script_tag }}
+      <script>
+        jQuery(function($) {
+          ajaxifyShopify.init({
+            method: '{{ settings.ajax_cart_method }}',
+            wrapperClass: 'wrapper',
+            formSelector: '#AddToCartForm',
+            addToCartSelector: '#AddToCart',
+            cartCountSelector: '.cart-count',
+            toggleCartButton: '.cart-toggle',
+            btnClass: 'btn',
+            moneyFormat: {{ shop.money_format | json }}
+          });
+        });
+      </script>
+    {% endif %}
+
+    {% if template contains 'product' and settings.product_image_zoom_enable %}
+      {{ 'jquery.zoom.min.js' | asset_url | script_tag }}
+    {% endif %}
+
+    <!-- Google Code for Remarketing Tag -->
+    <!--------------------------------------------------
+    Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+    --------------------------------------------------->
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 861610919;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+
+/* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/861610919/?guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+
+    {% include 'collection-filter-v2' %}
+
+
+    <script src="https://cdn.rep.ai/rep.js"></script>
+    <script>
+      repWidgetId = '5aa6d7dfe9aa4a0023959248' {% if customer %}
+        Rep.init({appId: repWidgetId, email: '{{ customer.email }}', givenName: '{{ customer.first_name }}', surname: '{{ customer.last_name }}'});
+      {% else %}
+        Rep.init({appId: repWidgetId});{% endif %}
+    </script>
+
+    <input type="hidden" id="656565115116111114101" data-customer-id="{{ customer.id }}" data-customer-email="{{ customer.email }}" data-customer-name="{{ customer.first_name }} {{ customer.last_name }}"/>
+    <script type="text/javascript" charset="utf-8">
+      var shappify_customer_tags = {{ customer.tags | json }}
+    </script>
+    <!-- <input type="hidden" name="page_handle" class="get_current_page_handle" value="{{ page.title }}"><script type='text/javascript'>var subscribersSiteId = '0e9437ef-e1f0-4cc9-b90a-3d6b7f915dee';var subscribersServiceWorkerPath = '/apps/firebase-messaging-sw';</script><script type='text/javascript' src='https://cdn.subscribers.com/assets/subscribers.js'></script>
+    -->
+
+
+    <div class="aaa_form_builder_call_popup_form"></div>
+    <script>
+      jQuery('a[href^="http"]').not('a[href^=" {{ shop.url }}"]').attr('target', '_blank');
+    </script>
+
+    {% include 'buddha-crosssell' %}
+    {% include 'instabuy' %}
+
+    <!-- **BEGIN** Hextom CTB Integration // Main Include - DO NOT MODIFY -->
+    {% render 'hextom_ctb_main', product: product, customer: customer %}
+    <!-- **END** Hextom CTB Integration // Main Include - DO NOT MODIFY -->
+    {% if template contains 'collection' and request.path == '/collections/single-use-bioprocess' %}
+      {% include 'linkedin_script' %}
+      {% else %}
+    {% endif %}  
+
+    {% comment %} <div id="recently-bought-product-sec"></div>
+<style>
+
+.someone-bought-popup-product-card.hide {
+    animation: slideOut 0.5s ease;
+    transition: opacity 0.5s ease; 
+    opacity: 0;
+}
+
+.someone-bought-popup-product-card {
+   border-radius: 12px!important;
+  }
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.someone-bought-popup-picks-image-container {
+    background-size: contain;
+    display: block;
+    height: auto;
+    width: 80px;
+    max-width: 80px;
+    overflow: hidden;
+}
+
+</style> {% endcomment %}
+
+<!--
+    <script>
+        fetch('https://fls-g-recently-bought-product-popup.onrender.com/')
+            .then(response => response.text())
+            .then(html => {
+                const div = document.createElement('div');
+                div.innerHTML = html;
+
+
+                const contentDiv = document.getElementById('recently-bought-product-sec');
+                const scripts = div.getElementsByTagName('script');
+                const styles = div.getElementsByTagName('style');
+
+
+                for (let i = 0; i < styles.length; i++) {
+                    contentDiv.appendChild(styles[i]);
+                }
+                contentDiv.innerHTML += div.innerHTML.replace(/<script.*?>.*?<\/script>/g, '');
+
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+  <script>
+
+      let currentIndex = 0;
+let timeoutId;
+let cards;
+
+function resetProgressBar(progressBar) {
+  progressBar.style.animation = 'none';
+
+  progressBar.offsetHeight;
+  progressBar.style.animation = '';
+}
+
+function showNextCard() {
+  cards = document.querySelectorAll('.someone-bought-popup-product-card');
+  if (cards.length === 0) return;
+
+  const card = cards[currentIndex];
+  const progressBar = card.querySelector('.progress-bar-inner');
+
+  resetProgressBar(progressBar);
+  card.classList.add('show');
+  progressBar.style.animation = 'progress 10s linear forwards'; 
+
+  timeoutId = setTimeout(() => {
+    card.classList.remove('show');
+    currentIndex = (currentIndex + 1) % cards.length;
+
+    setTimeout(showNextCard, 5000);
+  }, 10000); 
+}
+
+
+function closeCard(index) {
+    clearTimeout(timeoutId);
+    const card = document.getElementById('card-' + index);
+    if (card) {
+        card.classList.add('hide'); 
+        setTimeout(() => {
+            card.remove(); 
+            currentIndex = (currentIndex + 1) % cards.length;
+            setTimeout(showNextCard, 5000);
+        }, 500);
+    }
+}
+
+
+
+function init() {
+  setTimeout(showNextCard, 10000); 
+}
+
+document.addEventListener('DOMContentLoaded', init);
+  </script> 
+
+  -->
+
+  <style>
+    #admin-bar-iframe {
+      display:none!important
+    }
+  </style>
+  <script>
+
+    // Wait for the DOM content to be loaded
+    window.onload = function() {
+    // Find the iframe element by its id
+    var iframe = document.getElementById("admin-bar-iframe");
+    // Check if the iframe exists
+    if (iframe) {
+        // Hide the iframe by setting its display property to "none"
+        iframe.style.display = "none";
+    }
+};
+
+  </script>
+    {% comment %} {% render 'model_cyber_monday_sale' %}  {% endcomment %}
+
+  <!--  Snow fall snippet for christmas -->
+   {% comment %} {% render 'snow-fall-christmas-snippet' %} {% endcomment %}
+   <!--  Snow fall snippet for christmas -->      
+  {% comment %} {% if template == 'index' %}
+    {% render 'model_cyber_monday_sale' %} 
+    {% endif %} {% endcomment %}
+    {% comment %} {% render 'model_cyber_monday_sale' %}  {% endcomment %}
+    <!-- Christmas Announcement bar js -->
+  {% comment %} <script>
+  window.addEventListener('load', function() {
+
+    const relativeDiv = document.querySelector('.relative');
+    const headerBar = document.querySelector('.header-bar');
+
+    relativeDiv.classList.add('fixed');
+
+
+    headerBar.style.marginTop = '0px';
+  });
+</script> {% endcomment %}
+
+<!-- Christmas Announcement bar css -->
+
+<!-- /* christmas auto gift applied SCRIPT *end on 31st December */ -->
+
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script> {% endcomment %}
+<!-- /* christmas auto gift applied SCRIPT *end on 31st December */ -->
+
+<!-- heart shape canvas-->
+
+{% comment %} <script>
+var ww,wh,textHeartTimer,canvas=document.getElementById("heartsCanvas"),ctx=canvas.getContext("2d"),isTextHeartPresent=!1;function onResize(){ww=canvas.width=window.innerWidth,wh=canvas.height=window.innerHeight}function init(){ctx.strokeStyle="red",ctx.shadowBlur=0,ctx.shadowColor="hsla(0, 100%, 60%,0.5)",ctx.fillStyle="red"}var precision=100,hearts=[],textMessage="Foxx Loves India Open House",heartCreationCounter=0,heartCreationFrequency=5,colors=["rgba(255, 0, 0, 1)","rgba(240, 185, 204, 1)","rgba(235, 228, 230, 1)"],Heart=function(t,e,s=!1,i){this.x=t||Math.random()*ww,this.y=e||Math.random()*wh,this.size=.5*Math.random()+.5,this.shadowBlur=10*Math.random(),this.speedX=(Math.random()+.1-.55)*2,this.speedY=(Math.random()+.1-.55)*2,this.speedSize=.005*Math.random()+.002,this.opacity=1,this.vertices=[],this.showText=s,this.color=i||colors[Math.floor(Math.random()*colors.length)];for(var r=0;r<precision;r++){var a=(r/precision-.5)*(2*Math.PI),o={x:15*Math.pow(Math.sin(a),3),y:-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))};this.vertices.push(o)}};function addTextHeart(){hearts.push(new Heart(void 0,void 0,!0)),setTimeout(addTextHeart,2e4)}function render(t){requestAnimationFrame(render),++heartCreationCounter>=heartCreationFrequency&&(hearts.push(new Heart),heartCreationCounter=0),ctx.clearRect(0,0,ww,wh);for(var e=0;e<hearts.length;e++)hearts[e].draw(),hearts[e].size<=0&&(hearts.splice(e,1),e--)}Heart.prototype.draw=function(){if(!(this.size<=0)){this.size-=this.speedSize,this.x+=this.speedX,this.y+=this.speedY,ctx.save(),ctx.translate(this.x,this.y),ctx.scale(this.size,this.size),ctx.beginPath();for(var t=0;t<precision;t++){var e=this.vertices[t];ctx.lineTo(e.x,e.y)}ctx.globalAlpha=this.size,ctx.shadowBlur=Math.round((3-this.size)*10),ctx.shadowColor="hsla(0, 100%, 60%,0.5)",ctx.globalCompositeOperation="lighter",ctx.closePath(),ctx.fillStyle=this.color,ctx.fill(),ctx.restore(),this.showText&&this.size>.3&&(ctx.save(),ctx.translate(this.x,this.y),ctx.scale(this.size,this.size),ctx.font="italic 24px 'Great Vibes', cursive",ctx.textAlign="center",ctx.fillStyle="rgba(255, 0, 0, 1)",ctx.fillText(textMessage,0,0),ctx.restore())}},onResize(),init(),window.addEventListener("resize",onResize),requestAnimationFrame(render);
+</script> {% endcomment %}
+<!-- floating model open house promotion-->
+{% comment %} {% render 'open-house-floating-model' %} {% endcomment %}
+  </body>
+
+</html>
