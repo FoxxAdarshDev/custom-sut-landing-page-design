@@ -1957,7 +1957,19 @@
             color: #1a1a2e;
             overflow-x: hidden;
             width: 100%;
+            max-width: 100%;
             min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Ensure all promo sections stay within container bounds */
+        .promo-independence-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .promo-independence-wrapper > * {
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
 
@@ -1978,10 +1990,9 @@
         .promo-sticky-nav {
             position: fixed;
             bottom: -150px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            max-width: 1000px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: min(1000px, calc(100vw - 40px));
             width: 100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
@@ -2447,10 +2458,13 @@
 
         .promo-dual-worlds {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            max-width: 1200px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .promo-world {
@@ -2634,9 +2648,11 @@
         .promo-section-container {
             position: relative;
             z-index: 2;
-            max-width: 1200px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .promo-section-content {
@@ -3294,6 +3310,9 @@
 
             .promo-sticky-nav {
                 bottom: -120px;
+                left: 0;
+                right: 0;
+                transform: none;
                 width: 100%;
                 max-width: none;
                 border-radius: 0;
