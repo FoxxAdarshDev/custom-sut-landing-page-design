@@ -3916,17 +3916,30 @@
             });
         }
 
-        // Enhanced container monitoring
+        // Enhanced container monitoring with strict boundary enforcement
         function monitorContainerBounds() {
             const wrapper = document.querySelector('.promo-independence-wrapper');
             if (!wrapper) return;
+
+            // Get parent container for boundary reference
+            const parentGrid = wrapper.closest('.grid__item.large--four-fifths');
+            const parentContainer = parentGrid || wrapper.parentElement;
 
             // Create a ResizeObserver to monitor wrapper size changes
             if (window.ResizeObserver) {
                 const resizeObserver = new ResizeObserver(entries => {
                     enforceContainerConstraints();
+                    // Force parent boundary respect
+                    if (parentContainer) {
+                        const parentWidth = parentContainer.offsetWidth;
+                        wrapper.style.maxWidth = parentWidth + 'px';
+                        wrapper.style.width = '100%';
+                    }
                 });
                 resizeObserver.observe(wrapper);
+                if (parentContainer) {
+                    resizeObserver.observe(parentContainer);
+                }
             }
 
             // Create a MutationObserver to watch for DOM changes
@@ -3939,7 +3952,15 @@
                         }
                     });
                     if (shouldEnforce) {
-                        setTimeout(enforceContainerConstraints, 100);
+                        setTimeout(() => {
+                            enforceContainerConstraints();
+                            // Re-enforce parent boundaries
+                            if (parentContainer) {
+                                const parentWidth = parentContainer.offsetWidth;
+                                wrapper.style.maxWidth = parentWidth + 'px';
+                                wrapper.style.width = '100%';
+                            }
+                        }, 100);
                     }
                 });
                 
@@ -3947,9 +3968,24 @@
                     childList: true,
                     subtree: true,
                     attributes: true,
-                    attributeFilter: ['style', 'class']
+                    attributeFilter: ['style', 'class', 'width']
                 });
             }
+
+            // Continuous boundary check every 2 seconds
+            setInterval(() => {
+                const wrapperRect = wrapper.getBoundingClientRect();
+                const parentRect = parentContainer.getBoundingClientRect();
+                
+                // Check if wrapper is extending beyond parent
+                if (wrapperRect.right > parentRect.right || wrapperRect.left < parentRect.left) {
+                    wrapper.style.maxWidth = parentContainer.offsetWidth + 'px';
+                    wrapper.style.width = '100%';
+                    wrapper.style.margin = '0';
+                    wrapper.style.padding = '0';
+                    enforceContainerConstraints();
+                }
+            }, 2000);
         }
 
         // Force immediate constraint application
@@ -3960,40 +3996,118 @@
             // Apply CSS constraints directly
             const style = document.createElement('style');
             style.textContent = `
+                /* Main wrapper containment - force everything to stay within */
                 .promo-independence-wrapper {
-                    overflow-x: hidden !important;
+                    overflow: hidden !important;
                     max-width: 100% !important;
+                    width: 100% !important;
                     box-sizing: border-box !important;
+                    position: relative !important;
+                    contain: layout style paint !important;
                 }
                 
-                .promo-independence-wrapper * {
+                /* Universal containment for all children */
+                .promo-independence-wrapper *,
+                .promo-independence-wrapper *::before,
+                .promo-independence-wrapper *::after {
                     max-width: 100% !important;
                     box-sizing: border-box !important;
+                    position: relative !important;
                 }
                 
+                /* Specific section constraints */
+                .promo-independence-wrapper > * {
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    overflow: hidden !important;
+                    contain: layout !important;
+                }
+                
+                /* Navigation specific */
                 .promo-sticky-nav {
                     left: 0 !important;
                     right: 0 !important;
                     width: 100% !important;
+                    max-width: 100% !important;
+                    position: relative !important;
                 }
                 
+                /* Container constraints */
                 .promo-section-container {
                     max-width: 1200px !important;
                     margin: 0 auto !important;
                     padding: 0 20px !important;
+                    width: 100% !important;
+                    overflow: hidden !important;
                 }
                 
+                /* Product grid constraints */
                 .promo-products-grid {
                     width: 100% !important;
-                    overflow-x: hidden !important;
+                    max-width: 100% !important;
+                    overflow: hidden !important;
+                    display: flex !important;
+                    flex-wrap: wrap !important;
                 }
                 
+                /* Carousel constraints */
                 .promo-sticky-carousel,
                 .promo-carousel-container {
                     width: 100% !important;
+                    max-width: 100% !important;
                     overflow-x: auto !important;
+                    overflow-y: hidden !important;
                 }
                 
+                /* Hero section constraints */
+                .promo-hero-section {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    overflow: hidden !important;
+                }
+                
+                /* Grid constraints */
+                .promo-independence-wrapper .grid,
+                .promo-independence-wrapper .grid__item {
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    overflow: hidden !important;
+                }
+                
+                /* Force large--four-fifths to contain everything */
+                .grid__item.large--four-fifths {
+                    max-width: 100% !important;
+                    overflow: hidden !important;
+                    contain: layout style paint !important;
+                }
+                
+                /* Ensure wrapper respects parent boundaries */
+                .grid__item.large--four-fifths .promo-independence-wrapper {
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                
+                /* Product cards and images */
+                .promo-independence-wrapper img,
+                .promo-independence-wrapper .promo-product-card {
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+                
+                /* Text and content */
+                .promo-independence-wrapper h1,
+                .promo-independence-wrapper h2,
+                .promo-independence-wrapper h3,
+                .promo-independence-wrapper p,
+                .promo-independence-wrapper div {
+                    max-width: 100% !important;
+                    word-wrap: break-word !important;
+                    overflow-wrap: break-word !important;
+                }
+                
+                /* Mobile responsive constraints */
                 @media (max-width: 768px) {
                     .promo-section-content {
                         flex-direction: column !important;
@@ -4003,10 +4117,36 @@
                     .promo-products-grid {
                         max-width: 100% !important;
                         flex: none !important;
+                        width: 100% !important;
+                    }
+                    
+                    .promo-independence-wrapper {
+                        padding: 0 10px !important;
+                    }
+                    
+                    .promo-section-container {
+                        padding: 0 10px !important;
+                    }
+                }
+                
+                /* Additional safety constraints */
+                @media (max-width: 480px) {
+                    .promo-independence-wrapper * {
+                        max-width: 95vw !important;
                     }
                 }
             `;
             document.head.appendChild(style);
+            
+            // Force wrapper width calculation
+            setTimeout(() => {
+                const parentGrid = wrapper.closest('.grid__item.large--four-fifths');
+                if (parentGrid) {
+                    const parentWidth = parentGrid.offsetWidth;
+                    wrapper.style.maxWidth = parentWidth + 'px';
+                    wrapper.style.width = '100%';
+                }
+            }, 100);
         }
 
         // Initialize the revolutionary experience
