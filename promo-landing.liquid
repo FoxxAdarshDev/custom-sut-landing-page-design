@@ -3862,8 +3862,158 @@
             }
         }
 
+        // Container constraint enforcement system
+        function enforceContainerConstraints() {
+            const wrapper = document.querySelector('.promo-independence-wrapper');
+            if (!wrapper) return;
+
+            const wrapperWidth = wrapper.offsetWidth;
+            const wrapperRect = wrapper.getBoundingClientRect();
+
+            // Find all child elements that might overflow
+            const childElements = wrapper.querySelectorAll('*');
+            
+            childElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const elementStyle = window.getComputedStyle(element);
+                
+                // Skip if element is hidden or has no dimensions
+                if (rect.width === 0 || rect.height === 0) return;
+                
+                // Check if element extends beyond wrapper boundaries
+                if (rect.left < wrapperRect.left || rect.right > wrapperRect.right) {
+                    // Apply container constraints
+                    element.style.maxWidth = '100%';
+                    element.style.boxSizing = 'border-box';
+                    
+                    // Handle specific problematic elements
+                    if (element.classList.contains('promo-sticky-nav')) {
+                        element.style.left = '0';
+                        element.style.right = '0';
+                        element.style.width = '100%';
+                        element.style.maxWidth = wrapperWidth + 'px';
+                    }
+                    
+                    if (element.classList.contains('promo-products-grid')) {
+                        element.style.width = '100%';
+                        element.style.maxWidth = '100%';
+                        element.style.overflowX = 'hidden';
+                    }
+                    
+                    if (element.classList.contains('promo-section-container')) {
+                        element.style.maxWidth = '100%';
+                        element.style.padding = '0 20px';
+                    }
+                    
+                    // Handle carousel containers
+                    if (element.classList.contains('promo-sticky-carousel') || 
+                        element.classList.contains('promo-carousel-container')) {
+                        element.style.width = '100%';
+                        element.style.overflowX = 'auto';
+                        element.style.maxWidth = '100%';
+                    }
+                }
+            });
+        }
+
+        // Enhanced container monitoring
+        function monitorContainerBounds() {
+            const wrapper = document.querySelector('.promo-independence-wrapper');
+            if (!wrapper) return;
+
+            // Create a ResizeObserver to monitor wrapper size changes
+            if (window.ResizeObserver) {
+                const resizeObserver = new ResizeObserver(entries => {
+                    enforceContainerConstraints();
+                });
+                resizeObserver.observe(wrapper);
+            }
+
+            // Create a MutationObserver to watch for DOM changes
+            if (window.MutationObserver) {
+                const mutationObserver = new MutationObserver(mutations => {
+                    let shouldEnforce = false;
+                    mutations.forEach(mutation => {
+                        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                            shouldEnforce = true;
+                        }
+                    });
+                    if (shouldEnforce) {
+                        setTimeout(enforceContainerConstraints, 100);
+                    }
+                });
+                
+                mutationObserver.observe(wrapper, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
+                });
+            }
+        }
+
+        // Force immediate constraint application
+        function applyImmediateConstraints() {
+            const wrapper = document.querySelector('.promo-independence-wrapper');
+            if (!wrapper) return;
+
+            // Apply CSS constraints directly
+            const style = document.createElement('style');
+            style.textContent = `
+                .promo-independence-wrapper {
+                    overflow-x: hidden !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .promo-independence-wrapper * {
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .promo-sticky-nav {
+                    left: 0 !important;
+                    right: 0 !important;
+                    width: 100% !important;
+                }
+                
+                .promo-section-container {
+                    max-width: 1200px !important;
+                    margin: 0 auto !important;
+                    padding: 0 20px !important;
+                }
+                
+                .promo-products-grid {
+                    width: 100% !important;
+                    overflow-x: hidden !important;
+                }
+                
+                .promo-sticky-carousel,
+                .promo-carousel-container {
+                    width: 100% !important;
+                    overflow-x: auto !important;
+                }
+                
+                @media (max-width: 768px) {
+                    .promo-section-content {
+                        flex-direction: column !important;
+                    }
+                    
+                    .promo-section-info,
+                    .promo-products-grid {
+                        max-width: 100% !important;
+                        flex: none !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
         // Initialize the revolutionary experience
         document.addEventListener('DOMContentLoaded', function() {
+            // Apply immediate constraints first
+            applyImmediateConstraints();
+            
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
@@ -3880,6 +4030,20 @@
             // Initialize sticky navigation
             window.addEventListener('scroll', handleStickyNavigation);
             handleStickyNavigation(); // Initial check
+
+            // Initialize container constraints
+            setTimeout(() => {
+                enforceContainerConstraints();
+                monitorContainerBounds();
+            }, 100);
+
+            // Apply constraints on window resize
+            window.addEventListener('resize', () => {
+                setTimeout(enforceContainerConstraints, 100);
+            });
+
+            // Periodic constraint enforcement
+            setInterval(enforceContainerConstraints, 2000);
         });
     </script>
 </section>
