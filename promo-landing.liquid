@@ -11,10 +11,14 @@
     {% assign pc_carboy_collection = collections['pc-rectangular-carboy-us-independence-day-sale-25'] %}
     {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-us-independence-day-sale-25'] %}
     {% assign ezbio_bottles_collection = collections['ezbio-bottles-pc-us-independence-day-sale-25'] %}
+    {% assign ezbio_ts_bottles_collection = collections['ezbio-ts-bottles-us-independence-day-sale-25'] %}
+    {% assign pfa_bottles_collection = collections['pfa-bottles-us-independence-day-sale-25'] %}
+    {% assign aqg_collection = collections['aqg-us-independence-day-sale-25'] %}
+    {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-us-independence-day-sale-25'] %}
+    {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-us-independence-day-sale-25'] %}
     {% assign bioprocess_components_collection = collections['bioprocess-components-us-independence-day-sale-25'] %}
     {% assign vent_filters_collection = collections['vent-filters-us-independence-day-sale-25'] %}
     {% assign laboratory_collection = collections['laboratory-products-us-independence-day-sale-25'] %}
-    {% assign us_independence_sale_collection = collections['us-independence-day-sale-25'] %}
 
     <!-- American Flag Navigation -->
     <nav class="promo-flag-navigation">
@@ -116,7 +120,7 @@
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
-                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: bioprocess_components_collection.products.size | plus: vent_filters_collection.products.size %}
+                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: ezbio_ts_bottles_collection.products.size | plus: pfa_bottles_collection.products.size | plus: aqg_collection.products.size | plus: cpc_stream_thru_connectors_collection.products.size | plus: ezbio_bottle_assembly_pc_collection.products.size | plus: bioprocess_components_collection.products.size | plus: vent_filters_collection.products.size %}
                                 {{ bioprocess_total }}+
                             </span>
                             <span class="promo-stat-label">Products</span>
@@ -193,9 +197,64 @@
                 <div class="promo-category-card" onclick="window.location.href='{{ ezbio_bottles_collection.url }}'">
                     <div class="promo-flag-corner">🇺🇸</div>
                     <div class="promo-category-icon">🧪</div>
-                    <h4 class="promo-category-name">EZBio Bottles</h4>
+                    <h4 class="promo-category-name">EZBio Bottles PC</h4>
                     <div class="promo-category-discount">30% OFF</div>
                     <div class="promo-category-count">{{ ezbio_bottles_collection.products.size }} Products</div>
+                    <button class="promo-category-btn">VIEW DEALS</button>
+                </div>
+                {% endif %}
+
+                {% if ezbio_ts_bottles_collection.products.size > 0 %}
+                <div class="promo-category-card" onclick="window.location.href='{{ ezbio_ts_bottles_collection.url }}'">
+                    <div class="promo-flag-corner">🇺🇸</div>
+                    <div class="promo-category-icon">🧪</div>
+                    <h4 class="promo-category-name">EZBio TS Bottles</h4>
+                    <div class="promo-category-discount">25% OFF</div>
+                    <div class="promo-category-count">{{ ezbio_ts_bottles_collection.products.size }} Products</div>
+                    <button class="promo-category-btn">VIEW DEALS</button>
+                </div>
+                {% endif %}
+
+                {% if pfa_bottles_collection.products.size > 0 %}
+                <div class="promo-category-card" onclick="window.location.href='{{ pfa_bottles_collection.url }}'">
+                    <div class="promo-flag-corner">🇺🇸</div>
+                    <div class="promo-category-icon">⚗️</div>
+                    <h4 class="promo-category-name">PFA Bottles</h4>
+                    <div class="promo-category-discount">30% OFF</div>
+                    <div class="promo-category-count">{{ pfa_bottles_collection.products.size }} Products</div>
+                    <button class="promo-category-btn">VIEW DEALS</button>
+                </div>
+                {% endif %}
+
+                {% if aqg_collection.products.size > 0 %}
+                <div class="promo-category-card" onclick="window.location.href='{{ aqg_collection.url }}'">
+                    <div class="promo-flag-corner">🇺🇸</div>
+                    <div class="promo-category-icon">💧</div>
+                    <h4 class="promo-category-name">AQG</h4>
+                    <div class="promo-category-discount">35% OFF</div>
+                    <div class="promo-category-count">{{ aqg_collection.products.size }} Products</div>
+                    <button class="promo-category-btn">VIEW DEALS</button>
+                </div>
+                {% endif %}
+
+                {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
+                <div class="promo-category-card" onclick="window.location.href='{{ cpc_stream_thru_connectors_collection.url }}'">
+                    <div class="promo-flag-corner">🇺🇸</div>
+                    <div class="promo-category-icon">🔗</div>
+                    <h4 class="promo-category-name">CPC Stream Thru Connectors</h4>
+                    <div class="promo-category-discount">30% OFF</div>
+                    <div class="promo-category-count">{{ cpc_stream_thru_connectors_collection.products.size }} Products</div>
+                    <button class="promo-category-btn">VIEW DEALS</button>
+                </div>
+                {% endif %}
+
+                {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
+                <div class="promo-category-card" onclick="window.location.href='{{ ezbio_bottle_assembly_pc_collection.url }}'">
+                    <div class="promo-flag-corner">🇺🇸</div>
+                    <div class="promo-category-icon">🔧</div>
+                    <h4 class="promo-category-name">EZBio Bottle Assembly PC</h4>
+                    <div class="promo-category-discount">25% OFF</div>
+                    <div class="promo-category-count">{{ ezbio_bottle_assembly_pc_collection.products.size }} Products</div>
                     <button class="promo-category-btn">VIEW DEALS</button>
                 </div>
                 {% endif %}
@@ -313,34 +372,7 @@
                         </div>
                     {% endfor %}
 
-                    {% comment %} Fallback: If no specific collection products found, show from main Independence Day sale collection {% endcomment %}
-                    {% if featured_count == 0 %}
-                        {% for product in us_independence_sale_collection.products limit: 6 %}
-                        <div class="promo-product-card">
-                            <div class="promo-product-image">
-                                {% if product.featured_image %}
-                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                {% else %}
-                                    <div class="promo-placeholder-img">🧪</div>
-                                {% endif %}
-                                <div class="promo-sale-badge">🇺🇸 SALE</div>
-                            </div>
-                            <div class="promo-product-content">
-                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
-                                <div class="promo-product-price">
-                                    {% if product.compare_at_price > product.price %}
-                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                    {% else %}
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                    {% endif %}
-                                </div>
-                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    {% endif %}
+                    
                 </div>
             </div>
         </div>
@@ -589,12 +621,12 @@
             margin-bottom: 40px;
             animation: promo-liberty-glow 3s ease-in-out infinite;
             color: #002868;
-            border: 3px solid #FFD700;
+            border: 3px solid #095ea7;
         }
 
         @keyframes promo-liberty-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+            0%, 100% { box-shadow: 0 0 20px rgba(9, 94, 167, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(9, 94, 167, 1); }
         }
 
         .promo-revolutionary-title {
@@ -619,7 +651,7 @@
 
         .promo-word-2 {
             color: #002868;
-            text-shadow: 2px 2px 0 #FFD700;
+            text-shadow: 2px 2px 0 #095ea7;
             animation-delay: 0.5s;
         }
 
@@ -662,7 +694,7 @@
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 900;
             color: #BF0A30;
-            text-shadow: 4px 4px 0 #FFD700;
+            text-shadow: 4px 4px 0 #095ea7;
             line-height: 1;
             animation: promo-mega-pulse 2s ease-in-out infinite;
         }
@@ -704,7 +736,8 @@
 
         .promo-timer-cube {
             background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #FFD700;border-radius: 15px;
+            border: 2px solid #095ea7;
+            border-radius: 15px;
             padding: 20px;
             min-width: 100px;
             text-align: center;
@@ -723,7 +756,7 @@
             font-size: 2.5rem;
             font-weight: 900;
             color: #BF0A30;
-            text-shadow: 2px 2px 0 #FFD700;
+            text-shadow: 2px 2px 0 #095ea7;
         }
 
         .promo-timer-face label {
@@ -776,7 +809,7 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            border: 3px solid #FFD700;
+            border: 3px solid #095ea7;
         }
 
         .promo-world:hover {
@@ -912,7 +945,7 @@
 
         .promo-category-card {
             background: white;
-            border: 2px solid #FFD700;
+            border: 2px solid #095ea7;
             border-radius: 20px;
             padding: 30px;
             text-align: center;
@@ -930,10 +963,11 @@
 
         .promo-flag-corner {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
             animation: promo-flag-wave 2s ease-in-out infinite;
+            z-index: 5;
         }
 
         .promo-category-icon {
@@ -1023,7 +1057,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border: 2px solid #FFD700;
+            border: 2px solid #095ea7;
         }
 
         .promo-product-card:hover {
@@ -1063,7 +1097,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
             color: white;
             padding: 8px 15px;
             border-radius: 20px;
@@ -1140,7 +1174,7 @@
         /* Final CTA Section */
         .promo-freedom-finale {
             padding: 80px 20px;
-            background: linear-gradient(135deg, #002868 0%, #BF0A30 50%, #FFD700 100%);
+            background: linear-gradient(135deg, #002868 0%, #BF0A30 50%, #095ea7 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1215,7 +1249,7 @@
             font-size: 2rem;
             font-weight: 900;
             color: #BF0A30;
-            text-shadow: 2px 2px 0 #FFD700;
+            text-shadow: 2px 2px 0 #095ea7;
         }
 
         .promo-finale-unit label {
