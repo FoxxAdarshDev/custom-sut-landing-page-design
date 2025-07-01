@@ -781,9 +781,6 @@
                         </div>
                         {% endfor %}
                     </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -3685,6 +3682,10 @@
 
         // Enhanced scroll behavior for sticky navigation
         function scrollToCollectionSection(collectionType) {
+            // Clear any existing active states first
+            const allCards = document.querySelectorAll('.promo-sticky-card');
+            allCards.forEach(card => card.classList.remove('active'));
+            
             // Update sticky navigation active state
             updateStickyActiveState(collectionType);
 
@@ -3714,46 +3715,47 @@
             if (laboratoryCollections[collectionType]) {
                 exploreWorld('laboratory');
                 setTimeout(() => {
-                    const sections = document.querySelectorAll('.promo-laboratory-sections .promo-collection-section');
-                    const searchText = laboratoryCollections[collectionType];
-                    
-                    sections.forEach(section => {
-                        const badge = section.querySelector('.promo-category-badge');
-                        if (badge && badge.textContent.toLowerCase().includes(searchText)) {
-                            targetSection = section;
-                        }
-                    });
-
+                    targetSection = findSectionByBadgeText(laboratoryCollections[collectionType], '.promo-laboratory-sections');
                     if (targetSection) {
                         smoothScrollToSection(targetSection);
                     } else {
                         console.log('Laboratory section not found for:', collectionType);
                     }
-                }, 100);
+                }, 150);
             } 
             // Check if it's a bioprocess collection
             else if (bioprocessCollections[collectionType]) {
                 exploreWorld('bioprocess');
                 setTimeout(() => {
-                    const sections = document.querySelectorAll('.promo-bioprocess-sections .promo-collection-section');
-                    const searchText = bioprocessCollections[collectionType];
-                    
-                    sections.forEach(section => {
-                        const badge = section.querySelector('.promo-category-badge');
-                        if (badge && badge.textContent.toLowerCase().includes(searchText)) {
-                            targetSection = section;
-                        }
-                    });
-
+                    targetSection = findSectionByBadgeText(bioprocessCollections[collectionType], '.promo-bioprocess-sections');
                     if (targetSection) {
                         smoothScrollToSection(targetSection);
                     } else {
                         console.log('Bioprocess section not found for:', collectionType);
                     }
-                }, 100);
+                }, 150);
             } else {
                 console.log('Unknown collection type:', collectionType);
             }
+        }
+
+        function findSectionByBadgeText(searchText, containerSelector) {
+            const sections = document.querySelectorAll(`${containerSelector} .promo-collection-section`);
+            
+            for (let section of sections) {
+                const badge = section.querySelector('.promo-category-badge');
+                if (badge) {
+                    const badgeText = badge.textContent.toLowerCase().trim();
+                    const searchTextLower = searchText.toLowerCase().trim();
+                    
+                    // More precise matching
+                    if (badgeText.includes(searchTextLower) || 
+                        searchTextLower.includes(badgeText.replace(/[^\w\s]/g, '').trim())) {
+                        return section;
+                    }
+                }
+            }
+            return null;
         }
 
         function smoothScrollToSection(targetSection) {
@@ -3776,20 +3778,52 @@
         }
 
         function updateStickyActiveState(activeCollection) {
-            const cards = document.querySelectorAll('.promo-sticky-card');
-            cards.forEach(card => {
-                card.classList.remove('active');
+            // Clear all active states first
+            const allCards = document.querySelectorAll('.promo-sticky-card');
+            allCards.forEach(card => card.classList.remove('active'));
+
+            // Auto-switch to appropriate world if needed
+            const isLaboratory = ['ezlabpure-carboy', 'ezclear-carboy', 'ezgrip-carboy', 'ezbio-carboy', 'lab-general'].includes(activeCollection);
+            const currentToggle = document.querySelector('.promo-sticky-toggle.active');
+            const currentWorld = currentToggle ? currentToggle.dataset.world : 'bioprocess';
+
+            if (isLaboratory && currentWorld !== 'laboratory') {
+                switchStickyWorld('laboratory');
+                // Wait for world switch to complete
+                setTimeout(() => {
+                    setActiveCard(activeCollection);
+                }, 100);
+            } else if (!isLaboratory && currentWorld !== 'bioprocess') {
+                switchStickyWorld('bioprocess');
+                // Wait for world switch to complete
+                setTimeout(() => {
+                    setActiveCard(activeCollection);
+                }, 100);
+            } else {
+                setActiveCard(activeCollection);
+            }
+        }
+
+        function setActiveCard(activeCollection) {
+            // Only set active on cards in the currently visible carousel
+            const currentToggle = document.querySelector('.promo-sticky-toggle.active');
+            const currentWorld = currentToggle ? currentToggle.dataset.world : 'bioprocess';
+            const carouselSelector = currentWorld === 'laboratory' ? '#sticky-laboratory-carousel' : '#sticky-bioprocess-carousel';
+            
+            const visibleCards = document.querySelectorAll(`${carouselSelector} .promo-sticky-card`);
+            visibleCards.forEach(card => {
                 if (card.dataset.collection === activeCollection) {
                     card.classList.add('active');
-
-                    // Auto-switch to appropriate world if needed
-                    const isLaboratory = ['ezlabpure-carboy', 'ezclear-carboy', 'ezgrip-carboy', 'ezbio-carboy', 'lab-general'].includes(activeCollection);
-                    const currentWorld = document.querySelector('.promo-sticky-toggle.active').dataset.world;
-
-                    if (isLaboratory && currentWorld !== 'laboratory') {
-                        switchStickyWorld('laboratory');
-                    } else if (!isLaboratory && currentWorld !== 'bioprocess') {
-                        switchStickyWorld('bioprocess');
+                    
+                    // Scroll the card into view within the carousel
+                    const carousel = card.closest('.promo-sticky-carousel');
+                    if (carousel) {
+                        const cardRect = card.getBoundingClientRect();
+                        const carouselRect = carousel.getBoundingClientRect();
+                        
+                        if (cardRect.left < carouselRect.left || cardRect.right > carouselRect.right) {
+                            card.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+                        }
                     }
                 }
             });
@@ -3844,35 +3878,41 @@
                 sectionsToCheck = laboratorySections.querySelectorAll('.promo-collection-section');
             }
 
-            const offset = window.innerHeight / 2; // Use middle of viewport as reference
+            const offset = window.innerHeight / 3; // Use top third of viewport as reference
             let activeSection = null;
+            let closestDistance = Infinity;
 
             sectionsToCheck.forEach(section => {
                 const rect = section.getBoundingClientRect();
-                if (rect.top <= offset && rect.bottom >= offset) {
+                const distance = Math.abs(rect.top - offset);
+                
+                // Find the section closest to our reference point
+                if (rect.top <= offset + 100 && rect.bottom >= offset - 100 && distance < closestDistance) {
                     activeSection = section;
+                    closestDistance = distance;
                 }
             });
 
             if (activeSection) {
                 const badge = activeSection.querySelector('.promo-category-badge');
                 if (badge) {
-                    const badgeText = badge.textContent.toLowerCase();
+                    const badgeText = badge.textContent.toLowerCase().trim();
                     let collectionType = '';
 
-                    if (badgeText.includes('pc rectangular carboy')) collectionType = 'pc-carboy';
-                    else if (badgeText.includes('pc tr carboy')) collectionType = 'pc-tr-carboy';
-                    else if (badgeText.includes('ezbio bottles pc')) collectionType = 'ezbio-bottles';
-                    else if (badgeText.includes('ezbio ts bottles')) collectionType = 'ezbio-ts-bottles';
-                    else if (badgeText.includes('pfa bottles')) collectionType = 'pfa-bottles';
-                    else if (badgeText.includes('aqg connectors')) collectionType = 'aqg';
-                    else if (badgeText.includes('cpc stream thru')) collectionType = 'cpc-connectors';
-                    else if (badgeText.includes('ezbio assemblies')) collectionType = 'ezbio-assembly';
-                    else if (badgeText.includes('ezlabpure carboy')) collectionType = 'ezlabpure-carboy';
-                    else if (badgeText.includes('ezclear carboy')) collectionType = 'ezclear-carboy';
-                    else if (badgeText.includes('ezgrip carboy')) collectionType = 'ezgrip-carboy';
-                    else if (badgeText.includes('ezbio carboy')) collectionType = 'ezbio-carboy';
-                    else if (badgeText.includes('lab essentials')) collectionType = 'lab-general';
+                    // More precise matching with exact text patterns
+                    if (badgeText.includes('💎 ezbio ts bottles')) collectionType = 'ezbio-ts-bottles';
+                    else if (badgeText.includes('🧪 ezbio bottles pc')) collectionType = 'ezbio-bottles';
+                    else if (badgeText.includes('⚗️ pc rectangular carboy')) collectionType = 'pc-carboy';
+                    else if (badgeText.includes('🔄 pc tr carboy')) collectionType = 'pc-tr-carboy';
+                    else if (badgeText.includes('🏛️ pfa bottles')) collectionType = 'pfa-bottles';
+                    else if (badgeText.includes('💧 aqg connectors')) collectionType = 'aqg';
+                    else if (badgeText.includes('🔗 cpc stream thru')) collectionType = 'cpc-connectors';
+                    else if (badgeText.includes('🔧 ezbio assemblies')) collectionType = 'ezbio-assembly';
+                    else if (badgeText.includes('🧪 ezlabpure carboy')) collectionType = 'ezlabpure-carboy';
+                    else if (badgeText.includes('🧪 ezclear carboy')) collectionType = 'ezclear-carboy';
+                    else if (badgeText.includes('🫗 ezgrip carboy')) collectionType = 'ezgrip-carboy';
+                    else if (badgeText.includes('⚗️ ezbio carboy')) collectionType = 'ezbio-carboy';
+                    else if (badgeText.includes('🔬 lab essentials')) collectionType = 'lab-general';
 
                     if (collectionType) {
                         updateStickyActiveState(collectionType);
