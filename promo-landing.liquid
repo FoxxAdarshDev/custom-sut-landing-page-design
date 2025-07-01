@@ -1562,9 +1562,9 @@
         /* Enhanced Sticky Navigation Styles */
         .promo-sticky-nav {
             position: fixed;
-            top: 20px;
+            top: -200px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100%);
+            transform: translateX(-50%);
             max-width: 1000px;
             width: 85%;
             background: rgba(255, 255, 255, 0.98);
@@ -1572,14 +1572,14 @@
             border: 3px solid #095ea7;
             border-radius: 15px;
             z-index: 999;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            transition: top 0.4s ease, opacity 0.3s ease;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
             opacity: 0;
             visibility: hidden;
         }
 
         .promo-sticky-nav.visible {
-            transform: translateX(-50%) translateY(10px);
+            top: 20px;
             opacity: 1;
             visibility: visible;
         }
@@ -2811,7 +2811,7 @@
             }
 
             .promo-sticky-nav.visible {
-                transform: translateX(-50%) translateY(5px);
+                top: 10px;
             }
 
             .promo-sticky-header {
@@ -3222,13 +3222,23 @@
         function handleStickyNavigation() {
             const stickyNav = document.getElementById('sticky-nav');
             const dualWorldsSection = document.querySelector('.promo-dual-worlds');
+            const finalSection = document.querySelector('.promo-freedom-finale');
             
             if (!stickyNav || !dualWorldsSection) return;
             
             const dualWorldsRect = dualWorldsSection.getBoundingClientRect();
+            const finalSectionRect = finalSection ? finalSection.getBoundingClientRect() : null;
+            const scrollY = window.scrollY;
             
-            // Show sticky nav only when user has scrolled past the dual worlds section
-            if (dualWorldsRect.bottom <= 20) {
+            // Only show sticky nav when:
+            // 1. User has scrolled past the dual worlds section
+            // 2. User hasn't reached the final CTA section
+            // 3. User has scrolled more than 100px from top
+            const showSticky = dualWorldsRect.bottom <= 20 && 
+                             scrollY > 100 && 
+                             (!finalSectionRect || finalSectionRect.top > 100);
+            
+            if (showSticky) {
                 stickyNav.classList.add('visible');
                 // Update active state based on visible section
                 updateActiveBasedOnScroll();
