@@ -41,7 +41,7 @@
                 <div class="promo-stripe promo-red"></div>
             </div>
         </div>
-    </nav></div>
+    </nav>
 
     <!-- Revolutionary Hero Section -->
     <section class="promo-hero-revolution">
@@ -116,7 +116,20 @@
             <!-- Bioprocess World -->
             <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
                 <div class="promo-world-flag">
-                    <img src="https://flagcdn.com/w80/us.png" alt="US Flag" class="promo-flag-image" />
+                    <div class="promo-mini-flag">
+                        <div class="promo-flag-stars-mini">
+                            <div class="promo-mini-stars">★★★★★</div>
+                        </div>
+                        <div class="promo-flag-stripes-mini">
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
@@ -144,7 +157,20 @@
             <!-- Laboratory World -->
             <div class="promo-world promo-laboratory-world" data-world="laboratory">
                 <div class="promo-world-flag">
-                    <img src="https://flagcdn.com/w80/us.png" alt="US Flag" class="promo-flag-image" />
+                    <div class="promo-mini-flag">
+                        <div class="promo-flag-stars-mini">
+                            <div class="promo-mini-stars">★★★★★</div>
+                        </div>
+                        <div class="promo-flag-stripes-mini">
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                            <div class="promo-mini-stripe promo-mini-white"></div>
+                            <div class="promo-mini-stripe promo-mini-red"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🔬</div>
@@ -167,6 +193,18 @@
             </div>
         </div>
     </section>
+
+    <!-- Sticky Category Navigation -->
+    <div class="promo-sticky-category-nav" id="sticky-category-nav">
+        <div class="promo-sticky-nav-container">
+            <button class="promo-sticky-btn promo-active" data-world="bioprocess">
+                🧬 BIOPROCESS
+            </button>
+            <button class="promo-sticky-btn" data-world="laboratory">
+                🔬 LABORATORY
+            </button>
+        </div>
+    </div>
 
     <!-- Bioprocess Categories Sections -->
     <div class="promo-bioprocess-sections" id="bioprocess-sections">
@@ -806,7 +844,7 @@
     </div>
 
     <!-- Laboratory Section -->
-    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
+    <div class="promo-laboratory-sections" id="laboratory-sections">
         {% if laboratory_collection.products.size > 0 %}
         <section class="promo-collection-section">
             <div class="promo-flag-bg">
@@ -1318,18 +1356,24 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
+        .promo-mini-flag {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+        }
+
         .promo-flag-stars-mini {
             background: #002868;
             width: 40%;
-            height: 60%;
+            height: 100%;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .promo-flag-stars-mini::before {
-            content: "★★★★★";
+        .promo-mini-stars {
             color: white;
             font-size: 6px;
             letter-spacing: 1px;
@@ -1342,9 +1386,6 @@
         }
 
         .promo-flag-stripes-mini {
-            position: absolute;
-            top: 0;
-            right: 0;
             width: 60%;
             height: 100%;
             display: flex;
@@ -1361,6 +1402,58 @@
 
         .promo-mini-stripe.promo-mini-white {
             background: white;
+        }
+
+        /* Sticky Category Navigation */
+        .promo-sticky-category-nav {
+            position: sticky;
+            top: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #095ea7;
+            z-index: 100;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+
+        .promo-sticky-category-nav.promo-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .promo-sticky-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .promo-sticky-btn {
+            background: linear-gradient(45deg, #002868, #095ea7);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .promo-sticky-btn:hover {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+        }
+
+        .promo-sticky-btn.promo-active {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
         }
 
         @keyframes promo-flag-wave {
@@ -1914,6 +2007,24 @@
                 padding-top: 40px;
             }
 
+            .promo-sticky-category-nav {
+                top: 40px;
+                padding: 10px 0;
+            }
+
+            .promo-sticky-nav-container {
+                gap: 10px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .promo-sticky-btn {
+                padding: 10px 25px;
+                font-size: 0.8rem;
+                width: 100%;
+                max-width: 250px;
+            }
+
             .promo-american-eagle {
                 font-size: 2rem;
             }
@@ -2057,15 +2168,53 @@
         function exploreWorld(worldType) {
             const bioprocessSections = document.getElementById('bioprocess-sections');
             const laboratorySections = document.getElementById('laboratory-sections');
+            const stickyNav = document.getElementById('sticky-category-nav');
 
             if (worldType === 'bioprocess') {
                 bioprocessSections.style.display = 'block';
                 laboratorySections.style.display = 'none';
-                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
+                updateStickyNavButtons('bioprocess');
             } else {
                 bioprocessSections.style.display = 'none';
                 laboratorySections.style.display = 'block';
-                laboratorySections.scrollIntoView({ behavior: 'smooth' });
+                updateStickyNavButtons('laboratory');
+            }
+
+            // Smooth scroll to sections without going to top
+            const targetSection = worldType === 'bioprocess' ? bioprocessSections : laboratorySections;
+            const categorySection = document.querySelector('.promo-category-universe');
+            
+            categorySection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'end'
+            });
+        }
+
+        // Update sticky navigation buttons
+        function updateStickyNavButtons(activeWorld) {
+            const buttons = document.querySelectorAll('.promo-sticky-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('promo-active');
+                if (btn.dataset.world === activeWorld) {
+                    btn.classList.add('promo-active');
+                }
+            });
+        }
+
+        // Sticky navigation functionality
+        function handleStickyNavigation() {
+            const stickyNav = document.getElementById('sticky-category-nav');
+            const categorySection = document.querySelector('.promo-category-universe');
+            
+            if (!stickyNav || !categorySection) return;
+
+            const categoryRect = categorySection.getBoundingClientRect();
+            const shouldShow = categoryRect.bottom <= 60; // Show when category section is past navigation
+
+            if (shouldShow) {
+                stickyNav.classList.add('promo-visible');
+            } else {
+                stickyNav.classList.remove('promo-visible');
             }
         }
 
@@ -2113,11 +2262,28 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Show bioprocess sections by default
+            // Show both sections initially
             const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+            
             if (bioprocessSections) {
                 bioprocessSections.style.display = 'block';
             }
+            if (laboratorySections) {
+                laboratorySections.style.display = 'block';
+            }
+
+            // Add sticky navigation scroll listener
+            window.addEventListener('scroll', handleStickyNavigation);
+
+            // Add sticky navigation button event listeners
+            const stickyButtons = document.querySelectorAll('.promo-sticky-btn');
+            stickyButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const worldType = this.dataset.world;
+                    exploreWorld(worldType);
+                });
+            });
 
             // Auto-scroll carousels every 5 seconds
             setInterval(autoScrollCarousels, 5000);
