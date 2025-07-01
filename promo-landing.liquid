@@ -86,18 +86,21 @@
         <div class="promo-sticky-nav-content">
             <div class="promo-sticky-header">
                 <div class="promo-sticky-title">Independence Day Collections</div>
-                <div class="promo-sticky-toggles">
-                    <button class="promo-sticky-toggle active" data-world="bioprocess" onclick="switchStickyWorld('bioprocess')">
-                        🧬 Bioprocess
-                    </button>
-                    <button class="promo-sticky-toggle" data-world="laboratory" onclick="switchStickyWorld('laboratory')">
-                        🔬 Laboratory
-                    </button>
-                </div>
+                <div class="promo-sticky-main-content">
+                    <div class="promo-sticky-toggles">
+                        <button class="promo-sticky-toggle active" data-world="bioprocess" onclick="switchStickyWorld('bioprocess')">
+                            🧬 Bioprocess
+                        </button>
+                        <button class="promo-sticky-toggle" data-world="laboratory" onclick="switchStickyWorld('laboratory')">
+                            🔬 Laboratory
+                        </button>
+                    </div>
+            </div>
             </div>
             
             <!-- Bioprocess Carousel -->
             <div class="promo-sticky-carousel" id="sticky-bioprocess-carousel">
+                <div class="promo-mobile-card-container"
                 {% if pc_carboy_collection.image %}
                 <div class="promo-sticky-card" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
                     <div class="promo-sticky-card-flag">🇺🇸</div>
@@ -209,10 +212,12 @@
                     </div>
                 </div>
                 {% endif %}
+                </div>
             </div>
             
             <!-- Laboratory Carousel -->
             <div class="promo-sticky-carousel" id="sticky-laboratory-carousel" style="display: none;">
+                <div class="promo-mobile-card-container"
                 {% if laboratory_collection.image %}
                 <div class="promo-sticky-card" data-collection="laboratory" onclick="scrollToCollectionSection('laboratory')">
                     <div class="promo-sticky-card-flag">🇺🇸</div>
@@ -272,6 +277,9 @@
                     </div>
                 </div>
                 {% endif %}
+                </div>
+            </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1596,11 +1604,17 @@
         .promo-sticky-header {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid rgba(9, 94, 167, 0.1);
             gap: 25px;
+        }
+
+        .promo-sticky-main-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .promo-sticky-title {
@@ -1662,10 +1676,11 @@
             overflow-x: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            padding: 10px 20px;
+            padding: 0;
             justify-content: flex-start;
             align-items: center;
             scroll-behavior: smooth;
+            flex: 1;
         }
 
         .promo-sticky-carousel::-webkit-scrollbar {
@@ -1684,6 +1699,13 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0, 40, 104, 0.15);
+        }
+
+        .promo-mobile-card-container {
+            position: relative;
+            width: 120px;
+            height: 140px;
+            overflow: hidden;
         }
 
         .promo-sticky-card:hover {
@@ -2854,64 +2876,84 @@
                 bottom: 0;
             }
 
+            .promo-sticky-nav-content {
+                padding: 10px 15px;
+            }
+
             .promo-sticky-header {
                 flex-direction: column;
-                gap: 15px;
-                margin-bottom: 15px;
+                gap: 10px;
+                margin-bottom: 10px;
                 justify-content: center;
             }
 
+            .promo-sticky-main-content {
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+            }
+
             .promo-sticky-title {
-                font-size: 1rem;
+                font-size: 0.9rem;
                 text-align: center;
             }
 
             .promo-sticky-toggles {
                 justify-content: center;
-                gap: 8px;
+                gap: 6px;
+                flex: none;
             }
 
             .promo-sticky-toggle {
-                padding: 6px 12px;
-                font-size: 0.8rem;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+
+            .promo-sticky-carousel {
+                gap: 0;
+                justify-content: center;
+                padding: 0;
+                width: 100px;
+                position: relative;
             }
 
             .promo-sticky-card {
                 width: 100px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                transform: translateX(20px);
+                transition: all 0.5s ease;
+            }
+
+            .promo-sticky-card.mobile-active {
+                opacity: 1;
+                transform: translateX(0);
             }
 
             .promo-sticky-card-image {
-                height: 50px;
-                padding: 6px;
+                height: 45px;
+                padding: 4px;
             }
 
             .promo-sticky-card-content {
-                padding: 6px;
+                padding: 4px;
             }
 
             .promo-sticky-card-title {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
+                margin-bottom: 2px;
             }
 
             .promo-sticky-card-count {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
+                margin-bottom: 3px;
             }
 
             .promo-sticky-card-discount {
-                font-size: 0.55rem;
-                padding: 2px 4px;
-            }
-
-            .promo-sticky-carousel {
-                gap: 10px;
-                justify-content: flex-start;
-                padding: 5px 10px;
-                scroll-snap-type: x mandatory;
-            }
-
-            .promo-sticky-card {
-                scroll-snap-align: center;
-                flex-shrink: 0;
+                font-size: 0.5rem;
+                padding: 1px 3px;
             }
 
             .promo-american-eagle {
@@ -3153,11 +3195,47 @@
             });
         }
 
+        // Mobile carousel auto-looping
+        let mobileCarouselInterval;
+        let currentMobileIndex = 0;
+
+        function initMobileCarousel() {
+            if (window.innerWidth <= 768) {
+                const activeCarousel = document.querySelector('.promo-sticky-carousel:not([style*="display: none"])');
+                if (activeCarousel) {
+                    const cards = activeCarousel.querySelectorAll('.promo-sticky-card');
+                    if (cards.length > 0) {
+                        cards[0].classList.add('mobile-active');
+                        startMobileCarouselLoop(cards);
+                    }
+                }
+            }
+        }
+
+        function startMobileCarouselLoop(cards) {
+            if (mobileCarouselInterval) clearInterval(mobileCarouselInterval);
+            
+            mobileCarouselInterval = setInterval(() => {
+                cards[currentMobileIndex].classList.remove('mobile-active');
+                currentMobileIndex = (currentMobileIndex + 1) % cards.length;
+                cards[currentMobileIndex].classList.add('mobile-active');
+            }, 2500);
+        }
+
         // Switch between bioprocess and laboratory sticky carousels
         function switchStickyWorld(worldType) {
             const bioprocessCarousel = document.getElementById('sticky-bioprocess-carousel');
             const laboratoryCarousel = document.getElementById('sticky-laboratory-carousel');
             const toggles = document.querySelectorAll('.promo-sticky-toggle');
+            
+            // Clear mobile carousel
+            if (mobileCarouselInterval) clearInterval(mobileCarouselInterval);
+            currentMobileIndex = 0;
+            
+            // Remove mobile-active from all cards
+            document.querySelectorAll('.promo-sticky-card').forEach(card => {
+                card.classList.remove('mobile-active');
+            });
             
             // Update toggle states
             toggles.forEach(toggle => {
@@ -3175,6 +3253,9 @@
                 bioprocessCarousel.style.display = 'none';
                 laboratoryCarousel.style.display = 'flex';
             }
+            
+            // Reinitialize mobile carousel
+            setTimeout(initMobileCarousel, 100);
             
             // Also switch the main world view
             exploreWorld(worldType);
@@ -3346,9 +3427,17 @@
             initializeCarousel('bioprocess-carousel');
             initializeCarousel('laboratory-carousel');
 
+            // Initialize mobile carousel
+            initMobileCarousel();
+
             // Initialize sticky navigation
             window.addEventListener('scroll', handleStickyNavigation);
             handleStickyNavigation(); // Initial check
+
+            // Reinitialize mobile carousel on window resize
+            window.addEventListener('resize', () => {
+                setTimeout(initMobileCarousel, 100);
+            });
         });
     </script>
 </body>
