@@ -2219,7 +2219,9 @@
         }
 
         .promo-section-info {
-            flex: 0 0 400px;
+            flex: 1;
+            min-width: 0;
+            max-width: 45%;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
             padding: 35px 30px;
@@ -2346,6 +2348,8 @@
         /* Products Grid Layout */
         .promo-products-grid {
             flex: 1;
+            min-width: 0;
+            max-width: 55%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
@@ -2934,6 +2938,7 @@
 
             .promo-section-info {
                 flex: none;
+                max-width: 100%;
                 padding: 25px 20px;
             }
 
@@ -2946,6 +2951,7 @@
             }
 
             .promo-products-grid {
+                max-width: 100%;
                 grid-template-columns: 1fr;
                 gap: 20px;
                 padding: 20px;
