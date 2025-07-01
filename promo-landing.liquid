@@ -1957,7 +1957,15 @@
             color: #1a1a2e;
             overflow-x: hidden;
             width: 100%;
+            max-width: 100%;
             min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Ensure all child elements respect container boundaries */
+        .promo-independence-wrapper * {
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
 
@@ -1972,16 +1980,18 @@
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
             padding-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         /* Enhanced Sticky Navigation Styles */
         .promo-sticky-nav {
             position: fixed;
             bottom: -150px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            max-width: 1000px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: min(1000px, 90vw);
             width: 100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
@@ -1992,6 +2002,7 @@
             box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
+            box-sizing: border-box;
         }
 
         .promo-sticky-nav.visible {
@@ -2555,6 +2566,9 @@
             margin-bottom: 40px;
             overflow: hidden;
             background: rgba(255,255,255,0.95);
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .promo-collection-section::before {
@@ -2634,9 +2648,12 @@
         .promo-section-container {
             position: relative;
             z-index: 2;
-            max-width: 1200px;
+            max-width: min(1200px, 100%);
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .promo-section-content {
@@ -2792,6 +2809,8 @@
             max-height: 800px;
             overflow-y: auto;
             overflow-x: hidden;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         /* Ensure minimum width for cards even with many products */
@@ -3294,8 +3313,10 @@
 
             .promo-sticky-nav {
                 bottom: -120px;
+                left: 0;
+                transform: none;
                 width: 100%;
-                max-width: none;
+                max-width: 100%;
                 border-radius: 0;
             }
 
