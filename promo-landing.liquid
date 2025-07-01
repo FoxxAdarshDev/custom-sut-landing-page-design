@@ -2317,6 +2317,7 @@
             max-width: 55%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-auto-rows: min-content;
             gap: 20px;
             padding: 25px;
             background: rgba(255, 255, 255, 0.95);
@@ -2325,9 +2326,10 @@
             backdrop-filter: blur(15px);
             box-shadow: 0 10px 30px rgba(9, 94, 167, 0.1);
             position: relative;
-            overflow: hidden;
+            height: fit-content;
             max-height: 800px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         /* Ensure minimum width for cards even with many products */
