@@ -512,7 +512,7 @@
     {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
     {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
     {{ 'custom.css' | asset_url | stylesheet_tag }}
-    
+
     <!-- Promo Layout Containment Styles -->
     <style>
       .promo-layout-wrapper {
@@ -520,11 +520,11 @@
         max-width: 100% !important;
         box-sizing: border-box !important;
       }
-      
+
       .promo-layout-wrapper * {
         box-sizing: border-box !important;
       }
-      
+
       .promo-independence-wrapper,
       .promo-independence-wrapper > *,
       .promo-sections-container,
@@ -533,7 +533,7 @@
         overflow-x: hidden !important;
         box-sizing: border-box !important;
       }
-      
+
       /* Force all promo sections to stay within bounds */
       .promo-hero-revolution,
       .promo-category-universe,
@@ -546,7 +546,7 @@
         box-sizing: border-box !important;
         overflow-x: hidden !important;
       }
-      
+
       /* Fix sticky navigation positioning */
       .promo-sticky-nav {
         position: fixed !important;
@@ -559,11 +559,11 @@
         z-index: 999 !important;
         box-sizing: border-box !important;
       }
-      
+
       .promo-sticky-nav.visible {
         bottom: 0 !important;
       }
-      
+
       /* Ensure section containers respect boundaries */
       .promo-section-container {
         max-width: 100% !important;
@@ -573,14 +573,14 @@
         box-sizing: border-box !important;
         overflow-x: hidden !important;
       }
-      
+
       /* Fix products grid overflow */
       .promo-products-grid {
         max-width: 100% !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
       }
-      
+
       /* Mobile responsive fixes */
       @media (max-width: 768px) {
         .promo-sticky-nav {
@@ -591,18 +591,18 @@
           max-width: 100% !important;
           border-radius: 0 !important;
         }
-        
+
         .promo-section-container {
           padding-left: 10px !important;
           padding-right: 10px !important;
         }
-        
+
         .promo-collection-section {
           margin-left: 0 !important;
           margin-right: 0 !important;
         }
       }
-      
+
       /* Additional containment for large screens */
       @media (min-width: 1200px) {
         .promo-section-container {
@@ -1492,42 +1492,43 @@ document.addEventListener('DOMContentLoaded', init);
     document.addEventListener('DOMContentLoaded', function() {
       // Find the main content container
       const mainContentContainer = document.querySelector('.grid__item.large--four-fifths');
-      
+
       // Find the promotional wrapper section
       const promoWrapper = document.querySelector('#christmas-offer-landing-page-home');
-      
+
       if (mainContentContainer && promoWrapper) {
         // Check if promo wrapper is not already inside the main content container
         if (!mainContentContainer.contains(promoWrapper)) {
           // Move the promotional wrapper into the main content container
           mainContentContainer.appendChild(promoWrapper);
-          
+
           // Add containment styles to ensure proper layout
           promoWrapper.style.maxWidth = '100%';
           promoWrapper.style.overflow = 'hidden';
           promoWrapper.style.boxSizing = 'border-box';
-          
+
           console.log('Promotional sections moved to main content area');
         }
       }
-      
+
       // Also handle any other promotional sections that might be outside the container
-      const allPromoSections = document.querySelectorAll('.promo-independence-wrapper, .promo-bioprocess-sections, .promo-laboratory-sections');
-      
+      // Use a more flexible approach to catch all promo sections
+      const allPromoSections = document.querySelectorAll('[class*="promo-"], .promo-independence-wrapper, .promo-bioprocess-sections, .promo-laboratory-sections, .promo-freedom-finale, .promo-collection-section');
+
       allPromoSections.forEach(function(section) {
         if (mainContentContainer && !mainContentContainer.contains(section) && section.id !== 'christmas-offer-landing-page-home') {
           // Move section into the main content container
           mainContentContainer.appendChild(section);
-          
+
           // Apply containment styles
           section.style.maxWidth = '100%';
           section.style.overflow = 'hidden';
           section.style.boxSizing = 'border-box';
-          
+
           console.log('Promotional section moved to main content area:', section.className);
         }
       });
-      
+
       // Ensure sticky navigation works properly after content relocation
       setTimeout(function() {
         if (typeof handleStickyNavigation === 'function') {
@@ -1563,7 +1564,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 <!-- /* christmas auto gift applied SCRIPT *end on 31st December */ -->
 
-{% comment %} <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script> {% endcomment %}
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script> </% endcomment %}
 <!-- /* christmas auto gift applied SCRIPT *end on 31st December */ -->
 
 <!-- heart shape canvas-->
