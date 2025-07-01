@@ -1052,23 +1052,82 @@
             }
         }
 
-        /* Creative Arrow Connectors */
+        /* Creative Curved Arrow Connectors */
+        .promo-section-content {
+            position: relative;
+        }
+
+        .promo-section-content::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 48%;
+            width: 80px;
+            height: 80px;
+            background: transparent;
+            border: 3px solid #FF6B35;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 50px 0 0;
+            transform: rotate(45deg);
+            z-index: 10;
+            pointer-events: none;
+            animation: promo-curved-arrow-glow 3s ease-in-out infinite;
+        }
+
+        .promo-section-content::after {
+            content: '➤';
+            position: absolute;
+            top: 28%;
+            right: 42%;
+            font-size: 1.8rem;
+            color: #FF6B35;
+            z-index: 11;
+            pointer-events: none;
+            animation: promo-arrow-bounce 2s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes promo-curved-arrow-glow {
+            0%, 100% { 
+                border-color: #FF6B35;
+                box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+            }
+            50% { 
+                border-color: #BF0A30;
+                box-shadow: 0 0 20px rgba(191, 10, 48, 0.7);
+            }
+        }
+
+        @keyframes promo-arrow-bounce {
+            0%, 100% { 
+                transform: translateX(0) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateX(8px) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Additional connecting lines for better visual flow */
         .promo-products-grid::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
+            left: -30px;
+            width: 30px;
             height: 100%;
             background: linear-gradient(180deg, 
                 transparent 0%, 
-                rgba(9, 94, 167, 0.3) 10%, 
+                rgba(255, 107, 53, 0.3) 20%, 
                 rgba(191, 10, 48, 0.5) 50%, 
-                rgba(9, 94, 167, 0.3) 90%, 
+                rgba(255, 107, 53, 0.3) 80%, 
                 transparent 100%);
             z-index: 1;
             pointer-events: none;
+            border-radius: 15px;
         }
 
         .promo-product-card {
@@ -1081,12 +1140,12 @@
             left: -25px;
             top: 50%;
             transform: translateY(-50%);
-            color: #BF0A30;
+            color: #FF6B35;
             font-size: 1.5rem;
             font-weight: bold;
             z-index: 2;
             animation: promo-arrow-pulse 2s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(191, 10, 48, 0.5);
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
@@ -1096,12 +1155,12 @@
             right: -25px;
             top: 50%;
             transform: translateY(-50%);
-            color: #095ea7;
+            color: #BF0A30;
             font-size: 1.5rem;
             font-weight: bold;
             z-index: 2;
             animation: promo-arrow-pulse 2s ease-in-out infinite 0.5s;
-            text-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
+            text-shadow: 0 0 10px rgba(191, 10, 48, 0.5);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
@@ -1118,6 +1177,8 @@
 
         /* Hide arrows on mobile */
         @media (max-width: 768px) {
+            .promo-section-content::before,
+            .promo-section-content::after,
             .promo-products-grid::before,
             .promo-product-card::after,
             .promo-product-card::before {
