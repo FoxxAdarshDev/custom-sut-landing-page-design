@@ -1084,101 +1084,170 @@
             position: relative;
         }
 
-        /* Enhanced Arrow SVG Icons */
-        .promo-product-card:nth-child(even)::after {
-            content: '';
-            position: absolute;
-            left: -35px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 30px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BF0A30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'%3E%3C/line%3E%3Cpolyline points='7,7 17,7 17,17'%3E%3C/polyline%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            z-index: 2;
-            animation: promo-arrow-pulse 2s ease-in-out infinite;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        /* Interlinking Arrow SVG System */
+        .promo-products-grid {
+            position: relative;
         }
 
-        .promo-product-card:nth-child(odd)::before {
+        /* Create curved connecting arrows between cards */
+        .promo-product-card:nth-child(1)::after {
             content: '';
             position: absolute;
-            right: -35px;
+            right: -50px;
             top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 30px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='17' y1='7' x2='7' y2='17'%3E%3C/line%3E%3Cpolyline points='17,7 7,7 7,17'%3E%3C/polyline%3E%3C/svg%3E");
+            width: 100px;
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 10 90 30' stroke='%23BF0A30' stroke-width='3' fill='none' marker-end='url(%23arrow1)'/%3E%3Cdefs%3E%3Cmarker id='arrow1' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
-            z-index: 2;
-            animation: promo-arrow-pulse 2s ease-in-out infinite 0.5s;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite;
+            pointer-events: none;
         }
 
-        /* Additional arrows for mobile - simplified */
+        .promo-product-card:nth-child(2)::after {
+            content: '';
+            position: absolute;
+            left: -50px;
+            bottom: -40px;
+            width: 100px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23095ea7' stroke-width='3' fill='none' marker-end='url(%23arrow2)'/%3E%3Cdefs%3E%3Cmarker id='arrow2' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23095ea7'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite 1s;
+            pointer-events: none;
+        }
+
+        .promo-product-card:nth-child(3)::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            width: 100px;
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 50 90 30' stroke='%23BF0A30' stroke-width='3' fill='none' marker-end='url(%23arrow3)'/%3E%3Cdefs%3E%3Cmarker id='arrow3' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite 2s;
+            pointer-events: none;
+        }
+
+        .promo-product-card:nth-child(4)::after {
+            content: '';
+            position: absolute;
+            left: -50px;
+            bottom: -40px;
+            width: 100px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23095ea7' stroke-width='3' fill='none' marker-end='url(%23arrow4)'/%3E%3Cdefs%3E%3Cmarker id='arrow4' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23095ea7'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite 0.5s;
+            pointer-events: none;
+        }
+
+        /* Continue pattern for more cards */
+        .promo-product-card:nth-child(5)::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            width: 100px;
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 10 90 30' stroke='%23FFD700' stroke-width='3' fill='none' marker-end='url(%23arrow5)'/%3E%3Cdefs%3E%3Cmarker id='arrow5' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23FFD700'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite 1.5s;
+            pointer-events: none;
+        }
+
+        .promo-product-card:nth-child(6)::after {
+            content: '';
+            position: absolute;
+            left: -50px;
+            bottom: -40px;
+            width: 100px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23FFD700' stroke-width='3' fill='none' marker-end='url(%23arrow6)'/%3E%3Cdefs%3E%3Cmarker id='arrow6' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23FFD700'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: promo-arrow-pulse 3s ease-in-out infinite 2.5s;
+            pointer-events: none;
+        }
+
+        /* Mobile responsive arrows */
         @media (max-width: 768px) {
             .promo-products-grid::before {
                 display: none;
             }
 
-            .promo-product-card:nth-child(even)::after {
-                left: -20px;
-                width: 20px;
-                height: 20px;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BF0A30' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9,18 15,12 9,6'%3E%3C/polyline%3E%3C/svg%3E");
+            /* Mobile: Show vertical flow arrows between stacked cards */
+            .promo-product-card::after {
+                display: none !important;
             }
 
-            .promo-product-card:nth-child(odd)::before {
-                right: -20px;
-                width: 20px;
-                height: 20px;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15,18 9,12 15,6'%3E%3C/polyline%3E%3C/svg%3E");
+            .promo-product-card:not(:last-child)::before {
+                content: '';
+                position: absolute;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 30px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 30' fill='none'%3E%3Cpath d='M20 5 L20 20' stroke='%23BF0A30' stroke-width='3' marker-end='url(%23arrowDown)'/%3E%3Cdefs%3E%3Cmarker id='arrowDown' markerWidth='8' markerHeight='6' refX='8' refY='3' orient='auto'%3E%3Cpolygon points='0 0, 8 3, 0 6' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
+                background-size: contain;
+                background-repeat: no-repeat;
+                z-index: 10;
+                animation: promo-arrow-pulse 2s ease-in-out infinite;
+                pointer-events: none;
             }
         }
 
         @keyframes promo-arrow-pulse {
             0%, 100% { 
-                opacity: 0.7; 
-                transform: translateY(-50%) scale(1); 
+                opacity: 0.6; 
+                transform: scale(1); 
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             }
             50% { 
                 opacity: 1; 
-                transform: translateY(-50%) scale(1.1); 
+                transform: scale(1.05); 
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
             }
         }
 
-        /* Connecting lines between products */
-        .promo-product-card:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 20px;
-            background: linear-gradient(to bottom, rgba(9, 94, 167, 0.6), transparent);
+        /* Enhanced grid positioning for arrow connections */
+        .promo-products-grid {
+            position: relative;
             z-index: 1;
         }
 
-        /* Enhanced pulse animation for better visibility */
+        .promo-product-card {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced pulse animation for interlinking arrows */
         @keyframes promo-enhanced-pulse {
             0% { 
-                opacity: 0.5; 
-                transform: translateY(-50%) scale(0.9);
+                opacity: 0.4; 
+                transform: scale(0.95);
                 filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
             }
             50% { 
                 opacity: 1; 
-                transform: translateY(-50%) scale(1.2);
+                transform: scale(1.1);
                 filter: drop-shadow(0 0 15px rgba(191, 10, 48, 0.8));
             }
             100% { 
-                opacity: 0.5; 
-                transform: translateY(-50%) scale(0.9);
+                opacity: 0.4; 
+                transform: scale(0.95);
                 filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
             }
         }
@@ -1230,13 +1299,11 @@
             position: relative;
         }
 
-        /* Additional arrow styles for better visibility */
-        .promo-products-grid .promo-product-card:nth-child(2n)::after {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23BF0A30' stroke='%23BF0A30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3Cpath d='M12 1v6m0 6v6m11-7h-6m-6 0H1'%3E%3C/path%3E%3C/svg%3E");
-        }
-
-        .promo-products-grid .promo-product-card:nth-child(2n+1)::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23095ea7' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3Cpath d='M12 1v6m0 6v6m11-7h-6m-6 0H1'%3E%3C/path%3E%3C/svg%3E");
+        /* Enhanced hover effects for interlinking arrows */
+        .promo-product-card:hover::after {
+            animation: promo-enhanced-pulse 1s ease-in-out infinite;
+            transform: scale(1.2);
+            z-index: 15;
         }
 
         /* Flow indicators for product journey */
