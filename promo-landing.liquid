@@ -3690,15 +3690,15 @@
 
             let targetSection = null;
 
-            // Define collection type mappings
+            // Define collection type mappings that match the actual badge text in sections
             const bioprocessCollections = {
-                'pc-carboy': 'pc rectangular',
-                'pc-tr-carboy': 'pc tr',
+                'pc-carboy': 'pc rectangular carboy',
+                'pc-tr-carboy': 'pc tr carboy',
                 'ezbio-bottles': 'ezbio bottles pc',
-                'ezbio-ts-bottles': 'ezbio ts',
+                'ezbio-ts-bottles': 'ezbio ts bottles',
                 'pfa-bottles': 'pfa bottles',
-                'aqg': 'aqg',
-                'cpc-connectors': 'cpc stream',
+                'aqg': 'aqg connectors',
+                'cpc-connectors': 'cpc stream thru',
                 'ezbio-assembly': 'ezbio assemblies'
             };
 
@@ -3860,13 +3860,13 @@
                     const badgeText = badge.textContent.toLowerCase();
                     let collectionType = '';
 
-                    if (badgeText.includes('pc rectangular')) collectionType = 'pc-carboy';
-                    else if (badgeText.includes('pc tr')) collectionType = 'pc-tr-carboy';
+                    if (badgeText.includes('pc rectangular carboy')) collectionType = 'pc-carboy';
+                    else if (badgeText.includes('pc tr carboy')) collectionType = 'pc-tr-carboy';
                     else if (badgeText.includes('ezbio bottles pc')) collectionType = 'ezbio-bottles';
-                    else if (badgeText.includes('ezbio ts')) collectionType = 'ezbio-ts-bottles';
+                    else if (badgeText.includes('ezbio ts bottles')) collectionType = 'ezbio-ts-bottles';
                     else if (badgeText.includes('pfa bottles')) collectionType = 'pfa-bottles';
-                    else if (badgeText.includes('aqg')) collectionType = 'aqg';
-                    else if (badgeText.includes('cpc stream')) collectionType = 'cpc-connectors';
+                    else if (badgeText.includes('aqg connectors')) collectionType = 'aqg';
+                    else if (badgeText.includes('cpc stream thru')) collectionType = 'cpc-connectors';
                     else if (badgeText.includes('ezbio assemblies')) collectionType = 'ezbio-assembly';
                     else if (badgeText.includes('ezlabpure carboy')) collectionType = 'ezlabpure-carboy';
                     else if (badgeText.includes('ezclear carboy')) collectionType = 'ezclear-carboy';
