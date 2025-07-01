@@ -3651,21 +3651,13 @@
                 }
             });
 
-            // Switch carousels and reset scroll position
+            // Switch carousels
             if (worldType === 'bioprocess') {
                 bioprocessCarousel.style.display = 'flex';
                 laboratoryCarousel.style.display = 'none';
-                // Reset bioprocess carousel scroll to start
-                setTimeout(() => {
-                    bioprocessCarousel.scrollLeft = 0;
-                }, 50);
             } else {
                 bioprocessCarousel.style.display = 'none';
                 laboratoryCarousel.style.display = 'flex';
-                // Reset laboratory carousel scroll to start
-                setTimeout(() => {
-                    laboratoryCarousel.scrollLeft = 0;
-                }, 50);
             }
 
             // Switch the main world view but don't auto-scroll to avoid sticky nav issues
