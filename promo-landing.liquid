@@ -1968,6 +1968,15 @@
             overflow-x: hidden;
         }
 
+        /* Enhanced containment class for moved elements */
+        .promo-contained {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            overflow-x: hidden !important;
+            margin: 0 auto !important;
+        }
+
         /* Ensure all promo sections stay within container bounds */
         .promo-independence-wrapper * {
             box-sizing: border-box;
@@ -1983,6 +1992,25 @@
         .promo-independence-wrapper > div {
             max-width: 100%;
             width: 100%;
+        }
+
+        /* Additional safety net for any elements that might escape */
+        body > section:not([class*="site-"]):not([class*="header-"]):not([class*="footer-"]),
+        body > div:not([class*="site-"]):not([class*="header-"]):not([class*="footer-"]) {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            box-sizing: border-box !important;
+            overflow-x: hidden !important;
+        }
+
+        /* Force sections with promo classes to stay contained */
+        [class*="promo-"],
+        [id*="promo-"] {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            overflow-x: hidden !important;
         }
 
         /* Sections container styling */
@@ -3921,10 +3949,117 @@
             }
         }
 
+        // Function to ensure all sections are properly contained
+        function ensureProperContainment() {
+            const mainSection = document.getElementById('christmas-offer-landing-page-home');
+            if (!mainSection) return;
+
+            // Find all direct children of body that should be inside main section
+            const body = document.body;
+            const elementsToMove = [];
+
+            // Collect elements that are outside the main section but should be inside
+            Array.from(body.children).forEach(child => {
+                // Skip elements that should stay at body level (like nav, header, footer)
+                if (child.tagName === 'SCRIPT' || 
+                    child.tagName === 'STYLE' || 
+                    child.tagName === 'HEADER' || 
+                    child.tagName === 'NAV' || 
+                    child.tagName === 'FOOTER' ||
+                    child.classList.contains('site-header') ||
+                    child.classList.contains('header-bar') ||
+                    child.classList.contains('footer') ||
+                    child.id === 'christmas-offer-landing-page-home') {
+                    return;
+                }
+
+                // If it's a section or div that looks like it belongs in the promo page
+                if ((child.tagName === 'SECTION' || child.tagName === 'DIV') &&
+                    (child.classList.contains('promo-') || 
+                     child.id.includes('promo-') ||
+                     child.innerHTML.includes('promo-') ||
+                     child.innerHTML.includes('Independence') ||
+                     child.innerHTML.includes('Revolutionary'))) {
+                    elementsToMove.push(child);
+                }
+            });
+
+            // Move elements into the main section
+            elementsToMove.forEach(element => {
+                mainSection.appendChild(element);
+            });
+
+            // Ensure all moved elements have proper containment classes
+            elementsToMove.forEach(element => {
+                element.style.maxWidth = '100%';
+                element.style.width = '100%';
+                element.style.boxSizing = 'border-box';
+                element.style.overflowX = 'hidden';
+                
+                // Add containment class if it doesn't exist
+                if (!element.classList.contains('promo-contained')) {
+                    element.classList.add('promo-contained');
+                }
+            });
+        }
+
+        // Function to fix any remaining layout issues
+        function fixLayoutContainment() {
+            // Find all elements with promo classes and ensure they're contained
+            const promoElements = document.querySelectorAll('[class*="promo-"], [id*="promo-"]');
+            
+            promoElements.forEach(element => {
+                // Force containment styles
+                element.style.maxWidth = '100%';
+                element.style.width = '100%';
+                element.style.boxSizing = 'border-box';
+                element.style.overflowX = 'hidden';
+                element.style.margin = '0 auto';
+                
+                // Check if element is breaking out of container
+                const rect = element.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                
+                if (rect.width > windowWidth) {
+                    element.style.width = '100vw';
+                    element.style.marginLeft = '0';
+                    element.style.marginRight = '0';
+                    element.style.paddingLeft = '15px';
+                    element.style.paddingRight = '15px';
+                }
+            });
+
+            // Specifically target sections that commonly break out
+            const sectionsToFix = [
+                '.promo-hero-revolution',
+                '.promo-category-universe', 
+                '.promo-collection-section',
+                '.promo-freedom-finale',
+                '.promo-bioprocess-sections',
+                '.promo-laboratory-sections'
+            ];
+
+            sectionsToFix.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    element.style.maxWidth = '100%';
+                    element.style.width = '100%';
+                    element.style.marginLeft = '0';
+                    element.style.marginRight = '0';
+                    element.style.boxSizing = 'border-box';
+                    element.style.overflowX = 'hidden';
+                });
+            });
+        }
+
         // Initialize the revolutionary experience
         document.addEventListener('DOMContentLoaded', function() {
             updateCountdown();
             setInterval(updateCountdown, 1000);
+
+            // Ensure proper containment first
+            ensureProperContainment();
+            fixLayoutContainment();
 
             // Show bioprocess sections by default
             const bioprocessSections = document.getElementById('bioprocess-sections');
@@ -3939,6 +4074,14 @@
             // Initialize sticky navigation
             window.addEventListener('scroll', handleStickyNavigation);
             handleStickyNavigation(); // Initial check
+
+            // Re-apply containment fixes after a short delay to catch any dynamically loaded content
+            setTimeout(() => {
+                fixLayoutContainment();
+            }, 500);
+
+            // Re-apply fixes on window resize
+            window.addEventListener('resize', fixLayoutContainment);
         });
     </script>
 </section>
