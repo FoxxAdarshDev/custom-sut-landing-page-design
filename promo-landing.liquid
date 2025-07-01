@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +17,6 @@
     {% assign aqg_collection = collections['aqg-us-independence-day-sale-25'] %}
     {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-us-independence-day-sale-25'] %}
     {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-us-independence-day-sale-25'] %}
-    {% assign bioprocess_components_collection = collections['bioprocess-components-us-independence-day-sale-25'] %}
-    {% assign vent_filters_collection = collections['vent-filters-us-independence-day-sale-25'] %}
     {% assign laboratory_collection = collections['laboratory-products-us-independence-day-sale-25'] %}
 
     <!-- American Flag Navigation -->
@@ -116,11 +115,11 @@
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
-                    <p class="promo-world-desc">5 Categories of Cutting-Edge Equipment</p>
+                    <p class="promo-world-desc">8 Categories of Cutting-Edge Equipment</p>
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
-                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: ezbio_ts_bottles_collection.products.size | plus: pfa_bottles_collection.products.size | plus: aqg_collection.products.size | plus: cpc_stream_thru_connectors_collection.products.size | plus: ezbio_bottle_assembly_pc_collection.products.size | plus: bioprocess_components_collection.products.size | plus: vent_filters_collection.products.size %}
+                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: ezbio_ts_bottles_collection.products.size | plus: pfa_bottles_collection.products.size | plus: aqg_collection.products.size | plus: cpc_stream_thru_connectors_collection.products.size | plus: ezbio_bottle_assembly_pc_collection.products.size %}
                                 {{ bioprocess_total }}+
                             </span>
                             <span class="promo-stat-label">Products</span>
@@ -161,264 +160,723 @@
         </div>
     </section>
 
-    <!-- Dynamic Product Showcase -->
-    <section class="promo-product-galaxy" id="promo-product-showcase">
-        <!-- Bioprocess Galaxy -->
-        <div class="promo-galaxy promo-bioprocess-galaxy" id="bioprocess-galaxy">
-            <div class="promo-galaxy-header">
-                <h2 class="promo-galaxy-title">🧬 BIOPROCESS UNIVERSE 🇺🇸</h2>
-                <p class="promo-galaxy-subtitle">Five revolutionary categories for American innovation</p>
+    <!-- Bioprocess Categories Sections -->
+    <div class="promo-bioprocess-sections" id="bioprocess-sections">
+        
+        <!-- PC Rectangular Carboy Section -->
+        {% if pc_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
             </div>
-
-            <div class="promo-categories-grid">
-                {% if pc_carboy_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ pc_carboy_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">⚗️</div>
-                    <h4 class="promo-category-name">PC Rectangular Carboy</h4>
-                    <div class="promo-category-discount">20% OFF</div>
-                    <div class="promo-category-count">{{ pc_carboy_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if pc_tr_carboy_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ pc_tr_carboy_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🔄</div>
-                    <h4 class="promo-category-name">PC TR Carboy</h4>
-                    <div class="promo-category-discount">25% OFF</div>
-                    <div class="promo-category-count">{{ pc_tr_carboy_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if ezbio_bottles_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ ezbio_bottles_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🧪</div>
-                    <h4 class="promo-category-name">EZBio Bottles PC</h4>
-                    <div class="promo-category-discount">30% OFF</div>
-                    <div class="promo-category-count">{{ ezbio_bottles_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if ezbio_ts_bottles_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ ezbio_ts_bottles_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🧪</div>
-                    <h4 class="promo-category-name">EZBio TS Bottles</h4>
-                    <div class="promo-category-discount">25% OFF</div>
-                    <div class="promo-category-count">{{ ezbio_ts_bottles_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if pfa_bottles_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ pfa_bottles_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">⚗️</div>
-                    <h4 class="promo-category-name">PFA Bottles</h4>
-                    <div class="promo-category-discount">30% OFF</div>
-                    <div class="promo-category-count">{{ pfa_bottles_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if aqg_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ aqg_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">💧</div>
-                    <h4 class="promo-category-name">AQG</h4>
-                    <div class="promo-category-discount">35% OFF</div>
-                    <div class="promo-category-count">{{ aqg_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ cpc_stream_thru_connectors_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🔗</div>
-                    <h4 class="promo-category-name">CPC Stream Thru Connectors</h4>
-                    <div class="promo-category-discount">30% OFF</div>
-                    <div class="promo-category-count">{{ cpc_stream_thru_connectors_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ ezbio_bottle_assembly_pc_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🔧</div>
-                    <h4 class="promo-category-name">EZBio Bottle Assembly PC</h4>
-                    <div class="promo-category-discount">25% OFF</div>
-                    <div class="promo-category-count">{{ ezbio_bottle_assembly_pc_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if bioprocess_components_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ bioprocess_components_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">⚙️</div>
-                    <h4 class="promo-category-name">Bioprocess Components</h4>
-                    <div class="promo-category-discount">40% OFF</div>
-                    <div class="promo-category-count">{{ bioprocess_components_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-
-                {% if vent_filters_collection.products.size > 0 %}
-                <div class="promo-category-card" onclick="window.location.href='{{ vent_filters_collection.url }}'">
-                    <div class="promo-flag-corner">🇺🇸</div>
-                    <div class="promo-category-icon">🌪️</div>
-                    <h4 class="promo-category-name">Vent Filters</h4>
-                    <div class="promo-category-discount">50% OFF</div>
-                    <div class="promo-category-count">{{ vent_filters_collection.products.size }} Products</div>
-                    <button class="promo-category-btn">VIEW DEALS</button>
-                </div>
-                {% endif %}
-            </div>
-
-            <!-- Featured Bioprocess Products -->
-            <div class="promo-featured-products">
-                <h3 class="promo-featured-title">🎆 FEATURED BIOPROCESS DEALS 🎆</h3>
-                <div class="promo-products-grid">
-                    {% assign featured_count = 0 %}
-
-                    {% comment %} Show products from PC Carboy collection {% endcomment %}
-                    {% for product in pc_carboy_collection.products limit: 2 %}
-                        {% assign featured_count = featured_count | plus: 1 %}
-                        <div class="promo-product-card">
-                            <div class="promo-product-image">
-                                {% if product.featured_image %}
-                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                {% else %}
-                                    <div class="promo-placeholder-img">⚗️</div>
-                                {% endif %}
-                                <div class="promo-sale-badge">🇺🇸 20% OFF</div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">⚗️ PC RECTANGULAR CARBOY</div>
+                        <h2 class="promo-section-title">Premium Polycarbonate Space-Saving Solutions</h2>
+                        <p class="promo-section-description">Revolutionary rectangular carboys designed for maximum efficiency and space optimization in bioprocessing applications. Made from high-quality polycarbonate for superior clarity and durability.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pc_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
                             </div>
-                            <div class="promo-product-content">
-                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
-                                <div class="promo-product-price">
-                                    {% if product.compare_at_price > product.price %}
-                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                    {% else %}
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                    {% endif %}
-                                </div>
-                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">20%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
                             </div>
                         </div>
-                    {% endfor %}
-
-                    {% comment %} Show products from EZBio collection {% endcomment %}
-                    {% for product in ezbio_bottles_collection.products limit: 2 %}
-                        {% assign featured_count = featured_count | plus: 1 %}
-                        <div class="promo-product-card">
-                            <div class="promo-product-image">
-                                {% if product.featured_image %}
-                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                {% else %}
-                                    <div class="promo-placeholder-img">🧪</div>
-                                {% endif %}
-                                <div class="promo-sale-badge">🇺🇸 30% OFF</div>
-                            </div>
-                            <div class="promo-product-content">
-                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
-                                <div class="promo-product-price">
-                                    {% if product.compare_at_price > product.price %}
-                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                    {% else %}
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                    {% endif %}
-                                </div>
-                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                    {% comment %} Show products from Components collection {% endcomment %}
-                    {% for product in bioprocess_components_collection.products limit: 2 %}
-                        {% assign featured_count = featured_count | plus: 1 %}
-                        <div class="promo-product-card">
-                            <div class="promo-product-image">
-                                {% if product.featured_image %}
-                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                {% else %}
-                                    <div class="promo-placeholder-img">⚙️</div>
-                                {% endif %}
-                                <div class="promo-sale-badge">🇺🇸 40% OFF</div>
-                            </div>
-                            <div class="promo-product-content">
-                                <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
-                                <div class="promo-product-price">
-                                    {% if product.compare_at_price > product.price %}
-                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                        <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                    {% else %}
-                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                    {% endif %}
-                                </div>
-                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-
+                        <a href="{{ pc_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL CARBOYS
+                        </a>
+                    </div>
                     
-                </div>
-            </div>
-        </div>
-
-        <!-- Laboratory Galaxy -->
-        <div class="promo-galaxy promo-laboratory-galaxy" id="laboratory-galaxy">
-            <div class="promo-galaxy-header">
-                <h2 class="promo-galaxy-title">🔬 LABORATORY UNIVERSE 🇺🇸</h2>
-                <p class="promo-galaxy-subtitle">Premium laboratory essentials for American innovation</p>
-            </div>
-
-            <!-- Featured Laboratory Products -->
-            <div class="promo-featured-products">
-                <h3 class="promo-featured-title">🎆 FEATURED LABORATORY DEALS 🎆</h3>
-                <div class="promo-products-grid">
-                    {% for product in laboratory_collection.products limit: 6 %}
-                    <div class="promo-product-card">
-                        <div class="promo-product-image">
-                            {% if product.featured_image %}
-                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                            {% else %}
-                                <div class="promo-placeholder-img">🔬</div>
-                            {% endif %}
-                            <div class="promo-sale-badge">🇺🇸 40% OFF</div>
-                        </div>
-                        <div class="promo-product-content">
-                            <h4 class="promo-product-title">{{ product.title | truncate: 40 }}</h4>
-                            <div class="promo-product-price">
-                                {% if product.compare_at_price > product.price %}
-                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                    <span class="promo-savings">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-                                {% else %}
-                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                {% endif %}
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-pc-carboy">
+                                {% for product in pc_carboy_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">⚗️</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 20% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
-                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pc-carboy', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pc-carboy', 1)">›</button>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        {% endif %}
 
-    <!-- Independence Day Special Collection Section Removed -->
+        <!-- PC TR Carboy Section -->
+        {% if pc_tr_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🔄 PC TR CARBOY</div>
+                        <h2 class="promo-section-title">Advanced Temperature Resistant Carboys</h2>
+                        <p class="promo-section-description">Next-generation polycarbonate carboys with enhanced temperature resistance for demanding bioprocess applications. Perfect for high-performance laboratory environments.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pc_tr_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ pc_tr_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL TR CARBOYS
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-pc-tr">
+                                {% for product in pc_tr_carboy_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🔄</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 25% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pc-tr', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pc-tr', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Bottles PC Section -->
+        {% if ezbio_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🧪 EZBIO BOTTLES PC</div>
+                        <h2 class="promo-section-title">Revolutionary EZBio Bottle Systems</h2>
+                        <p class="promo-section-description">State-of-the-art polycarbonate bottles with integrated connection systems for seamless bioprocessing workflows. Designed for sterile applications and maximum convenience.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZBIO BOTTLES
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-ezbio-pc">
+                                {% for product in ezbio_bottles_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🧪</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 30% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-ezbio-pc', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-ezbio-pc', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio TS Bottles Section -->
+        {% if ezbio_ts_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">💎 EZBIO TS BOTTLES</div>
+                        <h2 class="promo-section-title">Premium Titanium Series Bottles</h2>
+                        <p class="promo-section-description">Premium titanium series bottles offering superior chemical resistance and durability for the most demanding bioprocess applications. Built for excellence and reliability.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_ts_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_ts_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL TS BOTTLES
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-ezbio-ts">
+                                {% for product in ezbio_ts_bottles_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">💎</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 25% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-ezbio-ts', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-ezbio-ts', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- PFA Bottles Section -->
+        {% if pfa_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🏛️ PFA BOTTLES</div>
+                        <h2 class="promo-section-title">Ultra-Pure PFA Bottle Solutions</h2>
+                        <p class="promo-section-description">Ultra-pure PFA bottles offering exceptional chemical resistance and purity for critical applications. The gold standard for trace analysis and high-purity processes.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pfa_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ pfa_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL PFA BOTTLES
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-pfa">
+                                {% for product in pfa_bottles_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🏛️</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 30% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pfa', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pfa', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- AQG Section -->
+        {% if aqg_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">💧 AQG CONNECTORS</div>
+                        <h2 class="promo-section-title">Advanced AseptiQuik G Systems</h2>
+                        <p class="promo-section-description">Revolutionary AseptiQuik G connector systems for sterile connections in bioprocessing. Engineered for reliability, sterility, and ease of use in critical applications.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ aqg_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">35%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ aqg_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL AQG SYSTEMS
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-aqg">
+                                {% for product in aqg_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">💧</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 35% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-aqg', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-aqg', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- CPC Stream Thru Connectors Section -->
+        {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🔗 CPC STREAM THRU</div>
+                        <h2 class="promo-section-title">High-Performance Stream Thru Connectors</h2>
+                        <p class="promo-section-description">Advanced CPC stream thru connectors designed for continuous flow applications. Engineered for maximum efficiency and sterility in bioprocessing workflows.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ cpc_stream_thru_connectors_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ cpc_stream_thru_connectors_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL CONNECTORS
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-cpc">
+                                {% for product in cpc_stream_thru_connectors_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🔗</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 30% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-cpc', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-cpc', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Bottle Assembly PC Section -->
+        {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🔧 EZBIO ASSEMBLIES</div>
+                        <h2 class="promo-section-title">Complete Bottle Assembly Solutions</h2>
+                        <p class="promo-section-description">Ready-to-use EZBio bottle assemblies with integrated connection systems. Perfect for streamlined bioprocessing operations and reduced setup time.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_bottle_assembly_pc_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_bottle_assembly_pc_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL ASSEMBLIES
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-assembly">
+                                {% for product in ezbio_bottle_assembly_pc_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🔧</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 25% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-assembly', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-assembly', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+    </div>
+
+    <!-- Laboratory Section -->
+    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
+        {% if laboratory_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+            
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-flag-icon">🇺🇸</div>
+                        <div class="promo-category-badge">🔬 LABORATORY ESSENTIALS</div>
+                        <h2 class="promo-section-title">Premium Laboratory Equipment</h2>
+                        <p class="promo-section-description">Complete range of high-quality laboratory equipment and supplies for research, analysis, and scientific innovation. Built to the highest standards for reliable performance.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ laboratory_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">40%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ laboratory_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL LABORATORY
+                        </a>
+                    </div>
+                    
+                    <div class="promo-section-carousel">
+                        <div class="promo-carousel-container">
+                            <div class="promo-carousel-track" id="carousel-laboratory">
+                                {% for product in laboratory_collection.products %}
+                                <div class="promo-carousel-slide">
+                                    <div class="promo-product-card">
+                                        <div class="promo-product-image">
+                                            {% if product.featured_image %}
+                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                            {% else %}
+                                                <div class="promo-placeholder-img">🔬</div>
+                                            {% endif %}
+                                            <div class="promo-sale-badge">🇺🇸 40% OFF</div>
+                                        </div>
+                                        <div class="promo-product-content">
+                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                            <div class="promo-product-price">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% else %}
+                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-laboratory', -1)">‹</button>
+                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-laboratory', 1)">›</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </div>
 
     <!-- Final Revolutionary CTA -->
     <section class="promo-freedom-finale">
@@ -456,7 +914,7 @@
                 <a href="{{ collections.all-products.url }}" class="promo-finale-btn promo-btn-primary">
                     🚀 SHOP ALL DEALS
                 </a>
-                <a href="#promo-product-showcase" class="promo-finale-btn promo-btn-secondary">
+                <a href="#bioprocess-sections" class="promo-finale-btn promo-btn-secondary">
                     🔍 EXPLORE CATEGORIES
                 </a>
             </div>
@@ -894,180 +1352,217 @@
             box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
         }
 
-        /* Product Galaxy Section */
-        .promo-product-galaxy {
+        /* Collection Sections */
+        .promo-collection-section {
+            position: relative;
             padding: 80px 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            margin-bottom: 60px;
+            overflow: hidden;
         }
 
-        .promo-galaxy {
-            display: none;
+        .promo-flag-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .promo-animated-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-star {
+            position: absolute;
+            color: #002868;
+            font-size: 2rem;
+            animation: promo-star-twinkle 3s ease-in-out infinite;
+        }
+
+        .promo-star-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .promo-star-2 { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .promo-star-3 { bottom: 30%; left: 20%; animation-delay: 1s; }
+        .promo-star-4 { bottom: 20%; right: 10%; animation-delay: 1.5s; }
+        .promo-star-5 { top: 50%; left: 50%; animation-delay: 2s; }
+
+        @keyframes promo-star-twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        .promo-animated-stripes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-moving-stripe {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, transparent, #BF0A30, transparent);
+            animation: promo-stripe-move 4s linear infinite;
+        }
+
+        .promo-stripe-1 { top: 25%; animation-delay: 0s; }
+        .promo-stripe-2 { top: 50%; animation-delay: 1s; }
+        .promo-stripe-3 { top: 75%; animation-delay: 2s; }
+
+        @keyframes promo-stripe-move {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .promo-section-container {
+            position: relative;
+            z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .promo-galaxy.active {
-            display: block;
-            animation: promo-galaxy-appear 1s ease-out;
-        }
-
-        @keyframes promo-galaxy-appear {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .promo-galaxy-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .promo-galaxy-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            color: #002868;
-            margin-bottom: 15px;
-        }
-
-        .promo-galaxy-subtitle {
-            font-size: 1.2rem;
-            color: #6c757d;
-            font-weight: 300;
-        }
-
-        /* Categories Grid */
-        .promo-categories-grid {
+        .promo-section-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        .promo-category-card {
-            background: white;
-            border: 2px solid #095ea7;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .promo-section-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            border: 3px solid #095ea7;
+            backdrop-filter: blur(10px);
         }
 
-        .promo-category-card:hover {
-            transform: translateY(-5px);
-            border-color: #BF0A30;
-            box-shadow: 0 15px 40px rgba(191, 10, 48, 0.2);
-        }
-
-        .promo-flag-corner {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.2rem;
-            animation: promo-flag-wave 2s ease-in-out infinite;
-            z-index: 5;
-        }
-
-        .promo-category-icon {
+        .promo-flag-icon {
             font-size: 3rem;
             margin-bottom: 20px;
-            animation: promo-icon-bounce 2s ease-in-out infinite;
+            animation: promo-flag-wave 2s ease-in-out infinite;
         }
 
-        @keyframes promo-icon-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .promo-category-name {
-            color: #002868;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .promo-category-discount {
-            background: #BF0A30;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .promo-category-badge {
             display: inline-block;
-            animation: promo-discount-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes promo-discount-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .promo-category-count {
-            color: #002868;
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 0.9rem;
+            font-weight: 700;
             margin-bottom: 20px;
-            font-weight: 500;
+            text-transform: uppercase;
         }
 
-        .promo-category-btn {
+        .promo-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: #002868;
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .promo-section-description {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .promo-section-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .promo-stat-item {
+            text-align: center;
+        }
+
+        .promo-stat-item .promo-stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #BF0A30;
+            text-shadow: 2px 2px 0 #095ea7;
+        }
+
+        .promo-stat-item .promo-stat-label {
+            font-size: 0.9rem;
+            color: #002868;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .promo-section-cta {
+            display: inline-block;
             background: linear-gradient(45deg, #002868, #BF0A30);
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 20px;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
             font-weight: 700;
-            cursor: pointer;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
-        .promo-category-btn:hover {
+        .promo-section-cta:hover {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 40, 104, 0.4);
+            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+            text-decoration: none;
+            color: white;
         }
 
-        /* Featured Products */
-        .promo-featured-products {
-            margin-top: 60px;
+        /* Carousel Styles */
+        .promo-section-carousel {
+            position: relative;
         }
 
-        .promo-featured-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: #002868;
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 900;
+        .promo-carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #095ea7;
+            backdrop-filter: blur(10px);
         }
 
-        .promo-products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .promo-carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .promo-carousel-slide {
+            min-width: 280px;
+            flex-shrink: 0;
         }
 
         .promo-product-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border: 2px solid #095ea7;
+            border: 2px solid #e9ecef;
         }
 
         .promo-product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border-color: #BF0A30;
         }
 
         .promo-product-image {
-            height: 200px;
+            height: 180px;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             display: flex;
             align-items: center;
@@ -1088,20 +1583,20 @@
         }
 
         .promo-placeholder-img {
-            font-size: 4rem;
+            font-size: 3rem;
             opacity: 0.7;
             color: #6c757d;
         }
 
         .promo-sale-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             background: linear-gradient(45deg, #BF0A30, #095ea7);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
             font-weight: 700;
             animation: promo-badge-pulse 2s ease-in-out infinite;
         }
@@ -1112,14 +1607,14 @@
         }
 
         .promo-product-content {
-            padding: 25px;
+            padding: 20px;
         }
 
         .promo-product-title {
             color: #002868;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             line-height: 1.3;
         }
 
@@ -1131,34 +1626,26 @@
             text-decoration: line-through;
             color: #6c757d;
             font-size: 0.9rem;
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         .promo-sale-price {
             color: #BF0A30;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             font-family: 'Orbitron', sans-serif;
         }
 
-        .promo-savings {
-            display: block;
-            color: #28a745;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 5px;
-        }
-
         .promo-product-cta {
-            display: inline-block;
+            display: block;
             background: linear-gradient(45deg, #002868, #BF0A30);
             color: white;
-            padding: 12px 25px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 15px;
             text-decoration: none;
             font-weight: 700;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            width: 100%;
             text-align: center;
             text-transform: uppercase;
         }
@@ -1166,9 +1653,38 @@
         .promo-product-cta:hover {
             background: linear-gradient(45deg, #BF0A30, #FFD700);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+            box-shadow: 0 3px 10px rgba(191, 10, 48, 0.4);
             text-decoration: none;
             color: white;
+        }
+
+        .promo-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 40, 104, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .promo-carousel-btn:hover {
+            background: #BF0A30;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .promo-prev-btn {
+            left: 10px;
+        }
+
+        .promo-next-btn {
+            right: 10px;
         }
 
         /* Final CTA Section */
@@ -1336,14 +1852,27 @@
                 padding: 30px 20px;
             }
 
-            .promo-categories-grid {
+            .promo-section-content {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .promo-section-info {
+                padding: 30px 20px;
+            }
+
+            .promo-section-stats {
                 gap: 20px;
             }
 
-            .promo-products-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .promo-carousel-slide {
+                min-width: 250px;
+            }
+
+            .promo-carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
 
             .promo-timer-grid,
@@ -1370,6 +1899,32 @@
             .promo-finale-btn {
                 width: 100%;
                 max-width: 300px;
+            }
+
+            /* Mobile carousel adjustments */
+            .promo-carousel-track {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .promo-carousel-slide {
+                min-width: 220px;
+            }
+
+            .promo-product-image {
+                height: 150px;
+            }
+
+            .promo-product-content {
+                padding: 15px;
+            }
+
+            .promo-prev-btn {
+                left: 5px;
+            }
+
+            .promo-next-btn {
+                right: 5px;
             }
         }
     </style>
@@ -1412,18 +1967,57 @@
 
         // World exploration functionality
         function exploreWorld(worldType) {
-            const galaxies = document.querySelectorAll('.promo-galaxy');
-            galaxies.forEach(galaxy => galaxy.classList.remove('active'));
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
 
-            const targetGalaxy = document.getElementById(worldType + '-galaxy');
-            if (targetGalaxy) {
-                targetGalaxy.classList.add('active');
-
-                // Smooth scroll to product showcase
-                document.getElementById('promo-product-showcase').scrollIntoView({
-                    behavior: 'smooth'
-                });
+            if (worldType === 'bioprocess') {
+                bioprocessSections.style.display = 'block';
+                laboratorySections.style.display = 'none';
+                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                bioprocessSections.style.display = 'none';
+                laboratorySections.style.display = 'block';
+                laboratorySections.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        // Carousel functionality
+        const carouselPositions = {};
+
+        function moveCarousel(carouselId, direction) {
+            const track = document.getElementById(carouselId);
+            if (!track) return;
+
+            const slides = track.querySelectorAll('.promo-carousel-slide');
+            const slideWidth = slides[0].offsetWidth + 20; // Include gap
+            
+            if (!carouselPositions[carouselId]) {
+                carouselPositions[carouselId] = 0;
+            }
+
+            const maxPosition = -(slides.length - 1) * slideWidth;
+            let newPosition = carouselPositions[carouselId] + (direction * slideWidth);
+
+            // Loop carousel
+            if (newPosition > 0) {
+                newPosition = maxPosition;
+            } else if (newPosition < maxPosition) {
+                newPosition = 0;
+            }
+
+            carouselPositions[carouselId] = newPosition;
+            track.style.transform = `translateX(${newPosition}px)`;
+        }
+
+        // Auto-scroll carousels
+        function autoScrollCarousels() {
+            const carouselTracks = document.querySelectorAll('.promo-carousel-track');
+            carouselTracks.forEach(track => {
+                const carouselId = track.id;
+                if (carouselId) {
+                    moveCarousel(carouselId, -1);
+                }
+            });
         }
 
         // Initialize the revolutionary experience
@@ -1431,11 +2025,14 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Show bioprocess galaxy by default
-            const bioprocessGalaxy = document.getElementById('bioprocess-galaxy');
-            if (bioprocessGalaxy) {
-                bioprocessGalaxy.classList.add('active');
+            // Show bioprocess sections by default
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            if (bioprocessSections) {
+                bioprocessSections.style.display = 'block';
             }
+
+            // Auto-scroll carousels every 5 seconds
+            setInterval(autoScrollCarousels, 5000);
         });
     </script>
 </body>
