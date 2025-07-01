@@ -194,15 +194,17 @@
         </div>
     </section>
 
-    <!-- Sticky Category Navigation -->
+    <!-- Enhanced Sticky Category Navigation -->
     <div class="promo-sticky-category-nav" id="sticky-category-nav">
-        <div class="promo-sticky-nav-container">
-            <button class="promo-sticky-btn promo-active" data-world="bioprocess">
-                🧬 BIOPROCESS
-            </button>
-            <button class="promo-sticky-btn" data-world="laboratory">
-                🔬 LABORATORY
-            </button>
+        <div class="promo-world-nav-container">
+            <div class="promo-world-nav-item promo-active" data-world="bioprocess">
+                <div class="promo-world-circle">🧬</div>
+                <div class="promo-world-nav-text">Bioprocess Revolution</div>
+            </div>
+            <div class="promo-world-nav-item" data-world="laboratory">
+                <div class="promo-world-circle">🔬</div>
+                <div class="promo-world-nav-text">Laboratory Revolution</div>
+            </div>
         </div>
     </div>
 
@@ -1059,7 +1061,7 @@
             justify-content: center;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
-            padding-top: 60px;
+            margin-top: 60px;
         }
 
         .promo-patriotic-canvas {
@@ -1404,7 +1406,7 @@
             background: white;
         }
 
-        /* Sticky Category Navigation */
+        /* Enhanced Sticky Category Navigation */
         .promo-sticky-category-nav {
             position: sticky;
             top: 60px;
@@ -1416,11 +1418,73 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(-100%);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .promo-sticky-category-nav.promo-visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Enhanced World Navigation with Circular Icons */
+        .promo-world-nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .promo-world-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-world-nav-item.promo-active {
+            transform: scale(1.05);
+        }
+
+        .promo-world-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #095ea7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .promo-world-nav-item:hover .promo-world-circle {
+            border-color: #BF0A30;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 10, 48, 0.3);
+        }
+
+        .promo-world-nav-item.promo-active .promo-world-circle {
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
+            color: white;
+            border-color: #BF0A30;
+        }
+
+        .promo-world-nav-text {
+            font-weight: 700;
+            color: #002868;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .promo-world-nav-item.promo-active .promo-world-nav-text {
+            color: #BF0A30;
         }
 
         .promo-sticky-nav-container {
@@ -1993,6 +2057,30 @@
             text-decoration: none;
         }
 
+        /* Section Transitions */
+        .promo-bioprocess-sections,
+        .promo-laboratory-sections {
+            transition: all 0.5s ease;
+            transform-origin: center top;
+        }
+
+        .promo-bioprocess-sections.promo-fade-out,
+        .promo-laboratory-sections.promo-fade-out {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .promo-bioprocess-sections.promo-fade-in,
+        .promo-laboratory-sections.promo-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .promo-flag-navigation {
@@ -2004,7 +2092,22 @@
             }
 
             .promo-hero-revolution {
-                padding-top: 40px;
+                margin-top: 40px;
+            }
+
+            .promo-world-nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .promo-world-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .promo-world-nav-text {
+                font-size: 0.9rem;
             }
 
             .promo-sticky-category-nav {
@@ -2164,39 +2267,38 @@
             }
         }
 
-        // World exploration functionality
+        // Enhanced World exploration with smooth transitions
         function exploreWorld(worldType) {
             const bioprocessSections = document.getElementById('bioprocess-sections');
             const laboratorySections = document.getElementById('laboratory-sections');
-            const stickyNav = document.getElementById('sticky-category-nav');
-
-            if (worldType === 'bioprocess') {
-                bioprocessSections.style.display = 'block';
-                laboratorySections.style.display = 'none';
-                updateStickyNavButtons('bioprocess');
-            } else {
-                bioprocessSections.style.display = 'none';
-                laboratorySections.style.display = 'block';
-                updateStickyNavButtons('laboratory');
-            }
-
-            // Smooth scroll to sections without going to top
-            const targetSection = worldType === 'bioprocess' ? bioprocessSections : laboratorySections;
-            const categorySection = document.querySelector('.promo-category-universe');
             
-            categorySection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'end'
-            });
+            // Add fade out effect to current section
+            const currentSection = bioprocessSections.style.display !== 'none' ? bioprocessSections : laboratorySections;
+            currentSection.classList.add('promo-fade-out');
+            
+            setTimeout(() => {
+                if (worldType === 'bioprocess') {
+                    bioprocessSections.style.display = 'block';
+                    laboratorySections.style.display = 'none';
+                    bioprocessSections.classList.remove('promo-fade-out');
+                    bioprocessSections.classList.add('promo-fade-in');
+                } else {
+                    laboratorySections.style.display = 'block';
+                    bioprocessSections.style.display = 'none';
+                    laboratorySections.classList.remove('promo-fade-out');
+                    laboratorySections.classList.add('promo-fade-in');
+                }
+                updateStickyNavButtons(worldType);
+            }, 250);
         }
 
-        // Update sticky navigation buttons
+        // Update sticky navigation buttons with enhanced styling
         function updateStickyNavButtons(activeWorld) {
-            const buttons = document.querySelectorAll('.promo-sticky-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('promo-active');
-                if (btn.dataset.world === activeWorld) {
-                    btn.classList.add('promo-active');
+            const navItems = document.querySelectorAll('.promo-world-nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('promo-active');
+                if (item.dataset.world === activeWorld) {
+                    item.classList.add('promo-active');
                 }
             });
         }
@@ -2276,10 +2378,10 @@
             // Add sticky navigation scroll listener
             window.addEventListener('scroll', handleStickyNavigation);
 
-            // Add sticky navigation button event listeners
-            const stickyButtons = document.querySelectorAll('.promo-sticky-btn');
-            stickyButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
+            // Add sticky navigation item event listeners
+            const stickyNavItems = document.querySelectorAll('.promo-world-nav-item');
+            stickyNavItems.forEach(item => {
+                item.addEventListener('click', function() {
                     const worldType = this.dataset.world;
                     exploreWorld(worldType);
                 });
