@@ -115,7 +115,18 @@
         <div class="promo-dual-worlds">
             <!-- Bioprocess World -->
             <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
-                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-flag">
+                    <div class="promo-flag-stars-mini"></div>
+                    <div class="promo-flag-stripes-mini">
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                    </div>
+                </div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
@@ -141,7 +152,18 @@
 
             <!-- Laboratory World -->
             <div class="promo-world promo-laboratory-world" data-world="laboratory">
-                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-flag">
+                    <div class="promo-flag-stars-mini"></div>
+                    <div class="promo-flag-stripes-mini">
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                        <div class="promo-mini-stripe promo-mini-white"></div>
+                        <div class="promo-mini-stripe promo-mini-red"></div>
+                    </div>
+                </div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🔬</div>
                     <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
@@ -1305,8 +1327,58 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 2rem;
+            width: 60px;
+            height: 36px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
             animation: promo-flag-wave 2s ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .promo-flag-stars-mini {
+            background: #002868;
+            width: 40%;
+            height: 60%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promo-flag-stars-mini::before {
+            content: "★★★★★";
+            color: white;
+            font-size: 6px;
+            letter-spacing: 1px;
+            animation: promo-mini-twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-mini-twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 3px rgba(255,255,255,0.8); }
+        }
+
+        .promo-flag-stripes-mini {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .promo-mini-stripe {
+            flex: 1;
+        }
+
+        .promo-mini-stripe.promo-mini-red {
+            background: #BF0A30;
+        }
+
+        .promo-mini-stripe.promo-mini-white {
+            background: white;
         }
 
         @keyframes promo-flag-wave {
