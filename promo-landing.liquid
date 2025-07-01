@@ -1635,24 +1635,22 @@
             transform: translateX(-50%) translateY(-100%);
             max-width: 1200px;
             width: 90%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             border: 3px solid #095ea7;
             border-radius: 20px;
-            z-index: 100;
+            z-index: 999;
             transition: transform 0.3s ease, opacity 0.3s ease;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
             opacity: 0;
             visibility: hidden;
             margin: 0 auto;
-            pointer-events: none;
         }
 
         .promo-sticky-nav.visible {
             transform: translateX(-50%) translateY(10px);
             opacity: 1;
             visibility: visible;
-            pointer-events: auto;
         }
 
         .promo-sticky-nav-content {
@@ -2175,7 +2173,6 @@
             margin-bottom: 40px;
             overflow: hidden;
             background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
-            scroll-margin-top: 180px;
         }
 
         .promo-flag-bg {
@@ -2242,7 +2239,7 @@
 
         .promo-section-container {
             position: relative;
-            z-index: 10;
+            z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -3247,10 +3244,9 @@
         }
 
         function smoothScrollToSection(targetSection) {
-            const stickyNav = document.querySelector('.promo-sticky-nav');
+            const stickyNavHeight = document.querySelector('.promo-sticky-nav').offsetHeight;
             const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
-            const stickyNavHeight = stickyNav.classList.contains('visible') ? stickyNav.offsetHeight : 0;
-            const totalOffset = stickyNavHeight + flagNavHeight + 30; // Extra padding
+            const totalOffset = stickyNavHeight + flagNavHeight + 20; // Extra padding
             
             const elementPosition = targetSection.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
@@ -3261,11 +3257,8 @@
             });
 
             // Add highlight effect
-            targetSection.style.transform = 'scale(1.02)';
-            targetSection.style.transition = 'transform 0.5s ease';
             targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
             setTimeout(() => {
-                targetSection.style.transform = '';
                 targetSection.style.boxShadow = '';
             }, 2000);
         }
@@ -3294,20 +3287,16 @@
         function handleStickyNavigation() {
             const stickyNav = document.getElementById('sticky-nav');
             const dualWorldsSection = document.querySelector('.promo-dual-worlds');
-            const finalCTA = document.querySelector('.promo-freedom-finale');
             
             if (!stickyNav || !dualWorldsSection) return;
             
             const dualWorldsRect = dualWorldsSection.getBoundingClientRect();
-            const finalCTARect = finalCTA ? finalCTA.getBoundingClientRect() : null;
             const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
             
-            // Show sticky nav only when user has scrolled past the dual worlds section but before final CTA
-            const shouldShow = dualWorldsRect.bottom <= flagNavHeight && 
-                             (!finalCTARect || finalCTARect.top > window.innerHeight * 0.3);
-            
-            if (shouldShow) {
+            // Show sticky nav only when user has scrolled past the dual worlds section
+            if (dualWorldsRect.bottom <= flagNavHeight) {
                 stickyNav.classList.add('visible');
+                // Update active state based on visible section
                 updateActiveBasedOnScroll();
             } else {
                 stickyNav.classList.remove('visible');
