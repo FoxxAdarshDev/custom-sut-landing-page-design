@@ -114,7 +114,7 @@
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
                     <p class="promo-world-desc">8 Categories of Cutting-Edge Equipment</p>
-
+                    
                     <!-- Collection Image Carousel -->
                     <div class="promo-collection-carousel" id="bioprocess-carousel">
                         <div class="promo-carousel-container">
@@ -124,49 +124,49 @@
                                 <div class="promo-circle-label">PC Carboy</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if pc_tr_carboy_collection.image %}
                             <div class="promo-collection-circle" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
                                 <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
                                 <div class="promo-circle-label">PC TR Carboy</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if ezbio_bottles_collection.image %}
                             <div class="promo-collection-circle" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
                                 <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
                                 <div class="promo-circle-label">EZBio Bottles</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if ezbio_ts_bottles_collection.image %}
                             <div class="promo-collection-circle" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
                                 <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
                                 <div class="promo-circle-label">EZBio TS</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if pfa_bottles_collection.image %}
                             <div class="promo-collection-circle" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
                                 <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
                                 <div class="promo-circle-label">PFA Bottles</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if aqg_collection.image %}
                             <div class="promo-collection-circle" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
                                 <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
                                 <div class="promo-circle-label">AQG</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if cpc_stream_thru_connectors_collection.image %}
                             <div class="promo-collection-circle" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
                                 <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
                                 <div class="promo-circle-label">CPC Connectors</div>
                             </div>
                             {% endif %}
-
+                            
                             {% if ezbio_bottle_assembly_pc_collection.image %}
                             <div class="promo-collection-circle" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
                                 <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
@@ -176,7 +176,7 @@
                         </div>
                         <div class="promo-carousel-dots" id="bioprocess-dots"></div>
                     </div>
-
+                    
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
@@ -190,6 +190,9 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
+                        🚀 EXPLORE BIOPROCESS
+                    </button>
                 </div>
             </div>
 
@@ -200,7 +203,7 @@
                     <div class="promo-world-icon">🔬</div>
                     <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
                     <p class="promo-world-desc">Premium Laboratory Essentials</p>
-
+                    
                     <!-- Laboratory Collection Image Carousel -->
                     <div class="promo-collection-carousel" id="laboratory-carousel">
                         <div class="promo-carousel-container">
@@ -210,7 +213,7 @@
                                 <div class="promo-circle-label">Lab Equipment</div>
                             </div>
                             {% endif %}
-
+                            
                             <!-- Additional laboratory subcategories if available -->
                             {% assign lab_bottles_collection = collections['laboratory-bottles-us-independence-day-sale-25'] %}
                             {% if lab_bottles_collection.image %}
@@ -219,7 +222,7 @@
                                 <div class="promo-circle-label">Lab Bottles</div>
                             </div>
                             {% endif %}
-
+                            
                             {% assign lab_storage_collection = collections['laboratory-storage-us-independence-day-sale-25'] %}
                             {% if lab_storage_collection.image %}
                             <div class="promo-collection-circle" data-collection="lab-storage" onclick="scrollToCollectionSection('lab-storage')">
@@ -227,7 +230,7 @@
                                 <div class="promo-circle-label">Storage</div>
                             </div>
                             {% endif %}
-
+                            
                             {% assign lab_instruments_collection = collections['laboratory-instruments-us-independence-day-sale-25'] %}
                             {% if lab_instruments_collection.image %}
                             <div class="promo-collection-circle" data-collection="lab-instruments" onclick="scrollToCollectionSection('lab-instruments')">
@@ -238,7 +241,7 @@
                         </div>
                         <div class="promo-carousel-dots" id="laboratory-dots"></div>
                     </div>
-
+                    
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">{{ laboratory_collection.products.size }}+</span>
@@ -249,6 +252,9 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
+                        🚀 EXPLORE LABORATORY
+                    </button>
                 </div>
             </div>
         </div>
@@ -1197,7 +1203,7 @@
     </div>
 
     <!-- Laboratory Section -->
-    <div class="promo-laboratory-sections" id="laboratory-sections">
+    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
         {% if laboratory_collection.products.size > 0 %}
         <section class="promo-collection-section">
             <div class="promo-flag-bg">
@@ -1366,20 +1372,15 @@
         .promo-flag-navigation {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
             width: 100%;
             height: 60px;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            background: transparent;
         }
 
         .promo-flag-container {
             display: flex;
             height: 100%;
-            width: 100%;
-            position: relative;
         }
 
         .promo-flag-stars {
@@ -2615,11 +2616,19 @@
             }
         }
 
-        // Scroll to sections functionality
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
+        // World exploration functionality
+        function exploreWorld(worldType) {
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+
+            if (worldType === 'bioprocess') {
+                bioprocessSections.style.display = 'block';
+                laboratorySections.style.display = 'none';
+                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                bioprocessSections.style.display = 'none';
+                laboratorySections.style.display = 'block';
+                laboratorySections.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -2696,7 +2705,7 @@
                 const scrollLeft = container.scrollLeft;
                 const circleWidth = circles[0].offsetWidth + 20;
                 const newIndex = Math.round(scrollLeft / circleWidth);
-
+                
                 if (newIndex !== currentIndex && newIndex < circles.length) {
                     currentIndex = newIndex;
                     dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
@@ -2722,7 +2731,7 @@
         // Scroll to specific collection section
         function scrollToCollectionSection(collectionType) {
             let targetSelector = '';
-
+            
             switch(collectionType) {
                 case 'pc-carboy':
                     targetSelector = '.promo-collection-section:has([data-collection="pc-carboy"])';
@@ -2754,7 +2763,7 @@
                 default:
                     return;
             }
-
+            
             // First ensure the right sections are visible
             if (collectionType === 'laboratory') {
                 exploreWorld('laboratory');
@@ -2796,14 +2805,10 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Show both sections by default
+            // Show bioprocess sections by default
             const bioprocessSections = document.getElementById('bioprocess-sections');
-            const laboratorySections = document.getElementById('laboratory-sections');
             if (bioprocessSections) {
                 bioprocessSections.style.display = 'block';
-            }
-            if (laboratorySections) {
-                laboratorySections.style.display = 'block';
             }
 
             // Initialize carousels
