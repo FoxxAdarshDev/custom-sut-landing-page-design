@@ -99,6 +99,77 @@
         </div>
     </section>
 
+    <!-- Sticky Navigation Bar -->
+    <div class="promo-sticky-nav" id="sticky-nav">
+        <div class="promo-sticky-nav-content">
+            <div class="promo-sticky-title">🇺🇸 Independence Day Collections</div>
+            <div class="promo-sticky-carousel">
+                {% if pc_carboy_collection.image %}
+                <div class="promo-sticky-circle" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                    <img src="{{ pc_carboy_collection.image | img_url: '60x60' }}" alt="PC Carboy">
+                    <div class="promo-sticky-tooltip">PC Carboy</div>
+                </div>
+                {% endif %}
+                
+                {% if pc_tr_carboy_collection.image %}
+                <div class="promo-sticky-circle" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                    <img src="{{ pc_tr_carboy_collection.image | img_url: '60x60' }}" alt="PC TR Carboy">
+                    <div class="promo-sticky-tooltip">PC TR Carboy</div>
+                </div>
+                {% endif %}
+                
+                {% if ezbio_bottles_collection.image %}
+                <div class="promo-sticky-circle" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                    <img src="{{ ezbio_bottles_collection.image | img_url: '60x60' }}" alt="EZBio Bottles">
+                    <div class="promo-sticky-tooltip">EZBio Bottles</div>
+                </div>
+                {% endif %}
+                
+                {% if ezbio_ts_bottles_collection.image %}
+                <div class="promo-sticky-circle" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                    <img src="{{ ezbio_ts_bottles_collection.image | img_url: '60x60' }}" alt="EZBio TS">
+                    <div class="promo-sticky-tooltip">EZBio TS</div>
+                </div>
+                {% endif %}
+                
+                {% if pfa_bottles_collection.image %}
+                <div class="promo-sticky-circle" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                    <img src="{{ pfa_bottles_collection.image | img_url: '60x60' }}" alt="PFA Bottles">
+                    <div class="promo-sticky-tooltip">PFA Bottles</div>
+                </div>
+                {% endif %}
+                
+                {% if aqg_collection.image %}
+                <div class="promo-sticky-circle" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                    <img src="{{ aqg_collection.image | img_url: '60x60' }}" alt="AQG">
+                    <div class="promo-sticky-tooltip">AQG</div>
+                </div>
+                {% endif %}
+                
+                {% if cpc_stream_thru_connectors_collection.image %}
+                <div class="promo-sticky-circle" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                    <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '60x60' }}" alt="CPC Connectors">
+                    <div class="promo-sticky-tooltip">CPC Connectors</div>
+                </div>
+                {% endif %}
+                
+                {% if ezbio_bottle_assembly_pc_collection.image %}
+                <div class="promo-sticky-circle" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                    <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '60x60' }}" alt="Assemblies">
+                    <div class="promo-sticky-tooltip">Assemblies</div>
+                </div>
+                {% endif %}
+                
+                {% if laboratory_collection.image %}
+                <div class="promo-sticky-circle" data-collection="laboratory" onclick="scrollToCollectionSection('laboratory')">
+                    <img src="{{ laboratory_collection.image | img_url: '60x60' }}" alt="Laboratory">
+                    <div class="promo-sticky-tooltip">Laboratory</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <!-- Revolutionary Category Navigation -->
     <section class="promo-category-universe">
         <div class="promo-universe-header">
@@ -1432,6 +1503,124 @@
             padding-top: 60px;
         }
 
+        /* Sticky Navigation Styles */
+        .promo-sticky-nav {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #095ea7;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .promo-sticky-nav.visible {
+            transform: translateY(0);
+        }
+
+        .promo-sticky-nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px 20px;
+        }
+
+        .promo-sticky-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #002868;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .promo-sticky-carousel {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 5px 0;
+        }
+
+        .promo-sticky-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-sticky-circle {
+            flex: 0 0 auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #095ea7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 40, 104, 0.2);
+        }
+
+        .promo-sticky-circle:hover {
+            transform: scale(1.1);
+            border-color: #BF0A30;
+            box-shadow: 0 4px 15px rgba(191, 10, 48, 0.3);
+        }
+
+        .promo-sticky-circle.active {
+            border-color: #BF0A30;
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            transform: scale(1.05);
+        }
+
+        .promo-sticky-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-sticky-circle:hover img {
+            transform: scale(1.1);
+        }
+
+        .promo-sticky-tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 40, 104, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .promo-sticky-circle:hover .promo-sticky-tooltip {
+            opacity: 1;
+        }
+
+        .promo-sticky-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid rgba(0, 40, 104, 0.9);
+        }
+
         .promo-patriotic-canvas {
             position: absolute;
             top: 0;
@@ -2491,6 +2680,30 @@
                 padding-top: 40px;
             }
 
+            .promo-sticky-nav {
+                top: 40px;
+            }
+
+            .promo-sticky-nav-content {
+                flex-direction: column;
+                gap: 10px;
+                padding: 8px 15px;
+            }
+
+            .promo-sticky-title {
+                font-size: 0.9rem;
+            }
+
+            .promo-sticky-circle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .promo-sticky-carousel {
+                gap: 8px;
+                justify-content: center;
+            }
+
             .promo-american-eagle {
                 font-size: 2rem;
             }
@@ -2728,75 +2941,138 @@
             });
         }
 
-        // Scroll to specific collection section
+        // Enhanced scroll behavior for sticky navigation
         function scrollToCollectionSection(collectionType) {
-            let targetSelector = '';
+            // Update sticky navigation active state
+            updateStickyActiveState(collectionType);
             
-            switch(collectionType) {
-                case 'pc-carboy':
-                    targetSelector = '.promo-collection-section:has([data-collection="pc-carboy"])';
-                    break;
-                case 'pc-tr-carboy':
-                    targetSelector = '.promo-collection-section:has([data-collection="pc-tr-carboy"])';
-                    break;
-                case 'ezbio-bottles':
-                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-bottles"])';
-                    break;
-                case 'ezbio-ts-bottles':
-                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-ts-bottles"])';
-                    break;
-                case 'pfa-bottles':
-                    targetSelector = '.promo-collection-section:has([data-collection="pfa-bottles"])';
-                    break;
-                case 'aqg':
-                    targetSelector = '.promo-collection-section:has([data-collection="aqg"])';
-                    break;
-                case 'cpc-connectors':
-                    targetSelector = '.promo-collection-section:has([data-collection="cpc-connectors"])';
-                    break;
-                case 'ezbio-assembly':
-                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-assembly"])';
-                    break;
-                case 'laboratory':
-                    targetSelector = '.promo-laboratory-sections .promo-collection-section';
-                    break;
-                default:
-                    return;
-            }
+            let targetSection = null;
             
-            // First ensure the right sections are visible
+            // Find the target section based on collection type
             if (collectionType === 'laboratory') {
                 exploreWorld('laboratory');
                 setTimeout(() => {
-                    const targetSection = document.querySelector(targetSelector);
+                    targetSection = document.querySelector('.promo-laboratory-sections .promo-collection-section');
                     if (targetSection) {
-                        targetSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        // Add highlight effect
-                        targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
-                        setTimeout(() => {
-                            targetSection.style.boxShadow = '';
-                        }, 2000);
+                        smoothScrollToSection(targetSection);
                     }
-                }, 300);
+                }, 100);
             } else {
                 exploreWorld('bioprocess');
                 setTimeout(() => {
-                    const targetSection = document.querySelector(targetSelector);
+                    // Find the section by checking for the category badge text
+                    const sections = document.querySelectorAll('.promo-bioprocess-sections .promo-collection-section');
+                    sections.forEach(section => {
+                        const badge = section.querySelector('.promo-category-badge');
+                        if (badge) {
+                            const badgeText = badge.textContent.toLowerCase();
+                            if (
+                                (collectionType === 'pc-carboy' && badgeText.includes('pc rectangular')) ||
+                                (collectionType === 'pc-tr-carboy' && badgeText.includes('pc tr')) ||
+                                (collectionType === 'ezbio-bottles' && badgeText.includes('ezbio bottles pc')) ||
+                                (collectionType === 'ezbio-ts-bottles' && badgeText.includes('ezbio ts')) ||
+                                (collectionType === 'pfa-bottles' && badgeText.includes('pfa bottles')) ||
+                                (collectionType === 'aqg' && badgeText.includes('aqg')) ||
+                                (collectionType === 'cpc-connectors' && badgeText.includes('cpc stream')) ||
+                                (collectionType === 'ezbio-assembly' && badgeText.includes('ezbio assemblies'))
+                            ) {
+                                targetSection = section;
+                            }
+                        }
+                    });
+                    
                     if (targetSection) {
-                        targetSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        // Add highlight effect
-                        targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
-                        setTimeout(() => {
-                            targetSection.style.boxShadow = '';
-                        }, 2000);
+                        smoothScrollToSection(targetSection);
                     }
-                }, 300);
+                }, 100);
+            }
+        }
+
+        function smoothScrollToSection(targetSection) {
+            const stickyNavHeight = document.querySelector('.promo-sticky-nav').offsetHeight;
+            const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
+            const totalOffset = stickyNavHeight + flagNavHeight + 20; // Extra padding
+            
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
+            // Add highlight effect
+            targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
+            setTimeout(() => {
+                targetSection.style.boxShadow = '';
+            }, 2000);
+        }
+
+        function updateStickyActiveState(activeCollection) {
+            const circles = document.querySelectorAll('.promo-sticky-circle');
+            circles.forEach(circle => {
+                circle.classList.remove('active');
+                if (circle.dataset.collection === activeCollection) {
+                    circle.classList.add('active');
+                }
+            });
+        }
+
+        // Sticky navigation visibility control
+        function handleStickyNavigation() {
+            const stickyNav = document.getElementById('sticky-nav');
+            const categorySection = document.querySelector('.promo-category-universe');
+            
+            if (!stickyNav || !categorySection) return;
+            
+            const categoryTop = categorySection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (categoryTop < 0) {
+                stickyNav.classList.add('visible');
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+            
+            // Update active state based on visible section
+            updateActiveBasedOnScroll();
+        }
+
+        function updateActiveBasedOnScroll() {
+            const sections = document.querySelectorAll('.promo-collection-section');
+            const stickyNavHeight = document.querySelector('.promo-sticky-nav').offsetHeight;
+            const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
+            const offset = stickyNavHeight + flagNavHeight + 100;
+            
+            let activeSection = null;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= offset && rect.bottom >= offset) {
+                    activeSection = section;
+                }
+            });
+            
+            if (activeSection) {
+                const badge = activeSection.querySelector('.promo-category-badge');
+                if (badge) {
+                    const badgeText = badge.textContent.toLowerCase();
+                    let collectionType = '';
+                    
+                    if (badgeText.includes('pc rectangular')) collectionType = 'pc-carboy';
+                    else if (badgeText.includes('pc tr')) collectionType = 'pc-tr-carboy';
+                    else if (badgeText.includes('ezbio bottles pc')) collectionType = 'ezbio-bottles';
+                    else if (badgeText.includes('ezbio ts')) collectionType = 'ezbio-ts-bottles';
+                    else if (badgeText.includes('pfa bottles')) collectionType = 'pfa-bottles';
+                    else if (badgeText.includes('aqg')) collectionType = 'aqg';
+                    else if (badgeText.includes('cpc stream')) collectionType = 'cpc-connectors';
+                    else if (badgeText.includes('ezbio assemblies')) collectionType = 'ezbio-assembly';
+                    else if (badgeText.includes('laboratory')) collectionType = 'laboratory';
+                    
+                    if (collectionType) {
+                        updateStickyActiveState(collectionType);
+                    }
+                }
             }
         }
 
@@ -2814,6 +3090,10 @@
             // Initialize carousels
             initializeCarousel('bioprocess-carousel');
             initializeCarousel('laboratory-carousel');
+
+            // Initialize sticky navigation
+            window.addEventListener('scroll', handleStickyNavigation);
+            handleStickyNavigation(); // Initial check
         });
     </script>
 </body>
