@@ -1568,13 +1568,13 @@
             margin: 0 auto;
             max-width: 100%;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(15px);
-            border-top: 3px solid #095ea7;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(9, 94, 167, 0.3);
             border-radius: 15px 15px 0 0;
             z-index: 999;
             transition: bottom 0.4s ease, opacity 0.3s ease;
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
         }
@@ -1589,6 +1589,8 @@
             padding: 15px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
         }
 
         .promo-sticky-header {
@@ -1630,9 +1632,10 @@
         }
 
         .promo-sticky-toggle {
-            background: rgba(9, 94, 167, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             color: #095ea7;
-            border: 2px solid #095ea7;
+            border: 1px solid rgba(9, 94, 167, 0.4);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -1642,9 +1645,10 @@
         }
 
         .promo-sticky-toggle.active {
-            background: linear-gradient(45deg, #095ea7, #BF0A30);
+            background: rgba(9, 94, 167, 0.3);
+            backdrop-filter: blur(15px);
             color: white;
-            border-color: #BF0A30;
+            border-color: rgba(191, 10, 48, 0.6);
         }
 
         .promo-sticky-toggle:hover {
@@ -1671,25 +1675,28 @@
         .promo-sticky-card {
             flex: 0 0 auto;
             width: 120px;
-            background: white;
-            border: 2px solid #095ea7;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(9, 94, 167, 0.3);
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 40, 104, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 40, 104, 0.15);
         }
 
         .promo-sticky-card:hover {
             transform: translateY(-3px);
-            border-color: #BF0A30;
+            border-color: rgba(191, 10, 48, 0.6);
+            background: rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 25px rgba(191, 10, 48, 0.2);
         }
 
         .promo-sticky-card.active {
-            border-color: #BF0A30;
-            background: linear-gradient(135deg, rgba(191, 10, 48, 0.05), rgba(255, 215, 0, 0.05));
+            border-color: rgba(191, 10, 48, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
             transform: translateY(-2px);
         }
 
