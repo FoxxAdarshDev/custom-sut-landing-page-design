@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Independence Day Freedom Sale - Revolutionary Bioprocess & Laboratory Equipment</title>
-</head>
-<body class="promo-independence-body">
+<div class="promo-independence-wrapper">
     {% comment %} Dynamic Product Collections {% endcomment %}
     {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
     {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
@@ -1957,12 +1950,14 @@
     </section>
 
     <style>
-        .promo-independence-body {
+        .promo-independence-wrapper {
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
             color: #1a1a2e;
             overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
         }
 
 
@@ -3887,5 +3882,4 @@
             handleStickyNavigation(); // Initial check
         });
     </script>
-</body>
-</html>
+</div>
