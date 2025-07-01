@@ -1960,12 +1960,22 @@
             max-width: 100%;
             min-height: 100vh;
             box-sizing: border-box;
+            position: relative;
+            contain: layout style;
         }
 
         /* Ensure all child elements respect container boundaries */
-        .promo-independence-wrapper * {
+        .promo-independence-wrapper *,
+        .promo-independence-wrapper *::before,
+        .promo-independence-wrapper *::after {
             max-width: 100%;
             box-sizing: border-box;
+        }
+
+        /* Prevent any elements from exceeding container width */
+        .promo-independence-wrapper > * {
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
 
@@ -1979,10 +1989,11 @@
             justify-content: center;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
-            padding-top: 20px;
+            padding: 20px;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
+            contain: layout;
         }
 
         /* Enhanced Sticky Navigation Styles */
@@ -2272,8 +2283,10 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 1200px;
+            max-width: min(1200px, 100%);
             padding: 40px 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .promo-liberty-badge {
@@ -2435,6 +2448,10 @@
         .promo-category-universe {
             padding: 80px 20px;
             background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .promo-universe-header {
@@ -2458,10 +2475,14 @@
 
         .promo-dual-worlds {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
             gap: 40px;
-            max-width: 1200px;
+            max-width: min(1200px, 100%);
             margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
         }
 
         .promo-world {
@@ -2475,6 +2496,9 @@
             overflow: hidden;
             cursor: pointer;
             border: 3px solid #095ea7;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .promo-world:hover {
@@ -2660,6 +2684,9 @@
             display: flex;
             align-items: stretch;
             gap: 40px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .promo-section-info {
@@ -2674,6 +2701,7 @@
             box-shadow: 0 10px 30px rgba(9, 94, 167, 0.15);
             position: relative;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         .promo-section-info::before {
@@ -2795,7 +2823,7 @@
             min-width: 0;
             max-width: 55%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
             grid-auto-rows: min-content;
             gap: 20px;
             padding: 25px;
@@ -2811,6 +2839,7 @@
             overflow-x: hidden;
             box-sizing: border-box;
             width: 100%;
+            contain: layout style;
         }
 
         /* Ensure minimum width for cards even with many products */
@@ -3458,9 +3487,20 @@
 
             .promo-products-grid {
                 max-width: 100%;
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(min(150px, calc(50% - 10px)), 1fr));
                 gap: 18px;
                 padding: 20px;
+            }
+            
+            .promo-dual-worlds {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 10px;
+            }
+            
+            .promo-section-container {
+                padding: 0 10px;
+                max-width: 100%;
             }
 
             .promo-timer-grid,
