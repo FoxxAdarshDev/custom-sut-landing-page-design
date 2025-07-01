@@ -190,9 +190,6 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
-                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
-                        🚀 EXPLORE BIOPROCESS
-                    </button>
                 </div>
             </div>
 
@@ -252,9 +249,6 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
-                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
-                        🚀 EXPLORE LABORATORY
-                    </button>
                 </div>
             </div>
         </div>
@@ -1203,7 +1197,7 @@
     </div>
 
     <!-- Laboratory Section -->
-    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
+    <div class="promo-laboratory-sections" id="laboratory-sections">
         {% if laboratory_collection.products.size > 0 %}
         <section class="promo-collection-section">
             <div class="promo-flag-bg">
@@ -2616,19 +2610,11 @@
             }
         }
 
-        // World exploration functionality
-        function exploreWorld(worldType) {
-            const bioprocessSections = document.getElementById('bioprocess-sections');
-            const laboratorySections = document.getElementById('laboratory-sections');
-
-            if (worldType === 'bioprocess') {
-                bioprocessSections.style.display = 'block';
-                laboratorySections.style.display = 'none';
-                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                bioprocessSections.style.display = 'none';
-                laboratorySections.style.display = 'block';
-                laboratorySections.scrollIntoView({ behavior: 'smooth' });
+        // Scroll to sections functionality
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -2805,10 +2791,14 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Show bioprocess sections by default
+            // Show both sections by default
             const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
             if (bioprocessSections) {
                 bioprocessSections.style.display = 'block';
+            }
+            if (laboratorySections) {
+                laboratorySections.style.display = 'block';
             }
 
             // Initialize carousels
