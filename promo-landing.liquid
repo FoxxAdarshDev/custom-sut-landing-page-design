@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Independence Day Freedom Sale - Revolutionary Bioprocess & Laboratory Equipment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="promo-independence-body">
     {% comment %} Dynamic Product Collections {% endcomment %}
@@ -23,12 +22,7 @@
         <div class="promo-flag-container">
             <div class="promo-flag-stars">
                 <div class="promo-nav-stars">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★
                 </div>
             </div>
             <div class="promo-flag-stripes">
@@ -115,26 +109,74 @@
         <div class="promo-dual-worlds">
             <!-- Bioprocess World -->
             <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
-                <div class="promo-world-flag">
-                    <div class="promo-mini-flag">
-                        <div class="promo-flag-stars-mini">
-                            <div class="promo-mini-stars">★★★★★</div>
-                        </div>
-                        <div class="promo-flag-stripes-mini">
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="promo-world-flag">🇺🇸</div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
                     <p class="promo-world-desc">8 Categories of Cutting-Edge Equipment</p>
+
+                    <!-- Collection Image Carousel -->
+                    <div class="promo-collection-carousel" id="bioprocess-carousel">
+                        <div class="promo-carousel-container">
+                            {% if pc_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                                <img src="{{ pc_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_carboy_collection.title }}">
+                                <div class="promo-circle-label">PC Carboy</div>
+                            </div>
+                            {% endif %}
+
+                            {% if pc_tr_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                                <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
+                                <div class="promo-circle-label">PC TR Carboy</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                                <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
+                                <div class="promo-circle-label">EZBio Bottles</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_ts_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                                <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
+                                <div class="promo-circle-label">EZBio TS</div>
+                            </div>
+                            {% endif %}
+
+                            {% if pfa_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                                <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
+                                <div class="promo-circle-label">PFA Bottles</div>
+                            </div>
+                            {% endif %}
+
+                            {% if aqg_collection.image %}
+                            <div class="promo-collection-circle" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                                <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
+                                <div class="promo-circle-label">AQG</div>
+                            </div>
+                            {% endif %}
+
+                            {% if cpc_stream_thru_connectors_collection.image %}
+                            <div class="promo-collection-circle" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                                <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
+                                <div class="promo-circle-label">CPC Connectors</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_bottle_assembly_pc_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                                <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
+                                <div class="promo-circle-label">Assemblies</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="promo-carousel-dots" id="bioprocess-dots"></div>
+                    </div>
+
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
@@ -156,26 +198,50 @@
 
             <!-- Laboratory World -->
             <div class="promo-world promo-laboratory-world" data-world="laboratory">
-                <div class="promo-world-flag">
-                    <div class="promo-mini-flag">
-                        <div class="promo-flag-stars-mini">
-                            <div class="promo-mini-stars">★★★★★</div>
-                        </div>
-                        <div class="promo-flag-stripes-mini">
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                            <div class="promo-mini-stripe promo-mini-white"></div>
-                            <div class="promo-mini-stripe promo-mini-red"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="promo-world-flag">🇺🇸</div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🔬</div>
                     <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
                     <p class="promo-world-desc">Premium Laboratory Essentials</p>
+
+                    <!-- Laboratory Collection Image Carousel -->
+                    <div class="promo-collection-carousel" id="laboratory-carousel">
+                        <div class="promo-carousel-container">
+                            {% if laboratory_collection.image %}
+                            <div class="promo-collection-circle" data-collection="laboratory" onclick="scrollToCollectionSection('laboratory')">
+                                <img src="{{ laboratory_collection.image | img_url: '150x150' }}" alt="{{ laboratory_collection.title }}">
+                                <div class="promo-circle-label">Lab Equipment</div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Additional laboratory subcategories if available -->
+                            {% assign lab_bottles_collection = collections['laboratory-bottles-us-independence-day-sale-25'] %}
+                            {% if lab_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="lab-bottles" onclick="scrollToCollectionSection('lab-bottles')">
+                                <img src="{{ lab_bottles_collection.image | img_url: '150x150' }}" alt="{{ lab_bottles_collection.title }}">
+                                <div class="promo-circle-label">Lab Bottles</div>
+                            </div>
+                            {% endif %}
+
+                            {% assign lab_storage_collection = collections['laboratory-storage-us-independence-day-sale-25'] %}
+                            {% if lab_storage_collection.image %}
+                            <div class="promo-collection-circle" data-collection="lab-storage" onclick="scrollToCollectionSection('lab-storage')">
+                                <img src="{{ lab_storage_collection.image | img_url: '150x150' }}" alt="{{ lab_storage_collection.title }}">
+                                <div class="promo-circle-label">Storage</div>
+                            </div>
+                            {% endif %}
+
+                            {% assign lab_instruments_collection = collections['laboratory-instruments-us-independence-day-sale-25'] %}
+                            {% if lab_instruments_collection.image %}
+                            <div class="promo-collection-circle" data-collection="lab-instruments" onclick="scrollToCollectionSection('lab-instruments')">
+                                <img src="{{ lab_instruments_collection.image | img_url: '150x150' }}" alt="{{ lab_instruments_collection.title }}">
+                                <div class="promo-circle-label">Instruments</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="promo-carousel-dots" id="laboratory-dots"></div>
+                    </div>
+
                     <div class="promo-world-stats">
                         <div class="promo-stat">
                             <span class="promo-stat-number">{{ laboratory_collection.products.size }}+</span>
@@ -193,20 +259,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Enhanced Sticky Category Navigation -->
-    <div class="promo-sticky-category-nav" id="sticky-category-nav">
-        <div class="promo-world-nav-container">
-            <div class="promo-world-nav-item promo-active" data-world="bioprocess">
-                <div class="promo-world-circle">🧬</div>
-                <div class="promo-world-nav-text">Bioprocess Revolution</div>
-            </div>
-            <div class="promo-world-nav-item" data-world="laboratory">
-                <div class="promo-world-circle">🔬</div>
-                <div class="promo-world-nav-text">Laboratory Revolution</div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bioprocess Categories Sections -->
     <div class="promo-bioprocess-sections" id="bioprocess-sections">
@@ -232,7 +284,45 @@
             <div class="promo-section-container">
                 <div class="promo-section-content">
                     <div class="promo-section-info">
-                        <div class="promo-flag-icon"><span class="promo-animated-flag">🇺🇸</span></div>
+                        <div class="promo-flag-icon"><span class="promo-animated-flag"> <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg></span></div>
                         <div class="promo-category-badge">⚗️ PC RECTANGULAR CARBOY</div>
                         <h2 class="promo-section-title">Premium Polycarbonate Space-Saving Solutions</h2>
                         <p class="promo-section-description">Revolutionary rectangular carboys designed for maximum efficiency and space optimization in bioprocessing applications. Made from high-quality polycarbonate for superior clarity and durability.</p>
@@ -251,39 +341,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-pc-carboy">
-                                {% for product in pc_carboy_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">⚗️</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 20% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in pc_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">⚗️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    20% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pc-carboy', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pc-carboy', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -311,7 +434,7 @@
             <div class="promo-section-container">
                 <div class="promo-section-content">
                     <div class="promo-section-info">
-                        <div class="promo-flag-icon"><span class="promo-animated-flag">🇺🇸</span></div>
+                        <div class="promo-flag-icon"><span class="promo-animated-flag"></span></div>
                         <div class="promo-category-badge">🔄 PC TR CARBOY</div>
                         <h2 class="promo-section-title">Advanced Temperature Resistant Carboys</h2>
                         <p class="promo-section-description">Next-generation polycarbonate carboys with enhanced temperature resistance for demanding bioprocess applications. Perfect for high-performance laboratory environments.</p>
@@ -330,39 +453,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-pc-tr">
-                                {% for product in pc_tr_carboy_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🔄</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 25% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in pc_tr_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔄</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pc-tr', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pc-tr', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -409,38 +565,74 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-ezbio-pc">
-                                {% for product in ezbio_bottles_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🧪</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 30% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-ezbio-pc', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-ezbio-pc', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
                         </div>
                     </div>
                 </div>
@@ -488,39 +680,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-ezbio-ts">
-                                {% for product in ezbio_ts_bottles_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">💎</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 25% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_ts_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">💎</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-ezbio-ts', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-ezbio-ts', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -567,39 +792,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-pfa">
-                                {% for product in pfa_bottles_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🏛️</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 30% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in pfa_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🏛️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-pfa', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-pfa', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -646,39 +904,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-aqg">
-                                {% for product in aqg_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">💧</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 35% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in aqg_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">💧</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    35% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-aqg', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-aqg', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -725,39 +1016,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-cpc">
-                                {% for product in cpc_stream_thru_connectors_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🔗</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 30% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in cpc_stream_thru_connectors_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔗</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-cpc', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-cpc', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -804,39 +1128,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-assembly">
-                                {% for product in ezbio_bottle_assembly_pc_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🔧</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 25% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_bottle_assembly_pc_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔧</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-assembly', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-assembly', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -846,7 +1203,7 @@
     </div>
 
     <!-- Laboratory Section -->
-    <div class="promo-laboratory-sections" id="laboratory-sections">
+    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
         {% if laboratory_collection.products.size > 0 %}
         <section class="promo-collection-section">
             <div class="promo-flag-bg">
@@ -886,39 +1243,72 @@
                         </a>
                     </div>
 
-                    <div class="promo-section-carousel">
-                        <div class="promo-carousel-container">
-                            <div class="promo-carousel-track" id="carousel-laboratory">
-                                {% for product in laboratory_collection.products %}
-                                <div class="promo-carousel-slide">
-                                    <div class="promo-product-card">
-                                        <div class="promo-product-image">
-                                            {% if product.featured_image %}
-                                                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-                                            {% else %}
-                                                <div class="promo-placeholder-img">🔬</div>
-                                            {% endif %}
-                                            <div class="promo-sale-badge"><span class="promo-animated-flag">🇺🇸</span> 40% OFF</div>
-                                        </div>
-                                        <div class="promo-product-content">
-                                            <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
-                                            <div class="promo-product-price">
-                                                {% if product.compare_at_price > product.price %}
-                                                    <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% else %}
-                                                    <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
-                                        </div>
-                                    </div>
+                    <div class="promo-products-grid">
+                        {% for product in laboratory_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔬</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    40% OFF
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="promo-carousel-btn promo-prev-btn" onclick="moveCarousel('carousel-laboratory', -1)">‹</button>
-                            <button class="promo-carousel-btn promo-next-btn" onclick="moveCarousel('carousel-laboratory', 1)">›</button>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM FREEDOM</a>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -973,7 +1363,6 @@
         .promo-independence-body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
             color: #1a1a2e;
             overflow-x: hidden;
@@ -997,41 +1386,20 @@
         .promo-flag-stars {
             background: #002868;
             width: 40%;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 3px;
-            padding: 8px;
+            display: flex;
             align-items: center;
-            justify-items: center;
+            justify-content: center;
         }
 
         .promo-nav-stars {
             color: white;
-            font-size: 10px;
+            font-size: 12px;
             animation: promo-nav-twinkle 2s ease-in-out infinite;
-        }
-
-        .promo-nav-stars span {
-            display: inline-block;
-            animation: promo-star-twinkle 1.5s ease-in-out infinite;
-        }
-
-        .promo-nav-stars span:nth-child(odd) {
-            animation-delay: 0.3s;
-        }
-
-        .promo-nav-stars span:nth-child(even) {
-            animation-delay: 0.8s;
         }
 
         @keyframes promo-nav-twinkle {
             0%, 100% { opacity: 0.8; }
             50% { opacity: 1; }
-        }
-
-        @keyframes promo-star-twinkle {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .promo-flag-stripes {
@@ -1061,7 +1429,7 @@
             justify-content: center;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
-            margin-top: 60px;
+            padding-top: 60px;
         }
 
         .promo-patriotic-canvas {
@@ -1349,175 +1717,8 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 60px;
-            height: 36px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            overflow: hidden;
+            font-size: 2rem;
             animation: promo-flag-wave 2s ease-in-out infinite;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .promo-mini-flag {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-        }
-
-        .promo-flag-stars-mini {
-            background: #002868;
-            width: 40%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .promo-mini-stars {
-            color: white;
-            font-size: 6px;
-            letter-spacing: 1px;
-            animation: promo-mini-twinkle 2s ease-in-out infinite;
-        }
-
-        @keyframes promo-mini-twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; text-shadow: 0 0 3px rgba(255,255,255,0.8); }
-        }
-
-        .promo-flag-stripes-mini {
-            width: 60%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .promo-mini-stripe {
-            flex: 1;
-        }
-
-        .promo-mini-stripe.promo-mini-red {
-            background: #BF0A30;
-        }
-
-        .promo-mini-stripe.promo-mini-white {
-            background: white;
-        }
-
-        /* Enhanced Sticky Category Navigation */
-        .promo-sticky-category-nav {
-            position: sticky;
-            top: 60px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 3px solid #095ea7;
-            z-index: 100;
-            padding: 15px 0;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(-100%);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .promo-sticky-category-nav.promo-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced World Navigation with Circular Icons */
-        .promo-world-nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .promo-world-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .promo-world-nav-item.promo-active {
-            transform: scale(1.05);
-        }
-
-        .promo-world-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #095ea7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .promo-world-nav-item:hover .promo-world-circle {
-            border-color: #BF0A30;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(191, 10, 48, 0.3);
-        }
-
-        .promo-world-nav-item.promo-active .promo-world-circle {
-            background: linear-gradient(45deg, #BF0A30, #095ea7);
-            color: white;
-            border-color: #BF0A30;
-        }
-
-        .promo-world-nav-text {
-            font-weight: 700;
-            color: #002868;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .promo-world-nav-item.promo-active .promo-world-nav-text {
-            color: #BF0A30;
-        }
-
-        .promo-sticky-nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 0 20px;
-        }
-
-        .promo-sticky-btn {
-            background: linear-gradient(45deg, #002868, #095ea7);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .promo-sticky-btn:hover {
-            background: linear-gradient(45deg, #BF0A30, #FFD700);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
-        }
-
-        .promo-sticky-btn.promo-active {
-            background: linear-gradient(45deg, #BF0A30, #FFD700);
-            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
         }
 
         @keyframes promo-flag-wave {
@@ -1591,9 +1792,10 @@
         /* Collection Sections */
         .promo-collection-section {
             position: relative;
-            padding: 80px 20px;
-            margin-bottom: 60px;
+            padding: 60px 20px;
+            margin-bottom: 40px;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
         }
 
         .promo-flag-bg {
@@ -1603,7 +1805,7 @@
             right: 0;
             bottom: 0;
             z-index: 1;
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         .promo-animated-stars {
@@ -1615,19 +1817,23 @@
         .promo-star {
             position: absolute;
             color: #002868;
-            font-size: 2rem;
-            animation: promo-star-twinkle 3s ease-in-out infinite;
+            font-size: 2.5rem;
+            animation: promo-star-twinkle 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px rgba(0, 40, 104, 0.3));
         }
 
-        .promo-star-1 { top: 10%; left: 10%; animation-delay: 0s; }
-        .promo-star-2 { top: 20%; right: 15%; animation-delay: 0.5s; }
-        .promo-star-3 { bottom: 30%; left: 20%; animation-delay: 1s; }
-        .promo-star-4 { bottom: 20%; right: 10%; animation-delay: 1.5s; }
-        .promo-star-5 { top: 50%; left: 50%; animation-delay: 2s; }
+        .promo-star-1 { top: 15%; left: 5%; animation-delay: 0s; }
+        .promo-star-2 { top: 25%; right: 8%; animation-delay: 0.8s; }
+        .promo-star-3 { bottom: 35%; left: 12%; animation-delay: 1.6s; }
+        .promo-star-4 { bottom: 25%; right: 15%; animation-delay: 2.4s; }
+        .promo-star-5 { top: 45%; left: 45%; animation-delay: 3.2s; }
+        .promo-star-6 { top: 35%; right: 45%; animation-delay: 4s; }
 
         @keyframes promo-star-twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.2); }
+            0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+            25% { opacity: 0.8; transform: scale(1.3) rotate(45deg); }
+            50% { opacity: 1; transform: scale(1.5) rotate(90deg); }
+            75% { opacity: 0.6; transform: scale(1.2) rotate(135deg); }
         }
 
         .promo-animated-stripes {
@@ -1638,19 +1844,20 @@
 
         .promo-moving-stripe {
             position: absolute;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(90deg, transparent, #BF0A30, transparent);
-            animation: promo-stripe-move 4s linear infinite;
+            width: 120%;
+            height: 30px;
+            background: linear-gradient(90deg, transparent, rgba(191, 10, 48, 0.1), transparent);
+            animation: promo-stripe-move 6s linear infinite;
+            border-radius: 15px;
         }
 
-        .promo-stripe-1 { top: 25%; animation-delay: 0s; }
-        .promo-stripe-2 { top: 50%; animation-delay: 1s; }
-        .promo-stripe-3 { top: 75%; animation-delay: 2s; }
+        .promo-stripe-1 { top: 20%; animation-delay: 0s; }
+        .promo-stripe-2 { top: 45%; animation-delay: 2s; }
+        .promo-stripe-3 { top: 70%; animation-delay: 4s; }
 
         @keyframes promo-stripe-move {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% { transform: translateX(-120%) skewX(-15deg); }
+            100% { transform: translateX(120%) skewX(-15deg); }
         }
 
         .promo-section-container {
@@ -1661,52 +1868,87 @@
         }
 
         .promo-section-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            align-items: center;
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
         }
 
         .promo-section-info {
-            background: rgba(255, 255, 255, 0.95);
+            flex: 0 0 400px;
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 25px;
-            padding: 40px;
+            padding: 35px 30px;
             border: 3px solid #095ea7;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(9, 94, 167, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-section-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(191, 10, 48, 0.05), transparent);
+            animation: promo-info-shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes promo-info-shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .promo-flag-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            animation: promo-flag-wave 2s ease-in-out infinite;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: promo-flag-wave 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(191, 10, 48, 0.3));
+            position: relative;
+            z-index: 1;
         }
 
         .promo-category-badge {
             display: inline-block;
             background: linear-gradient(45deg, #BF0A30, #095ea7);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
+            animation: promo-badge-glow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes promo-badge-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(191, 10, 48, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(9, 94, 167, 0.6); }
         }
 
         .promo-section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
             color: #002868;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 900;
-            line-height: 1.2;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0, 40, 104, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .promo-section-description {
-            color: #6c757d;
-            font-size: 1.1rem;
+            color: #495057;
+            font-size: 1rem;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .promo-section-stats {
@@ -1756,49 +1998,59 @@
             color: white;
         }
 
-        /* Carousel Styles */
-        .promo-section-carousel {
-            position: relative;
-        }
-
-        .promo-carousel-container {
+        /* Products Grid Layout */
+        .promo-products-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            border: 3px solid #095ea7;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(9, 94, 167, 0.1);
             position: relative;
             overflow: hidden;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 3px solid #095ea7;
-            backdrop-filter: blur(10px);
+            max-height: 800px;
+            overflow-y: auto;
         }
 
-        .promo-carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-            padding: 20px;
-            gap: 20px;
+        .promo-products-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: promo-grid-shine 4s ease-in-out infinite;
         }
 
-        .promo-carousel-slide {
-            min-width: 280px;
-            flex-shrink: 0;
+        @keyframes promo-grid-shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
         }
 
         .promo-product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 2px solid #e9ecef;
+            height: fit-content;
         }
 
         .promo-product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             border-color: #BF0A30;
         }
 
         .promo-product-image {
-            height: 180px;
+            height: 160px;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             display: flex;
             align-items: center;
@@ -1810,12 +2062,13 @@
         .promo-product-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 10px;
             transition: transform 0.3s ease;
         }
 
         .promo-product-card:hover .promo-product-image img {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .promo-placeholder-img {
@@ -1824,7 +2077,7 @@
             color: #6c757d;
         }
 
-        .promo-sale-badge {
+        .promo-sale-badge-modern {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -1835,6 +2088,12 @@
             font-size: 0.75rem;
             font-weight: 700;
             animation: promo-badge-pulse 2s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+        }
+
+        .promo-us-flag-svg {
+            margin-right: 5px;
         }
 
         @keyframes promo-badge-pulse {
@@ -1894,34 +2153,7 @@
             color: white;
         }
 
-        .promo-carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 40, 104, 0.9);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
 
-        .promo-carousel-btn:hover {
-            background: #BF0A30;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .promo-prev-btn {
-            left: 10px;
-        }
-
-        .promo-next-btn {
-            right: 10px;
-        }
 
         /* Final CTA Section */
         .promo-freedom-finale {
@@ -2057,28 +2289,192 @@
             text-decoration: none;
         }
 
-        /* Section Transitions */
-        .promo-bioprocess-sections,
-        .promo-laboratory-sections {
-            transition: all 0.5s ease;
-            transform-origin: center top;
+        /* Independence Day Fireworks Animation */
+        .promo-collection-section::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 6px;
+            height: 6px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: promo-firework-burst 6s ease-out infinite;
+            z-index: 1;
         }
 
-        .promo-bioprocess-sections.promo-fade-out,
-        .promo-laboratory-sections.promo-fade-out {
-            opacity: 0;
-            transform: translateY(30px);
+        @keyframes promo-firework-burst {
+            0% { 
+                transform: scale(0);
+                opacity: 1;
+                box-shadow: 0 0 0 0 #FFD700, 0 0 0 0 #BF0A30, 0 0 0 0 #002868;
+            }
+            20% { 
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: 0 0 20px 5px #FFD700, 0 0 15px 3px #BF0A30, 0 0 10px 2px #002868;
+            }
+            40% { 
+                transform: scale(3);
+                opacity: 0.8;
+                box-shadow: 0 0 40px 15px rgba(255, 215, 0, 0.6), 0 0 30px 10px rgba(191, 10, 48, 0.6), 0 0 20px 5px rgba(0, 40, 104, 0.6);
+            }
+            100% { 
+                transform: scale(6);
+                opacity: 0;
+                box-shadow: 0 0 60px 25px rgba(255, 215, 0, 0), 0 0 50px 20px rgba(191, 10, 48, 0), 0 0 40px 15px rgba(0, 40, 104, 0);
+            }
         }
 
-        .promo-bioprocess-sections.promo-fade-in,
-        .promo-laboratory-sections.promo-fade-in {
-            opacity: 1;
-            transform: translateY(0);
+        /* Add more stars for enhanced effect */
+        .promo-animated-stars::after {
+            content: '★';
+            position: absolute;
+            top: 60%;
+            left: 85%;
+            font-size: 2rem;
+            color: #FFD700;
+            animation: promo-star-twinkle 3s ease-in-out infinite;
+            animation-delay: 1s;
         }
 
-        /* Smooth scroll behavior */
-        html {
+        .promo-animated-stars::before {
+            content: '★';
+            position: absolute;
+            top: 30%;
+            left: 25%;
+            font-size: 1.8rem;
+            color: #BF0A30;
+            animation: promo-star-twinkle 4s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        /* Collection Carousel Styles */
+        .promo-collection-carousel {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .promo-carousel-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
             scroll-behavior: smooth;
+            padding: 20px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .promo-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-collection-circle {
+            flex: 0 0 auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #095ea7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 40, 104, 0.2);
+        }
+
+        .promo-collection-circle:hover {
+            transform: scale(1.1);
+            border-color: #BF0A30;
+            box-shadow: 0 8px 25px rgba(191, 10, 48, 0.3);
+        }
+
+        .promo-collection-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-collection-circle:hover img {
+            transform: scale(1.1);
+        }
+
+        .promo-circle-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #002868;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid #095ea7;
+        }
+
+        .promo-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .promo-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-carousel-dot.active {
+            background: #BF0A30;
+            transform: scale(1.2);
+        }
+
+        /* Auto-rotate animation */
+        .promo-carousel-auto-rotate {
+            animation: promo-carousel-rotate 8s ease-in-out infinite;
+        }
+
+        @keyframes promo-carousel-rotate {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .promo-collection-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .promo-circle-label {
+                font-size: 0.6rem;
+                bottom: -20px;
+            }
+
+            .promo-carousel-container {
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            /* Show only one circle at a time on mobile */
+            .promo-carousel-container {
+                justify-content: center;
+            }
+
+            .promo-collection-circle:not(.active-mobile) {
+                display: none;
+            }
         }
 
         /* Mobile Responsive */
@@ -2092,40 +2488,7 @@
             }
 
             .promo-hero-revolution {
-                margin-top: 40px;
-            }
-
-            .promo-world-nav-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .promo-world-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .promo-world-nav-text {
-                font-size: 0.9rem;
-            }
-
-            .promo-sticky-category-nav {
-                top: 40px;
-                padding: 10px 0;
-            }
-
-            .promo-sticky-nav-container {
-                gap: 10px;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .promo-sticky-btn {
-                padding: 10px 25px;
-                font-size: 0.8rem;
-                width: 100%;
-                max-width: 250px;
+                padding-top: 40px;
             }
 
             .promo-american-eagle {
@@ -2146,26 +2509,27 @@
             }
 
             .promo-section-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
+                flex-direction: column;
+                gap: 30px;
             }
 
             .promo-section-info {
-                padding: 30px 20px;
+                flex: none;
+                padding: 25px 20px;
+            }
+
+            .promo-flag-icon {
+                font-size: 4rem;
             }
 
             .promo-section-stats {
                 gap: 20px;
             }
 
-            .promo-carousel-slide {
-                min-width: 250px;
-            }
-
-            .promo-carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+            .promo-products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
             }
 
             .promo-timer-grid,
@@ -2194,16 +2558,6 @@
                 max-width: 300px;
             }
 
-            /* Mobile carousel adjustments */
-            .promo-carousel-track {
-                padding: 15px;
-                gap: 15px;
-            }
-
-            .promo-carousel-slide {
-                min-width: 220px;
-            }
-
             .promo-product-image {
                 height: 150px;
             }
@@ -2212,23 +2566,18 @@
                 padding: 15px;
             }
 
-            .promo-prev-btn {
-                left: 5px;
-            }
-
-            .promo-next-btn {
-                right: 5px;
+            .promo-star {
+                font-size: 1.8rem;
             }
         }
-		.promo-animated-flag {
-			animation: promo-flag-wave 2s ease-in-out infinite;
-			display: inline-block;
-		}
-		.promo-flag-image {
-			width: 100%;
-			height: auto;
-			display: block;
-		}
+        .promo-animated-flag {
+            animation: promo-flag-wave 2s ease-in-out infinite;
+            display: inline-block;
+        }
+        .promo-flag-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
     </style>
 
     <script>
@@ -2267,96 +2616,188 @@
             }
         }
 
-        // Enhanced World exploration with smooth transitions
+        // World exploration functionality
         function exploreWorld(worldType) {
             const bioprocessSections = document.getElementById('bioprocess-sections');
             const laboratorySections = document.getElementById('laboratory-sections');
-            
-            // Add fade out effect to current section
-            const currentSection = bioprocessSections.style.display !== 'none' ? bioprocessSections : laboratorySections;
-            currentSection.classList.add('promo-fade-out');
-            
-            setTimeout(() => {
-                if (worldType === 'bioprocess') {
-                    bioprocessSections.style.display = 'block';
-                    laboratorySections.style.display = 'none';
-                    bioprocessSections.classList.remove('promo-fade-out');
-                    bioprocessSections.classList.add('promo-fade-in');
-                } else {
-                    laboratorySections.style.display = 'block';
-                    bioprocessSections.style.display = 'none';
-                    laboratorySections.classList.remove('promo-fade-out');
-                    laboratorySections.classList.add('promo-fade-in');
-                }
-                updateStickyNavButtons(worldType);
-            }, 250);
-        }
 
-        // Update sticky navigation buttons with enhanced styling
-        function updateStickyNavButtons(activeWorld) {
-            const navItems = document.querySelectorAll('.promo-world-nav-item');
-            navItems.forEach(item => {
-                item.classList.remove('promo-active');
-                if (item.dataset.world === activeWorld) {
-                    item.classList.add('promo-active');
-                }
-            });
-        }
-
-        // Sticky navigation functionality
-        function handleStickyNavigation() {
-            const stickyNav = document.getElementById('sticky-category-nav');
-            const categorySection = document.querySelector('.promo-category-universe');
-            
-            if (!stickyNav || !categorySection) return;
-
-            const categoryRect = categorySection.getBoundingClientRect();
-            const shouldShow = categoryRect.bottom <= 60; // Show when category section is past navigation
-
-            if (shouldShow) {
-                stickyNav.classList.add('promo-visible');
+            if (worldType === 'bioprocess') {
+                bioprocessSections.style.display = 'block';
+                laboratorySections.style.display = 'none';
+                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
             } else {
-                stickyNav.classList.remove('promo-visible');
+                bioprocessSections.style.display = 'none';
+                laboratorySections.style.display = 'block';
+                laboratorySections.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // Carousel functionality
-        const carouselPositions = {};
 
-        function moveCarousel(carouselId, direction) {
-            const track = document.getElementById(carouselId);
-            if (!track) return;
 
-            const slides = track.querySelectorAll('.promo-carousel-slide');
-            const slideWidth = slides[0].offsetWidth + 20; // Include gap
+        // Collection carousel functionality
+        function initializeCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
 
-            if (!carouselPositions[carouselId]) {
-                carouselPositions[carouselId] = 0;
+            const container = carousel.querySelector('.promo-carousel-container');
+            const circles = carousel.querySelectorAll('.promo-collection-circle');
+            const dotsContainer = carousel.querySelector('.promo-carousel-dots');
+
+            if (circles.length === 0) return;
+
+            // Create dots
+            circles.forEach((circle, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'promo-carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => scrollToCircle(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            let currentIndex = 0;
+            let autoRotateInterval;
+
+            function scrollToCircle(index) {
+                currentIndex = index;
+                const circleWidth = circles[0].offsetWidth + 20; // including gap
+                container.scrollLeft = index * circleWidth;
+
+                // Update dots
+                dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                // Update mobile active circle
+                if (window.innerWidth <= 768) {
+                    circles.forEach((circle, i) => {
+                        circle.classList.toggle('active-mobile', i === index);
+                    });
+                }
             }
 
-            const maxPosition = -(slides.length - 1) * slideWidth;
-            let newPosition = carouselPositions[carouselId] + (direction * slideWidth);
-
-            // Loop carousel
-            if (newPosition > 0) {
-                newPosition = maxPosition;
-            } else if (newPosition < maxPosition) {
-                newPosition = 0;
+            function autoRotate() {
+                currentIndex = (currentIndex + 1) % circles.length;
+                scrollToCircle(currentIndex);
             }
 
-            carouselPositions[carouselId] = newPosition;
-            track.style.transform = `translateX(${newPosition}px)`;
-        }
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(autoRotate, 3000);
+            }
 
-        // Auto-scroll carousels
-        function autoScrollCarousels() {
-            const carouselTracks = document.querySelectorAll('.promo-carousel-track');
-            carouselTracks.forEach(track => {
-                const carouselId = track.id;
-                if (carouselId) {
-                    moveCarousel(carouselId, -1);
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+
+            // Initialize first circle as active on mobile
+            if (window.innerWidth <= 768) {
+                circles[0].classList.add('active-mobile');
+            }
+
+            // Start auto-rotation
+            startAutoRotate();
+
+            // Pause on hover
+            carousel.addEventListener('mouseenter', stopAutoRotate);
+            carousel.addEventListener('mouseleave', startAutoRotate);
+
+            // Handle manual scroll
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const circleWidth = circles[0].offsetWidth + 20;
+                const newIndex = Math.round(scrollLeft / circleWidth);
+
+                if (newIndex !== currentIndex && newIndex < circles.length) {
+                    currentIndex = newIndex;
+                    dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
                 }
             });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 768) {
+                    circles.forEach((circle, i) => {
+                        circle.classList.toggle('active-mobile', i === currentIndex);
+                    });
+                } else {
+                    circles.forEach(circle => {
+                        circle.classList.remove('active-mobile');
+                    });
+                }
+            });
+        }
+
+        // Scroll to specific collection section
+        function scrollToCollectionSection(collectionType) {
+            let targetSelector = '';
+
+            switch(collectionType) {
+                case 'pc-carboy':
+                    targetSelector = '.promo-collection-section:has([data-collection="pc-carboy"])';
+                    break;
+                case 'pc-tr-carboy':
+                    targetSelector = '.promo-collection-section:has([data-collection="pc-tr-carboy"])';
+                    break;
+                case 'ezbio-bottles':
+                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-bottles"])';
+                    break;
+                case 'ezbio-ts-bottles':
+                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-ts-bottles"])';
+                    break;
+                case 'pfa-bottles':
+                    targetSelector = '.promo-collection-section:has([data-collection="pfa-bottles"])';
+                    break;
+                case 'aqg':
+                    targetSelector = '.promo-collection-section:has([data-collection="aqg"])';
+                    break;
+                case 'cpc-connectors':
+                    targetSelector = '.promo-collection-section:has([data-collection="cpc-connectors"])';
+                    break;
+                case 'ezbio-assembly':
+                    targetSelector = '.promo-collection-section:has([data-collection="ezbio-assembly"])';
+                    break;
+                case 'laboratory':
+                    targetSelector = '.promo-laboratory-sections .promo-collection-section';
+                    break;
+                default:
+                    return;
+            }
+
+            // First ensure the right sections are visible
+            if (collectionType === 'laboratory') {
+                exploreWorld('laboratory');
+                setTimeout(() => {
+                    const targetSection = document.querySelector(targetSelector);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Add highlight effect
+                        targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
+                        setTimeout(() => {
+                            targetSection.style.boxShadow = '';
+                        }, 2000);
+                    }
+                }, 300);
+            } else {
+                exploreWorld('bioprocess');
+                setTimeout(() => {
+                    const targetSection = document.querySelector(targetSelector);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Add highlight effect
+                        targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
+                        setTimeout(() => {
+                            targetSection.style.boxShadow = '';
+                        }, 2000);
+                    }
+                }, 300);
+            }
         }
 
         // Initialize the revolutionary experience
@@ -2364,31 +2805,15 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Show both sections initially
+            // Show bioprocess sections by default
             const bioprocessSections = document.getElementById('bioprocess-sections');
-            const laboratorySections = document.getElementById('laboratory-sections');
-            
             if (bioprocessSections) {
                 bioprocessSections.style.display = 'block';
             }
-            if (laboratorySections) {
-                laboratorySections.style.display = 'block';
-            }
 
-            // Add sticky navigation scroll listener
-            window.addEventListener('scroll', handleStickyNavigation);
-
-            // Add sticky navigation item event listeners
-            const stickyNavItems = document.querySelectorAll('.promo-world-nav-item');
-            stickyNavItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const worldType = this.dataset.world;
-                    exploreWorld(worldType);
-                });
-            });
-
-            // Auto-scroll carousels every 5 seconds
-            setInterval(autoScrollCarousels, 5000);
+            // Initialize carousels
+            initializeCarousel('bioprocess-carousel');
+            initializeCarousel('laboratory-carousel');
         });
     </script>
 </body>
