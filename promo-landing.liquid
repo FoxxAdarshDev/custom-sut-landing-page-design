@@ -1,7 +1,10 @@
 
-<div class="promo-independence-body">
-    {% comment %} Dynamic Product Collections {% endcomment %}
-    {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
+<div class="sticky-grid" flex>
+    <div class="grid__item large--one-fifth medium-down--hide sticky-content c-sticky-content"></div>
+    <div class="grid__item large--four-fifths">
+        <div class="promo-independence-body">
+            {% comment %} Dynamic Product Collections {% endcomment %}
+            {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
     {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
     {% assign ezbio_bottles_collection = collections['ezbio-bottles-pc-bioprocess-us-independence-day-sale-25'] %}
     {% assign ezbio_ts_bottles_collection = collections['ezbio-ts-bottles-us-independence-day-sale-25'] %}
@@ -3881,4 +3884,6 @@
             handleStickyNavigation(); // Initial check
         });
     </script>
+        </div>
+    </div>
 </div>
