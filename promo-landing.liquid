@@ -1,4 +1,4 @@
-<div class="promo-independence-wrapper">
+<section class="promo-independence-wrapper">
     {% comment %} Dynamic Product Collections {% endcomment %}
     {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
     {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
@@ -1907,7 +1907,7 @@
     </div>
 
     <!-- Final Revolutionary CTA -->
-    <section class="promo-freedom-finale">
+    <div class="promo-freedom-finale">
         <div class="promo-finale-flag">🇺🇸</div>
         <div class="promo-finale-content">
             <h2 class="promo-finale-title">
@@ -1947,7 +1947,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </div>
 
     <style>
         .promo-independence-wrapper {
@@ -1957,25 +1957,7 @@
             color: #1a1a2e;
             overflow-x: hidden;
             width: 100%;
-            max-width: 100%;
             min-height: 100vh;
-            box-sizing: border-box;
-            position: relative;
-            contain: layout style;
-        }
-
-        /* Ensure all child elements respect container boundaries */
-        .promo-independence-wrapper *,
-        .promo-independence-wrapper *::before,
-        .promo-independence-wrapper *::after {
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Prevent any elements from exceeding container width */
-        .promo-independence-wrapper > * {
-            max-width: 100%;
-            overflow-x: hidden;
         }
 
 
@@ -1989,20 +1971,17 @@
             justify-content: center;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
             overflow: hidden;
-            padding: 20px;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            contain: layout;
+            padding-top: 20px;
         }
 
         /* Enhanced Sticky Navigation Styles */
         .promo-sticky-nav {
             position: fixed;
             bottom: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: min(1000px, 90vw);
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            max-width: 1000px;
             width: 100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
@@ -2013,7 +1992,6 @@
             box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
-            box-sizing: border-box;
         }
 
         .promo-sticky-nav.visible {
@@ -2283,10 +2261,8 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: min(1200px, 100%);
+            max-width: 1200px;
             padding: 40px 20px;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         .promo-liberty-badge {
@@ -2448,10 +2424,6 @@
         .promo-category-universe {
             padding: 80px 20px;
             background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow-x: hidden;
         }
 
         .promo-universe-header {
@@ -2475,14 +2447,10 @@
 
         .promo-dual-worlds {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 40px;
-            max-width: min(1200px, 100%);
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-            width: 100%;
-            overflow: hidden;
         }
 
         .promo-world {
@@ -2496,9 +2464,6 @@
             overflow: hidden;
             cursor: pointer;
             border: 3px solid #095ea7;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
         }
 
         .promo-world:hover {
@@ -2590,9 +2555,6 @@
             margin-bottom: 40px;
             overflow: hidden;
             background: rgba(255,255,255,0.95);
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
         }
 
         .promo-collection-section::before {
@@ -2672,21 +2634,15 @@
         .promo-section-container {
             position: relative;
             z-index: 2;
-            max-width: min(1200px, 100%);
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
         }
 
         .promo-section-content {
             display: flex;
             align-items: stretch;
             gap: 40px;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
         }
 
         .promo-section-info {
@@ -2701,7 +2657,6 @@
             box-shadow: 0 10px 30px rgba(9, 94, 167, 0.15);
             position: relative;
             overflow: hidden;
-            box-sizing: border-box;
         }
 
         .promo-section-info::before {
@@ -2823,7 +2778,7 @@
             min-width: 0;
             max-width: 55%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             grid-auto-rows: min-content;
             gap: 20px;
             padding: 25px;
@@ -2837,9 +2792,6 @@
             max-height: 800px;
             overflow-y: auto;
             overflow-x: hidden;
-            box-sizing: border-box;
-            width: 100%;
-            contain: layout style;
         }
 
         /* Ensure minimum width for cards even with many products */
@@ -3342,10 +3294,8 @@
 
             .promo-sticky-nav {
                 bottom: -120px;
-                left: 0;
-                transform: none;
                 width: 100%;
-                max-width: 100%;
+                max-width: none;
                 border-radius: 0;
             }
 
@@ -3487,20 +3437,9 @@
 
             .promo-products-grid {
                 max-width: 100%;
-                grid-template-columns: repeat(auto-fill, minmax(min(150px, calc(50% - 10px)), 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 18px;
                 padding: 20px;
-            }
-            
-            .promo-dual-worlds {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 0 10px;
-            }
-            
-            .promo-section-container {
-                padding: 0 10px;
-                max-width: 100%;
             }
 
             .promo-timer-grid,
@@ -3943,4 +3882,4 @@
             handleStickyNavigation(); // Initial check
         });
     </script>
-</div>
+</section>

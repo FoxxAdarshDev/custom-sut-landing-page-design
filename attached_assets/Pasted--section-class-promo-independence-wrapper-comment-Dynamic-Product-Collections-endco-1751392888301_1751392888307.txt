@@ -1,0 +1,3885 @@
+<section class="promo-independence-wrapper">
+    {% comment %} Dynamic Product Collections {% endcomment %}
+    {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
+    {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
+    {% assign ezbio_bottles_collection = collections['ezbio-bottles-pc-bioprocess-us-independence-day-sale-25'] %}
+    {% assign ezbio_ts_bottles_collection = collections['ezbio-ts-bottles-us-independence-day-sale-25'] %}
+    {% assign pfa_bottles_collection = collections['pfa-bottles-us-independence-day-sale-25'] %}
+    {% assign aqg_collection = collections['aqg-us-independence-day-sale-25'] %}
+    {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-us-independence-day-sale-25'] %}
+    {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-us-independence-day-sale-25'] %}
+    <!--- laboratory collection -->
+    {% assign ezlabpure_carboy_collection = collections['ezlabpure-20l-round-carboy-lab-us-independence-day-sale-25'] %}
+    {% assign ezclear_carboy_collection = collections['ezclear-5l-pc-space-saving-carboy-lab-us-independence-day-sale-25'] %}
+    {% assign ezgrip_carboy_collection = collections['ezgrip-10l-autoclavable-pp-lab-us-independence-day-sale-25'] %}
+    {% assign ezbio_carboy_collection = collections['ezbio-carboys-lab-us-independence-day-sale-25'] %}
+
+
+
+    <!-- Revolutionary Hero Section -->
+    <section class="promo-hero-revolution">
+        <div class="promo-patriotic-canvas">
+            <div class="promo-american-eagle">🦅</div>
+            <div class="promo-liberty-bell">🔔</div>
+            <div class="promo-fireworks-display">
+                <div class="promo-firework promo-fw1"></div>
+                <div class="promo-firework promo-fw2"></div>
+                <div class="promo-firework promo-fw3"></div>
+            </div>
+        </div>
+
+        <div class="promo-hero-content">
+            <div class="promo-liberty-badge">
+                🇺🇸 INDEPENDENCE DAY FREEDOM SALE 🇺🇸
+            </div>
+
+            <h1 class="promo-revolutionary-title">
+                <span class="promo-word promo-word-1">FREEDOM</span>
+                <span class="promo-word promo-word-2">TO</span>
+                <span class="promo-word promo-word-3">INNOVATE</span>
+                <span class="promo-hero-subtitle-text">YOUR LABORATORY</span>
+            </h1>
+
+            <div class="promo-savings-explosion">
+                <div class="promo-explosion-text">SAVE UP TO</div>
+                <div class="promo-mega-discount">70% OFF</div>
+                <div class="promo-explosion-subtext">ON PREMIUM EQUIPMENT</div>
+            </div>
+
+            <div class="promo-countdown-revolution">
+                <div class="promo-countdown-label">⚡ SALE ENDS IN ⚡</div>
+                <div class="promo-timer-grid">
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-days">30</span>
+                            <label>DAYS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-hours">22</span>
+                            <label>HOURS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-minutes">48</span>
+                            <label>MINS</label>
+                        </div>
+                    </div>
+                    <div class="promo-timer-cube">
+                        <div class="promo-timer-face promo-timer-front">
+                            <span id="promo-seconds">02</span>
+                            <label>SECS</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Sticky Navigation Bar -->
+    <div class="promo-sticky-nav" id="sticky-nav">
+        <div class="promo-sticky-nav-content">
+            <div class="promo-sticky-header">
+                <div class="promo-sticky-title">Independence Day Collections</div>
+                <div class="promo-sticky-toggles">
+                    <button class="promo-sticky-toggle active" data-world="bioprocess" onclick="switchStickyWorld('bioprocess')">
+                        🧬 Bioprocess
+                    </button>
+                    <button class="promo-sticky-toggle" data-world="laboratory" onclick="switchStickyWorld('laboratory')">
+                        🔬 Laboratory
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bioprocess Carousel -->
+            <div class="promo-sticky-carousel" id="sticky-bioprocess-carousel">
+                {% if pc_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ pc_carboy_collection.image | img_url: '80x80' }}" alt="PC Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">PC Carboy</div>
+                        <div class="promo-sticky-card-count">{{ pc_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">20% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if pc_tr_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ pc_tr_carboy_collection.image | img_url: '80x80' }}" alt="PC TR Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">PC TR</div>
+                        <div class="promo-sticky-card-count">{{ pc_tr_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">25% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_bottles_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezbio_bottles_collection.image | img_url: '80x80' }}" alt="EZBio Bottles">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZBio</div>
+                        <div class="promo-sticky-card-count">{{ ezbio_bottles_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">30% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_ts_bottles_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezbio_ts_bottles_collection.image | img_url: '80x80' }}" alt="EZBio TS">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZBio TS</div>
+                        <div class="promo-sticky-card-count">{{ ezbio_ts_bottles_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">25% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if pfa_bottles_collection.image %}
+                <div class="promo-sticky-card" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ pfa_bottles_collection.image | img_url: '80x80' }}" alt="PFA Bottles">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">PFA</div>
+                        <div class="promo-sticky-card-count">{{ pfa_bottles_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">30% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if aqg_collection.image %}
+                <div class="promo-sticky-card" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ aqg_collection.image | img_url: '80x80' }}" alt="AQG">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">AQG</div>
+                        <div class="promo-sticky-card-count">{{ aqg_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">35% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if cpc_stream_thru_connectors_collection.image %}
+                <div class="promo-sticky-card" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '80x80' }}" alt="CPC Connectors">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">CPC</div>
+                        <div class="promo-sticky-card-count">{{ cpc_stream_thru_connectors_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">30% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_bottle_assembly_pc_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '80x80' }}" alt="Assemblies">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">Assembly</div>
+                        <div class="promo-sticky-card-count">{{ ezbio_bottle_assembly_pc_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">25% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Laboratory Carousel -->
+            <div class="promo-sticky-carousel" id="sticky-laboratory-carousel" style="display: none;">
+                {% if ezlabpure_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezlabpure_carboy_collection.image | img_url: '80x80' }}" alt="EZLabpure Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZLabpure</div>
+                        <div class="promo-sticky-card-count">{{ ezlabpure_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">30% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezclear_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezclear_carboy_collection.image | img_url: '80x80' }}" alt="EZclear Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZclear</div>
+                        <div class="promo-sticky-card-count">{{ ezclear_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">25% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezgrip_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezgrip_carboy_collection.image | img_url: '80x80' }}" alt="EZgrip Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZgrip</div>
+                        <div class="promo-sticky-card-count">{{ ezgrip_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">35% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezbio_carboy_collection.image | img_url: '80x80' }}" alt="EZBio Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZBio</div>
+                        <div class="promo-sticky-card-count">{{ ezbio_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">20% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if lab_general_collection.image %}
+                <div class="promo-sticky-card" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ lab_general_collection.image | img_url: '80x80' }}" alt="Lab General">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">Lab Items</div>
+                        <div class="promo-sticky-card-count">{{ lab_general_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">40% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Revolutionary Category Navigation -->
+    <section class="promo-category-universe">
+        <div class="promo-universe-header">
+            <h2 class="promo-universe-title">Choose Your Independence Revolution</h2>
+            <p class="promo-universe-subtitle">Two worlds of American innovation, infinite possibilities</p>
+        </div>
+
+        <div class="promo-dual-worlds">
+            <!-- Bioprocess World -->
+            <div class="promo-world promo-bioprocess-world" data-world="bioprocess">
+                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🧬</div>
+                    <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
+                    <p class="promo-world-desc">8 Categories of Cutting-Edge Equipment</p>
+
+                    <!-- Collection Image Carousel -->
+                    <div class="promo-collection-carousel" id="bioprocess-carousel">
+                        <div class="promo-carousel-container">
+                            {% if pc_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                                <img src="{{ pc_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_carboy_collection.title }}">
+                                <div class="promo-circle-label">PC Carboy</div>
+                            </div>
+                            {% endif %}
+
+                            {% if pc_tr_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                                <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
+                                <div class="promo-circle-label">PC TR Carboy</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                                <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
+                                <div class="promo-circle-label">EZBio Bottles</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_ts_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                                <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
+                                <div class="promo-circle-label">EZBio TS</div>
+                            </div>
+                            {% endif %}
+
+                            {% if pfa_bottles_collection.image %}
+                            <div class="promo-collection-circle" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                                <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
+                                <div class="promo-circle-label">PFA Bottles</div>
+                            </div>
+                            {% endif %}
+
+                            {% if aqg_collection.image %}
+                            <div class="promo-collection-circle" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                                <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
+                                <div class="promo-circle-label">AQG</div>
+                            </div>
+                            {% endif %}
+
+                            {% if cpc_stream_thru_connectors_collection.image %}
+                            <div class="promo-collection-circle" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                                <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
+                                <div class="promo-circle-label">CPC Connectors</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_bottle_assembly_pc_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                                <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
+                                <div class="promo-circle-label">Assemblies</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="promo-carousel-dots" id="bioprocess-dots"></div>
+                    </div>
+
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">
+                                {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: ezbio_ts_bottles_collection.products.size | plus: pfa_bottles_collection.products.size | plus: aqg_collection.products.size | plus: cpc_stream_thru_connectors_collection.products.size | plus: ezbio_bottle_assembly_pc_collection.products.size %}
+                                {{ bioprocess_total }}+
+                            </span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 50%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
+                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
+                        🚀 EXPLORE BIOPROCESS
+                    </button>
+                </div>
+            </div>
+
+            <!-- Laboratory World -->
+            <div class="promo-world promo-laboratory-world" data-world="laboratory">
+                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-content">
+                    <div class="promo-world-icon">🔬</div>
+                    <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
+                    <p class="promo-world-desc">Premium Laboratory Essentials</p>
+
+                    <!-- Laboratory Collection Image Carousel -->
+                    <div class="promo-collection-carousel" id="laboratory-carousel">
+                        <div class="promo-carousel-container">
+                            {% if ezlabpure_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
+                                <img src="{{ ezlabpure_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezlabpure_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZLabpure</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezclear_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
+                                <img src="{{ ezclear_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezclear_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZclear</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezgrip_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                                <img src="{{ ezgrip_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezgrip_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZgrip</div>
+                            </div>
+                            {% endif %}
+
+                            {% if ezbio_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                                <img src="{{ ezbio_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezbio_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZBio</div>
+                            </div>
+                            {% endif %}
+
+                            {% if lab_general_collection.image %}
+                            <div class="promo-collection-circle" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                                <img src="{{ lab_general_collection.image | img_url: '150x150' }}" alt="{{ lab_general_collection.title }}">
+                                <div class="promo-circle-label">Lab Items</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="promo-carousel-dots" id="laboratory-dots"></div>
+                    </div>
+
+                    <div class="promo-world-stats">
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">
+                                {% assign lab_total = ezlabpure_carboy_collection.products.size | plus: ezclear_carboy_collection.products.size | plus: ezgrip_carboy_collection.products.size | plus: ezbio_carboy_collection.products.size | plus: lab_general_collection.products.size %}
+                                {{ lab_total }}+
+                            </span>
+                            <span class="promo-stat-label">Products</span>
+                        </div>
+                        <div class="promo-stat">
+                            <span class="promo-stat-number">Up to 40%</span>
+                            <span class="promo-stat-label">Savings</span>
+                        </div>
+                    </div>
+                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
+                        🚀 EXPLORE LABORATORY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bioprocess Categories Sections -->
+    <div class="promo-bioprocess-sections" id="bioprocess-sections">
+
+        <!-- PC Rectangular Carboy Section -->
+        {% if pc_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">⚗️ PC RECTANGULAR CARBOY</div>
+                        <h2 class="promo-section-title">Premium Polycarbonate Space-Saving Solutions</h2>
+                        <p class="promo-section-description">Revolutionary rectangular carboys designed for maximum efficiency and space optimization in bioprocessing applications. Made from high-quality polycarbonate for superior clarity and durability.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pc_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">20%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ pc_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL CARBOYS
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in pc_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">⚗️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    20% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- PC TR Carboy Section -->
+        {% if pc_tr_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🔄 PC TR CARBOY</div>
+                        <h2 class="promo-section-title">Advanced Temperature Resistant Carboys</h2>
+                        <p class="promo-section-description">Next-generation polycarbonate carboys with enhanced temperature resistance for demanding bioprocess applications. Perfect for high-performance laboratory environments.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pc_tr_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">15%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ pc_tr_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL TR CARBOYS
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in pc_tr_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔄</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    15% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Bottles PC Section -->
+        {% if ezbio_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🧪 EZBIO BOTTLES PC</div>
+                        <h2 class="promo-section-title">Revolutionary EZBio Bottle Systems</h2>
+                        <p class="promo-section-description">State-of-the-art polycarbonate bottles with integrated connection systems for seamless bioprocessing workflows. Designed for sterile applications and maximum convenience.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZBIO BOTTLES
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio TS Bottles Section -->
+        {% if ezbio_ts_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">💎 EZBIO TS BOTTLES</div>
+                        <h2 class="promo-section-title">Premium Titanium Series Bottles</h2>
+                        <p class="promo-section-description">Premium titanium series bottles offering superior chemical resistance and durability for the most demanding bioprocess applications. Built for excellence and reliability.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_ts_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_ts_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL TS BOTTLES
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_ts_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">💎</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- PFA Bottles Section -->
+        {% if pfa_bottles_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🏛️ PFA BOTTLES</div>
+                        <h2 class="promo-section-title">Ultra-Pure PFA Bottle Solutions</h2>
+                        <p class="promo-section-description">Ultra-pure PFA bottles offering exceptional chemical resistance and purity for critical applications. The gold standard for trace analysis and high-purity processes.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ pfa_bottles_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ pfa_bottles_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL PFA BOTTLES
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in pfa_bottles_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🏛️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- AQG Section -->
+        {% if aqg_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">💧 AQG CONNECTORS</div>
+                        <h2 class="promo-section-title">Advanced AseptiQuik G Systems</h2>
+                        <p class="promo-section-description">Revolutionary AseptiQuik G connector systems for sterile connections in bioprocessing. Engineered for reliability, sterility, and ease of use in critical applications.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ aqg_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">35%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ aqg_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL AQG SYSTEMS
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in aqg_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">💧</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    35% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- CPC Stream Thru Connectors Section -->
+        {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🔗 CPC STREAM THRU</div>
+                        <h2 class="promo-section-title">High-Performance Stream Thru Connectors</h2>
+                        <p class="promo-section-description">Advanced CPC stream thru connectors designed for continuous flow applications. Engineered for maximum efficiency and sterility in bioprocessing workflows.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ cpc_stream_thru_connectors_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ cpc_stream_thru_connectors_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL CONNECTORS
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in cpc_stream_thru_connectors_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔗</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Bottle Assembly PC Section -->
+        {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🔧 EZBIO ASSEMBLIES</div>
+                        <h2 class="promo-section-title">Complete Bottle Assembly Solutions</h2>
+                        <p class="promo-section-description">Ready-to-use EZBio bottle assemblies with integrated connection systems. Perfect for streamlined bioprocessing operations and reduced setup time.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_bottle_assembly_pc_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_bottle_assembly_pc_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL ASSEMBLIES
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_bottle_assembly_pc_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔧</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+    </div>
+
+    <!-- Laboratory Sections -->
+    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
+
+        <!-- EZLabpure 20L Round Carboy Section -->
+        {% if ezlabpure_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🧪 EZLABPURE CARBOY</div>
+                        <h2 class="promo-section-title">EZLabpure™ 20 L Round Carboy</h2>
+                        <p class="promo-section-description">Premium 20-liter round carboys designed for laboratory applications requiring high purity and reliability. Perfect for research environments and analytical work.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezlabpure_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezlabpure_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZLABPURE
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezlabpure_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZclear 5L PC Space Saving Carboy Section -->
+        {% if ezclear_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🧪 EZCLEAR CARBOY</div>
+                        <h2 class="promo-section-title">EZclear 5 L Polycarbonate Space Saving Carboy</h2>
+                        <p class="promo-section-description">Innovative 5-liter polycarbonate carboys with space-saving design for laboratory efficiency. Crystal clear visibility and optimal space utilization for modern labs.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezclear_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">32%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezclear_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZCLEAR
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezclear_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    32% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZgrip 10L Autoclavable PP Section -->
+        {% if ezgrip_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🫗 EZGRIP CARBOY</div>
+                        <h2 class="promo-section-title">EZgrip® 10 L Autoclavable Polypropylene</h2>
+                        <p class="promo-section-description">Durable 10-liter autoclavable polypropylene carboys with enhanced grip design. Perfect for applications requiring repeated sterilization and ergonomic handling.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezgrip_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">32%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezgrip_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZGRIP
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezgrip_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🫗</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    32% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Carboy Section -->
+        {% if ezbio_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">⚗️ EZBIO CARBOY</div>
+                        <h2 class="promo-section-title">EZBio® Carboy Systems</h2>
+                        <p class="promo-section-description">Advanced EZBio carboy systems designed for laboratory bioprocessing applications. Featuring integrated connection systems for seamless fluid handling and storage.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">32%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZBIO
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">⚗️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    32% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Lab General Section -->
+        {% if lab_general_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🔬 LAB ESSENTIALS</div>
+                        <h2 class="promo-section-title">Laboratory Independence Collection</h2>
+                        <p class="promo-section-description">Complete range of essential laboratory equipment and supplies for research, analysis, and scientific innovation. Built to the highest standards for reliable performance in all lab environments.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ lab_general_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">40%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ lab_general_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL LAB ITEMS
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in lab_general_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🔬</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    40% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+    </div>
+
+    <!-- Final Revolutionary CTA -->
+    <div class="promo-freedom-finale">
+        <div class="promo-finale-flag">🇺🇸</div>
+        <div class="promo-finale-content">
+            <h2 class="promo-finale-title">
+                🇺🇸 JOIN THE AMERICAN REVOLUTION 🇺🇸
+            </h2>
+            <p class="promo-finale-subtitle">
+                Don't let this Independence Day pass you by! Revolutionary savings end soon.
+            </p>
+
+            <div class="promo-finale-timer">
+                <div class="promo-finale-timer-grid">
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-days">30</span>
+                        <label>DAYS</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-hours">22</span>
+                        <label>HOURS</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-minutes">48</span>
+                        <label>MINUTES</label>
+                    </div>
+                    <div class="promo-finale-unit">
+                        <span id="promo-finale-seconds">02</span>
+                        <label>SECONDS</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promo-finale-ctas">
+                <a href="{{ collections.all-products.url }}" class="promo-finale-btn promo-btn-primary">
+                    🚀 SHOP ALL DEALS
+                </a>
+                <a href="#bioprocess-sections" class="promo-finale-btn promo-btn-secondary">
+                    🔍 EXPLORE CATEGORIES
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .promo-independence-wrapper {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            color: #1a1a2e;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+
+
+        /* Revolutionary Hero Section */
+        .promo-hero-revolution {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e3f2fd 70%, #bbdefb 100%);
+            overflow: hidden;
+            padding-top: 20px;
+        }
+
+        /* Enhanced Sticky Navigation Styles */
+        .promo-sticky-nav {
+            position: fixed;
+            bottom: -150px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(9, 94, 167, 0.3);
+            border-radius: 15px 15px 0 0;
+            z-index: 999;
+            transition: bottom 0.4s ease, opacity 0.3s ease;
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .promo-sticky-nav.visible {
+            bottom: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .promo-sticky-nav-content {
+            padding: 8px 15px;
+            display:flex;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .promo-sticky-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(9, 94, 167, 0.1);
+            gap: 15px;
+        }
+
+        .promo-sticky-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #002868;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .promo-sticky-title::before {
+            content: '';
+            width: 20px;
+            height: 14px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 60 40' width='20' height='14' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='60' height='40' fill='%23B22234'/%3E%3Crect y='3' width='60' height='3' fill='white'/%3E%3Crect y='9' width='60' height='3' fill='white'/%3E%3Crect y='15' width='60' height='3' fill='white'/%3E%3Crect y='21' width='60' height='3' fill='white'/%3E%3Crect y='27' width='60' height='3' fill='white'/%3E%3Crect y='33' width='60' height='3' fill='white'/%3E%3Crect width='24' height='21' fill='%233C3B6E'/%3E%3Cg fill='white'%3E%3Ccircle cx='4' cy='3' r='0.5'/%3E%3Ccircle cx='8' cy='3' r='0.5'/%3E%3Ccircle cx='12' cy='3' r='0.5'/%3E%3Ccircle cx='16' cy='3' r='0.5'/%3E%3Ccircle cx='20' cy='3' r='0.5'/%3E%3Ccircle cx='6' cy='6' r='0.5'/%3E%3Ccircle cx='10' cy='6' r='0.5'/%3E%3Ccircle cx='14' cy='6' r='0.5'/%3E%3Ccircle cx='18' cy='6' r='0.5'/%3E%3Ccircle cx='4' cy='9' r='0.5'/%3E%3Ccircle cx='8' cy='9' r='0.5'/%3E%3Ccircle cx='12' cy='9' r='0.5'/%3E%3Ccircle cx='16' cy='9' r='0.5'/%3E%3Ccircle cx='20' cy='9' r='0.5'/%3E%3Ccircle cx='6' cy='12' r='0.5'/%3E%3Ccircle cx='10' cy='12' r='0.5'/%3E%3Ccircle cx='14' cy='12' r='0.5'/%3E%3Ccircle cx='18' cy='12' r='0.5'/%3E%3Ccircle cx='4' cy='15' r='0.5'/%3E%3Ccircle cx='8' cy='15' r='0.5'/%3E%3Ccircle cx='12' cy='15' r='0.5'/%3E%3Ccircle cx='16' cy='15' r='0.5'/%3E%3Ccircle cx='20' cy='15' r='0.5'/%3E%3Ccircle cx='6' cy='18' r='0.5'/%3E%3Ccircle cx='10' cy='18' r='0.5'/%3E%3Ccircle cx='14' cy='18' r='0.5'/%3E%3Ccircle cx='18' cy='18' r='0.5'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+
+        .promo-sticky-toggles {
+            display: flex;
+            gap: 8px;
+            flex: none;
+        }
+
+        .promo-sticky-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #095ea7;
+            border: 1px solid rgba(9, 94, 167, 0.4);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .promo-sticky-toggle.active {
+            background: rgba(9, 94, 167, 1);
+            backdrop-filter: blur(15px);
+            color: white;
+            border-color: rgba(191, 10, 48, 0.6);
+        }
+
+        .promo-sticky-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(9, 94, 167, 1);
+        }
+
+        .promo-sticky-carousel {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 6px 5px;
+            justify-content: flex-start;
+            align-items: center;
+            scroll-behavior: smooth;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            min-height: 100px;
+            max-height: 120px;
+        }
+
+        .promo-sticky-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-sticky-card {
+            flex: 0 0 auto;
+            width: 75px;
+            min-width: 75px;
+            max-width: 75px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(9, 94, 167, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 40, 104, 0.15);
+            display: flex;
+            flex-direction: column;
+            margin: 2px;
+        }
+
+        .promo-sticky-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(191, 10, 48, 0.6);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(191, 10, 48, 0.2);
+        }
+
+        .promo-sticky-card.active {
+            border-color: rgba(191, 10, 48, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            transform: translateY(-1px);
+        }
+
+        .promo-sticky-card-flag {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7rem;
+            z-index: 2;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        }
+
+        .promo-sticky-card-image {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .promo-sticky-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-sticky-card:hover .promo-sticky-card-image img {
+            transform: scale(1.1);
+        }
+
+        .promo-sticky-card-content {
+            padding: 4px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .promo-sticky-card-title {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #002868;
+            margin-bottom: 1px;
+            line-height: 1.1;
+        }
+
+        .promo-sticky-card-count {
+            font-size: 0.5rem;
+            color: #6c757d;
+            margin-bottom: 2px;
+        }
+
+        .promo-sticky-card-discount {
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
+            color: white;
+            font-size: 0.45rem;
+            font-weight: 700;
+            padding: 1px 3px;
+            border-radius: 4px;
+            display: inline-block;
+            animation: promo-card-discount-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-card-discount-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .promo-patriotic-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .promo-american-eagle {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            font-size: 3rem;
+            animation: promo-eagle-soar 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(191, 10, 48, 0.3));
+        }
+
+        @keyframes promo-eagle-soar {
+            0% { transform: translateX(100px) translateY(0px); }
+            25% { transform: translateX(0px) translateY(-50px); }
+            50% { transform: translateX(-100px) translateY(0px); }
+            75% { transform: translateX(0px) translateY(50px); }
+            100% { transform: translateX(100px) translateY(0px); }
+        }
+
+        .promo-liberty-bell {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            font-size: 2.5rem;
+            animation: promo-bell-swing 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 40, 104, 0.3));
+        }
+
+        @keyframes promo-bell-swing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .promo-fireworks-display {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .promo-firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: promo-firework-explode 3s ease-out infinite;
+        }
+
+        .promo-fw1 { top: 20%; left: 30%; animation-delay: 0s; }
+        .promo-fw2 { top: 40%; right: 25%; animation-delay: 1s; }
+        .promo-fw3 { bottom: 30%; left: 60%; animation-delay: 2s; }
+
+        @keyframes promo-firework-explode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(20); opacity: 1; box-shadow: 0 0 50px #FFD700; }
+            100% { transform: scale(40); opacity: 0; }
+        }
+
+        .promo-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 40px 20px;
+        }
+
+        .promo-liberty-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #BF0A30, white, #002868);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            animation: promo-liberty-glow 3s ease-in-out infinite;
+            color: #002868;
+            border: 3px solid #095ea7;
+        }
+
+        @keyframes promo-liberty-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(9, 94, 167, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(9, 94, 167, 1); }
+        }
+
+        .promo-revolutionary-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .promo-word {
+            display: inline-block;
+            margin: 0 10px;
+            animation: promo-word-pulse 2s ease-in-out infinite;
+        }
+
+        .promo-word-1 {
+            color: #BF0A30;
+            text-shadow: 3px 3px 0 white;
+            animation-delay: 0s;
+        }
+
+        .promo-word-2 {
+            color: #002868;
+            text-shadow: 2px 2px 0 #095ea7;
+            animation-delay: 0.5s;
+        }
+
+        .promo-word-3 {
+            color: #BF0A30;
+            text-shadow: 3px 3px 0 white;
+            animation-delay: 1s;
+        }
+
+        .promo-hero-subtitle-text {
+            display: block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #002868;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(0, 40, 104, 0.3);
+        }
+
+        @keyframes promo-word-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .promo-savings-explosion {
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px solid #FFD700;
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .promo-explosion-text {
+            color: #002868;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .promo-mega-discount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            color: #BF0A30;
+            text-shadow: 4px 4px 0 #095ea7;
+            line-height: 1;
+            animation: promo-mega-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-mega-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .promo-explosion-subtext {
+            color: #002868;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .promo-countdown-revolution {
+            margin-top: 50px;
+        }
+
+        .promo-countdown-label {
+            color: #BF0A30;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: promo-flash 1.5s infinite;
+        }
+
+        @keyframes promo-flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .promo-timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .promo-timer-cube {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #095ea7;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 100px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: promo-cube-float 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-cube-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .promo-timer-face span {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #BF0A30;
+            text-shadow: 2px 2px 0 #095ea7;
+        }
+
+        .promo-timer-face label {
+            color: #002868;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* Category Universe Section */
+        .promo-category-universe {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .promo-universe-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .promo-universe-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #002868;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .promo-universe-subtitle {
+            font-size: 1.3rem;
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        .promo-dual-worlds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .promo-world {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid #095ea7;
+        }
+
+        .promo-world:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-color: #BF0A30;
+        }
+
+        .promo-world-flag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            animation: promo-flag-wave 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-flag-wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .promo-world-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: promo-icon-float 3s ease-in-out infinite;
+        }
+
+        @keyframes promo-icon-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .promo-world-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #002868;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .promo-world-desc {
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .promo-world-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .promo-stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #BF0A30;
+        }
+
+        .promo-stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .promo-world-cta {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .promo-world-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+        }
+
+        /* Collection Sections */
+        .promo-collection-section {
+            position: relative;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .promo-collection-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248,249,250,0.9) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 0;
+        }
+
+        .promo-flag-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            opacity: 0.08;
+        }
+
+        .promo-animated-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-star {
+            position: absolute;
+            color: #002868;
+            font-size: 2.5rem;
+            animation: promo-star-twinkle 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px rgba(0, 40, 104, 0.3));
+        }
+
+        .promo-star-1 { top: 15%; left: 5%; animation-delay: 0s; }
+        .promo-star-2 { top: 25%; right: 8%; animation-delay: 0.8s; }
+        .promo-star-3 { bottom: 35%; left: 12%; animation-delay: 1.6s; }
+        .promo-star-4 { bottom: 25%; right: 15%; animation-delay: 2.4s; }
+        .promo-star-5 { top: 45%; left: 45%; animation-delay: 3.2s; }
+        .promo-star-6 { top: 35%; right: 45%; animation-delay: 4s; }
+
+        @keyframes promo-star-twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+            25% { opacity: 0.8; transform: scale(1.3) rotate(45deg); }
+            50% { opacity: 1; transform: scale(1.5) rotate(90deg); }
+            75% { opacity: 0.6; transform: scale(1.2) rotate(135deg); }
+        }
+
+        .promo-animated-stripes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .promo-moving-stripe {
+            position: absolute;
+            width: 120%;
+            height: 30px;
+            background: linear-gradient(90deg, transparent, rgba(191, 10, 48, 0.1), transparent);
+            animation: promo-stripe-move 6s linear infinite;
+            border-radius: 15px;
+        }
+
+        .promo-stripe-1 { top: 20%; animation-delay: 0s; }
+        .promo-stripe-2 { top: 45%; animation-delay: 2s; }
+        .promo-stripe-3 { top: 70%; animation-delay: 4s; }
+
+        @keyframes promo-stripe-move {
+            0% { transform: translateX(-120%) skewX(-15deg); }
+            100% { transform: translateX(120%) skewX(-15deg); }
+        }
+
+        .promo-section-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .promo-section-content {
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
+        }
+
+        .promo-section-info {
+            flex: 1;
+            min-width: 0;
+            max-width: 45%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px 30px;
+            border: 3px solid rgba(9, 94, 167, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(9, 94, 167, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-section-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(191, 10, 48, 0.05), transparent);
+            animation: promo-info-shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes promo-info-shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .promo-flag-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: promo-flag-wave 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(191, 10, 48, 0.3));
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-category-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            animation: promo-badge-glow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes promo-badge-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(191, 10, 48, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(9, 94, 167, 0.6); }
+        }
+
+        .promo-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            color: #002868;
+            margin-bottom: 15px;
+            font-weight: 900;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0, 40, 104, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-section-description {
+            color: #495057;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-section-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .promo-stat-item {
+            text-align: center;
+        }
+
+        .promo-stat-item .promo-stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #BF0A30;
+            text-shadow: 2px 2px 0 #095ea7;
+        }
+
+        .promo-stat-item .promo-stat-label {
+            font-size: 0.9rem;
+            color: #002868;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .promo-section-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #002868, #BF0A30);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .promo-section-cta:hover {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Products Grid Layout */
+        .promo-products-grid {
+            flex: 1;
+            min-width: 0;
+            max-width: 55%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-auto-rows: min-content;
+            gap: 20px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            border: 3px solid rgba(9, 94, 167, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(9, 94, 167, 0.1);
+            position: relative;
+            height: fit-content;
+            max-height: 800px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Ensure minimum width for cards even with many products */
+        @media (min-width: 769px) {
+            .promo-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .promo-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        .promo-products-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: promo-grid-shine 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-grid-shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .promo-product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            height: fit-content;
+        }
+
+        .promo-product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: #BF0A30;
+        }
+
+        .promo-product-image {
+            height: 120px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-product-card:hover .promo-product-image img {
+            transform: scale(1.03);
+        }
+
+        .promo-placeholder-img {
+            font-size: 2.5rem;
+            opacity: 0.7;
+            color: #6c757d;
+        }
+
+        .promo-sale-badge-modern {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(45deg, #BF0A30, #095ea7);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            animation: promo-badge-pulse 2s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+        }
+
+        .promo-us-flag-svg {
+            margin-right: 3px;
+            width: 16px;
+            height: 10px;
+        }
+
+        @keyframes promo-badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .promo-product-content {
+            padding: 12px;
+        }
+
+        .promo-product-title {
+            color: #002868;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            min-height: 2.4em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .promo-product-price {
+            margin-bottom: 10px;
+        }
+
+        .promo-original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin-right: 6px;
+        }
+
+        .promo-sale-price {
+            color: #BF0A30;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .promo-product-cta {
+            display: block;
+            background: linear-gradient(45deg, #002868, #BF0A30);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .promo-product-cta:hover {
+            background: linear-gradient(45deg, #BF0A30, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(191, 10, 48, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+
+
+        /* Final CTA Section */
+        .promo-freedom-finale {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #002868 0%, #BF0A30 50%, #095ea7 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-finale-flag {
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            font-size: 6rem;
+            opacity: 0.3;
+            animation: promo-finale-sway 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-finale-sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .promo-finale-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-finale-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-shadow: 3px 3px 0 #002868;
+        }
+
+        .promo-finale-subtitle {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .promo-finale-timer {
+            margin-bottom: 40px;
+        }
+
+        .promo-finale-timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .promo-finale-unit {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid white;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 100px;
+            backdrop-filter: blur(10px);
+            animation: promo-finale-float 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-finale-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .promo-finale-unit span {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #BF0A30;
+            text-shadow: 2px 2px 0 #095ea7;
+        }
+
+        .promo-finale-unit label {
+            color: #002868;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .promo-finale-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .promo-finale-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .promo-btn-primary {
+            background: white;
+            color: #BF0A30;
+            border: 2px solid white;
+        }
+
+        .promo-btn-primary:hover {
+            background: #BF0A30;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+        }
+
+        .promo-btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .promo-btn-secondary:hover {
+            background: white;
+            color: #002868;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        /* Independence Day Fireworks Animation */
+        .promo-collection-section::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 6px;
+            height: 6px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: promo-firework-burst 6s ease-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes promo-firework-burst {
+            0% { 
+                transform: scale(0);
+                opacity: 1;
+                box-shadow: 0 0 0 0 #FFD700, 0 0 0 0 #BF0A30, 0 0 0 0 #002868;
+            }
+            20% { 
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: 0 0 20px 5px #FFD700, 0 0 15px 3px #BF0A30, 0 0 10px 2px #002868;
+            }
+            40% { 
+                transform: scale(3);
+                opacity: 0.8;
+                box-shadow: 0 0 40px 15px rgba(255, 215, 0, 0.6), 0 0 30px 10px rgba(191, 10, 48, 0.6), 0 0 20px 5px rgba(0, 40, 104, 0.6);
+            }
+            100% { 
+                transform: scale(6);
+                opacity: 0;
+                box-shadow: 0 0 60px 25px rgba(255, 215, 0, 0), 0 0 50px 20px rgba(191, 10, 48, 0), 0 0 40px 15px rgba(0, 40, 104, 0);
+            }
+        }
+
+        /* Add more stars for enhanced effect */
+        .promo-animated-stars::after {
+            content: '★';
+            position: absolute;
+            top: 60%;
+            left: 85%;
+            font-size: 2rem;
+            color: #FFD700;
+            animation: promo-star-twinkle 3s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .promo-animated-stars::before {
+            content: '★';
+            position: absolute;
+            top: 30%;
+            left: 25%;
+            font-size: 1.8rem;
+            color: #BF0A30;
+            animation: promo-star-twinkle 4s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        /* Collection Carousel Styles */
+        .promo-collection-carousel {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .promo-carousel-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .promo-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-collection-circle {
+            flex: 0 0 auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #095ea7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 40, 104, 0.2);
+        }
+
+        .promo-collection-circle:hover {
+            transform: scale(1.1);
+            border-color: #BF0A30;
+            box-shadow: 0 8px 25px rgba(191, 10, 48, 0.3);
+        }
+
+        .promo-collection-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-collection-circle:hover img {
+            transform: scale(1.1);
+        }
+
+        .promo-circle-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #002868;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid #095ea7;
+        }
+
+        .promo-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .promo-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-carousel-dot.active {
+            background: #BF0A30;
+            transform: scale(1.2);
+        }
+
+        /* Auto-rotate animation */
+        .promo-carousel-auto-rotate {
+            animation: promo-carousel-rotate 8s ease-in-out infinite;
+        }
+
+        @keyframes promo-carousel-rotate {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .promo-collection-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .promo-circle-label {
+                font-size: 0.6rem;
+                bottom: -20px;
+            }
+
+            .promo-carousel-container {
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            /* Show only one circle at a time on mobile */
+            .promo-carousel-container {
+                justify-content: center;
+            }
+
+            .promo-collection-circle:not(.active-mobile) {
+                display: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .promo-hero-revolution {
+                padding-top: 10px;
+            }
+
+            .promo-section-container {
+                padding: 0 15px;
+                max-width: 100%;
+            }
+
+            .promo-collection-section {
+                padding: 40px 0;
+                margin: 0 10px 40px 10px;
+                border-radius: 15px;
+            }
+
+            .promo-sticky-nav {
+                bottom: -120px;
+                width: 100%;
+                max-width: none;
+                border-radius: 0;
+            }
+
+            .promo-sticky-nav.visible {
+                bottom: 0;
+            }
+
+            .promo-sticky-nav-content {
+                padding: 6px 10px;
+            }
+
+            .promo-sticky-header {
+                flex-direction: row;
+                gap: 10px;
+                margin-bottom: 6px;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .promo-sticky-title {
+                font-size: 0.8rem;
+                text-align: left;
+                flex: 1;
+                gap: 6px;
+            }
+
+            .promo-sticky-title::before {
+                width: 16px;
+                height: 11px;
+            }
+
+            .promo-sticky-toggles {
+                justify-content: flex-end;
+                gap: 6px;
+                flex: none;
+            }
+
+            .promo-sticky-toggle {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+                border-radius: 12px;
+            }
+
+            .promo-sticky-card {
+                width: 60px;
+                min-width: 60px;
+                max-width: 60px;
+                flex-shrink: 0;
+                flex: 0 0 60px;
+                margin-right: 1px;
+            }
+
+            .promo-sticky-card-image {
+                height: 30px;
+                padding: 3px;
+            }
+
+            .promo-sticky-card-content {
+                padding: 3px;
+            }
+
+            .promo-sticky-card-title {
+                font-size: 0.5rem;
+                margin-bottom: 1px;
+            }
+
+            .promo-sticky-card-count {
+                font-size: 0.4rem;
+                margin-bottom: 1px;
+            }
+
+            .promo-sticky-card-discount {
+                font-size: 0.35rem;
+                padding: 1px 2px;
+                border-radius: 3px;
+            }
+
+            .promo-sticky-card-flag {
+                font-size: 0.5rem;
+                top: 1px;
+                right: 1px;
+            }
+
+            .promo-sticky-carousel {
+                gap: 8px;
+                justify-content: flex-start;
+                padding: 8px 5px;
+                scroll-snap-type: x mandatory;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                flex-direction: row;
+                display: flex;
+                min-height: 80px;
+                max-height: 80px;
+                white-space: nowrap;
+            }
+
+            .promo-sticky-card {
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                margin: 1px;
+            }
+
+            .promo-american-eagle {
+                font-size: 2rem;
+            }
+
+            .promo-liberty-bell {
+                font-size: 1.5rem;
+            }
+
+            .promo-dual-worlds {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .promo-world {
+                padding: 30px 20px;
+            }
+
+            .promo-section-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .promo-section-info {
+                flex: none;
+                max-width: 100%;
+                padding: 25px 20px;
+            }
+
+            .promo-flag-icon {
+                font-size: 4rem;
+            }
+
+            .promo-section-stats {
+                gap: 20px;
+            }
+
+            .promo-products-grid {
+                max-width: 100%;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 18px;
+                padding: 20px;
+            }
+
+            .promo-timer-grid,
+            .promo-finale-timer-grid {
+                gap: 10px;
+            }
+
+            .promo-timer-cube,
+            .promo-finale-unit {
+                min-width: 80px;
+                padding: 15px 10px;
+            }
+
+            .promo-timer-face span,
+            .promo-finale-unit span {
+                font-size: 1.8rem;
+            }
+
+            .promo-finale-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .promo-finale-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .promo-product-image {
+                height: 150px;
+            }
+
+            .promo-product-content {
+                padding: 15px;
+            }
+
+            .promo-star {
+                font-size: 1.8rem;
+            }
+        }
+        .promo-animated-flag {
+            animation: promo-flag-wave 2s ease-in-out infinite;
+            display: inline-block;
+        }
+        .promo-flag-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script>
+        // Enhanced countdown timer
+        function updateCountdown() {
+            const targetDate = new Date('July 4, 2025 23:59:59').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Update all timers
+                ['promo-days', 'promo-finale-days'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = days.toString().padStart(2, '0');
+                });
+
+                ['promo-hours', 'promo-finale-hours'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = hours.toString().padStart(2, '0');
+                });
+
+                ['promo-minutes', 'promo-finale-minutes'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = minutes.toString().padStart(2, '0');
+                });
+
+                ['promo-seconds', 'promo-finale-seconds'].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = seconds.toString().padStart(2, '0');
+                });
+            }
+        }
+
+        // World exploration functionality
+        function exploreWorld(worldType) {
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+
+            if (worldType === 'bioprocess') {
+                bioprocessSections.style.display = 'block';
+                laboratorySections.style.display = 'none';
+                bioprocessSections.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                bioprocessSections.style.display = 'none';
+                laboratorySections.style.display = 'block';
+                laboratorySections.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+
+
+        // Collection carousel functionality
+        function initializeCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const container = carousel.querySelector('.promo-carousel-container');
+            const circles = carousel.querySelectorAll('.promo-collection-circle');
+            const dotsContainer = carousel.querySelector('.promo-carousel-dots');
+
+            if (circles.length === 0) return;
+
+            // Create dots
+            circles.forEach((circle, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'promo-carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => scrollToCircle(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            let currentIndex = 0;
+            let autoRotateInterval;
+
+            function scrollToCircle(index) {
+                currentIndex = index;
+                const circleWidth = circles[0].offsetWidth + 20; // including gap
+                container.scrollLeft = index * circleWidth;
+
+                // Update dots
+                dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                // Update mobile active circle
+                if (window.innerWidth <= 768) {
+                    circles.forEach((circle, i) => {
+                        circle.classList.toggle('active-mobile', i === index);
+                    });
+                }
+            }
+
+            function autoRotate() {
+                currentIndex = (currentIndex + 1) % circles.length;
+                scrollToCircle(currentIndex);
+            }
+
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(autoRotate, 3000);
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+
+            // Initialize first circle as active on mobile
+            if (window.innerWidth <= 768) {
+                circles[0].classList.add('active-mobile');
+            }
+
+            // Start auto-rotation
+            startAutoRotate();
+
+            // Pause on hover
+            carousel.addEventListener('mouseenter', stopAutoRotate);
+            carousel.addEventListener('mouseleave', startAutoRotate);
+
+            // Handle manual scroll
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const circleWidth = circles[0].offsetWidth + 20;
+                const newIndex = Math.round(scrollLeft / circleWidth);
+
+                if (newIndex !== currentIndex && newIndex < circles.length) {
+                    currentIndex = newIndex;
+                    dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 768) {
+                    circles.forEach((circle, i) => {
+                        circle.classList.toggle('active-mobile', i === currentIndex);
+                    });
+                } else {
+                    circles.forEach(circle => {
+                        circle.classList.remove('active-mobile');
+                    });
+                }
+            });
+        }
+
+        // Switch between bioprocess and laboratory sticky carousels
+        function switchStickyWorld(worldType) {
+            const bioprocessCarousel = document.getElementById('sticky-bioprocess-carousel');
+            const laboratoryCarousel = document.getElementById('sticky-laboratory-carousel');
+            const toggles = document.querySelectorAll('.promo-sticky-toggle');
+
+            // Update toggle states
+            toggles.forEach(toggle => {
+                toggle.classList.remove('active');
+                if (toggle.dataset.world === worldType) {
+                    toggle.classList.add('active');
+                }
+            });
+
+            // Switch carousels
+            if (worldType === 'bioprocess') {
+                bioprocessCarousel.style.display = 'flex';
+                laboratoryCarousel.style.display = 'none';
+            } else {
+                bioprocessCarousel.style.display = 'none';
+                laboratoryCarousel.style.display = 'flex';
+            }
+
+            // Switch the main world view but don't auto-scroll to avoid sticky nav issues
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+
+            if (worldType === 'bioprocess') {
+                bioprocessSections.style.display = 'block';
+                laboratorySections.style.display = 'none';
+            } else {
+                bioprocessSections.style.display = 'none';
+                laboratorySections.style.display = 'block';
+            }
+        }
+
+        // Enhanced scroll behavior for sticky navigation
+        function scrollToCollectionSection(collectionType) {
+            // Update sticky navigation active state
+            updateStickyActiveState(collectionType);
+
+            let targetSection = null;
+
+            // Find the target section based on collection type
+            if (collectionType === 'ezlabpure-carboy' || collectionType === 'ezclear-carboy' || collectionType === 'ezgrip-carboy' || collectionType === 'ezbio-carboy' || collectionType === 'lab-general') {
+                exploreWorld('laboratory');
+                setTimeout(() => {
+                    const sections = document.querySelectorAll('.promo-laboratory-sections .promo-collection-section');
+                    sections.forEach(section => {
+                        const badge = section.querySelector('.promo-category-badge');
+                        if (badge) {
+                            const badgeText = badge.textContent.toLowerCase();
+                            if (
+                                (collectionType === 'ezlabpure-carboy' && badgeText.includes('ezlabpure carboy')) ||
+                                (collectionType === 'ezclear-carboy' && badgeText.includes('ezclear carboy')) ||
+                                (collectionType === 'ezgrip-carboy' && badgeText.includes('ezgrip carboy')) ||
+                                (collectionType === 'ezbio-carboy' && badgeText.includes('ezbio carboy')) ||
+                                (collectionType === 'lab-general' && badgeText.includes('lab essentials'))
+                            ) {
+                                targetSection = section;
+                            }
+                        }
+                    });
+
+                    if (targetSection) {
+                        smoothScrollToSection(targetSection);
+                    }
+                }, 100);
+            } else {
+                exploreWorld('bioprocess');
+                setTimeout(() => {
+                    // Find the section by checking for the category badge text
+                    const sections = document.querySelectorAll('.promo-bioprocess-sections .promo-collection-section');
+                    sections.forEach(section => {
+                        const badge = section.querySelector('.promo-category-badge');
+                        if (badge) {
+                            const badgeText = badge.textContent.toLowerCase();
+                            if (
+                                (collectionType === 'pc-carboy' && badgeText.includes('pc rectangular')) ||
+                                (collectionType === 'pc-tr-carboy' && badgeText.includes('pc tr')) ||
+                                (collectionType === 'ezbio-bottles' && badgeText.includes('ezbio bottles pc')) ||
+                                (collectionType === 'ezbio-ts-bottles' && badgeText.includes('ezbio ts')) ||
+                                (collectionType === 'pfa-bottles' && badgeText.includes('pfa bottles')) ||
+                                (collectionType === 'aqg' && badgeText.includes('aqg')) ||
+                                (collectionType === 'cpc-connectors' && badgeText.includes('cpc stream')) ||
+                                (collectionType === 'ezbio-assembly' && badgeText.includes('ezbio assemblies'))
+                            ) {
+                                targetSection = section;
+                            }
+                        }
+                    });
+
+                    if (targetSection) {
+                        smoothScrollToSection(targetSection);
+                    }
+                }, 100);
+            }
+        }
+
+        function smoothScrollToSection(targetSection) {
+            const stickyNavHeight = document.querySelector('.promo-sticky-nav').offsetHeight;
+            const totalOffset = 40; // Just extra padding, no need to account for bottom nav
+
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
+            // Add highlight effect
+            targetSection.style.boxShadow = '0 0 30px rgba(191, 10, 48, 0.3)';
+            setTimeout(() => {
+                targetSection.style.boxShadow = '';
+            }, 2000);
+        }
+
+        function updateStickyActiveState(activeCollection) {
+            const cards = document.querySelectorAll('.promo-sticky-card');
+            cards.forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.collection === activeCollection) {
+                    card.classList.add('active');
+
+                    // Auto-switch to appropriate world if needed
+                    const isLaboratory = ['ezlabpure-carboy', 'ezclear-carboy', 'ezgrip-carboy', 'ezbio-carboy', 'lab-general'].includes(activeCollection);
+                    const currentWorld = document.querySelector('.promo-sticky-toggle.active').dataset.world;
+
+                    if (isLaboratory && currentWorld !== 'laboratory') {
+                        switchStickyWorld('laboratory');
+                    } else if (!isLaboratory && currentWorld !== 'bioprocess') {
+                        switchStickyWorld('bioprocess');
+                    }
+                }
+            });
+        }
+
+        // Sticky navigation visibility control
+        function handleStickyNavigation() {
+            const stickyNav = document.getElementById('sticky-nav');
+            const dualWorldsSection = document.querySelector('.promo-dual-worlds');
+            const finalSection = document.querySelector('.promo-freedom-finale');
+
+            if (!stickyNav || !dualWorldsSection) return;
+
+            const dualWorldsRect = dualWorldsSection.getBoundingClientRect();
+            const finalSectionRect = finalSection ? finalSection.getBoundingClientRect() : null;
+            const scrollY = window.scrollY;
+
+            // Check if any collection sections are visible
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+            const hasVisibleSections = (bioprocessSections && bioprocessSections.style.display !== 'none') || 
+                                     (laboratorySections && laboratorySections.style.display !== 'none');
+
+            // Only show sticky nav when:
+            // 1. User has scrolled past the dual worlds section
+            // 2. User hasn't reached the final CTA section
+            // 3. User has scrolled more than 100px from top
+            // 4. There are visible collection sections
+            const showSticky = dualWorldsRect.bottom <= 20 && 
+                             scrollY > 100 && 
+                             hasVisibleSections &&
+                             (!finalSectionRect || finalSectionRect.top > 100);
+
+            if (showSticky) {
+                stickyNav.classList.add('visible');
+                // Update active state based on visible section
+                updateActiveBasedOnScroll();
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+        }
+
+        function updateActiveBasedOnScroll() {
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            const laboratorySections = document.getElementById('laboratory-sections');
+
+            // Only check sections from the currently visible world
+            let sectionsToCheck = [];
+            if (bioprocessSections && bioprocessSections.style.display !== 'none') {
+                sectionsToCheck = bioprocessSections.querySelectorAll('.promo-collection-section');
+            } else if (laboratorySections && laboratorySections.style.display !== 'none') {
+                sectionsToCheck = laboratorySections.querySelectorAll('.promo-collection-section');
+            }
+
+            const offset = window.innerHeight / 2; // Use middle of viewport as reference
+            let activeSection = null;
+
+            sectionsToCheck.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= offset && rect.bottom >= offset) {
+                    activeSection = section;
+                }
+            });
+
+            if (activeSection) {
+                const badge = activeSection.querySelector('.promo-category-badge');
+                if (badge) {
+                    const badgeText = badge.textContent.toLowerCase();
+                    let collectionType = '';
+
+                    if (badgeText.includes('pc rectangular')) collectionType = 'pc-carboy';
+                    else if (badgeText.includes('pc tr')) collectionType = 'pc-tr-carboy';
+                    else if (badgeText.includes('ezbio bottles pc')) collectionType = 'ezbio-bottles';
+                    else if (badgeText.includes('ezbio ts')) collectionType = 'ezbio-ts-bottles';
+                    else if (badgeText.includes('pfa bottles')) collectionType = 'pfa-bottles';
+                    else if (badgeText.includes('aqg')) collectionType = 'aqg';
+                    else if (badgeText.includes('cpc stream')) collectionType = 'cpc-connectors';
+                    else if (badgeText.includes('ezbio assemblies')) collectionType = 'ezbio-assembly';
+                    else if (badgeText.includes('ezlabpure carboy')) collectionType = 'ezlabpure-carboy';
+                    else if (badgeText.includes('ezclear carboy')) collectionType = 'ezclear-carboy';
+                    else if (badgeText.includes('ezgrip carboy')) collectionType = 'ezgrip-carboy';
+                    else if (badgeText.includes('ezbio carboy')) collectionType = 'ezbio-carboy';
+                    else if (badgeText.includes('lab essentials')) collectionType = 'lab-general';
+
+                    if (collectionType) {
+                        updateStickyActiveState(collectionType);
+                    }
+                }
+            }
+        }
+
+        // Initialize the revolutionary experience
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Show bioprocess sections by default
+            const bioprocessSections = document.getElementById('bioprocess-sections');
+            if (bioprocessSections) {
+                bioprocessSections.style.display = 'block';
+            }
+
+            // Initialize carousels
+            initializeCarousel('bioprocess-carousel');
+            initializeCarousel('laboratory-carousel');
+
+            // Initialize sticky navigation
+            window.addEventListener('scroll', handleStickyNavigation);
+            handleStickyNavigation(); // Initial check
+        });
+    </script>
+</section>
