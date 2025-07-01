@@ -1668,7 +1668,7 @@
             justify-content: flex-start;
             align-items: center;
             scroll-behavior: smooth;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             flex-direction: row;
             min-height: 100px;
             max-height: 120px;
@@ -2363,8 +2363,8 @@
             max-width: 55%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            padding: 20px;
+            gap: 20px;
+            padding: 25px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
             border: 3px solid rgba(9, 94, 167, 0.6);
@@ -2962,9 +2962,9 @@
             }
 
             .promo-sticky-carousel {
-                gap: 3px;
+                gap: 8px;
                 justify-content: flex-start;
-                padding: 3px 5px;
+                padding: 8px 5px;
                 scroll-snap-type: x mandatory;
                 flex-wrap: nowrap;
                 overflow-x: auto;
@@ -2972,6 +2972,7 @@
                 display: flex;
                 min-height: 80px;
                 max-height: 80px;
+                white-space: nowrap;
             }
 
             .promo-sticky-card {
@@ -3019,8 +3020,8 @@
             .promo-products-grid {
                 max-width: 100%;
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
-                padding: 15px;
+                gap: 18px;
+                padding: 20px;
             }
 
             .promo-timer-grid,
