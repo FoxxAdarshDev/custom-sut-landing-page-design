@@ -16,6 +16,11 @@
     {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-us-independence-day-sale-25'] %}
     {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-us-independence-day-sale-25'] %}
     {% assign laboratory_collection = collections['laboratory-products-us-independence-day-sale-25'] %}
+    {% assign ezlabpure_carboy_collection = collections['ezlabpure-20l-round-carboy-us-independence-day-sale-25'] %}
+    {% assign ezclear_carboy_collection = collections['ezclear-5l-pc-space-saving-carboy-us-independence-day-sale-25'] %}
+    {% assign ezgrip_carboy_collection = collections['ezgrip-10l-autoclavable-pp-us-independence-day-sale-25'] %}
+    {% assign ezbio_carboy_collection = collections['ezbio-carboy-us-independence-day-sale-25'] %}
+    {% assign lab_general_collection = collections['lab-us-independence-day-sale-25'] %}
 
 
 
@@ -213,62 +218,72 @@
 
             <!-- Laboratory Carousel -->
             <div class="promo-sticky-carousel" id="sticky-laboratory-carousel" style="display: none;">
-                {% if laboratory_collection.image %}
-                <div class="promo-sticky-card" data-collection="laboratory" onclick="scrollToCollectionSection('laboratory')">
+                {% if ezlabpure_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
                     <div class="promo-sticky-card-flag">🇺🇸</div>
                     <div class="promo-sticky-card-image">
-                        <img src="{{ laboratory_collection.image | img_url: '80x80' }}" alt="Laboratory">
+                        <img src="{{ ezlabpure_carboy_collection.image | img_url: '80x80' }}" alt="EZLabpure Carboy">
                     </div>
                     <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">Lab Equipment</div>
-                        <div class="promo-sticky-card-count">{{ laboratory_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">40% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- Additional laboratory subcategories -->
-                {% assign lab_bottles_collection = collections['laboratory-bottles-us-independence-day-sale-25'] %}
-                {% if lab_bottles_collection.image %}
-                <div class="promo-sticky-card" data-collection="lab-bottles" onclick="scrollToCollectionSection('lab-bottles')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ lab_bottles_collection.image | img_url: '80x80' }}" alt="Lab Bottles">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">Lab Bottles</div>
-                        <div class="promo-sticky-card-count">{{ lab_bottles_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">35% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% assign lab_storage_collection = collections['laboratory-storage-us-independence-day-sale-25'] %}
-                {% if lab_storage_collection.image %}
-                <div class="promo-sticky-card" data-collection="lab-storage" onclick="scrollToCollectionSection('lab-storage')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ lab_storage_collection.image | img_url: '80x80' }}" alt="Lab Storage">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">Storage</div>
-                        <div class="promo-sticky-card-count">{{ lab_storage_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-title">EZLabpure</div>
+                        <div class="promo-sticky-card-count">{{ ezlabpure_carboy_collection.products.size }} Items</div>
                         <div class="promo-sticky-card-discount">30% OFF</div>
                     </div>
                 </div>
                 {% endif %}
 
-                {% assign lab_instruments_collection = collections['laboratory-instruments-us-independence-day-sale-25'] %}
-                {% if lab_instruments_collection.image %}
-                <div class="promo-sticky-card" data-collection="lab-instruments" onclick="scrollToCollectionSection('lab-instruments')">
+                {% if ezclear_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
                     <div class="promo-sticky-card-flag">🇺🇸</div>
                     <div class="promo-sticky-card-image">
-                        <img src="{{ lab_instruments_collection.image | img_url: '80x80' }}" alt="Lab Instruments">
+                        <img src="{{ ezclear_carboy_collection.image | img_url: '80x80' }}" alt="EZclear Carboy">
                     </div>
                     <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">Instruments</div>
-                        <div class="promo-sticky-card-count">{{ lab_instruments_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-title">EZclear</div>
+                        <div class="promo-sticky-card-count">{{ ezclear_carboy_collection.products.size }} Items</div>
                         <div class="promo-sticky-card-discount">25% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezgrip_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezgrip_carboy_collection.image | img_url: '80x80' }}" alt="EZgrip Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZgrip</div>
+                        <div class="promo-sticky-card-count">{{ ezgrip_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">35% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if ezbio_carboy_collection.image %}
+                <div class="promo-sticky-card" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ ezbio_carboy_collection.image | img_url: '80x80' }}" alt="EZBio Carboy">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">EZBio</div>
+                        <div class="promo-sticky-card-count">{{ ezbio_carboy_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">20% OFF</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if lab_general_collection.image %}
+                <div class="promo-sticky-card" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                    <div class="promo-sticky-card-flag">🇺🇸</div>
+                    <div class="promo-sticky-card-image">
+                        <img src="{{ lab_general_collection.image | img_url: '80x80' }}" alt="Lab General">
+                    </div>
+                    <div class="promo-sticky-card-content">
+                        <div class="promo-sticky-card-title">Lab Items</div>
+                        <div class="promo-sticky-card-count">{{ lab_general_collection.products.size }} Items</div>
+                        <div class="promo-sticky-card-discount">40% OFF</div>
                     </div>
                 </div>
                 {% endif %}
@@ -384,35 +399,38 @@
                     <!-- Laboratory Collection Image Carousel -->
                     <div class="promo-collection-carousel" id="laboratory-carousel">
                         <div class="promo-carousel-container">
-                            {% if laboratory_collection.image %}
-                            <div class="promo-collection-circle" data-collection="laboratory" onclick="scrollToCollectionSection('laboratory')">
-                                <img src="{{ laboratory_collection.image | img_url: '150x150' }}" alt="{{ laboratory_collection.title }}">
-                                <div class="promo-circle-label">Lab Equipment</div>
+                            {% if ezlabpure_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
+                                <img src="{{ ezlabpure_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezlabpure_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZLabpure</div>
                             </div>
                             {% endif %}
 
-                            <!-- Additional laboratory subcategories if available -->
-                            {% assign lab_bottles_collection = collections['laboratory-bottles-us-independence-day-sale-25'] %}
-                            {% if lab_bottles_collection.image %}
-                            <div class="promo-collection-circle" data-collection="lab-bottles" onclick="scrollToCollectionSection('lab-bottles')">
-                                <img src="{{ lab_bottles_collection.image | img_url: '150x150' }}" alt="{{ lab_bottles_collection.title }}">
-                                <div class="promo-circle-label">Lab Bottles</div>
+                            {% if ezclear_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
+                                <img src="{{ ezclear_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezclear_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZclear</div>
                             </div>
                             {% endif %}
 
-                            {% assign lab_storage_collection = collections['laboratory-storage-us-independence-day-sale-25'] %}
-                            {% if lab_storage_collection.image %}
-                            <div class="promo-collection-circle" data-collection="lab-storage" onclick="scrollToCollectionSection('lab-storage')">
-                                <img src="{{ lab_storage_collection.image | img_url: '150x150' }}" alt="{{ lab_storage_collection.title }}">
-                                <div class="promo-circle-label">Storage</div>
+                            {% if ezgrip_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                                <img src="{{ ezgrip_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezgrip_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZgrip</div>
                             </div>
                             {% endif %}
 
-                            {% assign lab_instruments_collection = collections['laboratory-instruments-us-independence-day-sale-25'] %}
-                            {% if lab_instruments_collection.image %}
-                            <div class="promo-collection-circle" data-collection="lab-instruments" onclick="scrollToCollectionSection('lab-instruments')">
-                                <img src="{{ lab_instruments_collection.image | img_url: '150x150' }}" alt="{{ lab_instruments_collection.title }}">
-                                <div class="promo-circle-label">Instruments</div>
+                            {% if ezbio_carboy_collection.image %}
+                            <div class="promo-collection-circle" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                                <img src="{{ ezbio_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezbio_carboy_collection.title }}">
+                                <div class="promo-circle-label">EZBio</div>
+                            </div>
+                            {% endif %}
+
+                            {% if lab_general_collection.image %}
+                            <div class="promo-collection-circle" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                                <img src="{{ lab_general_collection.image | img_url: '150x150' }}" alt="{{ lab_general_collection.title }}">
+                                <div class="promo-circle-label">Lab Items</div>
                             </div>
                             {% endif %}
                         </div>
@@ -421,7 +439,10 @@
 
                     <div class="promo-world-stats">
                         <div class="promo-stat">
-                            <span class="promo-stat-number">{{ laboratory_collection.products.size }}+</span>
+                            <span class="promo-stat-number">
+                                {% assign lab_total = ezlabpure_carboy_collection.products.size | plus: ezclear_carboy_collection.products.size | plus: ezgrip_carboy_collection.products.size | plus: ezbio_carboy_collection.products.size | plus: lab_general_collection.products.size %}
+                                {{ lab_total }}+
+                            </span>
                             <span class="promo-stat-label">Products</span>
                         </div>
                         <div class="promo-stat">
@@ -1333,9 +1354,11 @@
 
     </div>
 
-    <!-- Laboratory Section -->
+    <!-- Laboratory Sections -->
     <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
-        {% if laboratory_collection.products.size > 0 %}
+
+        <!-- EZLabpure 20L Round Carboy Section -->
+        {% if ezlabpure_carboy_collection.products.size > 0 %}
         <section class="promo-collection-section">
             <div class="promo-flag-bg">
                 <div class="promo-animated-stars">
@@ -1355,12 +1378,456 @@
             <div class="promo-section-container">
                 <div class="promo-section-content">
                     <div class="promo-section-info">
-                        <div class="promo-category-badge">🔬 LABORATORY ESSENTIALS</div>
-                        <h2 class="promo-section-title">Premium Laboratory Equipment</h2>
-                        <p class="promo-section-description">Complete range of high-quality laboratory equipment and supplies for research, analysis, and scientific innovation. Built to the highest standards for reliable performance.</p>
+                        <div class="promo-category-badge">🧪 EZLABPURE CARBOY</div>
+                        <h2 class="promo-section-title">EZLabpure™ 20 L Round Carboy</h2>
+                        <p class="promo-section-description">Premium 20-liter round carboys designed for laboratory applications requiring high purity and reliability. Perfect for research environments and analytical work.</p>
                         <div class="promo-section-stats">
                             <div class="promo-stat-item">
-                                <span class="promo-stat-number">{{ laboratory_collection.products.size }}</span>
+                                <span class="promo-stat-number">{{ ezlabpure_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">30%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezlabpure_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZLABPURE
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezlabpure_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    30% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZclear 5L PC Space Saving Carboy Section -->
+        {% if ezclear_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🧪 EZCLEAR CARBOY</div>
+                        <h2 class="promo-section-title">EZclear 5 L Polycarbonate Space Saving Carboy</h2>
+                        <p class="promo-section-description">Innovative 5-liter polycarbonate carboys with space-saving design for laboratory efficiency. Crystal clear visibility and optimal space utilization for modern labs.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezclear_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">25%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezclear_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZCLEAR
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezclear_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🧪</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    25% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZgrip 10L Autoclavable PP Section -->
+        {% if ezgrip_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🫗 EZGRIP CARBOY</div>
+                        <h2 class="promo-section-title">EZgrip® 10 L Autoclavable Polypropylene</h2>
+                        <p class="promo-section-description">Durable 10-liter autoclavable polypropylene carboys with enhanced grip design. Perfect for applications requiring repeated sterilization and ergonomic handling.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezgrip_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">35%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezgrip_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZGRIP
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezgrip_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">🫗</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    35% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- EZBio Carboy Section -->
+        {% if ezbio_carboy_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">⚗️ EZBIO CARBOY</div>
+                        <h2 class="promo-section-title">EZBio® Carboy Systems</h2>
+                        <p class="promo-section-description">Advanced EZBio carboy systems designed for laboratory bioprocessing applications. Featuring integrated connection systems for seamless fluid handling and storage.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ ezbio_carboy_collection.products.size }}</span>
+                                <span class="promo-stat-label">Products Available</span>
+                            </div>
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">20%</span>
+                                <span class="promo-stat-label">Independence Savings</span>
+                            </div>
+                        </div>
+                        <a href="{{ ezbio_carboy_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL EZBIO
+                        </a>
+                    </div>
+
+                    <div class="promo-products-grid">
+                        {% for product in ezbio_carboy_collection.products limit: 10 %}
+                        <div class="promo-product-card">
+                            <div class="promo-product-image">
+                                {% if product.featured_image %}
+                                    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <div class="promo-placeholder-img">⚗️</div>
+                                {% endif %}
+                                <div class="promo-sale-badge-modern">
+                                    <svg class="promo-us-flag-svg" viewBox="0 0 60 40" width="24" height="16">
+                                        <rect width="60" height="40" fill="#B22234"/>
+                                        <rect y="3" width="60" height="3" fill="white"/>
+                                        <rect y="9" width="60" height="3" fill="white"/>
+                                        <rect y="15" width="60" height="3" fill="white"/>
+                                        <rect y="21" width="60" height="3" fill="white"/>
+                                        <rect y="27" width="60" height="3" fill="white"/>
+                                        <rect y="33" width="60" height="3" fill="white"/>
+                                        <rect width="24" height="21" fill="#3C3B6E"/>
+                                        <g fill="white">
+                                            <circle cx="4" cy="3" r="0.5"/>
+                                            <circle cx="8" cy="3" r="0.5"/>
+                                            <circle cx="12" cy="3" r="0.5"/>
+                                            <circle cx="16" cy="3" r="0.5"/>
+                                            <circle cx="20" cy="3" r="0.5"/>
+                                            <circle cx="6" cy="6" r="0.5"/>
+                                            <circle cx="10" cy="6" r="0.5"/>
+                                            <circle cx="14" cy="6" r="0.5"/>
+                                            <circle cx="18" cy="6" r="0.5"/>
+                                            <circle cx="4" cy="9" r="0.5"/>
+                                            <circle cx="8" cy="9" r="0.5"/>
+                                            <circle cx="12" cy="9" r="0.5"/>
+                                            <circle cx="16" cy="9" r="0.5"/>
+                                            <circle cx="20" cy="9" r="0.5"/>
+                                            <circle cx="6" cy="12" r="0.5"/>
+                                            <circle cx="10" cy="12" r="0.5"/>
+                                            <circle cx="14" cy="12" r="0.5"/>
+                                            <circle cx="18" cy="12" r="0.5"/>
+                                            <circle cx="4" cy="15" r="0.5"/>
+                                            <circle cx="8" cy="15" r="0.5"/>
+                                            <circle cx="12" cy="15" r="0.5"/>
+                                            <circle cx="16" cy="15" r="0.5"/>
+                                            <circle cx="20" cy="15" r="0.5"/>
+                                            <circle cx="6" cy="18" r="0.5"/>
+                                            <circle cx="10" cy="18" r="0.5"/>
+                                            <circle cx="14" cy="18" r="0.5"/>
+                                            <circle cx="18" cy="18" r="0.5"/>
+                                        </g>
+                                    </svg>
+                                    20% OFF
+                                </div>
+                            </div>
+                            <div class="promo-product-content">
+                                <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
+                                <div class="promo-product-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% else %}
+                                        <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Lab General Section -->
+        {% if lab_general_collection.products.size > 0 %}
+        <section class="promo-collection-section">
+            <div class="promo-flag-bg">
+                <div class="promo-animated-stars">
+                    <div class="promo-star promo-star-1">★</div>
+                    <div class="promo-star promo-star-2">★</div>
+                    <div class="promo-star promo-star-3">★</div>
+                    <div class="promo-star promo-star-4">★</div>
+                    <div class="promo-star promo-star-5">★</div>
+                </div>
+                <div class="promo-animated-stripes">
+                    <div class="promo-moving-stripe promo-stripe-1"></div>
+                    <div class="promo-moving-stripe promo-stripe-2"></div>
+                    <div class="promo-moving-stripe promo-stripe-3"></div>
+                </div>
+            </div>
+
+            <div class="promo-section-container">
+                <div class="promo-section-content">
+                    <div class="promo-section-info">
+                        <div class="promo-category-badge">🔬 LAB ESSENTIALS</div>
+                        <h2 class="promo-section-title">Laboratory Independence Collection</h2>
+                        <p class="promo-section-description">Complete range of essential laboratory equipment and supplies for research, analysis, and scientific innovation. Built to the highest standards for reliable performance in all lab environments.</p>
+                        <div class="promo-section-stats">
+                            <div class="promo-stat-item">
+                                <span class="promo-stat-number">{{ lab_general_collection.products.size }}</span>
                                 <span class="promo-stat-label">Products Available</span>
                             </div>
                             <div class="promo-stat-item">
@@ -1368,13 +1835,13 @@
                                 <span class="promo-stat-label">Independence Savings</span>
                             </div>
                         </div>
-                        <a href="{{ laboratory_collection.url }}" class="promo-section-cta">
-                            🚀 VIEW ALL LABORATORY
+                        <a href="{{ lab_general_collection.url }}" class="promo-section-cta">
+                            🚀 VIEW ALL LAB ITEMS
                         </a>
                     </div>
 
                     <div class="promo-products-grid">
-                        {% for product in laboratory_collection.products limit: 10 %}
+                        {% for product in lab_general_collection.products limit: 10 %}
                         <div class="promo-product-card">
                             <div class="promo-product-image">
                                 {% if product.featured_image %}
@@ -1444,6 +1911,7 @@
             </div>
         </section>
         {% endif %}
+
     </div>
 
     <!-- Final Revolutionary CTA -->
@@ -3220,10 +3688,26 @@
             let targetSection = null;
 
             // Find the target section based on collection type
-            if (collectionType === 'laboratory' || collectionType === 'lab-bottles' || collectionType === 'lab-storage' || collectionType === 'lab-instruments') {
+            if (collectionType === 'ezlabpure-carboy' || collectionType === 'ezclear-carboy' || collectionType === 'ezgrip-carboy' || collectionType === 'ezbio-carboy' || collectionType === 'lab-general') {
                 exploreWorld('laboratory');
                 setTimeout(() => {
-                    targetSection = document.querySelector('.promo-laboratory-sections .promo-collection-section');
+                    const sections = document.querySelectorAll('.promo-laboratory-sections .promo-collection-section');
+                    sections.forEach(section => {
+                        const badge = section.querySelector('.promo-category-badge');
+                        if (badge) {
+                            const badgeText = badge.textContent.toLowerCase();
+                            if (
+                                (collectionType === 'ezlabpure-carboy' && badgeText.includes('ezlabpure carboy')) ||
+                                (collectionType === 'ezclear-carboy' && badgeText.includes('ezclear carboy')) ||
+                                (collectionType === 'ezgrip-carboy' && badgeText.includes('ezgrip carboy')) ||
+                                (collectionType === 'ezbio-carboy' && badgeText.includes('ezbio carboy')) ||
+                                (collectionType === 'lab-general' && badgeText.includes('lab essentials'))
+                            ) {
+                                targetSection = section;
+                            }
+                        }
+                    });
+
                     if (targetSection) {
                         smoothScrollToSection(targetSection);
                     }
@@ -3286,7 +3770,7 @@
                     card.classList.add('active');
 
                     // Auto-switch to appropriate world if needed
-                    const isLaboratory = ['laboratory', 'lab-bottles', 'lab-storage', 'lab-instruments'].includes(activeCollection);
+                    const isLaboratory = ['ezlabpure-carboy', 'ezclear-carboy', 'ezgrip-carboy', 'ezbio-carboy', 'lab-general'].includes(activeCollection);
                     const currentWorld = document.querySelector('.promo-sticky-toggle.active').dataset.world;
 
                     if (isLaboratory && currentWorld !== 'laboratory') {
@@ -3371,7 +3855,11 @@
                     else if (badgeText.includes('aqg')) collectionType = 'aqg';
                     else if (badgeText.includes('cpc stream')) collectionType = 'cpc-connectors';
                     else if (badgeText.includes('ezbio assemblies')) collectionType = 'ezbio-assembly';
-                    else if (badgeText.includes('laboratory')) collectionType = 'laboratory';
+                    else if (badgeText.includes('ezlabpure carboy')) collectionType = 'ezlabpure-carboy';
+                    else if (badgeText.includes('ezclear carboy')) collectionType = 'ezclear-carboy';
+                    else if (badgeText.includes('ezgrip carboy')) collectionType = 'ezgrip-carboy';
+                    else if (badgeText.includes('ezbio carboy')) collectionType = 'ezbio-carboy';
+                    else if (badgeText.includes('lab essentials')) collectionType = 'lab-general';
 
                     if (collectionType) {
                         updateStickyActiveState(collectionType);
