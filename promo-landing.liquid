@@ -3025,17 +3025,20 @@
             
             if (!stickyNav || !categorySection) return;
             
-            const categoryTop = categorySection.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
+            const categoryRect = categorySection.getBoundingClientRect();
+            const stickyNavHeight = stickyNav.offsetHeight;
+            const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
+            const totalHeaderHeight = stickyNavHeight + flagNavHeight;
             
-            if (categoryTop < 0) {
+            // Show sticky nav only when category section is visible and user has scrolled into it
+            // Hide when completely past the section
+            if (categoryRect.top <= totalHeaderHeight && categoryRect.bottom > totalHeaderHeight) {
                 stickyNav.classList.add('visible');
+                // Update active state based on visible section
+                updateActiveBasedOnScroll();
             } else {
                 stickyNav.classList.remove('visible');
             }
-            
-            // Update active state based on visible section
-            updateActiveBasedOnScroll();
         }
 
         function updateActiveBasedOnScroll() {
