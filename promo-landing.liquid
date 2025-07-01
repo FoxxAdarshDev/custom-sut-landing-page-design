@@ -1052,7 +1052,7 @@
             }
         }
 
-        /* Creative Curved Arrow Connectors */
+        /* SVG Curved Arrow Connectors */
         .promo-section-content {
             position: relative;
         }
@@ -1060,54 +1060,33 @@
         .promo-section-content::before {
             content: '';
             position: absolute;
-            top: 0%;
-            left: 45%;
-            width: 60px;
+            top: 10%;
+            left: 44%;
+            width: 80px;
             height: 60px;
-            background: transparent;
-            border: 1px solid #095ea7;
-            border-left: none;
-            border-bottom: none;
-            border-radius: 0 30px 0 0;
-            transform: rotate(45deg);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 60' width='80' height='60'%3E%3Cpath d='M10 30 Q30 10, 50 20 Q65 25, 70 30' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M65 25 L70 30 L65 35 M70 30 L65 30' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
             z-index: 10;
             pointer-events: none;
             animation: promo-curved-arrow-glow 3s ease-in-out infinite;
         }
 
         .promo-section-content::after {
-            content: '→';
-            position: absolute;
-            top: -2%;
-            right: 49%;
-            font-size: 1.2rem;
-            color: #095ea7;
-            z-index: 11;
-            pointer-events: none;
-            animation: promo-arrow-bounce 2s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            content: '';
+            display: none;
         }
 
         @keyframes promo-curved-arrow-glow {
             0%, 100% { 
-                border-color: #095ea7;
-                box-shadow: 0 0 5px rgba(9, 94, 167, 0.3);
+                opacity: 0.8;
+                transform: scale(1);
+                filter: drop-shadow(0 2px 4px rgba(9, 94, 167, 0.3));
             }
             50% { 
-                border-color: #002868;
-                box-shadow: 0 0 8px rgba(0, 40, 104, 0.5);
-            }
-        }
-
-        @keyframes promo-arrow-bounce {
-            0%, 100% { 
-                transform: translateX(0) scale(1);
-                opacity: 0.9;
-            }
-            50% { 
-                transform: translateX(4px) scale(1.05);
                 opacity: 1;
+                transform: scale(1.05);
+                filter: drop-shadow(0 4px 8px rgba(0, 40, 104, 0.5));
             }
         }
 
@@ -1175,9 +1154,16 @@
             }
         }
 
-        /* Hide arrows on mobile */
+        /* Responsive arrows for mobile */
         @media (max-width: 768px) {
-            .promo-section-content::before,
+            .promo-section-content::before {
+                width: 40px;
+                height: 30px;
+                top: 15%;
+                left: 47%;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 30' width='40' height='30'%3E%3Cpath d='M5 15 Q15 8, 25 12 Q32 14, 35 15' fill='none' stroke='%23095ea7' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M30 12 L35 15 L30 18 M35 15 L30 15' fill='none' stroke='%23095ea7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+            
             .promo-section-content::after,
             .promo-products-grid::before,
             .promo-product-card::after,
