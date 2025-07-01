@@ -2124,10 +2124,22 @@
         /* Collection Sections */
         .promo-collection-section {
             position: relative;
-            padding: 60px 20px;
+            padding: 60px 0;
             margin-bottom: 40px;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(248,249,250,0.85) 100%);
+        }
+        
+        .promo-collection-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(248,249,250,0.3) 100%);
+            backdrop-filter: blur(5px);
+            z-index: 0;
         }
 
         .promo-flag-bg {
@@ -2197,6 +2209,7 @@
             z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         .promo-section-content {
@@ -2207,10 +2220,10 @@
 
         .promo-section-info {
             flex: 0 0 400px;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
             padding: 35px 30px;
-            border: 3px solid #095ea7;
+            border: 3px solid rgba(9, 94, 167, 0.6);
             backdrop-filter: blur(15px);
             box-shadow: 0 10px 30px rgba(9, 94, 167, 0.15);
             position: relative;
@@ -2337,9 +2350,9 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
-            border: 3px solid #095ea7;
+            border: 3px solid rgba(9, 94, 167, 0.6);
             backdrop-filter: blur(15px);
             box-shadow: 0 10px 30px rgba(9, 94, 167, 0.1);
             position: relative;
@@ -2813,6 +2826,14 @@
         @media (max-width: 768px) {
             .promo-hero-revolution {
                 padding-top: 10px;
+            }
+            
+            .promo-section-container {
+                padding: 0 15px;
+            }
+            
+            .promo-collection-section {
+                padding: 40px 0;
             }
 
             .promo-sticky-nav {
