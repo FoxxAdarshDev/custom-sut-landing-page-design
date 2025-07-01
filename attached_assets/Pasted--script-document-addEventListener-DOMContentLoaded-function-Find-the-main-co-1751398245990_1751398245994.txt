@@ -1,0 +1,48 @@
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find the main content container
+      const mainContentContainer = document.querySelector('.grid__item.large--four-fifths');
+      
+      // Find the promotional wrapper section
+      const promoWrapper = document.querySelector('#christmas-offer-landing-page-home');
+      
+      if (mainContentContainer && promoWrapper) {
+        // Check if promo wrapper is not already inside the main content container
+        if (!mainContentContainer.contains(promoWrapper)) {
+          // Move the promotional wrapper into the main content container
+          mainContentContainer.appendChild(promoWrapper);
+          
+          // Add containment styles to ensure proper layout
+          promoWrapper.style.maxWidth = '100%';
+          promoWrapper.style.overflow = 'hidden';
+          promoWrapper.style.boxSizing = 'border-box';
+          
+          console.log('Promotional sections moved to main content area');
+        }
+      }
+      
+      // Also handle any other promotional sections that might be outside the container
+      const allPromoSections = document.querySelectorAll('.promo-independence-wrapper, .promo-bioprocess-sections, .promo-laboratory-sections, .promo-freedom-finale');
+      
+      allPromoSections.forEach(function(section) {
+        if (mainContentContainer && !mainContentContainer.contains(section) && section.id !== 'christmas-offer-landing-page-home') {
+          // Move section into the main content container
+          mainContentContainer.appendChild(section);
+          
+          // Apply containment styles
+          section.style.maxWidth = '100%';
+          section.style.overflow = 'hidden';
+          section.style.boxSizing = 'border-box';
+          
+          console.log('Promotional section moved to main content area:', section.className);
+        }
+      });
+      
+      // Ensure sticky navigation works properly after content relocation
+      setTimeout(function() {
+        if (typeof handleStickyNavigation === 'function') {
+          handleStickyNavigation();
+        }
+      }, 100);
+    });
+  </script>
