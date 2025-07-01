@@ -1060,15 +1060,15 @@
         .promo-section-content::before {
             content: '';
             position: absolute;
-            top: 5%;
-            left: 42%;
-            width: 80px;
-            height: 80px;
+            top: 0%;
+            left: 45%;
+            width: 60px;
+            height: 60px;
             background: transparent;
-            border: 3px solid #095ea7;
+            border: 1px solid #095ea7;
             border-left: none;
             border-bottom: none;
-            border-radius: 0 50px 0 0;
+            border-radius: 0 30px 0 0;
             transform: rotate(45deg);
             z-index: 10;
             pointer-events: none;
@@ -1076,37 +1076,37 @@
         }
 
         .promo-section-content::after {
-            content: '➤';
+            content: '→';
             position: absolute;
-            top: 2%;
-            right: 48%;
-            font-size: 1.8rem;
+            top: -2%;
+            right: 49%;
+            font-size: 1.2rem;
             color: #095ea7;
             z-index: 11;
             pointer-events: none;
             animation: promo-arrow-bounce 2s ease-in-out infinite;
-            text-shadow: 0 0 15px rgba(9, 94, 167, 0.7);
-            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+            text-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes promo-curved-arrow-glow {
             0%, 100% { 
                 border-color: #095ea7;
-                box-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
+                box-shadow: 0 0 5px rgba(9, 94, 167, 0.3);
             }
             50% { 
                 border-color: #002868;
-                box-shadow: 0 0 20px rgba(0, 40, 104, 0.7);
+                box-shadow: 0 0 8px rgba(0, 40, 104, 0.5);
             }
         }
 
         @keyframes promo-arrow-bounce {
             0%, 100% { 
                 transform: translateX(0) scale(1);
-                opacity: 0.8;
+                opacity: 0.9;
             }
             50% { 
-                transform: translateX(8px) scale(1.1);
+                transform: translateX(4px) scale(1.05);
                 opacity: 1;
             }
         }
