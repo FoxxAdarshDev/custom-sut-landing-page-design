@@ -1034,30 +1034,21 @@
             .promo-products-grid {
                 grid-template-columns: 1fr;
                 max-width: 100%;
-                gap: 30px;
-                position: relative;
-            }
-
-            /* Enhanced mobile arrows */
-            .promo-products-grid .promo-product-card:nth-child(even)::after,
-            .promo-products-grid .promo-product-card:nth-child(odd)::before {
-                animation: promo-enhanced-pulse 3s ease-in-out infinite;
+                gap: 20px;
             }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .promo-products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                position: relative;
+                gap: 12px;
             }
         }
 
         @media (min-width: 1025px) {
             .promo-products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-                position: relative;
+                gap: 15px;
             }
         }
 
@@ -1084,171 +1075,53 @@
             position: relative;
         }
 
-        /* Interlinking Arrow SVG System */
-        .promo-products-grid {
-            position: relative;
-        }
-
-        /* Create curved connecting arrows between cards */
-        .promo-product-card:nth-child(1)::after {
-            content: '';
+        .promo-product-card:nth-child(even)::after {
+            content: '→';
             position: absolute;
-            right: -50px;
+            left: -25px;
             top: 50%;
-            width: 100px;
-            height: 60px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 10 90 30' stroke='%23BF0A30' stroke-width='3' fill='none' marker-end='url(%23arrow1)'/%3E%3Cdefs%3E%3Cmarker id='arrow1' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite;
-            pointer-events: none;
+            transform: translateY(-50%);
+            color: #BF0A30;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 2;
+            animation: promo-arrow-pulse 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(191, 10, 48, 0.5);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        .promo-product-card:nth-child(2)::after {
-            content: '';
+        .promo-product-card:nth-child(odd)::before {
+            content: '←';
             position: absolute;
-            left: -50px;
-            bottom: -40px;
-            width: 100px;
-            height: 80px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23095ea7' stroke-width='3' fill='none' marker-end='url(%23arrow2)'/%3E%3Cdefs%3E%3Cmarker id='arrow2' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23095ea7'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite 1s;
-            pointer-events: none;
-        }
-
-        .promo-product-card:nth-child(3)::after {
-            content: '';
-            position: absolute;
-            right: -50px;
+            right: -25px;
             top: 50%;
-            width: 100px;
-            height: 60px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 50 90 30' stroke='%23BF0A30' stroke-width='3' fill='none' marker-end='url(%23arrow3)'/%3E%3Cdefs%3E%3Cmarker id='arrow3' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite 2s;
-            pointer-events: none;
-        }
-
-        .promo-product-card:nth-child(4)::after {
-            content: '';
-            position: absolute;
-            left: -50px;
-            bottom: -40px;
-            width: 100px;
-            height: 80px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23095ea7' stroke-width='3' fill='none' marker-end='url(%23arrow4)'/%3E%3Cdefs%3E%3Cmarker id='arrow4' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23095ea7'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite 0.5s;
-            pointer-events: none;
-        }
-
-        /* Continue pattern for more cards */
-        .promo-product-card:nth-child(5)::after {
-            content: '';
-            position: absolute;
-            right: -50px;
-            top: 50%;
-            width: 100px;
-            height: 60px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='none'%3E%3Cpath d='M10 30 Q50 10 90 30' stroke='%23FFD700' stroke-width='3' fill='none' marker-end='url(%23arrow5)'/%3E%3Cdefs%3E%3Cmarker id='arrow5' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23FFD700'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite 1.5s;
-            pointer-events: none;
-        }
-
-        .promo-product-card:nth-child(6)::after {
-            content: '';
-            position: absolute;
-            left: -50px;
-            bottom: -40px;
-            width: 100px;
-            height: 80px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80' fill='none'%3E%3Cpath d='M90 20 Q50 60 10 60' stroke='%23FFD700' stroke-width='3' fill='none' marker-end='url(%23arrow6)'/%3E%3Cdefs%3E%3Cmarker id='arrow6' markerWidth='10' markerHeight='7' refX='9' refY='3.5' orient='auto'%3E%3Cpolygon points='0 0, 10 3.5, 0 7' fill='%23FFD700'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-            animation: promo-arrow-pulse 3s ease-in-out infinite 2.5s;
-            pointer-events: none;
-        }
-
-        /* Mobile responsive arrows */
-        @media (max-width: 768px) {
-            .promo-products-grid::before {
-                display: none;
-            }
-
-            /* Mobile: Show vertical flow arrows between stacked cards */
-            .promo-product-card::after {
-                display: none !important;
-            }
-
-            .promo-product-card:not(:last-child)::before {
-                content: '';
-                position: absolute;
-                bottom: -30px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 40px;
-                height: 30px;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 30' fill='none'%3E%3Cpath d='M20 5 L20 20' stroke='%23BF0A30' stroke-width='3' marker-end='url(%23arrowDown)'/%3E%3Cdefs%3E%3Cmarker id='arrowDown' markerWidth='8' markerHeight='6' refX='8' refY='3' orient='auto'%3E%3Cpolygon points='0 0, 8 3, 0 6' fill='%23BF0A30'/%3E%3C/marker%3E%3C/defs%3E%3C/svg%3E");
-                background-size: contain;
-                background-repeat: no-repeat;
-                z-index: 10;
-                animation: promo-arrow-pulse 2s ease-in-out infinite;
-                pointer-events: none;
-            }
+            transform: translateY(-50%);
+            color: #095ea7;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 2;
+            animation: promo-arrow-pulse 2s ease-in-out infinite 0.5s;
+            text-shadow: 0 0 10px rgba(9, 94, 167, 0.5);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes promo-arrow-pulse {
             0%, 100% { 
                 opacity: 0.6; 
-                transform: scale(1); 
-                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+                transform: translateY(-50%) scale(1); 
             }
             50% { 
                 opacity: 1; 
-                transform: scale(1.05); 
-                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+                transform: translateY(-50%) scale(1.2); 
             }
         }
 
-        /* Enhanced grid positioning for arrow connections */
-        .promo-products-grid {
-            position: relative;
-            z-index: 1;
-        }
-
-        .promo-product-card {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Enhanced pulse animation for interlinking arrows */
-        @keyframes promo-enhanced-pulse {
-            0% { 
-                opacity: 0.4; 
-                transform: scale(0.95);
-                filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
-            }
-            50% { 
-                opacity: 1; 
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 15px rgba(191, 10, 48, 0.8));
-            }
-            100% { 
-                opacity: 0.4; 
-                transform: scale(0.95);
-                filter: drop-shadow(0 0 5px rgba(191, 10, 48, 0.3));
+        /* Hide arrows on mobile */
+        @media (max-width: 768px) {
+            .promo-products-grid::before,
+            .promo-product-card::after,
+            .promo-product-card::before {
+                display: none;
             }
         }
 
@@ -1285,51 +1158,6 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             border-color: #BF0A30;
-        }
-
-        /* Enhanced hover effect for arrows */
-        .promo-product-card:hover::after,
-        .promo-product-card:hover::before {
-            animation: promo-enhanced-pulse 1s ease-in-out infinite;
-            transform: translateY(-50%) scale(1.3);
-        }
-
-        /* Ensure arrows appear in all product grids */
-        .promo-products-grid .promo-product-card {
-            position: relative;
-        }
-
-        /* Enhanced hover effects for interlinking arrows */
-        .promo-product-card:hover::after {
-            animation: promo-enhanced-pulse 1s ease-in-out infinite;
-            transform: scale(1.2);
-            z-index: 15;
-        }
-
-        /* Flow indicators for product journey */
-        .promo-products-grid::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23095ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-            animation: promo-flow-indicator 4s ease-in-out infinite;
-        }
-
-        @keyframes promo-flow-indicator {
-            0%, 100% { 
-                transform: translateY(0); 
-                opacity: 0.6; 
-            }
-            50% { 
-                transform: translateY(10px); 
-                opacity: 1; 
-            }
         }
 
         .promo-product-image {
@@ -1415,7 +1243,7 @@
             .promo-product-content {
                 padding: 12px;
             }
-            
+
             .promo-product-title {
                 font-size: 0.85rem;
                 margin-bottom: 8px;
