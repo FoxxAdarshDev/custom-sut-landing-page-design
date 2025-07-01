@@ -3651,13 +3651,23 @@
                 }
             });
 
-            // Switch carousels
+            // Switch carousels and reset scroll position
             if (worldType === 'bioprocess') {
                 bioprocessCarousel.style.display = 'flex';
                 laboratoryCarousel.style.display = 'none';
+                // Reset scroll position to first card
+                bioprocessCarousel.scrollLeft = 0;
+                setTimeout(() => {
+                    bioprocessCarousel.scrollTo(0, 0);
+                }, 50);
             } else {
                 bioprocessCarousel.style.display = 'none';
                 laboratoryCarousel.style.display = 'flex';
+                // Reset scroll position to first card
+                laboratoryCarousel.scrollLeft = 0;
+                setTimeout(() => {
+                    laboratoryCarousel.scrollTo(0, 0);
+                }, 50);
             }
 
             // Switch the main world view but don't auto-scroll to avoid sticky nav issues
@@ -3680,59 +3690,69 @@
 
             let targetSection = null;
 
-            // Find the target section based on collection type
-            if (collectionType === 'ezlabpure-carboy' || collectionType === 'ezclear-carboy' || collectionType === 'ezgrip-carboy' || collectionType === 'ezbio-carboy' || collectionType === 'lab-general') {
+            // Define collection type mappings
+            const bioprocessCollections = {
+                'pc-carboy': 'pc rectangular',
+                'pc-tr-carboy': 'pc tr',
+                'ezbio-bottles': 'ezbio bottles pc',
+                'ezbio-ts-bottles': 'ezbio ts',
+                'pfa-bottles': 'pfa bottles',
+                'aqg': 'aqg',
+                'cpc-connectors': 'cpc stream',
+                'ezbio-assembly': 'ezbio assemblies'
+            };
+
+            const laboratoryCollections = {
+                'ezlabpure-carboy': 'ezlabpure carboy',
+                'ezclear-carboy': 'ezclear carboy',
+                'ezgrip-carboy': 'ezgrip carboy',
+                'ezbio-carboy': 'ezbio carboy',
+                'lab-general': 'lab essentials'
+            };
+
+            // Check if it's a laboratory collection
+            if (laboratoryCollections[collectionType]) {
                 exploreWorld('laboratory');
                 setTimeout(() => {
                     const sections = document.querySelectorAll('.promo-laboratory-sections .promo-collection-section');
+                    const searchText = laboratoryCollections[collectionType];
+                    
                     sections.forEach(section => {
                         const badge = section.querySelector('.promo-category-badge');
-                        if (badge) {
-                            const badgeText = badge.textContent.toLowerCase();
-                            if (
-                                (collectionType === 'ezlabpure-carboy' && badgeText.includes('ezlabpure carboy')) ||
-                                (collectionType === 'ezclear-carboy' && badgeText.includes('ezclear carboy')) ||
-                                (collectionType === 'ezgrip-carboy' && badgeText.includes('ezgrip carboy')) ||
-                                (collectionType === 'ezbio-carboy' && badgeText.includes('ezbio carboy')) ||
-                                (collectionType === 'lab-general' && badgeText.includes('lab essentials'))
-                            ) {
-                                targetSection = section;
-                            }
+                        if (badge && badge.textContent.toLowerCase().includes(searchText)) {
+                            targetSection = section;
                         }
                     });
 
                     if (targetSection) {
                         smoothScrollToSection(targetSection);
+                    } else {
+                        console.log('Laboratory section not found for:', collectionType);
+                    }
+                }, 100);
+            } 
+            // Check if it's a bioprocess collection
+            else if (bioprocessCollections[collectionType]) {
+                exploreWorld('bioprocess');
+                setTimeout(() => {
+                    const sections = document.querySelectorAll('.promo-bioprocess-sections .promo-collection-section');
+                    const searchText = bioprocessCollections[collectionType];
+                    
+                    sections.forEach(section => {
+                        const badge = section.querySelector('.promo-category-badge');
+                        if (badge && badge.textContent.toLowerCase().includes(searchText)) {
+                            targetSection = section;
+                        }
+                    });
+
+                    if (targetSection) {
+                        smoothScrollToSection(targetSection);
+                    } else {
+                        console.log('Bioprocess section not found for:', collectionType);
                     }
                 }, 100);
             } else {
-                exploreWorld('bioprocess');
-                setTimeout(() => {
-                    // Find the section by checking for the category badge text
-                    const sections = document.querySelectorAll('.promo-bioprocess-sections .promo-collection-section');
-                    sections.forEach(section => {
-                        const badge = section.querySelector('.promo-category-badge');
-                        if (badge) {
-                            const badgeText = badge.textContent.toLowerCase();
-                            if (
-                                (collectionType === 'pc-carboy' && badgeText.includes('pc rectangular')) ||
-                                (collectionType === 'pc-tr-carboy' && badgeText.includes('pc tr')) ||
-                                (collectionType === 'ezbio-bottles' && badgeText.includes('ezbio bottles pc')) ||
-                                (collectionType === 'ezbio-ts-bottles' && badgeText.includes('ezbio ts')) ||
-                                (collectionType === 'pfa-bottles' && badgeText.includes('pfa bottles')) ||
-                                (collectionType === 'aqg' && badgeText.includes('aqg')) ||
-                                (collectionType === 'cpc-connectors' && badgeText.includes('cpc stream')) ||
-                                (collectionType === 'ezbio-assembly' && badgeText.includes('ezbio assemblies'))
-                            ) {
-                                targetSection = section;
-                            }
-                        }
-                    });
-
-                    if (targetSection) {
-                        smoothScrollToSection(targetSection);
-                    }
-                }, 100);
+                console.log('Unknown collection type:', collectionType);
             }
         }
 
