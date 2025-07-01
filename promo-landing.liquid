@@ -1633,49 +1633,53 @@
             top: 60px;
             left: 50%;
             transform: translateX(-50%) translateY(-100%);
-            max-width: 1400px;
-            width: 95%;
+            max-width: 1200px;
+            width: 90%;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             border: 3px solid #095ea7;
             border-radius: 20px;
             z-index: 999;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
             opacity: 0;
             visibility: hidden;
-            margin-top: 10px;
+            margin: 0 auto;
         }
 
         .promo-sticky-nav.visible {
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(10px);
             opacity: 1;
             visibility: visible;
         }
 
         .promo-sticky-nav-content {
-            padding: 15px 25px;
+            padding: 20px 30px;
         }
 
         .promo-sticky-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 2px solid rgba(9, 94, 167, 0.1);
+            gap: 30px;
         }
 
         .promo-sticky-title {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             color: #002868;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            text-align: center;
+            flex: none;
         }
 
         .promo-sticky-toggles {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex: none;
         }
 
         .promo-sticky-toggle {
@@ -1707,7 +1711,9 @@
             overflow-x: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            padding: 10px 0;
+            padding: 15px 0;
+            justify-content: center;
+            align-items: center;
         }
 
         .promo-sticky-carousel::-webkit-scrollbar {
@@ -2864,14 +2870,19 @@
 
             .promo-sticky-nav {
                 top: 40px;
-                width: 98%;
-                margin-top: 5px;
+                width: 95%;
+                max-width: none;
+            }
+
+            .promo-sticky-nav.visible {
+                transform: translateX(-50%) translateY(5px);
             }
 
             .promo-sticky-header {
                 flex-direction: column;
-                gap: 10px;
-                margin-bottom: 10px;
+                gap: 15px;
+                margin-bottom: 15px;
+                justify-content: center;
             }
 
             .promo-sticky-title {
