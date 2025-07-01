@@ -1516,10 +1516,14 @@
             transform: translateY(-100%);
             transition: transform 0.3s ease;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
         }
 
         .promo-sticky-nav.visible {
             transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
 
         .promo-sticky-nav-content {
@@ -3021,18 +3025,15 @@
         // Sticky navigation visibility control
         function handleStickyNavigation() {
             const stickyNav = document.getElementById('sticky-nav');
-            const categorySection = document.querySelector('.promo-category-universe');
+            const dualWorldsSection = document.querySelector('.promo-dual-worlds');
             
-            if (!stickyNav || !categorySection) return;
+            if (!stickyNav || !dualWorldsSection) return;
             
-            const categoryRect = categorySection.getBoundingClientRect();
-            const stickyNavHeight = stickyNav.offsetHeight;
+            const dualWorldsRect = dualWorldsSection.getBoundingClientRect();
             const flagNavHeight = document.querySelector('.promo-flag-navigation').offsetHeight;
-            const totalHeaderHeight = stickyNavHeight + flagNavHeight;
             
-            // Show sticky nav only when category section is visible and user has scrolled into it
-            // Hide when completely past the section
-            if (categoryRect.top <= totalHeaderHeight && categoryRect.bottom > totalHeaderHeight) {
+            // Show sticky nav only when user has scrolled past the dual worlds section
+            if (dualWorldsRect.bottom <= flagNavHeight) {
                 stickyNav.classList.add('visible');
                 // Update active state based on visible section
                 updateActiveBasedOnScroll();
