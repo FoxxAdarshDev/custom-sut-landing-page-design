@@ -1540,8 +1540,9 @@
             padding: 20px 0;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            min-width: 100%;
         }
 
         .promo-carousel-container::-webkit-scrollbar {
@@ -1558,6 +1559,7 @@
             margin: 0 4px;
             text-align: center;
             width: 100px;
+            min-width: 100px;
         }
 
         .promo-collection-circle-container:hover {
@@ -2357,6 +2359,7 @@
                     <!-- Collection Image Carousel -->
                     <div class="promo-collection-carousel" id="bioprocess-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
+                            {% comment %} Match the exact order from sticky navigation {% endcomment %}
                             {% if pc_carboy_collection.image %}
                             <div class="promo-collection-circle-container" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
                                 <div class="promo-collection-circle">
