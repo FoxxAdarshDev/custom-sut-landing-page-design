@@ -881,7 +881,7 @@
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 9998;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -1099,19 +1099,19 @@
     margin: 20px;
     border-radius: 16px;
   }
-  
+
   .popup-header {
     padding: 16px 20px 0 20px;
   }
-  
+
   .popup-content {
     padding: 0 20px 20px 20px;
   }
-  
+
   .popup-product-title {
     font-size: 16px;
   }
-  
+
   .popup-product-price {
     font-size: 18px;
   }
@@ -1217,7 +1217,7 @@
                 <div class="savings-preview">Buy 2+ items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
                 <div class="savings-details">
                   <div class="savings-option most-popular">
-                    <span class="savings-label">MOST POPULAR</span>
+                    <span class="savings-label">&nbsp;</span>
                     <div class="savings-text">More than 2 Items</div>
                     <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
                   </div>
@@ -2010,12 +2010,12 @@
         <div></div>
         <button class="popup-close" onclick="closeAddToCartPopup()">×</button>
     </div>
-    
+
     <div class="popup-content">
         <div class="popup-product-image">
             <img id="popupProductImage" src="" alt="Product Image">
         </div>
-        
+
         <h2 class="popup-product-title" id="popupProductTitle"></h2>
         <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
         <div class="popup-product-price">$<span id="popupProductPrice"></span></div>
@@ -2225,14 +2225,14 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     // Show overlay first
     const overlay = document.getElementById('overlay');
     const popup = document.getElementById('addToCartPopup');
-    
+
     overlay.classList.add('show');
-    
+
     // Small delay for smooth animation
     setTimeout(() => {
         popup.classList.add('show');
     }, 10);
-    
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 }
@@ -2240,9 +2240,9 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 function closeAddToCartPopup() {
     const overlay = document.getElementById('overlay');
     const popup = document.getElementById('addToCartPopup');
-    
+
     popup.classList.remove('show');
-    
+
     setTimeout(() => {
         overlay.classList.remove('show');
         document.body.style.overflow = '';
