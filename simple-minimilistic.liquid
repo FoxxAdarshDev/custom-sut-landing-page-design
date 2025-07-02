@@ -1179,6 +1179,8 @@
   font-size: 18px;
   font-weight: 500;
   color: #1d1d1f;
+  position: relative;
+  z-index: 1;
 }
 
 .popup-quantity-btn:hover {
@@ -1202,6 +1204,8 @@
   font-size: 16px;
   font-weight: 500;
   color: #1d1d1f;
+  position: relative;
+  z-index: 1;
 }
 
 .popup-add-to-cart {
@@ -2434,9 +2438,9 @@
         <div class="popup-quantity-section">
             <label class="popup-quantity-label">Quantity</label>
             <div class="popup-quantity-controls">
-                <button class="popup-quantity-btn" onclick="decreaseQuantity()">−</button>
+                <button class="popup-quantity-btn" onclick="decreaseQuantity()" type="button">−</button>
                 <input type="number" class="popup-quantity-input" id="popupQuantity" value="1" min="1" readonly>
-                <button class="popup-quantity-btn" onclick="increaseQuantity()">+</button>
+                <button class="popup-quantity-btn" onclick="increaseQuantity()" type="button">+</button>
             </div>
         </div>
 
