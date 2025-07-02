@@ -442,24 +442,24 @@ html
 
   .discount-badge {
     position: absolute;
-    top: 8px;
-    right: -5px;
+    top: 12px;
+    right: 12px;
     z-index: 10;
   }
 
   .discount-label {
     background: #0071ce !important;
     color: white !important;
-    padding: 8px 16px 8px 12px;
+    padding: 6px 14px 6px 10px;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-align: center;
     position: relative;
     display: inline-flex;
     align-items: center;
-    min-height: 28px;
-    border-radius: 0 4px 4px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-height: 24px;
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
   .discount-label::before {
@@ -470,14 +470,14 @@ html
     bottom: 0;
     background: #dc3545;
     color: white;
-    padding: 8px 10px;
-    font-size: 0.65rem;
+    padding: 6px 8px;
+    font-size: 0.6rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    border-radius: 4px 0 0 4px;
+    border-radius: 3px 0 0 3px;
     white-space: nowrap;
-    min-height: 28px;
+    min-height: 24px;
     box-sizing: border-box;
   }
 
@@ -488,8 +488,8 @@ html
     top: 100%;
     width: 0;
     height: 0;
-    border-left: 6px solid #a91e2e;
-    border-bottom: 6px solid transparent;
+    border-left: 5px solid #a91e2e;
+    border-bottom: 5px solid transparent;
   }
 
   @keyframes glow {
@@ -498,7 +498,7 @@ html
   }
 
   .product-image {
-    height: 220px; /* Adjusted height */
+    height: 280px; /* Increased height */
     background: white;
     display: flex;
     align-items: center;
@@ -520,8 +520,8 @@ html
   .product-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #0071ce; /* Updated color */
-    margin-bottom: 15px;
+    color: #333; /* Updated to brand color - darker text */
+    margin-bottom: 12px;
     line-height: 1.4;
     min-height: 48px;
     display: -webkit-box;
@@ -530,8 +530,32 @@ html
     overflow: hidden;
   }
 
+  .product-sku {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 6px; /* Reduced margin */
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    gap: 8px;
+  }
+
+  .copy-icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    color: #0071ce;
+    transition: color 0.2s ease;
+  }
+
+  .copy-icon:hover {
+    color: #005ba6;
+  }
+
   .product-price {
-    margin-bottom: 20px;
+    margin-bottom: 12px; /* Reduced margin */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -549,53 +573,6 @@ html
     font-weight: 700;
   }
 
-  .product-cta {
-    background: #0071ce;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .product-cta:hover {
-    background: #005ba6;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 113, 206, 0.4);
-    color: white;
-    text-decoration: none;
-  }
-
-  .product-card {
-    cursor: pointer;
-  }
-
-  .product-sku {
-    color: #666;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    font-weight: 500;
-	display: flex;  /* Aligns items in a row */
-    align-items: center; /* Vertically centers items */
-    justify-content: space-between; /* Puts space between items */
-    cursor: pointer;
-  }
-    .copy-icon {
-    width: 16px; /* Adjust size as needed */
-    height: 16px;
-    cursor: pointer;
-	margin-left: 5px;
-  }
-
   .final-price {
     color: #dc3545;
     font-size: 1.6rem;
@@ -606,8 +583,8 @@ html
   .smart-savings {
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 8px; /* Reduced padding */
-    margin: 15px 0;
+    padding: 6px 8px; /* Further reduced padding */
+    margin: 8px 0 12px 0; /* Reduced margins */
     border: 1px solid #e9ecef;
   }
 
@@ -616,10 +593,18 @@ html
     align-items: center;
     font-weight: 700;
     color: #495057;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-	justify-content: space-between;
+    font-size: 0.85rem; /* Slightly smaller font */
+    margin-bottom: 4px; /* Reduced margin */
+    justify-content: space-between;
     cursor: pointer;
+  }
+
+  .savings-preview {
+    font-size: 0.75rem; /* Smaller font */
+    color: #6c757d;
+    margin: 0; /* Removed margins */
+    padding: 0; /* Removed padding */
+    line-height: 1.2; /* Tighter line height */
   }
 
   .savings-option {
@@ -661,15 +646,8 @@ html
   }
 
   .savings-details {
-    display: none; /* Initially hide the details */
+    display: none;
     padding-top: 10px;
-  }
-
-  .savings-preview {
-    font-size: 0.8rem;
-    color: #6c757d;
-    margin-top: -4px;
-    margin-bottom: 8px;
   }
 
   .smart-savings-toggle {
@@ -684,7 +662,59 @@ html
   }
 
   .smart-savings.expanded .smart-savings-toggle {
-    transform: rotate(180deg); /* Rotate the arrow when expanded */
+    transform: rotate(180deg);
+  }
+
+  .product-cta {
+    background: #0071ce;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .product-cta:hover {
+    background: #005ba6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 113, 206, 0.4);
+    color: white;
+    text-decoration: none;
+  }
+
+  .product-card {
+    cursor: pointer;
+  }
+
+  /* Toast notification styles */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .toast.show {
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
@@ -1946,7 +1976,7 @@ function toggleSavings(event, element) {
             // Show toast notification
             const toast = document.createElement('div');
             toast.classList.add('toast');
-            toast.textContent = 'SKU Copied!';
+            toast.textContent = text + ' SKU copied!';
             document.body.appendChild(toast);
             // Animate toast
             setTimeout(() => {
@@ -1954,14 +1984,32 @@ function toggleSavings(event, element) {
                 setTimeout(() => {
                     toast.classList.remove('show');
                     setTimeout(() => {
-                        document.body.removeChild(toast);
+                        if (document.body.contains(toast)) {
+                            document.body.removeChild(toast);
+                        }
                     }, 300); // Duration of fade-out
                 }, 2000); // Display duration
             }, 100); // Small delay before fade-in
         })
         .catch(err => {
             console.error('Could not copy text: ', err);
-            alert('Failed to copy SKU. Please try again.'); // Fallback in case clipboard API fails
+            // Fallback toast for error
+            const errorToast = document.createElement('div');
+            errorToast.classList.add('toast');
+            errorToast.textContent = 'Failed to copy SKU. Please try again.';
+            errorToast.style.background = '#dc3545';
+            document.body.appendChild(errorToast);
+            setTimeout(() => {
+                errorToast.classList.add('show');
+                setTimeout(() => {
+                    errorToast.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(errorToast)) {
+                            document.body.removeChild(errorToast);
+                        }
+                    }, 300);
+                }, 2000);
+            }, 100);
         });
 }
 // Start countdown and sticky tabs when page loads
