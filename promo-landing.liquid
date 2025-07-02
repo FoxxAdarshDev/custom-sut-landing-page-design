@@ -4555,6 +4555,10 @@
             const laboratoryCarousel = document.getElementById('sticky-laboratory-carousel');
             const toggles = document.querySelectorAll('.promo-sticky-toggle');
 
+            // Clear all active states from both carousels first
+            const allCards = document.querySelectorAll('.promo-sticky-card');
+            allCards.forEach(card => card.classList.remove('active'));
+
             // Update toggle states
             toggles.forEach(toggle => {
                 toggle.classList.remove('active');
@@ -4571,6 +4575,11 @@
                 bioprocessCarousel.scrollLeft = 0;
                 setTimeout(() => {
                     bioprocessCarousel.scrollTo(0, 0);
+                    // Set first card as active in bioprocess
+                    const firstBioprocessCard = bioprocessCarousel.querySelector('.promo-sticky-card');
+                    if (firstBioprocessCard) {
+                        firstBioprocessCard.classList.add('active');
+                    }
                 }, 50);
             } else {
                 bioprocessCarousel.style.display = 'none';
@@ -4579,6 +4588,11 @@
                 laboratoryCarousel.scrollLeft = 0;
                 setTimeout(() => {
                     laboratoryCarousel.scrollTo(0, 0);
+                    // Set first card as active in laboratory
+                    const firstLabCard = laboratoryCarousel.querySelector('.promo-sticky-card');
+                    if (firstLabCard) {
+                        firstLabCard.classList.add('active');
+                    }
                 }, 50);
             }
 
@@ -4704,16 +4718,16 @@
 
             if (isLaboratory && currentWorld !== 'laboratory') {
                 switchStickyWorld('laboratory');
-                // Wait for world switch to complete
+                // Wait for world switch to complete, then set active card
                 setTimeout(() => {
                     setActiveCard(activeCollection);
-                }, 100);
+                }, 150);
             } else if (!isLaboratory && currentWorld !== 'bioprocess') {
                 switchStickyWorld('bioprocess');
-                // Wait for world switch to complete
+                // Wait for world switch to complete, then set active card
                 setTimeout(() => {
                     setActiveCard(activeCollection);
-                }, 100);
+                }, 150);
             } else {
                 setActiveCard(activeCollection);
             }
@@ -4726,9 +4740,12 @@
             const carouselSelector = currentWorld === 'laboratory' ? '#sticky-laboratory-carousel' : '#sticky-bioprocess-carousel';
 
             const visibleCards = document.querySelectorAll(`${carouselSelector} .promo-sticky-card`);
+            let foundCard = false;
+            
             visibleCards.forEach(card => {
                 if (card.dataset.collection === activeCollection) {
                     card.classList.add('active');
+                    foundCard = true;
 
                     // Scroll the card into view within the carousel
                     const carousel = card.closest('.promo-sticky-carousel');
@@ -4742,6 +4759,11 @@
                     }
                 }
             });
+
+            // If no card was found for the activeCollection, activate the first card
+            if (!foundCard && visibleCards.length > 0) {
+                visibleCards[0].classList.add('active');
+            }
         }
 
         // Sticky navigation visibility control
@@ -4850,6 +4872,14 @@
             // Initialize carousels
             initializeCarousel('bioprocess-carousel');
             initializeCarousel('laboratory-carousel');
+
+            // Set first card as active in bioprocess carousel by default
+            setTimeout(() => {
+                const firstBioprocessCard = document.querySelector('#sticky-bioprocess-carousel .promo-sticky-card');
+                if (firstBioprocessCard) {
+                    firstBioprocessCard.classList.add('active');
+                }
+            }, 100);
 
             // Initialize sticky navigation
             window.addEventListener('scroll', handleStickyNavigation);
