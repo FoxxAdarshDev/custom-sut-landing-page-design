@@ -2746,6 +2746,9 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
+    
+    // Load current cart info and show checkout section
+    updateCartInfo();
 }
 
 function closeAddToCartPopup() {
@@ -2757,6 +2760,12 @@ function closeAddToCartPopup() {
     setTimeout(() => {
         overlay.classList.remove('show');
         document.body.style.overflow = '';
+        
+        // Clean up any dynamically created checkout sections
+        const checkoutSection = document.querySelector('.popup-checkout-section');
+        if (checkoutSection) {
+            checkoutSection.remove();
+        }
     }, 300);
 }
 
@@ -2790,10 +2799,8 @@ function selectSavingsOption(quantity) {
     // Update quantity input
     document.getElementById('popupQuantity').value = quantity;
 
-    // Automatically add to cart
-    setTimeout(() => {
-        addToCart();
-    }, 500); // Small delay for visual feedback
+    // Don't auto-add to cart - let user click Add to Cart button
+    // This gives users more control over their purchase
 }
 
 function addToCart() {
@@ -2815,8 +2822,14 @@ function addToCart() {
         // Show success notification
         showAddToCartSuccess();
 
-        // Update popup to show checkout options and related products
-        showCheckoutSection();
+        // Update cart count and checkout button
+        updateCartInfo();
+        
+        // Reset quantity to 1 after adding
+        document.getElementById('popupQuantity').value = 1;
+        
+        // Keep the Add to Cart button visible - don't hide it
+        // This allows users to add more items or different quantities
     })
     .catch(error => {
         console.error('Error adding to cart:', error);
@@ -2873,17 +2886,41 @@ function showAddToCartError() {
     }, 100);
 }
 
-function showCheckoutSection() {
-    // Update the popup content to show checkout and related products
-    const addToCartButton = document.querySelector('.popup-add-to-cart');
-    addToCartButton.style.display = 'none';
+// Global cart info
+let currentCartCount = 0;
+let currentCartTotal = 0;
 
+function updateCartInfo() {
+    // Fetch current cart information
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+        currentCartCount = cart.item_count;
+        currentCartTotal = cart.total_price;
+        
+        // Update checkout button text with cart info
+        updateCheckoutButton();
+    })
+    .catch(error => {
+        console.error('Error fetching cart:', error);
+    });
+}
+
+function updateCheckoutButton() {
+    // Create or update checkout section if it doesn't exist
+    let checkoutSection = document.querySelector('.popup-checkout-section');
+    
+    if (!checkoutSection) {
+        checkoutSection = document.createElement('div');
+        checkoutSection.classList.add('popup-checkout-section');
+        
+        // Insert after the add to cart button
+        const addToCartButton = document.querySelector('.popup-add-to-cart');
+        addToCartButton.parentNode.insertBefore(checkoutSection, addToCartButton.nextSibling);
+    }
+    
     // Get actual products from the page (excluding current product)
     const relatedProducts = getRelatedProducts();
-
-    // Create checkout section
-    const checkoutSection = document.createElement('div');
-    checkoutSection.classList.add('popup-checkout-section');
 
     let relatedProductsHTML = '';
     if (relatedProducts.length > 0) {
@@ -2919,11 +2956,15 @@ function showCheckoutSection() {
         `;
     }
 
+    const cartText = currentCartCount > 0 ? 
+        `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})` : 
+        `🛒 Proceed to Checkout`;
+
     checkoutSection.innerHTML = `
         <div class="checkout-buttons">
             <button class="checkout-btn primary" onclick="proceedToCheckout()">
-                <span class="checkout-icon">🛒</span>
-                Proceed to Checkout
+                <span class="checkout-icon"></span>
+                ${cartText}
             </button>
             <button class="checkout-btn secondary" onclick="continueShopping()">
                 Continue Shopping
@@ -2931,10 +2972,6 @@ function showCheckoutSection() {
         </div>
         ${relatedProductsHTML}
     `;
-
-    // Insert after the quantity section
-    const quantitySection = document.querySelector('.popup-quantity-section');
-    quantitySection.parentNode.insertBefore(checkoutSection, quantitySection.nextSibling);
 }
 
 function getRelatedProducts() {
@@ -3042,5 +3079,8 @@ function addRelatedProduct(sku, title, price) {
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
   calculatePricesAndSavings();
+  
+  // Initialize cart info
+  updateCartInfo();
 });
 </script>
