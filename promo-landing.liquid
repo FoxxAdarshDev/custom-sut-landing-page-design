@@ -1027,41 +1027,56 @@
         @media (max-width: 768px) {
             .promo-products-grid {
                 grid-template-columns: 1fr !important;
-                max-width: 100%;
-                gap: 25px;
-                padding: 25px 20px;
-                max-height: none;
-                border-radius: 20px;
+                max-width: 100% !important;
+                gap: 25px !important;
+                padding: 25px 20px !important;
+                max-height: none !important;
+                border-radius: 20px !important;
+            }
+            
+            .promo-product-card {
+                width: 100% !important;
+                max-width: 100% !important;
             }
         }
 
         @media (max-width: 480px) {
             .promo-products-grid {
                 grid-template-columns: 1fr !important;
-                gap: 20px;
-                padding: 20px 15px;
+                gap: 20px !important;
+                padding: 20px 15px !important;
+            }
+            
+            .promo-product-card {
+                width: 100% !important;
+                max-width: 100% !important;
             }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
             .promo-products-grid {
                 grid-template-columns: 1fr !important;
-                gap: 25px;
-                padding: 25px 20px;
+                gap: 25px !important;
+                padding: 25px 20px !important;
+            }
+            
+            .promo-product-card {
+                width: 100% !important;
+                max-width: 100% !important;
             }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .promo-products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
             }
         }
 
         @media (min-width: 1025px) {
             .promo-products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
             }
         }
 
@@ -1810,6 +1825,21 @@
                 padding: 40px 0;
                 margin: 0 10px 40px 10px;
                 border-radius: 15px;
+            }
+            
+            /* Force single column on all mobile devices */
+            .promo-products-grid {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto !important;
+                width: 100% !important;
+            }
+            
+            .promo-product-card {
+                grid-column: 1 !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 auto !important;
             }
 
             .promo-sticky-nav {
