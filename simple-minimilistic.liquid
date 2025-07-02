@@ -378,7 +378,7 @@
     padding: 40px;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     text-align: center;
-    border-bottom: 3px solid #dee2e6;
+    border-bottom: 3px solid #0071ce;
   }
 
   .collection-header img {
@@ -389,20 +389,16 @@
     object-fit: contain;
     margin-bottom: 20px;
     border-radius: 10px;
+    border: 3px solid #0071ce;
+    padding: 10px;
+    background: white;
   }
 
   .collection-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #1E3A8A;
+    color: #0071ce;
     margin-bottom: 10px;
-  }
-
-  .collection-description {
-    font-size: 1.1rem;
-    color: #6c757d;
-    max-width: 600px;
-    margin: 0 auto;
   }
 
   .products-grid {
@@ -781,7 +777,6 @@
             <img src="{{ pc_carboy_collection.image | img_url: '400x400' }}" alt="{{ pc_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ pc_carboy_collection.title }}</h2>
-          <p class="collection-description">Premium polycarbonate rectangular carboys for space-saving bioprocessing applications.</p>
         </div>
         <div class="products-grid">
           {% for product in pc_carboy_collection.products %}
@@ -821,7 +816,6 @@
             <img src="{{ pc_tr_carboy_collection.image | img_url: '400x400' }}" alt="{{ pc_tr_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ pc_tr_carboy_collection.title }}</h2>
-          <p class="collection-description">Temperature resistant polycarbonate carboys for demanding bioprocess applications.</p>
         </div>
         <div class="products-grid">
           {% for product in pc_tr_carboy_collection.products %}
@@ -861,7 +855,6 @@
             <img src="{{ ezbio_bottles_collection.image | img_url: '400x400' }}" alt="{{ ezbio_bottles_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezbio_bottles_collection.title }}</h2>
-          <p class="collection-description">Innovative EZBio bottle systems with integrated connection technology.</p>
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottles_collection.products %}
@@ -901,7 +894,6 @@
             <img src="{{ ezbio_ts_bottles_collection.image | img_url: '400x400' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezbio_ts_bottles_collection.title }}</h2>
-          <p class="collection-description">Premium titanium series bottles for superior chemical resistance.</p>
         </div>
         <div class="products-grid">
           {% for product in ezbio_ts_bottles_collection.products %}
@@ -941,7 +933,6 @@
             <img src="{{ pfa_bottles_collection.image | img_url: '400x400' }}" alt="{{ pfa_bottles_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ pfa_bottles_collection.title }}</h2>
-          <p class="collection-description">Ultra-pure PFA bottles for critical high-purity applications.</p>
         </div>
         <div class="products-grid">
           {% for product in pfa_bottles_collection.products %}
@@ -981,7 +972,6 @@
             <img src="{{ aqg_collection.image | img_url: '400x400' }}" alt="{{ aqg_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ aqg_collection.title }}</h2>
-          <p class="collection-description">AseptiQuik G connector systems for sterile bioprocessing connections.</p>
         </div>
         <div class="products-grid">
           {% for product in aqg_collection.products %}
@@ -1021,7 +1011,6 @@
             <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '400x400' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ cpc_stream_thru_connectors_collection.title }}</h2>
-          <p class="collection-description">High-performance stream thru connectors for continuous flow applications.</p>
         </div>
         <div class="products-grid">
           {% for product in cpc_stream_thru_connectors_collection.products %}
@@ -1061,7 +1050,6 @@
             <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '400x400' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezbio_bottle_assembly_pc_collection.title }}</h2>
-          <p class="collection-description">Complete bottle assembly solutions for streamlined bioprocessing operations.</p>
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottle_assembly_pc_collection.products %}
@@ -1106,7 +1094,6 @@
             <img src="{{ ezlabpure_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezlabpure_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezlabpure_carboy_collection.title }}</h2>
-          <p class="collection-description">Premium 20-liter round carboys for high-purity laboratory applications.</p>
         </div>
         <div class="products-grid">
           {% for product in ezlabpure_carboy_collection.products %}
@@ -1146,7 +1133,6 @@
             <img src="{{ ezclear_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezclear_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezclear_carboy_collection.title }}</h2>
-          <p classass="collection-description">Space-saving 5-liter polycarbonate carboys with crystal clear visibility.</p>
         </div>
         <div class="products-grid">
           {% for product in ezclear_carboy_collection.products %}
@@ -1186,7 +1172,6 @@
             <img src="{{ ezgrip_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezgrip_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezgrip_carboy_collection.title }}</h2>
-          <p class="collection-description">Autoclavable 10-liter polypropylene carboys with enhanced grip design.</p>
         </div>
         <div class="products-grid">
           {% for product in ezgrip_carboy_collection.products %}
@@ -1226,7 +1211,6 @@
             <img src="{{ ezbio_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezbio_carboy_collection.title }}">
           {% endif %}
           <h2 class="collection-title">{{ ezbio_carboy_collection.title }}</h2>
-          <p class="collection-description">Advanced EZBio carboy systems for laboratory bioprocessing applications.</p>
         </div>
         <div class="products-grid">
           {% for product in ezbio_carboy_collection.products %}
