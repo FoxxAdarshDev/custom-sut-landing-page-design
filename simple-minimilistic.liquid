@@ -1793,12 +1793,19 @@ function calculatePricesAndSavings() {
     finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
   });
 
+  // Calculate smart savings amounts for expanded sections
+  const savingsAmounts = document.querySelectorAll('.savings-amount');
   savingsAmounts.forEach(savingsAmount => {
     const basePrice = parseFloat(savingsAmount.dataset.basePrice);
     const qty = parseInt(savingsAmount.dataset.qty);
 
-    // Use consistent 10% bulk discount for quantities 2+
-    const discountRate = 0.10;
+    // Find the discount percentage from the product card's discount badge
+    const productCard = savingsAmount.closest('.product-card');
+    const discountLabel = productCard.querySelector('.discount-label');
+    const discountText = discountLabel.textContent;
+    const discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+    const discountRate = discountPercentage / 100;
+
     const regularTotal = basePrice * qty;
     const discountedTotal = regularTotal * (1 - discountRate);
     const totalSavings = regularTotal - discountedTotal;
@@ -1813,8 +1820,13 @@ function calculatePricesAndSavings() {
     const basePrice = parseFloat(savingsPreviewAmount.dataset.basePrice);
     const qty = parseInt(savingsPreviewAmount.dataset.qty);
 
-    // Use same 10% bulk discount as the expanded section
-    const discountRate = 0.10;
+    // Find the discount percentage from the product card's discount badge
+    const productCard = savingsPreviewAmount.closest('.product-card');
+    const discountLabel = productCard.querySelector('.discount-label');
+    const discountText = discountLabel.textContent;
+    const discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+    const discountRate = discountPercentage / 100;
+
     const regularTotal = basePrice * qty;
     const discountedTotal = regularTotal * (1 - discountRate);
     const totalSavings = regularTotal - discountedTotal;
