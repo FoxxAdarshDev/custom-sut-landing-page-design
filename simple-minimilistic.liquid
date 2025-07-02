@@ -1179,8 +1179,7 @@
   font-size: 18px;
   font-weight: 500;
   color: #1d1d1f;
-  position: relative;
-  z-index: 1;
+  user-select: none;
 }
 
 .popup-quantity-btn:hover {
@@ -1204,8 +1203,12 @@
   font-size: 16px;
   font-weight: 500;
   color: #1d1d1f;
-  position: relative;
-  z-index: 1;
+  outline: none;
+}
+
+/* Hide any extra quantity controls */
+.popup-quantity-section .popup-quantity-btn:nth-of-type(n+3) {
+  display: none;
 }
 
 .popup-add-to-cart {
