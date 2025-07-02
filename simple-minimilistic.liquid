@@ -223,7 +223,7 @@
   .sticky-tab-container {
     position: fixed;
     top: 0;
-    left: 60%;
+    left: 50%;
     transform: translateX(-50%) translateY(-100%);
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
     padding: 15px 20px;
@@ -566,6 +566,17 @@
   }
 
   @media (max-width: 768px) {
+    .sticky-tab-container {
+      width: calc(100% - 20px);
+      padding: 12px 15px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+    }
+
+    .sticky-tab-container.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
     .sticky-content {
       flex-direction: column;
       gap: 10px;
