@@ -407,6 +407,169 @@
             50% { transform: scale(1.05); }
         }
 
+        /* Laboratory & Bioprocess Announcement Styles */
+        .promo-lab-bioprocess-announcement {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .promo-announcement-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(45deg, #002868, #095ea7, #002868);
+            background-size: 200% 200%;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 35px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 25px rgba(9, 94, 167, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.1);
+            animation: promo-lab-bioprocess-glow 3s ease-in-out infinite, promo-announcement-gradient 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-announcement-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: promo-announcement-shine 3s linear infinite;
+        }
+
+        .promo-announcement-icon {
+            font-size: 1.5rem;
+            animation: promo-icon-bounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+        }
+
+        .promo-announcement-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-announcement-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 0 #000, 0 0 15px #FFD700;
+            letter-spacing: 1px;
+        }
+
+        .promo-announcement-subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 0 #000;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        @keyframes promo-lab-bioprocess-glow {
+            0%, 100% { box-shadow: 0 0 25px rgba(9, 94, 167, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.2); }
+        }
+
+        @keyframes promo-announcement-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes promo-announcement-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes promo-icon-bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-3px) scale(1.1); }
+        }
+
+        /* Social Proof Banner Styles */
+        .promo-social-proof-banner {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .promo-social-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #28a745, #32CD32);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+            animation: promo-social-pulse 2.5s ease-in-out infinite;
+        }
+
+        .promo-social-icon {
+            font-size: 1.1rem;
+            animation: promo-social-icon-pulse 2s ease-in-out infinite;
+        }
+
+        .promo-buyers-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 #000;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes promo-social-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(40, 167, 69, 0.5); }
+            50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(40, 167, 69, 0.7); }
+        }
+
+        @keyframes promo-social-icon-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.15); }
+        }
+
+        /* Action Motivator Styles */
+        .promo-action-motivator {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .promo-motivator-text {
+            background: linear-gradient(45deg, #BF0A30, #FF4444);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 #000;
+            border: 2px solid #FFD700;
+            animation: promo-motivator-urgent 1.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(191, 10, 48, 0.6);
+        }
+
+        @keyframes promo-motivator-urgent {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(191, 10, 48, 0.6); 
+            }
+            50% { 
+                transform: scale(1.03); 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); 
+            }
+        }
+
         /* Biggest Sale Alert Styles */
         .promo-biggest-sale-alert {
             display: flex;
@@ -2093,6 +2256,53 @@
                 padding-top: 10px;
             }
 
+            .promo-lab-bioprocess-announcement {
+                margin-bottom: 20px;
+            }
+
+            .promo-announcement-wrapper {
+                padding: 10px 20px;
+                gap: 12px;
+            }
+
+            .promo-announcement-icon {
+                font-size: 1.3rem;
+            }
+
+            .promo-announcement-title {
+                font-size: 0.8rem;
+            }
+
+            .promo-announcement-subtitle {
+                font-size: 0.65rem;
+            }
+
+            .promo-social-proof-banner {
+                margin-bottom: 20px;
+            }
+
+            .promo-social-icons {
+                padding: 6px 15px;
+                gap: 8px;
+            }
+
+            .promo-buyers-text {
+                font-size: 0.7rem;
+            }
+
+            .promo-social-icon {
+                font-size: 1rem;
+            }
+
+            .promo-action-motivator {
+                margin-top: 12px;
+            }
+
+            .promo-motivator-text {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
             .promo-section-container {
                 padding: 0 15px;
                 max-width: 100%;
@@ -2466,6 +2676,18 @@
                 <div class="promo-alert-flash">🚨</div>
             </div>
 
+            <!-- Laboratory & Bioprocess Announcement -->
+            <div class="promo-lab-bioprocess-announcement">
+                <div class="promo-announcement-wrapper">
+                    <div class="promo-announcement-icon">🧬</div>
+                    <div class="promo-announcement-content">
+                        <span class="promo-announcement-title">LABORATORY & BIOPROCESS</span>
+                        <span class="promo-announcement-subtitle">EQUIPMENT REVOLUTION</span>
+                    </div>
+                    <div class="promo-announcement-icon">🔬</div>
+                </div>
+            </div>
+
             <h1 class="promo-revolutionary-title">
                 <span class="promo-word promo-word-1">FREEDOM</span>
                 <span class="promo-word promo-word-2">TO</span>
@@ -2480,6 +2702,15 @@
                 <div class="promo-urgency-icon">⚡</div>
             </div>
 
+            <!-- Social Proof Banner -->
+            <div class="promo-social-proof-banner">
+                <div class="promo-social-icons">
+                    <span class="promo-social-icon">👥</span>
+                    <span class="promo-buyers-text">2,847+ customers shopping this sale today</span>
+                    <span class="promo-social-icon">🔥</span>
+                </div>
+            </div>
+
             <div class="promo-savings-explosion">
                 <div class="promo-explosion-text">SAVE UP TO</div>
                 <div class="promo-mega-discount">50% OFF</div>
@@ -2489,6 +2720,10 @@
                     <span class="promo-warning-icon">⚠️</span>
                     <span class="promo-warning-text">STOCK FLYING OFF THE SHELVES!</span>
                     <span class="promo-warning-icon">⚠️</span>
+                </div>
+                <!-- Action Motivator -->
+                <div class="promo-action-motivator">
+                    <span class="promo-motivator-text">🚀 SHOP NOW BEFORE IT'S TOO LATE!</span>
                 </div>
             </div>
 
