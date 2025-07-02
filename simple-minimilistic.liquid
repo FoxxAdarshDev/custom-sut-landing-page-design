@@ -1,3 +1,4 @@
+html
 <style>
 
 
@@ -609,6 +610,8 @@
     color: #495057;
     font-size: 0.9rem;
     margin-bottom: 8px;
+	justify-content: space-between;
+    cursor: pointer;
   }
 
   .savings-option {
@@ -647,6 +650,33 @@
 
   .savings-amount {
     font-weight: 700;
+  }
+
+  .savings-details {
+    display: none; /* Initially hide the details */
+    padding-top: 10px;
+  }
+
+  .savings-preview {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: -4px;
+    margin-bottom: 8px;
+  }
+
+  .smart-savings-toggle {
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #0071ce;
+    user-select: none;
+  }
+
+  .smart-savings.expanded .savings-details {
+    display: block;
+  }
+
+  .smart-savings.expanded .smart-savings-toggle {
+    transform: rotate(180deg); /* Rotate the arrow when expanded */
   }
 
   @media (max-width: 768px) {
@@ -691,6 +721,10 @@
 
     .sticky-countdown-unit span {
       font-size: 0.9rem;
+    }
+
+    .sticky-countdown-unit label {
+      font-size: 0.6rem;
     }
 
     .patriotic-sale-container {
@@ -909,12 +943,15 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="20"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
-                </div>
-                <div class="smart-savings-options">
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>                </div>
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">MOST POPULAR</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -969,12 +1006,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="15"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">MOST POPULAR</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1029,12 +1070,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">BEST VALUE</span>
                     <div class="savings-text">More than 3 Items</div>
@@ -1088,12 +1133,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">BEST VALUE</span>
                     <div class="savings-text">More than 3 Items</div>
@@ -1148,12 +1197,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="40"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">HUGE SAVINGS</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1208,12 +1261,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">BEST DEAL</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1268,12 +1325,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">BEST DEAL</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1328,12 +1389,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">BEST VALUE</span>
                     <div class="savings-text">More than 3 Items</div>
@@ -1393,12 +1458,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="25"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">GREAT VALUE</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1453,12 +1522,17 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify```html
+.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">EXCELLENT DEAL</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1513,12 +1587,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">EXCELLENT DEAL</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1573,12 +1651,16 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <div class="smart-savings">
+              <div class="smart-savings" onclick="toggleSavings(this)">
                 <div class="smart-savings-header">
-                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                  Smart Savings
+                  <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                  </div>
+                  <span class="smart-savings-toggle">▼</span>
                 </div>
-                <div class="smart-savings-options">
+                <div class="savings-preview">Buy more and save up to 10% per item</div>
+                <div class="savings-details">
                   <div class="savings-option most-popular">
                     <span class="savings-label">EXCELLENT DEAL</span>
                     <div class="savings-text">More than 2 Items</div>
@@ -1719,6 +1801,10 @@ function calculatePricesAndSavings() {
     const savings = (basePrice * qty) - (basePrice * qty * 0.9); // 10% bulk discount example
     savingsAmount.textContent = '$' + savings.toFixed(0);
   });
+}
+
+function toggleSavings(element) {
+  element.classList.toggle('expanded');
 }
 
 // Start countdown and sticky tabs when page loads
