@@ -1548,22 +1548,36 @@
             display: none;
         }
 
-        .promo-collection-circle {
+        .promo-collection-circle-container {
             flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            text-align: center;
+            width: 100px;
+        }
+
+        .promo-collection-circle-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .promo-collection-circle {
             width: 80px;
             height: 80px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #095ea7;
-            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             background: white;
             box-shadow: 0 5px 15px rgba(0, 40, 104, 0.2);
-            margin: 0 auto;
+            margin-bottom: 8px;
         }
 
-        .promo-collection-circle:hover {
+        .promo-collection-circle-container:hover .promo-collection-circle {
             transform: scale(1.1);
             border-color: #BF0A30;
             box-shadow: 0 8px 25px rgba(191, 10, 48, 0.3);
@@ -1577,10 +1591,25 @@
             padding: 4px;
         }
 
-        .promo-collection-circle:hover img {
+        .promo-collection-circle-container:hover .promo-collection-circle img {
             transform: scale(1.1);
         }
 
+        .promo-circle-title {
+            font-size: 0.75rem;
+            color: #002868;
+            font-weight: 700;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .promo-circle-count {
+            font-size: 0.65rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Legacy support for old circle label (remove if not needed) */
         .promo-circle-label {
             position: absolute;
             bottom: -25px;
@@ -1707,14 +1736,22 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .promo-collection-circle-container {
+                margin: 0 5px;
+                width: 80px;
+            }
+
             .promo-collection-circle {
                 width: 60px;
                 height: 60px;
             }
 
-            .promo-circle-label {
-                font-size: 0.6rem;
-                bottom: -20px;
+            .promo-circle-title {
+                font-size: 0.65rem;
+            }
+
+            .promo-circle-count {
+                font-size: 0.55rem;
             }
 
             .promo-carousel-container {
@@ -1724,9 +1761,16 @@
             }
 
             /* Show only one circle at a time on mobile */
-            .promo-collection-circle:not(.active-mobile) {
+            .promo-collection-circle-container:not(.active-mobile) {
                 display: none;
             }
+
+            /* Legacy circle label for mobile */
+            .promo-circle-label {
+                font-size: 0.6rem;
+                bottom: -20px;
+            }
+        }
 
             /* Mobile responsive collection titles */
             .promo-collection-titles-row {
@@ -2384,58 +2428,82 @@
                     <div class="promo-collection-carousel" id="bioprocess-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
                             {% if pc_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
-                                <img src="{{ pc_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_carboy_collection.title }}">
-                                <div class="promo-circle-label">PC Carboy</div>
+                            <div class="promo-collection-circle-container" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ pc_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">PC Carboy</div>
+                                <div class="promo-circle-count">{{ pc_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if pc_tr_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
-                                <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
-                                <div class="promo-circle-label">PC TR</div>
+                            <div class="promo-collection-circle-container" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">PC TR</div>
+                                <div class="promo-circle-count">{{ pc_tr_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezbio_bottles_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
-                                <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
-                                <div class="promo-circle-label">EZBio Bottles</div>
+                            <div class="promo-collection-circle-container" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZBio Bottles</div>
+                                <div class="promo-circle-count">{{ ezbio_bottles_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezbio_ts_bottles_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
-                                <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
-                                <div class="promo-circle-label">EZBio TS</div>
+                            <div class="promo-collection-circle-container" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZBio TS</div>
+                                <div class="promo-circle-count">{{ ezbio_ts_bottles_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if pfa_bottles_collection.image %}
-                            <div class="promo-collection-circle" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
-                                <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
-                                <div class="promo-circle-label">PFA</div>
+                            <div class="promo-collection-circle-container" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">PFA</div>
+                                <div class="promo-circle-count">{{ pfa_bottles_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if aqg_collection.image %}
-                            <div class="promo-collection-circle" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
-                                <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
-                                <div class="promo-circle-label">AQG</div>
+                            <div class="promo-collection-circle-container" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">AQG</div>
+                                <div class="promo-circle-count">{{ aqg_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if cpc_stream_thru_connectors_collection.image %}
-                            <div class="promo-collection-circle" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
-                                <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
-                                <div class="promo-circle-label">CPC</div>
+                            <div class="promo-collection-circle-container" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">CPC</div>
+                                <div class="promo-circle-count">{{ cpc_stream_thru_connectors_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezbio_bottle_assembly_pc_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
-                                <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
-                                <div class="promo-circle-label">Assembly</div>
+                            <div class="promo-collection-circle-container" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">Assembly</div>
+                                <div class="promo-circle-count">{{ ezbio_bottle_assembly_pc_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
                         </div>
@@ -2544,37 +2612,52 @@
                     <div class="promo-collection-carousel" id="laboratory-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
                             {% if ezlabpure_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
-                                <img src="{{ ezlabpure_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezlabpure_carboy_collection.title }}">
-                                <div class="promo-circle-label">EZLabpure</div>
+                            <div class="promo-collection-circle-container" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezlabpure_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezlabpure_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZLabpure</div>
+                                <div class="promo-circle-count">{{ ezlabpure_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezclear_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
-                                <img src="{{ ezclear_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezclear_carboy_collection.title }}">
-                                <div class="promo-circle-label">EZclear</div>
+                            <div class="promo-collection-circle-container" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezclear_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezclear_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZclear</div>
+                                <div class="promo-circle-count">{{ ezclear_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezgrip_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
-                                <img src="{{ ezgrip_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezgrip_carboy_collection.title }}">
-                                <div class="promo-circle-label">EZgrip</div>
+                            <div class="promo-collection-circle-container" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezgrip_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezgrip_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZgrip</div>
+                                <div class="promo-circle-count">{{ ezgrip_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if ezbio_carboy_collection.image %}
-                            <div class="promo-collection-circle" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
-                                <img src="{{ ezbio_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezbio_carboy_collection.title }}">
-                                <div class="promo-circle-label">EZBio</div>
+                            <div class="promo-collection-circle-container" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ ezbio_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezbio_carboy_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">EZBio</div>
+                                <div class="promo-circle-count">{{ ezbio_carboy_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
 
                             {% if lab_general_collection.image %}
-                            <div class="promo-collection-circle" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
-                                <img src="{{ lab_general_collection.image | img_url: '150x150' }}" alt="{{ lab_general_collection.title }}">
-                                <div class="promo-circle-label">Lab Items</div>
+                            <div class="promo-collection-circle-container" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                                <div class="promo-collection-circle">
+                                    <img src="{{ lab_general_collection.image | img_url: '150x150' }}" alt="{{ lab_general_collection.title }}">
+                                </div>
+                                <div class="promo-circle-title">Lab Items</div>
+                                <div class="promo-circle-count">{{ lab_general_collection.products.size }} Items</div>
                             </div>
                             {% endif %}
                         </div>
@@ -4231,9 +4314,16 @@
 
                 // Update mobile active circle
                 if (window.innerWidth <= 768) {
-                    circles.forEach((circle, i) => {
-                        circle.classList.toggle('active-mobile', i === index);
-                    });
+                    const containers = carousel.querySelectorAll('.promo-collection-circle-container');
+                    if (containers.length > 0) {
+                        containers.forEach((container, i) => {
+                            container.classList.toggle('active-mobile', i === index);
+                        });
+                    } else {
+                        circles.forEach((circle, i) => {
+                            circle.classList.toggle('active-mobile', i === index);
+                        });
+                    }
                 }
             }
 
@@ -4252,7 +4342,12 @@
 
             // Initialize first circle as active on mobile
             if (window.innerWidth <= 768) {
-                circles[0].classList.add('active-mobile');
+                const containers = carousel.querySelectorAll('.promo-collection-circle-container');
+                if (containers.length > 0) {
+                    containers[0].classList.add('active-mobile');
+                } else {
+                    circles[0].classList.add('active-mobile');
+                }
             }
 
             // Start auto-rotation
@@ -4278,14 +4373,27 @@
 
             // Handle window resize
             window.addEventListener('resize', () => {
+                const containers = carousel.querySelectorAll('.promo-collection-circle-container');
                 if (window.innerWidth <= 768) {
-                    circles.forEach((circle, i) => {
-                        circle.classList.toggle('active-mobile', i === currentIndex);
-                    });
+                    if (containers.length > 0) {
+                        containers.forEach((container, i) => {
+                            container.classList.toggle('active-mobile', i === currentIndex);
+                        });
+                    } else {
+                        circles.forEach((circle, i) => {
+                            circle.classList.toggle('active-mobile', i === currentIndex);
+                        });
+                    }
                 } else {
-                    circles.forEach(circle => {
-                        circle.classList.remove('active-mobile');
-                    });
+                    if (containers.length > 0) {
+                        containers.forEach(container => {
+                            container.classList.remove('active-mobile');
+                        });
+                    } else {
+                        circles.forEach(circle => {
+                            circle.classList.remove('active-mobile');
+                        });
+                    }
                 }
             });
         }
