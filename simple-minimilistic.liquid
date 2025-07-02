@@ -106,7 +106,7 @@
 
   .header-timer-label::before,
   .header-timer-label::after {
-    content: '⚡';
+    content: '';
     color: #dc3545;
     font-size: 1.2rem;
     animation: flash 1.5s infinite;
@@ -227,12 +227,12 @@
     left: 55%;
     transform: translateX(-55%) translateY(-100%);
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
-    padding: 15px 20px;
+    padding: 5px 5px;
     z-index: 800;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
     border-bottom: 3px solid #0071ce;
-    max-width: 1000px;
+    max-width: 1100px;
     width: calc(100% - 40px);
     border-radius: 0 0 15px 15px;
   }
@@ -879,15 +879,15 @@
       <div class="independence-badge">US Independence Day Special</div>
       <h1>Our <span class="gradient-text">Biggest</span> Patriotic <span class="gradient-text">Sale</span> of the <span class="gradient-text">Year!</span></h1>
       <div class="discount">UP TO 50% OFF</div>
-      <div class="sale-subtitle">
+      {% comment %} <div class="sale-subtitle">
         Celebrate America's independence with our biggest sale of the year!
-      </div>
+      </div> {% endcomment %}
       <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
 
     <div class="hero-right">
       <div class="header-timer">
-        <div class="header-timer-label">⚡ Sale Ends July 31st ⚡</div>
+        <div class="header-timer-label">Sale Ends July 31st</div>
         <div class="header-countdown">
           <div class="header-countdown-unit">
             <span id="days">02</span>
@@ -1859,7 +1859,7 @@ function switchTab(tabName) {
 // Countdown Timer
 function updateCountdown() {
   // Set the date we're counting down to (July 31st, 2024 at 11:59 PM)
-  const countDownDate = new Date('2024-07-31T23:59:59').getTime();
+  const countDownDate = new Date('2025-07-31T23:59:59').getTime();
 
   const timer = setInterval(function() {
     const now = new Date().getTime();
@@ -2042,10 +2042,10 @@ function handleScrollBasedTabSwitching() {
   const laboratoryRect = laboratoryTab.getBoundingClientRect();
   const windowHeight = window.innerHeight;
   const scrollTriggerPoint = windowHeight * 0.3; // Trigger when 30% of section is visible
-  
+
   // Check if bioprocess section has been scrolled past (top is above viewport)
   const bioprocessScrolledPast = bioprocessRect.top < windowHeight && bioprocessRect.bottom < 0;
-  
+
   // Check if laboratory section has been scrolled past (top is above viewport)
   const laboratoryScrolledPast = laboratoryRect.top < windowHeight && laboratoryRect.bottom < 0;
 
