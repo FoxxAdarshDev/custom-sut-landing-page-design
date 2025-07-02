@@ -2464,12 +2464,8 @@ function calculatePricesAndSavings() {
 
     const finalPriceAmount = salePrice - (salePrice * actualDiscountPercentage / 100);
 
-    // Format price properly
-    if (finalPriceAmount >= 1000) {
-      finalPrice.textContent = '$' + (finalPriceAmount % 1 === 0 ? finalPriceAmount.toFixed(0) : finalPriceAmount.toFixed(2));
-    } else {
-      finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
-    }
+    // Format price consistently with 2 decimal places
+    finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
   });
 
   // Calculate smart savings amounts for expanded sections
@@ -2609,15 +2605,10 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     selectedProductDiscount = discountPercentage;
 
     // Helper function to format price
-    function formatPrice(price) {
-		const priceInNumber = Number(price)
-        if (priceInNumber >= 1000) {
-            // For prices >= 1000, show without decimals if it's a whole number
-            return priceInNumber % 1 === 0 ? priceInNumber.toFixed(0) : priceInNumber.toFixed(2);
-        } else {
-            // For prices < 1000, always show 2 decimal places
-            return priceInNumber.toFixed(2);
-        }
+    function formatPrice(priceInDollars) {
+        const priceInNumber = Number(priceInDollars);
+        // Always show 2 decimal places for consistency
+        return priceInNumber.toFixed(2);
     }
 
     // Populate popup content
