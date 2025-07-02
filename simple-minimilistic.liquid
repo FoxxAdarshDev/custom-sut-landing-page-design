@@ -2464,7 +2464,10 @@
 // Countdown Timer
 // Global function for opening popup with event handling
 function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
-    event.stopPropagation();
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, event);
 }
 
@@ -2643,6 +2646,9 @@ let selectedProductDiscount;
 
 
 function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, event) {
+    // Debug log
+    console.log('Opening popup for product:', productTitle);
+    
     selectedProductId = productId;
     selectedProductTitle = productTitle;
     selectedProductImage = productImage;
@@ -2651,20 +2657,24 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     selectedProductVariantId = productVariantId;
 
     // Find the product card to get discount information by using the event target
-    const productCard = event.target.closest('.product-card');
+    let productCard = null;
     let discountPercentage = 0;
     let finalPrice = productPrice;
+
+    if (event && event.target) {
+        productCard = event.target.closest('.product-card');
+    }
 
     if (productCard) {
         const discountLabel = productCard.querySelector('.discount-label');
         if (discountLabel) {
             const discountText = discountLabel.textContent;
-            discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
 
             // Get the actual final price that's already calculated on the card
             const cardFinalPrice = productCard.querySelector('.final-price');
             if (cardFinalPrice) {
-                const finalPriceText = cardFinalPrice.textContent.replace('$', '');
+                const finalPriceText = cardFinalPrice.textContent.replace('$', '').replace(',', '');
                 finalPrice = parseFloat(finalPriceText) * 100; // Convert back to cents
             } else {
                 // Fallback calculation
@@ -2713,6 +2723,14 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     // Show overlay first
     const overlay = document.getElementById('overlay');
     const popup = document.getElementById('addToCartPopup');
+
+    if (!overlay || !popup) {
+        console.error('Popup elements not found');
+        return;
+    }
+
+    // Debug log
+    console.log('Showing popup...');
 
     overlay.classList.add('show');
 
