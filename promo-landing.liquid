@@ -1826,13 +1826,32 @@
                 margin: 0 10px 40px 10px;
                 border-radius: 15px;
             }
-            
-            /* Force single column on all mobile devices */
+
+            /* Mobile specific layout for section content */
+            .promo-section-content {
+                flex-direction: column !important;
+                gap: 25px !important;
+                align-items: stretch !important;
+            }
+
+            .promo-section-info {
+                flex: none !important;
+                max-width: 100% !important;
+                padding: 20px 15px !important;
+                order: 1 !important;
+                margin-bottom: 0 !important;
+            }
+
             .promo-products-grid {
-                display: grid !important;
+                flex: none !important;
+                max-width: 100% !important;
                 grid-template-columns: 1fr !important;
-                grid-template-rows: auto !important;
-                width: 100% !important;
+                gap: 20px !important;
+                padding: 20px 15px !important;
+                order: 2 !important;
+                border-radius: 15px !important;
+                max-height: none !important;
+                overflow-y: visible !important;
             }
             
             .promo-product-card {
