@@ -1,3 +1,4 @@
+html
 <style>
 
 
@@ -371,7 +372,7 @@
     to { opacity: 1; }
   }
 
-  
+
 
   .product-image {
     height: 220px;
@@ -608,7 +609,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">⚗️</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -648,7 +649,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔄</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -688,7 +689,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -728,7 +729,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">💎</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -768,7 +769,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🏛️</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -808,7 +809,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">💧</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -848,7 +849,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔗</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -888,7 +889,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔧</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -933,7 +934,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -973,7 +974,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -1013,7 +1014,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🫗</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -1053,7 +1054,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">⚗️</div>
+                <div style="color: #6c757d; font-size: 1.2rem; font-weight: 600;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -1097,7 +1098,7 @@ function switchTab(tabName) {
   if (event && event.target) {
     event.target.classList.add('active');
   }
-  
+
   // Sync hero tab buttons
   const heroButtons = document.querySelectorAll('.hero-tab-button');
   heroButtons.forEach(button => {
@@ -1152,3 +1153,7 @@ document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
 });
 </script>
+``````html
+
+</body>
+</html>
