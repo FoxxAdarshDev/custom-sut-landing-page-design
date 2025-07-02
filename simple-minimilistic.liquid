@@ -576,6 +576,79 @@
     text-decoration: none;
   }
 
+  .product-card {
+    cursor: pointer;
+  }
+
+  .product-sku {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .final-price {
+    color: #dc3545;
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-left: 10px;
+  }
+
+  .smart-savings {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #e9ecef;
+  }
+
+  .smart-savings-header {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .savings-option {
+    background: #d1ecf1;
+    border: 2px solid #bee5eb;
+    border-radius: 6px;
+    padding: 8px 10px;
+    position: relative;
+  }
+
+  .savings-option.most-popular::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+  .savings-text {
+    color: #121212;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .savings-price {
+    color: #495057;
+    font-size: 0.8rem;
+  }
+
+  .savings-amount {
+    font-weight: 700;
+  }
+
   @media (max-width: 768px) {
     .sticky-tab-container {
       width: calc(100% - 20px);
@@ -813,7 +886,7 @@
         </div>
         <div class="products-grid">
           {% for product in pc_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">20% OFF</div>
             </div>
@@ -826,13 +899,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="20"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">MOST POPULAR</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -856,7 +946,7 @@
         </div>
         <div class="products-grid">
           {% for product in pc_tr_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">15% OFF</div>
             </div>
@@ -869,13 +959,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="15"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">MOST POPULAR</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -899,7 +1006,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottles_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -912,13 +1019,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">BEST VALUE</span>
+                    <div class="savings-text">More than 3 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1423,9 +1547,31 @@ function handleStickyTabs() {
   }
 }
 
+// Calculate final prices and smart savings
+function calculatePricesAndSavings() {
+  // Calculate final prices based on discount percentage
+  const finalPrices = document.querySelectorAll('.final-price');
+  finalPrices.forEach(finalPrice => {
+    const salePrice = parseFloat(finalPrice.dataset.salePrice);
+    const discount = parseFloat(finalPrice.dataset.discount);
+    const finalPriceAmount = salePrice - (salePrice * discount / 100);
+    finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
+  });
+
+  // Calculate smart savings amounts
+  const savingsAmounts = document.querySelectorAll('.savings-amount');
+  savingsAmounts.forEach(savingsAmount => {
+    const basePrice = parseFloat(savingsAmount.dataset.basePrice);
+    const qty = parseInt(savingsAmount.dataset.qty);
+    const savings = (basePrice * qty) - (basePrice * qty * 0.9); // 10% bulk discount example
+    savingsAmount.textContent = '$' + savings.toFixed(0);
+  });
+}
+
 // Start countdown and sticky tabs when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
+  calculatePricesAndSavings();
 
   // Add scroll event listener for sticky tabs
   window.addEventListener('scroll', handleStickyTabs);
