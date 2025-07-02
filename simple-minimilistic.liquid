@@ -967,10 +967,10 @@
 }
 
 .popup-product-image {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   background: #f8f9fa;
-  border-radius: 16px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2692,24 +2692,30 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     // Calculate smart savings for different quantities
     const priceInDollars = productPrice / 100;
 
-    // Calculate for 2+ items
+    // Calculate for 2+ items - additional 5% bulk discount
     const qty2 = 2;
+    const bulkDiscount2 = 5; // 5% additional bulk discount
+    const totalDiscount2 = discountPercentage + bulkDiscount2;
     const regularTotal2 = priceInDollars * qty2;
-    const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
+    const discountedTotal2 = regularTotal2 * (1 - totalDiscount2 / 100);
     const totalSavings2 = regularTotal2 - discountedTotal2;
     const perItemSavings2 = totalSavings2 / qty2;
 
-    // Calculate for 3+ items  
+    // Calculate for 3+ items - additional 8% bulk discount
     const qty3 = 3;
+    const bulkDiscount3 = 8; // 8% additional bulk discount
+    const totalDiscount3 = discountPercentage + bulkDiscount3;
     const regularTotal3 = priceInDollars * qty3;
-    const discountedTotal3 = regularTotal3 * (1 - discountPercentage / 100);
+    const discountedTotal3 = regularTotal3 * (1 - totalDiscount3 / 100);
     const totalSavings3 = regularTotal3 - discountedTotal3;
     const perItemSavings3 = totalSavings3 / qty3;
 
-    // Calculate for 5+ items
+    // Calculate for 5+ items - additional 12% bulk discount
     const qty5 = 5;
+    const bulkDiscount5 = 12; // 12% additional bulk discount
+    const totalDiscount5 = discountPercentage + bulkDiscount5;
     const regularTotal5 = priceInDollars * qty5;
-    const discountedTotal5 = regularTotal5 * (1 - discountPercentage / 100);
+    const discountedTotal5 = regularTotal5 * (1 - totalDiscount5 / 100);
     const totalSavings5 = regularTotal5 - discountedTotal5;
     const perItemSavings5 = totalSavings5 / qty5;
 
@@ -2779,6 +2785,11 @@ function selectSavingsOption(quantity) {
 
     // Update quantity input
     document.getElementById('popupQuantity').value = quantity;
+
+    // Automatically add to cart
+    setTimeout(() => {
+        addToCart();
+    }, 500); // Small delay for visual feedback
 }
 
 function addToCart() {
