@@ -1635,22 +1635,30 @@
             justify-content: center;
             gap: 8px;
             margin-top: 15px;
+            min-height: 20px;
         }
 
         .promo-carousel-dot {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: rgba(9, 94, 167, 0.4);
             border: 2px solid #095ea7;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: block;
         }
 
         .promo-carousel-dot.active {
             background: #BF0A30;
             border-color: #BF0A30;
             transform: scale(1.2);
+        }
+
+        .promo-carousel-dot:hover {
+            background: #BF0A30;
+            border-color: #BF0A30;
+            transform: scale(1.1);
         }
 
         /* Auto-rotate animation */
@@ -4125,14 +4133,15 @@
             // Clear existing dots
             dotsContainer.innerHTML = '';
 
-            // Only create dots if we have more than 1 item and on mobile show fewer dots
+            // Always create dots for visual indication
             const isMobile = window.innerWidth <= 768;
             const itemsToShow = isMobile ? 1 : Math.min(4, circles.length); // Show 1 on mobile, max 4 on desktop
             const totalPages = Math.ceil(circles.length / itemsToShow);
 
-            // Only create dots if we need pagination
-            if (totalPages > 1) {
-                for (let i = 0; i < totalPages; i++) {
+            // Always create dots if we have circles
+            if (circles.length > 0) {
+                const dotsToShow = Math.max(totalPages, 1); // At least 1 dot
+                for (let i = 0; i < dotsToShow; i++) {
                     const dot = document.createElement('div');
                     dot.className = 'promo-carousel-dot';
                     if (i === 0) dot.classList.add('active');
@@ -4202,8 +4211,8 @@
                 });
             }
 
-            // Only start auto-rotation if we have dots (meaning pagination is needed)
-            if (dotsContainer.children.length > 0) {
+            // Start auto-rotation if we have multiple items
+            if (circles.length > 1 && dotsContainer.children.length > 0) {
                 startAutoRotate();
                 
                 // Pause on hover
