@@ -407,6 +407,436 @@
             50% { transform: scale(1.05); }
         }
 
+        /* Biggest Sale Alert Styles */
+        .promo-biggest-sale-alert {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(45deg, #FF0000, #FFD700, #FF0000);
+            background-size: 400% 400%;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            animation: promo-biggest-gradient 3s ease-in-out infinite, promo-biggest-shake 0.5s ease-in-out infinite;
+            border: 3px solid #fff;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-biggest-sale-alert::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: promo-biggest-shine 2s linear infinite;
+        }
+
+        .promo-alert-flash {
+            font-size: 1.8rem;
+            animation: promo-flash-urgent 1s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px #FFD700);
+        }
+
+        .promo-alert-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-biggest-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 0 #000, 0 0 20px #FFD700;
+            letter-spacing: 2px;
+        }
+
+        .promo-year-text {
+            font-size: 1rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 #000;
+            letter-spacing: 1px;
+        }
+
+        @keyframes promo-biggest-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes promo-biggest-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        @keyframes promo-biggest-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes promo-flash-urgent {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        /* Urgency Banner Styles */
+        .promo-urgency-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #BF0A30, #FF4444);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            animation: promo-urgency-pulse 2s ease-in-out infinite;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 20px rgba(191, 10, 48, 0.6);
+        }
+
+        .promo-urgency-icon {
+            font-size: 1.3rem;
+            animation: promo-lightning-flash 1.5s ease-in-out infinite;
+        }
+
+        .promo-urgency-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 #000;
+            letter-spacing: 1px;
+        }
+
+        @keyframes promo-urgency-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(191, 10, 48, 0.6); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        @keyframes promo-lightning-flash {
+            0%, 100% { opacity: 1; transform: rotate(0deg); }
+            25% { opacity: 0.7; transform: rotate(-10deg); }
+            75% { opacity: 0.7; transform: rotate(10deg); }
+        }
+
+        /* Stock Warning Styles */
+        .promo-stock-warning {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            background: linear-gradient(45deg, #FF6B00, #FF8C00);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            animation: promo-stock-urgent 1.5s ease-in-out infinite;
+            border: 2px solid #FFD700;
+        }
+
+        .promo-warning-icon {
+            font-size: 1.1rem;
+            animation: promo-warning-bounce 1s ease-in-out infinite;
+        }
+
+        .promo-warning-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 0 #000;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes promo-stock-urgent {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.9; }
+        }
+
+        @keyframes promo-warning-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Hot Deal Badge */
+        .promo-hot-deal-badge {
+            position: absolute;
+            top: 50px;
+            right: 8px;
+            background: linear-gradient(45deg, #FF4500, #FF6B00);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            animation: promo-hot-deal-pulse 2s ease-in-out infinite;
+            border: 1px solid #FFD700;
+            box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+        }
+
+        @keyframes promo-hot-deal-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 69, 0, 0.6); }
+        }
+
+        /* Stock Alert */
+        .promo-stock-alert {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            text-align: center;
+        }
+
+        .promo-stock-low {
+            background: linear-gradient(45deg, #FF0000, #FF4444);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            animation: promo-stock-blink 1s ease-in-out infinite;
+            border: 1px solid #FFD700;
+        }
+
+        .promo-stock-medium {
+            background: linear-gradient(45deg, #FF8C00, #FFA500);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            animation: promo-stock-glow 2s ease-in-out infinite;
+        }
+
+        .promo-stock-high {
+            background: linear-gradient(45deg, #28a745, #32CD32);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.55rem;
+            font-weight: 700;
+        }
+
+        @keyframes promo-stock-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes promo-stock-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
+            50% { box-shadow: 0 0 10px rgba(255, 140, 0, 0.8); }
+        }
+
+        /* Popular Badge */
+        .promo-popular-badge {
+            background: linear-gradient(45deg, #9400D3, #8A2BE2);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: inline-block;
+            animation: promo-popular-sparkle 3s ease-in-out infinite;
+            border: 1px solid #FFD700;
+        }
+
+        @keyframes promo-popular-sparkle {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.02); filter: brightness(1.1); }
+        }
+
+        /* Savings Amount */
+        .promo-savings-amount {
+            color: #28a745;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 3px;
+            animation: promo-savings-highlight 2s ease-in-out infinite;
+        }
+
+        @keyframes promo-savings-highlight {
+            0%, 100% { color: #28a745; }
+            50% { color: #32CD32; }
+        }
+
+        /* Social Proof */
+        .promo-social-proof {
+            margin: 8px 0;
+        }
+
+        .promo-buyers-count {
+            color: #6c757d;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            padding: 2px 6px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            animation: promo-buyers-update 4s ease-in-out infinite;
+        }
+
+        @keyframes promo-buyers-update {
+            0%, 90%, 100% { transform: scale(1); }
+            95% { transform: scale(1.02); }
+        }
+
+        /* Enhanced CTA Button */
+        .promo-cta-urgent {
+            background: linear-gradient(45deg, #FF0000, #FF4444, #FF0000);
+            background-size: 200% 200%;
+            animation: promo-cta-urgent-gradient 2s ease-in-out infinite, promo-cta-urgent-pulse 1.5s ease-in-out infinite;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .promo-cta-urgent:hover {
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            background-size: 200% 200%;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes promo-cta-urgent-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes promo-cta-urgent-pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5); }
+        }
+
+        /* Floating Engagement Elements */
+        .promo-floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .promo-floating-deal {
+            position: absolute;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #002868;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 2px solid #002868;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: promo-float-bounce 4s ease-in-out infinite;
+        }
+
+        .promo-float-1 {
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .promo-float-2 {
+            top: 35%;
+            right: 8%;
+            animation-delay: 1.5s;
+        }
+
+        .promo-float-3 {
+            top: 60%;
+            left: 3%;
+            animation-delay: 3s;
+        }
+
+        @keyframes promo-float-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            25% { transform: translateY(-10px) rotate(2deg); opacity: 1; }
+            50% { transform: translateY(-5px) rotate(-1deg); opacity: 0.95; }
+            75% { transform: translateY(-8px) rotate(1deg); opacity: 1; }
+        }
+
+        .promo-deal-icon {
+            font-size: 1.2rem;
+            animation: promo-icon-spin 3s linear infinite;
+        }
+
+        @keyframes promo-icon-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Encouragement */
+        .promo-scroll-encouragement {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #BF0A30, #FF4444);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #FFD700;
+            z-index: 999;
+            animation: promo-scroll-bounce 2s ease-in-out infinite;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(191, 10, 48, 0.4);
+        }
+
+        .promo-scroll-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .promo-scroll-arrow {
+            font-size: 1.2rem;
+            animation: promo-arrow-bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes promo-scroll-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes promo-arrow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+
+        /* Hide floating elements on mobile to avoid clutter */
+        @media (max-width: 768px) {
+            .promo-floating-elements {
+                display: none;
+            }
+            
+            .promo-scroll-encouragement {
+                bottom: 20px;
+                padding: 8px 15px;
+                font-size: 0.7rem;
+            }
+            
+            .promo-scroll-text {
+                font-size: 0.7rem;
+            }
+        }
+
         .promo-explosion-subtext {
             color: #002868;
             font-size: 1.2rem;
@@ -1889,7 +2319,29 @@
 
 
 
-    <!-- Revolutionary Hero Section -->
+    <!-- Floating Engagement Elements -->
+        <div class="promo-floating-elements">
+            <div class="promo-floating-deal promo-float-1">
+                <div class="promo-deal-icon">💰</div>
+                <div class="promo-deal-text">Save $500+</div>
+            </div>
+            <div class="promo-floating-deal promo-float-2">
+                <div class="promo-deal-icon">🔥</div>
+                <div class="promo-deal-text">Limited Stock</div>
+            </div>
+            <div class="promo-floating-deal promo-float-3">
+                <div class="promo-deal-icon">⚡</div>
+                <div class="promo-deal-text">48 hrs left</div>
+            </div>
+        </div>
+
+        <!-- Scroll Encouragement Arrow -->
+        <div class="promo-scroll-encouragement">
+            <div class="promo-scroll-text">Scroll to discover amazing deals!</div>
+            <div class="promo-scroll-arrow">↓</div>
+        </div>
+
+        <!-- Revolutionary Hero Section -->
     <section class="promo-hero-revolution">
         <div class="promo-patriotic-canvas">
             <!-- Dynamic SVG American Flag -->
@@ -2004,6 +2456,16 @@
                 🗽 INDEPENDENCE DAY FREEDOM SALE 🇺🇸
             </div>
 
+            <!-- Biggest Sale Alert -->
+            <div class="promo-biggest-sale-alert">
+                <div class="promo-alert-flash">🚨</div>
+                <div class="promo-alert-text">
+                    <span class="promo-biggest-text">FOXX'S BIGGEST SALE</span>
+                    <span class="promo-year-text">OF THE YEAR</span>
+                </div>
+                <div class="promo-alert-flash">🚨</div>
+            </div>
+
             <h1 class="promo-revolutionary-title">
                 <span class="promo-word promo-word-1">FREEDOM</span>
                 <span class="promo-word promo-word-2">TO</span>
@@ -2011,10 +2473,23 @@
                 <span class="promo-hero-subtitle-text">YOUR LABORATORY & BIOPROCESS</span>
             </h1>
 
+            <!-- Limited Time Urgency Banner -->
+            <div class="promo-urgency-banner">
+                <div class="promo-urgency-icon">⚡</div>
+                <div class="promo-urgency-text">LIMITED TIME ONLY - PRICES WILL NEVER BE THIS LOW AGAIN!</div>
+                <div class="promo-urgency-icon">⚡</div>
+            </div>
+
             <div class="promo-savings-explosion">
                 <div class="promo-explosion-text">SAVE UP TO</div>
                 <div class="promo-mega-discount">50% OFF</div>
                 <div class="promo-explosion-subtext">ON PREMIUM EQUIPMENT</div>
+                <!-- Stock Warning -->
+                <div class="promo-stock-warning">
+                    <span class="promo-warning-icon">⚠️</span>
+                    <span class="promo-warning-text">STOCK FLYING OFF THE SHELVES!</span>
+                    <span class="promo-warning-icon">⚠️</span>
+                </div>
             </div>
 
             <div class="promo-countdown-revolution">
@@ -2522,18 +2997,42 @@
                                     </svg>
                                     20% OFF
                                 </div>
+                                <!-- Hot Deal Badge -->
+                                <div class="promo-hot-deal-badge">🔥 HOT DEAL!</div>
+                                <!-- Stock Alert -->
+                                <div class="promo-stock-alert">
+                                    {% assign stock_level = product.variants.first.inventory_quantity | default: 0 %}
+                                    {% if stock_level <= 10 %}
+                                        <span class="promo-stock-low">⚠️ Only {{ stock_level }} left!</span>
+                                    {% elsif stock_level <= 25 %}
+                                        <span class="promo-stock-medium">🔥 {{ stock_level }} in stock</span>
+                                    {% else %}
+                                        <span class="promo-stock-high">✅ In Stock</span>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="promo-product-content">
+                                <!-- Popular Badge -->
+                                <div class="promo-popular-badge">⭐ Customer Favorite</div>
                                 <h4 class="promo-product-title">{{ product.title | truncate: 35 }}</h4>
                                 <div class="promo-product-price">
                                     {% if product.compare_at_price > product.price %}
                                         <span class="promo-original-price">${{ product.compare_at_price | money_without_currency }}</span>
                                         <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
+                                        <div class="promo-savings-amount">
+                                            Save ${{ product.compare_at_price | minus: product.price | money_without_currency }}!
+                                        </div>
                                     {% else %}
                                         <span class="promo-sale-price">${{ product.price | money_without_currency }}</span>
                                     {% endif %}
                                 </div>
-                                <a href="{{ product.url }}" class="promo-product-cta">🚀 CLAIM OFFER</a>
+                                <!-- Social Proof -->
+                                <div class="promo-social-proof">
+                                    <span class="promo-buyers-count">👥 {{ forloop.index | times: 23 | plus: 45 }}+ bought this week</span>
+                                </div>
+                                <a href="{{ product.url }}" class="promo-product-cta promo-cta-urgent">
+                                    🚀 CLAIM NOW - LIMITED TIME!
+                                </a>
                             </div>
                         </div>
                         {% endfor %}
