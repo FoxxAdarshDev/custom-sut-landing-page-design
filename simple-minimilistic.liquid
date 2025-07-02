@@ -55,7 +55,102 @@
     font-weight: 400;
     line-height: 1.5;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
+  }
+
+  .header-timer {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #FFC72C;
+    border-radius: 15px;
+    padding: 25px 20px;
+    margin: 30px auto 40px auto;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+  }
+
+  .header-timer-label {
+    color: #FFC72C;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 1px;
+  }
+
+  .header-timer-label::before,
+  .header-timer-label::after {
+    content: '⚡';
+    color: #FFC72C;
+    font-size: 1.5rem;
+    animation: flash 1.5s infinite;
+  }
+
+  .header-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .header-countdown-unit {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 15px 20px;
+    min-width: 70px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .header-countdown-unit:hover {
+    transform: translateY(-2px);
+  }
+
+  .header-countdown-unit span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #FFC72C;
+    line-height: 1;
+    margin-bottom: 5px;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .header-countdown-unit label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .shop-now-cta {
+    background: linear-gradient(45deg, #FFC72C, #ff6b35);
+    color: #1E3A8A;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(255, 199, 44, 0.3);
+  }
+
+  .shop-now-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 199, 44, 0.5);
+    color: #1E3A8A;
+    text-decoration: none;
   }
 
   .tabs-container {
@@ -224,76 +319,7 @@
     to { opacity: 1; }
   }
 
-  /* Timer Section */
-  .timer-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 40px 20px;
-    text-align: center;
-    margin-bottom: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .timer-header {
-    color: #0071ce;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    letter-spacing: 1px;
-  }
-
-  .timer-header::before,
-  .timer-header::after {
-    content: '⚡';
-    color: #FFC72C;
-    font-size: 1.5rem;
-    animation: flash 1.5s infinite;
-  }
-
-  .countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  .countdown-unit {
-    background: white;
-    border: 3px solid #1E3A8A;
-    border-radius: 12px;
-    padding: 20px 25px;
-    min-width: 90px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
-    transition: transform 0.3s ease;
-  }
-
-  .countdown-unit:hover {
-    transform: translateY(-2px);
-  }
-
-  .countdown-unit span {
-    display: block;
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #0071ce;
-    line-height: 1;
-    margin-bottom: 8px;
-    font-family: 'Arial', sans-serif;
-  }
-
-  .countdown-unit label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #1E3A8A;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
+  
 
   .product-image {
     height: 220px;
@@ -378,6 +404,37 @@
       padding: 20px 10px;
     }
 
+    .sale-header {
+      padding: 30px 15px;
+    }
+
+    .header-timer {
+      margin: 25px auto 30px auto;
+      padding: 20px 15px;
+    }
+
+    .header-countdown {
+      gap: 8px;
+    }
+
+    .header-countdown-unit {
+      min-width: 60px;
+      padding: 12px 15px;
+    }
+
+    .header-countdown-unit span {
+      font-size: 1.5rem;
+    }
+
+    .header-countdown-unit label {
+      font-size: 0.65rem;
+    }
+
+    .shop-now-cta {
+      padding: 12px 30px;
+      font-size: 1rem;
+    }
+
     .tab-buttons {
       flex-direction: column;
       align-items: center;
@@ -414,28 +471,30 @@
       Celebrate America's independence with our biggest sale of the year!<br>
       Premium bioprocess equipment at unbeatable prices.
     </div>
-  </div>
-
-  <div class="timer-section">
-    <div class="timer-header">Sale Ends In</div>
-    <div class="countdown-container">
-      <div class="countdown-unit">
-        <span id="days">02</span>
-        <label>Days</label>
-      </div>
-      <div class="countdown-unit">
-        <span id="hours">06</span>
-        <label>Hours</label>
-      </div>
-      <div class="countdown-unit">
-        <span id="minutes">25</span>
-        <label>Mins</label>
-      </div>
-      <div class="countdown-unit">
-        <span id="seconds">41</span>
-        <label>Secs</label>
+    
+    <div class="header-timer">
+      <div class="header-timer-label">Sale Ends In</div>
+      <div class="header-countdown">
+        <div class="header-countdown-unit">
+          <span id="days">02</span>
+          <label>Days</label>
+        </div>
+        <div class="header-countdown-unit">
+          <span id="hours">06</span>
+          <label>Hours</label>
+        </div>
+        <div class="header-countdown-unit">
+          <span id="minutes">25</span>
+          <label>Mins</label>
+        </div>
+        <div class="header-countdown-unit">
+          <span id="seconds">41</span>
+          <label>Secs</label>
+        </div>
       </div>
     </div>
+
+    <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
   </div>
 
   <div class="tabs-container">
@@ -984,6 +1043,17 @@ function updateCountdown() {
       document.getElementById("seconds").innerHTML = "00";
     }
   }, 1000);
+}
+
+// Scroll to products function
+function scrollToProducts() {
+  const tabsContainer = document.querySelector('.tabs-container');
+  if (tabsContainer) {
+    tabsContainer.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }
 
 // Start countdown when page loads
