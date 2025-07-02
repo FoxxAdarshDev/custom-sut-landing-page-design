@@ -1068,7 +1068,9 @@
 }
 
 .popup-savings-details {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   margin-top: 12px;
 }
 
@@ -1076,14 +1078,11 @@
   background: #d1ecf1;
   border: 2px solid #bee5eb;
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 10px 8px;
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
-  margin-bottom: 8px;
-  display: block;
-  width: 100%;
 }
 
 .popup-savings-option:hover {
@@ -1129,14 +1128,14 @@
 
 .popup-savings-text {
   color: #121212;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .popup-savings-price {
   color: #495057;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .popup-savings-amount {
@@ -1480,15 +1479,16 @@
   }
 
   .popup-savings-details {
-    display: block;
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
   .popup-savings-text {
-    font-size: 13px;
+    font-size: 11px;
   }
 
   .popup-savings-price {
-    font-size: 11px;
+    font-size: 9px;
   }
 }
 </style>
@@ -2689,28 +2689,33 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         discountBadge.style.display = 'none';
     }
 
-    // Calculate smart savings for different quantities using the SAME logic as the card
+    // Calculate smart savings for different quantities
     const priceInDollars = productPrice / 100;
-    const discountRate = discountPercentage / 100;
 
-    // Calculate for 2+ items - use same logic as card
+    // Calculate for 2+ items - additional 5% bulk discount
     const qty2 = 2;
+    const bulkDiscount2 = 5; // 5% additional bulk discount
+    const totalDiscount2 = discountPercentage + bulkDiscount2;
     const regularTotal2 = priceInDollars * qty2;
-    const discountedTotal2 = regularTotal2 * (1 - discountRate);
+    const discountedTotal2 = regularTotal2 * (1 - totalDiscount2 / 100);
     const totalSavings2 = regularTotal2 - discountedTotal2;
     const perItemSavings2 = totalSavings2 / qty2;
 
-    // Calculate for 3+ items - use same logic as card
+    // Calculate for 3+ items - additional 8% bulk discount
     const qty3 = 3;
+    const bulkDiscount3 = 8; // 8% additional bulk discount
+    const totalDiscount3 = discountPercentage + bulkDiscount3;
     const regularTotal3 = priceInDollars * qty3;
-    const discountedTotal3 = regularTotal3 * (1 - discountRate);
+    const discountedTotal3 = regularTotal3 * (1 - totalDiscount3 / 100);
     const totalSavings3 = regularTotal3 - discountedTotal3;
     const perItemSavings3 = totalSavings3 / qty3;
 
-    // Calculate for 5+ items - use same logic as card
+    // Calculate for 5+ items - additional 12% bulk discount
     const qty5 = 5;
+    const bulkDiscount5 = 12; // 12% additional bulk discount
+    const totalDiscount5 = discountPercentage + bulkDiscount5;
     const regularTotal5 = priceInDollars * qty5;
-    const discountedTotal5 = regularTotal5 * (1 - discountRate);
+    const discountedTotal5 = regularTotal5 * (1 - totalDiscount5 / 100);
     const totalSavings5 = regularTotal5 - discountedTotal5;
     const perItemSavings5 = totalSavings5 / qty5;
 
@@ -2869,47 +2874,9 @@ function showCheckoutSection() {
     const addToCartButton = document.querySelector('.popup-add-to-cart');
     addToCartButton.style.display = 'none';
 
-    // Get actual products from the current page (excluding current product)
-    const relatedProducts = getRelatedProductsFromPage();
-
     // Create checkout section
     const checkoutSection = document.createElement('div');
     checkoutSection.classList.add('popup-checkout-section');
-    
-    let relatedProductsHTML = '';
-    if (relatedProducts.length > 0) {
-        relatedProductsHTML = `
-            <div class="related-products-section">
-                <h3>You might also like</h3>
-                <div class="related-products-grid">
-                    ${relatedProducts.map(product => `
-                        <div class="related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, '\\\')}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
-                            <div class="related-product-image">
-                                <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="related-placeholder" style="display: none;">📦</div>
-                            </div>
-                            <div class="related-product-info">
-                                <h4>${product.title}</h4>
-                                <div class="related-product-price">
-                                    <span class="related-sale-price">$${(product.price / 100).toFixed(2)}</span>
-                                    <span class="related-final-price">$${product.finalPrice}</span>
-                                </div>
-                                <div class="related-discount-badge">${product.discount}% OFF</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    } else {
-        relatedProductsHTML = `
-            <div class="related-products-section">
-                <h3>You might also like</h3>
-                <p>More products coming soon...</p>
-            </div>
-        `;
-    }
-
     checkoutSection.innerHTML = `
         <div class="checkout-buttons">
             <button class="checkout-btn primary" onclick="proceedToCheckout()">
@@ -2920,65 +2887,46 @@ function showCheckoutSection() {
                 Continue Shopping
             </button>
         </div>
-        ${relatedProductsHTML}
+
+        <div class="related-products-section">
+            <h3>You might also like</h3>
+            <div class="related-products-grid">
+                <div class="related-product-card" onclick="addRelatedProduct('158-3121-TR', 'EZBio TR Carboy 20L', 25000)">
+                    <div class="related-product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-3121-TR.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">📦</div>
+                    </div>
+                    <div class="related-product-info">
+                        <h4>EZBio TR Carboy 20L</h4>
+                        <div class="related-product-price">
+                            <span class="related-sale-price">$250.00</span>
+                            <span class="related-final-price">$212.50</span>
+                        </div>
+                        <div class="related-discount-badge">15% OFF</div>
+                    </div>
+                </div>
+
+                <div class="related-product-card" onclick="addRelatedProduct('158-0500-PC', 'EZBio PC Bottle 500ml', 8500)">
+                    <div class="related-product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-0500-PC.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">🧪</div>
+                    </div>
+                    <div class="related-product-info">
+                        <h4>EZBio PC Bottle 500ml</h4>
+                        <div class="related-product-price">
+                            <span class="related-sale-price">$85.00</span>
+                            <span class="related-final-price">$74.80</span>
+                        </div>
+                        <div class="related-discount-badge">12% OFF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     `;
 
     // Insert after the quantity section
     const quantitySection = document.querySelector('.popup-quantity-section');
     quantitySection.parentNode.insertBefore(checkoutSection, quantitySection.nextSibling);
-}
-
-function getRelatedProductsFromPage() {
-    const allProductCards = document.querySelectorAll('.product-card');
-    const relatedProducts = [];
-    
-    allProductCards.forEach(card => {
-        const skuElement = card.querySelector('.product-sku');
-        const currentSKU = skuElement ? skuElement.textContent.trim() : '';
-        
-        // Skip current product
-        if (currentSKU === selectedProductSKU) return;
-        
-        // Extract product data
-        const titleElement = card.querySelector('.product-title');
-        const imageElement = card.querySelector('.product-image img');
-        const salePriceElement = card.querySelector('.sale-price');
-        const finalPriceElement = card.querySelector('.final-price');
-        const discountElement = card.querySelector('.discount-label');
-        const ctaButton = card.querySelector('.product-cta');
-        
-        if (titleElement && salePriceElement && ctaButton) {
-            // Extract data from onclick attribute
-            const onclickAttr = ctaButton.getAttribute('onclick');
-            const matches = onclickAttr.match(/openAddToCartPopupWithEvent\(event,\s*(\d+),\s*'([^']*)',\s*'([^']*)',\s*'([^']*)',\s*(\d+),\s*(\d+)\)/);
-            
-            if (matches) {
-                relatedProducts.push({
-                    id: matches[1],
-                    title: matches[2],
-                    image: matches[3],
-                    sku: matches[4],
-                    price: parseInt(matches[5]),
-                    variantId: matches[6],
-                    finalPrice: finalPriceElement ? finalPriceElement.textContent.replace('$', '') : '0.00',
-                    discount: discountElement ? discountElement.textContent.replace(/[^\d]/g, '') : '0'
-                });
-            }
-        }
-    });
-    
-    // Return first 4 related products
-    return relatedProducts.slice(0, 4);
-}
-
-function openRelatedProduct(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
-    // Close current popup and open new one
-    closeAddToCartPopup();
-    setTimeout(() => {
-        // Create a fake event object
-        const fakeEvent = { target: { closest: () => null } };
-        openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, fakeEvent);
-    }, 100);
 }
 
 function proceedToCheckout() {
