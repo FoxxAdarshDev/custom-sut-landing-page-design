@@ -360,7 +360,7 @@
   }
 
   .tab-content {
-    display: none;
+    display: block;
   }
 
   .tab-content.active {
@@ -1816,22 +1816,24 @@ function switchTab(tabName) {
   // Disable scroll-based tab switching temporarily
   window.manualTabSwitch = true;
 
-  // Hide all tab contents
-  const tabContents = document.querySelectorAll('.tab-content');
-  tabContents.forEach(content => {
-    content.classList.remove('active');
-  });
-
   // Remove active class from all tab buttons (hero, main, and sticky)
   const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button, .sticky-tab-button');
   tabButtons.forEach(button => {
     button.classList.remove('active');
   });
 
+  // Show selected tab content and hide others temporarily (only for manual clicks)
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(content => {
+    content.classList.remove('active');
+    content.style.display = 'none';
+  });
+
   // Show selected tab content
   const targetTab = document.getElementById(tabName + '-tab');
   if (targetTab) {
     targetTab.classList.add('active');
+    targetTab.style.display = 'block';
   }
 
   // Sync all tab buttons based on tab name
@@ -1847,6 +1849,10 @@ function switchTab(tabName) {
   // Re-enable scroll-based tab switching after a delay
   setTimeout(() => {
     window.manualTabSwitch = false;
+    // Reset display to block for scroll-based logic to take over
+    tabContents.forEach(content => {
+      content.style.display = 'block';
+    });
   }, 1000);
 }
 
@@ -2022,7 +2028,7 @@ function toggleSavings(event, element) {
             }, 100);
         });
 }
-// Scroll-based tab switching
+// Scroll-based tab switching and section visibility
 function handleScrollBasedTabSwitching() {
   // Don't auto-switch if user manually switched tabs recently
   if (window.manualTabSwitch) return;
@@ -2036,8 +2042,24 @@ function handleScrollBasedTabSwitching() {
   const laboratoryRect = laboratoryTab.getBoundingClientRect();
   const windowHeight = window.innerHeight;
   const scrollTriggerPoint = windowHeight * 0.3; // Trigger when 30% of section is visible
+  
+  // Check if bioprocess section has been scrolled past (top is above viewport)
+  const bioprocessScrolledPast = bioprocessRect.top < windowHeight && bioprocessRect.bottom < 0;
+  
+  // Check if laboratory section has been scrolled past (top is above viewport)
+  const laboratoryScrolledPast = laboratoryRect.top < windowHeight && laboratoryRect.bottom < 0;
 
-  // Check if laboratory section is in view
+  // Show bioprocess section if it's in view or has been scrolled past
+  if (bioprocessRect.top <= scrollTriggerPoint || bioprocessScrolledPast) {
+    bioprocessTab.style.display = 'block';
+  }
+
+  // Show laboratory section if it's in view or has been scrolled past
+  if (laboratoryRect.top <= scrollTriggerPoint || laboratoryScrolledPast) {
+    laboratoryTab.style.display = 'block';
+  }
+
+  // Active tab switching based on current viewport
   if (laboratoryRect.top <= scrollTriggerPoint && laboratoryRect.bottom >= scrollTriggerPoint) {
     // Switch to laboratory tab
     switchTabByName('laboratory');
