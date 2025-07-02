@@ -23,223 +23,7 @@
             padding-top: 20px;
         }
 
-        /* Enhanced Sticky Navigation Styles */
-        .promo-sticky-nav {
-            position: fixed;
-            bottom: -150px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            max-width: 1000px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-top: 2px solid rgba(9, 94, 167, 0.3);
-            border-radius: 15px 15px 0 0;
-            z-index: 999;
-            transition: bottom 0.4s ease, opacity 0.3s ease;
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .promo-sticky-nav.visible {
-            bottom: 0;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .promo-sticky-nav-content {
-            padding: 8px 15px;
-            display: flex;
-            /* flex-direction: column; */
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-        }
-
-        .promo-sticky-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(9, 94, 167, 0.1);
-            gap: 15px;
-        }
-
-        .promo-sticky-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: #002868;
-            font-size: 0.9rem;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .promo-sticky-title::before {
-            content: '';
-            width: 20px;
-            height: 14px;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 60 40' width='20' height='14' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='60' height='40' fill='%23B22234'/%3E%3Crect y='3' width='60' height='3' fill='white'/%3E%3Crect y='9' width='60' height='3' fill='white'/%3E%3Crect y='15' width='60' height='3' fill='white'/%3E%3Crect y='21' width='60' height='3' fill='white'/%3E%3Crect y='27' width='60' height='3' fill='white'/%3E%3Crect y='33' width='60' height='3' fill='white'/%3E%3Crect width='24' height='21' fill='%233C3B6E'/%3E%3Cg fill='white'%3E%3Ccircle cx='4' cy='3' r='0.5'/%3E%3Ccircle cx='8' cy='3' r='0.5'/%3E%3Ccircle cx='12' cy='3' r='0.5'/%3E%3Ccircle cx='16' cy='3' r='0.5'/%3E%3Ccircle cx='20' cy='3' r='0.5'/%3E%3Ccircle cx='6' cy='6' r='0.5'/%3E%3Ccircle cx='10' cy='6' r='0.5'/%3E%3Ccircle cx='14' cy='6' r='0.5'/%3E%3Ccircle cx='18' cy='6' r='0.5'/%3E%3Ccircle cx='4' cy='9' r='0.5'/%3E%3Ccircle cx='8' cy='9' r='0.5'/%3E%3Ccircle cx='12' cy='9' r='0.5'/%3E%3Ccircle cx='16' cy='9' r='0.5'/%3E%3Ccircle cx='20' cy='9' r='0.5'/%3E%3Ccircle cx='6' cy='12' r='0.5'/%3E%3Ccircle cx='10' cy='12' r='0.5'/%3E%3Ccircle cx='14' cy='12' r='0.5'/%3E%3Ccircle cx='18' cy='12' r='0.5'/%3E%3Ccircle cx='4' cy='15' r='0.5'/%3E%3Ccircle cx='8' cy='15' r='0.5'/%3E%3Ccircle cx='12' cy='15' r='0.5'/%3E%3Ccircle cx='16' cy='15' r='0.5'/%3E%3Ccircle cx='20' cy='15' r='0.5'/%3E%3Ccircle cx='6' cy='18' r='0.5'/%3E%3Ccircle cx='10' cy='18' r='0.5'/%3E%3Ccircle cx='14' cy='18' r='0.5'/%3E%3Ccircle cx='18' cy='18' r='0.5'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
-
-        .promo-sticky-toggles {
-            display: flex;
-            gap: 8px;
-            flex: none;
-        }
-
-        .promo-sticky-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            color: #095ea7;
-            border: 1px solid rgba(9, 94, 167, 0.4);
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .promo-sticky-toggle.active {
-            background: rgba(9, 94, 167, 1);
-            backdrop-filter: blur(15px);
-            color: white;
-            border-color: rgba(191, 10, 48, 0.6);
-        }
-
-        .promo-sticky-toggle:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(9, 94, 167, 1);
-        }
-
-        .promo-sticky-carousel {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding: 6px 5px;
-            justify-content: flex-start;
-            align-items: center;
-            scroll-behavior: smooth;
-            flex-wrap: nowrap;
-            flex-direction: row;
-            min-height: 100px;
-            max-height: 120px;
-        }
-
-        .promo-sticky-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .promo-sticky-card {
-            flex: 0 0 auto;
-            width: 75px;
-            min-width: 75px;
-            max-width: 75px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(9, 94, 167, 0.3);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 40, 104, 0.15);
-            display: flex;
-            flex-direction: column;
-            margin: 2px;
-        }
-
-        .promo-sticky-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(191, 10, 48, 0.6);
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 20px rgba(191, 10, 48, 0.2);
-        }
-
-        .promo-sticky-card.active {
-            border-color: rgba(191, 10, 48, 0.6);
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            transform: translateY(-1px);
-        }
-
-        .promo-sticky-card-flag {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            font-size: 0.7rem;
-            z-index: 2;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-        }
-
-        .promo-sticky-card-image {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        }
-
-        .promo-sticky-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        .promo-sticky-card:hover .promo-sticky-card-image img {
-            transform: scale(1.1);
-        }
-
-        .promo-sticky-card-content {
-            padding: 4px;
-            background-color: #fff;
-            text-align: center;
-        }
-
-        .promo-sticky-card-title {
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: #002868;
-            margin-bottom: 1px;
-            line-height: 1.1;
-        }
-
-        .promo-sticky-card-count {
-            font-size: 0.5rem;
-            color: #6c757d;
-            margin-bottom: 2px;
-        }
-
-        .promo-sticky-card-discount {
-            background: linear-gradient(45deg, #BF0A30, #095ea7);
-            color: white;
-            font-size: 0.45rem;
-            font-weight: 700;
-            padding: 1px 3px;
-            border-radius: 4px;
-            display: inline-block;
-            animation: promo-card-discount-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes promo-card-discount-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+        
 
         .promo-patriotic-canvas {
             position: absolute;
@@ -1929,131 +1713,7 @@
                 display: block !important;
             }
 
-            .promo-sticky-nav {
-                bottom: -180px;
-                width: 100%;
-                max-width: none;
-                border-radius: 0;
-                left: 0;
-                right: 0;
-                margin: 0;
-            }
-
-            .promo-sticky-nav.visible {
-                bottom: 0;
-            }
-
-            .promo-sticky-nav-content {
-                padding: 8px 10px;
-                flex-direction: column;
-            }
-
-            .promo-sticky-header {
-                flex-direction: column;
-                gap: 8px;
-                margin-bottom: 8px;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-
-            .promo-sticky-title {
-                font-size: 0.9rem;
-                text-align: center;
-                flex: none;
-                gap: 6px;
-                order: 1;
-            }
-
-            .promo-sticky-title::before {
-                width: 16px;
-                height: 11px;
-            }
-
-            .promo-sticky-toggles {
-                justify-content: center;
-                gap: 8px;
-                flex: none;
-                order: 2;
-                width: 100%;
-            }
-
-            .promo-sticky-toggle {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-                border-radius: 12px;
-                flex: 1;
-                max-width: 120px;
-            }
-
-            .promo-sticky-card {
-                width: 75px;
-                min-width: 75px;
-                max-width: 75px;
-                flex-shrink: 0;
-                flex: 0 0 75px;
-                margin: 0 2px;
-            }
-
-            .promo-sticky-card-image {
-                height: 35px;
-                padding: 4px;
-            }
-
-            .promo-sticky-card-content {
-                padding: 4px;
-            }
-
-            .promo-sticky-card-title {
-                font-size: 0.55rem;
-                margin-bottom: 2px;
-                line-height: 1.1;
-            }
-
-            .promo-sticky-card-count {
-                font-size: 0.45rem;
-                margin-bottom: 2px;
-            }
-
-            .promo-sticky-card-discount {
-                font-size: 0.4rem;
-                padding: 2px 4px;
-                border-radius: 4px;
-            }
-
-            .promo-sticky-card-flag {
-                font-size: 0.6rem;
-                top: 2px;
-                right: 2px;
-            }
-
-            .promo-sticky-carousel {
-                gap: 4px;
-                justify-content: flex-start;
-                padding: 10px 8px;
-                scroll-snap-type: x mandatory;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                flex-direction: row;
-                display: flex !important;
-                min-height: 95px;
-                max-height: 95px;
-                white-space: nowrap;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .promo-sticky-carousel::-webkit-scrollbar {
-                display: none;
-            }
-
-            .promo-sticky-card {
-                scroll-snap-align: start;
-                flex-shrink: 0;
-                margin: 0 2px;
-                display: flex !important;
-                flex-direction: column;
-            }
+            
 
             .promo-american-eagle {
                 font-size: 2rem;
@@ -2384,210 +2044,7 @@
         </div>
     </section>
 
-    <!-- Enhanced Sticky Navigation Bar -->
-    <div class="promo-sticky-nav" id="sticky-nav">
-        <div class="promo-sticky-nav-content">
-            <div class="promo-sticky-header">
-                <div class="promo-sticky-title">Independence Day Collections</div>
-                <div class="promo-sticky-toggles">
-                    <button class="promo-sticky-toggle active" data-world="bioprocess" onclick="switchStickyWorld('bioprocess')">
-                        🧬 Bioprocess
-                    </button>
-                    <button class="promo-sticky-toggle" data-world="laboratory" onclick="switchStickyWorld('laboratory')">
-                        🔬 Laboratory
-                    </button>
-                </div>
-            </div>
-
-            <!-- Bioprocess Carousel -->
-            <div class="promo-sticky-carousel" id="sticky-bioprocess-carousel">
-                {% if pc_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ pc_carboy_collection.image | img_url: '80x80' }}" alt="PC Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">PC Carboy</div>
-                        <div class="promo-sticky-card-count">{{ pc_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">20% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if pc_tr_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ pc_tr_carboy_collection.image | img_url: '80x80' }}" alt="PC TR Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">PC TR</div>
-                        <div class="promo-sticky-card-count">{{ pc_tr_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">15 OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezbio_bottles_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezbio_bottles_collection.image | img_url: '80x80' }}" alt="EZBio Bottles">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZBio Bottles</div>
-                        <div class="promo-sticky-card-count">{{ ezbio_bottles_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">12% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezbio_ts_bottles_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezbio_ts_bottles_collection.image | img_url: '80x80' }}" alt="EZBio TS">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZBio TS</div>
-                        <div class="promo-sticky-card-count">{{ ezbio_ts_bottles_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">10-12% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if pfa_bottles_collection.image %}
-                <div class="promo-sticky-card" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ pfa_bottles_collection.image | img_url: '80x80' }}" alt="PFA Bottles">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">PFA</div>
-                        <div class="promo-sticky-card-count">{{ pfa_bottles_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">40% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if aqg_collection.image %}
-                <div class="promo-sticky-card" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ aqg_collection.image | img_url: '80x80' }}" alt="AQG">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">AQG</div>
-                        <div class="promo-sticky-card-count">{{ aqg_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">20-50% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if cpc_stream_thru_connectors_collection.image %}
-                <div class="promo-sticky-card" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '80x80' }}" alt="CPC Connectors">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">CPC</div>
-                        <div class="promo-sticky-card-count">{{ cpc_stream_thru_connectors_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">50% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezbio_bottle_assembly_pc_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '80x80' }}" alt="Assemblies">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">BottleAssembly</div>
-                        <div class="promo-sticky-card-count">{{ ezbio_bottle_assembly_pc_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">12% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-
-            <!-- Laboratory Carousel -->
-            <div class="promo-sticky-carousel" id="sticky-laboratory-carousel" style="display: none;">
-                {% if ezlabpure_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezlabpure_carboy_collection.image | img_url: '80x80' }}" alt="EZLabpure Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZLabpure</div>
-                        <div class="promo-sticky-card-count">{{ ezlabpure_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">30% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezclear_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezclear_carboy_collection.image | img_url: '80x80' }}" alt="EZclear Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZclear</div>
-                        <div class="promo-sticky-card-count">{{ ezclear_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">25% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezgrip_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezgrip_carboy_collection.image | img_url: '80x80' }}" alt="EZgrip Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZgrip</div>
-                        <div class="promo-sticky-card-count">{{ ezgrip_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">35% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if ezbio_carboy_collection.image %}
-                <div class="promo-sticky-card" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ ezbio_carboy_collection.image | img_url: '80x80' }}" alt="EZBio Carboy">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">EZBio</div>
-                        <div class="promo-sticky-card-count">{{ ezbio_carboy_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">20% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if lab_general_collection.image %}
-                <div class="promo-sticky-card" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
-                    <div class="promo-sticky-card-flag">🇺🇸</div>
-                    <div class="promo-sticky-card-image">
-                        <img src="{{ lab_general_collection.image | img_url: '80x80' }}" alt="Lab General">
-                    </div>
-                    <div class="promo-sticky-card-content">
-                        <div class="promo-sticky-card-title">Lab Items</div>
-                        <div class="promo-sticky-card-count">{{ lab_general_collection.products.size }} Items</div>
-                        <div class="promo-sticky-card-discount">40% OFF</div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Revolutionary Category Navigation -->
     <section class="promo-category-universe">
@@ -2652,7 +2109,7 @@
                         <div class="promo-carousel-container">
                             {% comment %} Match the exact order from sticky navigation {% endcomment %}
                             {% if pc_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="pc-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ pc_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_carboy_collection.title }}">
                                 </div>
@@ -2662,7 +2119,7 @@
                             {% endif %}
 
                             {% if pc_tr_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="pc-tr-carboy" onclick="scrollToCollectionSection('pc-tr-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="pc-tr-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ pc_tr_carboy_collection.image | img_url: '150x150' }}" alt="{{ pc_tr_carboy_collection.title }}">
                                 </div>
@@ -2672,7 +2129,7 @@
                             {% endif %}
 
                             {% if ezbio_bottles_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezbio-bottles" onclick="scrollToCollectionSection('ezbio-bottles')">
+                            <div class="promo-collection-circle-container" data-collection="ezbio-bottles">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezbio_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottles_collection.title }}">
                                 </div>
@@ -2682,7 +2139,7 @@
                             {% endif %}
 
                             {% if ezbio_ts_bottles_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezbio-ts-bottles" onclick="scrollToCollectionSection('ezbio-ts-bottles')">
+                            <div class="promo-collection-circle-container" data-collection="ezbio-ts-bottles">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezbio_ts_bottles_collection.image | img_url: '150x150' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
                                 </div>
@@ -2692,7 +2149,7 @@
                             {% endif %}
 
                             {% if pfa_bottles_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="pfa-bottles" onclick="scrollToCollectionSection('pfa-bottles')">
+                            <div class="promo-collection-circle-container" data-collection="pfa-bottles">
                                 <div class="promo-collection-circle">
                                     <img src="{{ pfa_bottles_collection.image | img_url: '150x150' }}" alt="{{ pfa_bottles_collection.title }}">
                                 </div>
@@ -2702,7 +2159,7 @@
                             {% endif %}
 
                             {% if aqg_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="aqg" onclick="scrollToCollectionSection('aqg')">
+                            <div class="promo-collection-circle-container" data-collection="aqg">
                                 <div class="promo-collection-circle">
                                     <img src="{{ aqg_collection.image | img_url: '150x150' }}" alt="{{ aqg_collection.title }}">
                                 </div>
@@ -2712,7 +2169,7 @@
                             {% endif %}
 
                             {% if cpc_stream_thru_connectors_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="cpc-connectors" onclick="scrollToCollectionSection('cpc-connectors')">
+                            <div class="promo-collection-circle-container" data-collection="cpc-connectors">
                                 <div class="promo-collection-circle">
                                     <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '150x150' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
                                 </div>
@@ -2722,7 +2179,7 @@
                             {% endif %}
 
                             {% if ezbio_bottle_assembly_pc_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezbio-assembly" onclick="scrollToCollectionSection('ezbio-assembly')">
+                            <div class="promo-collection-circle-container" data-collection="ezbio-assembly">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '150x150' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
                                 </div>
@@ -2747,9 +2204,9 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
-                    <button class="promo-world-cta" onclick="exploreWorld('bioprocess')">
+                    <a href="/collections/bioprocess" class="promo-world-cta">
                         🚀 EXPLORE BIOPROCESS
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -2807,7 +2264,7 @@
                     <div class="promo-collection-carousel" id="laboratory-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
                             {% if ezlabpure_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="ezlabpure-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezlabpure_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezlabpure_carboy_collection.title }}">
                                 </div>
@@ -2817,7 +2274,7 @@
                             {% endif %}
 
                             {% if ezclear_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezclear-carboy" onclick="scrollToCollectionSection('ezclear-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="ezclear-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezclear_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezclear_carboy_collection.title }}">
                                 </div>
@@ -2827,7 +2284,7 @@
                             {% endif %}
 
                             {% if ezgrip_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezgrip-carboy" onclick="scrollToCollectionSection('ezgrip-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="ezgrip-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezgrip_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezgrip_carboy_collection.title }}">
                                 </div>
@@ -2837,7 +2294,7 @@
                             {% endif %}
 
                             {% if ezbio_carboy_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="ezbio-carboy" onclick="scrollToCollectionSection('ezbio-carboy')">
+                            <div class="promo-collection-circle-container" data-collection="ezbio-carboy">
                                 <div class="promo-collection-circle">
                                     <img src="{{ ezbio_carboy_collection.image | img_url: '150x150' }}" alt="{{ ezbio_carboy_collection.title }}">
                                 </div>
@@ -2847,7 +2304,7 @@
                             {% endif %}
 
                             {% if lab_general_collection.image %}
-                            <div class="promo-collection-circle-container" data-collection="lab-general" onclick="scrollToCollectionSection('lab-general')">
+                            <div class="promo-collection-circle-container" data-collection="lab-general">
                                 <div class="promo-collection-circle">
                                     <img src="{{ lab_general_collection.image | img_url: '150x150' }}" alt="{{ lab_general_collection.title }}">
                                 </div>
@@ -2872,9 +2329,9 @@
                             <span class="promo-stat-label">Savings</span>
                         </div>
                     </div>
-                    <button class="promo-world-cta" onclick="exploreWorld('laboratory')">
+                    <a href="/collections/laboratory" class="promo-world-cta">
                         🚀 EXPLORE LABORATORY
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -3774,7 +3231,7 @@
     </div>
 
     <!-- Laboratory Sections -->
-    <div class="promo-laboratory-sections" id="laboratory-sections" style="display: none;">
+    <div class="promo-laboratory-sections" id="laboratory-sections">
 
         <!-- EZLabpure 20L Round Carboy Section -->
         {% if ezlabpure_carboy_collection.products.size > 0 %}
