@@ -909,8 +909,8 @@
       </div>
 
       <div class="hero-tab-buttons">
-        <button class="hero-tab-button active" onclick="switchTab('bioprocess'); scrollToProducts()">Explore Bioprocess Products</button>
-        <button class="hero-tab-button" onclick="switchTab('laboratory'); scrollToProducts()">Explore Laboratory Products</button>
+        <button class="hero-tab-button active" onclick="event.preventDefault(); switchTab('bioprocess'); scrollToProducts();">Explore Bioprocess Products</button>
+        <button class="hero-tab-button" onclick="event.preventDefault(); switchTab('laboratory'); scrollToProducts();">Explore Laboratory Products</button>
       </div>
     </div>
   </div>
@@ -919,8 +919,8 @@
   <div class="sticky-tab-container" id="sticky-tabs">
     <div class="sticky-content">
       <div class="sticky-tabs">
-        <button class="sticky-tab-button active" onclick="switchTab('bioprocess'); scrollToProducts()" data-tab="bioprocess">Explore Bioprocess Products</button>
-        <button class="sticky-tab-button" onclick="switchTab('laboratory'); scrollToProducts()" data-tab="laboratory">Explore Laboratory Products</button>
+        <button class="sticky-tab-button active" onclick="event.preventDefault(); switchTab('bioprocess'); scrollToProducts();" data-tab="bioprocess">Explore Bioprocess Products</button>
+        <button class="sticky-tab-button" onclick="event.preventDefault(); switchTab('laboratory'); scrollToProducts();" data-tab="laboratory">Explore Laboratory Products</button>
       </div>
       <div class="sticky-timer">
         <div class="sticky-timer-label">Sale Ends</div>
@@ -1813,6 +1813,9 @@
 
 <script>
 function switchTab(tabName) {
+  // Disable scroll-based tab switching temporarily
+  window.manualTabSwitch = true;
+  
   // Hide all tab contents
   const tabContents = document.querySelectorAll('.tab-content');
   tabContents.forEach(content => {
@@ -1826,21 +1829,25 @@ function switchTab(tabName) {
   });
 
   // Show selected tab content
-  document.getElementById(tabName + '-tab').classList.add('active');
-
-  // Add active class to clicked button and sync all tab buttons
-  if (event && event.target) {
-    event.target.classList.add('active');
+  const targetTab = document.getElementById(tabName + '-tab');
+  if (targetTab) {
+    targetTab.classList.add('active');
   }
 
-  // Sync all tab buttons (hero, main, and sticky)
+  // Sync all tab buttons based on tab name
   const allButtons = document.querySelectorAll('.hero-tab-button, .tab-button, .sticky-tab-button');
   allButtons.forEach(button => {
     if (button.textContent.toLowerCase().includes(tabName) || 
-        (button.dataset && button.dataset.tab === tabName)) {
+        (button.dataset && button.dataset.tab === tabName) ||
+        button.getAttribute('onclick')?.includes(tabName)) {
       button.classList.add('active');
     }
   });
+
+  // Re-enable scroll-based tab switching after a delay
+  setTimeout(() => {
+    window.manualTabSwitch = false;
+  }, 1000);
 }
 
 // Countdown Timer
@@ -2017,6 +2024,9 @@ function toggleSavings(event, element) {
 }
 // Scroll-based tab switching
 function handleScrollBasedTabSwitching() {
+  // Don't auto-switch if user manually switched tabs recently
+  if (window.manualTabSwitch) return;
+  
   const bioprocessTab = document.getElementById('bioprocess-tab');
   const laboratoryTab = document.getElementById('laboratory-tab');
 
