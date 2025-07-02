@@ -1202,6 +1202,206 @@
   margin: 0;
 }
 
+/* Cart Notifications */
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10002;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 4px solid #28a745;
+  max-width: 350px;
+}
+
+.cart-notification.error {
+  border-left-color: #dc3545;
+}
+
+.cart-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  background: #28a745;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cart-notification.error .notification-icon {
+  background: #dc3545;
+}
+
+.notification-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+
+/* Checkout Section */
+.popup-checkout-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.checkout-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.checkout-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.checkout-btn.primary {
+  background: #0071ce;
+  color: white;
+}
+
+.checkout-btn.primary:hover {
+  background: #005ba6;
+  transform: translateY(-1px);
+}
+
+.checkout-btn.secondary {
+  background: rgba(0, 0, 0, 0.04);
+  color: #1d1d1f;
+}
+
+.checkout-btn.secondary:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.checkout-icon {
+  font-size: 16px;
+}
+
+/* Related Products */
+.related-products-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.related-product-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.related-product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #0071ce;
+}
+
+.related-product-image {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px auto;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.related-product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.related-placeholder {
+  font-size: 24px;
+  color: #666;
+}
+
+.related-product-info h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 6px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.related-product-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.related-sale-price {
+  font-size: 11px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.related-final-price {
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc3545;
+}
+
+.related-discount-badge {
+  background: #dc3545;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
 /* Mobile Responsive */
 @media (max-width: 480px) {
   .add-to-cart-popup {
@@ -1224,6 +1424,21 @@
 
   .popup-product-price {
     font-size: 18px;
+  }
+
+  .cart-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .checkout-buttons {
+    flex-direction: column;
+  }
+
+  .related-products-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -2257,7 +2472,7 @@ function calculatePricesAndSavings() {
     const totalSavings = regularTotal - discountedTotal;
     const perItemSavings = totalSavings / qty;
 
-    savingsAmount.textContent = '$' + perItemSavings.toFixed(2);
+    savingsAmount.textContent = perItemSavings.toFixed(2);
   });
 
   // Calculate smart savings preview amounts - must match the savings amounts
@@ -2443,19 +2658,169 @@ function togglePopupSavings(element) {
 function addToCart() {
     const quantity = document.getElementById('popupQuantity').value;
 
-    // If quantity is 3 or more, use the discounted price
-    let finalQuantity = quantity;
-    if (parseInt(quantity) >= 3) {
-        finalQuantity = quantity; // Add all items at once for bulk discount
-    }
+    // Add to cart via AJAX instead of redirect
+    fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: selectedProductVariantId,
+            quantity: parseInt(quantity)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show success notification
+        showAddToCartSuccess();
+        
+        // Update popup to show checkout options and related products
+        showCheckoutSection();
+    })
+    .catch(error => {
+        console.error('Error adding to cart:', error);
+        showAddToCartError();
+    });
+}
 
-    // Construct the cart URL
-    const cartUrl = `/cart/add?id=${selectedProductVariantId}&quantity=${finalQuantity}`;
+function showAddToCartSuccess() {
+    // Create and show success notification
+    const notification = document.createElement('div');
+    notification.classList.add('cart-notification', 'success');
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">✓</span>
+            <span class="notification-text">Product added to cart successfully!</span>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }, 100);
+}
 
-    // Redirect to the cart URL
-    window.location.href = cartUrl;
+function showAddToCartError() {
+    const notification = document.createElement('div');
+    notification.classList.add('cart-notification', 'error');
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">✗</span>
+            <span class="notification-text">Failed to add product to cart. Please try again.</span>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }, 100);
+}
 
+function showCheckoutSection() {
+    // Update the popup content to show checkout and related products
+    const addToCartButton = document.querySelector('.popup-add-to-cart');
+    addToCartButton.style.display = 'none';
+    
+    // Create checkout section
+    const checkoutSection = document.createElement('div');
+    checkoutSection.classList.add('popup-checkout-section');
+    checkoutSection.innerHTML = `
+        <div class="checkout-buttons">
+            <button class="checkout-btn primary" onclick="proceedToCheckout()">
+                <span class="checkout-icon">🛒</span>
+                Proceed to Checkout
+            </button>
+            <button class="checkout-btn secondary" onclick="continueShopping()">
+                Continue Shopping
+            </button>
+        </div>
+        
+        <div class="related-products-section">
+            <h3>You might also like</h3>
+            <div class="related-products-grid">
+                <div class="related-product-card" onclick="addRelatedProduct('158-3121-TR', 'EZBio TR Carboy 20L', 25000)">
+                    <div class="related-product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-3121-TR.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">📦</div>
+                    </div>
+                    <div class="related-product-info">
+                        <h4>EZBio TR Carboy 20L</h4>
+                        <div class="related-product-price">
+                            <span class="related-sale-price">$250.00</span>
+                            <span class="related-final-price">$212.50</span>
+                        </div>
+                        <div class="related-discount-badge">15% OFF</div>
+                    </div>
+                </div>
+                
+                <div class="related-product-card" onclick="addRelatedProduct('158-0500-PC', 'EZBio PC Bottle 500ml', 8500)">
+                    <div class="related-product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-0500-PC.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">🧪</div>
+                    </div>
+                    <div class="related-product-info">
+                        <h4>EZBio PC Bottle 500ml</h4>
+                        <div class="related-product-price">
+                            <span class="related-sale-price">$85.00</span>
+                            <span class="related-final-price">$74.80</span>
+                        </div>
+                        <div class="related-discount-badge">12% OFF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Insert after the quantity section
+    const quantitySection = document.querySelector('.popup-quantity-section');
+    quantitySection.parentNode.insertBefore(checkoutSection, quantitySection.nextSibling);
+}
+
+function proceedToCheckout() {
+    // Redirect to cart/checkout page
+    window.location.href = '/cart';
+}
+
+function continueShopping() {
     closeAddToCartPopup();
+}
+
+function addRelatedProduct(sku, title, price) {
+    // Add related product to cart
+    fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: sku, // You may need to map SKU to variant ID
+            quantity: 1
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        showAddToCartSuccess();
+    })
+    .catch(error => {
+        console.error('Error adding related product:', error);
+        showAddToCartError();
+    });
 }
 
 // Start countdown when page loads
