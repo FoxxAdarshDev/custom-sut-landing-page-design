@@ -52,13 +52,16 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     margin-bottom: 15px;
+    color: #0071ce;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .sale-header h1 .gradient-text {
     background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
-    letter-spacing: 1px;
-    line-height: 1.1;
   }
 
   .sale-header .discount {
@@ -686,7 +689,7 @@
   <div class="sale-header">
     <div class="hero-left">
       <div class="independence-badge">US Independence Day Special</div>
-      <h1>Our Biggest Patriotic Sale of the Year!</h1>
+      <h1>Our <span class="gradient-text">Biggest</span> Patriotic <span class="gradient-text">Sale</span> of the <span class="gradient-text">Year!</span></h1>
       <div class="discount">UP TO 50% OFF</div>
       <div class="sale-subtitle">
         Celebrate America's independence with our biggest sale of the year!
