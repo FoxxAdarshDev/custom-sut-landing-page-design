@@ -22,7 +22,7 @@
     text-align: center;
     margin-bottom: 50px;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #002868 0%, #BF0A30 50%, #095ea7 100%);
+    background: linear-gradient(135deg, #1E3A8A 0%, #C8102E 50%, #1E3A8A 100%);
     border-radius: 20px;
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@
   .sale-header .discount {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    color: #FFD700;
+    color: #FFC72C;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
@@ -68,11 +68,11 @@
   }
 
   .tab-button.active {
-    background: linear-gradient(45deg, #002868, #BF0A30);
+    background: linear-gradient(45deg, #1E3A8A, #C8102E);
     color: white;
-    border-color: #BF0A30;
+    border-color: #C8102E;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(191, 10, 48, 0.3);
+    box-shadow: 0 5px 15px rgba(200, 16, 46, 0.3);
   }
 
   .tab-button:hover:not(.active) {
@@ -117,7 +117,7 @@
   .collection-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #002868;
+    color: #1E3A8A;
     margin-bottom: 10px;
   }
 
@@ -159,33 +159,97 @@
   }
 
   .discount-label {
-    background: linear-gradient(45deg, #BF0A30, #002868);
+    background: linear-gradient(135deg, #C8102E 0%, #1E3A8A 100%);
     color: white;
     padding: 8px 16px;
-    border-radius: 20px 5px 20px 5px;
+    border-radius: 25px;
     font-weight: 700;
     font-size: 0.9rem;
     text-transform: uppercase;
-    box-shadow: 0 3px 10px rgba(191, 10, 48, 0.3);
+    box-shadow: 0 4px 15px rgba(200, 16, 46, 0.4);
     position: relative;
+    border: 2px solid white;
   }
 
   .discount-label::before {
     content: '';
     position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    background: linear-gradient(45deg, #FFD700, #BF0A30, #002868);
-    border-radius: 25px 10px 25px 10px;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, #C8102E 0%, #1E3A8A 100%);
+    border-radius: 28px;
     z-index: -1;
     animation: glow 2s ease-in-out infinite alternate;
   }
 
   @keyframes glow {
-    from { opacity: 0.5; }
+    from { opacity: 0.7; }
     to { opacity: 1; }
+  }
+
+  /* Timer Section */
+  .timer-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 30px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .timer-header {
+    color: #C8102E;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .timer-header::before,
+  .timer-header::after {
+    content: '⚡';
+    color: #FFC72C;
+    font-size: 1.4rem;
+  }
+
+  .countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    background: white;
+    border: 3px solid #1E3A8A;
+    border-radius: 12px;
+    padding: 15px 20px;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(30, 58, 138, 0.2);
+  }
+
+  .countdown-unit span {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #C8102E;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .countdown-unit label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .product-image {
@@ -210,7 +274,7 @@
   .product-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #002868;
+    color: #1E3A8A;
     margin-bottom: 15px;
     line-height: 1.4;
     min-height: 50px;
@@ -232,13 +296,13 @@
   }
 
   .sale-price {
-    color: #BF0A30;
+    color: #C8102E;
     font-size: 1.3rem;
     font-weight: 700;
   }
 
   .product-cta {
-    background: linear-gradient(45deg, #002868, #BF0A30);
+    background: linear-gradient(45deg, #1E3A8A, #C8102E);
     color: white;
     padding: 12px 25px;
     border: none;
@@ -255,9 +319,9 @@
   }
 
   .product-cta:hover {
-    background: linear-gradient(45deg, #BF0A30, #FFD700);
+    background: linear-gradient(45deg, #C8102E, #FFC72C);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(191, 10, 48, 0.4);
+    box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
     color: white;
     text-decoration: none;
   }
@@ -298,6 +362,28 @@
   <div class="sale-header">
     <h1>Our Biggest Patriotic Sale of the Year!</h1>
     <div class="discount">Up to 50% OFF</div>
+  </div>
+
+  <div class="timer-section">
+    <div class="timer-header">Sale Ends In</div>
+    <div class="countdown-container">
+      <div class="countdown-unit">
+        <span id="days">02</span>
+        <label>Days</label>
+      </div>
+      <div class="countdown-unit">
+        <span id="hours">06</span>
+        <label>Hours</label>
+      </div>
+      <div class="countdown-unit">
+        <span id="minutes">25</span>
+        <label>Mins</label>
+      </div>
+      <div class="countdown-unit">
+        <span id="seconds">41</span>
+        <label>Secs</label>
+      </div>
+    </div>
   </div>
 
   <div class="tabs-container">
@@ -818,4 +904,38 @@ function switchTab(tabName) {
   // Add active class to clicked button
   event.target.classList.add('active');
 }
+
+// Countdown Timer
+function updateCountdown() {
+  // Set the date we're counting down to (2 days from now)
+  const countDownDate = new Date().getTime() + (2 * 24 * 60 * 60 * 1000) + (6 * 60 * 60 * 1000) + (25 * 60 * 1000) + (41 * 1000);
+
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+    document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById("days").innerHTML = "00";
+      document.getElementById("hours").innerHTML = "00";
+      document.getElementById("minutes").innerHTML = "00";
+      document.getElementById("seconds").innerHTML = "00";
+    }
+  }, 1000);
+}
+
+// Start countdown when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  updateCountdown();
+});
 </script>
