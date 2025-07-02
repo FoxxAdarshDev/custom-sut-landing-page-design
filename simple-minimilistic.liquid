@@ -2344,7 +2344,7 @@
 
         <h2 class="popup-product-title" id="popupProductTitle"></h2>
         <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
-        
+
         <div class="popup-product-price">
             <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
             <span class="popup-sale-price">$<span id="popupSalePrice"></span></span>
@@ -2449,15 +2449,15 @@ function calculatePricesAndSavings() {
   const finalPrices = document.querySelectorAll('.final-price');
   finalPrices.forEach(finalPrice => {
     const salePrice = parseFloat(finalPrice.dataset.salePrice);
-    
+
     // Get the actual discount percentage from the discount label in the same product card
     const productCard = finalPrice.closest('.product-card');
     const discountLabel = productCard.querySelector('.discount-label');
     const discountText = discountLabel.textContent;
     const actualDiscountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
-    
+
     const finalPriceAmount = salePrice - (salePrice * actualDiscountPercentage / 100);
-    
+
     // Format price properly
     if (finalPriceAmount >= 1000) {
       finalPrice.textContent = '$' + (finalPriceAmount % 1 === 0 ? finalPriceAmount.toFixed(0) : finalPriceAmount.toFixed(2));
@@ -2586,13 +2586,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     productCards.forEach(card => {
         const cardButton = card.querySelector('.product-cta');
         const cardSKU = card.querySelector('.product-sku')?.textContent.trim();
-        
+
         if (cardSKU === productSKU) {
             const discountLabel = card.querySelector('.discount-label');
             if (discountLabel) {
                 const discountText = discountLabel.textContent;
                 discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
-                
+
                 // Get the actual final price that's already calculated on the card
                 const cardFinalPrice = card.querySelector('.final-price');
                 if (cardFinalPrice) {
@@ -2610,12 +2610,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     // Helper function to format price
     function formatPrice(price) {
-        if (price >= 1000) {
+		const priceInNumber = Number(price)
+        if (priceInNumber >= 1000) {
             // For prices >= 1000, show without decimals if it's a whole number
-            return price % 1 === 0 ? price.toFixed(0) : price.toFixed(2);
+            return priceInNumber % 1 === 0 ? priceInNumber.toFixed(0) : priceInNumber.toFixed(2);
         } else {
             // For prices < 1000, always show 2 decimal places
-            return price.toFixed(2);
+            return priceInNumber.toFixed(2);
         }
     }
 
@@ -2710,7 +2711,7 @@ function addToCart() {
     .then(data => {
         // Show success notification
         showAddToCartSuccess();
-        
+
         // Update popup to show checkout options and related products
         showCheckoutSection();
     })
@@ -2731,7 +2732,7 @@ function showAddToCartSuccess() {
         </div>
     `;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.classList.add('show');
         setTimeout(() => {
@@ -2755,7 +2756,7 @@ function showAddToCartError() {
         </div>
     `;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.classList.add('show');
         setTimeout(() => {
@@ -2773,7 +2774,7 @@ function showCheckoutSection() {
     // Update the popup content to show checkout and related products
     const addToCartButton = document.querySelector('.popup-add-to-cart');
     addToCartButton.style.display = 'none';
-    
+
     // Create checkout section
     const checkoutSection = document.createElement('div');
     checkoutSection.classList.add('popup-checkout-section');
@@ -2787,7 +2788,7 @@ function showCheckoutSection() {
                 Continue Shopping
             </button>
         </div>
-        
+
         <div class="related-products-section">
             <h3>You might also like</h3>
             <div class="related-products-grid">
@@ -2805,7 +2806,7 @@ function showCheckoutSection() {
                         <div class="related-discount-badge">15% OFF</div>
                     </div>
                 </div>
-                
+
                 <div class="related-product-card" onclick="addRelatedProduct('158-0500-PC', 'EZBio PC Bottle 500ml', 8500)">
                     <div class="related-product-image">
                         <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-0500-PC.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -2823,7 +2824,7 @@ function showCheckoutSection() {
             </div>
         </div>
     `;
-    
+
     // Insert after the quantity section
     const quantitySection = document.querySelector('.popup-quantity-section');
     quantitySection.parentNode.insertBefore(checkoutSection, quantitySection.nextSibling);
