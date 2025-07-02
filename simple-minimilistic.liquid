@@ -2445,13 +2445,25 @@ function scrollToProducts() {
 
 // Calculate final prices and smart savings
 function calculatePricesAndSavings() {
-  // Calculate final prices based on discount percentage
+  // Calculate final prices based on discount percentage from the actual discount label
   const finalPrices = document.querySelectorAll('.final-price');
   finalPrices.forEach(finalPrice => {
     const salePrice = parseFloat(finalPrice.dataset.salePrice);
-    const discount = parseFloat(finalPrice.dataset.discount);
-    const finalPriceAmount = salePrice - (salePrice * discount / 100);
-    finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
+    
+    // Get the actual discount percentage from the discount label in the same product card
+    const productCard = finalPrice.closest('.product-card');
+    const discountLabel = productCard.querySelector('.discount-label');
+    const discountText = discountLabel.textContent;
+    const actualDiscountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+    
+    const finalPriceAmount = salePrice - (salePrice * actualDiscountPercentage / 100);
+    
+    // Format price properly
+    if (finalPriceAmount >= 1000) {
+      finalPrice.textContent = '$' + (finalPriceAmount % 1 === 0 ? finalPriceAmount.toFixed(0) : finalPriceAmount.toFixed(2));
+    } else {
+      finalPrice.textContent = '$' + finalPriceAmount.toFixed(2);
+    }
   });
 
   // Calculate smart savings amounts for expanded sections
@@ -2565,19 +2577,31 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     selectedProductPrice = productPrice;
     selectedProductVariantId = productVariantId;
 
-    // Find the product card to get discount information
+    // Find the product card to get discount information by matching the Shop Now button click
     const productCards = document.querySelectorAll('.product-card');
     let discountPercentage = 0;
     let finalPrice = productPrice;
 
+    // Find the correct product card by checking which one contains this specific button
     productCards.forEach(card => {
+        const cardButton = card.querySelector('.product-cta');
         const cardSKU = card.querySelector('.product-sku')?.textContent.trim();
+        
         if (cardSKU === productSKU) {
             const discountLabel = card.querySelector('.discount-label');
             if (discountLabel) {
                 const discountText = discountLabel.textContent;
                 discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
-                finalPrice = productPrice - (productPrice * discountPercentage / 100);
+                
+                // Get the actual final price that's already calculated on the card
+                const cardFinalPrice = card.querySelector('.final-price');
+                if (cardFinalPrice) {
+                    const finalPriceText = cardFinalPrice.textContent.replace('$', '');
+                    finalPrice = parseFloat(finalPriceText) * 100; // Convert back to cents
+                } else {
+                    // Fallback calculation
+                    finalPrice = productPrice - (productPrice * discountPercentage / 100);
+                }
             }
         }
     });
@@ -2603,7 +2627,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     document.getElementById('popupFinalPrice').textContent = '$' + formatPrice(finalPrice / 100); // Convert from cents
     document.getElementById('popupQuantity').value = 1;
 
-    // Show discount badge
+    // Show discount badge with the SAME percentage as the product card
     const discountBadge = document.getElementById('popupDiscountBadge');
     if (discountPercentage > 0) {
         discountBadge.textContent = discountPercentage + '% OFF';
@@ -2612,13 +2636,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         discountBadge.style.display = 'none';
     }
 
-    // Calculate smart savings (using the actual price in dollars)
+    // Calculate smart savings using the SAME logic as the product cards
     const priceInDollars = productPrice / 100;
-    const finalPriceInDollars = finalPrice / 100;
-    const regularTotal = priceInDollars * 2;
+    const qty = 2;
+    const regularTotal = priceInDollars * qty;
     const discountedTotal = regularTotal * (1 - discountPercentage / 100);
     const totalSavings = regularTotal - discountedTotal;
-    const perItemSavings = totalSavings / 2;
+    const perItemSavings = totalSavings / qty;
 
     document.getElementById('popupSavingsPreview').textContent = formatPrice(perItemSavings);
     document.getElementById('popupSavingsAmount').textContent = formatPrice(perItemSavings);
