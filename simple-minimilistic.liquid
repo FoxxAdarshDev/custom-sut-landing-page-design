@@ -881,7 +881,7 @@
       {% comment %} <div class="sale-subtitle">
         Celebrate America's independence with our biggest sale of the year!
       </div> {% endcomment %}
-      <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
+      <a href="#products-section" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
 
     <div class="hero-right">
@@ -906,49 +906,14 @@
           </div>
         </div>
       </div>
-
-      <div class="hero-tab-buttons">
-        <button class="hero-tab-button active" onclick="event.preventDefault(); switchTab('bioprocess'); scrollToProducts();">Explore Bioprocess Products</button>
-        <button class="hero-tab-button" onclick="event.preventDefault(); switchTab('laboratory'); scrollToProducts();">Explore Laboratory Products</button>
-      </div>
     </div>
   </div>
 
-  <!-- Sticky Tab Container -->
-  <div class="sticky-tab-container" id="sticky-tabs">
-    <div class="sticky-content">
-      <div class="sticky-tabs">
-        <button class="sticky-tab-button active" onclick="event.preventDefault(); switchTab('bioprocess'); scrollToProducts();" data-tab="bioprocess">Explore Bioprocess Products</button>
-        <button class="sticky-tab-button" onclick="event.preventDefault(); switchTab('laboratory'); scrollToProducts();" data-tab="laboratory">Explore Laboratory Products</button>
-      </div>
-      <div class="sticky-timer">
-        <div class="sticky-timer-label">Sale Ends July 31st</div>
-        <div class="sticky-countdown">
-          <div class="sticky-countdown-unit">
-            <span id="sticky-days">02</span>
-            <label>Days</label>
-          </div>
-          <div class="sticky-countdown-unit">
-            <span id="sticky-hours">06</span>
-            <label>Hrs</label>
-          </div>
-          <div class="sticky-countdown-unit">
-            <span id="sticky-minutes">25</span>
-            <label>Min</label>
-          </div>
-          <div class="sticky-countdown-unit">
-            <span id="sticky-seconds">41</span>
-            <label>Sec</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
-  <div class="tabs-container">
+  <div class="tabs-container" id="products-section">
 
-    <!-- Bioprocess Tab Content -->
-    <div id="bioprocess-tab" class="tab-content active">
+    <!-- Bioprocess Products -->
 
       <!-- PC Rectangular Carboy Collection -->
       {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
@@ -1510,10 +1475,7 @@
       </div>
       {% endif %}
 
-    </div>
-
-    <!-- Laboratory Tab Content -->
-    <div id="laboratory-tab" class="tab-content">
+    <!-- Laboratory Products -->
 
       <!-- EZLabpure Carboy Collection -->
       {% assign ezlabpure_carboy_collection = collections['ezlabpure-20l-round-carboy-lab-us-independence-day-sale-25'] %}
@@ -1796,53 +1758,9 @@
       {% endif %}
 
     </div>
-  </div>
 </div>
 
 <script>
-function switchTab(tabName) {
-  // Disable scroll-based tab switching temporarily
-  window.manualTabSwitch = true;
-
-  // Remove active class from all tab buttons (hero, main, and sticky)
-  const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button, .sticky-tab-button');
-  tabButtons.forEach(button => {
-    button.classList.remove('active');
-  });
-
-  // Show selected tab content and hide others temporarily (only for manual clicks)
-  const tabContents = document.querySelectorAll('.tab-content');
-  tabContents.forEach(content => {
-    content.classList.remove('active');
-    content.style.display = 'none';
-  });
-
-  // Show selected tab content
-  const targetTab = document.getElementById(tabName + '-tab');
-  if (targetTab) {
-    targetTab.classList.add('active');
-    targetTab.style.display = 'block';
-  }
-
-  // Sync all tab buttons based on tab name
-  const allButtons = document.querySelectorAll('.hero-tab-button, .tab-button, .sticky-tab-button');
-  allButtons.forEach(button => {
-    if (button.textContent.toLowerCase().includes(tabName) || 
-        (button.dataset && button.dataset.tab === tabName) ||
-        button.getAttribute('onclick')?.includes(tabName)) {
-      button.classList.add('active');
-    }
-  });
-
-  // Re-enable scroll-based tab switching after a delay
-  setTimeout(() => {
-    window.manualTabSwitch = false;
-    // Reset display to block for scroll-based logic to take over
-    tabContents.forEach(content => {
-      content.style.display = 'block';
-    });
-  }, 1000);
-}
 
 // Countdown Timer
 function updateCountdown() {
@@ -1888,29 +1806,12 @@ function updateCountdown() {
 
 // Scroll to products function
 function scrollToProducts() {
-  const tabsContainer = document.querySelector('.tabs-container');
-  if (tabsContainer) {
-    tabsContainer.scrollIntoView({ 
+  const productsSection = document.getElementById('products-section');
+  if (productsSection) {
+    productsSection.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
     });
-  }
-}
-
-// Sticky tabs functionality
-function handleStickyTabs() {
-  const stickyContainer = document.getElementById('sticky-tabs');
-  const heroSection = document.querySelector('.sale-header');
-
-  if (!stickyContainer || !heroSection) return;
-
-  const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-  if (scrollPosition > heroBottom) {
-    stickyContainer.classList.add('show');
-  } else {
-    stickyContainer.classList.remove('show');
   }
 }
 
@@ -2016,80 +1917,11 @@ function toggleSavings(event, element) {
             }, 100);
         });
 }
-// Scroll-based tab switching and section visibility
-function handleScrollBasedTabSwitching() {
-  // Don't auto-switch if user manually switched tabs recently
-  if (window.manualTabSwitch) return;
 
-  const bioprocessTab = document.getElementById('bioprocess-tab');
-  const laboratoryTab = document.getElementById('laboratory-tab');
 
-  if (!bioprocessTab || !laboratoryTab) return;
-
-  const bioprocessRect = bioprocessTab.getBoundingClientRect();
-  const laboratoryRect = laboratoryTab.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-  const scrollTriggerPoint = windowHeight * 0.3; // Trigger when 30% of section is visible
-
-  // Check if bioprocess section has been scrolled past (top is above viewport)
-  const bioprocessScrolledPast = bioprocessRect.top < windowHeight && bioprocessRect.bottom < 0;
-
-  // Check if laboratory section has been scrolled past (top is above viewport)
-  const laboratoryScrolledPast = laboratoryRect.top < windowHeight && laboratoryRect.bottom < 0;
-
-  // Show bioprocess section if it's in view or has been scrolled past
-  if (bioprocessRect.top <= scrollTriggerPoint || bioprocessScrolledPast) {
-    bioprocessTab.style.display = 'block';
-  }
-
-  // Show laboratory section if it's in view or has been scrolled past
-  if (laboratoryRect.top <= scrollTriggerPoint || laboratoryScrolledPast) {
-    laboratoryTab.style.display = 'block';
-  }
-
-  // Active tab switching based on current viewport
-  if (laboratoryRect.top <= scrollTriggerPoint && laboratoryRect.bottom >= scrollTriggerPoint) {
-    // Switch to laboratory tab
-    switchTabByName('laboratory');
-  } else if (bioprocessRect.top <= scrollTriggerPoint && bioprocessRect.bottom >= scrollTriggerPoint) {
-    // Switch to bioprocess tab
-    switchTabByName('bioprocess');
-  }
-}
-
-// Helper function to switch tabs by name without triggering scroll
-function switchTabByName(tabName) {
-  // Remove active class from all tab buttons
-  const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button, .sticky-tab-button');
-  tabButtons.forEach(button => {
-    button.classList.remove('active');
-  });
-
-  // Add active class to buttons for the specified tab
-  const allButtons = document.querySelectorAll('.hero-tab-button, .tab-button, .sticky-tab-button');
-  allButtons.forEach(button => {
-    if (button.textContent.toLowerCase().includes(tabName) || 
-        (button.dataset && button.dataset.tab === tabName)) {
-      button.classList.add('active');
-    }
-  });
-}
-
-// Start countdown and sticky tabs when page loads
+// Start countdown when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
   calculatePricesAndSavings();
-
-  // Add scroll event listener for sticky tabs
-  window.addEventListener('scroll', handleStickyTabs);
-
-  // Add scroll event listener for tab switching
-  window.addEventListener('scroll', handleScrollBasedTabSwitching);
-
-  // Initial check for sticky tabs
-  handleStickyTabs();
-
-  // Initial check for tab switching
-  handleScrollBasedTabSwitching();
 });
 </script>
