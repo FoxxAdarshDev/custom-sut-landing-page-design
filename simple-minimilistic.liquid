@@ -995,6 +995,7 @@
 }
 
 .popup-product-sku {
+```html
   font-size: 14px;
   color: #86868b;
   margin-bottom: 12px;
@@ -1069,7 +1070,8 @@
 
 .popup-savings-details {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */ /* Change to row */
+  flex-direction: row; /* Change to row */
   gap: 8px;
   margin-top: 12px;
 }
@@ -1083,6 +1085,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
+  flex: 1; /* Equal width distribution */
 }
 
 .popup-savings-option:hover {
@@ -1786,6 +1789,7 @@
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
+```html
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
@@ -2688,30 +2692,31 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         discountBadge.style.display = 'none';
     }
 
-    // Calculate smart savings for different quantities using the SAME logic as product cards
-    const priceInDollars = productPrice / 100;
+  // Calculate smart savings for different quantities using the SAME logic as product cards
+  const priceInDollars = productPrice / 100;
 
-    // Use the same calculation method as in calculatePricesAndSavings function
-    // Calculate for 2+ items - use same logic as cards
-    const qty2 = 2;
-    const regularTotal2 = priceInDollars * qty2;
-    const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
-    const totalSavings2 = regularTotal2 - discountedTotal2;
-    const perItemSavings2 = totalSavings2 / qty2;
+  // Calculate for 2+ items
+  const qty2 = 2;
+  const regularTotal2 = priceInDollars * qty2;
+  const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
+  const totalSavings2 = regularTotal2 - discountedTotal2;
+  const perItemSavings2 = totalSavings2 / qty2;
 
-    // Calculate for 3+ items - use same logic as cards
-    const qty3 = 3;
-    const regularTotal3 = priceInDollars * qty3;
-    const discountedTotal3 = regularTotal3 * (1 - discountPercentage / 100);
-    const totalSavings3 = regularTotal3 - discountedTotal3;
-    const perItemSavings3 = totalSavings3 / qty3;
+  // Calculate for 3+ items - FIXED: Use correct quantity multiplier
+  const qty3 = 3;
+  const bulkDiscount3 = discountPercentage + 5; // Additional 5% bulk discount for 3+ items
+  const regularTotal3 = priceInDollars * qty3;
+  const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3 / 100);
+  const totalSavings3 = regularTotal3 - discountedTotal3;
+  const perItemSavings3 = totalSavings3 / qty3;
 
-    // Calculate for 5+ items - use same logic as cards
-    const qty5 = 5;
-    const regularTotal5 = priceInDollars * qty5;
-    const discountedTotal5 = regularTotal5 * (1 - discountPercentage / 100);
-    const totalSavings5 = regularTotal5 - discountedTotal5;
-    const perItemSavings5 = totalSavings5 / qty5;
+  // Calculate for 5+ items - FIXED: Use correct quantity multiplier
+  const qty5 = 5;
+  const bulkDiscount5 = discountPercentage + 10; // Additional 10% bulk discount for 5+ items
+  const regularTotal5 = priceInDollars * qty5;
+  const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5 / 100);
+  const totalSavings5 = regularTotal5 - discountedTotal5;
+  const perItemSavings5 = totalSavings5 / qty5;
 
     document.getElementById('popupSavingsPreview').textContent = formatPrice(perItemSavings2);
     document.getElementById('popupSavingsAmount2').textContent = formatPrice(perItemSavings2);
@@ -2874,7 +2879,7 @@ function showCheckoutSection() {
     // Create checkout section
     const checkoutSection = document.createElement('div');
     checkoutSection.classList.add('popup-checkout-section');
-    
+
     let relatedProductsHTML = '';
     if (relatedProducts.length > 0) {
         relatedProductsHTML = `
@@ -2930,17 +2935,17 @@ function showCheckoutSection() {
 function getRelatedProducts() {
     const allProductCards = document.querySelectorAll('.product-card');
     const relatedProducts = [];
-    
+
     // Get up to 2 random products that are not the current one
     const availableProducts = Array.from(allProductCards).filter(card => {
         const cardSku = card.querySelector('.product-sku')?.textContent.trim();
         return cardSku && cardSku !== selectedProductSKU;
     });
-    
+
     // Shuffle and take first 2
     const shuffled = availableProducts.sort(() => 0.5 - Math.random());
     const selectedCards = shuffled.slice(0, 2);
-    
+
     selectedCards.forEach(card => {
         const title = card.querySelector('.product-title')?.textContent.trim();
         const sku = card.querySelector('.product-sku')?.textContent.trim();
@@ -2949,13 +2954,13 @@ function getRelatedProducts() {
         const finalPrice = card.querySelector('.final-price')?.textContent.replace('$', '').replace(/,/g, '');
         const discountLabel = card.querySelector('.discount-label')?.textContent;
         const discount = discountLabel ? parseInt(discountLabel.replace(/[^\d]/g, '')) : 0;
-        
+
         // Get product ID and variant ID from the Shop Now button
         const shopButton = card.querySelector('.product-cta');
         const onclickAttr = shopButton?.getAttribute('onclick');
         let productId = null;
         let variantId = null;
-        
+
         if (onclickAttr) {
             const matches = onclickAttr.match(/openAddToCartPopupWithEvent\([^,]+,\s*(\d+),.*?,.*?,.*?,.*?,\s*(\d+)\)/);
             if (matches) {
@@ -2963,7 +2968,7 @@ function getRelatedProducts() {
                 variantId = matches[2];
             }
         }
-        
+
         if (title && sku && image && salePrice && finalPrice && productId && variantId) {
             relatedProducts.push({
                 id: productId,
@@ -2977,14 +2982,14 @@ function getRelatedProducts() {
             });
         }
     });
-    
+
     return relatedProducts;
 }
 
 function openRelatedProduct(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
     // Close current popup
     closeAddToCartPopup();
-    
+
     // Small delay then open new popup
     setTimeout(() => {
         // Create a fake event object
@@ -2992,7 +2997,7 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
             target: document.querySelector(`[onclick*="${productId}"]`),
             stopPropagation: () => {}
         };
-        
+
         openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, fakeEvent);
     }, 300);
 }
