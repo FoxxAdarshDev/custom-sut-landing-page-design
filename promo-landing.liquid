@@ -1534,7 +1534,7 @@
 
         .promo-carousel-container {
             display: flex;
-            gap: 20px;
+            gap: 8px;
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 20px 0;
@@ -1555,7 +1555,7 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 0 10px;
+            margin: 0 4px;
             text-align: center;
             width: 100px;
         }
@@ -1626,77 +1626,7 @@
             border: 1px solid #095ea7;
         }
 
-        /* Collection Titles Row */
-        .promo-collection-titles-row {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            border: 2px solid rgba(9, 94, 167, 0.2);
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
-        }
-
-        .promo-collection-title-card {
-            flex: 0 0 auto;
-            min-width: 85px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #095ea7;
-            border-radius: 12px;
-            padding: 8px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 40, 104, 0.15);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-collection-title-card::before {
-            content: '🇺🇸';
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            font-size: 0.7rem;
-        }
-
-        .promo-collection-title-card:hover {
-            transform: translateY(-2px);
-            border-color: #BF0A30;
-            box-shadow: 0 6px 20px rgba(191, 10, 48, 0.2);
-        }
-
-        .promo-collection-title-text {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #002868;
-            margin-bottom: 4px;
-            line-height: 1.2;
-        }
-
-        .promo-collection-title-items {
-            font-size: 0.65rem;
-            color: #6c757d;
-            margin-bottom: 4px;
-        }
-
-        .promo-collection-title-discount {
-            background: linear-gradient(45deg, #BF0A30, #095ea7);
-            color: white;
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 8px;
-            display: inline-block;
-            animation: promo-title-discount-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes promo-title-discount-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+        
 
         .promo-carousel-dots {
             display: flex;
@@ -1737,7 +1667,7 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .promo-collection-circle-container {
-                margin: 0 5px;
+                margin: 0 2px;
                 width: 80px;
             }
 
@@ -1755,7 +1685,7 @@
             }
 
             .promo-carousel-container {
-                gap: 15px;
+                gap: 5px;
                 padding: 15px 0;
                 justify-content: center;
             }
@@ -2508,73 +2438,6 @@
                             {% endif %}
                         </div>
                         <div class="promo-carousel-dots" id="bioprocess-dots"></div>
-                        
-                        <!-- Collection Titles Row -->
-                        <div class="promo-collection-titles-row">
-                            {% if pc_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">PC Carboy</div>
-                                <div class="promo-collection-title-items">{{ pc_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">20% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if pc_tr_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">PC TR</div>
-                                <div class="promo-collection-title-items">{{ pc_tr_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">15% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezbio_bottles_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZBio Bottles</div>
-                                <div class="promo-collection-title-items">{{ ezbio_bottles_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">12% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezbio_ts_bottles_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZBio TS</div>
-                                <div class="promo-collection-title-items">{{ ezbio_ts_bottles_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">10-12% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if pfa_bottles_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">PFA</div>
-                                <div class="promo-collection-title-items">{{ pfa_bottles_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">40% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if aqg_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">AQG</div>
-                                <div class="promo-collection-title-items">{{ aqg_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">20-50% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if cpc_stream_thru_connectors_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">CPC</div>
-                                <div class="promo-collection-title-items">{{ cpc_stream_thru_connectors_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">50% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezbio_bottle_assembly_pc_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">Assembly</div>
-                                <div class="promo-collection-title-items">{{ ezbio_bottle_assembly_pc_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">12% OFF</div>
-                            </div>
-                            {% endif %}
-                        </div>
                     </div>
 
                     <div class="promo-world-stats" style="margin-bottom: 20px;">
@@ -2662,49 +2525,6 @@
                             {% endif %}
                         </div>
                         <div class="promo-carousel-dots" id="laboratory-dots"></div>
-                        
-                        <!-- Collection Titles Row -->
-                        <div class="promo-collection-titles-row">
-                            {% if ezlabpure_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZLabpure</div>
-                                <div class="promo-collection-title-items">{{ ezlabpure_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">30% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezclear_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZclear</div>
-                                <div class="promo-collection-title-items">{{ ezclear_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">25% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezgrip_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZgrip</div>
-                                <div class="promo-collection-title-items">{{ ezgrip_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">35% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if ezbio_carboy_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">EZBio</div>
-                                <div class="promo-collection-title-items">{{ ezbio_carboy_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">20% OFF</div>
-                            </div>
-                            {% endif %}
-
-                            {% if lab_general_collection.image %}
-                            <div class="promo-collection-title-card">
-                                <div class="promo-collection-title-text">Lab Items</div>
-                                <div class="promo-collection-title-items">{{ lab_general_collection.products.size }} Items</div>
-                                <div class="promo-collection-title-discount">40% OFF</div>
-                            </div>
-                            {% endif %}
-                        </div>
                     </div>
 
                     <div class="promo-world-stats" style="margin-bottom: 20px;">
