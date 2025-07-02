@@ -497,10 +497,8 @@ html
     to { opacity: 1; }
   }
 
-
-
   .product-image {
-    height: 220px;
+    height: 220px; /* Adjusted height */
     background: white;
     display: flex;
     align-items: center;
@@ -522,7 +520,7 @@ html
   .product-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #333;
+    color: #0071ce; /* Updated color */
     margin-bottom: 15px;
     line-height: 1.4;
     min-height: 48px;
@@ -586,6 +584,16 @@ html
     font-size: 0.85rem;
     margin-bottom: 10px;
     font-weight: 500;
+	display: flex;  /* Aligns items in a row */
+    align-items: center; /* Vertically centers items */
+    justify-content: space-between; /* Puts space between items */
+    cursor: pointer;
+  }
+    .copy-icon {
+    width: 16px; /* Adjust size as needed */
+    height: 16px;
+    cursor: pointer;
+	margin-left: 5px;
   }
 
   .final-price {
@@ -598,7 +606,7 @@ html
   .smart-savings {
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 12px;
+    padding: 8px; /* Reduced padding */
     margin: 15px 0;
     border: 1px solid #e9ecef;
   }
@@ -824,6 +832,12 @@ html
       font-size: 1.5rem;
     }
   }
+  .discount-badge {
+    position: absolute;
+    top: 8px; /* Adjust as needed */
+    right: -5px; /* Adjust as needed */
+    z-index: 10;
+}
 </style>
 
 <div class="patriotic-sale-container">
@@ -934,7 +948,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -998,7 +1019,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1062,7 +1090,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1125,7 +1160,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1189,7 +1231,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1253,7 +1302,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1317,7 +1373,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1381,7 +1444,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1450,7 +1520,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1514,7 +1591,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1578,7 +1662,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1642,7 +1733,14 @@ html
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
-                <div class="product-sku">{{ product.variants.first.sku }}</div>
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="m5 15-4-4 4-4"></path>
+                    <path d="M11 4H4a2 2 0 00-2 2v12a2 2 0 002 2h7"></path>
+                  </svg>
+                </div>
               {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
@@ -1841,7 +1939,31 @@ function toggleSavings(event, element) {
   event.stopPropagation();
   element.classList.toggle('expanded');
 }
-
+ function copyToClipboard(text, event) {
+    event.stopPropagation();
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            // Show toast notification
+            const toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.textContent = 'SKU Copied!';
+            document.body.appendChild(toast);
+            // Animate toast
+            setTimeout(() => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300); // Duration of fade-out
+                }, 2000); // Display duration
+            }, 100); // Small delay before fade-in
+        })
+        .catch(err => {
+            console.error('Could not copy text: ', err);
+            alert('Failed to copy SKU. Please try again.'); // Fallback in case clipboard API fails
+        });
+}
 // Start countdown and sticky tabs when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
