@@ -52,7 +52,10 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     margin-bottom: 15px;
-    color: #0071ce;
+    background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: none;
     letter-spacing: 1px;
     line-height: 1.1;
@@ -212,6 +215,110 @@
   .tabs-container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .sticky-tab-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    border-bottom: 3px solid #0071ce;
+  }
+
+  .sticky-tab-container.show {
+    transform: translateY(0);
+  }
+
+  .sticky-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .sticky-tabs {
+    display: flex;
+    gap: 10px;
+  }
+
+  .sticky-tab-button {
+    padding: 10px 25px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .sticky-tab-button.active {
+    background: linear-gradient(45deg, #1E3A8A, #0071ce);
+    color: white;
+    border-color: #0071ce;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 113, 206, 0.3);
+  }
+
+  .sticky-timer {
+    background: white;
+    border: 2px solid #dc3545;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sticky-timer-label {
+    color: #dc3545;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .sticky-countdown {
+    display: flex;
+    gap: 8px;
+  }
+
+  .sticky-countdown-unit {
+    background: white;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    min-width: 35px;
+  }
+
+  .sticky-countdown-unit span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #dc3545;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .sticky-countdown-unit label {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: #dc3545;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .tab-buttons {
@@ -456,6 +563,38 @@
   }
 
   @media (max-width: 768px) {
+    .sticky-content {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sticky-tabs {
+      gap: 5px;
+    }
+
+    .sticky-tab-button {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+
+    .sticky-timer {
+      padding: 8px 12px;
+      gap: 10px;
+    }
+
+    .sticky-countdown {
+      gap: 5px;
+    }
+
+    .sticky-countdown-unit {
+      min-width: 30px;
+      padding: 3px 4px;
+    }
+
+    .sticky-countdown-unit span {
+      font-size: 0.9rem;
+    }
+
     .patriotic-sale-container {
       padding: 20px 10px;
     }
@@ -550,8 +689,7 @@
       <h1>Our Biggest Patriotic Sale of the Year!</h1>
       <div class="discount">UP TO 50% OFF</div>
       <div class="sale-subtitle">
-        Celebrate America's independence with our biggest sale of the year!<br>
-        Premium bioprocess equipment at unbeatable prices.
+        Celebrate America's independence with our biggest sale of the year!
       </div>
       <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
@@ -582,6 +720,37 @@
       <div class="hero-tab-buttons">
         <button class="hero-tab-button active" onclick="switchTab('bioprocess'); scrollToProducts()">Bioprocess</button>
         <button class="hero-tab-button" onclick="switchTab('laboratory'); scrollToProducts()">Laboratory</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Tab Container -->
+  <div class="sticky-tab-container" id="sticky-tabs">
+    <div class="sticky-content">
+      <div class="sticky-tabs">
+        <button class="sticky-tab-button active" onclick="switchTab('bioprocess'); scrollToProducts()" data-tab="bioprocess">Bioprocess</button>
+        <button class="sticky-tab-button" onclick="switchTab('laboratory'); scrollToProducts()" data-tab="laboratory">Laboratory</button>
+      </div>
+      <div class="sticky-timer">
+        <div class="sticky-timer-label">Sale Ends</div>
+        <div class="sticky-countdown">
+          <div class="sticky-countdown-unit">
+            <span id="sticky-days">02</span>
+            <label>Days</label>
+          </div>
+          <div class="sticky-countdown-unit">
+            <span id="sticky-hours">06</span>
+            <label>Hrs</label>
+          </div>
+          <div class="sticky-countdown-unit">
+            <span id="sticky-minutes">25</span>
+            <label>Min</label>
+          </div>
+          <div class="sticky-countdown-unit">
+            <span id="sticky-seconds">41</span>
+            <label>Sec</label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1088,8 +1257,8 @@ function switchTab(tabName) {
     content.classList.remove('active');
   });
 
-  // Remove active class from all tab buttons (both hero and main)
-  const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button');
+  // Remove active class from all tab buttons (hero, main, and sticky)
+  const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button, .sticky-tab-button');
   tabButtons.forEach(button => {
     button.classList.remove('active');
   });
@@ -1097,15 +1266,16 @@ function switchTab(tabName) {
   // Show selected tab content
   document.getElementById(tabName + '-tab').classList.add('active');
 
-  // Add active class to clicked button and corresponding hero button
+  // Add active class to clicked button and sync all tab buttons
   if (event && event.target) {
     event.target.classList.add('active');
   }
 
-  // Sync hero tab buttons
-  const heroButtons = document.querySelectorAll('.hero-tab-button');
-  heroButtons.forEach(button => {
-    if (button.textContent.toLowerCase().includes(tabName)) {
+  // Sync all tab buttons (hero, main, and sticky)
+  const allButtons = document.querySelectorAll('.hero-tab-button, .tab-button, .sticky-tab-button');
+  allButtons.forEach(button => {
+    if (button.textContent.toLowerCase().includes(tabName) || 
+        (button.dataset && button.dataset.tab === tabName)) {
       button.classList.add('active');
     }
   });
@@ -1125,17 +1295,30 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("days").innerHTML = String(days).padStart(2, '0');
-    document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
-    document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
-    document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+    const dayStr = String(days).padStart(2, '0');
+    const hourStr = String(hours).padStart(2, '0');
+    const minuteStr = String(minutes).padStart(2, '0');
+    const secondStr = String(seconds).padStart(2, '0');
+
+    // Update main timer
+    document.getElementById("days").innerHTML = dayStr;
+    document.getElementById("hours").innerHTML = hourStr;
+    document.getElementById("minutes").innerHTML = minuteStr;
+    document.getElementById("seconds").innerHTML = secondStr;
+
+    // Update sticky timer
+    document.getElementById("sticky-days").innerHTML = dayStr;
+    document.getElementById("sticky-hours").innerHTML = hourStr;
+    document.getElementById("sticky-minutes").innerHTML = minuteStr;
+    document.getElementById("sticky-seconds").innerHTML = secondStr;
 
     if (distance < 0) {
       clearInterval(timer);
-      document.getElementById("days").innerHTML = "00";
-      document.getElementById("hours").innerHTML = "00";
-      document.getElementById("minutes").innerHTML = "00";
-      document.getElementById("seconds").innerHTML = "00";
+      // Reset both timers
+      ["days", "hours", "minutes", "seconds", "sticky-days", "sticky-hours", "sticky-minutes", "sticky-seconds"].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.innerHTML = "00";
+      });
     }
   }, 1000);
 }
@@ -1151,8 +1334,31 @@ function scrollToProducts() {
   }
 }
 
-// Start countdown when page loads
+// Sticky tabs functionality
+function handleStickyTabs() {
+  const stickyContainer = document.getElementById('sticky-tabs');
+  const heroSection = document.querySelector('.sale-header');
+  
+  if (!stickyContainer || !heroSection) return;
+
+  const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollPosition > heroBottom) {
+    stickyContainer.classList.add('show');
+  } else {
+    stickyContainer.classList.remove('show');
+  }
+}
+
+// Start countdown and sticky tabs when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
+  
+  // Add scroll event listener for sticky tabs
+  window.addEventListener('scroll', handleStickyTabs);
+  
+  // Initial check for sticky tabs
+  handleStickyTabs();
 });
 </script>
