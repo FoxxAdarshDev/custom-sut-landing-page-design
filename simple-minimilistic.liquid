@@ -142,23 +142,24 @@
 
   .discount-badge {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 8px;
+    right: -5px;
     z-index: 10;
   }
 
   .discount-label {
     background: #0071ce !important;
     color: white !important;
-    padding: 6px 12px;
+    padding: 8px 16px 8px 12px;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-align: center;
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
     border-radius: 0 4px 4px 0;
-    min-width: 50px;
-    display: inline-block;
-    margin-left: 60px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .discount-label::before {
@@ -169,13 +170,26 @@
     bottom: 0;
     background: #dc3545;
     color: white;
-    padding: 6px 10px;
-    font-size: 0.7rem;
+    padding: 8px 10px;
+    font-size: 0.65rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     border-radius: 4px 0 0 4px;
     white-space: nowrap;
+    min-height: 28px;
+    box-sizing: border-box;
+  }
+
+  .discount-label::after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid #a91e2e;
+    border-bottom: 6px solid transparent;
   }
 
   @keyframes glow {
