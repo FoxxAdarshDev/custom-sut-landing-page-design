@@ -1065,7 +1065,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_ts_bottles_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -1078,13 +1078,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">BEST VALUE</span>
+                    <div class="savings-text">More than 3 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1108,7 +1125,7 @@
         </div>
         <div class="products-grid">
           {% for product in pfa_bottles_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">40% OFF</div>
             </div>
@@ -1121,13 +1138,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="40"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">HUGE SAVINGS</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1151,7 +1185,7 @@
         </div>
         <div class="products-grid">
           {% for product in aqg_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">50% OFF</div>
             </div>
@@ -1164,13 +1198,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">BEST DEAL</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1194,7 +1245,7 @@
         </div>
         <div class="products-grid">
           {% for product in cpc_stream_thru_connectors_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">50% OFF</div>
             </div>
@@ -1207,13 +1258,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">BEST DEAL</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1237,7 +1305,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottle_assembly_pc_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -1250,13 +1318,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">BEST VALUE</span>
+                    <div class="savings-text">More than 3 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1285,7 +1370,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezlabpure_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">25% OFF</div>
             </div>
@@ -1298,13 +1383,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="25"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">GREAT VALUE</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1328,7 +1430,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezclear_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1341,13 +1443,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">EXCELLENT DEAL</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1371,7 +1490,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezgrip_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1384,13 +1503,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">EXCELLENT DEAL</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
@@ -1414,7 +1550,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_carboy_collection.products %}
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1427,13 +1563,30 @@
             </div>
             <div class="product-content">
               <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku">{{ product.variants.first.sku }}</div>
+              {% endif %}
               <div class="product-price">
                 {% if product.compare_at_price > product.price %}
                   <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
                 {% endif %}
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <a href="{{ product.url }}" class="product-cta">Shop Now</a>
+              <div class="smart-savings">
+                <div class="smart-savings-header">
+                  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                  Smart Savings
+                </div>
+                <div class="smart-savings-options">
+                  <div class="savings-option most-popular">
+                    <span class="savings-label">EXCELLENT DEAL</span>
+                    <div class="savings-text">More than 2 Items</div>
+                    <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
             </div>
           </div>
           {% endfor %}
