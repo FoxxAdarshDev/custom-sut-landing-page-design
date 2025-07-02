@@ -220,7 +220,7 @@
   .sticky-tab-container {
     position: fixed;
     top: 0;
-    left: 50%;
+    left: 60%;
     transform: translateX(-50%) translateY(-100%);
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
     padding: 15px 20px;
@@ -1338,7 +1338,7 @@ function scrollToProducts() {
 function handleStickyTabs() {
   const stickyContainer = document.getElementById('sticky-tabs');
   const heroSection = document.querySelector('.sale-header');
-  
+
   if (!stickyContainer || !heroSection) return;
 
   const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
@@ -1354,10 +1354,10 @@ function handleStickyTabs() {
 // Start countdown and sticky tabs when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
-  
+
   // Add scroll event listener for sticky tabs
   window.addEventListener('scroll', handleStickyTabs);
-  
+
   // Initial check for sticky tabs
   handleStickyTabs();
 });
