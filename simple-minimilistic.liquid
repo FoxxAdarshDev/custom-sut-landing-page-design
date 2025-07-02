@@ -870,6 +870,91 @@
     right: -5px; /* Adjust as needed */
     z-index: 10;
 }
+
+/* Popup Styles */
+.add-to-cart-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.add-to-cart-popup h2 {
+  color: #0071ce;
+  margin-bottom: 15px;
+}
+
+.add-to-cart-popup .product-image {
+    height: 200px; /* Adjust as needed */
+    border-bottom: none;
+}
+
+.add-to-cart-popup .product-details {
+  margin-bottom: 20px;
+}
+
+.add-to-cart-popup .quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.add-to-cart-popup .quantity-selector label {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.add-to-cart-popup .quantity-selector input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.add-to-cart-popup .add-to-cart-button {
+  background: #0071ce;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-popup .add-to-cart-button:hover {
+  background-color: #005ba6;
+}
+
+.add-to-cart-popup .recommended-products {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.add-to-cart-popup .recommended-products h3 {
+  color: #0071ce;
+  margin-bottom: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
 </style>
 
 <div class="patriotic-sale-container">
@@ -931,7 +1016,7 @@
         </div>
         <div class="products-grid">
           {% for product in pc_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">20% OFF</div>
             </div>
@@ -977,7 +1062,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1001,7 +1086,7 @@
         </div>
         <div class="products-grid">
           {% for product in pc_tr_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">15% OFF</div>
             </div>
@@ -1047,7 +1132,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1071,7 +1156,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottles_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -1117,7 +1202,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1140,7 +1225,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_ts_bottles_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -1186,7 +1271,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1210,7 +1295,7 @@
         </div>
         <div class="products-grid">
           {% for product in pfa_bottles_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">40% OFF</div>
             </div>
@@ -1256,7 +1341,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1280,7 +1365,7 @@
         </div>
         <div class="products-grid">
           {% for product in aqg_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">50% OFF</div>
             </div>
@@ -1326,7 +1411,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1350,7 +1435,7 @@
         </div>
         <div class="products-grid">
           {% for product in cpc_stream_thru_connectors_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">50% OFF</div>
             </div>
@@ -1396,7 +1481,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1420,7 +1505,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottle_assembly_pc_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
             </div>
@@ -1466,7 +1551,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1492,7 +1577,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezlabpure_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">25% OFF</div>
             </div>
@@ -1538,7 +1623,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1562,7 +1647,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezclear_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1608,7 +1693,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1632,7 +1717,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezgrip_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1678,7 +1763,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1702,7 +1787,7 @@
         </div>
         <div class="products-grid">
           {% for product in ezbio_carboy_collection.products %}
-          <div class="product-card" onclick="window.location.href='{{ product.url }}'">
+          <div class="product-card" >
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
             </div>
@@ -1748,7 +1833,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ product.url }}" class="product-cta" onclick="event.stopPropagation();">Shop Now</a>
+              <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopup({{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1758,6 +1843,31 @@
 
     </div>
 </div>
+
+<div id="addToCartPopup" class="add-to-cart-popup" style="display:none;">
+    <div class="product-details">
+        <div class="product-image">
+            <img id="popupProductImage" src="" alt="Product Image">
+        </div>
+        <h2 id="popupProductTitle"></h2>
+        <p>SKU: <span id="popupProductSKU"></span></p>
+        <p>Price: $<span id="popupProductPrice"></span></p>
+    </div>
+
+    <div class="quantity-selector">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="popupQuantity" name="quantity" value="1" min="1">
+    </div>
+
+    <button class="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
+
+    <div class="recommended-products">
+        <h3>Recommended Products</h3>
+        <p>More products coming soon...</p>
+    </div>
+</div>
+
+<div id="overlay" class="overlay" style="display:none;"></div>
 
 <script>
 
@@ -1917,6 +2027,50 @@ function toggleSavings(event, element) {
         });
 }
 
+
+// Add to cart functionality with popup
+let selectedProductId;
+let selectedProductTitle;
+let selectedProductImage;
+let selectedProductSKU;
+let selectedProductPrice;
+let selectedProductVariantId;
+
+
+function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
+    selectedProductId = productId;
+    selectedProductTitle = productTitle;
+    selectedProductImage = productImage;
+    selectedProductSKU = productSKU;
+    selectedProductPrice = productPrice;
+    selectedProductVariantId = productVariantId;
+
+    document.getElementById('popupProductImage').src = productImage;
+    document.getElementById('popupProductTitle').textContent = productTitle;
+    document.getElementById('popupProductSKU').textContent = productSKU;
+    document.getElementById('popupProductPrice').textContent = productPrice;
+    document.getElementById('popupQuantity').value = 1;
+
+    document.getElementById('addToCartPopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closeAddToCartPopup() {
+    document.getElementById('addToCartPopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function addToCart() {
+    const quantity = document.getElementById('popupQuantity').value;
+
+    // Construct the cart URL
+    const cartUrl = `/cart/add?id=${selectedProductVariantId}&quantity=${quantity}`;
+
+    // Redirect to the cart URL
+    window.location.href = cartUrl;
+
+     closeAddToCartPopup();
+}
 
 // Start countdown when page loads
 document.addEventListener('DOMContentLoaded', function() {
