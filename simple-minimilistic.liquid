@@ -151,7 +151,7 @@
   .discount-label {
     background: #0071ce !important;
     color: white !important;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px 8px 25px;
     font-weight: 700;
     font-size: 0.85rem;
     text-align: center;
@@ -163,19 +163,36 @@
     align-items: center;
     justify-content: center;
     border: none;
-    margin-left: 8px;
   }
 
   .discount-label::before {
+    content: 'Discount';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    background: #dc3545;
+    color: white;
+    padding: 8px 8px 8px 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border-radius: 4px 0 0 4px;
+    min-width: 55px;
+    justify-content: center;
+  }
+
+  .discount-label::after {
     content: '';
     position: absolute;
-    left: -8px;
+    left: 35px;
     top: 0;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 8px 100% 0;
-    border-color: transparent #0071ce transparent transparent;
+    border-width: 0 0 100% 8px;
+    border-color: transparent transparent transparent #dc3545;
     height: 100%;
   }
 
