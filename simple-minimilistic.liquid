@@ -114,15 +114,15 @@
 
   .header-countdown {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
   }
 
   .header-countdown-unit {
     background: white;
     border: 2px solid #dc3545;
     border-radius: 8px;
-    padding: 12px 8px;
+    padding: 8px 4px;
     text-align: center;
     transition: transform 0.3s ease;
   }
@@ -134,16 +134,16 @@
 
   .header-countdown-unit span {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 900;
     color: #dc3545;
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     font-family: 'Arial', sans-serif;
   }
 
   .header-countdown-unit label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
     color: #dc3545;
     text-transform: uppercase;
@@ -797,19 +797,19 @@
     }
 
     .header-countdown {
-      gap: 6px;
+      gap: 4px;
     }
 
     .header-countdown-unit {
-      padding: 10px 6px;
+      padding: 6px 4px;
     }
 
     .header-countdown-unit span {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .header-countdown-unit label {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
 
     .hero-tab-buttons {
@@ -887,7 +887,7 @@
 
     <div class="hero-right">
       <div class="header-timer">
-        <div class="header-timer-label">Sale Ends In</div>
+        <div class="header-timer-label">⚡ Sale Ends July 31st ⚡</div>
         <div class="header-countdown">
           <div class="header-countdown-unit">
             <span id="days">02</span>
@@ -923,7 +923,7 @@
         <button class="sticky-tab-button" onclick="event.preventDefault(); switchTab('laboratory'); scrollToProducts();" data-tab="laboratory">Explore Laboratory Products</button>
       </div>
       <div class="sticky-timer">
-        <div class="sticky-timer-label">Sale Ends</div>
+        <div class="sticky-timer-label">Sale Ends July 31st</div>
         <div class="sticky-countdown">
           <div class="sticky-countdown-unit">
             <span id="sticky-days">02</span>
@@ -1858,8 +1858,8 @@ function switchTab(tabName) {
 
 // Countdown Timer
 function updateCountdown() {
-  // Set the date we're counting down to (2 days from now)
-  const countDownDate = new Date().getTime() + (2 * 24 * 60 * 60 * 1000) + (6 * 60 * 60 * 1000) + (25 * 60 * 1000) + (41 * 1000);
+  // Set the date we're counting down to (July 31st, 2024 at 11:59 PM)
+  const countDownDate = new Date('2024-07-31T23:59:59').getTime();
 
   const timer = setInterval(function() {
     const now = new Date().getTime();
