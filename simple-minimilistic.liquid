@@ -1054,55 +1054,93 @@
   line-height: 1.2;
 }
 
-.popup-savings-details {
-  display: none;
-  padding-top: 12px;
-}
-
-.popup-smart-savings.expanded .popup-savings-details {
-  display: block;
-}
-
-.popup-smart-savings.expanded .popup-smart-savings-toggle {
-  transform: rotate(180deg);
+.popup-savings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .popup-savings-option {
   background: #d1ecf1;
   border: 2px solid #bee5eb;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 12px 8px;
   position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
-.popup-savings-option.most-popular::before {
-  content: 'MOST POPULAR';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #28a745;
+.popup-savings-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #0071ce;
+}
+
+.popup-savings-option.selected {
+  background: #0071ce;
+  border-color: #0071ce;
   color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 10px;
-  font-weight: 700;
 }
 
-.popup-savings-text {
+.popup-savings-option.selected .popup-savings-text,
+.popup-savings-option.selected .popup-savings-label {
+  color: white;
+}
+
+.popup-savings-label {
   color: #121212;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.popup-savings-price {
-  color: #495057;
-  font-size: 12px;
+.popup-savings-dotted-line {
+  color: #666;
+  font-size: 10px;
+  margin: 2px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.popup-savings-text {
+  color: #121212;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
 .popup-savings-amount {
+  color: #121212;
+  font-size: 14px;
   font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.popup-savings-badge {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.popup-savings-badge.most-popular {
+  background: #28a745;
+}
+
+.popup-savings-badge.best-value {
+  background: #333;
+}
+
+.popup-savings-badge.most-savings {
+  background: #333;
 }
 
 .popup-quantity-section {
@@ -1424,6 +1462,24 @@
 
   .popup-product-price {
     font-size: 18px;
+  }
+
+  .popup-savings-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .popup-savings-option {
+    padding: 10px 6px;
+  }
+
+  .popup-savings-amount {
+    font-size: 12px;
+  }
+
+  .popup-savings-badge {
+    font-size: 7px;
+    padding: 1px 4px;
   }
 
   .cart-notification {
@@ -2351,19 +2407,34 @@
             <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
         </div>
 
-        <div class="popup-smart-savings" onclick="togglePopupSavings(this)">
+        <div class="popup-smart-savings">
             <div class="popup-smart-savings-header">
                 <div style="display: flex; align-items: center;">
                     <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
                     Smart Savings
                 </div>
-                <span class="popup-smart-savings-toggle">▼</span>
             </div>
-            <div class="popup-savings-preview">Buy 2+ items and save $<span class="popup-savings-preview-amount" id="popupSavingsPreview">0.00</span>/item</div>
-            <div class="popup-savings-details">
-                <div class="popup-savings-option most-popular">
-                    <div class="popup-savings-text">More than 2 Items</div>
-                    <div class="popup-savings-price">and save $<span class="popup-savings-amount" id="popupSavingsAmount">0.00</span>/item</div>
+            <div class="popup-savings-grid">
+                <div class="popup-savings-option" onclick="selectSmartSavings(2)">
+                    <div class="popup-savings-label">More than 2 Items</div>
+                    <div class="popup-savings-dotted-line">.......................</div>
+                    <div class="popup-savings-text">and save</div>
+                    <div class="popup-savings-amount" id="popupSavings2">$106/item</div>
+                    <div class="popup-savings-badge most-popular">MOST POPULAR</div>
+                </div>
+                <div class="popup-savings-option" onclick="selectSmartSavings(3)">
+                    <div class="popup-savings-label">More than 3 Items</div>
+                    <div class="popup-savings-dotted-line">.......................</div>
+                    <div class="popup-savings-text">and save</div>
+                    <div class="popup-savings-amount" id="popupSavings3">$159/item</div>
+                    <div class="popup-savings-badge best-value">BEST VALUE</div>
+                </div>
+                <div class="popup-savings-option" onclick="selectSmartSavings(5)">
+                    <div class="popup-savings-label">More than 5 Items</div>
+                    <div class="popup-savings-dotted-line">.......................</div>
+                    <div class="popup-savings-text">and save</div>
+                    <div class="popup-savings-amount" id="popupSavings5">$265/item</div>
+                    <div class="popup-savings-badge most-savings">MOST SAVINGS</div>
                 </div>
             </div>
         </div>
@@ -2379,7 +2450,7 @@
 
         <button class="popup-add-to-cart" onclick="addToCart()">Add to Cart</button>
 
-        <div class="popup-recommended">
+        <div class="popup-recommended" style="display: none;">
             <h3>You might also like</h3>
             <p>More products coming soon...</p>
         </div>
@@ -2669,23 +2740,61 @@ function closeAddToCartPopup() {
 function increaseQuantity() {
     const quantityInput = document.getElementById('popupQuantity');
     const currentValue = parseInt(quantityInput.value);
-    quantityInput.value = currentValue + 1;
+    const newValue = currentValue + 1;
+    quantityInput.value = newValue;
+    selectedSmartSavingsQuantity = newValue;
+    
+    // Update smart savings selection based on new quantity
+    updateSmartSavingsSelection(newValue);
 }
 
 function decreaseQuantity() {
     const quantityInput = document.getElementById('popupQuantity');
     const currentValue = parseInt(quantityInput.value);
     if (currentValue > 1) {
-        quantityInput.value = currentValue - 1;
+        const newValue = currentValue - 1;
+        quantityInput.value = newValue;
+        selectedSmartSavingsQuantity = newValue;
+        
+        // Update smart savings selection based on new quantity
+        updateSmartSavingsSelection(newValue);
     }
 }
 
-function togglePopupSavings(element) {
-    element.classList.toggle('expanded');
+function updateSmartSavingsSelection(quantity) {
+    // Remove selected class from all options
+    document.querySelectorAll('.popup-savings-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    // Select appropriate smart savings option based on quantity
+    if (quantity >= 5) {
+        document.querySelector('.popup-savings-option:nth-child(3)').classList.add('selected');
+    } else if (quantity >= 3) {
+        document.querySelector('.popup-savings-option:nth-child(2)').classList.add('selected');
+    } else if (quantity >= 2) {
+        document.querySelector('.popup-savings-option:nth-child(1)').classList.add('selected');
+    }
+}
+
+let selectedSmartSavingsQuantity = 1;
+
+function selectSmartSavings(quantity) {
+    // Remove selected class from all options
+    document.querySelectorAll('.popup-savings-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    // Add selected class to clicked option
+    event.target.closest('.popup-savings-option').classList.add('selected');
+    
+    // Update the quantity input
+    document.getElementById('popupQuantity').value = quantity;
+    selectedSmartSavingsQuantity = quantity;
 }
 
 function addToCart() {
-    const quantity = document.getElementById('popupQuantity').value;
+    const quantity = selectedSmartSavingsQuantity || document.getElementById('popupQuantity').value;
 
     // Add to cart via AJAX instead of redirect
     fetch('/cart/add.js', {
@@ -2700,8 +2809,8 @@ function addToCart() {
     })
     .then(response => response.json())
     .then(data => {
-        // Show success notification
-        showAddToCartSuccess();
+        // Show success notification with quantity
+        showAddToCartSuccess(quantity);
 
         // Update popup to show checkout options and related products
         showCheckoutSection();
@@ -2712,14 +2821,14 @@ function addToCart() {
     });
 }
 
-function showAddToCartSuccess() {
-    // Create and show success notification
+function showAddToCartSuccess(quantity = 1) {
+    // Create and show success notification with quantity
     const notification = document.createElement('div');
     notification.classList.add('cart-notification', 'success');
     notification.innerHTML = `
         <div class="notification-content">
             <span class="notification-icon">✓</span>
-            <span class="notification-text">Product added to cart successfully!</span>
+            <span class="notification-text">${quantity} item${quantity > 1 ? 's' : ''} added to cart successfully!</span>
         </div>
     `;
     document.body.appendChild(notification);
@@ -2822,8 +2931,8 @@ function showCheckoutSection() {
 }
 
 function proceedToCheckout() {
-    // Redirect to cart/checkout page
-    window.location.href = '/cart';
+    // Redirect to checkout page
+    window.location.href = '/checkout';
 }
 
 function continueShopping() {
