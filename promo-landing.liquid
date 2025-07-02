@@ -1628,37 +1628,29 @@
             border: 1px solid #095ea7;
         }
 
-        
+
 
         .promo-carousel-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
             margin-top: 15px;
-            min-height: 20px;
         }
 
         .promo-carousel-dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(9, 94, 167, 0.4);
             border: 2px solid #095ea7;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: block;
         }
 
         .promo-carousel-dot.active {
             background: #BF0A30;
             border-color: #BF0A30;
             transform: scale(1.2);
-        }
-
-        .promo-carousel-dot:hover {
-            background: #BF0A30;
-            border-color: #BF0A30;
-            transform: scale(1.1);
         }
 
         /* Auto-rotate animation */
@@ -1677,9 +1669,8 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .promo-collection-circle-container {
-                margin: 0 auto;
+                margin: 0 2px;
                 width: 80px;
-                justify-content: center;
             }
 
             .promo-collection-circle {
@@ -1699,25 +1690,17 @@
                 gap: 5px;
                 padding: 15px 0;
                 justify-content: center;
-                overflow: hidden;
             }
 
-            /* Mobile carousel shows one item centered */
-            .promo-collection-circle-container {
-                width: 100%;
-                max-width: 100px;
-                margin: 0 auto;
+            /* Show only one circle at a time on mobile */
+            .promo-collection-circle-container:not(.active-mobile) {
+                display: none;
             }
 
             /* Legacy circle label for mobile */
             .promo-circle-label {
                 font-size: 0.6rem;
                 bottom: -20px;
-            }
-
-            /* Hide scroll on mobile */
-            .promo-carousel-container::-webkit-scrollbar {
-                display: none;
             }
         }
 
@@ -2368,7 +2351,45 @@
                     <div class="promo-patriotic-star">★</div>
                     <div class="promo-patriotic-star">★</div>
                 </div>
-                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-flag">   <svg width="40" height="40" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="40" fill="#B22234"></rect>
+                    <rect y="3" width="60" height="3" fill="white"></rect>
+                    <rect y="9" width="60" height="3" fill="white"></rect>
+                    <rect y="15" width="60" height="3" fill="white"></rect>
+                    <rect y="21" width="60" height="3" fill="white"></rect>
+                    <rect y="27" width="60" height="3" fill="white"></rect>
+                    <rect y="33" width="60" height="3" fill="white"></rect>
+                    <rect width="24" height="21" fill="#3C3B6E"></rect>
+                    <g fill="white">
+                        <circle cx="4" cy="3" r="0.8"></circle>
+                        <circle cx="8" cy="3" r="0.8"></circle>
+                        <circle cx="12" cy="3" r="0.8"></circle>
+                        <circle cx="16" cy="3" r="0.8"></circle>
+                        <circle cx="20" cy="3" r="0.8"></circle>
+                        <circle cx="6" cy="6" r="0.8"></circle>
+                        <circle cx="10" cy="6" r="0.8"></circle>
+                        <circle cx="14" cy="6" r="0.8"></circle>
+                        <circle cx="18" cy="6" r="0.8"></circle>
+                        <circle cx="4" cy="9" r="0.8"></circle>
+                        <circle cx="8" cy="9" r="0.8"></circle>
+                        <circle cx="12" cy="9" r="0.8"></circle>
+                        <circle cx="16" cy="9" r="0.8"></circle>
+                        <circle cx="20" cy="9" r="0.8"></circle>
+                        <circle cx="6" cy="12" r="0.8"></circle>
+                        <circle cx="10" cy="12" r="0.8"></circle>
+                        <circle cx="14" cy="12" r="0.8"></circle>
+                        <circle cx="18" cy="12" r="0.8"></circle>
+                        <circle cx="4" cy="15" r="0.8"></circle>
+                        <circle cx="8" cy="15" r="0.8"></circle>
+                        <circle cx="12" cy="15" r="0.8"></circle>
+                        <circle cx="16" cy="15" r="0.8"></circle>
+                        <circle cx="20" cy="15" r="0.8"></circle>
+                        <circle cx="6" cy="18" r="0.8"></circle>
+                        <circle cx="10" cy="18" r="0.8"></circle>
+                        <circle cx="14" cy="18" r="0.8"></circle>
+                        <circle cx="18" cy="18" r="0.8"></circle>
+                    </g>
+                </svg></div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
@@ -2486,7 +2507,45 @@
                     <div class="promo-patriotic-star">★</div>
                     <div class="promo-patriotic-star">★</div>
                 </div>
-                <div class="promo-world-flag">🇺🇸</div>
+                <div class="promo-world-flag">   <svg width="40" height="40" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="40" fill="#B22234"></rect>
+                    <rect y="3" width="60" height="3" fill="white"></rect>
+                    <rect y="9" width="60" height="3" fill="white"></rect>
+                    <rect y="15" width="60" height="3" fill="white"></rect>
+                    <rect y="21" width="60" height="3" fill="white"></rect>
+                    <rect y="27" width="60" height="3" fill="white"></rect>
+                    <rect y="33" width="60" height="3" fill="white"></rect>
+                    <rect width="24" height="21" fill="#3C3B6E"></rect>
+                    <g fill="white">
+                        <circle cx="4" cy="3" r="0.8"></circle>
+                        <circle cx="8" cy="3" r="0.8"></circle>
+                        <circle cx="12" cy="3" r="0.8"></circle>
+                        <circle cx="16" cy="3" r="0.8"></circle>
+                        <circle cx="20" cy="3" r="0.8"></circle>
+                        <circle cx="6" cy="6" r="0.8"></circle>
+                        <circle cx="10" cy="6" r="0.8"></circle>
+                        <circle cx="14" cy="6" r="0.8"></circle>
+                        <circle cx="18" cy="6" r="0.8"></circle>
+                        <circle cx="4" cy="9" r="0.8"></circle>
+                        <circle cx="8" cy="9" r="0.8"></circle>
+                        <circle cx="12" cy="9" r="0.8"></circle>
+                        <circle cx="16" cy="9" r="0.8"></circle>
+                        <circle cx="20" cy="9" r="0.8"></circle>
+                        <circle cx="6" cy="12" r="0.8"></circle>
+                        <circle cx="10" cy="12" r="0.8"></circle>
+                        <circle cx="14" cy="12" r="0.8"></circle>
+                        <circle cx="18" cy="12" r="0.8"></circle>
+                        <circle cx="4" cy="15" r="0.8"></circle>
+                        <circle cx="8" cy="15" r="0.8"></circle>
+                        <circle cx="12" cy="15" r="0.8"></circle>
+                        <circle cx="16" cy="15" r="0.8"></circle>
+                        <circle cx="20" cy="15" r="0.8"></circle>
+                        <circle cx="6" cy="18" r="0.8"></circle>
+                        <circle cx="10" cy="18" r="0.8"></circle>
+                        <circle cx="14" cy="18" r="0.8"></circle>
+                        <circle cx="18" cy="18" r="0.8"></circle>
+                    </g>
+                </svg></div>
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🔬</div>
                     <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
@@ -4125,73 +4184,51 @@
             if (!carousel) return;
 
             const container = carousel.querySelector('.promo-carousel-container');
-            const circles = carousel.querySelectorAll('.promo-collection-circle-container');
+            const circles = carousel.querySelectorAll('.promo-collection-circle');
             const dotsContainer = carousel.querySelector('.promo-carousel-dots');
 
             if (circles.length === 0) return;
 
-            // Clear existing dots
-            dotsContainer.innerHTML = '';
-
-            // Always create dots for visual indication
-            const isMobile = window.innerWidth <= 768;
-            const itemsToShow = isMobile ? 1 : Math.min(4, circles.length); // Show 1 on mobile, max 4 on desktop
-            const totalPages = Math.ceil(circles.length / itemsToShow);
-
-            // Always create dots if we have circles
-            if (circles.length > 0) {
-                const dotsToShow = Math.max(totalPages, 1); // At least 1 dot
-                for (let i = 0; i < dotsToShow; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'promo-carousel-dot';
-                    if (i === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => scrollToPage(i));
-                    dotsContainer.appendChild(dot);
-                }
-            }
+            // Create dots
+            circles.forEach((circle, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'promo-carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => scrollToCircle(index));
+                dotsContainer.appendChild(dot);
+            });
 
             let currentIndex = 0;
             let autoRotateInterval;
 
-            function scrollToPage(pageIndex) {
-                const isMobile = window.innerWidth <= 768;
-                const itemsToShow = isMobile ? 1 : Math.min(4, circles.length);
-                const totalPages = Math.ceil(circles.length / itemsToShow);
-                
-                currentIndex = pageIndex;
-                
-                if (isMobile) {
-                    // On mobile, show only one item at a time
-                    circles.forEach((circle, i) => {
-                        circle.style.display = i === pageIndex ? 'flex' : 'none';
-                    });
-                } else {
-                    // On desktop, scroll to show the page
-                    const startIndex = pageIndex * itemsToShow;
-                    const circleWidth = circles[0].offsetWidth + 20; // including gap
-                    container.scrollLeft = startIndex * circleWidth;
-                }
+            function scrollToCircle(index) {
+                currentIndex = index;
+                const circleWidth = circles[0].offsetWidth + 20; // including gap
+                container.scrollLeft = index * circleWidth;
 
                 // Update dots
                 dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === pageIndex);
+                    dot.classList.toggle('active', i === index);
                 });
-            }
 
-            function scrollToCircle(index) {
-                const isMobile = window.innerWidth <= 768;
-                const itemsToShow = isMobile ? 1 : Math.min(4, circles.length);
-                const pageIndex = Math.floor(index / itemsToShow);
-                scrollToPage(pageIndex);
+                // Update mobile active circle
+                if (window.innerWidth <= 768) {
+                    const containers = carousel.querySelectorAll('.promo-collection-circle-container');
+                    if (containers.length > 0) {
+                        containers.forEach((container, i) => {
+                            container.classList.toggle('active-mobile', i === index);
+                        });
+                    } else {
+                        circles.forEach((circle, i) => {
+                            circle.classList.toggle('active-mobile', i === index);
+                        });
+                    }
+                }
             }
 
             function autoRotate() {
-                const isMobile = window.innerWidth <= 768;
-                const itemsToShow = isMobile ? 1 : Math.min(4, circles.length);
-                const totalPages = Math.ceil(circles.length / itemsToShow);
-                
-                currentIndex = (currentIndex + 1) % totalPages;
-                scrollToPage(currentIndex);
+                currentIndex = (currentIndex + 1) % circles.length;
+                scrollToCircle(currentIndex);
             }
 
             function startAutoRotate() {
@@ -4202,36 +4239,62 @@
                 clearInterval(autoRotateInterval);
             }
 
-            // Initialize display based on screen size
-            const isMobile = window.innerWidth <= 768;
-            if (isMobile && circles.length > 1) {
-                // On mobile, hide all except first item
-                circles.forEach((circle, i) => {
-                    circle.style.display = i === 0 ? 'flex' : 'none';
-                });
+            // Initialize first circle as active on mobile
+            if (window.innerWidth <= 768) {
+                const containers = carousel.querySelectorAll('.promo-collection-circle-container');
+                if (containers.length > 0) {
+                    containers[0].classList.add('active-mobile');
+                } else {
+                    circles[0].classList.add('active-mobile');
+                }
             }
 
-            // Start auto-rotation if we have multiple items
-            if (circles.length > 1 && dotsContainer.children.length > 0) {
-                startAutoRotate();
-                
-                // Pause on hover
-                carousel.addEventListener('mouseenter', stopAutoRotate);
-                carousel.addEventListener('mouseleave', startAutoRotate);
-            }
+            // Start auto-rotation
+            startAutoRotate();
+
+            // Pause on hover
+            carousel.addEventListener('mouseenter', stopAutoRotate);
+            carousel.addEventListener('mouseleave', startAutoRotate);
+
+            // Handle manual scroll
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const circleWidth = circles[0].offsetWidth + 20;
+                const newIndex = Math.round(scrollLeft / circleWidth);
+
+                if (newIndex !== currentIndex && newIndex < circles.length) {
+                    currentIndex = newIndex;
+                    dotsContainer.querySelectorAll('.promo-carousel-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
+            });
 
             // Handle window resize
-            const handleResize = () => {
-                const wasMobile = circles[0].style.display === 'none' || circles[0].style.display === '';
-                const nowMobile = window.innerWidth <= 768;
-                
-                if (nowMobile !== wasMobile) {
-                    // Re-initialize carousel for new screen size
-                    initializeCarousel(carouselId);
+            window.addEventListener('resize', () => {
+                const containers = carousel.querySelectorAll('.promo-collection-circle-container');
+                if (window.innerWidth <= 768) {
+                    if (containers.length > 0) {
+                        containers.forEach((container, i) => {
+                            container.classList.toggle('active-mobile', i === currentIndex);
+                        });
+                    } else {
+                        circles.forEach((circle, i) => {
+                            circle.classList.toggle('active-mobile', i === currentIndex);
+                        });
+                    }
+                } else {
+                    if (containers.length > 0) {
+                        containers.forEach(container => {
+                            container.classList.remove('active-mobile');
+                        });
+                    } else {
+                        circles.forEach(circle => {
+                            circle.classList.remove('active-mobile');
+                        });
+                    }
                 }
-            };
-            
-            window.addEventListener('resize', handleResize);
+            });
         }
 
         // Switch between bioprocess and laboratory sticky carousels
