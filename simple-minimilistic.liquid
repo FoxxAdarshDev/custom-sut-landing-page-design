@@ -2584,12 +2584,23 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     selectedProductDiscount = discountPercentage;
 
+    // Helper function to format price
+    function formatPrice(price) {
+        if (price >= 1000) {
+            // For prices >= 1000, show without decimals if it's a whole number
+            return price % 1 === 0 ? price.toFixed(0) : price.toFixed(2);
+        } else {
+            // For prices < 1000, always show 2 decimal places
+            return price.toFixed(2);
+        }
+    }
+
     // Populate popup content
     document.getElementById('popupProductImage').src = productImage;
     document.getElementById('popupProductTitle').textContent = productTitle;
     document.getElementById('popupProductSKU').textContent = productSKU;
-    document.getElementById('popupSalePrice').textContent = productPrice.toFixed(2);
-    document.getElementById('popupFinalPrice').textContent = '$' + finalPrice.toFixed(2);
+    document.getElementById('popupSalePrice').textContent = formatPrice(productPrice / 100); // Convert from cents
+    document.getElementById('popupFinalPrice').textContent = '$' + formatPrice(finalPrice / 100); // Convert from cents
     document.getElementById('popupQuantity').value = 1;
 
     // Show discount badge
@@ -2601,14 +2612,16 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         discountBadge.style.display = 'none';
     }
 
-    // Calculate smart savings
-    const regularTotal = productPrice * 2;
+    // Calculate smart savings (using the actual price in dollars)
+    const priceInDollars = productPrice / 100;
+    const finalPriceInDollars = finalPrice / 100;
+    const regularTotal = priceInDollars * 2;
     const discountedTotal = regularTotal * (1 - discountPercentage / 100);
     const totalSavings = regularTotal - discountedTotal;
     const perItemSavings = totalSavings / 2;
 
-    document.getElementById('popupSavingsPreview').textContent = perItemSavings.toFixed(2);
-    document.getElementById('popupSavingsAmount').textContent = perItemSavings.toFixed(2);
+    document.getElementById('popupSavingsPreview').textContent = formatPrice(perItemSavings);
+    document.getElementById('popupSavingsAmount').textContent = formatPrice(perItemSavings);
 
     // Show overlay first
     const overlay = document.getElementById('overlay');
