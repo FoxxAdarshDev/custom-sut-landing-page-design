@@ -576,8 +576,8 @@
       </div>
 
       <div class="hero-tab-buttons">
-        <button class="hero-tab-button active" onclick="switchTab('bioprocess')">🧬 Bioprocess</button>
-        <button class="hero-tab-button" onclick="switchTab('laboratory')">🔬 Laboratory</button>
+        <button class="hero-tab-button active" onclick="switchTab('bioprocess'); scrollToProducts()">Bioprocess</button>
+        <button class="hero-tab-button" onclick="switchTab('laboratory'); scrollToProducts()">Laboratory</button>
       </div>
     </div>
   </div>
@@ -608,7 +608,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">⚗️</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -648,7 +648,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔄</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -688,7 +688,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -728,7 +728,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">💎</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -768,7 +768,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🏛️</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -808,7 +808,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">💧</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -825,7 +825,7 @@
           {% endfor %}
         </div>
       </div>
-      {% endif %}
+{% endif %}
 
       <!-- CPC Stream Thru Connectors Collection -->
       {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-bioprocess-us-independence-day-sale-25'] %}
@@ -848,7 +848,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔗</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -888,7 +888,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🔧</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -933,7 +933,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -973,7 +973,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🧪</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -1013,7 +1013,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">🫗</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
@@ -1053,7 +1053,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
               {% else %}
-                <div style="color: #6c757d; font-size: 3rem;">⚗️</div>
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
               {% endif %}
             </div>
             <div class="product-content">
