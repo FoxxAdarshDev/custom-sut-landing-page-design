@@ -505,7 +505,7 @@
         .promo-world {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 50%, #e3f2fd 100%);
             border-radius: 35px;
-            padding: 50px 40px;
+            padding: 30px 25px;
             text-align: center;
             box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.8);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -649,8 +649,8 @@
         }
 
         .promo-world-icon {
-            font-size: 5rem;
-            margin-bottom: 25px;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
             animation: promo-icon-float 4s ease-in-out infinite;
             filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
             background: linear-gradient(135deg, #002868, #BF0A30);
@@ -670,26 +670,19 @@
 
         .promo-world-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #002868, #BF0A30, #002868);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 18px;
+            margin-bottom: 10px;
             font-weight: 900;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 2;
         }
 
-        .promo-world-desc {
-            color: #495057;
-            margin-bottom: 35px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            position: relative;
-            z-index: 2;
-        }
+        
 
         .promo-world-stats {
             display: flex;
@@ -1800,7 +1793,7 @@
             }
 
             .promo-world {
-                padding: 30px 20px;
+                padding: 20px 15px;
             }
 
             .promo-section-content {
@@ -2278,10 +2271,9 @@
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🧬</div>
                     <h3 class="promo-world-title">BIOPROCESS REVOLUTION</h3>
-                    <p class="promo-world-desc">8 Categories of Cutting-Edge Equipment</p>
 
                     <!-- Collection Image Carousel -->
-                    <div class="promo-collection-carousel" id="bioprocess-carousel">
+                    <div class="promo-collection-carousel" id="bioprocess-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
                             {% if pc_carboy_collection.image %}
                             <div class="promo-collection-circle" data-collection="pc-carboy" onclick="scrollToCollectionSection('pc-carboy')">
@@ -2342,7 +2334,7 @@
                         <div class="promo-carousel-dots" id="bioprocess-dots"></div>
                     </div>
 
-                    <div class="promo-world-stats">
+                    <div class="promo-world-stats" style="margin-bottom: 20px;">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
                                 {% assign bioprocess_total = pc_carboy_collection.products.size | plus: pc_tr_carboy_collection.products.size | plus: ezbio_bottles_collection.products.size | plus: ezbio_ts_bottles_collection.products.size | plus: pfa_bottles_collection.products.size | plus: aqg_collection.products.size | plus: cpc_stream_thru_connectors_collection.products.size | plus: ezbio_bottle_assembly_pc_collection.products.size %}
@@ -2372,10 +2364,9 @@
                 <div class="promo-world-content">
                     <div class="promo-world-icon">🔬</div>
                     <h3 class="promo-world-title">LABORATORY REVOLUTION</h3>
-                    <p class="promo-world-desc">Premium Laboratory Essentials</p>
 
                     <!-- Laboratory Collection Image Carousel -->
-                    <div class="promo-collection-carousel" id="laboratory-carousel">
+                    <div class="promo-collection-carousel" id="laboratory-carousel" style="margin: 15px 0;">
                         <div class="promo-carousel-container">
                             {% if ezlabpure_carboy_collection.image %}
                             <div class="promo-collection-circle" data-collection="ezlabpure-carboy" onclick="scrollToCollectionSection('ezlabpure-carboy')">
@@ -2415,7 +2406,7 @@
                         <div class="promo-carousel-dots" id="laboratory-dots"></div>
                     </div>
 
-                    <div class="promo-world-stats">
+                    <div class="promo-world-stats" style="margin-bottom: 20px;">
                         <div class="promo-stat">
                             <span class="promo-stat-number">
                                 {% assign lab_total = ezlabpure_carboy_collection.products.size | plus: ezclear_carboy_collection.products.size | plus: ezgrip_carboy_collection.products.size | plus: ezbio_carboy_collection.products.size | plus: lab_general_collection.products.size %}
