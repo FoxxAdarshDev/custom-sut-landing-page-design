@@ -360,7 +360,7 @@
   }
 
   .tab-content {
-    display: block;
+    display: none;
   }
 
   .tab-content.active {
@@ -1815,7 +1815,7 @@
 function switchTab(tabName) {
   // Disable scroll-based tab switching temporarily
   window.manualTabSwitch = true;
-  
+
   // Hide all tab contents
   const tabContents = document.querySelectorAll('.tab-content');
   tabContents.forEach(content => {
@@ -2026,7 +2026,7 @@ function toggleSavings(event, element) {
 function handleScrollBasedTabSwitching() {
   // Don't auto-switch if user manually switched tabs recently
   if (window.manualTabSwitch) return;
-  
+
   const bioprocessTab = document.getElementById('bioprocess-tab');
   const laboratoryTab = document.getElementById('laboratory-tab');
 
