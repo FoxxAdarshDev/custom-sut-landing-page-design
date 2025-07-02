@@ -1068,8 +1068,8 @@
 }
 
 .popup-savings-details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-top: 12px;
 }
@@ -1479,7 +1479,6 @@
   }
 
   .popup-savings-details {
-    grid-template-columns: 1fr;
     gap: 6px;
   }
 
@@ -2689,33 +2688,28 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         discountBadge.style.display = 'none';
     }
 
-    // Calculate smart savings for different quantities
+    // Calculate smart savings for different quantities using the SAME logic as product cards
     const priceInDollars = productPrice / 100;
 
-    // Calculate for 2+ items - additional 5% bulk discount
+    // Use the same calculation method as in calculatePricesAndSavings function
+    // Calculate for 2+ items - use same logic as cards
     const qty2 = 2;
-    const bulkDiscount2 = 5; // 5% additional bulk discount
-    const totalDiscount2 = discountPercentage + bulkDiscount2;
     const regularTotal2 = priceInDollars * qty2;
-    const discountedTotal2 = regularTotal2 * (1 - totalDiscount2 / 100);
+    const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
     const totalSavings2 = regularTotal2 - discountedTotal2;
     const perItemSavings2 = totalSavings2 / qty2;
 
-    // Calculate for 3+ items - additional 8% bulk discount
+    // Calculate for 3+ items - use same logic as cards
     const qty3 = 3;
-    const bulkDiscount3 = 8; // 8% additional bulk discount
-    const totalDiscount3 = discountPercentage + bulkDiscount3;
     const regularTotal3 = priceInDollars * qty3;
-    const discountedTotal3 = regularTotal3 * (1 - totalDiscount3 / 100);
+    const discountedTotal3 = regularTotal3 * (1 - discountPercentage / 100);
     const totalSavings3 = regularTotal3 - discountedTotal3;
     const perItemSavings3 = totalSavings3 / qty3;
 
-    // Calculate for 5+ items - additional 12% bulk discount
+    // Calculate for 5+ items - use same logic as cards
     const qty5 = 5;
-    const bulkDiscount5 = 12; // 12% additional bulk discount
-    const totalDiscount5 = discountPercentage + bulkDiscount5;
     const regularTotal5 = priceInDollars * qty5;
-    const discountedTotal5 = regularTotal5 * (1 - totalDiscount5 / 100);
+    const discountedTotal5 = regularTotal5 * (1 - discountPercentage / 100);
     const totalSavings5 = regularTotal5 - discountedTotal5;
     const perItemSavings5 = totalSavings5 / qty5;
 
@@ -2874,9 +2868,47 @@ function showCheckoutSection() {
     const addToCartButton = document.querySelector('.popup-add-to-cart');
     addToCartButton.style.display = 'none';
 
+    // Get actual products from the page (excluding current product)
+    const relatedProducts = getRelatedProducts();
+
     // Create checkout section
     const checkoutSection = document.createElement('div');
     checkoutSection.classList.add('popup-checkout-section');
+    
+    let relatedProductsHTML = '';
+    if (relatedProducts.length > 0) {
+        relatedProductsHTML = `
+            <div class="related-products-section">
+                <h3>You might also like</h3>
+                <div class="related-products-grid">
+                    ${relatedProducts.map(product => `
+                        <div class="related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
+                            <div class="related-product-image">
+                                <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="related-placeholder" style="display: none;">📦</div>
+                            </div>
+                            <div class="related-product-info">
+                                <h4>${product.title}</h4>
+                                <div class="related-product-price">
+                                    <span class="related-sale-price">$${(product.price / 100).toFixed(2)}</span>
+                                    <span class="related-final-price">$${(product.finalPrice / 100).toFixed(2)}</span>
+                                </div>
+                                <div class="related-discount-badge">${product.discount}% OFF</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        relatedProductsHTML = `
+            <div class="related-products-section">
+                <h3>You might also like</h3>
+                <p>More products available on this page...</p>
+            </div>
+        `;
+    }
+
     checkoutSection.innerHTML = `
         <div class="checkout-buttons">
             <button class="checkout-btn primary" onclick="proceedToCheckout()">
@@ -2887,46 +2919,82 @@ function showCheckoutSection() {
                 Continue Shopping
             </button>
         </div>
-
-        <div class="related-products-section">
-            <h3>You might also like</h3>
-            <div class="related-products-grid">
-                <div class="related-product-card" onclick="addRelatedProduct('158-3121-TR', 'EZBio TR Carboy 20L', 25000)">
-                    <div class="related-product-image">
-                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-3121-TR.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="related-placeholder" style="display: none;">📦</div>
-                    </div>
-                    <div class="related-product-info">
-                        <h4>EZBio TR Carboy 20L</h4>
-                        <div class="related-product-price">
-                            <span class="related-sale-price">$250.00</span>
-                            <span class="related-final-price">$212.50</span>
-                        </div>
-                        <div class="related-discount-badge">15% OFF</div>
-                    </div>
-                </div>
-
-                <div class="related-product-card" onclick="addRelatedProduct('158-0500-PC', 'EZBio PC Bottle 500ml', 8500)">
-                    <div class="related-product-image">
-                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/158-0500-PC.jpg?v=1640000000" alt="Related Product" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="related-placeholder" style="display: none;">🧪</div>
-                    </div>
-                    <div class="related-product-info">
-                        <h4>EZBio PC Bottle 500ml</h4>
-                        <div class="related-product-price">
-                            <span class="related-sale-price">$85.00</span>
-                            <span class="related-final-price">$74.80</span>
-                        </div>
-                        <div class="related-discount-badge">12% OFF</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        ${relatedProductsHTML}
     `;
 
     // Insert after the quantity section
     const quantitySection = document.querySelector('.popup-quantity-section');
     quantitySection.parentNode.insertBefore(checkoutSection, quantitySection.nextSibling);
+}
+
+function getRelatedProducts() {
+    const allProductCards = document.querySelectorAll('.product-card');
+    const relatedProducts = [];
+    
+    // Get up to 2 random products that are not the current one
+    const availableProducts = Array.from(allProductCards).filter(card => {
+        const cardSku = card.querySelector('.product-sku')?.textContent.trim();
+        return cardSku && cardSku !== selectedProductSKU;
+    });
+    
+    // Shuffle and take first 2
+    const shuffled = availableProducts.sort(() => 0.5 - Math.random());
+    const selectedCards = shuffled.slice(0, 2);
+    
+    selectedCards.forEach(card => {
+        const title = card.querySelector('.product-title')?.textContent.trim();
+        const sku = card.querySelector('.product-sku')?.textContent.trim();
+        const image = card.querySelector('.product-image img')?.src;
+        const salePrice = card.querySelector('.sale-price')?.textContent.replace('$', '').replace(/,/g, '');
+        const finalPrice = card.querySelector('.final-price')?.textContent.replace('$', '').replace(/,/g, '');
+        const discountLabel = card.querySelector('.discount-label')?.textContent;
+        const discount = discountLabel ? parseInt(discountLabel.replace(/[^\d]/g, '')) : 0;
+        
+        // Get product ID and variant ID from the Shop Now button
+        const shopButton = card.querySelector('.product-cta');
+        const onclickAttr = shopButton?.getAttribute('onclick');
+        let productId = null;
+        let variantId = null;
+        
+        if (onclickAttr) {
+            const matches = onclickAttr.match(/openAddToCartPopupWithEvent\([^,]+,\s*(\d+),.*?,.*?,.*?,.*?,\s*(\d+)\)/);
+            if (matches) {
+                productId = matches[1];
+                variantId = matches[2];
+            }
+        }
+        
+        if (title && sku && image && salePrice && finalPrice && productId && variantId) {
+            relatedProducts.push({
+                id: productId,
+                title: title,
+                sku: sku,
+                image: image,
+                price: Math.round(parseFloat(salePrice) * 100), // Convert to cents
+                finalPrice: Math.round(parseFloat(finalPrice) * 100), // Convert to cents
+                discount: discount,
+                variantId: variantId
+            });
+        }
+    });
+    
+    return relatedProducts;
+}
+
+function openRelatedProduct(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
+    // Close current popup
+    closeAddToCartPopup();
+    
+    // Small delay then open new popup
+    setTimeout(() => {
+        // Create a fake event object
+        const fakeEvent = {
+            target: document.querySelector(`[onclick*="${productId}"]`),
+            stopPropagation: () => {}
+        };
+        
+        openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, fakeEvent);
+    }, 300);
 }
 
 function proceedToCheckout() {
