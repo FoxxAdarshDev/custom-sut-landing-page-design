@@ -2454,7 +2454,7 @@ function calculatePricesAndSavings() {
   // Calculate final prices based on discount percentage from the actual discount label
   const finalPrices = document.querySelectorAll('.final-price');
   finalPrices.forEach(finalPrice => {
-    const salePrice = parseFloat(finalPrice.dataset.salePrice);
+    const salePrice = parseFloat(finalPrice.dataset.salePrice.replace(/,/g, ''));
 
     // Get the actual discount percentage from the discount label in the same product card
     const productCard = finalPrice.closest('.product-card');
@@ -2471,7 +2471,7 @@ function calculatePricesAndSavings() {
   // Calculate smart savings amounts for expanded sections
   const savingsAmounts = document.querySelectorAll('.savings-amount');
   savingsAmounts.forEach(savingsAmount => {
-    const basePrice = parseFloat(savingsAmount.dataset.basePrice);
+    const basePrice = parseFloat(savingsAmount.dataset.basePrice.replace(/,/g, ''));
     const qty = parseInt(savingsAmount.dataset.qty);
 
     // Find the discount percentage from the product card's discount badge
@@ -2492,7 +2492,7 @@ function calculatePricesAndSavings() {
   // Calculate smart savings preview amounts - must match the savings amounts
   const savingsPreviewAmounts = document.querySelectorAll('.savings-preview-amount');
   savingsPreviewAmounts.forEach(savingsPreviewAmount => {
-    const basePrice = parseFloat(savingsPreviewAmount.dataset.basePrice);
+    const basePrice = parseFloat(savingsPreviewAmount.dataset.basePrice.replace(/,/g, ''));
     const qty = parseInt(savingsPreviewAmount.dataset.qty);
 
     // Find the discount percentage from the product card's discount badge
