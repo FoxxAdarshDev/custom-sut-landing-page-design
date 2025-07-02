@@ -8,14 +8,18 @@
   }
 
   .sale-header {
-    text-align: center;
-    margin-bottom: 50px;
-    padding: 40px 20px;
+    margin-bottom: 30px;
+    padding: 30px 20px;
     background: linear-gradient(135deg, #1E3A8A 0%, #0071ce 50%, #1E3A8A 100%);
     border-radius: 20px;
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 400px;
   }
 
   .independence-badge {
@@ -31,53 +35,64 @@
     letter-spacing: 1px;
   }
 
+  .hero-left {
+    flex: 1;
+    text-align: left;
+    max-width: 500px;
+  }
+
+  .hero-right {
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .sale-header h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     line-height: 1.1;
   }
 
   .sale-header .discount {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 900;
     color: #FFC72C;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     letter-spacing: 1px;
   }
 
   .sale-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     color: rgba(255, 255, 255, 0.9);
     font-weight: 400;
-    line-height: 1.5;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
+    line-height: 1.4;
+    margin-bottom: 25px;
   }
 
   .header-timer {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid #FFC72C;
-    border-radius: 15px;
-    padding: 25px 20px;
-    margin: 30px auto 40px auto;
-    max-width: 500px;
+    border-radius: 12px;
+    padding: 20px 15px;
     backdrop-filter: blur(10px);
+    width: 100%;
   }
 
   .header-timer-label {
     color: #FFC72C;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     letter-spacing: 1px;
   }
 
@@ -85,23 +100,21 @@
   .header-timer-label::after {
     content: '⚡';
     color: #FFC72C;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     animation: flash 1.5s infinite;
   }
 
   .header-countdown {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
 
   .header-countdown-unit {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    padding: 15px 20px;
-    min-width: 70px;
+    border-radius: 8px;
+    padding: 12px 8px;
     text-align: center;
     transition: transform 0.3s ease;
   }
@@ -112,31 +125,70 @@
 
   .header-countdown-unit span {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: #FFC72C;
     line-height: 1;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .header-countdown-unit label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
+  .hero-tab-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero-tab-button {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .hero-tab-button.active {
+    background: rgba(255, 199, 44, 0.2);
+    border-color: #FFC72C;
+    color: #FFC72C;
+    transform: translateX(5px);
+  }
+
+  .hero-tab-button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(3px);
+  }
+
   .shop-now-cta {
     background: linear-gradient(45deg, #FFC72C, #ff6b35);
     color: #1E3A8A;
-    padding: 15px 40px;
+    padding: 12px 30px;
     border: none;
-    border-radius: 30px;
+    border-radius: 25px;
     font-weight: 900;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -405,34 +457,59 @@
     }
 
     .sale-header {
-      padding: 30px 15px;
+      padding: 25px 15px;
+      flex-direction: column;
+      text-align: center;
+      min-height: auto;
+      gap: 25px;
+    }
+
+    .hero-left {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .hero-right {
+      flex: none;
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
     }
 
     .header-timer {
-      margin: 25px auto 30px auto;
-      padding: 20px 15px;
+      padding: 18px 15px;
     }
 
     .header-countdown {
-      gap: 8px;
+      gap: 6px;
     }
 
     .header-countdown-unit {
-      min-width: 60px;
-      padding: 12px 15px;
+      padding: 10px 6px;
     }
 
     .header-countdown-unit span {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
 
     .header-countdown-unit label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
+    }
+
+    .hero-tab-buttons {
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    .hero-tab-button {
+      padding: 12px 15px;
+      font-size: 0.9rem;
     }
 
     .shop-now-cta {
-      padding: 12px 30px;
-      font-size: 1rem;
+      padding: 12px 25px;
+      font-size: 0.9rem;
+      margin-top: 15px;
     }
 
     .tab-buttons {
@@ -464,44 +541,48 @@
 
 <div class="patriotic-sale-container">
   <div class="sale-header">
-    <div class="independence-badge">US Independence Day Special</div>
-    <h1>Our Biggest Patriotic Sale of the Year!</h1>
-    <div class="discount">UP TO 50% OFF</div>
-    <div class="sale-subtitle">
-      Celebrate America's independence with our biggest sale of the year!<br>
-      Premium bioprocess equipment at unbeatable prices.
-    </div>
-    
-    <div class="header-timer">
-      <div class="header-timer-label">Sale Ends In</div>
-      <div class="header-countdown">
-        <div class="header-countdown-unit">
-          <span id="days">02</span>
-          <label>Days</label>
-        </div>
-        <div class="header-countdown-unit">
-          <span id="hours">06</span>
-          <label>Hours</label>
-        </div>
-        <div class="header-countdown-unit">
-          <span id="minutes">25</span>
-          <label>Mins</label>
-        </div>
-        <div class="header-countdown-unit">
-          <span id="seconds">41</span>
-          <label>Secs</label>
-        </div>
+    <div class="hero-left">
+      <div class="independence-badge">US Independence Day Special</div>
+      <h1>Our Biggest Patriotic Sale of the Year!</h1>
+      <div class="discount">UP TO 50% OFF</div>
+      <div class="sale-subtitle">
+        Celebrate America's independence with our biggest sale of the year!<br>
+        Premium bioprocess equipment at unbeatable prices.
       </div>
+      <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
 
-    <a href="#bioprocess-tab" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
+    <div class="hero-right">
+      <div class="header-timer">
+        <div class="header-timer-label">Sale Ends In</div>
+        <div class="header-countdown">
+          <div class="header-countdown-unit">
+            <span id="days">02</span>
+            <label>Days</label>
+          </div>
+          <div class="header-countdown-unit">
+            <span id="hours">06</span>
+            <label>Hours</label>
+          </div>
+          <div class="header-countdown-unit">
+            <span id="minutes">25</span>
+            <label>Mins</label>
+          </div>
+          <div class="header-countdown-unit">
+            <span id="seconds">41</span>
+            <label>Secs</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-tab-buttons">
+        <button class="hero-tab-button active" onclick="switchTab('bioprocess')">🧬 Bioprocess</button>
+        <button class="hero-tab-button" onclick="switchTab('laboratory')">🔬 Laboratory</button>
+      </div>
+    </div>
   </div>
 
   <div class="tabs-container">
-    <div class="tab-buttons">
-      <button class="tab-button active" onclick="switchTab('bioprocess')">🧬 Bioprocess</button>
-      <button class="tab-button" onclick="switchTab('laboratory')">🔬 Laboratory</button>
-    </div>
 
     <!-- Bioprocess Tab Content -->
     <div id="bioprocess-tab" class="tab-content active">
@@ -1003,8 +1084,8 @@ function switchTab(tabName) {
     content.classList.remove('active');
   });
 
-  // Remove active class from all tab buttons
-  const tabButtons = document.querySelectorAll('.tab-button');
+  // Remove active class from all tab buttons (both hero and main)
+  const tabButtons = document.querySelectorAll('.tab-button, .hero-tab-button');
   tabButtons.forEach(button => {
     button.classList.remove('active');
   });
@@ -1012,8 +1093,18 @@ function switchTab(tabName) {
   // Show selected tab content
   document.getElementById(tabName + '-tab').classList.add('active');
 
-  // Add active class to clicked button
-  event.target.classList.add('active');
+  // Add active class to clicked button and corresponding hero button
+  if (event && event.target) {
+    event.target.classList.add('active');
+  }
+  
+  // Sync hero tab buttons
+  const heroButtons = document.querySelectorAll('.hero-tab-button');
+  heroButtons.forEach(button => {
+    if (button.textContent.toLowerCase().includes(tabName)) {
+      button.classList.add('active');
+    }
+  });
 }
 
 // Countdown Timer
