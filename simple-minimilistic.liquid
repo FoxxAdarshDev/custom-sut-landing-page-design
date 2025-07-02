@@ -151,7 +151,7 @@
   .discount-label {
     background: #0071ce !important;
     color: white !important;
-    padding: 8px 16px 8px 20px;
+    padding: 8px 16px 8px 16px;
     font-weight: 700;
     font-size: 0.85rem;
     text-align: center;
@@ -163,44 +163,20 @@
     align-items: center;
     justify-content: center;
     border: none;
+    margin-left: 8px;
   }
 
   .discount-label::before {
     content: '';
     position: absolute;
-    left: -10px;
+    left: -8px;
     top: 0;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 10px 34px 0;
+    border-width: 0 8px 100% 0;
     border-color: transparent #0071ce transparent transparent;
-  }
-
-  .discount-label::after {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 34px 10px 0 0;
-    border-color: #0071ce transparent transparent transparent;
-  }
-
-  /* Add ribbon tail effect */
-  .discount-label:before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border: 17px solid transparent;
-    border-right: 10px solid #0071ce;
-    border-left: none;
+    height: 100%;
   }
 
   @keyframes glow {
