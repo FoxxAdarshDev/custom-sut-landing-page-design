@@ -881,7 +881,7 @@
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 1000;
+  z-index: 10000;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -904,7 +904,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
+  z-index: 10001;
   max-width: 480px;
   width: 90%;
   max-height: 90vh;
@@ -926,6 +926,20 @@
   align-items: center;
   padding: 20px 24px 0 24px;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.popup-discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  background: #dc3545;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .popup-close {
@@ -983,16 +997,112 @@
 .popup-product-sku {
   font-size: 14px;
   color: #86868b;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
 .popup-product-price {
-  font-size: 20px;
-  font-weight: 600;
-  color: #0071ce;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup-original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+}
+
+.popup-sale-price {
+  color: #0071ce;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.popup-final-price {
+  color: #dc3545;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.popup-smart-savings {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.popup-smart-savings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.popup-savings-preview {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.popup-savings-details {
+  display: none;
+  padding-top: 12px;
+}
+
+.popup-smart-savings.expanded .popup-savings-details {
+  display: block;
+}
+
+.popup-smart-savings.expanded .popup-smart-savings-toggle {
+  transform: rotate(180deg);
+}
+
+.popup-savings-option {
+  background: #d1ecf1;
+  border: 2px solid #bee5eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  position: relative;
+}
+
+.popup-savings-option.most-popular::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28a745;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.popup-savings-text {
+  color: #121212;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.popup-savings-price {
+  color: #495057;
+  font-size: 12px;
+}
+
+.popup-savings-amount {
+  font-weight: 700;
 }
 
 .popup-quantity-section {
@@ -2008,6 +2118,7 @@
 <div id="addToCartPopup" class="add-to-cart-popup">
     <div class="popup-header">
         <div></div>
+        <div class="popup-discount-badge" id="popupDiscountBadge"></div>
         <button class="popup-close" onclick="closeAddToCartPopup()">×</button>
     </div>
 
@@ -2018,7 +2129,29 @@
 
         <h2 class="popup-product-title" id="popupProductTitle"></h2>
         <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
-        <div class="popup-product-price">$<span id="popupProductPrice"></span></div>
+        
+        <div class="popup-product-price">
+            <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
+            <span class="popup-sale-price">$<span id="popupSalePrice"></span></span>
+            <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
+        </div>
+
+        <div class="popup-smart-savings" onclick="togglePopupSavings(this)">
+            <div class="popup-smart-savings-header">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
+                    Smart Savings
+                </div>
+                <span class="popup-smart-savings-toggle">▼</span>
+            </div>
+            <div class="popup-savings-preview">Buy 2+ items and save $<span class="popup-savings-preview-amount" id="popupSavingsPreview">0.00</span>/item</div>
+            <div class="popup-savings-details">
+                <div class="popup-savings-option most-popular">
+                    <div class="popup-savings-text">More than 2 Items</div>
+                    <div class="popup-savings-price">and save $<span class="popup-savings-amount" id="popupSavingsAmount">0.00</span>/item</div>
+                </div>
+            </div>
+        </div>
 
         <div class="popup-quantity-section">
             <label class="popup-quantity-label">Quantity</label>
@@ -2206,6 +2339,7 @@ let selectedProductImage;
 let selectedProductSKU;
 let selectedProductPrice;
 let selectedProductVariantId;
+let selectedProductDiscount;
 
 
 function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
@@ -2216,11 +2350,50 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     selectedProductPrice = productPrice;
     selectedProductVariantId = productVariantId;
 
+    // Find the product card to get discount information
+    const productCards = document.querySelectorAll('.product-card');
+    let discountPercentage = 0;
+    let finalPrice = productPrice;
+
+    productCards.forEach(card => {
+        const cardSKU = card.querySelector('.product-sku')?.textContent.trim();
+        if (cardSKU === productSKU) {
+            const discountLabel = card.querySelector('.discount-label');
+            if (discountLabel) {
+                const discountText = discountLabel.textContent;
+                discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+                finalPrice = productPrice - (productPrice * discountPercentage / 100);
+            }
+        }
+    });
+
+    selectedProductDiscount = discountPercentage;
+
+    // Populate popup content
     document.getElementById('popupProductImage').src = productImage;
     document.getElementById('popupProductTitle').textContent = productTitle;
     document.getElementById('popupProductSKU').textContent = productSKU;
-    document.getElementById('popupProductPrice').textContent = productPrice;
+    document.getElementById('popupSalePrice').textContent = productPrice.toFixed(2);
+    document.getElementById('popupFinalPrice').textContent = '$' + finalPrice.toFixed(2);
     document.getElementById('popupQuantity').value = 1;
+
+    // Show discount badge
+    const discountBadge = document.getElementById('popupDiscountBadge');
+    if (discountPercentage > 0) {
+        discountBadge.textContent = discountPercentage + '% OFF';
+        discountBadge.style.display = 'block';
+    } else {
+        discountBadge.style.display = 'none';
+    }
+
+    // Calculate smart savings
+    const regularTotal = productPrice * 2;
+    const discountedTotal = regularTotal * (1 - discountPercentage / 100);
+    const totalSavings = regularTotal - discountedTotal;
+    const perItemSavings = totalSavings / 2;
+
+    document.getElementById('popupSavingsPreview').textContent = perItemSavings.toFixed(2);
+    document.getElementById('popupSavingsAmount').textContent = perItemSavings.toFixed(2);
 
     // Show overlay first
     const overlay = document.getElementById('overlay');
@@ -2263,16 +2436,26 @@ function decreaseQuantity() {
     }
 }
 
+function togglePopupSavings(element) {
+    element.classList.toggle('expanded');
+}
+
 function addToCart() {
     const quantity = document.getElementById('popupQuantity').value;
 
+    // If quantity is 3 or more, use the discounted price
+    let finalQuantity = quantity;
+    if (parseInt(quantity) >= 3) {
+        finalQuantity = quantity; // Add all items at once for bulk discount
+    }
+
     // Construct the cart URL
-    const cartUrl = `/cart/add?id=${selectedProductVariantId}&quantity=${quantity}`;
+    const cartUrl = `/cart/add?id=${selectedProductVariantId}&quantity=${finalQuantity}`;
 
     // Redirect to the cart URL
     window.location.href = cartUrl;
 
-     closeAddToCartPopup();
+    closeAddToCartPopup();
 }
 
 // Start countdown when page loads
