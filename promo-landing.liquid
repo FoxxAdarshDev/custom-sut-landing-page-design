@@ -4611,6 +4611,10 @@
 
         // Enhanced scroll behavior for sticky navigation
         function scrollToCollectionSection(collectionType) {
+            // Set scrolling flag to prevent auto-scroll interference
+            isScrollingToSection = true;
+            lastActiveCollection = collectionType;
+            
             // Clear any existing active states first
             const allCards = document.querySelectorAll('.promo-sticky-card');
             allCards.forEach(card => card.classList.remove('active'));
@@ -4704,6 +4708,11 @@
             setTimeout(() => {
                 targetSection.style.boxShadow = '';
             }, 2000);
+
+            // Reset scroll flag after scroll completes
+            setTimeout(() => {
+                isScrollingToSection = false;
+            }, 1500);
         }
 
         function updateStickyActiveState(activeCollection) {
@@ -4803,7 +4812,14 @@
             }
         }
 
+        // Track the last active collection to prevent infinite loops
+        let lastActiveCollection = '';
+        let isScrollingToSection = false;
+
         function updateActiveBasedOnScroll() {
+            // Don't update if we're currently scrolling to a section
+            if (isScrollingToSection) return;
+
             const bioprocessSections = document.getElementById('bioprocess-sections');
             const laboratorySections = document.getElementById('laboratory-sections');
 
@@ -4851,8 +4867,32 @@
                     else if (badgeText.includes('⚗️ ezbio carboy')) collectionType = 'ezbio-carboy';
                     else if (badgeText.includes('🔬 lab essentials')) collectionType = 'lab-general';
 
-                    if (collectionType) {
+                    if (collectionType && collectionType !== lastActiveCollection) {
+                        lastActiveCollection = collectionType;
                         updateStickyActiveState(collectionType);
+                        
+                        // Add gentle scroll adjustment to ensure section is properly visible
+                        setTimeout(() => {
+                            const sectionRect = activeSection.getBoundingClientRect();
+                            const viewportHeight = window.innerHeight;
+                            
+                            // If section is not optimally positioned, gently adjust
+                            if (sectionRect.top < 50 || sectionRect.top > viewportHeight / 2) {
+                                isScrollingToSection = true;
+                                
+                                const targetPosition = activeSection.getBoundingClientRect().top + window.pageYOffset - 80;
+                                
+                                window.scrollTo({
+                                    top: targetPosition,
+                                    behavior: 'smooth'
+                                });
+                                
+                                // Reset flag after scroll completes
+                                setTimeout(() => {
+                                    isScrollingToSection = false;
+                                }, 1000);
+                            }
+                        }, 100);
                     }
                 }
             }
