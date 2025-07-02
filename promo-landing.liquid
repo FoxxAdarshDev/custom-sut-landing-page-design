@@ -4555,10 +4555,6 @@
             const laboratoryCarousel = document.getElementById('sticky-laboratory-carousel');
             const toggles = document.querySelectorAll('.promo-sticky-toggle');
 
-            // Clear all active states first
-            const allCards = document.querySelectorAll('.promo-sticky-card');
-            allCards.forEach(card => card.classList.remove('active'));
-
             // Update toggle states
             toggles.forEach(toggle => {
                 toggle.classList.remove('active');
@@ -4575,11 +4571,6 @@
                 bioprocessCarousel.scrollLeft = 0;
                 setTimeout(() => {
                     bioprocessCarousel.scrollTo(0, 0);
-                    // Auto-activate first bioprocess card
-                    const firstBioprocessCard = bioprocessCarousel.querySelector('.promo-sticky-card');
-                    if (firstBioprocessCard) {
-                        firstBioprocessCard.classList.add('active');
-                    }
                 }, 50);
             } else {
                 bioprocessCarousel.style.display = 'none';
@@ -4588,11 +4579,6 @@
                 laboratoryCarousel.scrollLeft = 0;
                 setTimeout(() => {
                     laboratoryCarousel.scrollTo(0, 0);
-                    // Auto-activate first laboratory card
-                    const firstLaboratoryCard = laboratoryCarousel.querySelector('.promo-sticky-card');
-                    if (firstLaboratoryCard) {
-                        firstLaboratoryCard.classList.add('active');
-                    }
                 }, 50);
             }
 
