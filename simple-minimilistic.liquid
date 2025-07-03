@@ -554,6 +554,8 @@
     color: #0071ce;
     font-size: 1rem;
     font-weight: 700;
+    text-decoration: line-through; /* Strikethrough */
+    font-size: 0.9rem; /* Reduced font size */
   }
 
   .final-price {
@@ -994,6 +996,7 @@
   color: #0071ce;
   font-size: 18px;
   font-weight: 600;
+  text-decoration: line-through;
 }
 
 .popup-final-price {
@@ -1697,7 +1700,7 @@
                   {{ product.variants.first.sku }}
                   <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
                   </svg>
                 </div>
               {% endif %}
@@ -1732,7 +1735,7 @@
                   {{ product.variants.first.sku }}
                   <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
                   </svg>
                 </div>
               {% endif %}
@@ -2252,8 +2255,12 @@
         <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
 
         <div class="popup-product-price">
+             {% comment %} Add the original price in popup {% endcomment %}
             <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
-            <span class="popup-sale-price">$<span id="popupSalePrice"></span></span>
+            <span class="popup-sale-price">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
+            
+            {% comment %} Add strikethrough to sale price and decrease font size in popup {% endcomment %}
+            
             <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
         </div>
 
@@ -2531,6 +2538,16 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     document.getElementById('popupProductImage').src = productImage;
     document.getElementById('popupProductTitle').textContent = productTitle;
     document.getElementById('popupProductSKU').textContent = productSKU;
+  
+    // Add the original price to the popup
+    const originalPriceElement = document.getElementById('popupOriginalPrice');
+    if (productPrice > 0 && selectedProductDiscount > 0){
+        originalPriceElement.textContent = '$' + formatPrice(productPrice / 100); // original price
+        originalPriceElement.style.display = 'inline';
+    }else {
+        originalPriceElement.style.display = 'none';
+    }
+
     document.getElementById('popupSalePrice').textContent = formatPrice(productPrice / 100); // Convert from cents
     document.getElementById('popupFinalPrice').textContent = '$' + formatPrice(finalPrice / 100); // Convert from cents
     document.getElementById('popupQuantity').value = 1;
