@@ -1,15 +1,13 @@
 <style>
   .homepage-slider { 
     display: block !important; 
-    border: none;
-    background: none;
-    border-radius: 0;
-    box-shadow: none;
+    border: 2px solid transparent; 
+    background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); 
+    background-origin: border-box; 
+    background-clip: content-box, border-box; 
+    border-radius: 12px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
   }
 
   .homepage-slider.slick-initialized {
@@ -165,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Override expo.initSlickSlider with video support
     expo.initSlickSlider = function() {
       console.log('Initializing video slider...');
-      
+
       // Destroy existing slider if present
       if ($('.homepage-slider').hasClass('slick-initialized')) {
         $('.homepage-slider').slick('unslick');
@@ -204,53 +202,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupVideoHandlers() {
       console.log('Setting up video handlers...');
-      
+
       // Add video loading event handlers to all videos
       $('.homepage-slider video').each(function() {
         var video = this;
         var $video = $(video);
         var $container = $video.closest('.video-container');
         var $placeholder = $container.find('.video-loading-placeholder');
-        
+
         // Video loading events
         video.addEventListener('loadstart', function() {
           console.log('Video loading started');
           $placeholder.show();
           $video.css('opacity', '0');
         });
-        
+
         video.addEventListener('loadedmetadata', function() {
           console.log('Video metadata loaded');
         });
-        
+
         video.addEventListener('canplaythrough', function() {
           console.log('Video can play through');
           $placeholder.hide();
           $video.css('opacity', '1');
         });
-        
+
         video.addEventListener('error', function(e) {
           console.log('Video error:', e);
           $placeholder.html('<div style="color: #666; text-align: center; padding: 20px;">Video unavailable</div>');
         });
-        
+
         // Force reload to ensure proper loading state
         video.load();
       });
-      
+
       // Handle slide changes
       $('.homepage-slider').off('beforeChange.videoSlider afterChange.videoSlider');
-      
+
       $('.homepage-slider').on('beforeChange.videoSlider', function(event, slick, currentSlide, nextSlide) {
         console.log('Slide changing from', currentSlide, 'to', nextSlide);
-        
+
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
           window.slideTimer = null;
           console.log('Cleared slide timer');
         }
-        
+
         // Pause and reset current video
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
@@ -262,51 +260,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
       $('.homepage-slider').on('afterChange.videoSlider', function(event, slick, currentSlide) {
         console.log('Slide changed to', currentSlide);
-        
+
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
         var image = currentSlideElement.find('img')[0];
-        
+
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
           window.slideTimer = null;
           console.log('Cleared existing timer');
         }
-        
+
         if (video) {
           console.log('Video slide detected on slide', currentSlide);
-          
+
           var $video = $(video);
           var $container = $video.closest('.video-container');
           var $placeholder = $container.find('.video-loading-placeholder');
-          
+
           // Remove any existing event listeners from ALL videos to prevent duplicates
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
           });
-          
+
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
-          
+
           // Show loading placeholder
           $placeholder.show();
           $video.css('opacity', '0');
-          
+
           // Force reload video source to ensure it plays when returning to slide
           video.load();
-          
+
           // Reset video
           video.currentTime = 0;
-          
+
           // Wait for video to be ready before playing
           var playVideo = function() {
             if (video.readyState >= 2) { // HAVE_CURRENT_DATA
               $placeholder.hide();
               $video.css('opacity', '1');
-              
+
               var playPromise = video.play();
-              
+
               if (playPromise !== undefined) {
                 playPromise.then(function() {
                   console.log('Video started playing on slide', currentSlide);
@@ -332,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
               setTimeout(playVideo, 200);
             }
           };
-          
+
           // Start the play process
           playVideo();
         } else if (image) {
@@ -356,16 +354,16 @@ document.addEventListener('DOMContentLoaded', function() {
       // Video end handler
       function handleVideoEnd(event) {
         console.log('Video ended, advancing to next slide...');
-        
+
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
           window.slideTimer = null;
         }
-        
+
         // Remove event listener from this video to prevent duplicate triggers
         event.target.removeEventListener('ended', handleVideoEnd);
-        
+
         // Small delay to ensure smooth transition
         setTimeout(function() {
           if ($('.homepage-slider').hasClass('slick-initialized')) {
@@ -379,45 +377,45 @@ document.addEventListener('DOMContentLoaded', function() {
         var firstSlide = $('.homepage-slider .slick-active');
         var firstVideo = firstSlide.find('video')[0];
         var firstImage = firstSlide.find('img')[0];
-        
+
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
           window.slideTimer = null;
         }
-        
+
         if (firstVideo) {
           console.log('First slide is video, initializing...');
-          
+
           var $firstVideo = $(firstVideo);
           var $firstContainer = $firstVideo.closest('.video-container');
           var $firstPlaceholder = $firstContainer.find('.video-loading-placeholder');
-          
+
           // Remove any existing event listeners from ALL videos
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
           });
-          
+
           firstVideo.addEventListener('ended', handleVideoEnd);
-          
+
           // Show loading placeholder
           $firstPlaceholder.show();
           $firstVideo.css('opacity', '0');
-          
+
           // Force reload video source
           firstVideo.load();
-          
+
           // Reset video
           firstVideo.currentTime = 0;
-          
+
           // Wait for video to be ready before playing
           var playFirstVideo = function() {
             if (firstVideo.readyState >= 2) { // HAVE_CURRENT_DATA
               $firstPlaceholder.hide();
               $firstVideo.css('opacity', '1');
-              
+
               var playPromise = firstVideo.play();
-              
+
               if (playPromise !== undefined) {
                 playPromise.then(function() {
                   console.log('First video started playing');
@@ -443,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
               setTimeout(playFirstVideo, 200);
             }
           };
-          
+
           // Start the play process
           playFirstVideo();
         } else if (firstImage) {
@@ -498,5 +496,8 @@ document.addEventListener('DOMContentLoaded', function() {
           });
 
       </script>
+
+    <!-- -->
+
 
     <!-- -->
