@@ -115,22 +115,33 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Override the existing expo.initSlickSlider function to handle videos
-  if (typeof expo !== 'undefined') {
-    expo.initSlickSlider = function(){
-      // Check if slider already exists and destroy it
+  // Wait for all dependencies to load
+  function initVideoSlider() {
+    if (typeof $ === 'undefined' || !$.fn.slick || typeof expo === 'undefined') {
+      setTimeout(initVideoSlider, 100);
+      return;
+    }
+
+    // Store reference to original function if it exists
+    var originalInitSlickSlider = expo.initSlickSlider;
+
+    // Override expo.initSlickSlider with video support
+    expo.initSlickSlider = function() {
+      console.log('Initializing video slider...');
+      
+      // Destroy existing slider if present
       if ($('.homepage-slider').hasClass('slick-initialized')) {
         $('.homepage-slider').slick('unslick');
       }
-      
-      // Initialize slider with video support
+
+      // Initialize slider
       $(".homepage-slider").slick({
         dots: true,
         infinite: true,
         speed: 500,
         fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
         cssEase: 'linear',
-        autoplay: false, // Disable autoplay - videos will control timing
+        autoplay: false,
         arrows: true,
         pauseOnHover: false,
         pauseOnFocus: false,
@@ -144,56 +155,81 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
       });
 
-      // Handle video playback in slider
-      $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        // Pause current video and reset to beginning
+      // Setup video event handlers after slider is initialized
+      setupVideoHandlers();
+    };
+
+    function setupVideoHandlers() {
+      console.log('Setting up video handlers...');
+      
+      // Handle slide changes
+      $('.homepage-slider').off('beforeChange.videoSlider afterChange.videoSlider');
+      
+      $('.homepage-slider').on('beforeChange.videoSlider', function(event, slick, currentSlide, nextSlide) {
+        console.log('Slide changing from', currentSlide, 'to', nextSlide);
+        
+        // Pause and reset current video
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
           currentVideo.pause();
           currentVideo.currentTime = 0;
+          console.log('Paused video on slide', currentSlide);
         }
       });
 
-      // Handle video end event to auto-advance slide
-      $('.homepage-slider').on('init', function(event, slick) {
-        // Add event listeners to all videos
-        $(slick.$slides).each(function() {
-          var video = $(this).find('video')[0];
-          if (video) {
-            video.addEventListener('ended', function() {
-              // Auto-advance to next slide when video ends
-              $('.homepage-slider').slick('slickNext');
-            });
-          }
-        });
-
-        // Start first video if present
-        setTimeout(function() {
-          var firstVideo = $('.homepage-slider .slick-active video')[0];
-          if (firstVideo) {
-            firstVideo.currentTime = 0;
-            firstVideo.play();
-          }
-        }, 500);
-      });
-
-      // Handle slide changes - play videos immediately
-      $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
+      $('.homepage-slider').on('afterChange.videoSlider', function(event, slick, currentSlide) {
+        console.log('Slide changed to', currentSlide);
+        
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
         
         if (video) {
+          // Remove any existing event listeners to prevent duplicates
+          video.removeEventListener('ended', handleVideoEnd);
+          
+          // Add new event listener
+          video.addEventListener('ended', handleVideoEnd);
+          
+          // Reset and play video
           video.currentTime = 0;
-          video.play();
+          video.play().then(function() {
+            console.log('Video started playing on slide', currentSlide);
+          }).catch(function(error) {
+            console.log('Video autoplay failed:', error);
+          });
         }
       });
-    };
 
-    // Reinitialize the slider if expo is already loaded
-    if (typeof $ !== 'undefined' && $.fn.slick) {
-      expo.initSlickSlider();
+      // Video end handler
+      function handleVideoEnd() {
+        console.log('Video ended, advancing to next slide...');
+        $('.homepage-slider').slick('slickNext');
+      }
+
+      // Start first video after initialization
+      setTimeout(function() {
+        var firstSlide = $('.homepage-slider .slick-active');
+        var firstVideo = firstSlide.find('video')[0];
+        
+        if (firstVideo) {
+          firstVideo.removeEventListener('ended', handleVideoEnd);
+          firstVideo.addEventListener('ended', handleVideoEnd);
+          firstVideo.currentTime = 0;
+          firstVideo.play().then(function() {
+            console.log('First video started playing');
+          }).catch(function(error) {
+            console.log('First video autoplay failed:', error);
+          });
+        }
+      }, 1000);
     }
+
+    // Initialize the slider
+    expo.initSlickSlider();
   }
+
+  // Start initialization
+  initVideoSlider();
 });
 </script>
 
