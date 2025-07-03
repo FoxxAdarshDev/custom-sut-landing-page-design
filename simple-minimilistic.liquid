@@ -2543,16 +2543,26 @@ function updateCountdown() {
     const secondStr = String(seconds).padStart(2, '0');
 
     // Update main timer
-    document.getElementById("days").innerHTML = dayStr;
-    document.getElementById("hours").innerHTML = hourStr;
-    document.getElementById("minutes").innerHTML = minuteStr;
-    document.getElementById("seconds").innerHTML = secondStr;
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    
+    if (daysEl) daysEl.innerHTML = dayStr;
+    if (hoursEl) hoursEl.innerHTML = hourStr;
+    if (minutesEl) minutesEl.innerHTML = minuteStr;
+    if (secondsEl) secondsEl.innerHTML = secondStr;
 
     // Update sticky timer
-    document.getElementById("sticky-days").innerHTML = dayStr;
-    document.getElementById("sticky-hours").innerHTML = hourStr;
-    document.getElementById("sticky-minutes").innerHTML = minuteStr;
-    document.getElementById("sticky-seconds").innerHTML = secondStr;
+    const stickyDaysEl = document.getElementById("sticky-days");
+    const stickyHoursEl = document.getElementById("sticky-hours");
+    const stickyMinutesEl = document.getElementById("sticky-minutes");
+    const stickySecondsEl = document.getElementById("sticky-seconds");
+    
+    if (stickyDaysEl) stickyDaysEl.innerHTML = dayStr;
+    if (stickyHoursEl) stickyHoursEl.innerHTML = hourStr;
+    if (stickyMinutesEl) stickyMinutesEl.innerHTML = minuteStr;
+    if (stickySecondsEl) stickySecondsEl.innerHTML = secondStr;
 
     if (distance < 0) {
       clearInterval(timer);
@@ -2741,9 +2751,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     }
 
     // Populate popup content
-    document.getElementById('popupProductImage').src = productImage;
-    document.getElementById('popupProductTitle').textContent = productTitle;
-    document.getElementById('popupProductSKU').textContent = productSKU;
+    const popupImageEl = document.getElementById('popupProductImage');
+    const popupTitleEl = document.getElementById('popupProductTitle');
+    const popupSKUEl = document.getElementById('popupProductSKU');
+    
+    if (popupImageEl) popupImageEl.src = productImage;
+    if (popupTitleEl) popupTitleEl.textContent = productTitle;
+    if (popupSKUEl) popupSKUEl.textContent = productSKU;
 
     // Add the original price to the popup
     const originalPriceElement = document.getElementById('popupOriginalPrice');
@@ -2754,9 +2768,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         originalPriceElement.style.display = 'none';
     }
 
-    document.getElementById('popupSalePrice').textContent = formatPrice(productPrice / 100); // Convert from cents
-    document.getElementById('popupFinalPrice').textContent = '$' + formatPrice(finalPrice / 100); // Convert from cents
-    document.getElementById('popupQuantity').value = 1;
+    const popupSalePriceEl = document.getElementById('popupSalePrice');
+    const popupFinalPriceEl = document.getElementById('popupFinalPrice');
+    const popupQuantityEl = document.getElementById('popupQuantity');
+    
+    if (popupSalePriceEl) popupSalePriceEl.textContent = formatPrice(productPrice / 100);
+    if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
+    if (popupQuantityEl) popupQuantityEl.value = 1;
 
     // Show discount badge with the SAME percentage as the product card
     const discountBadge = document.getElementById('popupDiscountBadge');
@@ -2793,10 +2811,15 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
   const totalSavings5 = regularTotal5 - discountedTotal5;
   const perItemSavings5 = totalSavings5 / qty5;
 
-    document.getElementById('popupSavingsPreview').textContent = formatPrice(perItemSavings2);
-    document.getElementById('popupSavingsAmount2').textContent = formatPrice(perItemSavings2);
-    document.getElementById('popupSavingsAmount3').textContent = formatPrice(perItemSavings3);
-    document.getElementById('popupSavingsAmount5').textContent = formatPrice(perItemSavings5);
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    const popupSavingsAmount2El = document.getElementById('popupSavingsAmount2');
+    const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
+    const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
+    
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = formatPrice(perItemSavings3);
+    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = formatPrice(perItemSavings5);
 
     // Reset savings selections
     document.querySelectorAll('.popup-savings-option').forEach(option => {
