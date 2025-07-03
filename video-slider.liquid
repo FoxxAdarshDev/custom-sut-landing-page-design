@@ -49,10 +49,10 @@
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <video 
               class="slide-video" 
-              autoplay 
               muted 
               playsinline
-              style="width: 100%; height: 100%; object-fit: cover;"
+              preload="metadata"
+              style="width: 100%; height: 100%; object-fit: cover; background: transparent;"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
@@ -94,6 +94,11 @@
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
+  background: transparent !important;
+}
+
+.slide-video:loading {
+  background: transparent !important;
 }
 
 .homepage-slider img {
@@ -147,46 +152,73 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle video playback in slider
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        // Pause current video and reset to beginning
-        var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
-        if (currentVideo) {
-          currentVideo.pause();
-          currentVideo.currentTime = 0;
-        }
-      });
-
-      // Handle video end event to auto-advance slide
-      $('.homepage-slider').on('init', function(event, slick) {
-        // Add event listeners to all videos
-        $(slick.$slides).each(function() {
-          var video = $(this).find('video')[0];
-          if (video) {
-            video.addEventListener('ended', function() {
-              // Auto-advance to next slide when video ends
-              $('.homepage-slider').slick('slickNext');
-            });
-          }
+        // Pause all videos and reset them
+        $('.homepage-slider video').each(function() {
+          this.pause();
+          this.currentTime = 0;
         });
-
-        // Start first video if present
-        setTimeout(function() {
-          var firstVideo = $('.homepage-slider .slick-active video')[0];
-          if (firstVideo) {
-            firstVideo.currentTime = 0;
-            firstVideo.play();
-          }
-        }, 500);
       });
 
-      // Handle slide changes - play videos immediately
+      // Handle slide changes and video events
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-        var currentSlideElement = $(slick.$slides[currentSlide]);
+        var currentSlideElement = $('.homepage-slider .slick-active');
         var video = currentSlideElement.find('video')[0];
+        var image = currentSlideElement.find('img')[0];
 
         if (video) {
+          // For video slides
           video.currentTime = 0;
-          video.play();
+          video.load(); // Reload video to prevent white screen
+          video.play().catch(function(error) {
+            console.log('Video play failed:', error);
+          });
+        } else if (image) {
+          // For image slides, auto-advance after 12 seconds
+          setTimeout(function() {
+            $('.homepage-slider').slick('slickNext');
+          }, 12000);
         }
+      });
+
+      // Add video event listeners after slider is initialized
+      $('.homepage-slider').on('init', function(event, slick) {
+        // Wait a bit for slides to be ready
+        setTimeout(function() {
+          // Add ended event listeners to all videos
+          $('.homepage-slider video').each(function() {
+            var video = this;
+            video.addEventListener('ended', function() {
+              $('.homepage-slider').slick('slickNext');
+            });
+            
+            // Prevent white screen by handling load events
+            video.addEventListener('loadstart', function() {
+              video.style.background = 'transparent';
+            });
+            
+            video.addEventListener('loadeddata', function() {
+              video.style.background = 'transparent';
+            });
+          });
+
+          // Start first slide
+          var firstSlide = $('.homepage-slider .slick-active');
+          var firstVideo = firstSlide.find('video')[0];
+          var firstImage = firstSlide.find('img')[0];
+
+          if (firstVideo) {
+            firstVideo.currentTime = 0;
+            firstVideo.load();
+            firstVideo.play().catch(function(error) {
+              console.log('First video play failed:', error);
+            });
+          } else if (firstImage) {
+            // Start timer for first image slide
+            setTimeout(function() {
+              $('.homepage-slider').slick('slickNext');
+            }, 12000);
+          }
+        }, 800);
       });
     };
 
