@@ -1662,9 +1662,15 @@
       </div>
       {% endif %}
 
-      <!-- EZBio® Media bottle (PC) Collection - 12% Off -->
-      {% assign ezbio_bottles_collection = collections['ezbio-media-bottle-pc-12-off-us-independence-day-sale-25', 'ezbio-media-bottle-pc-10-off-us-independence-day-sale-25'] %}
-      {% if ezbio_bottles_collection.products.size > 0 %}
+      <!-- EZBio® Media bottle (PC) Collection - 12% & 10% Off -->
+      {% assign ezbio_bottles_12_collection = collections['ezbio-media-bottle-pc-12-off-us-independence-day-sale-25'] %}
+      {% assign ezbio_bottles_10_collection = collections['ezbio-media-bottle-pc-10-off-us-independence-day-sale-25'] %}
+      {% assign has_products = false %}
+      {% if ezbio_bottles_12_collection.products.size > 0 or ezbio_bottles_10_collection.products.size > 0 %}
+        {% assign has_products = true %}
+      {% endif %}
+      
+      {% if has_products %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
@@ -1672,7 +1678,7 @@
           </div>
         </div>
         <div class="products-grid">
-          {% for product in ezbio_bottles_collection.products %}
+          {% for product in ezbio_bottles_12_collection.products %}
           <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
@@ -1691,7 +1697,7 @@
                   {{ product.variants.first.sku }}
                   <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
                   </svg>
                 </div>
               {% endif %}
@@ -1706,7 +1712,43 @@
             </div>
           </div>
           {% endfor %}
-        </div>      </div>
+          
+          {% for product in ezbio_bottles_10_collection.products %}
+          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
+            <div class="discount-badge">
+              <div class="discount-label">10% OFF</div>
+            </div>
+            <div class="product-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+              {% else %}
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+              {% endif %}
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
+                  </svg>
+                </div>
+              {% endif %}
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="10"></span>
+              </div>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
       {% endif %}
 
       <!-- EZBio® Titanium Square Media Bottles (PETG) Collection - 12% Off -->
