@@ -950,7 +950,7 @@
   }
   
   .popup-left-section {
-    flex: 0 0 240px;
+    flex: 0 0 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1419,6 +1419,108 @@ font-size: 0.9rem;
   gap: 10px;
 }
 
+/* Left Column Related Products */
+.left-related-products-section {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.left-related-products-section h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0071ce;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.left-related-products-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.left-related-product-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.left-related-product-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: #0071ce;
+}
+
+.left-related-product-image {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.left-related-product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.left-related-product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.left-related-product-info h4 {
+  font-size: 10px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.left-related-product-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.left-related-sale-price {
+  font-size: 9px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.left-related-final-price {
+  font-size: 10px;
+  font-weight: 600;
+  color: #dc3545;
+}
+
+.left-related-discount-badge {
+  background: #dc3545;
+  color: white;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 600;
+}
+
 .related-product-card {
   background: #f8f9fa;
   border-radius: 8px;
@@ -1711,6 +1813,10 @@ font-size: 0.9rem;
   .related-product-info h4 {
     font-size: 11px;
     min-height: 22px;
+  }
+
+  .left-related-products-section {
+    display: none !important;
   }
 }
 
@@ -2552,6 +2658,11 @@ font-size: 0.9rem;
             <div class="popup-product-image">
                 <img id="popupProductImage" src="" alt="Product Image">
             </div>
+            <div class="left-related-products-section" id="leftRelatedProducts" style="display: none;">
+                <h3>💡 You might also like</h3>
+                <div class="left-related-products-grid" id="leftRelatedProductsGrid">
+                </div>
+            </div>
         </div>
 
         <div class="popup-right-section">
@@ -2937,6 +3048,9 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         addToCartBtn.style.display = 'block';
     }
 
+    // Show related products in left column on desktop
+    updateLeftColumnRelatedProducts();
+
     // Load current cart info and conditionally show checkout section
     updateCartInfo();
 }
@@ -3011,6 +3125,9 @@ function addToCart() {
     .then(data => {
         // Show success notification
         showAddToCartSuccess();
+
+        // Update header cart count immediately
+        updateHeaderCartCount();
 
         // Check for automatic coupon codes after adding to cart
         setTimeout(() => {
@@ -3142,6 +3259,21 @@ function showAddToCartError() {
 let currentCartCount = 0;
 let currentCartTotal = 0;
 const MINIMUM_ORDER_VALUE = 10000; // $100 in cents
+
+function updateHeaderCartCount() {
+    // Update the header cart count
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+        const headerCartCount = document.querySelector('.cart-count');
+        if (headerCartCount) {
+            headerCartCount.textContent = cart.item_count;
+        }
+    })
+    .catch(error => {
+        console.error('Error updating header cart count:', error);
+    });
+}
 
 function updateCartInfo() {
     // Fetch current cart information
@@ -3313,6 +3445,37 @@ function getRelatedProducts() {
     return relatedProducts;
 }
 
+function updateLeftColumnRelatedProducts() {
+    const leftRelatedSection = document.getElementById('leftRelatedProducts');
+    const leftRelatedGrid = document.getElementById('leftRelatedProductsGrid');
+    
+    if (leftRelatedSection && leftRelatedGrid) {
+        const relatedProducts = getRelatedProducts();
+        
+        if (relatedProducts.length > 0) {
+            leftRelatedGrid.innerHTML = relatedProducts.map(product => `
+                <div class="left-related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
+                    <div class="left-related-product-image">
+                        <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">📦</div>
+                    </div>
+                    <div class="left-related-product-info">
+                        <h4>${product.title}</h4>
+                        <div class="left-related-product-price">
+                            <span class="left-related-sale-price">$${(product.price / 100).toFixed(2)}</span>
+                            <span class="left-related-final-price">$${(product.finalPrice / 100).toFixed(2)}</span>
+                        </div>
+                        <div class="left-related-discount-badge">${product.discount}% OFF</div>
+                    </div>
+                </div>
+            `).join('');
+            leftRelatedSection.style.display = 'block';
+        } else {
+            leftRelatedSection.style.display = 'none';
+        }
+    }
+}
+
 function updateRelatedProducts() {
     // Update the related products section with new recommendations
     const relatedProductsSection = document.querySelector('.related-products-section');
@@ -3481,6 +3644,9 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
 
     // Update related products section with new recommendations
     updateRelatedProducts();
+    
+    // Update left column related products
+    updateLeftColumnRelatedProducts();
 }
 
 function proceedToCheckout() {
