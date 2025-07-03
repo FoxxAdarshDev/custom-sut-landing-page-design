@@ -147,8 +147,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
 
-      // Ensure first video plays when slider loads
-      $('.homepage-slider').on('init', function() {
+      // Handle video end event to auto-advance slide
+      $('.homepage-slider').on('init', function(event, slick) {
+        // Add event listeners to all videos
+        $(slick.$slides).each(function() {
+          var video = $(this).find('video')[0];
+          if (video) {
+            video.addEventListener('ended', function() {
+              // Auto-advance to next slide when video ends
+              $('.homepage-slider').slick('slickNext');
+            });
+          }
+        });
+
+        // Ensure first video plays when slider loads
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
