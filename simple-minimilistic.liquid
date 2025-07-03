@@ -3288,20 +3288,174 @@ function getRelatedProducts() {
     return relatedProducts;
 }
 
+function updateRelatedProducts() {
+    // Update the related products section with new recommendations
+    const relatedProductsSection = document.querySelector('.related-products-section');
+    if (relatedProductsSection) {
+        const relatedProducts = getRelatedProducts();
+        const relatedProductsGrid = relatedProductsSection.querySelector('.related-products-grid');
+        
+        if (relatedProductsGrid && relatedProducts.length > 0) {
+            relatedProductsGrid.innerHTML = relatedProducts.map(product => `
+                <div class="related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
+                    <div class="related-product-image">
+                        <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="related-placeholder" style="display: none;">📦</div>
+                    </div>
+                    <div class="related-product-info">
+                        <h4>${product.title}</h4>
+                        <div class="related-product-price">
+                            <span class="related-sale-price">$${(product.price / 100).toFixed(2)}</span>
+                            <span class="related-final-price">$${(product.finalPrice / 100).toFixed(2)}</span>
+                        </div>
+                        <div class="related-discount-badge">${product.discount}% OFF</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+}
+
 function openRelatedProduct(productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
-    // Close current popup
-    closeAddToCartPopup();
+    // Don't close the popup - just update the content directly
+    // Find the product card to get discount and compare at price information
+    const productCards = document.querySelectorAll('.product-card');
+    let compareAtPrice = 0;
+    let productCard = null;
 
-    // Small delay then open new popup
-    setTimeout(() => {
-        // Create a fake event object
-        const fakeEvent = {
-            target: document.querySelector(`[onclick*="${productId}"]`),
-            stopPropagation: () => {}
-        };
+    // Find the matching product card by SKU
+    for (const card of productCards) {
+        const cardSku = card.querySelector('.product-sku')?.textContent.trim();
+        if (cardSku === productSKU) {
+            productCard = card;
+            // Get compare at price from original price if it exists
+            const originalPriceEl = card.querySelector('.original-price');
+            if (originalPriceEl) {
+                const originalPriceText = originalPriceEl.textContent.replace('$', '').replace(/,/g, '');
+                compareAtPrice = Math.round(parseFloat(originalPriceText) * 100);
+            }
+            break;
+        }
+    }
 
-        openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, fakeEvent);
-    }, 300);
+    // Create a fake event object with the found product card
+    const fakeEvent = {
+        target: productCard || document.querySelector(`[onclick*="${productId}"]`),
+        stopPropagation: () => {}
+    };
+
+    // Update the popup content with new product data
+    selectedProductId = productId;
+    selectedProductTitle = productTitle;
+    selectedProductImage = productImage;
+    selectedProductSKU = productSKU;
+    selectedProductPrice = productPrice;
+    selectedProductVariantId = productVariantId;
+    selectedProductCompareAtPrice = compareAtPrice;
+
+    // Find discount information from the product card
+    let discountPercentage = 0;
+    let finalPrice = productPrice;
+
+    if (productCard) {
+        const discountLabel = productCard.querySelector('.discount-label');
+        if (discountLabel) {
+            const discountText = discountLabel.textContent;
+            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
+
+            // Calculate final price properly
+            if (discountPercentage > 0) {
+                finalPrice = productPrice * (1 - discountPercentage / 100);
+            }
+        }
+    }
+
+    selectedProductDiscount = discountPercentage;
+
+    // Helper function to format price
+    function formatPrice(price) {
+        const priceInNumber = Number(price);
+        return priceInNumber.toFixed(2);
+    }
+
+    // Update popup content immediately
+    const popupImageEl = document.getElementById('popupProductImage');
+    const popupTitleEl = document.getElementById('popupProductTitle');
+    const popupSKUEl = document.getElementById('popupProductSKU');
+    
+    if (popupImageEl) popupImageEl.src = productImage;
+    if (popupTitleEl) popupTitleEl.textContent = productTitle;
+    if (popupSKUEl) popupSKUEl.textContent = productSKU;
+
+    // Update original price in the popup
+    const originalPriceElement = document.getElementById('popupOriginalPrice');
+    if (selectedProductCompareAtPrice > 0){
+        originalPriceElement.textContent = '$' + formatPrice(selectedProductCompareAtPrice / 100);
+        originalPriceElement.style.display = 'inline';
+    } else {
+        originalPriceElement.style.display = 'none';
+    }
+
+    const popupSalePriceEl = document.getElementById('popupSalePrice');
+    const popupFinalPriceEl = document.getElementById('popupFinalPrice');
+    const popupQuantityEl = document.getElementById('popupQuantity');
+    
+    if (popupSalePriceEl) popupSalePriceEl.textContent = formatPrice(productPrice / 100);
+    if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
+    if (popupQuantityEl) popupQuantityEl.value = 1;
+
+    // Show discount badge with the SAME percentage as the product card
+    const discountBadge = document.getElementById('popupDiscountBadge');
+    if (discountPercentage > 0) {
+        discountBadge.textContent = discountPercentage + '% OFF';
+        discountBadge.style.display = 'block';
+    } else {
+        discountBadge.style.display = 'none';
+    }
+
+    // Calculate smart savings for different quantities
+    const priceInDollars = productPrice / 100;
+
+    // Calculate for 2+ items
+    const qty2 = 2;
+    const regularTotal2 = priceInDollars * qty2;
+    const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
+    const totalSavings2 = regularTotal2 - discountedTotal2;
+    const perItemSavings2 = totalSavings2 / qty2;
+
+    // Calculate for 3+ items
+    const qty3 = 3;
+    const bulkDiscount3 = discountPercentage + 5;
+    const regularTotal3 = priceInDollars * qty3;
+    const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3 / 100);
+    const totalSavings3 = regularTotal3 - discountedTotal3;
+    const perItemSavings3 = totalSavings3 / qty3;
+
+    // Calculate for 5+ items
+    const qty5 = 5;
+    const bulkDiscount5 = discountPercentage + 10;
+    const regularTotal5 = priceInDollars * qty5;
+    const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5 / 100);
+    const totalSavings5 = regularTotal5 - discountedTotal5;
+    const perItemSavings5 = totalSavings5 / qty5;
+
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    const popupSavingsAmount2El = document.getElementById('popupSavingsAmount2');
+    const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
+    const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
+    
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = formatPrice(perItemSavings3);
+    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = formatPrice(perItemSavings5);
+
+    // Reset savings selections
+    document.querySelectorAll('.popup-savings-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+
+    // Update related products section with new recommendations
+    updateRelatedProducts();
 }
 
 function proceedToCheckout() {
