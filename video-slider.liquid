@@ -125,13 +125,25 @@ document.addEventListener('DOMContentLoaded', function() {
   let videosReady = 0;
   let totalVideos = document.querySelectorAll('.slide-video').length;
   
-  // Preload all videos
+  // Preload all videos with better loading handling
   document.querySelectorAll('.slide-video').forEach(function(video, index) {
+    // Set up video for better initial loading
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.style.background = 'transparent';
+    
     video.addEventListener('loadeddata', function() {
+      console.log('Video loaded:', video.src);
       videosReady++;
       if (videosReady === totalVideos || totalVideos === 0) {
         initSliderWithVideos();
       }
+    });
+    
+    video.addEventListener('canplay', function() {
+      // Ensure video is ready to play
+      console.log('Video can play:', video.src);
     });
     
     video.addEventListener('error', function() {
@@ -197,18 +209,25 @@ document.addEventListener('DOMContentLoaded', function() {
           var image = currentSlideElement.find('img')[0];
 
           if (video) {
+            console.log('New video slide active:', currentSlide);
             // For video slides - ensure video is ready and play
             setTimeout(function() {
               video.currentTime = 0;
-              video.play().catch(function(error) {
-                console.log('Video play failed:', error);
-                // If video fails, advance to next slide after 5 seconds
+              video.muted = true;
+              
+              // Better video play handling
+              video.play().then(function() {
+                console.log('Video playing on slide:', currentSlide);
+              }).catch(function(error) {
+                console.log('Video play failed on slide:', currentSlide, error);
+                // If video fails, advance to next slide after 3 seconds
                 setTimeout(function() {
                   $('.homepage-slider').slick('slickNext');
-                }, 5000);
+                }, 3000);
               });
-            }, 200);
+            }, 300);
           } else if (image) {
+            console.log('Image slide active:', currentSlide);
             // For image slides, auto-advance after 12 seconds
             setTimeout(function() {
               $('.homepage-slider').slick('slickNext');
@@ -235,27 +254,45 @@ document.addEventListener('DOMContentLoaded', function() {
             });
           });
 
-          // Start first slide after a short delay
+          // Start first slide with improved video handling
           setTimeout(function() {
             var firstSlide = $('.homepage-slider .slick-active');
             var firstVideo = firstSlide.find('video')[0];
             var firstImage = firstSlide.find('img')[0];
 
             if (firstVideo) {
+              console.log('Starting first video');
+              // Ensure video is properly reset and ready
               firstVideo.currentTime = 0;
-              firstVideo.play().catch(function(error) {
-                console.log('First video play failed:', error);
-                setTimeout(function() {
-                  $('.homepage-slider').slick('slickNext');
-                }, 5000);
-              });
+              firstVideo.muted = true;
+              
+              // Try to play video with multiple attempts
+              var playAttempt = function(attempts) {
+                if (attempts > 0) {
+                  firstVideo.play().then(function() {
+                    console.log('First video started successfully');
+                  }).catch(function(error) {
+                    console.log('Video play attempt failed, retrying...', error);
+                    setTimeout(function() {
+                      playAttempt(attempts - 1);
+                    }, 200);
+                  });
+                } else {
+                  console.log('All video play attempts failed, advancing slide');
+                  setTimeout(function() {
+                    $('.homepage-slider').slick('slickNext');
+                  }, 2000);
+                }
+              };
+              
+              playAttempt(3); // Try 3 times
             } else if (firstImage) {
               // Start timer for first image slide
               setTimeout(function() {
                 $('.homepage-slider').slick('slickNext');
               }, 12000);
             }
-          }, 500);
+          }, 800);
         });
       };
 
