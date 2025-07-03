@@ -1,13 +1,15 @@
 <style>
   .homepage-slider { 
     display: block !important; 
-    border: 2px solid transparent; 
-    background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); 
-    background-origin: border-box; 
-    background-clip: content-box, border-box; 
-    border-radius: 12px;
+    border: none;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
     opacity: 0;
     transition: opacity 0.3s ease;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
   .homepage-slider.slick-initialized {
@@ -15,7 +17,7 @@
   }
 
   .homepage-slider img { 
-    border-radius: 12px; 
+    border-radius: 0;
   }
 
   /* Hide slides initially until slider is initialized */
@@ -79,6 +81,8 @@
   align-items: center;
   justify-content: center;
   background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .slide-link {
@@ -95,6 +99,14 @@
   height: 100%;
   object-fit: fill;
   background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.video-container {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 .homepage-slider img {
@@ -185,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
+          window.slideTimer = null;
           console.log('Cleared slide timer');
         }
         
@@ -260,6 +273,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }, 12000); // 12 seconds for images
         }
+      });
+
+      // Handle manual dot clicks - restart timers after user interaction
+      $('.homepage-slider').on('click', '.slick-dots li', function() {
+        console.log('Dot clicked, will restart timers after slide change');
+        // Timer will be restarted in afterChange event
       });
 
       // Video end handler
