@@ -1342,8 +1342,28 @@ font-size: 0.9rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.popup-checkout-section.sticky-active {
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  margin: 20px -24px -24px -24px;
+  padding: 12px 24px 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+/* Make Add to Cart button sticky when cart has items */
+.popup-add-to-cart.sticky-active {
+  position: sticky;
+  bottom: 120px;
+  z-index: 101;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+}
+
 @media (min-width: 768px) {
-  .popup-checkout-section {
+  .popup-checkout-section.sticky-active {
     position: sticky;
     bottom: 0;
     background: rgba(255, 255, 255, 0.95);
@@ -1351,6 +1371,10 @@ font-size: 0.9rem;
     margin: 20px -24px -24px -24px;
     padding: 12px 24px 16px 24px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-add-to-cart.sticky-active {
+    bottom: 140px;
   }
 }
 
@@ -1415,8 +1439,28 @@ font-size: 0.9rem;
 
 .related-products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.related-products-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.related-products-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.related-products-grid::-webkit-scrollbar-thumb {
+  background: #0071ce;
+  border-radius: 2px;
+}
+
+.related-products-grid::-webkit-scrollbar-thumb:hover {
+  background: #005ba6;
 }
 
 /* Left Column Related Products */
@@ -1883,7 +1927,8 @@ font-size: 0.9rem;
   }
 
   .related-products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 300px;
   }
 
   .popup-savings-details {
@@ -1909,6 +1954,14 @@ font-size: 0.9rem;
 
   .validation-btn {
     width: 100%;
+  }
+
+  .popup-add-to-cart.sticky-active {
+    bottom: 100px;
+  }
+
+  .popup-checkout-section.sticky-active {
+    bottom: 0;
   }
 }
 </style>
@@ -3334,14 +3387,23 @@ function updateCartInfo() {
 function updateCheckoutButton() {
     // Create or update checkout section if it doesn't exist
     let checkoutSection = document.querySelector('.popup-checkout-section');
+    const addToCartButton = document.querySelector('.popup-add-to-cart');
 
     if (!checkoutSection) {
         checkoutSection = document.createElement('div');
         checkoutSection.classList.add('popup-checkout-section');
 
         // Insert after the add to cart button
-        const addToCartButton = document.querySelector('.popup-add-to-cart');
         addToCartButton.parentNode.insertBefore(checkoutSection, addToCartButton.nextSibling);
+    }
+
+    // Add sticky behavior when cart has items
+    if (currentCartCount > 0) {
+        checkoutSection.classList.add('sticky-active');
+        addToCartButton.classList.add('sticky-active');
+    } else {
+        checkoutSection.classList.remove('sticky-active');
+        addToCartButton.classList.remove('sticky-active');
     }
 
     // Check if cart meets minimum order value
@@ -3351,7 +3413,7 @@ function updateCheckoutButton() {
     // Get actual products from the page (excluding current product) - only show if cart has items and on mobile
     let relatedProductsHTML = '';
     if (currentCartCount > 0 && window.innerWidth < 768) {
-        const relatedProducts = getRelatedProducts();
+        const relatedProducts = getRelatedProducts(); // Get all available products
 
         if (relatedProducts.length > 0) {
             relatedProductsHTML = `
@@ -3422,19 +3484,19 @@ function updateCheckoutButton() {
     `;
 }
 
-function getRelatedProducts(count = 2) {
+function getRelatedProducts(count = null) {
     const allProductCards = document.querySelectorAll('.product-card');
     const relatedProducts = [];
 
-    // Get up to specified count of random products that are not the current one
+    // Get all available products that are not the current one
     const availableProducts = Array.from(allProductCards).filter(card => {
         const cardSku = card.querySelector('.product-sku')?.textContent.trim();
         return cardSku && cardSku !== selectedProductSKU;
     });
 
-    // Shuffle and take first count
+    // Shuffle and take specified count (or all if count is null)
     const shuffled = availableProducts.sort(() => 0.5 - Math.random());
-    const selectedCards = shuffled.slice(0, count);
+    const selectedCards = count ? shuffled.slice(0, count) : shuffled;
 
     selectedCards.forEach(card => {
         const title = card.querySelector('.product-title')?.textContent.trim();
@@ -3490,7 +3552,7 @@ function updateLeftColumnRelatedProducts() {
             return;
         }
         
-        const relatedProducts = getRelatedProducts(4); // Get at least 4 products
+        const relatedProducts = getRelatedProducts(8); // Get up to 8 products for left column
         
         if (relatedProducts.length > 0) {
             leftRelatedGrid.innerHTML = relatedProducts.map(product => `
@@ -3520,7 +3582,7 @@ function updateRelatedProducts() {
     // Update the related products section with new recommendations
     const relatedProductsSection = document.querySelector('.related-products-section');
     if (relatedProductsSection) {
-        const relatedProducts = getRelatedProducts();
+        const relatedProducts = getRelatedProducts(); // Get all available products
         const relatedProductsGrid = relatedProductsSection.querySelector('.related-products-grid');
         
         if (relatedProductsGrid && relatedProducts.length > 0) {
