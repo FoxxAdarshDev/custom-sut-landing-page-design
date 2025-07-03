@@ -1191,6 +1191,12 @@ font-size: 0.9rem;
   font-weight: 500;
   color: #1d1d1f;
   user-select: none;
+  position: relative;
+}
+
+.popup-quantity-btn::before,
+.popup-quantity-btn::after {
+  content: none;
 }
 
 .popup-quantity-btn:hover {
@@ -1217,12 +1223,8 @@ font-size: 0.9rem;
   outline: none;
 }
 
-/* Ensure only proper quantity controls are shown */
-.popup-quantity-controls .popup-quantity-btn:last-child {
-  display: flex;
-}
-
-.popup-quantity-controls .popup-quantity-btn:first-child {
+/* Ensure proper quantity controls styling */
+.popup-quantity-controls .popup-quantity-btn {
   display: flex;
 }
 
