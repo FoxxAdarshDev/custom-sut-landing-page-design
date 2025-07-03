@@ -680,6 +680,41 @@
     cursor: pointer;
   }
 
+  /* Collection Anchor Links */
+  .collection-anchor {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+  }
+
+  .collection-anchor:hover {
+    color: #005ba6;
+    text-decoration: none;
+  }
+
+  .collection-anchor::after {
+    content: '🔗';
+    opacity: 0;
+    margin-left: 8px;
+    font-size: 0.8em;
+    transition: opacity 0.3s ease;
+  }
+
+  .collection-anchor:hover::after {
+    opacity: 1;
+  }
+
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Offset for fixed headers if any */
+  .collection-section {
+    scroll-margin-top: 20px;
+  }
+
   /* Toast notification styles */
   .toast {
     position: fixed;
@@ -2003,10 +2038,12 @@ font-size: 0.9rem;
       <!-- EZclear® Rectangular Carboy (PC) Collection - 32% Off -->
       {% assign ezclear_carboy_collection = collections['ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25'] %}
       {% if ezclear_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZclear-Rectangular-Carboy-PC">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZclear® Rectangular Carboy (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZclear-Rectangular-Carboy-PC" class="collection-anchor">EZclear® Rectangular Carboy (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2051,10 +2088,12 @@ font-size: 0.9rem;
       <!-- EZBio® Carboy (PC) Collection  - 20% Off -->
       {% assign pc_carboy_collection = collections['ezbio-carboy-pc-20-off-us-independence-day-sale-25'] %}
       {% if pc_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Carboy-PC">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Carboy (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Carboy-PC" class="collection-anchor">EZBio® Carboy (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2099,10 +2138,12 @@ font-size: 0.9rem;
       <!-- EZBio® Titanium Round Carboy (PC) Collection - 15% Off -->
       {% assign pc_tr_carboy_collection = collections['ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25'] %}
       {% if pc_tr_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Titanium-Round-Carboy-PC">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Titanium Round Carboy (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Titanium-Round-Carboy-PC" class="collection-anchor">EZBio® Titanium Round Carboy (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2153,10 +2194,12 @@ font-size: 0.9rem;
       {% endif %}
 
       {% if has_products %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Media-bottle-PC">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Media bottle (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Media-bottle-PC" class="collection-anchor">EZBio® Media bottle (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2236,10 +2279,12 @@ font-size: 0.9rem;
       <!-- EZBio® Titanium Square Media Bottles (PETG) Collection - 12% Off -->
       {% assign ezbio_ts_bottles_collection = collections['ezbio-titanium-square-media-bottles-petg-12-off-us-independence-day-sale-25'] %}
       {% if ezbio_ts_bottles_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Titanium-Square-Media-Bottles-PETG">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Titanium Square Media Bottles (PETG)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Titanium-Square-Media-Bottles-PETG" class="collection-anchor">EZBio® Titanium Square Media Bottles (PETG)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2284,10 +2329,12 @@ font-size: 0.9rem;
       <!-- EZBio® Pure PFA Bottle Collection - 40% Off -->
       {% assign pfa_bottles_collection = collections['ezbio-pure-pfa-bottle-40-off-us-independence-day-sale-25'] %}
       {% if pfa_bottles_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Pure-PFA-Bottle">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Pure PFA Bottle</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Pure-PFA-Bottle" class="collection-anchor">EZBio® Pure PFA Bottle</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2332,10 +2379,12 @@ font-size: 0.9rem;
       <!-- CPC® AseptiQuik G Sanitary Connector Collection - 20% Off -->
       {% assign aqg_collection = collections['cpc-aseptiquik-g-sanitary-connector-20-off-us-independence-day-sale-25'] %}
       {% if aqg_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="CPC-AseptiQuik-G-Sanitary-Connector">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">CPC® AseptiQuik G Sanitary Connector</h2>
+            <h2 class="collection-title">
+              <a href="#CPC-AseptiQuik-G-Sanitary-Connector" class="collection-anchor">CPC® AseptiQuik G Sanitary Connector</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2380,10 +2429,12 @@ font-size: 0.9rem;
     <!-- CPC® AseptiQuik S Connector  Collection - 50% Off --> 
     {% assign aqs_collection = collections['cpc-aseptiquik-s-connector-50-off-us-independence-day-sale-25'] %}
       {% if aqs_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="CPC-AseptiQuik-S-Connector">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">CPC® AseptiQuik S Connector</h2>
+            <h2 class="collection-title">
+              <a href="#CPC-AseptiQuik-S-Connector" class="collection-anchor">CPC® AseptiQuik S Connector</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2428,10 +2479,12 @@ font-size: 0.9rem;
       <!-- CPC® Steam Thru Connectors Collection - 50% Off -->
       {% assign cpc_stream_thru_connectors_collection = collections['cpc-steam-thru-connectors-50-off-us-independence-day-sale-25'] %}
       {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="CPC-Steam-Thru-Connectors">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">CPC® Steam Thru Connectors</h2>
+            <h2 class="collection-title">
+              <a href="#CPC-Steam-Thru-Connectors" class="collection-anchor">CPC® Steam Thru Connectors</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2476,10 +2529,12 @@ font-size: 0.9rem;
       <!-- EZBio® Bottle Assembly (PC) Collection - 12% Off -->
       {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-12-off-us-independence-day-sale-25'] %}
       {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Bottle-Assembly-PC">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Bottle Assembly (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Bottle-Assembly-PC" class="collection-anchor">EZBio® Bottle Assembly (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2526,10 +2581,12 @@ font-size: 0.9rem;
       <!-- EZLabpure™ Round Carboy (PP) Collection - 25% Off -->
       {% assign ezlabpure_carboy_collection = collections['ezlabpure-round-carboy-pp-25-off-us-independence-day-sale-25'] %}
       {% if ezlabpure_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZLabpure-Round-Carboy-PP">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZLabpure™ Round Carboy (PP)</h2>
+            <h2 class="collection-title">
+              <a href="#EZLabpure-Round-Carboy-PP" class="collection-anchor">EZLabpure™ Round Carboy (PP)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2574,10 +2631,12 @@ font-size: 0.9rem;
       <!-- EZgrip® Carboy (PP) Collection - 32% Off -->
       {% assign ezgrip_carboy_collection = collections['ezgrip-carboy-pp-32-off-us-independence-day-sale-25'] %}
       {% if ezgrip_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZgrip-Carboy-PP">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZgrip® Carboy (PP)</h2>
+            <h2 class="collection-title">
+              <a href="#EZgrip-Carboy-PP" class="collection-anchor">EZgrip® Carboy (PP)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2622,10 +2681,12 @@ font-size: 0.9rem;
        <!-- EZBio® Carboy (PC) Lab Collection - 32% Off -->
       {% assign ezbio_carboypc_collection = collections['ezbio-carboy-pc-lab-32-off-us-independence-day-sale-25'] %}
       {% if ezbio_carboypc_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Carboy-PC-Lab">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Carboy (PC)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Carboy-PC-Lab" class="collection-anchor">EZBio® Carboy (PC)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2670,10 +2731,12 @@ font-size: 0.9rem;
       <!-- EZBio Carboy Collection -->
       {% assign ezbio_carboypp_collection = collections['ezbio-carboy-pp-lab-32-off-us-independence-day-sale-25'] %}
       {% if ezbio_carboypp_collection.products.size > 0 %}
-      <div class="collection-section">
+      <div class="collection-section" id="EZBio-Carboy-PP-Lab">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Carboy (PP)</h2>
+            <h2 class="collection-title">
+              <a href="#EZBio-Carboy-PP-Lab" class="collection-anchor">EZBio® Carboy (PP)</a>
+            </h2>
           </div>
         </div>
         <div class="products-grid">
@@ -3858,5 +3921,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize cart info
   updateCartInfo();
+
+  // Handle URL hash navigation on page load
+  handleHashNavigation();
+
+  // Handle hash changes (when user navigates back/forward)
+  window.addEventListener('hashchange', handleHashNavigation);
 });
+
+// Function to handle URL hash navigation
+function handleHashNavigation() {
+  const hash = window.location.hash;
+  if (hash) {
+    const targetElement = document.querySelector(hash);
+    if (targetElement) {
+      // Small delay to ensure page is fully loaded
+      setTimeout(() => {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+    }
+  }
+}
 </script>
