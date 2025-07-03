@@ -46,8 +46,8 @@
       <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
-            <div class="video-container" style="position: relative; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center;">
-              <div class="video-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+            <div class="video-container" style="position: relative; width: 100%; height: 100%; background: #000;">
+              <div class="video-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 18px; display: flex; align-items: center; gap: 10px; z-index: 2;">
                 <div style="width: 20px; height: 20px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
                 Loading video...
               </div>
@@ -56,8 +56,8 @@
                 autoplay 
                 muted 
                 playsinline
-                preload="metadata"
-                style="width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.3s ease;"
+                preload="auto"
+                style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease;"
                 onloadeddata="this.style.opacity = '1'; this.parentElement.querySelector('.video-placeholder').style.display = 'none';"
                 oncanplaythrough="this.style.opacity = '1'; this.parentElement.querySelector('.video-placeholder').style.display = 'none';"
                 onerror="this.parentElement.querySelector('.video-placeholder').innerHTML = 'Video unavailable'; this.parentElement.querySelector('.video-placeholder').style.color = '#ff6b6b';"
@@ -86,7 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  background: #000;
 }
 
 .slide-link {
@@ -101,9 +101,7 @@
 .slide-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
+  object-fit: cover;
   background: #000;
 }
 
@@ -229,14 +227,29 @@ document.addEventListener('DOMContentLoaded', function() {
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
           
-          // Force video to reload and reset
-          video.load();
+          // Reset video completely
+          video.pause();
           video.currentTime = 0;
+          video.style.opacity = '0';
           
-          // Wait a moment for video to load, then play
-          setTimeout(function() {
+          // Show placeholder while loading
+          var placeholder = currentSlideElement.find('.video-placeholder');
+          if (placeholder.length) {
+            placeholder.show();
+          }
+          
+          // Force video to reload
+          video.load();
+          
+          // Wait for video to be ready, then play
+          var playVideo = function() {
+            video.currentTime = 0;
             video.play().then(function() {
               console.log('Video started playing on slide', currentSlide);
+              video.style.opacity = '1';
+              if (placeholder.length) {
+                placeholder.hide();
+              }
             }).catch(function(error) {
               console.log('Video autoplay failed:', error);
               // If video fails to play, treat as image with 12-second timer
@@ -246,7 +259,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('.homepage-slider').slick('slickNext');
               }, 12000);
             });
-          }, 200); // Small delay to ensure video is ready
+          };
+          
+          // Try to play when video is ready
+          if (video.readyState >= 3) {
+            playVideo();
+          } else {
+            video.addEventListener('canplaythrough', playVideo, { once: true });
+            video.addEventListener('loadeddata', playVideo, { once: true });
+          }
         } else if (image) {
           // For image slides, set 12-second timer
           console.log('Image slide detected, setting 12-second timer');
@@ -298,14 +319,29 @@ document.addEventListener('DOMContentLoaded', function() {
           
           firstVideo.addEventListener('ended', handleVideoEnd);
           
-          // Force video to reload and reset
-          firstVideo.load();
+          // Reset video completely
+          firstVideo.pause();
           firstVideo.currentTime = 0;
+          firstVideo.style.opacity = '0';
           
-          // Wait a moment for video to load, then play
-          setTimeout(function() {
+          // Show placeholder while loading
+          var firstPlaceholder = firstSlide.find('.video-placeholder');
+          if (firstPlaceholder.length) {
+            firstPlaceholder.show();
+          }
+          
+          // Force video to reload
+          firstVideo.load();
+          
+          // Wait for video to be ready, then play
+          var playFirstVideo = function() {
+            firstVideo.currentTime = 0;
             firstVideo.play().then(function() {
               console.log('First video started playing');
+              firstVideo.style.opacity = '1';
+              if (firstPlaceholder.length) {
+                firstPlaceholder.hide();
+              }
             }).catch(function(error) {
               console.log('First video autoplay failed:', error);
               // If video fails to play, treat as image with 12-second timer
@@ -315,7 +351,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('.homepage-slider').slick('slickNext');
               }, 12000);
             });
-          }, 200); // Small delay to ensure video is ready
+          };
+          
+          // Try to play when video is ready
+          if (firstVideo.readyState >= 3) {
+            playFirstVideo();
+          } else {
+            firstVideo.addEventListener('canplaythrough', playFirstVideo, { once: true });
+            firstVideo.addEventListener('loadeddata', playFirstVideo, { once: true });
+          }
         } else if (firstImage) {
           console.log('First slide is image, setting 12-second timer');
           window.slideTimer = setTimeout(function() {
