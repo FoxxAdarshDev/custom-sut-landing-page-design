@@ -2,10 +2,10 @@
 
         // Update cart count and show checkout section now that cart has items
         updateCartInfo();
-        
+
         // Reset quantity to 1 after adding
         document.getElementById('popupQuantity').value = 1;
-        
+
         // Keep the Add to Cart button visible alongside checkout options
         const addToCartBtn = document.querySelector('.popup-add-to-cart');
         if (addToCartBtn) {
@@ -78,7 +78,7 @@ function updateCartInfo() {
     .then(cart => {
         currentCartCount = cart.item_count;
         currentCartTotal = cart.total_price;
-        
+
         // Only update checkout button if there are items in cart
         if (currentCartCount > 0) {
             updateCheckoutButton();
@@ -98,16 +98,16 @@ function updateCartInfo() {
 function updateCheckoutButton() {
     // Create or update checkout section if it doesn't exist
     let checkoutSection = document.querySelector('.popup-checkout-section');
-    
+
     if (!checkoutSection) {
         checkoutSection = document.createElement('div');
         checkoutSection.classList.add('popup-checkout-section');
-        
+
         // Insert after the add to cart button
         const addToCartButton = document.querySelector('.popup-add-to-cart');
         addToCartButton.parentNode.insertBefore(checkoutSection, addToCartButton.nextSibling);
     }
-    
+
     // Get actual products from the page (excluding current product)
     const relatedProducts = getRelatedProducts();
 
@@ -266,8 +266,207 @@ function addRelatedProduct(sku, title, price) {
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
   calculatePricesAndSavings();
-  
+
   // Initialize cart info
   updateCartInfo();
 });
+
+function addToCart() {
+    const productId = document.getElementById('popupProductId').value;
+    const quantity = document.getElementById('popupQuantity').value;
+
+    // Get current product price
+    const priceElement = document.querySelector('.popup-price .final-price');
+    const currentProductPrice = priceElement ? parseFloat(priceElement.textContent.replace('$', '').replace(',', '')) * 100 : 0;
+
+    fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: productId,
+            quantity: parseInt(quantity)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Product added to cart:', data);
+
+        // Fetch updated cart to check total
+        return fetch('/cart.js');
+    })
+    .then(response => response.json())
+    .then(cart => {
+        const minimumOrderValue = 10000; // $100 in cents
+
+        if (cart.total_price < minimumOrderValue) {
+            // Show validation modal instead of success
+            showCartValidationModal(cart.total_price, minimumOrderValue);
+        } else {
+            showAddToCartSuccess();
+        }
+
+        // Update cart count and show checkout section
+        updateCartInfo();
+    })
+    .catch(error => {
+        console.error('Error adding to cart:', error);
+        showAddToCartError();
+    });
+}
+
+function showCartValidationModal(currentTotal, minimumTotal) {
+    const modal = document.createElement('div');
+    modal.classList.add('cart-validation-modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-button" onclick="closeCartValidationModal()">×</span>
+            <h2>Cart Validation</h2>
+            <p>Your cart total is $${(currentTotal / 100).toFixed(2)}. The minimum order value is $${(minimumTotal / 100).toFixed(2)}.</p>
+            <p>Please add more items to your cart to proceed to checkout.</p>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Show the modal
+    setTimeout(() => modal.classList.add('show'), 50);
+}
+
+function closeCartValidationModal() {
+    const modal = document.querySelector('.cart-validation-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => modal.remove(), 300);
+    }
+}
+
 </script>
+
+<style>
+.product-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cart-validation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cart-validation-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-validation-modal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.cart-validation-modal .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.product-image {
+  height: 200px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+</style>
+
+<section class="featured-products">
+  <h2>Featured Products</h2>
+  <div class="product-grid">
+
+    <div class="product-card" onclick="window.location.href='/products/sample-product-1'">
+        <div class="discount-badge">20% OFF</div>
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300/f8f9fa/6c757d?text=Product+Image" alt="Product Image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="placeholder-icon" style="display: none;">📦</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">20L (5 Gal) Polycarbonate Carboy with 120mm Cap</h3>
+          <div class="product-sku">158-3121-OEM</div>
+          <div class="product-price">
+            <span class="sale-price">$100.00</span>
+            <span class="final-price">$80.00</span>
+          </div>
+        </div>
+        <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopupWithEvent(event, 123456, '20L (5 Gal) Polycarbonate Carboy with 120mm Cap', 'https://via.placeholder.com/400x400/f8f9fa/6c757d?text=Product+Image', '158-3121-OEM', 30008, 789012)">
+          <span class="cta-icon">🛒</span>
+          <span class="cta-text">SHOP NOW</span>
+        </button>
+      </div>
+
+      <div class="product-card" onclick="window.location.href='/products/sample-product-2'">
+        <div class="discount-badge">25% OFF</div>
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300/f8f9fa/6c757d?text=Product+Image" alt="Product Image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="placeholder-icon" style="display: none;">📦</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">EZLabpure™ 10L Round Polypropylene (PP) Carboy with 83B Cap</h3>
+          <div class="product-sku">155-B117-FLS</div>
+          <div class="product-price">
+            <span class="sale-price">$86.85</span>
+            <span class="final-price">$65.14</span>
+          </div>
+        </div>
+        <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopupWithEvent(event, 234567, 'EZLabpure™ 10L Round Polypropylene (PP) Carboy with 83B Cap', 'https://via.placeholder.com/400x400/f8f9fa/6c757d?text=Product+Image', '155-B117-FLS', 8685, 890123)">
+          <span class="cta-icon">🛒</span>
+          <span class="cta-text">SHOP NOW</span>
+        </button>
+      </div>
+
+      <div class="product-card" onclick="window.location.href='/products/sample-product-3'">
+        <div class="discount-badge">20% OFF</div>
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300/f8f9fa/6c757d?text=Product+Image" alt="Product Image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="placeholder-icon" style="display: none;">📦</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">EZBio® Carboy, Polycarbonate (PC), 10L, No Spigot, VersaCap® 83mm</h3>
+          <div class="product-sku">518-5G51-FLS</div>
+          <div class="product-price">
+            <span class="sale-price">$462.68</span>
+            <span class="final-price">$370.14</span>
+          </div>
+        </div>
+        <button class="product-cta" onclick="event.stopPropagation(); openAddToCartPopupWithEvent(event, 345678, 'EZBio® Carboy, Polycarbonate (PC), 10L, No Spigot, VersaCap® 83mm', 'https://via.placeholder.com/400x400/f8f9fa/6c757d?text=Product+Image', '518-5G51-FLS', 46268, 901234)">
+          <span class="cta-icon">🛒</span>
+          <span class="cta-text">SHOP NOW</span>
+        </button>
+      </div>
+
+  </div>
+</section>
