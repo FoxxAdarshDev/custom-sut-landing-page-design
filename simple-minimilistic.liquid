@@ -989,19 +989,19 @@
 .popup-original-price {
   text-decoration: line-through;
   color: #999;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
 .popup-sale-price {
   color: #0071ce;
-  font-size: 18px;
+  font-size: 0.9rem;
   font-weight: 600;
   text-decoration: line-through;
 }
 
 .popup-final-price {
   color: #dc3545;
-  font-size: 20px;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
@@ -2258,9 +2258,9 @@
              {% comment %} Add the original price in popup {% endcomment %}
             <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
             <span class="popup-sale-price">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
-            
+
             {% comment %} Add strikethrough to sale price and decrease font size in popup {% endcomment %}
-            
+
             <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
         </div>
 
@@ -2538,7 +2538,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     document.getElementById('popupProductImage').src = productImage;
     document.getElementById('popupProductTitle').textContent = productTitle;
     document.getElementById('popupProductSKU').textContent = productSKU;
-  
+
     // Add the original price to the popup
     const originalPriceElement = document.getElementById('popupOriginalPrice');
     if (productPrice > 0 && selectedProductDiscount > 0){
