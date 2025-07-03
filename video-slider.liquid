@@ -47,20 +47,13 @@
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <div class="video-container" style="position: relative; width: 100%; height: 100%; background: #000;">
-              <div class="video-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 18px; display: flex; align-items: center; gap: 10px; z-index: 2;">
-                <div style="width: 20px; height: 20px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                Loading video...
-              </div>
               <video 
                 class="slide-video" 
                 autoplay 
                 muted 
                 playsinline
                 preload="auto"
-                style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease;"
-                onloadeddata="this.style.opacity = '1'; this.parentElement.querySelector('.video-placeholder').style.display = 'none';"
-                oncanplaythrough="this.style.opacity = '1'; this.parentElement.querySelector('.video-placeholder').style.display = 'none';"
-                onerror="this.parentElement.querySelector('.video-placeholder').innerHTML = 'Video unavailable'; this.parentElement.querySelector('.video-placeholder').style.color = '#ff6b6b';"
+                style="width: 100%; height: 100%; object-fit: fill; opacity: 1;"
               >
                 <source src="{{ settings[slide_video_url] }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -101,7 +94,7 @@
 .slide-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   background: #000;
 }
 
@@ -164,6 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight: false,
+        swipe: true,
+        touchMove: true,
+        accessibility: true,
         responsive: [
           {
               breakpoint: 480,
@@ -227,53 +223,29 @@ document.addEventListener('DOMContentLoaded', function() {
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
           
-          // Reset video completely
-          video.pause();
+          // Reset and play video
           video.currentTime = 0;
-          video.style.opacity = '0';
-          
-          // Show placeholder while loading
-          var placeholder = currentSlideElement.find('.video-placeholder');
-          if (placeholder.length) {
-            placeholder.show();
-          }
-          
-          // Force video to reload
-          video.load();
-          
-          // Wait for video to be ready, then play
-          var playVideo = function() {
-            video.currentTime = 0;
-            video.play().then(function() {
-              console.log('Video started playing on slide', currentSlide);
-              video.style.opacity = '1';
-              if (placeholder.length) {
-                placeholder.hide();
-              }
-            }).catch(function(error) {
-              console.log('Video autoplay failed:', error);
-              // If video fails to play, treat as image with 12-second timer
-              console.log('Video failed, setting 12-second fallback timer');
-              window.slideTimer = setTimeout(function() {
-                console.log('Video fallback timer completed, advancing to next slide');
+          video.play().then(function() {
+            console.log('Video started playing on slide', currentSlide);
+          }).catch(function(error) {
+            console.log('Video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('Video failed, setting 12-second fallback timer');
+            window.slideTimer = setTimeout(function() {
+              console.log('Video fallback timer completed, advancing to next slide');
+              if ($('.homepage-slider').hasClass('slick-initialized')) {
                 $('.homepage-slider').slick('slickNext');
-              }, 12000);
-            });
-          };
-          
-          // Try to play when video is ready
-          if (video.readyState >= 3) {
-            playVideo();
-          } else {
-            video.addEventListener('canplaythrough', playVideo, { once: true });
-            video.addEventListener('loadeddata', playVideo, { once: true });
-          }
+              }
+            }, 12000);
+          });
         } else if (image) {
           // For image slides, set 12-second timer
           console.log('Image slide detected, setting 12-second timer');
           window.slideTimer = setTimeout(function() {
             console.log('12-second timer completed, advancing to next slide');
-            $('.homepage-slider').slick('slickNext');
+            if ($('.homepage-slider').hasClass('slick-initialized')) {
+              $('.homepage-slider').slick('slickNext');
+            }
           }, 12000); // 12 seconds for images
         }
       });
@@ -293,7 +265,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Small delay to ensure smooth transition
         setTimeout(function() {
-          $('.homepage-slider').slick('slickNext');
+          if ($('.homepage-slider').hasClass('slick-initialized')) {
+            $('.homepage-slider').slick('slickNext');
+          }
         }, 100);
       }
 
@@ -319,52 +293,28 @@ document.addEventListener('DOMContentLoaded', function() {
           
           firstVideo.addEventListener('ended', handleVideoEnd);
           
-          // Reset video completely
-          firstVideo.pause();
+          // Reset and play first video
           firstVideo.currentTime = 0;
-          firstVideo.style.opacity = '0';
-          
-          // Show placeholder while loading
-          var firstPlaceholder = firstSlide.find('.video-placeholder');
-          if (firstPlaceholder.length) {
-            firstPlaceholder.show();
-          }
-          
-          // Force video to reload
-          firstVideo.load();
-          
-          // Wait for video to be ready, then play
-          var playFirstVideo = function() {
-            firstVideo.currentTime = 0;
-            firstVideo.play().then(function() {
-              console.log('First video started playing');
-              firstVideo.style.opacity = '1';
-              if (firstPlaceholder.length) {
-                firstPlaceholder.hide();
-              }
-            }).catch(function(error) {
-              console.log('First video autoplay failed:', error);
-              // If video fails to play, treat as image with 12-second timer
-              console.log('First video failed, setting 12-second fallback timer');
-              window.slideTimer = setTimeout(function() {
-                console.log('First slide fallback timer completed, advancing to next slide');
+          firstVideo.play().then(function() {
+            console.log('First video started playing');
+          }).catch(function(error) {
+            console.log('First video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('First video failed, setting 12-second fallback timer');
+            window.slideTimer = setTimeout(function() {
+              console.log('First slide fallback timer completed, advancing to next slide');
+              if ($('.homepage-slider').hasClass('slick-initialized')) {
                 $('.homepage-slider').slick('slickNext');
-              }, 12000);
-            });
-          };
-          
-          // Try to play when video is ready
-          if (firstVideo.readyState >= 3) {
-            playFirstVideo();
-          } else {
-            firstVideo.addEventListener('canplaythrough', playFirstVideo, { once: true });
-            firstVideo.addEventListener('loadeddata', playFirstVideo, { once: true });
-          }
+              }
+            }, 12000);
+          });
         } else if (firstImage) {
           console.log('First slide is image, setting 12-second timer');
           window.slideTimer = setTimeout(function() {
             console.log('First slide 12-second timer completed, advancing to next slide');
-            $('.homepage-slider').slick('slickNext');
+            if ($('.homepage-slider').hasClass('slick-initialized')) {
+              $('.homepage-slider').slick('slickNext');
+            }
           }, 12000); // 12 seconds for images
         }
       }, 1000);
