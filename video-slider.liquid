@@ -193,13 +193,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear any existing timers
         if (window.slideTimer) {
           clearTimeout(window.slideTimer);
+          window.slideTimer = null;
+          console.log('Cleared existing timer');
         }
         
         if (video) {
-          // Remove any existing event listeners to prevent duplicates
-          video.removeEventListener('ended', handleVideoEnd);
+          console.log('Video slide detected on slide', currentSlide);
           
-          // Add new event listener
+          // Remove any existing event listeners from ALL videos to prevent duplicates
+          $('.homepage-slider video').each(function() {
+            this.removeEventListener('ended', handleVideoEnd);
+          });
+          
+          // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
           
           // Reset and play video
@@ -208,6 +214,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Video started playing on slide', currentSlide);
           }).catch(function(error) {
             console.log('Video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('Video failed, setting 12-second fallback timer');
+            window.slideTimer = setTimeout(function() {
+              console.log('Video fallback timer completed, advancing to next slide');
+              $('.homepage-slider').slick('slickNext');
+            }, 12000);
           });
         } else if (image) {
           // For image slides, set 12-second timer
@@ -220,8 +232,19 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       // Video end handler
-      function handleVideoEnd() {
+      function handleVideoEnd(event) {
         console.log('Video ended, advancing to next slide...');
+        
+        // Clear any existing timers
+        if (window.slideTimer) {
+          clearTimeout(window.slideTimer);
+          window.slideTimer = null;
+        }
+        
+        // Remove event listener from this video to prevent duplicate triggers
+        event.target.removeEventListener('ended', handleVideoEnd);
+        
+        // Advance to next slide
         $('.homepage-slider').slick('slickNext');
       }
 
@@ -231,14 +254,32 @@ document.addEventListener('DOMContentLoaded', function() {
         var firstVideo = firstSlide.find('video')[0];
         var firstImage = firstSlide.find('img')[0];
         
+        // Clear any existing timers
+        if (window.slideTimer) {
+          clearTimeout(window.slideTimer);
+          window.slideTimer = null;
+        }
+        
         if (firstVideo) {
-          firstVideo.removeEventListener('ended', handleVideoEnd);
+          console.log('First slide is video, initializing...');
+          
+          // Remove any existing event listeners from ALL videos
+          $('.homepage-slider video').each(function() {
+            this.removeEventListener('ended', handleVideoEnd);
+          });
+          
           firstVideo.addEventListener('ended', handleVideoEnd);
           firstVideo.currentTime = 0;
           firstVideo.play().then(function() {
             console.log('First video started playing');
           }).catch(function(error) {
             console.log('First video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('First video failed, setting 12-second fallback timer');
+            window.slideTimer = setTimeout(function() {
+              console.log('First slide fallback timer completed, advancing to next slide');
+              $('.homepage-slider').slick('slickNext');
+            }, 12000);
           });
         } else if (firstImage) {
           console.log('First slide is image, setting 12-second timer');
