@@ -1437,6 +1437,27 @@ font-size: 0.9rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.left-related-products-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.left-related-products-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.left-related-products-grid::-webkit-scrollbar-thumb {
+  background: #0071ce;
+  border-radius: 2px;
+}
+
+.left-related-products-grid::-webkit-scrollbar-thumb:hover {
+  background: #005ba6;
 }
 
 .left-related-product-card {
@@ -1482,10 +1503,10 @@ font-size: 0.9rem;
 }
 
 .left-related-product-info h4 {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: #1d1d1f;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1497,17 +1518,17 @@ font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .left-related-sale-price {
-  font-size: 9px;
+  font-size: 8px;
   color: #999;
   text-decoration: line-through;
 }
 
 .left-related-final-price {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: #dc3545;
 }
@@ -1515,9 +1536,9 @@ font-size: 0.9rem;
 .left-related-discount-badge {
   background: #dc3545;
   color: white;
-  padding: 1px 4px;
-  border-radius: 4px;
-  font-size: 8px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-size: 6px;
   font-weight: 600;
 }
 
@@ -3048,11 +3069,15 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         addToCartBtn.style.display = 'block';
     }
 
-    // Show related products in left column on desktop
-    updateLeftColumnRelatedProducts();
-
-    // Load current cart info and conditionally show checkout section
+    // Load current cart info first
     updateCartInfo();
+
+    // Show related products in left column on desktop only if cart has items
+    setTimeout(() => {
+        if (currentCartCount > 0) {
+            updateLeftColumnRelatedProducts();
+        }
+    }, 500);
 }
 
 function closeAddToCartPopup() {
@@ -3316,41 +3341,43 @@ function updateCheckoutButton() {
     const meetsMinimum = currentCartTotal >= MINIMUM_ORDER_VALUE;
     const remaining = MINIMUM_ORDER_VALUE - currentCartTotal;
 
-    // Get actual products from the page (excluding current product)
-    const relatedProducts = getRelatedProducts();
-
+    // Get actual products from the page (excluding current product) - only show if cart has items
     let relatedProductsHTML = '';
-    if (relatedProducts.length > 0) {
-        relatedProductsHTML = `
-            <div class="related-products-section">
-                <h3>💡 You might also like</h3>
-                <div class="related-products-grid">
-                    ${relatedProducts.map(product => `
-                        <div class="related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
-                            <div class="related-product-image">
-                                <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="related-placeholder" style="display: none;">📦</div>
-                            </div>
-                            <div class="related-product-info">
-                                <h4>${product.title}</h4>
-                                <div class="related-product-price">
-                                    <span class="related-sale-price">$${(product.price / 100).toFixed(2)}</span>
-                                    <span class="related-final-price">$${(product.finalPrice / 100).toFixed(2)}</span>
+    if (currentCartCount > 0) {
+        const relatedProducts = getRelatedProducts();
+
+        if (relatedProducts.length > 0) {
+            relatedProductsHTML = `
+                <div class="related-products-section">
+                    <h3>💡 You might also like</h3>
+                    <div class="related-products-grid">
+                        ${relatedProducts.map(product => `
+                            <div class="related-product-card" onclick="openRelatedProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}', '${product.image}', '${product.sku}', ${product.price}, ${product.variantId})">
+                                <div class="related-product-image">
+                                    <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="related-placeholder" style="display: none;">📦</div>
                                 </div>
-                                <div class="related-discount-badge">${product.discount}% OFF</div>
+                                <div class="related-product-info">
+                                    <h4>${product.title}</h4>
+                                    <div class="related-product-price">
+                                        <span class="related-sale-price">$${(product.price / 100).toFixed(2)}</span>
+                                        <span class="related-final-price">$${(product.finalPrice / 100).toFixed(2)}</span>
+                                    </div>
+                                    <div class="related-discount-badge">${product.discount}% OFF</div>
+                                </div>
                             </div>
-                        </div>
-                    `).join('')}
+                        `).join('')}
+                    </div>
                 </div>
-            </div>
-        `;
-    } else {
-        relatedProductsHTML = `
-            <div class="related-products-section">
-                <h3>💡 You might also like</h3>
-                <p style="text-align: center; color: #666; font-size: 12px; margin: 0;">Browse more products on this page</p>
-            </div>
-        `;
+            `;
+        } else {
+            relatedProductsHTML = `
+                <div class="related-products-section">
+                    <h3>💡 You might also like</h3>
+                    <p style="text-align: center; color: #666; font-size: 12px; margin: 0;">Browse more products on this page</p>
+                </div>
+            `;
+        }
     }
 
     // Create validation warning if minimum not met
@@ -3388,19 +3415,19 @@ function updateCheckoutButton() {
     `;
 }
 
-function getRelatedProducts() {
+function getRelatedProducts(count = 2) {
     const allProductCards = document.querySelectorAll('.product-card');
     const relatedProducts = [];
 
-    // Get up to 2 random products that are not the current one
+    // Get up to specified count of random products that are not the current one
     const availableProducts = Array.from(allProductCards).filter(card => {
         const cardSku = card.querySelector('.product-sku')?.textContent.trim();
         return cardSku && cardSku !== selectedProductSKU;
     });
 
-    // Shuffle and take first 2
+    // Shuffle and take first count
     const shuffled = availableProducts.sort(() => 0.5 - Math.random());
-    const selectedCards = shuffled.slice(0, 2);
+    const selectedCards = shuffled.slice(0, count);
 
     selectedCards.forEach(card => {
         const title = card.querySelector('.product-title')?.textContent.trim();
@@ -3450,7 +3477,13 @@ function updateLeftColumnRelatedProducts() {
     const leftRelatedGrid = document.getElementById('leftRelatedProductsGrid');
     
     if (leftRelatedSection && leftRelatedGrid) {
-        const relatedProducts = getRelatedProducts();
+        // Only show if cart has items
+        if (currentCartCount === 0) {
+            leftRelatedSection.style.display = 'none';
+            return;
+        }
+        
+        const relatedProducts = getRelatedProducts(4); // Get at least 4 products
         
         if (relatedProducts.length > 0) {
             leftRelatedGrid.innerHTML = relatedProducts.map(product => `
