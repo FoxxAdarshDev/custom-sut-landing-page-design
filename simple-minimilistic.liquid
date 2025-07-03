@@ -880,7 +880,7 @@
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   z-index: 10001;
-  max-width: 480px;
+  max-width: 800px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
@@ -941,6 +941,28 @@
   padding: 0 24px 24px 24px;
 }
 
+/* Desktop Layout */
+@media (min-width: 768px) {
+  .popup-content {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  .popup-left-section {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .popup-right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .popup-product-image {
   width: 80px;
   height: 80px;
@@ -953,6 +975,14 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+@media (min-width: 768px) {
+  .popup-product-image {
+    width: 250px;
+    height: 250px;
+    margin: 0 0 20px 0;
+  }
+}
+
 .popup-product-image img {
   max-width: 100%;
   max-height: 100%;
@@ -963,10 +993,14 @@
 .popup-product-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: #0071ce;
   margin-bottom: 8px;
   line-height: 1.3;
   text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .popup-product-sku {
@@ -1183,9 +1217,13 @@ font-size: 0.9rem;
   outline: none;
 }
 
-/* Hide any extra quantity controls */
-.popup-quantity-section .popup-quantity-btn:nth-of-type(n+3) {
-  display: none;
+/* Ensure only proper quantity controls are shown */
+.popup-quantity-controls .popup-quantity-btn:last-child {
+  display: flex;
+}
+
+.popup-quantity-controls .popup-quantity-btn:first-child {
+  display: flex;
 }
 
 .popup-add-to-cart {
@@ -1304,6 +1342,18 @@ font-size: 0.9rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+@media (min-width: 768px) {
+  .popup-checkout-section {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    margin: 20px -24px -24px -24px;
+    padding: 20px 24px 24px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
 .checkout-buttons {
   display: flex;
   gap: 12px;
@@ -1352,7 +1402,7 @@ font-size: 0.9rem;
 .related-products-section h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: #0071ce;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -1409,6 +1459,11 @@ font-size: 0.9rem;
   margin-bottom: 6px;
   line-height: 1.3;
   text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 32px;
 }
 
 .related-product-price {
@@ -1617,6 +1672,23 @@ font-size: 0.9rem;
 }
 
 /* Mobile Responsive */
+@media (max-width: 767px) {
+  .popup-content {
+    display: block !important;
+  }
+  
+  .popup-left-section,
+  .popup-right-section {
+    flex: none !important;
+  }
+  
+  .popup-checkout-section {
+    position: relative !important;
+    margin: 20px 0 0 0 !important;
+    padding: 20px 0 0 0 !important;
+  }
+}
+
 @media (max-width: 480px) {
   .add-to-cart-popup {
     max-width: 95%;
@@ -2451,22 +2523,25 @@ font-size: 0.9rem;
     </div>
 
     <div class="popup-content">
-        <div class="popup-product-image">
-            <img id="popupProductImage" src="" alt="Product Image">
+        <div class="popup-left-section">
+            <div class="popup-product-image">
+                <img id="popupProductImage" src="" alt="Product Image">
+            </div>
         </div>
 
-        <h2 class="popup-product-title" id="popupProductTitle"></h2>
-        <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
+        <div class="popup-right-section">
+            <h2 class="popup-product-title" id="popupProductTitle"></h2>
+            <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
 
-        <div class="popup-product-price">
-             {% comment %} Add the original price in popup {% endcomment %}
-            <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
-            <span class="popup-sale-price">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
+            <div class="popup-product-price">
+                 {% comment %} Add the original price in popup {% endcomment %}
+                <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
+                <span class="popup-sale-price">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
 
-            {% comment %} Add strikethrough to sale price and decrease font size in popup {% endcomment %}
+                {% comment %} Add strikethrough to sale price and decrease font size in popup {% endcomment %}
 
-            <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
-        </div>
+                <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
+            </div>
 
         <div class="popup-smart-savings">
             <div class="popup-smart-savings-header">
@@ -2507,8 +2582,9 @@ font-size: 0.9rem;
         <button class="popup-add-to-cart" onclick="addToCart()">Add to Cart</button>
 
         <div class="popup-recommended">
-            {% comment %} <h3>You might also like</h3>
-            <p>More products coming soon...</p> {% endcomment %}
+                {% comment %} <h3>You might also like</h3>
+                <p>More products coming soon...</p> {% endcomment %}
+            </div>
         </div>
     </div>
 </div>
