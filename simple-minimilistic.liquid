@@ -989,7 +989,8 @@
 .popup-original-price {
   text-decoration: line-through;
   color: #999;
-  font-size: 0.9rem;
+  ```text
+font-size: 0.9rem;
 }
 
 .popup-sale-price {
@@ -1561,7 +1562,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1609,7 +1610,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="20"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1657,7 +1658,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="15"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1711,7 +1712,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1746,7 +1747,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="10"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1794,7 +1795,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1842,7 +1843,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="40"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1890,7 +1891,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1938,7 +1939,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -1986,7 +1987,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2034,7 +2035,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2084,7 +2085,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="25"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2132,7 +2133,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2180,7 +2181,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2228,7 +2229,7 @@
                 <span class="sale-price">${{ product.price | money_without_currency }}</span>
                 <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
             </div>
           </div>
           {% endfor %}
@@ -2315,9 +2316,9 @@
 
 // Countdown Timer
 // Global function for opening popup with event handling
-function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId) {
+function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice) {
     event.stopPropagation();
-    openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, event);
+    openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event);
 }
 
 function updateCountdown() {
@@ -2491,16 +2492,18 @@ let selectedProductImage;
 let selectedProductSKU;
 let selectedProductPrice;
 let selectedProductVariantId;
+let selectedProductCompareAtPrice;
 let selectedProductDiscount;
 
 
-function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, event) {
+function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event) {
     selectedProductId = productId;
     selectedProductTitle = productTitle;
     selectedProductImage = productImage;
     selectedProductSKU = productSKU;
     selectedProductPrice = productPrice;
     selectedProductVariantId = productVariantId;
+    selectedProductCompareAtPrice = compareAtPrice;
 
     // Find the product card to get discount information by using the event target
     const productCard = event.target.closest('.product-card');
@@ -2541,8 +2544,8 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     // Add the original price to the popup
     const originalPriceElement = document.getElementById('popupOriginalPrice');
-    if (productPrice > 0 && selectedProductDiscount > 0){
-        originalPriceElement.textContent = '$' + formatPrice(productPrice / 100); // original price
+    if (selectedProductCompareAtPrice > 0){
+        originalPriceElement.textContent = '$' + formatPrice(selectedProductCompareAtPrice / 100); // original price
         originalPriceElement.style.display = 'inline';
     }else {
         originalPriceElement.style.display = 'none';
