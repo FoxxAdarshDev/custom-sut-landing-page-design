@@ -1,4 +1,4 @@
-                    <style>
+<style>
 
 
                       .patriotic-sale-container {
@@ -1561,7 +1561,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in pc_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">20% OFF</div>
                                 </div>
@@ -1590,23 +1590,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="20"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                    <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">&nbsp;</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -1631,7 +1614,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in pc_tr_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">15% OFF</div>
                                 </div>
@@ -1660,23 +1643,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="15"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">&nbsp;</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -1701,7 +1667,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezbio_bottles_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">12% OFF</div>
                                 </div>
@@ -1729,23 +1695,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">BEST VALUE</span>
-                                        <div class="savings-text">More than 3 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
@@ -1770,7 +1719,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezbio_ts_bottles_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">12% OFF</div>
                                 </div>
@@ -1798,23 +1747,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                    <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">BEST VALUE</span>
-                                        <div class="savings-text">More than 3 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
@@ -1840,7 +1772,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in pfa_bottles_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">40% OFF</div>
                                 </div>
@@ -1869,23 +1801,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="40"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">HUGE SAVINGS</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -1910,7 +1825,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in aqg_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">50% OFF</div>
                                 </div>
@@ -1938,23 +1853,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">BEST DEAL</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
@@ -1980,7 +1878,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in cpc_stream_thru_connectors_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">50% OFF</div>
                                 </div>
@@ -2009,23 +1907,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">BEST DEAL</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -2050,7 +1931,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezbio_bottle_assembly_pc_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">12% OFF</div>
                                 </div>
@@ -2079,23 +1960,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">BEST VALUE</span>
-                                        <div class="savings-text">More than 3 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="3"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -2122,7 +1986,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezlabpure_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">25% OFF</div>
                                 </div>
@@ -2151,23 +2015,6 @@
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="25"></span>
                                   </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">GREAT VALUE</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
-                                  </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
                               </div>
@@ -2192,7 +2039,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezclear_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">32% OFF</div>
                                 </div>
@@ -2220,23 +2067,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">EXCELLENT DEAL</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
@@ -2262,7 +2092,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezgrip_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">32% OFF</div>
                                 </div>
@@ -2290,23 +2120,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">EXCELLENT DEAL</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
@@ -2332,7 +2145,7 @@
                             </div>
                             <div class="products-grid">
                               {% for product in ezbio_carboy_collection.products %}
-                              <div class="product-card" >
+                              <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
                                 <div class="discount-badge">
                                   <div class="discount-label">32% OFF</div>
                                 </div>
@@ -2360,23 +2173,6 @@
                                     {% endif %}
                                     <span class="sale-price">${{ product.price | money_without_currency }}</span>
                                     <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-                                  </div>
-                                  <div class="smart-savings" onclick="toggleSavings(event, this)">
-                                    <div class="smart-savings-header">
-                                      <div style="display: flex; align-items: center;">
-                                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                                        Smart Savings
-                                      </div>
-                                      <span class="smart-savings-toggle">▼</span>
-                                    </div>
-                                     <div class="savings-preview">Buy 2 items and save $<span class="savings-preview-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                    <div class="savings-details">
-                                      <div class="savings-option most-popular">
-                                        <span class="savings-label">EXCELLENT DEAL</span>
-                                        <div class="savings-text">More than 2 Items</div>
-                                        <div class="savings-price">and save <span class="savings-amount" data-base-price="{{ product.price | money_without_currency }}" data-qty="2"></span>/item</div>
-                                      </div>
-                                    </div>
                                   </div>
                                   <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
                                 </div>
