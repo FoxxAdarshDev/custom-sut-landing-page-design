@@ -49,12 +49,15 @@
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <div class="video-container" style="position: relative; width: 100%; height: 100%; background: transparent;">
+              <div class="video-loading-placeholder" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                <div class="loading-spinner" style="width: 40px; height: 40px; border: 4px solid #ddd; border-top: 4px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+              </div>
               <video 
                 class="slide-video" 
                 muted 
                 playsinline
                 preload="metadata"
-                style="width: 100%; height: 100%; object-fit: fill; opacity: 1;"
+                style="width: 100%; height: 100%; object-fit: fill; opacity: 0; transition: opacity 0.3s ease;"
               >
                 <source src="{{ settings[slide_video_url] }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -128,8 +131,22 @@
 
 /* Loading spinner animation */
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.video-loading-placeholder {
+  background: #f8f9fa !important;
+  border: 1px solid #e9ecef;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 </style>
 
@@ -188,6 +205,39 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupVideoHandlers() {
       console.log('Setting up video handlers...');
       
+      // Add video loading event handlers to all videos
+      $('.homepage-slider video').each(function() {
+        var video = this;
+        var $video = $(video);
+        var $container = $video.closest('.video-container');
+        var $placeholder = $container.find('.video-loading-placeholder');
+        
+        // Video loading events
+        video.addEventListener('loadstart', function() {
+          console.log('Video loading started');
+          $placeholder.show();
+          $video.css('opacity', '0');
+        });
+        
+        video.addEventListener('loadedmetadata', function() {
+          console.log('Video metadata loaded');
+        });
+        
+        video.addEventListener('canplaythrough', function() {
+          console.log('Video can play through');
+          $placeholder.hide();
+          $video.css('opacity', '1');
+        });
+        
+        video.addEventListener('error', function(e) {
+          console.log('Video error:', e);
+          $placeholder.html('<div style="color: #666; text-align: center; padding: 20px;">Video unavailable</div>');
+        });
+        
+        // Force reload to ensure proper loading state
+        video.load();
+      });
+      
       // Handle slide changes
       $('.homepage-slider').off('beforeChange.videoSlider afterChange.videoSlider');
       
@@ -227,6 +277,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (video) {
           console.log('Video slide detected on slide', currentSlide);
           
+          var $video = $(video);
+          var $container = $video.closest('.video-container');
+          var $placeholder = $container.find('.video-loading-placeholder');
+          
           // Remove any existing event listeners from ALL videos to prevent duplicates
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
@@ -235,34 +289,52 @@ document.addEventListener('DOMContentLoaded', function() {
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
           
+          // Show loading placeholder
+          $placeholder.show();
+          $video.css('opacity', '0');
+          
           // Force reload video source to ensure it plays when returning to slide
           video.load();
           
-          // Reset and play video
+          // Reset video
           video.currentTime = 0;
           
-          // Use a promise-based approach with better error handling
-          var playPromise = video.play();
-          
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              console.log('Video started playing on slide', currentSlide);
-            }).catch(function(error) {
-              console.log('Video autoplay failed:', error);
-              // Try to play again after a short delay
-              setTimeout(function() {
-                video.play().catch(function(retryError) {
-                  console.log('Video retry failed, setting 12-second fallback timer');
-                  window.slideTimer = setTimeout(function() {
-                    console.log('Video fallback timer completed, advancing to next slide');
-                    if ($('.homepage-slider').hasClass('slick-initialized')) {
-                      $('.homepage-slider').slick('slickNext');
-                    }
-                  }, 12000);
+          // Wait for video to be ready before playing
+          var playVideo = function() {
+            if (video.readyState >= 2) { // HAVE_CURRENT_DATA
+              $placeholder.hide();
+              $video.css('opacity', '1');
+              
+              var playPromise = video.play();
+              
+              if (playPromise !== undefined) {
+                playPromise.then(function() {
+                  console.log('Video started playing on slide', currentSlide);
+                }).catch(function(error) {
+                  console.log('Video autoplay failed:', error);
+                  // Try to play again after a short delay
+                  setTimeout(function() {
+                    video.play().catch(function(retryError) {
+                      console.log('Video retry failed, setting 12-second fallback timer');
+                      $placeholder.html('<div style="color: #666; text-align: center; padding: 20px;">Video unavailable</div>');
+                      window.slideTimer = setTimeout(function() {
+                        console.log('Video fallback timer completed, advancing to next slide');
+                        if ($('.homepage-slider').hasClass('slick-initialized')) {
+                          $('.homepage-slider').slick('slickNext');
+                        }
+                      }, 12000);
+                    });
+                  }, 500);
                 });
-              }, 500);
-            });
-          }
+              }
+            } else {
+              // Video not ready, wait a bit more
+              setTimeout(playVideo, 200);
+            }
+          };
+          
+          // Start the play process
+          playVideo();
         } else if (image) {
           // For image slides, set 12-second timer
           console.log('Image slide detected, setting 12-second timer');
@@ -317,6 +389,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (firstVideo) {
           console.log('First slide is video, initializing...');
           
+          var $firstVideo = $(firstVideo);
+          var $firstContainer = $firstVideo.closest('.video-container');
+          var $firstPlaceholder = $firstContainer.find('.video-loading-placeholder');
+          
           // Remove any existing event listeners from ALL videos
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
@@ -324,33 +400,52 @@ document.addEventListener('DOMContentLoaded', function() {
           
           firstVideo.addEventListener('ended', handleVideoEnd);
           
+          // Show loading placeholder
+          $firstPlaceholder.show();
+          $firstVideo.css('opacity', '0');
+          
           // Force reload video source
           firstVideo.load();
           
-          // Reset and play first video
+          // Reset video
           firstVideo.currentTime = 0;
           
-          var playPromise = firstVideo.play();
-          
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              console.log('First video started playing');
-            }).catch(function(error) {
-              console.log('First video autoplay failed:', error);
-              // Try to play again after a short delay
-              setTimeout(function() {
-                firstVideo.play().catch(function(retryError) {
-                  console.log('First video retry failed, setting 12-second fallback timer');
-                  window.slideTimer = setTimeout(function() {
-                    console.log('First slide fallback timer completed, advancing to next slide');
-                    if ($('.homepage-slider').hasClass('slick-initialized')) {
-                      $('.homepage-slider').slick('slickNext');
-                    }
-                  }, 12000);
+          // Wait for video to be ready before playing
+          var playFirstVideo = function() {
+            if (firstVideo.readyState >= 2) { // HAVE_CURRENT_DATA
+              $firstPlaceholder.hide();
+              $firstVideo.css('opacity', '1');
+              
+              var playPromise = firstVideo.play();
+              
+              if (playPromise !== undefined) {
+                playPromise.then(function() {
+                  console.log('First video started playing');
+                }).catch(function(error) {
+                  console.log('First video autoplay failed:', error);
+                  // Try to play again after a short delay
+                  setTimeout(function() {
+                    firstVideo.play().catch(function(retryError) {
+                      console.log('First video retry failed, setting 12-second fallback timer');
+                      $firstPlaceholder.html('<div style="color: #666; text-align: center; padding: 20px;">Video unavailable</div>');
+                      window.slideTimer = setTimeout(function() {
+                        console.log('First slide fallback timer completed, advancing to next slide');
+                        if ($('.homepage-slider').hasClass('slick-initialized')) {
+                          $('.homepage-slider').slick('slickNext');
+                        }
+                      }, 12000);
+                    });
+                  }, 500);
                 });
-              }, 500);
-            });
-          }
+              }
+            } else {
+              // Video not ready, wait a bit more
+              setTimeout(playFirstVideo, 200);
+            }
+          };
+          
+          // Start the play process
+          playFirstVideo();
         } else if (firstImage) {
           console.log('First slide is image, setting 12-second timer');
           window.slideTimer = setTimeout(function() {
