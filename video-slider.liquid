@@ -50,16 +50,23 @@
               class="slide-video" 
               muted 
               playsinline
-              preload="metadata"
-              onloadstart="this.style.opacity='0'; this.style.transition='opacity 0.3s';"
-              oncanplay="this.style.opacity='1';"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              preload="auto"
+              poster=""
+              style="background-color: #000;"
+              onloadstart="console.log('Video loading started:', this.src);"
+              onloadeddata="console.log('Video data loaded'); this.style.opacity='1';"
+              oncanplay="console.log('Video can play');"
+              onerror="console.error('Video error:', this.error); this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              onprogress="console.log('Video loading progress:', this.buffered.length);"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+              <source src="{{ settings[slide_video_url] }}" type="video/webm">
+              <source src="{{ settings[slide_video_url] }}" type="video/ogg">
               Your browser does not support the video tag.
             </video>
             <div class="video-fallback" style="display: none; width: 100%; height: 100%; background: #f8f9fa; align-items: center; justify-content: center; font-size: 1.2rem; color: #666;">
-              Video Loading...
+              <p>Video could not be loaded</p>
+              <p style="font-size: 0.9rem; margin-top: 10px;">Please check the video URL and format</p>
             </div>
           {% else %}
             {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
@@ -99,6 +106,12 @@
   max-width: 100%;
   max-height: 100%;
   background-color: #000; /* Black background for videos */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slide-video[data-loaded="true"] {
+  opacity: 1;
 }
 
 .homepage-slider img {
@@ -205,12 +218,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (video) {
           console.log('Video slide detected on slide', currentSlide);
+          console.log('Video source:', video.src);
+          console.log('Video readyState:', video.readyState);
+          console.log('Video networkState:', video.networkState);
+          
+          // Check if video source is valid
+          if (!video.src || video.src === '') {
+            console.error('Video source is empty');
+            showVideoFallback(video);
+            return;
+          }
           
           // Remove any existing event listeners from ALL videos to prevent duplicates
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
             this.removeEventListener('loadeddata', handleVideoReady);
+            this.removeEventListener('error', handleVideoError);
           });
+          
+          // Add error handler
+          video.addEventListener('error', handleVideoError);
           
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
@@ -236,16 +263,37 @@ document.addEventListener('DOMContentLoaded', function() {
           
           function handleVideoReady() {
             console.log('Video ready, attempting to play');
-            video.play().then(function() {
-              console.log('Video started playing after ready event');
-              // Clear fallback timer since video is playing
-              if (window.slideTimer) {
-                clearTimeout(window.slideTimer);
-                window.slideTimer = null;
-              }
-            }).catch(function(error) {
-              console.log('Video play failed after ready:', error);
-            });
+            
+            // Mark video as loaded
+            video.setAttribute('data-loaded', 'true');
+            video.style.opacity = '1';
+            
+            // Try to play video with better error handling
+            var playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+              playPromise.then(function() {
+                console.log('Video started playing after ready event');
+                // Clear fallback timer since video is playing
+                if (window.slideTimer) {
+                  clearTimeout(window.slideTimer);
+                  window.slideTimer = null;
+                }
+              }).catch(function(error) {
+                console.log('Video play failed after ready:', error);
+                // Show fallback if video fails to play
+                showVideoFallback(video);
+              });
+            }
+          }
+          
+          function showVideoFallback(videoElement) {
+            console.log('Showing video fallback');
+            var fallback = videoElement.nextElementSibling;
+            if (fallback && fallback.classList.contains('video-fallback')) {
+              videoElement.style.display = 'none';
+              fallback.style.display = 'flex';
+            }
           }
           
           function setFallbackTimer() {
@@ -280,6 +328,44 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Advance to next slide
         $('.homepage-slider').slick('slickNext');
+      }
+      
+      // Video error handler
+      function handleVideoError(event) {
+        console.error('Video error occurred:', event.target.error);
+        var video = event.target;
+        
+        if (video.error) {
+          switch (video.error.code) {
+            case 1:
+              console.error('Video error: MEDIA_ERR_ABORTED');
+              break;
+            case 2:
+              console.error('Video error: MEDIA_ERR_NETWORK');
+              break;
+            case 3:
+              console.error('Video error: MEDIA_ERR_DECODE');
+              break;
+            case 4:
+              console.error('Video error: MEDIA_ERR_SRC_NOT_SUPPORTED');
+              break;
+            default:
+              console.error('Video error: Unknown error');
+              break;
+          }
+        }
+        
+        // Show fallback and set timer
+        showVideoFallback(video);
+        
+        // Set fallback timer for slide progression
+        if (window.slideTimer) {
+          clearTimeout(window.slideTimer);
+        }
+        window.slideTimer = setTimeout(function() {
+          console.log('Video error fallback timer completed, advancing to next slide');
+          $('.homepage-slider').slick('slickNext');
+        }, 12000);
       }
 
       // Start first video or image timer after initialization
