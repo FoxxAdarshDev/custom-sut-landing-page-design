@@ -1,4 +1,10 @@
 
+<style>
+  .homepage-slider { display:flex;}.homepage-slider { border: 2px solid transparent; /* Initial transparent border */ background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); /* Gradient border */ background-origin: border-box; background-clip: content-box, border-box; /* Clip the background to show only the border */ border-radius: 12px; /* Optional content rounding */}.homepage-slider img { border-radius: 12px; }
+</style>
+
+
+
 <section class="homepage-slider">
   {% comment %} Show slide 3 first {% endcomment %}
   {% assign slide_order = '3,1,2,4,5,6,7,8' | split: ',' %}
@@ -10,7 +16,7 @@
     {% capture slide_alt %}slide_{{ i }}_alt{% endcapture %}
     {% capture slide_is_video %}slide_{{ i }}_is_video{% endcapture %}
     {% capture slide_video_url %}slide_{{ i }}_video_url{% endcapture %}
-    
+
     {% if settings[slide] %}
       <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
@@ -36,10 +42,7 @@
 </section>
 
 <style>
-.homepage-slider {
-  position: relative;
-  overflow: hidden;
-}
+
 
 .slide-item {
   position: relative;
@@ -96,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentVideo) {
       currentVideo.pause();
     }
-    
+
     // Play next video
     var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
     if (nextVideo) {
