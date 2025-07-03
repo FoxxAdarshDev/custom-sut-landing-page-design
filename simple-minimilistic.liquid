@@ -375,39 +375,20 @@
   }
 
   .collection-header {
-    padding: 40px;
+    padding: 20px 40px;
     background: white;
     display: flex;
     align-items: center;
-    gap: 50px;
-    min-height: 280px;
+    gap: 20px;
+    min-height: auto;
   }
 
   .collection-header.reverse {
-    flex-direction: row-reverse;
+    flex-direction: row;
   }
 
   .collection-header-content {
     flex: 1;
-  }
-
-  .collection-header-image {
-    flex: 0 0 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .collection-header img {
-    max-width: 280px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-    border: 3px solid #0071ce;
-    padding: 0px;
-    background: white;
   }
 
   .collection-title {
@@ -845,19 +826,11 @@
     }
 
     .collection-header {
-      padding: 25px 20px;
+      padding: 15px 20px;
       flex-direction: column;
       text-align: center;
-      gap: 20px;
+      gap: 15px;
       min-height: auto;
-    }
-
-    .collection-header.reverse {
-      flex-direction: column;
-    }
-
-    .collection-header-image {
-      flex: none;
     }
 
     .collection-title {
@@ -1553,11 +1526,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® Titanium Round Carboy (PC)</h2>
           </div>
-          <div class="collection-header-image">
-            {% if pc_carboy_collection.image %}
-              <img src="{{ pc_carboy_collection.image | img_url: '400x400' }}" alt="{{ pc_carboy_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in pc_carboy_collection.products %}
@@ -1602,14 +1570,9 @@
       {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
       {% if pc_tr_carboy_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® TR Carboys</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if pc_tr_carboy_collection.image %}
-              <img src="{{ pc_tr_carboy_collection.image | img_url: '400x400' }}" alt="{{ pc_tr_carboy_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
@@ -1659,11 +1622,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® Media Bottles</h2>
           </div>
-          <div class="collection-header-image">
-            {% if ezbio_bottles_collection.image %}
-              <img src="{{ ezbio_bottles_collection.image | img_url: '400x400' }}" alt="{{ ezbio_bottles_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in ezbio_bottles_collection.products %}
@@ -1707,14 +1665,9 @@
       {% assign ezbio_ts_bottles_collection = collections['ezbio-ts-bottles-bioprocess-us-independence-day-sale-25'] %}
       {% if ezbio_ts_bottles_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® TS Bottles</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if ezbio_ts_bottles_collection.image %}
-              <img src="{{ ezbio_ts_bottles_collection.image | img_url: '400x400' }}" alt="{{ ezbio_ts_bottles_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
@@ -1764,11 +1717,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® Pure PFA Bottle</h2>
           </div>
-          <div class="collection-header-image">
-            {% if pfa_bottles_collection.image %}
-              <img src="{{ pfa_bottles_collection.image | img_url: '400x400' }}" alt="{{ pfa_bottles_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in pfa_bottles_collection.products %}
@@ -1813,14 +1761,9 @@
       {% assign aqg_collection = collections['cpc-aqg-sanitary-connector-bioprocess-us-independence-day-sale-25'] %}
       {% if aqg_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">CPC® AseptiQuik G Sanitary Connector</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if aqg_collection.image %}
-              <img src="{{ aqg_collection.image | img_url: '400x400' }}" alt="{{ aqg_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
@@ -1870,11 +1813,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">CPC Steam Thru Connectors</h2>
           </div>
-          <div class="collection-header-image">
-            {% if cpc_stream_thru_connectors_collection.image %}
-              <img src="{{ cpc_stream_thru_connectors_collection.image | img_url: '400x400' }}" alt="{{ cpc_stream_thru_connectors_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in cpc_stream_thru_connectors_collection.products %}
@@ -1919,14 +1857,9 @@
       {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-single-use-bottle-assembly-bioprocess-pc-us-independence-day-sale-25'] %}
       {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio® PC Bottle Assembly</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if ezbio_bottle_assembly_pc_collection.image %}
-              <img src="{{ ezbio_bottle_assembly_pc_collection.image | img_url: '400x400' }}" alt="{{ ezbio_bottle_assembly_pc_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
@@ -1978,11 +1911,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">EZLabpure™ Round Carboys</h2>
           </div>
-          <div class="collection-header-image">
-            {% if ezlabpure_carboy_collection.image %}
-              <img src="{{ ezlabpure_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezlabpure_carboy_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in ezlabpure_carboy_collection.products %}
@@ -2027,14 +1955,9 @@
       {% assign ezclear_carboy_collection = collections['ezclear-5l-pc-space-saving-carboy-lab-us-independence-day-sale-25'] %}
       {% if ezclear_carboy_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">EZclear PC Space-Saving Carboys</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if ezclear_carboy_collection.image %}
-              <img src="{{ ezclear_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezclear_carboy_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
@@ -2084,11 +2007,6 @@
           <div class="collection-header-content">
             <h2 class="collection-title">EZgrip® Autoclavable PP Carboys</h2>
           </div>
-          <div class="collection-header-image">
-            {% if ezgrip_carboy_collection.image %}
-              <img src="{{ ezgrip_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezgrip_carboy_collection.title }}">
-            {% endif %}
-          </div>
         </div>
         <div class="products-grid">
           {% for product in ezgrip_carboy_collection.products %}
@@ -2133,14 +2051,9 @@
       {% assign ezbio_carboy_collection = collections['ezbio-carboys-lab-us-independence-day-sale-25'] %}
       {% if ezbio_carboy_collection.products.size > 0 %}
       <div class="collection-section">
-        <div class="collection-header reverse">
+        <div class="collection-header">
           <div class="collection-header-content">
             <h2 class="collection-title">EZBio®  PP Carboys Assembly</h2>
-          </div>
-          <div class="collection-header-image">
-            {% if ezbio_carboy_collection.image %}
-              <img src="{{ ezbio_carboy_collection.image | img_url: '400x400' }}" alt="{{ ezbio_carboy_collection.title }}">
-            {% endif %}
           </div>
         </div>
         <div class="products-grid">
