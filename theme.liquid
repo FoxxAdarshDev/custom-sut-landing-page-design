@@ -64,17 +64,32 @@
       <meta name="robots" content="noindex">
     {% endif %}
 
-    <!-- Script to replce  the first slide image -->
+    <!-- Script to replace slide images and handle videos -->
    <script>
           window.addEventListener('load', function() {
-              const firstSlideImg = document.querySelector('.slick-slide[data-slick-index="0"] img');
-              if(firstSlideImg) {
-                  firstSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Rhino_carboy_and_bottles_promo-foxx-life-sciences-home-slideshow-v2.jpg?v=1750361081';
+              // Replace first slide image if it's not a video
+              const firstSlide = document.querySelector('.slick-slide[data-slick-index="0"]');
+              if(firstSlide) {
+                  const firstSlideImg = firstSlide.querySelector('img');
+                  const firstSlideVideo = firstSlide.querySelector('video');
+                  
+                  // Only replace image if there's no video
+                  if(firstSlideImg && !firstSlideVideo) {
+                      firstSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Rhino_carboy_and_bottles_promo-foxx-life-sciences-home-slideshow-v2.jpg?v=1750361081';
+                  }
               }
-              const secondSlideImg = document.querySelector('.slick-slide[data-slick-index="1"] img');
-              if(secondSlideImg) {
-               secondSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Website_ISO_13485_Banner-foxx-life-sciences-HomeSlideshow.jpg?v=1750425783';
-               }
+              
+              // Replace second slide image if it's not a video
+              const secondSlide = document.querySelector('.slick-slide[data-slick-index="1"]');
+              if(secondSlide) {
+                  const secondSlideImg = secondSlide.querySelector('img');
+                  const secondSlideVideo = secondSlide.querySelector('video');
+                  
+                  // Only replace image if there's no video
+                  if(secondSlideImg && !secondSlideVideo) {
+                      secondSlideImg.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Website_ISO_13485_Banner-foxx-life-sciences-HomeSlideshow.jpg?v=1750425783';
+                  }
+              }
           });
 
       </script>

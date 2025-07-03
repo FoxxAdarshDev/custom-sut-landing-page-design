@@ -1,17 +1,112 @@
+
 <section class="homepage-slider">
   {% for i in (1..8) %}
     {% capture slide %}slide_{{ i }}{% endcapture %}
     {% capture slide_link %}slide_{{ i }}_link{% endcapture %}
     {% capture slide_img %}slide_{{ i }}.jpg{% endcapture %}
     {% capture slide_alt %}slide_{{ i }}_alt{% endcapture %}
+    {% capture slide_is_video %}slide_{{ i }}_is_video{% endcapture %}
+    {% capture slide_video_url %}slide_{{ i }}_video_url{% endcapture %}
+    
     {% if settings[slide] %}
-      <div>
+      <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
-          {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
+          {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
+            <video 
+              class="slide-video" 
+              autoplay 
+              muted 
+              loop 
+              playsinline
+              style="width: 100%; height: 100%; object-fit: cover;"
+            >
+              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% else %}
+            {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
+          {% endif %}
         </a>
       </div>
     {% endif %}
   {% endfor %}
 </section>
 
-// setting
+<style>
+.homepage-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-item {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.slide-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.homepage-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure videos don't interfere with slider controls */
+.slick-slide video {
+  pointer-events: none;
+}
+
+.slick-slide.slick-active video {
+  pointer-events: auto;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize slider with video support
+  $('.homepage-slider').slick({
+    autoplay: {{ settings.slider_home_auto | json }},
+    autoplaySpeed: {{ settings.slider_home_rate | default: 5000 }},
+    fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+    dots: true,
+    arrows: true,
+    pauseOnHover: true,
+    pauseOnFocus: true
+  });
+
+  // Handle video playback in slider
+  $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+    // Pause current video
+    var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
+    if (currentVideo) {
+      currentVideo.pause();
+    }
+    
+    // Play next video
+    var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
+    if (nextVideo) {
+      nextVideo.play();
+    }
+  });
+
+  // Ensure first video plays when slider loads
+  setTimeout(function() {
+    var firstVideo = $('.homepage-slider .slick-active video')[0];
+    if (firstVideo) {
+      firstVideo.play();
+    }
+  }, 500);
+});
+</script>
