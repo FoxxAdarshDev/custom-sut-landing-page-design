@@ -120,13 +120,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $ !== 'undefined' && $.fn.slick) {
       // Initialize slider with video support
       $('.homepage-slider').slick({
-        autoplay: false, // Disable autoplay, we'll handle it manually for videos
-        autoplaySpeed: {{ settings.slider_home_rate | default: 5000 }},
+        autoplay: false, // Completely disable autoplay
         fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
         dots: true,
         arrows: true,
-        pauseOnHover: true,
-        pauseOnFocus: true,
+        pauseOnHover: false,
+        pauseOnFocus: false,
         cssEase: 'ease-in-out',
         speed: 500
       });
