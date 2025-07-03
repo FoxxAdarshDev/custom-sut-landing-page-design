@@ -1,6 +1,32 @@
 
 <style>
-  .homepage-slider { display:flex;}.homepage-slider { border: 2px solid transparent; /* Initial transparent border */ background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); /* Gradient border */ background-origin: border-box; background-clip: content-box, border-box; /* Clip the background to show only the border */ border-radius: 12px; /* Optional content rounding */}.homepage-slider img { border-radius: 12px; }
+  .homepage-slider { 
+    display: block !important; 
+    border: 2px solid transparent; 
+    background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); 
+    background-origin: border-box; 
+    background-clip: content-box, border-box; 
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .homepage-slider.slick-initialized {
+    opacity: 1;
+  }
+  
+  .homepage-slider img { 
+    border-radius: 12px; 
+  }
+  
+  /* Hide slides initially until slider is initialized */
+  .homepage-slider:not(.slick-initialized) .slide-item {
+    display: none;
+  }
+  
+  .homepage-slider:not(.slick-initialized) .slide-item:first-child {
+    display: block;
+  }
 </style>
 
 
@@ -81,38 +107,53 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize slider with video support
-  $('.homepage-slider').slick({
-    autoplay: {{ settings.slider_home_auto | json }},
-    autoplaySpeed: {{ settings.slider_home_rate | default: 5000 }},
-    fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
-    dots: true,
-    arrows: true,
-    pauseOnHover: true,
-    pauseOnFocus: true
-  });
+  // Wait for jQuery and Slick to be available
+  function initializeSlider() {
+    if (typeof $ !== 'undefined' && $.fn.slick) {
+      // Initialize slider with video support
+      $('.homepage-slider').slick({
+        autoplay: {{ settings.slider_home_auto | json }},
+        autoplaySpeed: {{ settings.slider_home_rate | default: 5000 }},
+        fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+        dots: true,
+        arrows: true,
+        pauseOnHover: true,
+        pauseOnFocus: true,
+        cssEase: 'ease-in-out',
+        speed: 500
+      });
 
-  // Handle video playback in slider
-  $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-    // Pause current video
-    var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
-    if (currentVideo) {
-      currentVideo.pause();
-    }
+      // Handle video playback in slider
+      $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // Pause current video
+        var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
+        if (currentVideo) {
+          currentVideo.pause();
+        }
 
-    // Play next video
-    var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
-    if (nextVideo) {
-      nextVideo.play();
-    }
-  });
+        // Play next video
+        var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
+        if (nextVideo) {
+          nextVideo.play();
+        }
+      });
 
-  // Ensure first video plays when slider loads
-  setTimeout(function() {
-    var firstVideo = $('.homepage-slider .slick-active video')[0];
-    if (firstVideo) {
-      firstVideo.play();
+      // Ensure first video plays when slider loads
+      $('.homepage-slider').on('init', function() {
+        setTimeout(function() {
+          var firstVideo = $('.homepage-slider .slick-active video')[0];
+          if (firstVideo) {
+            firstVideo.play();
+          }
+        }, 100);
+      });
+    } else {
+      // Retry if jQuery or Slick not loaded yet
+      setTimeout(initializeSlider, 100);
     }
-  }, 500);
+  }
+
+  // Start initialization
+  initializeSlider();
 });
 </script>
