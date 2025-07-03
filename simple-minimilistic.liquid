@@ -1516,15 +1516,63 @@
 
   <div class="tabs-container" id="products-section">
 
-    <!-- Bioprocess Products -->
+      <!-- Bioprocess Products -->
 
-      <!-- PC Rectangular Carboy Collection -->
-      {% assign pc_carboy_collection = collections['pc-rectangular-carboy-bioprocess-us-independence-day-sale-25'] %}
+      <!-- EZclear® Rectangular Carboy (PC) Collection - 20% Off -->
+      {% assign ezclear_carboy_collection = collections['ezclear-rectangular-carboy-pc-20-off-us-independence-day-sale-25'] %}
+      {% if ezclear_carboy_collection.products.size > 0 %}
+      <div class="collection-section">
+        <div class="collection-header">
+          <div class="collection-header-content">
+            <h2 class="collection-title">EZclear® Rectangular Carboy (PC)</h2>
+          </div>
+        </div>
+        <div class="products-grid">
+          {% for product in ezclear_carboy_collection.products %}
+          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
+            <div class="discount-badge">
+              <div class="discount-label">20% OFF</div>
+            </div>
+            <div class="product-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+              {% else %}
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+              {% endif %}
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                  </svg>
+                </div>
+              {% endif %}
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
+              </div>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- EZBio® Carboy (PC) Collection  - 20% Off -->
+      {% assign pc_carboy_collection = collections['ezbio-carboy-pc-20-off-us-independence-day-sale-25'] %}
       {% if pc_carboy_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Titanium Round Carboy (PC)</h2>
+            <h2 class="collection-title">EZBio® Carboy (PC)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1566,13 +1614,13 @@
       </div>
       {% endif %}
 
-      <!-- PC TR Carboy Collection -->
-      {% assign pc_tr_carboy_collection = collections['pc-tr-carboy-bioprocess-us-independence-day-sale-25'] %}
+      <!-- EZBio® Titanium Round Carboy (PC) Collection - 15% Off -->
+      {% assign pc_tr_carboy_collection = collections['ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25'] %}
       {% if pc_tr_carboy_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® TR Carboys</h2>
+            <h2 class="collection-title">EZBio® Titanium Round Carboy (PC)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1614,13 +1662,13 @@
       </div>
       {% endif %}
 
-      <!-- EZBio Bottles PC Collection -->
-      {% assign ezbio_bottles_collection = collections['ezbio-bottles-pc-bioprocess-us-independence-day-sale-25'] %}
+      <!-- EZBio® Media bottle (PC) Collection - 12% Off -->
+      {% assign ezbio_bottles_collection = collections['ezbio-media-bottle-pc-12-off-us-independence-day-sale-25', 'ezbio-media-bottle-pc-10-off-us-independence-day-sale-25'] %}
       {% if ezbio_bottles_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® Media Bottles</h2>
+            <h2 class="collection-title">EZBio® Media bottle (PC)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1661,13 +1709,13 @@
         </div>      </div>
       {% endif %}
 
-      <!-- EZBio TS Bottles Collection -->
-      {% assign ezbio_ts_bottles_collection = collections['ezbio-ts-bottles-bioprocess-us-independence-day-sale-25'] %}
+      <!-- EZBio® Titanium Square Media Bottles (PETG) Collection - 12% Off -->
+      {% assign ezbio_ts_bottles_collection = collections['ezbio-titanium-square-media-bottles-petg-12-off-us-independence-day-sale-25'] %}
       {% if ezbio_ts_bottles_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® TS Bottles</h2>
+            <h2 class="collection-title">EZBio® Titanium Square Media Bottles (PETG)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1709,8 +1757,8 @@
       </div>
       {% endif %}
 
-      <!-- PFA Bottles Collection -->
-      {% assign pfa_bottles_collection = collections['ezbio-pure-pfa-bottles-bioprocess-us-independence-day-sale-25'] %}
+      <!-- EZBio® Pure PFA Bottle Collection - 40% Off -->
+      {% assign pfa_bottles_collection = collections['ezbio-pure-pfa-bottle-40-off-us-independence-day-sale-25'] %}
       {% if pfa_bottles_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
@@ -1757,8 +1805,8 @@
       </div>
       {% endif %}
 
-      <!-- AQG Collection -->
-      {% assign aqg_collection = collections['cpc-aqg-sanitary-connector-bioprocess-us-independence-day-sale-25'] %}
+      <!-- CPC® AseptiQuik G Sanitary Connector Collection - 20% Off -->
+      {% assign aqg_collection = collections['cpc-aseptiquik-g-sanitary-connector-20-off-us-independence-day-sale-25'] %}
       {% if aqg_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
@@ -1768,6 +1816,54 @@
         </div>
         <div class="products-grid">
           {% for product in aqg_collection.products %}
+          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
+            <div class="discount-badge">
+              <div class="discount-label">20% OFF</div>
+            </div>
+            <div class="product-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+              {% else %}
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+              {% endif %}
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                  </svg>
+                </div>
+              {% endif %}
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
+              </div>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+   {% endif %}
+
+    <!-- CPC® AseptiQuik S Connector  Collection - 50% Off --> 
+    {% assign aqs_collection = collections['cpc-aseptiquik-s-connector-50-off-us-independence-day-sale-25'] %}
+      {% if aqs_collection.products.size > 0 %}
+      <div class="collection-section">
+        <div class="collection-header">
+          <div class="collection-header-content">
+            <h2 class="collection-title">CPC® AseptiQuik S Connector</h2>
+          </div>
+        </div>
+        <div class="products-grid">
+          {% for product in aqs_collection.products %}
           <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
             <div class="discount-badge">
               <div class="discount-label">50% OFF</div>
@@ -1803,15 +1899,15 @@
           {% endfor %}
         </div>
       </div>
-{% endif %}
+   {% endif %}
 
-      <!-- CPC Stream Thru Connectors Collection -->
-      {% assign cpc_stream_thru_connectors_collection = collections['cpc-stream-thru-connectors-bioprocess-us-independence-day-sale-25'] %}
+      <!-- CPC® Steam Thru Connectors Collection - 50% Off -->
+      {% assign cpc_stream_thru_connectors_collection = collections['cpc-steam-thru-connectors-50-off-us-independence-day-sale-25'] %}
       {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">CPC Steam Thru Connectors</h2>
+            <h2 class="collection-title">CPC® Steam Thru Connectors</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1853,13 +1949,13 @@
       </div>
       {% endif %}
 
-      <!-- EZBio Bottle Assembly PC Collection -->
-      {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-single-use-bottle-assembly-bioprocess-pc-us-independence-day-sale-25'] %}
+      <!-- EZBio® Bottle Assembly (PC) Collection - 12% Off -->
+      {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-12-off-us-independence-day-sale-25'] %}
       {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio® PC Bottle Assembly</h2>
+            <h2 class="collection-title">EZBio® Bottle Assembly (PC)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1903,13 +1999,13 @@
 
     <!-- Laboratory Products -->
 
-      <!-- EZLabpure Carboy Collection -->
-      {% assign ezlabpure_carboy_collection = collections['ezlabpure-20l-round-carboy-lab-us-independence-day-sale-25'] %}
+      <!-- EZLabpure™ Round Carboy (PP) Collection - 25% Off -->
+      {% assign ezlabpure_carboy_collection = collections['ezlabpure-round-carboy-pp-25-off-us-independence-day-sale-25'] %}
       {% if ezlabpure_carboy_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZLabpure™ Round Carboys</h2>
+            <h2 class="collection-title">EZLabpure™ Round Carboy (PP)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -1951,61 +2047,13 @@
       </div>
       {% endif %}
 
-      <!-- EZclear Carboy Collection -->
-      {% assign ezclear_carboy_collection = collections['ezclear-5l-pc-space-saving-carboy-lab-us-independence-day-sale-25'] %}
-      {% if ezclear_carboy_collection.products.size > 0 %}
-      <div class="collection-section">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">EZclear PC Space-Saving Carboys</h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezclear_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">32% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZgrip Carboy Collection -->
-      {% assign ezgrip_carboy_collection = collections['ezgrip-10l-autoclavable-pp-lab-us-independence-day-sale-25'] %}
+      <!-- EZgrip® Carboy (PP) Collection - 32% Off -->
+      {% assign ezgrip_carboy_collection = collections['ezgrip-carboy-pp-32-off-us-independence-day-sale-25'] %}
       {% if ezgrip_carboy_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZgrip® Autoclavable PP Carboys</h2>
+            <h2 class="collection-title">EZgrip® Carboy (PP)</h2>
           </div>
         </div>
         <div class="products-grid">
@@ -2047,17 +2095,65 @@
       </div>
       {% endif %}
 
-      <!-- EZBio Carboy Collection -->
-      {% assign ezbio_carboy_collection = collections['ezbio-carboys-lab-us-independence-day-sale-25'] %}
-      {% if ezbio_carboy_collection.products.size > 0 %}
+       <!-- EZBio® Carboy (PC) Lab Collection - 32% Off -->
+      {% assign ezbio_carboypc_collection = collections['ezbio-carboy-pc-lab-32-off-us-independence-day-sale-25'] %}
+      {% if ezbio_carboypc_collection.products.size > 0 %}
       <div class="collection-section">
         <div class="collection-header">
           <div class="collection-header-content">
-            <h2 class="collection-title">EZBio®  PP Carboys Assembly</h2>
+            <h2 class="collection-title">EZBio® Carboy (PC)</h2>
           </div>
         </div>
         <div class="products-grid">
-          {% for product in ezbio_carboy_collection.products %}
+          {% for product in ezbio_carboypc_collection.products %}
+          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
+            <div class="discount-badge">
+              <div class="discount-label">32% OFF</div>
+            </div>
+            <div class="product-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+              {% else %}
+                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+              {% endif %}
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">{{ product.title }}</h3>
+              {% if product.variants.first.sku != blank %}
+                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
+                  {{ product.variants.first.sku }}
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                  </svg>
+                </div>
+              {% endif %}
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ product.price | money_without_currency }}</span>
+                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
+              </div>
+              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }});">Shop Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- EZBio Carboy Collection -->
+      {% assign ezbio_carboypp_collection = collections['ezbio-carboy-pp-lab-32-off-us-independence-day-sale-25'] %}
+      {% if ezbio_carboypp_collection.products.size > 0 %}
+      <div class="collection-section">
+        <div class="collection-header">
+          <div class="collection-header-content">
+            <h2 class="collection-title">EZBio® Carboy (PP)</h2>
+          </div>
+        </div>
+        <div class="products-grid">
+          {% for product in ezbio_carboypp_collection.products %}
           <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
             <div class="discount-badge">
               <div class="discount-label">32% OFF</div>
