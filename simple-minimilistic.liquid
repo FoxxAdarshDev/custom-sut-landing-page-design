@@ -2580,11 +2580,6 @@ font-size: 0.9rem;
         </div>
 
         <button class="popup-add-to-cart" onclick="addToCart()">Add to Cart</button>
-
-        <div class="popup-recommended">
-                {% comment %} <h3>You might also like</h3>
-                <p>More products coming soon...</p> {% endcomment %}
-            </div>
         </div>
     </div>
 </div>
@@ -2803,16 +2798,11 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
         const discountLabel = productCard.querySelector('.discount-label');
         if (discountLabel) {
             const discountText = discountLabel.textContent;
-            discountPercentage = parseInt(discountText.replace(/[^\d]/g, ''));
+            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
 
-            // Get the actual final price that's already calculated on the card
-            const cardFinalPrice = productCard.querySelector('.final-price');
-            if (cardFinalPrice) {
-                const finalPriceText = cardFinalPrice.textContent.replace('$', '');
-                finalPrice = parseFloat(finalPriceText) * 100; // Convert back to cents
-            } else {
-                // Fallback calculation
-                finalPrice = productPrice - (productPrice * discountPercentage / 100);
+            // Calculate final price properly
+            if (discountPercentage > 0) {
+                finalPrice = productPrice * (1 - discountPercentage / 100);
             }
         }
     }
@@ -3279,13 +3269,16 @@ function getRelatedProducts() {
         }
 
         if (title && sku && image && salePrice && finalPrice && productId && variantId) {
+            const salePriceNum = parseFloat(salePrice.replace(/,/g, '')) || 0;
+            const finalPriceNum = parseFloat(finalPrice.replace(/,/g, '')) || 0;
+            
             relatedProducts.push({
                 id: productId,
                 title: title,
                 sku: sku,
                 image: image,
-                price: Math.round(parseFloat(salePrice) * 100), // Convert to cents
-                finalPrice: Math.round(parseFloat(finalPrice) * 100), // Convert to cents
+                price: Math.round(salePriceNum * 100), // Convert to cents
+                finalPrice: Math.round(finalPriceNum * 100), // Convert to cents
                 discount: discount,
                 variantId: variantId
             });
