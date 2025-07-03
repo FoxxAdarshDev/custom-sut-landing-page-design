@@ -115,33 +115,42 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Wait for jQuery and Slick to be available
-  function initializeSlider() {
-    if (typeof $ !== 'undefined' && $.fn.slick) {
+  // Override the existing expo.initSlickSlider function to handle videos
+  if (typeof expo !== 'undefined') {
+    expo.initSlickSlider = function(){
+      // Check if slider already exists and destroy it
+      if ($('.homepage-slider').hasClass('slick-initialized')) {
+        $('.homepage-slider').slick('unslick');
+      }
+      
       // Initialize slider with video support
-      $('.homepage-slider').slick({
-        autoplay: false, // Completely disable autoplay
-        fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+      $(".homepage-slider").slick({
         dots: true,
+        infinite: true,
+        speed: 500,
+        fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+        cssEase: 'linear',
+        autoplay: false, // Disable autoplay - videos will control timing
         arrows: true,
         pauseOnHover: false,
         pauseOnFocus: false,
-        cssEase: 'ease-in-out',
-        speed: 500
+        responsive: [
+          {
+              breakpoint: 480,
+              settings: {
+                arrows: false
+              }
+          }
+        ]
       });
 
       // Handle video playback in slider
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        // Pause current video
+        // Pause current video and reset to beginning
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
           currentVideo.pause();
-        }
-
-        // Play next video
-        var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
-        if (nextVideo) {
-          nextVideo.play();
+          currentVideo.currentTime = 0;
         }
       });
 
@@ -162,29 +171,29 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
+            firstVideo.currentTime = 0;
             firstVideo.play();
           }
-        }, 100);
+        }, 500);
       });
 
-      // Handle slide changes - only play videos, no autoplay for images
+      // Handle slide changes - play videos immediately
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
         
         if (video) {
+          video.currentTime = 0;
           video.play();
         }
-        // Removed autoplay for image slides - only videos control advancement
       });
-    } else {
-      // Retry if jQuery or Slick not loaded yet
-      setTimeout(initializeSlider, 100);
+    };
+
+    // Reinitialize the slider if expo is already loaded
+    if (typeof $ !== 'undefined' && $.fn.slick) {
+      expo.initSlickSlider();
     }
   }
-
-  // Start initialization
-  initializeSlider();
 });
 </script>
 
