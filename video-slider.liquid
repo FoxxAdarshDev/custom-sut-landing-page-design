@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $ !== 'undefined' && $.fn.slick) {
       // Initialize slider with video support
       $('.homepage-slider').slick({
-        autoplay: {{ settings.slider_home_auto | json }},
+        autoplay: false, // Disable autoplay, we'll handle it manually for videos
         autoplaySpeed: {{ settings.slider_home_rate | default: 5000 }},
         fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
         dots: true,
@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle video end event to auto-advance slide
       $('.homepage-slider').on('init', function(event, slick) {
+        var autoplayTimer;
+        
         // Add event listeners to all videos
         $(slick.$slides).each(function() {
           var video = $(this).find('video')[0];
@@ -160,13 +162,34 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Ensure first video plays when slider loads
+        // Function to start autoplay timer for image slides
+        function startAutoplayTimer() {
+          if (autoplayTimer) clearTimeout(autoplayTimer);
+          
+          var currentSlide = $('.homepage-slider .slick-active');
+          var hasVideo = currentSlide.find('video').length > 0;
+          
+          if (!hasVideo && {{ settings.slider_home_auto | json }}) {
+            autoplayTimer = setTimeout(function() {
+              $('.homepage-slider').slick('slickNext');
+            }, {{ settings.slider_home_rate | default: 5000 }});
+          }
+        }
+
+        // Start autoplay timer for the first slide if it's an image
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
             firstVideo.play();
+          } else {
+            startAutoplayTimer();
           }
         }, 100);
+
+        // Restart autoplay timer when slide changes
+        $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
+          startAutoplayTimer();
+        });
       });
     } else {
       // Retry if jQuery or Slick not loaded yet
