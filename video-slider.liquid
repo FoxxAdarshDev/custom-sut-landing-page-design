@@ -168,6 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
       $('.homepage-slider').on('beforeChange.videoSlider', function(event, slick, currentSlide, nextSlide) {
         console.log('Slide changing from', currentSlide, 'to', nextSlide);
         
+        // Clear any existing timers
+        if (window.slideTimer) {
+          clearTimeout(window.slideTimer);
+          console.log('Cleared slide timer');
+        }
+        
         // Pause and reset current video
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
@@ -182,6 +188,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
+        var image = currentSlideElement.find('img')[0];
+        
+        // Clear any existing timers
+        if (window.slideTimer) {
+          clearTimeout(window.slideTimer);
+        }
         
         if (video) {
           // Remove any existing event listeners to prevent duplicates
@@ -197,6 +209,13 @@ document.addEventListener('DOMContentLoaded', function() {
           }).catch(function(error) {
             console.log('Video autoplay failed:', error);
           });
+        } else if (image) {
+          // For image slides, set 12-second timer
+          console.log('Image slide detected, setting 12-second timer');
+          window.slideTimer = setTimeout(function() {
+            console.log('12-second timer completed, advancing to next slide');
+            $('.homepage-slider').slick('slickNext');
+          }, 12000); // 12 seconds for images
         }
       });
 
@@ -206,10 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.homepage-slider').slick('slickNext');
       }
 
-      // Start first video after initialization
+      // Start first video or image timer after initialization
       setTimeout(function() {
         var firstSlide = $('.homepage-slider .slick-active');
         var firstVideo = firstSlide.find('video')[0];
+        var firstImage = firstSlide.find('img')[0];
         
         if (firstVideo) {
           firstVideo.removeEventListener('ended', handleVideoEnd);
@@ -220,6 +240,12 @@ document.addEventListener('DOMContentLoaded', function() {
           }).catch(function(error) {
             console.log('First video autoplay failed:', error);
           });
+        } else if (firstImage) {
+          console.log('First slide is image, setting 12-second timer');
+          window.slideTimer = setTimeout(function() {
+            console.log('First slide 12-second timer completed, advancing to next slide');
+            $('.homepage-slider').slick('slickNext');
+          }, 12000); // 12 seconds for images
         }
       }, 1000);
     }
