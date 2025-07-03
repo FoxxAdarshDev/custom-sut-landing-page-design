@@ -47,16 +47,22 @@
       <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
-            <video 
-              class="slide-video" 
-              muted 
-              playsinline
-              preload="metadata"
-              style="width: 100%; height: 100%; object-fit: cover; background: transparent;"
-            >
-              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+            <div class="video-container">
+              <div class="video-loading-placeholder">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Loading video...</div>
+              </div>
+              <video 
+                class="slide-video" 
+                muted 
+                playsinline
+                preload="metadata"
+                style="width: 100%; height: 100%; object-fit: cover; background: transparent; opacity: 0;"
+              >
+                <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
           {% else %}
             {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
           {% endif %}
@@ -109,6 +115,57 @@
   max-height: 100%;
 }
 
+/* Video container and loading placeholder */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-loading-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.video-loading-placeholder.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e3e3e3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 /* Ensure videos don't interfere with slider controls */
 .slick-slide video {
   pointer-events: none;
@@ -127,14 +184,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Preload all videos with better loading handling
   document.querySelectorAll('.slide-video').forEach(function(video, index) {
+    const placeholder = video.parentElement.querySelector('.video-loading-placeholder');
+    
     // Set up video for better initial loading
     video.muted = true;
     video.playsInline = true;
     video.preload = 'auto';
     video.style.background = 'transparent';
+    video.style.opacity = '0';
     
     video.addEventListener('loadeddata', function() {
       console.log('Video loaded:', video.src);
+      // Hide placeholder and show video
+      if (placeholder) {
+        placeholder.classList.add('hidden');
+      }
+      video.style.opacity = '1';
+      
       videosReady++;
       if (videosReady === totalVideos || totalVideos === 0) {
         initSliderWithVideos();
@@ -144,10 +210,19 @@ document.addEventListener('DOMContentLoaded', function() {
     video.addEventListener('canplay', function() {
       // Ensure video is ready to play
       console.log('Video can play:', video.src);
+      if (placeholder) {
+        placeholder.classList.add('hidden');
+      }
+      video.style.opacity = '1';
     });
     
     video.addEventListener('error', function() {
       console.error('Video failed to load:', video.src);
+      // Show error in placeholder
+      if (placeholder) {
+        placeholder.innerHTML = '<div style="color: #dc3545; text-align: center;"><div style="font-size: 24px; margin-bottom: 10px;">⚠️</div><div>Video failed to load</div></div>';
+      }
+      
       videosReady++;
       if (videosReady === totalVideos) {
         initSliderWithVideos();
@@ -210,16 +285,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (video) {
             console.log('New video slide active:', currentSlide);
+            var placeholder = currentSlideElement.find('.video-loading-placeholder')[0];
+            
             // For video slides - ensure video is ready and play
             setTimeout(function() {
               video.currentTime = 0;
               video.muted = true;
+              
+              // Hide placeholder when video starts playing
+              video.addEventListener('playing', function() {
+                if (placeholder) {
+                  placeholder.classList.add('hidden');
+                }
+                video.style.opacity = '1';
+              });
               
               // Better video play handling
               video.play().then(function() {
                 console.log('Video playing on slide:', currentSlide);
               }).catch(function(error) {
                 console.log('Video play failed on slide:', currentSlide, error);
+                // Show error in placeholder
+                if (placeholder) {
+                  placeholder.innerHTML = '<div style="color: #dc3545; text-align: center;"><div style="font-size: 24px; margin-bottom: 10px;">⚠️</div><div>Playback failed</div></div>';
+                  placeholder.classList.remove('hidden');
+                }
                 // If video fails, advance to next slide after 3 seconds
                 setTimeout(function() {
                   $('.homepage-slider').slick('slickNext');
