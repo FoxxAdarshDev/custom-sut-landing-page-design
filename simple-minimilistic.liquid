@@ -511,7 +511,6 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    cursor: pointer;
   }
 
   .product-sku {
@@ -960,42 +959,18 @@
 }
 
 .popup-product-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1d1d1f;
-    margin-bottom: 8px;
-    line-height: 1.3;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    padding-right: 20px;
-  }
-
-  .popup-product-title:hover {
-    color: #0071ce;
-    text-decoration: underline;
-  }
-
-  .popup-product-title::after {
-    content: '🔗';
-    position: absolute;
-    right: 0;
-    top: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-size: 0.8rem;
-  }
-
-  .popup-product-title:hover::after {
-    opacity: 1;
-  }
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  text-align: center;
+}
 
 .popup-product-sku {
 ```html
   font-size: 14px;
   color: #86868b;
-  ```html
   margin-bottom: 12px;
   text-align: center;
 }
@@ -1010,23 +985,22 @@
 }
 
 .popup-original-price {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 14px;
-  }
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+}
 
-  .popup-sale-price {
-    color: #666;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: line-through;
-  }
+.popup-sale-price {
+  color: #0071ce;
+  font-size: 18px;
+  font-weight: 600;
+}
 
-  .popup-final-price {
-    color: #dc3545;
-    font-size: 24px;
-    font-weight: 700;
-  }
+.popup-final-price {
+  color: #dc3545;
+  font-size: 20px;
+  font-weight: 700;
+}
 
 .popup-smart-savings {
   background: #f8f9fa;
@@ -1567,7 +1541,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1615,7 +1589,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1663,7 +1637,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1717,13 +1691,13 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
                   <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
                   </svg>
                 </div>
               {% endif %}
@@ -1752,13 +1726,13 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
                   <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012-2v1"></path>
                   </svg>
                 </div>
               {% endif %}
@@ -1787,7 +1761,7 @@
           </div>
         </div>
         <div class="products-grid">
-          {% for product in ezbio_tsbottles_collection.products %}
+          {% for product in ezbio_ts_bottles_collection.products %}
           <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
             <div class="discount-badge">
               <div class="discount-label">12% OFF</div>
@@ -1800,7 +1774,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1848,7 +1822,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1896,7 +1870,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1944,7 +1918,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -1992,7 +1966,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2040,7 +2014,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2090,7 +2064,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2138,7 +2112,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2186,7 +2160,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2234,7 +2208,7 @@
               {% endif %}
             </div>
             <div class="product-content">
-              <h3 class="product-title" onclick="copyProductUrl('{{ product.url | prepend: shop.url }}', event)">{{ product.title }}</h3>
+              <h3 class="product-title">{{ product.title }}</h3>
               {% if product.variants.first.sku != blank %}
                 <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
                   {{ product.variants.first.sku }}
@@ -2274,7 +2248,7 @@
             <img id="popupProductImage" src="" alt="Product Image">
         </div>
 
-        <h2 class="popup-product-title" id="popupProductTitle" onclick="copyPopupProductUrl(event)"></h2>
+        <h2 class="popup-product-title" id="popupProductTitle"></h2>
         <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
 
         <div class="popup-product-price">
@@ -2502,49 +2476,7 @@ function toggleSavings(event, element) {
         });
 }
 
-function copyProductUrl(url, event) {
-    event.stopPropagation();
-    navigator.clipboard.writeText(url)
-        .then(() => {
-            // Show toast notification
-            const toast = document.createElement('div');
-            toast.classList.add('toast');
-            toast.textContent = 'Product URL copied!';
-            document.body.appendChild(toast);
-            // Animate toast
-            setTimeout(() => {
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    setTimeout(() => {
-                        if (document.body.contains(toast)) {
-                            document.body.removeChild(toast);
-                        }
-                    }, 300); // Duration of fade-out
-                }, 2000); // Display duration
-            }, 100); // Small delay before fade-in
-        })
-        .catch(err => {
-            console.error('Could not copy URL: ', err);
-            // Fallback toast for error
-            const errorToast = document.createElement('div');
-            errorToast.classList.add('toast');
-            errorToast.textContent = 'Failed to copy URL. Please try again.';
-            errorToast.style.background = '#dc3545';
-            document.body.appendChild(errorToast);
-            setTimeout(() => {
-                errorToast.classList.add('show');
-                setTimeout(() => {
-                    errorToast.classList.remove('show');
-                    setTimeout(() => {
-                        if (document.body.contains(errorToast)) {
-                            document.body.removeChild(errorToast);
-                        }
-                    }, 300);
-                }, 2000);
-            }, 100);
-        });
-}
+
 // Add to cart functionality with popup
 let selectedProductId;
 let selectedProductTitle;
@@ -2554,50 +2486,6 @@ let selectedProductPrice;
 let selectedProductVariantId;
 let selectedProductDiscount;
 
-function copyPopupProductUrl(event) {
-    event.stopPropagation();
-    const productUrl = window.location.href; // You may need to construct the URL differently
-    navigator.clipboard.writeText(productUrl)
-        .then(() => {
-            // Show toast notification
-            const toast = document.createElement('div');
-            toast.classList.add('toast');
-            toast.textContent = 'Product URL copied!';
-            document.body.appendChild(toast);
-            // Animate toast
-            setTimeout(() => {
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    setTimeout(() => {
-                        if (document.body.contains(toast)) {
-                            document.body.removeChild(toast);
-                        }
-                    }, 300); // Duration of fade-out
-                }, 2000); // Display duration
-            }, 100); // Small delay before fade-in
-        })
-        .catch(err => {
-            console.error('Could not copy URL: ', err);
-            // Fallback toast for error
-            const errorToast = document.createElement('div');
-            errorToast.classList.add('toast');
-            errorToast.textContent = 'Failed to copy URL. Please try again.';
-            errorToast.style.background = '#dc3545';
-            document.body.appendChild(errorToast);
-            setTimeout(() => {
-                errorToast.classList.add('show');
-                setTimeout(() => {
-                    errorToast.classList.remove('show');
-                    setTimeout(() => {
-                        if (document.body.contains(errorToast)) {
-                            document.body.removeChild(errorToast);
-                        }
-                    }, 300);
-                }, 2000);
-            }, 100);
-        });
-}
 
 function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, event) {
     selectedProductId = productId;
