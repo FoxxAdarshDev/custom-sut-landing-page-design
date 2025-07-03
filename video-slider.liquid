@@ -148,8 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle video end event to auto-advance slide
       $('.homepage-slider').on('init', function(event, slick) {
-        var autoplayTimer;
-        
         // Add event listeners to all videos
         $(slick.$slides).each(function() {
           var video = $(this).find('video')[0];
@@ -161,49 +159,24 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Function to start autoplay timer for image slides
-        function startAutoplayTimer() {
-          if (autoplayTimer) clearTimeout(autoplayTimer);
-          
-          var currentSlide = $('.homepage-slider .slick-active');
-          var hasVideo = currentSlide.find('video').length > 0;
-          
-          if (!hasVideo && {{ settings.slider_home_auto | json }}) {
-            autoplayTimer = setTimeout(function() {
-              $('.homepage-slider').slick('slickNext');
-            }, {{ settings.slider_home_rate | default: 5000 }});
-          }
-        }
-
-        // Start autoplay timer for the first slide if it's an image
+        // Start first video if present
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
             firstVideo.play();
-          } else {
-            startAutoplayTimer();
           }
         }, 100);
       });
 
-      // Restart autoplay timer when slide changes (outside of init event)
+      // Handle slide changes - only play videos, no autoplay for images
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
         var currentSlideElement = $(slick.$slides[currentSlide]);
-        var hasVideo = currentSlideElement.find('video').length > 0;
+        var video = currentSlideElement.find('video')[0];
         
-        if (hasVideo) {
-          var video = currentSlideElement.find('video')[0];
-          if (video) {
-            video.play();
-          }
-        } else {
-          // Start autoplay timer for image slides
-          if ({{ settings.slider_home_auto | json }}) {
-            setTimeout(function() {
-              $('.homepage-slider').slick('slickNext');
-            }, {{ settings.slider_home_rate | default: 5000 }});
-          }
+        if (video) {
+          video.play();
         }
+        // Removed autoplay for image slides - only videos control advancement
       });
     } else {
       // Retry if jQuery or Slick not loaded yet
