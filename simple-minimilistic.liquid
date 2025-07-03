@@ -1247,6 +1247,11 @@ font-size: 0.9rem;
   border-left-color: #dc3545;
 }
 
+.cart-notification.coupon-notification {
+  border-left-color: #ffd700;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+}
+
 .cart-notification.show {
   opacity: 1;
   transform: translateX(0);
@@ -1276,10 +1281,20 @@ font-size: 0.9rem;
   background: #dc3545;
 }
 
+.cart-notification.coupon-notification .notification-icon {
+  background: #ffd700;
+  color: #333;
+  font-size: 16px;
+}
+
 .notification-text {
   font-size: 14px;
   font-weight: 500;
   color: #1d1d1f;
+}
+
+.cart-notification.coupon-notification .notification-text {
+  color: #333;
 }
 
 /* Checkout Section */
@@ -1426,6 +1441,181 @@ font-size: 0.9rem;
   text-align: center;
 }
 
+/* Validation Modal Styles */
+.popup-validation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10003;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-validation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.popup-validation-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.popup-validation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.popup-validation-header h3 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 18px;
+}
+
+.popup-validation-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.popup-validation-body {
+  padding: 24px;
+}
+
+.validation-info {
+  margin-bottom: 20px;
+}
+
+.validation-info p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.amount-needed {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.security-notice {
+  background: #e3f2fd;
+  border: 1px solid #1976d2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.security-icon {
+  font-size: 16px;
+}
+
+.security-text {
+  font-size: 13px;
+  color: #1976d2;
+  line-height: 1.4;
+}
+
+.popup-validation-footer {
+  padding: 20px 24px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.validation-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.validation-btn.primary {
+  background: #0071ce;
+  color: white;
+}
+
+.validation-btn.primary:hover {
+  background: #005ba6;
+}
+
+.validation-btn.secondary {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.validation-btn.secondary:hover {
+  background: #e0e0e0;
+}
+
+/* Popup validation warning */
+.popup-validation-warning {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.validation-icon {
+  font-size: 16px;
+  color: #856404;
+}
+
+.validation-content {
+  flex: 1;
+}
+
+.validation-title {
+  font-weight: 600;
+  color: #856404;
+  margin: 0 0 4px 0;
+  font-size: 14px;
+}
+
+.validation-message {
+  margin: 0;
+  font-size: 13px;
+  color: #856404;
+  line-height: 1.4;
+}
+
+/* Disabled checkout button */
+.checkout-btn.disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.checkout-btn.disabled:hover {
+  background: #f5f5f5;
+  transform: none;
+}
+
 /* Mobile Responsive */
 @media (max-width: 480px) {
   .add-to-cart-popup {
@@ -1475,6 +1665,19 @@ font-size: 0.9rem;
 
   .popup-savings-price {
     font-size: 9px;
+  }
+
+  .popup-validation-content {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .popup-validation-footer {
+    flex-direction: column;
+  }
+
+  .validation-btn {
+    width: 100%;
   }
 }
 </style>
@@ -2695,6 +2898,11 @@ function addToCart() {
         // Show success notification
         showAddToCartSuccess();
 
+        // Check for automatic coupon codes after adding to cart
+        setTimeout(() => {
+            checkForAutomaticCoupons();
+        }, 1000);
+
         // Update cart count and show checkout section now that cart has items
         updateCartInfo();
 
@@ -2711,6 +2919,60 @@ function addToCart() {
         console.error('Error adding to cart:', error);
         showAddToCartError();
     });
+}
+
+function checkForAutomaticCoupons() {
+    // Fetch current cart to check if automatic coupons were applied
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+        // Update current cart total
+        currentCartTotal = cart.total_price;
+        currentCartCount = cart.item_count;
+
+        // Check if there are any discounts applied
+        if (cart.discounts && cart.discounts.length > 0) {
+            // Show notification about automatic discount
+            showAutomaticCouponNotification(cart.discounts);
+        }
+
+        // Update checkout button status
+        updateCartInfo();
+    })
+    .catch(error => {
+        console.error('Error checking for automatic coupons:', error);
+    });
+}
+
+function showAutomaticCouponNotification(discounts) {
+    const notification = document.createElement('div');
+    notification.classList.add('cart-notification', 'success', 'coupon-notification');
+    
+    const discountNames = discounts.map(d => d.title).join(', ');
+    const totalSavings = discounts.reduce((sum, d) => sum + (d.amount || 0), 0);
+    
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">🎉</span>
+            <div class="notification-text">
+                <strong>Automatic Discount Applied!</strong><br>
+                ${discountNames} - Save $${(totalSavings / 100).toFixed(2)}
+            </div>
+        </div>
+    `;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 4000); // Show longer for coupon notifications
+    }, 100);
 }
 
 function showAddToCartSuccess() {
@@ -2765,6 +3027,7 @@ function showAddToCartError() {
 // Global cart info
 let currentCartCount = 0;
 let currentCartTotal = 0;
+const MINIMUM_ORDER_VALUE = 10000; // $100 in cents
 
 function updateCartInfo() {
     // Fetch current cart information
@@ -2803,6 +3066,10 @@ function updateCheckoutButton() {
         addToCartButton.parentNode.insertBefore(checkoutSection, addToCartButton.nextSibling);
     }
 
+    // Check if cart meets minimum order value
+    const meetsMinimum = currentCartTotal >= MINIMUM_ORDER_VALUE;
+    const remaining = MINIMUM_ORDER_VALUE - currentCartTotal;
+
     // Get actual products from the page (excluding current product)
     const relatedProducts = getRelatedProducts();
 
@@ -2840,11 +3107,30 @@ function updateCheckoutButton() {
         `;
     }
 
-    const cartText = `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})`;
+    // Create validation warning if minimum not met
+    let validationHTML = '';
+    if (!meetsMinimum) {
+        validationHTML = `
+            <div class="popup-validation-warning">
+                <div class="validation-icon">⚠️</div>
+                <div class="validation-content">
+                    <p class="validation-title">Minimum Order Required</p>
+                    <p class="validation-message">
+                        Add <strong>$${(remaining / 100).toFixed(2)}</strong> more to reach the minimum order value of <strong>$${(MINIMUM_ORDER_VALUE / 100).toFixed(2)}</strong>
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    const cartText = meetsMinimum 
+        ? `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})` 
+        : `🔒 Minimum Order Required`;
 
     checkoutSection.innerHTML = `
+        ${validationHTML}
         <div class="checkout-buttons">
-            <button class="checkout-btn primary" onclick="proceedToCheckout()">
+            <button class="checkout-btn ${meetsMinimum ? 'primary' : 'disabled'}" onclick="proceedToCheckout()" ${!meetsMinimum ? 'disabled' : ''}>
                 <span class="checkout-icon"></span>
                 ${cartText}
             </button>
@@ -2927,8 +3213,86 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
 }
 
 function proceedToCheckout() {
-    // Redirect to Shopify checkout page directly
-    window.location.href = '/checkout';
+    // Validate minimum order before proceeding
+    if (currentCartTotal < MINIMUM_ORDER_VALUE) {
+        showMinimumOrderModal();
+        return;
+    }
+
+    // Additional validation - check for automatic coupon codes
+    validateCartAndProceed();
+}
+
+function validateCartAndProceed() {
+    // Fetch current cart to check for automatic discounts
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+        // Update current total in case automatic coupons were applied
+        currentCartTotal = cart.total_price;
+        
+        // Check again after potential coupon application
+        if (currentCartTotal < MINIMUM_ORDER_VALUE) {
+            showMinimumOrderModal();
+            return;
+        }
+
+        // Proceed to checkout
+        window.location.href = '/checkout';
+    })
+    .catch(error => {
+        console.error('Error validating cart:', error);
+        // Proceed anyway if validation fails
+        window.location.href = '/checkout';
+    });
+}
+
+function showMinimumOrderModal() {
+    const remaining = MINIMUM_ORDER_VALUE - currentCartTotal;
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div class="popup-validation-modal" id="popup-validation-modal">
+            <div class="popup-validation-overlay" onclick="closeValidationModal()"></div>
+            <div class="popup-validation-content">
+                <div class="popup-validation-header">
+                    <h3>🛒 Minimum Order Required</h3>
+                    <button class="popup-validation-close" onclick="closeValidationModal()">×</button>
+                </div>
+                <div class="popup-validation-body">
+                    <div class="validation-info">
+                        <p><strong>Current Total:</strong> $${(currentCartTotal / 100).toFixed(2)}</p>
+                        <p><strong>Required Minimum:</strong> $${(MINIMUM_ORDER_VALUE / 100).toFixed(2)}</p>
+                        <p class="amount-needed"><strong>Amount Needed:</strong> $${(remaining / 100).toFixed(2)}</p>
+                    </div>
+                    <div class="security-notice">
+                        <div class="security-icon">🛡️</div>
+                        <span class="security-text">This validation is enforced server-side and cannot be bypassed. Your cart must meet the minimum order requirement to proceed.</span>
+                    </div>
+                </div>
+                <div class="popup-validation-footer">
+                    <button class="validation-btn primary" onclick="continueShopping()">🛍️ Continue Shopping</button>
+                    <button class="validation-btn secondary" onclick="closeValidationModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to page
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Show modal
+    const modal = document.getElementById('popup-validation-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeValidationModal() {
+    const modal = document.getElementById('popup-validation-modal');
+    if (modal) {
+        modal.remove();
+    }
+    document.body.style.overflow = 'auto';
 }
 
 function continueShopping() {
