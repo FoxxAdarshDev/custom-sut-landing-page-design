@@ -43,24 +43,19 @@
     {% capture slide_video_url %}slide_{{ i }}_video_url{% endcapture %}
 
     {% if settings[slide] %}
-      <div class="slide-item{% if settings[slide_is_video] and settings[slide_video_url] != blank %} has-video{% endif %}" data-slide-index="{{ forloop.index0 }}">
+      <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <video 
               class="slide-video" 
+              autoplay 
               muted 
               playsinline
-              preload="metadata"
-              onloadstart="this.style.opacity='0'; this.style.transition='opacity 0.3s';"
-              oncanplay="this.style.opacity='1';"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width: 100%; height: 100%; object-fit: cover;"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-            <div class="video-fallback" style="display: none; width: 100%; height: 100%; background: #f8f9fa; align-items: center; justify-content: center; font-size: 1.2rem; color: #666;">
-              Video Loading...
-            </div>
           {% else %}
             {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
           {% endif %}
@@ -76,15 +71,11 @@
 .slide-item {
   position: relative;
   width: 100%;
-  height: 450px; /* Default height for images */
+  height: 500px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.slide-item.has-video {
-  height: 600px; /* Increased height only for video slides */
 }
 
 .slide-link {
@@ -99,10 +90,9 @@
 .slide-video {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Changed back to contain to prevent cropping */
+  object-fit: cover;
   max-width: 100%;
   max-height: 100%;
-  background-color: #f8f9fa; /* Light background for video container */
 }
 
 .homepage-slider img {
@@ -213,52 +203,24 @@ document.addEventListener('DOMContentLoaded', function() {
           // Remove any existing event listeners from ALL videos to prevent duplicates
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
-            this.removeEventListener('loadeddata', handleVideoReady);
           });
           
           // Add new event listener only to current video
           video.addEventListener('ended', handleVideoEnd);
-          video.addEventListener('loadeddata', handleVideoReady);
           
-          // Reset video
+          // Reset and play video
           video.currentTime = 0;
-          
-          // Check if video is ready to play
-          if (video.readyState >= 2) {
-            // Video is ready, play it
-            video.play().then(function() {
-              console.log('Video started playing on slide', currentSlide);
-            }).catch(function(error) {
-              console.log('Video autoplay failed:', error);
-              setFallbackTimer();
-            });
-          } else {
-            // Wait for video to be ready
-            console.log('Video not ready, waiting for loadeddata event');
-            setFallbackTimer(); // Set fallback timer in case video never loads
-          }
-          
-          function handleVideoReady() {
-            console.log('Video ready, attempting to play');
-            video.play().then(function() {
-              console.log('Video started playing after ready event');
-              // Clear fallback timer since video is playing
-              if (window.slideTimer) {
-                clearTimeout(window.slideTimer);
-                window.slideTimer = null;
-              }
-            }).catch(function(error) {
-              console.log('Video play failed after ready:', error);
-            });
-          }
-          
-          function setFallbackTimer() {
-            console.log('Setting 12-second fallback timer for video');
+          video.play().then(function() {
+            console.log('Video started playing on slide', currentSlide);
+          }).catch(function(error) {
+            console.log('Video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('Video failed, setting 12-second fallback timer');
             window.slideTimer = setTimeout(function() {
               console.log('Video fallback timer completed, advancing to next slide');
               $('.homepage-slider').slick('slickNext');
             }, 12000);
-          }
+          });
         } else if (image) {
           // For image slides, set 12-second timer
           console.log('Image slide detected, setting 12-second timer');
@@ -304,47 +266,21 @@ document.addEventListener('DOMContentLoaded', function() {
           // Remove any existing event listeners from ALL videos
           $('.homepage-slider video').each(function() {
             this.removeEventListener('ended', handleVideoEnd);
-            this.removeEventListener('loadeddata', handleFirstVideoReady);
           });
           
           firstVideo.addEventListener('ended', handleVideoEnd);
-          firstVideo.addEventListener('loadeddata', handleFirstVideoReady);
           firstVideo.currentTime = 0;
-          
-          // Check if video is ready
-          if (firstVideo.readyState >= 2) {
-            firstVideo.play().then(function() {
-              console.log('First video started playing');
-            }).catch(function(error) {
-              console.log('First video autoplay failed:', error);
-              setFirstVideoFallback();
-            });
-          } else {
-            console.log('First video not ready, waiting...');
-            setFirstVideoFallback(); // Set fallback timer
-          }
-          
-          function handleFirstVideoReady() {
-            console.log('First video ready, attempting to play');
-            firstVideo.play().then(function() {
-              console.log('First video started playing after ready event');
-              // Clear fallback timer since video is playing
-              if (window.slideTimer) {
-                clearTimeout(window.slideTimer);
-                window.slideTimer = null;
-              }
-            }).catch(function(error) {
-              console.log('First video play failed after ready:', error);
-            });
-          }
-          
-          function setFirstVideoFallback() {
-            console.log('Setting fallback timer for first video');
+          firstVideo.play().then(function() {
+            console.log('First video started playing');
+          }).catch(function(error) {
+            console.log('First video autoplay failed:', error);
+            // If video fails to play, treat as image with 12-second timer
+            console.log('First video failed, setting 12-second fallback timer');
             window.slideTimer = setTimeout(function() {
               console.log('First slide fallback timer completed, advancing to next slide');
               $('.homepage-slider').slick('slickNext');
             }, 12000);
-          }
+          });
         } else if (firstImage) {
           console.log('First slide is image, setting 12-second timer');
           window.slideTimer = setTimeout(function() {
