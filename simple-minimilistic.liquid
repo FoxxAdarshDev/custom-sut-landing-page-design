@@ -3074,7 +3074,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     // Show related products in left column on desktop only if cart has items
     setTimeout(() => {
-        if (currentCartCount > 0) {
+        if (currentCartCount > 0 && window.innerWidth >= 768) {
             updateLeftColumnRelatedProducts();
         }
     }, 500);
@@ -3341,9 +3341,9 @@ function updateCheckoutButton() {
     const meetsMinimum = currentCartTotal >= MINIMUM_ORDER_VALUE;
     const remaining = MINIMUM_ORDER_VALUE - currentCartTotal;
 
-    // Get actual products from the page (excluding current product) - only show if cart has items
+    // Get actual products from the page (excluding current product) - only show if cart has items and on mobile
     let relatedProductsHTML = '';
-    if (currentCartCount > 0) {
+    if (currentCartCount > 0 && window.innerWidth < 768) {
         const relatedProducts = getRelatedProducts();
 
         if (relatedProducts.length > 0) {
@@ -3370,7 +3370,7 @@ function updateCheckoutButton() {
                     </div>
                 </div>
             `;
-        } else {
+        } else if (window.innerWidth < 768) {
             relatedProductsHTML = `
                 <div class="related-products-section">
                     <h3>💡 You might also like</h3>
@@ -3477,8 +3477,8 @@ function updateLeftColumnRelatedProducts() {
     const leftRelatedGrid = document.getElementById('leftRelatedProductsGrid');
     
     if (leftRelatedSection && leftRelatedGrid) {
-        // Only show if cart has items
-        if (currentCartCount === 0) {
+        // Only show if cart has items and on desktop
+        if (currentCartCount === 0 || window.innerWidth < 768) {
             leftRelatedSection.style.display = 'none';
             return;
         }
