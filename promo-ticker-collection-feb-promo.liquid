@@ -34,7 +34,7 @@
     }
 
     .ticker-item {
-      display: flex;
+      /* display: flex; */
       margin-right: 0px;
       vertical-align: middle;
       margin-bottom: 5px;
@@ -166,14 +166,14 @@
     <!-- discount Offer -->
     <div class="ticker-item {{ template | split: '.' | first }} default-discount">
       <div class="discount-svg-icon {{ template | split: '.' | first }}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16" fill="none">
+        {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M10.0688 2.95233C10.1311 2.98844 10.1793 3.0446 10.2055 3.11164C10.2318 3.17868 10.2345 3.25263 10.2133 3.32142L9.06719 7.04542H11.1818C11.244 7.0454 11.3048 7.06357 11.3567 7.0977C11.4086 7.13183 11.4494 7.18042 11.4741 7.23747C11.4987 7.29452 11.5061 7.35754 11.4953 7.41875C11.4846 7.47995 11.4561 7.53666 11.4135 7.58188L6.32256 12.991C6.2733 13.0433 6.20775 13.0775 6.1366 13.0879C6.06544 13.0982 5.99288 13.0842 5.93073 13.048C5.86858 13.0118 5.82052 12.9557 5.79437 12.8887C5.76822 12.8217 5.76553 12.7479 5.78674 12.6791L6.93283 8.95451H4.81819C4.75605 8.95454 4.69526 8.93636 4.64332 8.90223C4.59139 8.86811 4.55059 8.81952 4.52595 8.76246C4.50132 8.70541 4.49393 8.64239 4.5047 8.58119C4.51547 8.51998 4.54393 8.46327 4.58656 8.41806L9.67747 3.00897C9.72666 2.95666 9.79211 2.92253 9.86317 2.91213C9.93422 2.90173 10.0067 2.91568 10.0688 2.95169V2.95233Z"
             fill="#121212"></path>
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M8 14.4916C11.5852 14.4916 14.4916 11.5852 14.4916 8C14.4916 4.4148 11.5852 1.50842 8 1.50842C4.4148 1.50842 1.50842 4.4148 1.50842 8C1.50842 11.5852 4.4148 14.4916 8 14.4916ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z"
             fill="#121212"></path>
-        </svg>
+        </svg> {% endcomment %}
       </div>
       <div style="padding-left: 5px;">
 
@@ -201,7 +201,7 @@
               <span class="price-label">Your Price:</span>
               <span class="final-price-value">{{ final_price | money }}</span>
             </div>
-            
+
             {% assign original_price = product.variants.first.compare_at_price %}
             {% assign savings_amount = original_price | minus: final_price %}
             {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
@@ -272,7 +272,7 @@
               const daysEl = document.getElementById("promo-days");
               const hoursEl = document.getElementById("promo-hours");
               const minutesEl = document.getElementById("promo-minutes");
-              
+
               if (daysEl) daysEl.innerHTML = dayStr;
               if (hoursEl) hoursEl.innerHTML = hourStr;
               if (minutesEl) minutesEl.innerHTML = minuteStr;
@@ -292,7 +292,7 @@
 
       </div>
     </div>
-    
+
     <style>
       .promo-elements-container {
         display: flex;
@@ -460,68 +460,68 @@
           gap: 8px;
           width: 100%;
         }
-        
+
         .compact-promo-card {
           width: 100%;
           padding: 10px;
         }
-        
+
         .promo-header {
           margin-bottom: 6px;
         }
-        
+
         .promo-badge {
           font-size: 7px;
           padding: 2px 6px;
         }
-        
+
         .timer-label {
           font-size: 7px;
           padding: 1px 3px;
         }
-        
+
         .timer-unit {
           min-width: 20px;
           padding: 2px 3px;
           gap: 3px;
         }
-        
+
         .timer-unit span {
           font-size: 10px;
         }
-        
+
         .timer-unit label {
           font-size: 6px;
         }
-        
+
         .promo-content {
           gap: 8px;
         }
-        
+
         .discount-circle {
           width: 40px;
           height: 40px;
         }
-        
+
         .discount-percent {
           font-size: 12px;
         }
-        
+
         .discount-off {
           font-size: 6px;
         }
-        
+
         .savings-label {
           font-size: 8px;
         }
-        
+
         .savings-amount {
           font-size: 14px;
         }
       }
     </style>
-    
-    
+
+
 
     <style>
       .compact-price-display {
@@ -584,7 +584,7 @@
           width: 100%;
           order: -1;
         }
-        
+
         .final-price-value {
           font-size: 18px;
         }
