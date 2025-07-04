@@ -192,71 +192,302 @@
         {% if percent_tag != '' %}
         {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
         {% assign final_price = product.price | minus: price_discount %}
-        <p id="openSectionButton" class="t4s-ch ajax_modal_custom_btn_css {{ template | split: '.' | first }}"
-          data-no-instant rel="nofollow">
-          <span>
-            Enjoy <strong>{{ percent_tag }}% OFF</strong> & save
-            {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
-            <strong style="color:#4053c7">{{ price_discount | money }}</strong>
-          </span>
-        </p>
-        {% else %}
-        <p class="ajax_modal_custom_btn_css {{ template | split: '.' | first }}">Patriotic Sale Offer</p>
-        {% endif %}
-
-
+        <!-- Revolutionary Discount Display -->
+        <div class="revolutionary-discount-card">
+          <div class="discount-header">
+            <div class="patriotic-badge-mini">🇺🇸 INDEPENDENCE SPECIAL</div>
+          </div>
+          
+          {% if percent_tag != '' %}
+          <div class="main-discount-display">
+            <div class="discount-circle">
+              <span class="discount-number">{{ percent_tag }}%</span>
+              <span class="discount-text">OFF</span>
+            </div>
+            <div class="discount-details">
+              <div class="instant-savings">
+                <span class="savings-label">Instant Savings:</span>
+                {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+                <span class="savings-amount">{{ price_discount | money }}</span>
+              </div>
+              <p id="openSectionButton" class="terms-link" data-no-instant rel="nofollow">
+                <small>🛡️ Sale Terms & Conditions</small>
+              </p>
+            </div>
+          </div>
+          {% else %}
+          <div class="fallback-offer">
+            <div class="patriotic-shield">🛡️</div>
+            <span>Patriotic Sale Offer</span>
+          </div>
+          {% endif %}
+        </div>
 
         <script>
           document.getElementById('openSectionButton').addEventListener('click', function () {
             var sectionId = 't-and-c-apply-promo-regular';
             Shopify.openSection('t-and-c-apply-promo-regular');
-            // You might need to adjust the logic here based on your theme's setup
-            // For example, if you're using a different way to handle section visibility or toggling
           });
         </script>
 
       </div>
     </div>
-    <!-- prepaid value discount-->
-  </div>
-  <p class="offer-callout-simple personalised d-none d-md-block" style="font-size:10px;background-color:#FF3960">Patriotic Sale Offer </p>
-  {% if final_price %}
-  <div class="discountAndPrice {{ template | split: '.' | first }}">
-    <div class="price_2j8lL medium_1n4Qn salePrice_3B6QJ priceContainer"
-      style="display:flex;gap:8px;align-items:center;vertical-align:middle;flex-wrap:wrap" aria-hidden="true">
-      <div><strong>{{ final_price | money }}</strong>
-      </div>
-      <span>
-        <label class="lbl2 on-sale2 {{ template | split: '.' | first }}">
-          {% if final_price %}
+    
+    <style>
+      .revolutionary-discount-card {
+        background: linear-gradient(135deg, #002868 0%, #BF0A30 100%);
+        border-radius: 12px;
+        padding: 15px;
+        margin: 10px 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .revolutionary-discount-card::before {
+        content: '★';
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        font-size: 30px;
+        color: #ffd700;
+        opacity: 0.3;
+        animation: twinkle 2s infinite;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; transform: rotate(0deg); }
+        50% { opacity: 0.8; transform: rotate(180deg); }
+      }
+
+      .discount-header {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .patriotic-badge-mini {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffd700;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 9px;
+        font-weight: 700;
+        display: inline-block;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+      }
+
+      .main-discount-display {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .discount-circle {
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        animation: pulse-glow 2s infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { transform: scale(1); box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6); }
+      }
+
+      .discount-number {
+        font-size: 18px;
+        font-weight: 900;
+        color: #002868;
+        line-height: 1;
+      }
+
+      .discount-text {
+        font-size: 10px;
+        font-weight: 700;
+        color: #002868;
+        line-height: 1;
+      }
+
+      .discount-details {
+        flex: 1;
+        color: white;
+      }
+
+      .instant-savings {
+        margin-bottom: 8px;
+      }
+
+      .savings-label {
+        display: block;
+        font-size: 11px;
+        color: #ffd700;
+        font-weight: 600;
+      }
+
+      .savings-amount {
+        display: block;
+        font-size: 16px;
+        font-weight: 900;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .terms-link {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 9px;
+        transition: color 0.3s ease;
+        cursor: pointer;
+        margin: 0;
+      }
+
+      .terms-link:hover {
+        color: #ffd700;
+      }
+
+      .fallback-offer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        font-weight: 600;
+        justify-content: center;
+      }
+
+      .patriotic-shield {
+        font-size: 20px;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .discount-circle {
+          width: 60px;
+          height: 60px;
+        }
+        
+        .discount-number {
+          font-size: 16px;
+        }
+        
+        .savings-amount {
+          font-size: 14px;
+        }
+      }
+    </style>
+    
+    <!-- Final Price Display -->
+    {% if final_price %}
+    <div class="final-price-showcase {{ template | split: '.' | first }}">
+      <div class="price-container">
+        <div class="final-price-section">
+          <span class="price-label">Your Price:</span>
+          <span class="final-price-value">{{ final_price | money }}</span>
+        </div>
+        
+        <div class="total-savings-badge">
           {% assign original_price = product.variants.first.compare_at_price %}
           {% assign savings_amount = original_price | minus: final_price %}
           {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-          <span style="color:#0079C1;font-weight:500 {{ template | split: '.' | first }}">Total Save </span>{{
-          savings_percent }}%
-          {% endif %}
-        </label>
-      </span>
-      <style>
-        .template-collection .lbl2.on-sale2 {
-          font-size: 14px !important
-        }
+          <div class="savings-icon">💰</div>
+          <div class="savings-info">
+            <span class="total-saved">You Save {{ savings_percent }}%</span>
+            <span class="total-amount">({{ savings_amount | money }})</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
 
-        .lbl2.on-sale2 {
-          color: #F38547 !important;
-          background: none !important;
-          border: none !important;
-          white-space: nowrap;
-          font-weight: 700;
+    <style>
+      .final-price-showcase {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        border: 2px solid #e9ecef;
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .final-price-section {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .price-label {
+        color: #6c757d;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .final-price-value {
+        color: #28a745;
+        font-size: 24px;
+        font-weight: 900;
+        font-family: 'Arial', sans-serif;
+      }
+
+      .total-savings-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        width: fit-content;
+      }
+
+      .savings-icon {
+        font-size: 16px;
+      }
+
+      .savings-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .total-saved {
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .total-amount {
+        font-size: 11px;
+        opacity: 0.9;
+      }
+
+      /* Template-specific adjustments */
+      .template-collection .final-price-value {
+        font-size: 20px;
+      }
+
+      .template-collection .total-savings-badge {
+        padding: 6px 10px;
+      }
+
+      @media (max-width: 768px) {
+        .final-price-value {
           font-size: 20px;
         }
-      </style>
-      {% comment %} <div style="display:flex;gap:5px;align-items:center;vertical-align:middle">
-
-      </div> {% endcomment %}
-    </div>
-  </div>
-  {% endif %}
+        
+        .price-container {
+          gap: 8px;
+        }
+      }
+    </style>
 
 
 </promo-ticker>
