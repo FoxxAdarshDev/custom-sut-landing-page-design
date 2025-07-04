@@ -3,6 +3,34 @@
    .pdp-custom-payment-button.btn:active,.pdp-custom-payment-button.btn:hover,.pdp-custom-payment-wrapper .btn:active,.pdp-custom-payment-wrapper .custombfs_sale:active,.pdp-custom-payment-wrapper .custombfs_sale:hover{background:#ccece3!important}.pdf-custom-cta-price-item-per-order{color:#919191;font-size:14px;font-weight:700;letter-spacing:-.28px;line-height:1}.santa-gif{width:30px;transform:translate(0,0);opacity:1;margin-left:4px;transition:opacity .5s;z-index:100}.pdp-custom-payment-button.btn{background-color:#ccece3!important}
 </style>
 <script>
-document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");var n=parseFloat(e.innerText.replace("$","").replace(",","")),o=parseFloat(t.innerText.replace("$","").replace(",","")),a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");if(isNaN(n)||isNaN(o))console.error("Error: Unable to parse product or compare prices.");else{let e=2*o-2*n,t=3*o-3*n,r=5*o-5*n;document.getElementById("savingsValue2").innerText="$"+a(e.toFixed(0)),document.getElementById("savingsValue3").innerText="$"+a(t.toFixed(0)),document.getElementById("savingsValue5").innerText="$"+a(r.toFixed(0))}}e();var t={childList:!0,subtree:!0,characterData:!0};const r=new MutationObserver(e),n=new MutationObserver(e);var o=document.getElementById("ProductPrice1"),a=document.getElementById("ComparePrice1");r.observe(o,t),n.observe(a,t);const c=document.querySelectorAll(".pdp-custom-payment-button");c.forEach(n=>{n.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById("AddToCartForm");var r=t.querySelector("#productSelect").value,e=parseInt(n.getAttribute("data-qty"))||1;r=r,e=e,fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest"},body:JSON.stringify({id:r,quantity:e})}).then(e=>e.json()).then(e=>{console.log("Item added to cart:",e)}).catch(e=>{console.error("Error:",e)})})})});
+document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
+    
+    // Check if discounted price is available from percent_ tag calculation
+    const discountedPriceElement = document.querySelector('.discountAndPrice .priceContainer strong');
+    let currentPrice, comparePrice;
+    
+    if (discountedPriceElement) {
+        // Use discounted price if available
+        currentPrice = parseFloat(discountedPriceElement.innerText.replace("$","").replace(",",""));
+        // For compare price, use the original product price
+        const originalProductPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
+        comparePrice = originalProductPrice;
+    } else {
+        // Fallback to original logic
+        currentPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
+        comparePrice = parseFloat(t.innerText.replace("$","").replace(",",""));
+    }
+    
+    var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+    
+    if(isNaN(currentPrice)||isNaN(comparePrice))console.error("Error: Unable to parse product or compare prices.");else{
+        let e=2*comparePrice-2*currentPrice,
+            t=3*comparePrice-3*currentPrice,
+            r=5*comparePrice-5*currentPrice;
+        document.getElementById("savingsValue2").innerText="$"+a(e.toFixed(0)),
+        document.getElementById("savingsValue3").innerText="$"+a(t.toFixed(0)),
+        document.getElementById("savingsValue5").innerText="$"+a(r.toFixed(0))
+    }
+}e();var t={childList:!0,subtree:!0,characterData:!0};const r=new MutationObserver(e),n=new MutationObserver(e);var o=document.getElementById("ProductPrice1"),a=document.getElementById("ComparePrice1");r.observe(o,t),n.observe(a,t);const c=document.querySelectorAll(".pdp-custom-payment-button");c.forEach(n=>{n.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById("AddToCartForm");var r=t.querySelector("#productSelect").value,e=parseInt(n.getAttribute("data-qty"))||1;r=r,e=e,fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest"},body:JSON.stringify({id:r,quantity:e})}).then(e=>e.json()).then(e=>{console.log("Item added to cart:",e)}).catch(e=>{console.error("Error:",e)})})})});
 
 </script>
