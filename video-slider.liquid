@@ -1,3 +1,5 @@
+
+
 <style>
   .homepage-slider { 
     display: block !important; 
@@ -123,7 +125,7 @@
 .slide-video {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
   background: #000;
@@ -264,12 +266,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = currentSlideElement.querySelector('video');
     if (video) {
       console.log('Playing video on slide', currentSlide);
-      
+
       // Force reload the video to ensure it's properly loaded
       video.load();
       video.muted = true;
       video.currentTime = 0;
-      
+
       // Wait for video to be ready before playing
       const attemptPlay = () => {
         if (video.readyState >= 2) {
@@ -286,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }, { once: true });
         }
       };
-      
+
       attemptPlay();
     }
   }
@@ -332,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle slide changes
     $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       stopAllVideos();
-      
+
       // Pre-load the next slide video if it's a video slide
       const nextSlideElement = document.querySelector(`.slick-slide[data-slick-index="${nextSlide}"]`);
       const nextVideo = nextSlideElement ? nextSlideElement.querySelector('video') : null;
