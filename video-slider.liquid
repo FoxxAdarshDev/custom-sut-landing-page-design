@@ -66,47 +66,28 @@
 </section>
 
 <style>
-
-
 .slide-item {
   position: relative;
   width: 100%;
   min-height: 300px;
+  max-height: 600px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Video slides - allow natural height */
-.slide-item:has(video) {
-  height: auto;
-  min-height: 400px;
-}
-
-/* Image slides - fixed height */
-.slide-item:has(img) {
-  height: 450px;
-}
-
 @media screen and (max-width: 768px) {
   .slide-item {
     min-height: 200px;
-  }
-  
-  .slide-item:has(video) {
-    min-height: 250px;
-  }
-  
-  .slide-item:has(img) {
-    height: 300px;
+    max-height: 400px;
   }
 }
 
 .slide-link {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,17 +96,19 @@
 .slide-video {
   width: 100%;
   height: auto;
-  max-width: 100%;
   object-fit: contain;
+  max-width: 100%;
+  max-height: 600px;
   display: block;
 }
 
 .homepage-slider img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 600px;
+  display: block;
 }
 
 /* Ensure videos don't interfere with slider controls */
@@ -159,7 +142,7 @@
     height: auto;
     min-height: 350px;
   }
-  
+
   @media screen and (max-width: 768px) {
     .slide-item {
       min-height: 250px;
@@ -170,9 +153,14 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  let sliderInitialized = false;
+  let videoEndTimeout = null;
+
   // Override the existing expo.initSlickSlider function to handle videos
   if (typeof expo !== 'undefined') {
     expo.initSlickSlider = function(){
+      if (sliderInitialized) return;
+
       // Check if slider already exists and destroy it
       if ($('.homepage-slider').hasClass('slick-initialized')) {
         $('.homepage-slider').slick('unslick');
@@ -186,95 +174,110 @@ document.addEventListener('DOMContentLoaded', function() {
         fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
         cssEase: 'linear',
         autoplay: false, // Disable autoplay - videos will control timing
+        autoplaySpeed: 5000, // Fallback for images
         arrows: true,
         pauseOnHover: false,
         pauseOnFocus: false,
-        adaptiveHeight: true, // Allow height adjustment for different content
+        adaptiveHeight: true, // Allow height to adjust
         responsive: [
           {
               breakpoint: 480,
               settings: {
-                arrows: false,
-                adaptiveHeight: true
+                arrows: false
               }
           }
         ]
       });
 
-      // Function to attach video event listeners
-      function attachVideoListeners() {
-        $('.homepage-slider .slide-item video').each(function() {
-          var video = this;
-          
-          // Remove existing listeners to prevent duplicates
-          video.removeEventListener('ended', videoEndHandler);
-          video.removeEventListener('loadedmetadata', videoLoadedHandler);
-          
-          // Add video end handler
-          video.addEventListener('ended', videoEndHandler);
-          video.addEventListener('loadedmetadata', videoLoadedHandler);
-        });
-      }
-      
-      function videoEndHandler() {
-        console.log('Video ended, advancing to next slide');
-        $('.homepage-slider').slick('slickNext');
-      }
-      
-      function videoLoadedHandler() {
-        // Adjust slider height when video metadata is loaded
-        $('.homepage-slider').slick('setPosition');
-      }
+      sliderInitialized = true;
 
       // Handle video playback in slider
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // Clear any pending video end timeout
+        if (videoEndTimeout) {
+          clearTimeout(videoEndTimeout);
+          videoEndTimeout = null;
+        }
+
         // Pause current video and reset to beginning
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
           currentVideo.pause();
           currentVideo.currentTime = 0;
         }
+
+        // Adjust height for next slide
+        adjustSliderHeight(slick, nextSlide);
       });
 
-      // Handle slide changes - play videos immediately
-      $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-        var currentSlideElement = $(slick.$slides[currentSlide]);
-        var video = currentSlideElement.find('video')[0];
-
-        // Adjust height based on content type
-        setTimeout(function() {
-          $('.homepage-slider').slick('setPosition');
-        }, 100);
-
-        if (video) {
-          video.currentTime = 0;
-          video.play().catch(function(error) {
-            console.log('Video autoplay failed:', error);
-          });
-        }
-      });
-
-      // Initialize after slider is ready
+      // Handle video end event to auto-advance slide
       $('.homepage-slider').on('init', function(event, slick) {
-        // Attach video listeners
-        attachVideoListeners();
-        
-        // Start first video if present
-        setTimeout(function() {
-          var firstVideo = $('.homepage-slider .slick-active video')[0];
-          if (firstVideo) {
-            firstVideo.currentTime = 0;
-            firstVideo.play().catch(function(error) {
-              console.log('First video autoplay failed:', error);
+        // Add event listeners to all videos
+        $(slick.$slides).each(function(index) {
+          var video = $(this).find('video')[0];
+          if (video) {
+            video.addEventListener('ended', function() {
+              // Add small delay to ensure smooth transition
+              videoEndTimeout = setTimeout(function() {
+                if ($('.homepage-slider .slick-active').find('video')[0] === video) {
+                  $('.homepage-slider').slick('slickNext');
+                }
+              }, 300);
+            });
+
+            // Handle video load to adjust height
+            video.addEventListener('loadedmetadata', function() {
+              if ($(video).closest('.slick-slide').hasClass('slick-active')) {
+                adjustSliderHeight(slick, $('.homepage-slider').slick('slickCurrentSlide'));
+              }
             });
           }
+        });
+
+        // Start first slide content
+        setTimeout(function() {
+          startCurrentSlide(slick);
         }, 500);
       });
 
-      // Re-attach listeners after slider reinitialization
-      $('.homepage-slider').on('reInit', function(event, slick) {
-        attachVideoListeners();
+      // Handle slide changes - play videos immediately or start image timer
+      $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
+        startCurrentSlide(slick);
       });
+
+      // Function to start current slide (video or image timer)
+      function startCurrentSlide(slick) {
+        var currentSlideElement = $('.homepage-slider .slick-active');
+        var video = currentSlideElement.find('video')[0];
+
+        if (video) {
+          video.currentTime = 0;
+          video.play();
+        } else {
+          // If it's an image, auto-advance after 5 seconds
+          videoEndTimeout = setTimeout(function() {
+            $('.homepage-slider').slick('slickNext');
+          }, 5000);
+        }
+      }
+
+      // Function to adjust slider height based on content
+      function adjustSliderHeight(slick, slideIndex) {
+        var slide = $(slick.$slides[slideIndex]);
+        var video = slide.find('video')[0];
+        var image = slide.find('img')[0];
+
+        if (video) {
+          // Set height to maintain video aspect ratio
+          video.style.height = 'auto';
+          video.style.width = '100%';
+          video.style.maxHeight = '600px';
+        } else if (image) {
+          // Reset image height to auto
+          image.style.height = 'auto';
+          image.style.width = '100%';
+        }
+      }
     };
 
     // Reinitialize the slider if expo is already loaded
