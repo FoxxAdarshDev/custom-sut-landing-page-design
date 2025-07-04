@@ -982,26 +982,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Show/hide sticky bar on desktop based on scroll
-  function handleStickyBar() {
-    const stickyBar = document.querySelector('.sticky-checkout-bar');
-    const desktopSummary = document.querySelector('.cart-summary-desktop');
-    
-    if (window.innerWidth > 768 && stickyBar && desktopSummary) {
-      const summaryRect = desktopSummary.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      if (summaryRect.bottom < 0) {
-        stickyBar.classList.add('show');
-      } else {
-        stickyBar.classList.remove('show');
-      }
-    }
-  }
-
-  // Add scroll listener for desktop sticky behavior
-  window.addEventListener('scroll', handleStickyBar);
-  window.addEventListener('resize', handleStickyBar);
+  // Sticky bar is now always visible on desktop
 
   // Global functions for modal controls
   window.closeValidationModal = function() {
@@ -1323,19 +1304,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 }
 
-/* Desktop - Hide sticky on desktop by default, show on scroll */
+/* Desktop - Always show sticky bar */
 @media (min-width: 769px) {
   .cart-summary-desktop {
     display: block;
   }
   
   .sticky-checkout-bar {
-    transform: translateY(100%);
+    transform: translateY(0);
     transition: transform 0.3s ease;
   }
   
-  .sticky-checkout-bar.show {
-    transform: translateY(0);
+  /* Add margin to main content to prevent overlap */
+  .main-content {
+    margin-bottom: 120px;
   }
 }
 </style>
