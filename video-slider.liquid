@@ -254,9 +254,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let sliderInitialized = false;
-  let currentSlide = 0;
 
-  // Enhanced function to play video with better loading handling
+  // Simple function to play video
   function playVideo(slideIndex) {
     const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
     if (!slideElement) return;
@@ -264,75 +263,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = slideElement.querySelector('video');
     if (!video) return;
 
-    // Ensure video properties are set every time
+    // Set video properties
     video.muted = true;
     video.loop = true;
     video.preload = 'auto';
-    
-    // Force reload the video source if it's not playing
-    if (video.paused || video.readyState === 0) {
-      const src = video.src;
-      video.src = '';
-      video.src = src;
-      video.load();
-    }
 
-    // Multiple attempt strategy for video loading
-    const attemptPlay = (attempt = 1) => {
-      if (attempt > 3) {
-        console.log('Video play failed after 3 attempts');
-        return;
-      }
-
-      if (video.readyState >= 2) {
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            console.log('Video playing successfully');
-          }).catch(error => {
-            console.log(`Video play attempt ${attempt} failed:`, error);
-            setTimeout(() => attemptPlay(attempt + 1), 300);
-          });
-        }
-      } else {
-        // Wait for video to be ready
-        const onReady = () => {
-          video.removeEventListener('canplay', onReady);
-          video.removeEventListener('loadeddata', onReady);
-          attemptPlay(attempt);
-        };
-        
-        video.addEventListener('canplay', onReady, { once: true });
-        video.addEventListener('loadeddata', onReady, { once: true });
-        
-        // Force load if needed
-        if (video.readyState === 0) {
-          video.load();
-        }
-        
-        // Timeout fallback
+    // Try to play video
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Video play failed:', error);
+        // Retry after short delay
         setTimeout(() => {
-          video.removeEventListener('canplay', onReady);
-          video.removeEventListener('loadeddata', onReady);
-          attemptPlay(attempt + 1);
-        }, 1000);
-      }
-    };
-
-    attemptPlay();
+          video.play().catch(e => console.log('Retry failed:', e));
+        }, 200);
+      });
+    }
   }
 
-  // Simple function to pause all videos
+  // Pause all videos
   function pauseAllVideos() {
     document.querySelectorAll('.slide-video').forEach(video => {
       video.pause();
     });
   }
 
-  // Check if slide has video
+  // Check if slide has video based on slide element content
   function isVideoSlide(slideIndex) {
     const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
-    return slideElement && slideElement.querySelector('video');
+    return slideElement && slideElement.querySelector('.video-slide');
   }
 
   function initializeSlider() {
@@ -342,7 +301,10 @@ document.addEventListener('DOMContentLoaded', function() {
       $('.homepage-slider').slick('unslick');
     }
 
-    // Initialize with video timing since first slide is video
+    // Check if first slide is video to set initial timing
+    const firstSlideIsVideo = document.querySelector('.slide-item:first-child .video-slide');
+    const initialAutoplaySpeed = firstSlideIsVideo ? 70000 : 8000;
+
     $(".homepage-slider").slick({
       dots: true,
       infinite: true,
@@ -350,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
       fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
       cssEase: 'linear',
       autoplay: true,
-      autoplaySpeed: 70000, // 70 seconds for video
+      autoplaySpeed: initialAutoplaySpeed,
       arrows: true,
       pauseOnHover: false,
       pauseOnFocus: false,
@@ -367,14 +329,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sliderInitialized = true;
 
-    // Handle slide changes with improved video management
+    // Handle slide changes
     $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-      // Pause all videos to ensure clean transition
-      document.querySelectorAll('.slide-video').forEach(video => {
-        video.pause();
-      });
-
-      // Set autoplay speed based on slide type
+      pauseAllVideos();
+      
+      // Set autoplay speed based on next slide type
       if (isVideoSlide(nextSlide)) {
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
       } else {
@@ -383,25 +342,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-      // Always try to play video on video slides with longer delay
       if (isVideoSlide(currentSlide)) {
-        setTimeout(() => {
-          playVideo(currentSlide);
-        }, 500);
+        setTimeout(() => playVideo(currentSlide), 200);
       }
     });
 
-    // Handle manual navigation (dots and arrows)
-    $('.homepage-slider').on('click', '.slick-dots li, .slick-prev, .slick-next', function() {
-      setTimeout(() => {
-        const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
-        if (isVideoSlide(currentSlide)) {
-          playVideo(currentSlide);
-        }
-      }, 600);
-    });
-
-    // Preload all videos for better performance
+    // Preload all videos
     setTimeout(() => {
       document.querySelectorAll('.slide-video').forEach(video => {
         video.muted = true;
@@ -411,10 +357,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }, 100);
 
-    // Play initial video with extended delay
+    // Play initial video if first slide is video
     setTimeout(() => {
-      playVideo(0);
-    }, 800);
+      if (isVideoSlide(0)) {
+        playVideo(0);
+      }
+    }, 300);
   }
 
   // Initialize slider
@@ -424,66 +372,24 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initializeSlider, 1000);
 });
 
-// Enhanced visibility change handler
+// Simple visibility change handler
 document.addEventListener('visibilitychange', function() {
   if (!document.hidden) {
-    // When page becomes visible, ensure current video is playing
+    // When page becomes visible, continue playing current video
     setTimeout(() => {
-      const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
-      if (isVideoSlide(currentSlide)) {
-        playVideo(currentSlide);
+      if (typeof $ !== 'undefined' && $('.homepage-slider').hasClass('slick-initialized')) {
+        const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+        const slideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+        if (slideElement && slideElement.querySelector('.video-slide')) {
+          const video = slideElement.querySelector('video');
+          if (video && video.paused) {
+            video.play().catch(e => console.log('Resume failed:', e));
+          }
+        }
       }
-    }, 300);
-  } else {
-    // When page becomes hidden, pause all videos
-    document.querySelectorAll('.slide-video').forEach(video => {
-      video.pause();
-    });
+    }, 200);
   }
 });
-
-// Helper function for visibility check
-function isVideoSlide(slideIndex) {
-  const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
-  return slideElement && slideElement.querySelector('video');
-}
-
-function playVideo(slideIndex) {
-  const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
-  if (!slideElement) return;
-
-  const video = slideElement.querySelector('video');
-  if (!video) return;
-
-  // Ensure video properties are set
-  video.muted = true;
-  video.loop = true;
-  video.preload = 'auto';
-
-  // Check if video is ready to play
-  if (video.readyState >= 2) {
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        console.log('Video play failed:', error);
-        video.load();
-        setTimeout(() => {
-          video.play().catch(e => console.log('Retry failed:', e));
-        }, 500);
-      });
-    }
-  } else {
-    video.addEventListener('canplay', function() {
-      video.play().catch(error => {
-        console.log('Video play failed on canplay:', error);
-      });
-    }, { once: true });
-    
-    if (video.readyState === 0) {
-      video.load();
-    }
-  }
-}
 </script>
 
 <script>
