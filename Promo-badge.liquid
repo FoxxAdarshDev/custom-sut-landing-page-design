@@ -2,36 +2,208 @@
   {% if page_id != 110102085787 %}
     <style>
 
-.black-friday-sale-menu-link-desktop {
+.patriotic-sale-badge {
+  position: relative;
   background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
-  background-size: 300% 300%; /* Larger than the element to enable movement */
+  background-size: 300% 300%;
   color: #ffffff;
-  padding: 10px 5px;
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 10px;
+  padding: 12px 8px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 12px;
   letter-spacing: 0.5px;
   text-align: center;
   display: inline-block;
-  animation: movingBackground 5s linear infinite; /* Add background animation */
-  text-decoration: none; /* Ensure the link looks clean */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  animation: movingBackground 5s linear infinite;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: 2px solid #ffd700;
+  min-width: 200px;
 }
 
-
-a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-desktop:active {
-  color:#ffff!important
+.patriotic-sale-badge::before {
+  content: '🇺🇸';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 16px;
+  animation: wave 2s ease-in-out infinite;
 }
+
+.patriotic-sale-badge::after {
+  content: '🎆';
+  position: absolute;
+  bottom: -5px;
+  left: -5px;
+  font-size: 14px;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.sale-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.countdown-timer-mini {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.timer-unit-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 2px 4px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.timer-number-mini {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 1px 1px 0 #000;
+  line-height: 1;
+}
+
+.timer-label-mini {
+  font-size: 8px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.urgency-pulse {
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+
+a.patriotic-sale-badge:hover, a.patriotic-sale-badge:active {
+  color: #ffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes movingBackground {
-  0% {
-    background-position: 0% 50%;
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes urgencyPulse {
+  0%, 100% { 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 215, 0, 0.7);
   }
-  50% {
-    background-position: 100% 50%;
+  50% { 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(255, 215, 0, 0.3);
   }
-  100% {
-    background-position: 0% 50%; 
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .patriotic-sale-badge {
+    min-width: 180px;
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+  
+  .timer-unit-mini {
+    padding: 1px 3px;
+    gap: 6px;
+  }
+  
+  .timer-number-mini {
+    font-size: 10px;
+  }
+  
+  .timer-label-mini {
+    font-size: 7px;
   }
 }
     </style>
-<a href="/pages/us-independence-day-sale-25" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Foxx Biggest Patriotic Sale</a> 
+
+<a href="/pages/us-independence-day-sale-25" target="_blank" rel="nofollow" class="patriotic-sale-badge" id="patriotic-sale-badge">
+  <span class="sale-title">Foxx Biggest Patriotic Sale</span>
+  <div class="countdown-timer-mini">
+    <div class="timer-unit-mini">
+      <span class="timer-number-mini" id="days-mini">00</span>
+      <span class="timer-label-mini">Days</span>
+    </div>
+    <div class="timer-unit-mini">
+      <span class="timer-number-mini" id="hours-mini">00</span>
+      <span class="timer-label-mini">Hrs</span>
+    </div>
+    <div class="timer-unit-mini">
+      <span class="timer-number-mini" id="minutes-mini">00</span>
+      <span class="timer-label-mini">Min</span>
+    </div>
+    <div class="timer-unit-mini">
+      <span class="timer-number-mini" id="seconds-mini">00</span>
+      <span class="timer-label-mini">Sec</span>
+    </div>
+  </div>
+</a>
+
+<script>
+(function() {
+  function updatePatrioticCountdown() {
+    const targetDate = new Date('2024-07-31T23:59:59').getTime();
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    if (timeLeft > 0) {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      document.getElementById('days-mini').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours-mini').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes-mini').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds-mini').textContent = seconds.toString().padStart(2, '0');
+
+      // Add urgency pulse when less than 24 hours left
+      const badge = document.getElementById('patriotic-sale-badge');
+      if (timeLeft < 24 * 60 * 60 * 1000) {
+        badge.classList.add('urgency-pulse');
+      }
+    } else {
+      // Sale ended
+      document.getElementById('days-mini').textContent = '00';
+      document.getElementById('hours-mini').textContent = '00';
+      document.getElementById('minutes-mini').textContent = '00';
+      document.getElementById('seconds-mini').textContent = '00';
+      
+      // Change text to indicate sale ended
+      document.querySelector('.sale-title').textContent = 'Sale Ended!';
+    }
+  }
+
+  // Update countdown immediately and then every second
+  updatePatrioticCountdown();
+  setInterval(updatePatrioticCountdown, 1000);
+})();
+</script> 
