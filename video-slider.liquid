@@ -277,19 +277,48 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function playCurrentVideo(currentSlide) {
-    const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+    // IMPROVED: Multiple attempts to find the slide element
+    let currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+    
+    // Fallback: try finding by active class
+    if (!currentSlideElement) {
+      currentSlideElement = document.querySelector('.slick-slide.slick-active');
+      console.log('Using active slide as fallback for index', currentSlide);
+    }
+    
     if (!currentSlideElement) {
       console.log('No slide element found for index', currentSlide);
       return;
     }
 
-    const video = currentSlideElement.querySelector('video');
+    // IMPROVED: Multiple ways to find video element
+    let video = currentSlideElement.querySelector('video');
+    
+    // Fallback searches
     if (!video) {
-      console.log('No video found on slide', currentSlide);
+      video = currentSlideElement.querySelector('.slide-video');
+    }
+    if (!video) {
+      video = currentSlideElement.querySelector('.video-container video');
+    }
+    if (!video) {
+      // Last resort: search all videos and find the one in active slide
+      const allVideos = document.querySelectorAll('.slide-video');
+      for (let v of allVideos) {
+        const parentSlide = v.closest('.slick-slide');
+        if (parentSlide && parentSlide.getAttribute('data-slick-index') == currentSlide) {
+          video = v;
+          break;
+        }
+      }
+    }
+    
+    if (!video) {
+      console.log('No video found on slide', currentSlide, '- checked multiple selectors');
       return;
     }
 
-    console.log('Playing video on slide', currentSlide);
+    console.log('Playing video on slide', currentSlide, 'video element:', video);
     currentVideoSlide = currentSlide;
 
     // Force stop any other videos first
@@ -454,10 +483,27 @@ document.addEventListener('DOMContentLoaded', function() {
       stopAllVideos();
       currentVideoSlide = null;
 
-      // Pre-check if next slide is video and set timing immediately
+      // IMPROVED: Better video slide detection - check both the slide container AND for actual video element
       const nextSlideElement = document.querySelector(`.slick-slide[data-slick-index="${nextSlide}"]`);
-      const isNextSlideVideo = nextSlideElement && nextSlideElement.querySelector('.video-slide');
+      let isNextSlideVideo = false;
+      
+      if (nextSlideElement) {
+        // Check multiple ways to detect video slide
+        const hasVideoSlideClass = nextSlideElement.querySelector('.video-slide');
+        const hasVideoElement = nextSlideElement.querySelector('video');
+        const slideItemHasVideoClass = nextSlideElement.querySelector('.slide-item.video-slide');
+        
+        isNextSlideVideo = hasVideoSlideClass || hasVideoElement || slideItemHasVideoClass;
+        
+        console.log('Video detection for slide', nextSlide, ':', {
+          hasVideoSlideClass: !!hasVideoSlideClass,
+          hasVideoElement: !!hasVideoElement,
+          slideItemHasVideoClass: !!slideItemHasVideoClass,
+          isVideo: isNextSlideVideo
+        });
+      }
 
+      // FIXED: Don't restart autoplay immediately - just set the option
       if (isNextSlideVideo) {
         console.log('Next slide is video - setting 70 second autoplay');
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
@@ -485,13 +531,31 @@ document.addEventListener('DOMContentLoaded', function() {
       // Always stop all videos first to ensure clean state
       stopAllVideos();
       
-      // Check if current slide is a video slide
+      // IMPROVED: Better video slide detection (same as beforeChange)
       const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
-      const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
+      let isVideoSlide = false;
+      
+      if (currentSlideElement) {
+        const hasVideoSlideClass = currentSlideElement.querySelector('.video-slide');
+        const hasVideoElement = currentSlideElement.querySelector('video');
+        const slideItemHasVideoClass = currentSlideElement.querySelector('.slide-item.video-slide');
+        
+        isVideoSlide = hasVideoSlideClass || hasVideoElement || slideItemHasVideoClass;
+        
+        console.log('Video detection for current slide', currentSlide, ':', {
+          hasVideoSlideClass: !!hasVideoSlideClass,
+          hasVideoElement: !!hasVideoElement,
+          slideItemHasVideoClass: !!slideItemHasVideoClass,
+          isVideo: isVideoSlide
+        });
+      }
 
       if (isVideoSlide) {
         console.log('Current slide is video - ensuring 70 second timing and starting video');
-        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
+        // FIXED: Restart autoplay with correct timing after slide change
+        $('.homepage-slider').slick('slickPause');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
+        $('.homepage-slider').slick('slickPlay');
         
         // Force video restart with longer delay for manual navigation
         setTimeout(() => {
@@ -500,7 +564,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
       } else {
         console.log('Current slide is image - ensuring 8 second timing');
-        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, true);
+        // FIXED: Restart autoplay with correct timing after slide change
+        $('.homepage-slider').slick('slickPause');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, false);
+        $('.homepage-slider').slick('slickPlay');
         currentVideoSlide = null; // Clear current video slide reference
       }
     });
@@ -508,17 +575,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced handlers for manual navigation (arrows and dots)
     $('.homepage-slider').on('click', '.slick-arrow, .slick-dots button', function() {
       console.log('Manual navigation detected - will handle video restart');
+      
+      // Pause autoplay temporarily to prevent conflicts
+      $('.homepage-slider').slick('slickPause');
+      
       // Small delay to let the slide change complete, then force video check
       setTimeout(() => {
         const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
         const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
-        const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
+        
+        // Better video detection for manual navigation
+        let isVideoSlide = false;
+        if (currentSlideElement) {
+          const hasVideoSlideClass = currentSlideElement.querySelector('.video-slide');
+          const hasVideoElement = currentSlideElement.querySelector('video');
+          const slideItemHasVideoClass = currentSlideElement.querySelector('.slide-item.video-slide');
+          isVideoSlide = hasVideoSlideClass || hasVideoElement || slideItemHasVideoClass;
+        }
         
         if (isVideoSlide) {
-          console.log('Manual navigation to video slide - force restart');
+          console.log('Manual navigation to video slide - force restart with 70s timing');
+          $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
+          $('.homepage-slider').slick('slickPlay');
           setTimeout(() => playCurrentVideo(currentSlide), 500);
+        } else {
+          console.log('Manual navigation to image slide - restart with 8s timing');
+          $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, false);
+          $('.homepage-slider').slick('slickPlay');
         }
-      }, 100);
+      }, 200);
     });
 
     // Play video on first slide after initialization (since first slide is video slide 3)
