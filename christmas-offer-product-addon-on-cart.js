@@ -94,7 +94,99 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function showConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const overlay = document.getElementById('overlay');
+        
+        if (!canvas || !overlay) return;
+        
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Show overlay and canvas
+        overlay.style.display = 'block';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+        overlay.style.zIndex = '9998';
+        overlay.style.pointerEvents = 'none';
+        
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '9999';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.display = 'block';
+        
+        const confetti = [];
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#98d8c8'];
+        
+        // Create confetti particles
+        for (let i = 0; i < 100; i++) {
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: -10,
+                vx: Math.random() * 6 - 3,
+                vy: Math.random() * 3 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                size: Math.random() * 8 + 4,
+                rotation: Math.random() * 360,
+                rotationSpeed: Math.random() * 10 - 5
+            });
+        }
+        
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = confetti.length - 1; i >= 0; i--) {
+                const particle = confetti[i];
+                
+                // Update position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.rotation += particle.rotationSpeed;
+                
+                // Apply gravity
+                particle.vy += 0.3;
+                
+                // Draw particle
+                ctx.save();
+                ctx.translate(particle.x, particle.y);
+                ctx.rotate(particle.rotation * Math.PI / 180);
+                ctx.fillStyle = particle.color;
+                ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
+                ctx.restore();
+                
+                // Remove particles that are off screen
+                if (particle.y > canvas.height + 100) {
+                    confetti.splice(i, 1);
+                }
+            }
+            
+            if (confetti.length > 0) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                // Hide confetti after animation ends
+                setTimeout(() => {
+                    canvas.style.display = 'none';
+                    overlay.style.display = 'none';
+                }, 500);
+            }
+        }
+        
+        animateConfetti();
+    }
+
     async function showNotification(message, showViewCart) {
+        // Show confetti when notification is shown
+        showConfetti();
+        
         return new Promise((resolve) => {
             const notification = document.createElement('div');
             notification.id = 'notification-div'; // Assign an ID for easier reference
