@@ -434,26 +434,29 @@
 
               <div class="grid__item one-third">
                 <span class="cart__mini-labels">{{ 'cart.label.price' | t }}</span>
-                <span class="h5">{{ bold_variant_compare_at_price | default: bold_variant.compare_at_price | money }}</span>
+                <div class="price-display">
+                  {% if item.variant.compare_at_price and item.variant.compare_at_price > item.variant.price %}
+                    <span class="original-price">{{ item.variant.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="current-price">{{ item.variant.price | money }}</span>
+                </div>
               </div>
 
               <div class="grid__item one-third text-center">
                 <span class="cart__mini-labels">{{ 'cart.label.quantity' | t }}</span>
-                {% comment %}
-                  Added data-id for the ajax cart implementation only.
-                {% endcomment %}
-                <input style="width:40%!important" type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0" data-id="{{ item.id }}" class="quantity-input" data-original-value="{{ item.quantity }}">
+                <div class="quantity-wrapper">
+                  <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0" data-id="{{ item.id }}" class="quantity-input" data-original-value="{{ item.quantity }}">
+                </div>
               </div>
 
               <div class="grid__item one-third text-right">
                 <span class="cart__mini-labels">{{ 'cart.label.total' | t }}</span>
-
-                <span class="h5">
+                <div class="total-price-display">
                   {% if item.original_line_price != item.line_price %}
-                  <small class="cart-item__original-price"><s>{{ bold_item_line_price | money }}</s></small>
+                    <span class="original-total">{{ item.original_line_price | money }}</span>
                   {% endif %}
-                  {{ item.line_price | money }}
-                </span>
+                  <span class="current-total">{{ item.line_price | money }}</span>
+                </div>
                 {% if item.original_line_price != item.line_price %}
                   {% for discount in item.discounts %}
       <style>
@@ -1058,11 +1061,64 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
 .red-border{border:2px solid #C70209!important;background-color:#f5e7e7;position:relative;border-radius:10px;padding:10px;margin-bottom:10px;margin-top:10px}.free-gift-label{position:absolute;top:10px;right:10px;background-color:#fcc;color:#000;padding:5px 10px;border-radius:5px;font-weight:700}.cart__image{display:block;width:100%;text-align:center;margin:10px auto}.cart__image-container{width:100%;height:150px;overflow:hidden;margin:0 auto;border-radius:8px}.red-border .cart__image-container{border:2px solid #0071CE;box-shadow:0 4px 8px #0000001a}.cart-image{width:100%;height:100%;object-fit:contain;display:block}.grey-border{border:2px solid #D6D6D6;position:relative;border-radius:10px;padding:10px}.cart_product_title{color:#333}.cart_product_title:hover{color:#333}.cart__remove{display:flex;align-items:center;width:min-content;font-size:14px;color:#ff8080;border:none;border-radius:4px;cursor:pointer;text-decoration:none;transition:background-color .3s ease}.cart__remove:hover{color:#f66}.cart__remove svg{fill:#ff8080}.cart__remove svg:hover{fill:#f66}.af_tag{font-size:14px;color:#000;background-color:#DEDEDE;border:solid 1px #D6D6D6;padding:5px;margin:3px 0;border-radius:5px}div.af_tag{background:#EFF4F7!important;border-radius:20px!important;color:#222;display:flex;-webkit-align-items:center;align-items:center;padding:5px 10px;background:#e5e5e5;border:solid thin #d5d5d5;border-radius:3px!important;margin-right:5px!important;position:relative;transition:all ease-in-out .2s}div.af_tag .af_coupon_wrapper{margin-right:5px}div.af_tag span.af_coupon_wrapper svg{width:15px;height:15px}div.af_tag > *{display:flex;-webkit-align-items:center;align-items:center}#af_kd_tagged_discounts .af_coupon_text_amount{line-height:23px!important}.af_coupon_text_amount{display:grid;max-height:23px;text-align:center}div.af_tag span.af_coupon_text{color:#222}.af_coupon_text.af_coupon_code{visibility:visible!important;position:unset!important}.af_tagged_discounts .af_tag .af_coupon_text{display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden!important}.banner-container{max-width:800px;margin:0 auto;overflow:hidden}.promotional-banner{width:100%;overflow:hidden}
 
+/* Enhanced Cart Item Styling */
+.price-display {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.original-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.current-price {
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.quantity-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.quantity-input {
+  width: 60px !important;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.total-price-display {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.original-total {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.current-total {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+}
+
 /* Improved Mobile Layout */
 @media (max-width: 768px) {
   .cart__row {
-    margin-bottom: 15px;
-    padding: 15px 10px;
+    margin-bottom: 10px;
+    padding: 10px 8px;
   }
   
   .cart__row .grid--full {
@@ -1071,46 +1127,75 @@ document.addEventListener('DOMContentLoaded', function() {
   
   .cart__row .grid__item {
     width: 100% !important;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   .cart__image-container {
-    height: 120px;
-    width: 120px;
-    margin: 0 auto 15px auto;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto 10px auto;
   }
   
   .cart_product_title {
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    line-height: 1.2;
   }
   
   .cart__row--table-large .grid--full {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
   }
   
   .cart__row--table-large .grid__item {
     text-align: center;
+    flex: 1;
   }
   
   .cart__mini-labels {
     font-weight: 600;
     color: #666;
-    display: inline-block;
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
   }
   
   .quantity-input {
-    width: 60px !important;
+    width: 50px !important;
     text-align: center;
     margin: 0 auto;
+    padding: 5px;
+    font-size: 12px;
+  }
+  
+  .price-display,
+  .total-price-display {
+    gap: 2px;
+  }
+  
+  .original-price,
+  .original-total {
+    font-size: 12px;
+  }
+  
+  .current-price,
+  .current-total {
+    font-size: 14px;
   }
   
   .cart-summary-desktop {
     display: none;
+  }
+  
+  /* Reduce spacing between cart items */
+  .red-border,
+  .grey-border {
+    margin-bottom: 8px;
+    margin-top: 8px;
+    padding: 8px;
   }
   
   /* Add margin bottom for sticky button */
