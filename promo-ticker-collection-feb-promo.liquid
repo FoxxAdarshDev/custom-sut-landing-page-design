@@ -198,7 +198,6 @@
             <div class="patriotic-badge-mini">🇺🇸 INDEPENDENCE SPECIAL</div>
           </div>
           
-          {% if percent_tag != '' %}
           <div class="main-discount-display">
             <div class="discount-circle">
               <span class="discount-number">{{ percent_tag }}%</span>
@@ -215,13 +214,13 @@
               </p>
             </div>
           </div>
-          {% else %}
-          <div class="fallback-offer">
-            <div class="patriotic-shield">🛡️</div>
-            <span>Patriotic Sale Offer</span>
-          </div>
-          {% endif %}
         </div>
+        {% else %}
+        <div class="fallback-offer">
+          <div class="patriotic-shield">🛡️</div>
+          <span>Patriotic Sale Offer</span>
+        </div>
+        {% endif %}
 
         <script>
           document.getElementById('openSectionButton').addEventListener('click', function () {
