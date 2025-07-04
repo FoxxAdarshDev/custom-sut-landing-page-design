@@ -5,28 +5,31 @@
 <script>
 document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
     
-    // Check if discounted price is available from percent_ tag calculation
-    const discountedPriceElement = document.querySelector('.discountAndPrice .priceContainer strong');
+    // Get the discounted price from promo-ticker if available
+    const promoTickerPrice = document.querySelector('.discountAndPrice .priceContainer strong');
     let currentPrice, comparePrice;
     
-    if (discountedPriceElement) {
-        // Use discounted price if available
-        currentPrice = parseFloat(discountedPriceElement.innerText.replace("$","").replace(",",""));
-        // For compare price, use the original product price
-        const originalProductPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
-        comparePrice = originalProductPrice;
+    if (promoTickerPrice) {
+        // Use the promo-ticker calculated price as the base
+        currentPrice = parseFloat(promoTickerPrice.innerText.replace("$","").replace(",",""));
+        comparePrice = currentPrice; // Use the same price as both current and compare for bulk calculations
     } else {
         // Fallback to original logic
         currentPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
-        comparePrice = parseFloat(t.innerText.replace("$","").replace(",",""));
+        comparePrice = parseFloat(t.innerText.replace("$","").replace(",","")) || currentPrice;
     }
     
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
     
     if(isNaN(currentPrice)||isNaN(comparePrice))console.error("Error: Unable to parse product or compare prices.");else{
-        let e=2*comparePrice-2*currentPrice,
-            t=3*comparePrice-3*currentPrice,
-            r=5*comparePrice-5*currentPrice;
+        // Calculate bulk savings: additional 5%, 10%, 15% off the current discounted price
+        let bulkDiscount2 = currentPrice * 0.05 * 2; // 5% additional for 2+ items
+        let bulkDiscount3 = currentPrice * 0.10 * 3; // 10% additional for 3+ items  
+        let bulkDiscount5 = currentPrice * 0.15 * 5; // 15% additional for 5+ items
+        
+        let e = bulkDiscount2,
+            t = bulkDiscount3,
+            r = bulkDiscount5;
         document.getElementById("savingsValue2").innerText="$"+a(e.toFixed(0)),
         document.getElementById("savingsValue3").innerText="$"+a(t.toFixed(0)),
         document.getElementById("savingsValue5").innerText="$"+a(r.toFixed(0))
