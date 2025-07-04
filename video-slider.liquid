@@ -53,9 +53,10 @@
                 class="slide-video" 
                 muted 
                 playsinline
-                preload="metadata"
+                preload="auto"
                 src="{{ settings[slide_video_url] }}"
                 data-video-src="{{ settings[slide_video_url] }}"
+                poster=""
               >
                 <source src="{{ settings[slide_video_url] }}" type="video/mp4">
                 Your browser does not support the video tag.
@@ -141,17 +142,20 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .slide-video {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
   object-position: center;
   display: block;
   background: #000;
   border-radius: 12px;
   transition: opacity 0.3s ease;
+  min-width: 100%;
+  max-width: 100%;
 }
 
 .video-loading-overlay {
@@ -324,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const loadingOverlay = videoElement.parentElement.querySelector('.video-loading-overlay');
       
       // If video is already loaded
-      if (videoElement.readyState >= 3) {
+      if (videoElement.readyState >= 2) {
         console.log('Video already loaded');
         if (loadingOverlay) {
           loadingOverlay.classList.add('hidden');
@@ -338,6 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (loadingOverlay) {
           loadingOverlay.classList.add('hidden');
         }
+        videoElement.removeEventListener('loadedmetadata', onLoadedData);
         videoElement.removeEventListener('loadeddata', onLoadedData);
         videoElement.removeEventListener('canplay', onLoadedData);
         videoElement.removeEventListener('error', onError);
@@ -349,35 +354,37 @@ document.addEventListener('DOMContentLoaded', function() {
         if (loadingOverlay) {
           loadingOverlay.innerHTML = '<p style="color: white;">Video unavailable</p>';
         }
+        videoElement.removeEventListener('loadedmetadata', onLoadedData);
         videoElement.removeEventListener('loadeddata', onLoadedData);
         videoElement.removeEventListener('canplay', onLoadedData);
         videoElement.removeEventListener('error', onError);
         reject(e);
       };
 
+      videoElement.addEventListener('loadedmetadata', onLoadedData);
       videoElement.addEventListener('loadeddata', onLoadedData);
       videoElement.addEventListener('canplay', onLoadedData);
       videoElement.addEventListener('error', onError);
 
-      // Ensure src is set
+      // Ensure src is set and force preload
       const videoSrc = videoElement.getAttribute('data-video-src') || videoElement.src;
       if (videoSrc && videoElement.src !== videoSrc) {
         videoElement.src = videoSrc;
       }
-
-      // Start loading
+      
+      videoElement.preload = 'auto';
       videoElement.load();
       
       // Fallback timeout
       setTimeout(() => {
-        if (videoElement.readyState < 3) {
+        if (videoElement.readyState < 2) {
           console.log('Video loading timeout, hiding overlay anyway');
           if (loadingOverlay) {
             loadingOverlay.classList.add('hidden');
           }
           resolve(videoElement);
         }
-      }, 5000);
+      }, 3000);
     });
   }
 
@@ -566,21 +573,67 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Preload first video
+    // Preload and initialize first slide immediately
     setTimeout(function() {
       var firstSlide = $('.homepage-slider .slide-item').first();
       var firstVideo = firstSlide.find('video')[0];
       
       if (firstVideo) {
-        console.log('Pre-loading first video');
-        preloadVideo(firstVideo).catch(e => console.log('First video preload failed:', e));
+        console.log('Pre-loading and starting first video');
+        currentVideoElement = firstVideo;
+        
+        preloadVideo(firstVideo).then(() => {
+          return playVideo(firstVideo);
+        }).then(() => {
+          console.log('First video started successfully');
+          
+          // Set up video end listener for first video
+          firstVideo.onended = function() {
+            console.log('First video ended');
+            
+            if (slideTimeout) {
+              clearTimeout(slideTimeout);
+              slideTimeout = null;
+            }
+
+            slideTimeout = setTimeout(function() {
+              console.log('Auto-advancing after first video end');
+              if ($('.homepage-slider').hasClass('slick-initialized')) {
+                $('.homepage-slider').slick('slickNext');
+              }
+            }, 1000);
+          };
+          
+          // Set fallback timeout for first video
+          var videoDuration = firstVideo.duration;
+          var timeoutDuration = 60000;
+          
+          if (videoDuration && videoDuration > 0 && videoDuration < 120) {
+            timeoutDuration = (videoDuration * 1000) + 2000;
+          }
+          
+          slideTimeout = setTimeout(function() {
+            console.log('First video timeout reached, advancing slide');
+            if ($('.homepage-slider').hasClass('slick-initialized')) {
+              $('.homepage-slider').slick('slickNext');
+            }
+          }, timeoutDuration);
+          
+        }).catch(e => {
+          console.log('First video failed:', e);
+          // Still trigger afterChange for other slide types
+          $('.homepage-slider').trigger('afterChange', [null, 0]);
+        });
+      } else {
+        // No video on first slide, start normal timer
+        console.log('First slide is not video, starting image timer');
+        slideTimeout = setTimeout(function() {
+          if ($('.homepage-slider').hasClass('slick-initialized')) {
+            $('.homepage-slider').slick('slickNext');
+          }
+        }, 8000);
       }
-    }, 500);
-    
-    // Start the first slide
-    setTimeout(function() {
-      $('.homepage-slider').trigger('afterChange', [null, 0]);
-    }, 1000);
+    }, 200);
   }
 
   // Override expo function if it exists
