@@ -43,15 +43,15 @@
     {% capture slide_video_url %}slide_{{ i }}_video_url{% endcapture %}
 
     {% if settings[slide] %}
-      <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
+      <div class="slide-item {% if settings[slide_is_video] and settings[slide_video_url] != blank %}video-slide{% else %}image-slide{% endif %}" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <video 
               class="slide-video" 
               muted 
               playsinline
-              preload="metadata"
-              style="width: 100%; height: 100%; object-fit: cover;"
+              preload="auto"
+              data-video-src="{{ settings[slide_video_url] }}"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
@@ -69,7 +69,8 @@
 .slide-item {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: auto;
+  min-height: 400px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -77,8 +78,26 @@
   background: #f5f5f5;
 }
 
+/* Video slide specific styling */
+.slide-item.video-slide {
+  height: auto;
+  min-height: 500px;
+}
+
+.slide-item.image-slide {
+  height: 500px;
+}
+
 @media screen and (max-width: 768px) {
   .slide-item {
+    min-height: 250px;
+  }
+  
+  .slide-item.video-slide {
+    min-height: 300px;
+  }
+  
+  .slide-item.image-slide {
     height: 300px;
   }
 }
@@ -102,24 +121,19 @@
 
 .slide-video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  min-height: 400px;
+  object-fit: contain;
   object-position: center;
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
   background: #000;
+  border-radius: 12px;
 }
 
-/* Ensure video fills the container properly */
-.video-slide .slide-video {
-  object-fit: contain;
-  background: #000;
-}
-
-.image-slide .slide-video {
-  object-fit: cover;
+@media screen and (max-width: 768px) {
+  .slide-video {
+    min-height: 250px;
+  }
 }
 
 .homepage-slider img {
@@ -128,9 +142,6 @@
   object-fit: contain;
   object-position: center;
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
   background: #f5f5f5;
 }
 
@@ -145,86 +156,43 @@
 
 /* Slick slider height adjustments */
 .homepage-slider {
-  height: 500px;
-  max-height: 500px;
+  height: auto;
+  min-height: 400px;
   overflow: hidden;
   position: relative;
   background: #f5f5f5;
-  transition: height 0.3s ease;
-}
-
-/* Dynamic height for video slides */
-.homepage-slider.video-slide {
-  height: 60vh;
-  max-height: 60vh;
-  min-height: 400px;
-}
-
-/* Default height for image slides */
-.homepage-slider.image-slide {
-  height: 500px;
-  max-height: 500px;
+  transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 768px) {
   .homepage-slider {
-    height: 300px;
-    max-height: 300px;
-  }
-  
-  .homepage-slider.video-slide {
-    height: 50vh;
-    max-height: 50vh;
     min-height: 250px;
-  }
-  
-  .homepage-slider.image-slide {
-    height: 300px;
-    max-height: 300px;
   }
 }
 
 .homepage-slider .slick-track {
   display: flex;
   align-items: stretch;
-  height: 100%;
+  height: auto;
 }
 
 .homepage-slider .slick-slide {
-  height: 500px !important;
+  height: auto !important;
+  min-height: 400px !important;
   display: flex;
   align-items: center;
   overflow: hidden;
-  transition: height 0.3s ease;
-}
-
-.homepage-slider.video-slide .slick-slide {
-  height: 60vh !important;
-  min-height: 400px !important;
-}
-
-.homepage-slider.image-slide .slick-slide {
-  height: 500px !important;
 }
 
 @media screen and (max-width: 768px) {
   .homepage-slider .slick-slide {
-    height: 300px !important;
-  }
-  
-  .homepage-slider.video-slide .slick-slide {
-    height: 50vh !important;
     min-height: 250px !important;
-  }
-  
-  .homepage-slider.image-slide .slick-slide {
-    height: 300px !important;
   }
 }
 
 .homepage-slider .slick-slide > div {
   width: 100%;
-  height: 100%;
+  height: auto;
   overflow: hidden;
 }
 
@@ -357,19 +325,27 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
+    // Pre-load first video before slider starts
+    function preloadFirstVideo() {
+      var firstSlide = $('.homepage-slider .slide-item').first();
+      var firstVideo = firstSlide.find('video')[0];
+      
+      if (firstVideo) {
+        console.log('Pre-loading first video');
+        firstVideo.load();
+        
+        firstVideo.addEventListener('loadeddata', function() {
+          console.log('First video loaded and ready');
+        });
+      }
+    }
+
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
       console.log('Slide changed to:', currentSlide);
 
       var currentSlideElement = $(slick.$slides[currentSlide]);
       var video = currentSlideElement.find('video')[0];
       var hasVideo = !!video;
-
-      // Adjust slider height based on content type
-      if (hasVideo) {
-        $('.homepage-slider').addClass('video-slide').removeClass('image-slide');
-      } else {
-        $('.homepage-slider').addClass('image-slide').removeClass('video-slide');
-      }
 
       if (video) {
         console.log('Starting video on slide', currentSlide);
@@ -378,6 +354,11 @@ document.addEventListener('DOMContentLoaded', function() {
           // Reset video state
           video.currentTime = 0;
           video.removeAttribute('data-ended');
+          
+          // Ensure video is loaded
+          if (video.readyState < 2) { // Less than HAVE_CURRENT_DATA
+            video.load();
+          }
           
           // Set up error handling first
           video.onerror = function(e) {
@@ -409,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
           };
 
           // Set up metadata loaded handler
-          video.onloadedmetadata = function() {
+          video.onloadeddata = function() {
             var videoDuration = video.duration;
             console.log('Video duration:', videoDuration);
             
@@ -432,10 +413,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }
             }, timeoutDuration);
-          };
 
-          // Ensure video can be played
-          if (video.readyState >= 1) { // HAVE_METADATA
+            // Try to play video after it's loaded
             var playPromise = video.play();
             if (playPromise !== undefined) {
               playPromise.then(function() {
@@ -449,21 +428,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 8000);
               });
             }
-          } else {
-            // Wait for video to load
-            video.addEventListener('loadedmetadata', function() {
-              var playPromise = video.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                  console.log('Video autoplay failed after load:', error);
-                  slideTimeout = setTimeout(function() {
-                    if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
-                      $('.homepage-slider').slick('slickNext');
-                    }
-                  }, 8000);
-                });
-              }
-            });
+          };
+
+          // If video is already loaded, try to play immediately
+          if (video.readyState >= 2) { // HAVE_CURRENT_DATA or better
+            video.onloadeddata();
           }
 
         } catch (e) {
@@ -486,10 +455,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Start the first slide
+    // Pre-load first video and start the first slide
+    preloadFirstVideo();
+    
     setTimeout(function() {
       $('.homepage-slider').trigger('afterChange', [null, 0]);
-    }, 1000);
+    }, 1500);
   }
 
   // Override expo function if it exists
