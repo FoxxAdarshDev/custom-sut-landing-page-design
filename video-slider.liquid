@@ -69,7 +69,7 @@
 .slide-item {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -79,7 +79,7 @@
 
 @media screen and (max-width: 768px) {
   .slide-item {
-    height: 250px;
+    height: 300px;
   }
 }
 
@@ -103,6 +103,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -116,10 +117,13 @@
 }
 
 /* Slick slider height adjustments */
+.homepage-slider {
+  height: 500px;
+}
 
 @media screen and (max-width: 768px) {
   .homepage-slider {
-    height: 250px;
+    height: 300px;
   }
 }
 
@@ -176,8 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
       speed: 500,
       fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
       cssEase: 'linear',
-      autoplay: true,
-      autoplaySpeed: 10000, // 10 seconds for images
+      autoplay: false, // Disable default autoplay, we'll handle manually
       arrows: true,
       pauseOnHover: false,
       pauseOnFocus: false,
@@ -226,8 +229,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Starting video on slide', currentSlide);
         // Handle video slide
         video.currentTime = 0;
+        video.removeAttribute('data-ended');
+        
         video.play().catch(function(error) {
           console.log('Video autoplay failed:', error);
+          // If video fails to play, treat as image and advance after 10 seconds
+          slideTimeout = setTimeout(function() {
+            console.log('Video failed, advancing slide');
+            $('.homepage-slider').slick('slickNext');
+          }, 10000);
         });
 
         // Set up video end listener for this specific video
@@ -242,19 +252,39 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 500);
         };
 
-        // Fallback timeout for 70 seconds (1 min 10 sec)
-        slideTimeout = setTimeout(function() {
-          if (!video.getAttribute('data-ended')) {
-            console.log('Video timeout reached, advancing slide');
-            $('.homepage-slider').slick('slickNext');
+        // Check if video has a valid source and duration
+        video.onloadedmetadata = function() {
+          var videoDuration = video.duration;
+          console.log('Video duration:', videoDuration);
+          
+          // Clear any existing timeout
+          if (slideTimeout) {
+            clearTimeout(slideTimeout);
+            slideTimeout = null;
           }
-        }, 70000);
+          
+          // Set timeout based on actual video duration + 1 second buffer
+          if (videoDuration && videoDuration > 0) {
+            slideTimeout = setTimeout(function() {
+              if (!video.getAttribute('data-ended')) {
+                console.log('Video duration timeout reached, advancing slide');
+                $('.homepage-slider').slick('slickNext');
+              }
+            }, (videoDuration * 1000) + 1000);
+          } else {
+            // Fallback if duration not available
+            slideTimeout = setTimeout(function() {
+              if (!video.getAttribute('data-ended')) {
+                console.log('Video fallback timeout reached, advancing slide');
+                $('.homepage-slider').slick('slickNext');
+              }
+            }, 70000);
+          }
+        };
 
       } else {
         console.log('Starting image timer on slide', currentSlide);
         // Handle image slide - auto-advance after 10 seconds
-        $('.homepage-slider').slick('slickPlay');
-
         slideTimeout = setTimeout(function() {
           console.log('Image timeout reached, advancing slide');
           $('.homepage-slider').slick('slickNext');
