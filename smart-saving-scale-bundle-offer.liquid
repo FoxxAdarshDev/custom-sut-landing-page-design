@@ -5,18 +5,38 @@
 <script>
 document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
     
-    // Use the sale price as the base for bulk calculations (same logic as simple-minimilistic.liquid)
-    // Get the final discounted price that customers actually pay
-    const salePriceElement = document.querySelector('.sale-price');
+    // Use the same final price calculation logic as promo-ticker-collection-feb-promo.liquid
     let basePrice;
     
-    if (salePriceElement) {
-        // Extract price from sale price element (e.g., from "$300.08" get 300.08)
-        const salePriceText = salePriceElement.textContent || salePriceElement.innerText;
-        basePrice = parseFloat(salePriceText.replace("$","").replace(",",""));
+    // First, get the product's base price
+    const productPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
+    
+    // Check if there's a percent tag discount applied (same as promo ticker)
+    const discountElements = document.querySelectorAll('[class*="percent"], [data-percent], .promo-ticker .ajax_modal_custom_btn_css');
+    let percentDiscount = 0;
+    
+    // Try to extract percent from promo ticker or other discount elements
+    discountElements.forEach(element => {
+        const text = element.textContent || element.innerText;
+        const percentMatch = text.match(/(\d+)%\s*OFF/i);
+        if (percentMatch) {
+            percentDiscount = parseInt(percentMatch[1]);
+        }
+    });
+    
+    // Calculate final discounted price (same logic as promo ticker final_price)
+    if (percentDiscount > 0) {
+        const priceDiscount = productPrice * percentDiscount / 100;
+        basePrice = productPrice - priceDiscount;
     } else {
-        // Fallback to ProductPrice1 if sale-price element not found
-        basePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
+        // Fallback: try to get sale price from elements
+        const salePriceElement = document.querySelector('.sale-price, .salePrice_3B6QJ, .product-single__sale-price');
+        if (salePriceElement) {
+            const salePriceText = salePriceElement.textContent || salePriceElement.innerText;
+            basePrice = parseFloat(salePriceText.replace("$","").replace(",",""));
+        } else {
+            basePrice = productPrice;
+        }
     }
     
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
