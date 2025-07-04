@@ -194,7 +194,26 @@
         {% assign final_price = product.price | minus: price_discount %}
         <!-- Compact Independence Special Card -->
         <div class="compact-promo-card">
-          <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
+          <div class="promo-header">
+            <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
+            <div class="countdown-timer">
+              <div class="timer-label">Sale Ends:</div>
+              <div class="timer-units">
+                <div class="timer-unit">
+                  <span id="promo-days">02</span>
+                  <label>D</label>
+                </div>
+                <div class="timer-unit">
+                  <span id="promo-hours">06</span>
+                  <label>H</label>
+                </div>
+                <div class="timer-unit">
+                  <span id="promo-minutes">25</span>
+                  <label>M</label>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="promo-content">
             <div class="discount-circle">
               <span class="discount-percent">{{ percent_tag }}%</span>
@@ -206,11 +225,6 @@
               <div class="savings-amount">${{ price_discount | money_without_currency }}</div>
             </div>
           </div>
-          <div class="terms-footer">
-            <small id="openSectionButton" class="terms-link" data-no-instant rel="nofollow">
-              🛡️ Sale Terms & Conditions
-            </small>
-          </div>
         </div>
         {% else %}
         <div class="fallback-offer">
@@ -220,10 +234,40 @@
         {% endif %}
 
         <script>
-          document.getElementById('openSectionButton').addEventListener('click', function () {
-            var sectionId = 't-and-c-apply-promo-regular';
-            Shopify.openSection('t-and-c-apply-promo-regular');
-          });
+          // Countdown Timer for promo ticker
+          function updatePromoCountdown() {
+            const countDownDate = new Date('2025-07-31T23:59:59').getTime();
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance > 0) {
+              const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+              const dayStr = String(days).padStart(2, '0');
+              const hourStr = String(hours).padStart(2, '0');
+              const minuteStr = String(minutes).padStart(2, '0');
+
+              const daysEl = document.getElementById("promo-days");
+              const hoursEl = document.getElementById("promo-hours");
+              const minutesEl = document.getElementById("promo-minutes");
+              
+              if (daysEl) daysEl.innerHTML = dayStr;
+              if (hoursEl) hoursEl.innerHTML = hourStr;
+              if (minutesEl) minutesEl.innerHTML = minuteStr;
+            } else {
+              // Reset timer if expired
+              ["promo-days", "promo-hours", "promo-minutes"].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.innerHTML = "00";
+              });
+            }
+          }
+
+          // Start countdown
+          updatePromoCountdown();
+          setInterval(updatePromoCountdown, 60000); // Update every minute
         </script>
 
       </div>
@@ -232,71 +276,106 @@
     <style>
       .compact-promo-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
-        border-radius: 16px;
-        padding: 16px;
-        margin: 8px 0;
-        max-width: 320px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 12px;
+        margin: 4px 0;
+        max-width: 280px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
       }
 
-      .compact-promo-card::before {
-        content: '⚡';
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        font-size: 16px;
-        opacity: 0.6;
-        animation: flash 2s infinite;
-      }
-
-      @keyframes flash {
-        0%, 100% { opacity: 0.6; }
-        50% { opacity: 1; }
+      .promo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+        gap: 8px;
       }
 
       .promo-badge {
         background: rgba(255, 193, 7, 0.9);
         color: #1e3a8a;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 8px;
+        font-size: 8px;
         font-weight: 700;
         text-align: center;
-        margin-bottom: 12px;
         display: inline-block;
+        flex-shrink: 0;
+      }
+
+      .countdown-timer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+      }
+
+      .timer-label {
+        color: #ffc107;
+        font-size: 7px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .timer-units {
+        display: flex;
+        gap: 3px;
+      }
+
+      .timer-unit {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #ffc107;
+        border-radius: 4px;
+        padding: 2px 3px;
+        text-align: center;
+        min-width: 18px;
+      }
+
+      .timer-unit span {
+        display: block;
+        font-size: 9px;
+        font-weight: 900;
+        color: #ffc107;
+        line-height: 1;
+      }
+
+      .timer-unit label {
+        font-size: 6px;
+        font-weight: 600;
+        color: #ffc107;
+        line-height: 1;
       }
 
       .promo-content {
         display: flex;
         align-items: center;
-        gap: 16px;
-        margin-bottom: 8px;
+        gap: 12px;
       }
 
       .discount-circle {
         background: linear-gradient(45deg, #ffc107, #ffeb3b);
         border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        box-shadow: 0 3px 8px rgba(255, 193, 7, 0.3);
         flex-shrink: 0;
       }
 
       .discount-percent {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 900;
         color: #1e3a8a;
         line-height: 1;
       }
 
       .discount-off {
-        font-size: 8px;
+        font-size: 7px;
         font-weight: 700;
         color: #1e3a8a;
         line-height: 1;
@@ -308,34 +387,17 @@
       }
 
       .savings-label {
-        font-size: 11px;
+        font-size: 9px;
         color: #ffc107;
         font-weight: 600;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
       }
 
       .savings-amount {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 900;
         color: white;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-      }
-
-      .terms-footer {
-        text-align: center;
-        margin-top: 8px;
-      }
-
-      .terms-link {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 9px;
-        transition: color 0.3s ease;
-        cursor: pointer;
-      }
-
-      .terms-link:hover {
-        color: #ffc107;
       }
 
       .fallback-offer {
@@ -359,24 +421,58 @@
       @media (max-width: 768px) {
         .compact-promo-card {
           max-width: 100%;
-          padding: 12px;
+          padding: 10px;
+        }
+        
+        .promo-header {
+          margin-bottom: 6px;
+        }
+        
+        .promo-badge {
+          font-size: 7px;
+          padding: 2px 6px;
+        }
+        
+        .timer-label {
+          font-size: 6px;
+        }
+        
+        .timer-unit {
+          min-width: 16px;
+          padding: 1px 2px;
+        }
+        
+        .timer-unit span {
+          font-size: 8px;
+        }
+        
+        .timer-unit label {
+          font-size: 5px;
         }
         
         .promo-content {
-          gap: 12px;
+          gap: 8px;
         }
         
         .discount-circle {
-          width: 50px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
         }
         
         .discount-percent {
-          font-size: 16px;
+          font-size: 12px;
+        }
+        
+        .discount-off {
+          font-size: 6px;
+        }
+        
+        .savings-label {
+          font-size: 8px;
         }
         
         .savings-amount {
-          font-size: 18px;
+          font-size: 14px;
         }
       }
     </style>
@@ -401,29 +497,29 @@
     <style>
       .compact-price-display {
         background: #f8fdf9;
-        border-radius: 12px;
-        padding: 12px;
-        margin: 8px 0;
+        border-radius: 8px;
+        padding: 8px;
+        margin: 4px 0;
         border: 1px solid #d1f2dd;
-        max-width: 320px;
+        max-width: 280px;
       }
 
       .price-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
       }
 
       .price-label {
         color: #6b7280;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
       }
 
       .final-price-value {
         color: #059669;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 900;
         font-family: 'Arial', sans-serif;
       }
@@ -431,14 +527,14 @@
       .compact-savings-badge {
         background: linear-gradient(45deg, #059669, #10b981);
         color: white;
-        padding: 6px 12px;
-        border-radius: 8px;
+        padding: 4px 8px;
+        border-radius: 6px;
         text-align: center;
       }
 
       .savings-text {
         font-weight: 600;
-        font-size: 11px;
+        font-size: 9px;
       }
 
       /* Template-specific adjustments */
