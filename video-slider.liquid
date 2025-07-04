@@ -264,9 +264,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = currentSlideElement.querySelector('video');
     if (video) {
       console.log('Playing video on slide', currentSlide);
+      
+      // Force reload the video to ensure it's properly loaded
+      video.load();
       video.muted = true;
       video.currentTime = 0;
-      video.play().catch(e => console.log('Video play failed:', e));
+      
+      // Wait for video to be ready before playing
+      const attemptPlay = () => {
+        if (video.readyState >= 2) {
+          video.play().catch(e => {
+            console.log('Video play failed, retrying...', e);
+            setTimeout(() => {
+              video.load();
+              video.play().catch(err => console.log('Second play attempt failed:', err));
+            }, 500);
+          });
+        } else {
+          video.addEventListener('loadeddata', () => {
+            video.play().catch(e => console.log('Video play failed after loadeddata:', e));
+          }, { once: true });
+        }
+      };
+      
+      attemptPlay();
     }
   }
 
@@ -277,6 +298,13 @@ document.addEventListener('DOMContentLoaded', function() {
       $('.homepage-slider').slick('unslick');
     }
 
+    // Determine initial autoplay speed based on first slide
+    const firstSlideElement = document.querySelector('.slide-item:first-child');
+    const isFirstSlideVideo = firstSlideElement && firstSlideElement.classList.contains('video-slide');
+    const initialAutoplaySpeed = isFirstSlideVideo ? 70000 : 8000;
+
+    console.log('Initializing slider with autoplay speed:', initialAutoplaySpeed);
+
     $(".homepage-slider").slick({
       dots: true,
       infinite: true,
@@ -284,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
       fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
       cssEase: 'linear',
       autoplay: true,
-      autoplaySpeed: 8000,
+      autoplaySpeed: initialAutoplaySpeed,
       arrows: true,
       pauseOnHover: false,
       pauseOnFocus: false,
@@ -304,6 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle slide changes
     $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       stopAllVideos();
+      
+      // Pre-load the next slide video if it's a video slide
+      const nextSlideElement = document.querySelector(`.slick-slide[data-slick-index="${nextSlide}"]`);
+      const nextVideo = nextSlideElement ? nextSlideElement.querySelector('video') : null;
+      if (nextVideo) {
+        nextVideo.load();
+      }
     });
 
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
@@ -322,21 +357,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Play video with longer delay to ensure slide transition is complete
-      setTimeout(() => playCurrentVideo(currentSlide), 500);
+      setTimeout(() => playCurrentVideo(currentSlide), 800);
     });
 
-    // Set initial autoplay timing and play video on first slide
+    // Play video on first slide after initialization
     setTimeout(() => {
-      const firstSlideElement = document.querySelector(`.slick-slide[data-slick-index="0"]`);
-      const isFirstSlideVideo = firstSlideElement && firstSlideElement.querySelector('.video-slide');
-
-      if (isFirstSlideVideo) {
-        // First slide is video: set autoplay to 70 seconds
-        console.log('Initial slide is video, setting autoplay to 70 seconds');
-        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
-      }
+      console.log('Playing initial slide video');
       playCurrentVideo(0);
-    }, 1000);
+    }, 1200);
   }
 
   // Initialize slider
