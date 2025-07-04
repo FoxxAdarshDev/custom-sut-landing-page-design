@@ -264,8 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = slideElement.querySelector('video');
     if (!video) return;
 
-    // Reset and play video
-    video.currentTime = 0;
+    // Don't reset video time - continue from where it left off
     video.muted = true;
     video.loop = true;
 
@@ -359,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Simple visibility change handler
 document.addEventListener('visibilitychange', function() {
   if (!document.hidden) {
-    // When page becomes visible, restart current video if needed
+    // When page becomes visible, continue playing current video if needed
     setTimeout(() => {
       const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
       if (isVideoSlide(currentSlide)) {
@@ -382,7 +381,7 @@ function playVideo(slideIndex) {
   const video = slideElement.querySelector('video');
   if (!video) return;
 
-  video.currentTime = 0;
+  // Don't reset video time - continue from where it left off
   video.muted = true;
   video.loop = true;
 
