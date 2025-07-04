@@ -12,20 +12,21 @@ document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.
     // Try to find the percent discount from promo ticker or discount elements
     let percentDiscount = 0;
     
-    // Look for percent discount in updated promo ticker structure
-    const promoElements = document.querySelectorAll('.discount-percent, .discount-circle .discount-percent, .promo-ticker .discount-percent, .ajax_modal_custom_btn_css, [data-percent], .promo-ticker span');
+    // Look for percent discount in old promo ticker structure (ajax_modal_custom_btn_css)
+    const promoElements = document.querySelectorAll('.ajax_modal_custom_btn_css, .promo-ticker .ajax_modal_custom_btn_css, [data-percent]');
     promoElements.forEach(element => {
         const text = element.textContent || element.innerText;
-        const percentMatch = text.match(/(\d+)%/i);
+        // Look for "X% OFF" pattern in the text
+        const percentMatch = text.match(/(\d+)%\s*OFF/i) || text.match(/Enjoy\s*(\d+)%\s*OFF/i);
         if (percentMatch) {
             percentDiscount = parseInt(percentMatch[1]);
         }
     });
     
-    // If no percent found in promo ticker, look for it in the promo card structure
+    // If no percent found in promo ticker, look for it in discount badges
     if (percentDiscount === 0) {
-        const promoCardElements = document.querySelectorAll('.compact-promo-card .discount-percent');
-        promoCardElements.forEach(element => {
+        const discountElements = document.querySelectorAll('.discount-badge, .sale-badge, .lbl.on-sale, .discount-label, .lbl2.on-sale2');
+        discountElements.forEach(element => {
             const text = element.textContent || element.innerText;
             const percentMatch = text.match(/(\d+)%/i);
             if (percentMatch) {
@@ -34,10 +35,10 @@ document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.
         });
     }
     
-    // If still no percent found, look for other discount indicators
+    // If still no percent found, look for newer promo ticker structure as fallback
     if (percentDiscount === 0) {
-        const discountElements = document.querySelectorAll('.discount-badge, .sale-badge, .lbl.on-sale, .discount-label');
-        discountElements.forEach(element => {
+        const newPromoElements = document.querySelectorAll('.discount-percent, .discount-circle .discount-percent, .compact-promo-card .discount-percent');
+        newPromoElements.forEach(element => {
             const text = element.textContent || element.innerText;
             const percentMatch = text.match(/(\d+)%/i);
             if (percentMatch) {
