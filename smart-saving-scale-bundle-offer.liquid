@@ -22,10 +22,39 @@ document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
     
     if(isNaN(currentPrice)||isNaN(comparePrice))console.error("Error: Unable to parse product or compare prices.");else{
-        // Calculate bulk savings: additional 5%, 10%, 15% off the current discounted price
-        let bulkDiscount2 = currentPrice * 0.05 * 2; // 5% additional for 2+ items
-        let bulkDiscount3 = currentPrice * 0.10 * 3; // 10% additional for 3+ items  
-        let bulkDiscount5 = currentPrice * 0.15 * 5; // 15% additional for 5+ items
+        // Calculate bulk savings using the same logic as simple-minimilistic.liquid
+        // Get discount percentage from promo ticker if available
+        let baseDiscountPercentage = 0;
+        const promoTickerPrice = document.querySelector('.discountAndPrice .priceContainer strong');
+        if (promoTickerPrice) {
+            // Calculate the discount percentage from promo ticker
+            const promoPrice = parseFloat(promoTickerPrice.innerText.replace("$","").replace(",",""));
+            baseDiscountPercentage = ((currentPrice - promoPrice) / currentPrice) * 100;
+        }
+        
+        // Calculate for 2+ items with additional 5% bulk discount
+        const qty2 = 2;
+        const bulkDiscount2Percent = baseDiscountPercentage + 5; // Additional 5% bulk discount
+        const regularTotal2 = currentPrice * qty2;
+        const discountedTotal2 = regularTotal2 * (1 - bulkDiscount2Percent / 100);
+        const totalSavings2 = regularTotal2 - discountedTotal2;
+        const bulkDiscount2 = totalSavings2;
+
+        // Calculate for 3+ items with additional 10% bulk discount  
+        const qty3 = 3;
+        const bulkDiscount3Percent = baseDiscountPercentage + 10; // Additional 10% bulk discount
+        const regularTotal3 = currentPrice * qty3;
+        const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3Percent / 100);
+        const totalSavings3 = regularTotal3 - discountedTotal3;
+        const bulkDiscount3 = totalSavings3;
+
+        // Calculate for 5+ items with additional 15% bulk discount
+        const qty5 = 5;
+        const bulkDiscount5Percent = baseDiscountPercentage + 15; // Additional 15% bulk discount
+        const regularTotal5 = currentPrice * qty5;
+        const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5Percent / 100);
+        const totalSavings5 = regularTotal5 - discountedTotal5;
+        const bulkDiscount5 = totalSavings5;
         
         let e = bulkDiscount2,
             t = bulkDiscount3,
