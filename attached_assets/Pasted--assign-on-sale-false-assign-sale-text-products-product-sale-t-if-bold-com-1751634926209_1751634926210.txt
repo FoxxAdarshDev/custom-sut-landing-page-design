@@ -1,0 +1,262 @@
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if bold_compare_at_price > bold_price %}
+{% assign on_sale = true %}
+{% endif %}
+
+
+<promo-ticker class="promo-ticker text-uppercase" style="--ticker-speed: 3s;"
+  id="item_580a7897-25df-497c-aa15-ce4640142dba">
+  <style>
+    .lbl.on-sale,
+    .discount-badge {
+      background: #C5EBCD !important;
+      color: #069512 !important;
+      border: 1px solid #b1d4b9 !important;
+      border-radius: 20px;
+      padding: 0 6px;
+      white-space: nowrap;
+      font-weight: 500;
+      font-size: 10px;
+    }
+
+    .ticker-item {
+      background: #fdf8e5 padding:12px;
+      border-radius: 10px;
+    }
+
+    .discount-svg-icon {
+      display: flex;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+    }
+
+    .ticker-item {
+      display: flex;
+      margin-right: 0px;
+      vertical-align: middle;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+
+    .black-friday-deal-message-badge__text {
+      color: #1d252c !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      line-height: 13px;
+    }
+
+    .badgeWrpDefault_2Eb6h>div {
+      max-width: 132px;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    .primary_1d4Wm {
+      background-color: #bb0628;
+    }
+
+    .offer-callout-simple.personalised {
+      background: #bb0628;
+      font-size: 11px;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    .offer-callout-simple {
+      color: #fff;
+      background: #d83333;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      text-align: center;
+      line-height: normal;
+      margin-bottom: 5px;
+    }
+
+    .d-md-block {
+      display: block !important;
+    }
+
+    .offer-callout-simple {
+      width: fit-content;
+      border-radius: 10px;
+      padding: 5px 12px;
+    }
+
+    .medium_1n4Qn {
+      display: inline-block;
+    }
+
+    .price_2j8lL {
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .salePrice_3B6QJ {
+      color: #bb0628;
+      line-height: 1;
+      margin-top: 0;
+    }
+
+    /* Default styles */
+    .discountAndPrice .priceContainer {
+      font-size: 18px;
+    }
+
+    /* Product Page */
+    .discountAndPrice.product .priceContainer {
+      font-size: 32px;
+    }
+
+    /* Collection Page */
+    .discountAndPrice.collection .priceContainer {
+      font-size: 18px;
+    }
+
+    .ajax_modal_custom_btn_css {
+      background: none !important;
+      line-height: normal;
+      text-align: left !important;
+      color: #000 !important;
+      padding: 0;
+    }
+
+    .page-template .ajax_modal_custom_btn_css {
+      font-size: 10px !important;
+      line-height: 1 !important;
+      display: none !important
+    }
+
+    .template-collection .ajax_modal_custom_btn_css span,
+    .template-collection p.ajax_modal_custom_btn_css {
+      font-size: 14px !important
+    }
+
+    .template-page .ticker-item {
+      margin-bottom: 0px;
+      line-height: 1;
+      margin: 0px !important
+    }
+
+    .template-page .ajax_modal_custom_btn_css {
+      margin: 0px !important;
+      display: none !important
+    }
+
+    .ajax_modal_custom_btn_css {
+      margin: 0px !important
+    }
+
+
+    .template-collection .discount-svg-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .template-page .discount-svg-icon {
+      display: none !important
+    }
+  </style>
+  <div class="ticker-scroll">
+    <!-- discount Offer -->
+    <div class="ticker-item {{ template | split: '.' | first }} default-discount">
+      <div class="discount-svg-icon {{ template | split: '.' | first }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M10.0688 2.95233C10.1311 2.98844 10.1793 3.0446 10.2055 3.11164C10.2318 3.17868 10.2345 3.25263 10.2133 3.32142L9.06719 7.04542H11.1818C11.244 7.0454 11.3048 7.06357 11.3567 7.0977C11.4086 7.13183 11.4494 7.18042 11.4741 7.23747C11.4987 7.29452 11.5061 7.35754 11.4953 7.41875C11.4846 7.47995 11.4561 7.53666 11.4135 7.58188L6.32256 12.991C6.2733 13.0433 6.20775 13.0775 6.1366 13.0879C6.06544 13.0982 5.99288 13.0842 5.93073 13.048C5.86858 13.0118 5.82052 12.9557 5.79437 12.8887C5.76822 12.8217 5.76553 12.7479 5.78674 12.6791L6.93283 8.95451H4.81819C4.75605 8.95454 4.69526 8.93636 4.64332 8.90223C4.59139 8.86811 4.55059 8.81952 4.52595 8.76246C4.50132 8.70541 4.49393 8.64239 4.5047 8.58119C4.51547 8.51998 4.54393 8.46327 4.58656 8.41806L9.67747 3.00897C9.72666 2.95666 9.79211 2.92253 9.86317 2.91213C9.93422 2.90173 10.0067 2.91568 10.0688 2.95169V2.95233Z"
+            fill="#121212"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M8 14.4916C11.5852 14.4916 14.4916 11.5852 14.4916 8C14.4916 4.4148 11.5852 1.50842 8 1.50842C4.4148 1.50842 1.50842 4.4148 1.50842 8C1.50842 11.5852 4.4148 14.4916 8 14.4916ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z"
+            fill="#121212"></path>
+        </svg>
+      </div>
+      <div style="padding-left: 5px;">
+
+       
+
+        {% comment %}
+        Loop through the product tags to find the one containing 'percent_' and extract the value
+        {% endcomment %}
+        {% for tag in product.tags %}
+        {% if tag contains 'percent_' %}
+        {% assign percent_tag = tag | remove: 'percent_' %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+
+        {% if percent_tag != '' %}
+        {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+        {% assign final_price = product.price | minus: price_discount %}
+        <p id="openSectionButton" class="t4s-ch ajax_modal_custom_btn_css {{ template | split: '.' | first }}"
+          data-no-instant rel="nofollow">
+          <span>
+            Enjoy <strong>{{ percent_tag }}% OFF</strong> & save
+            {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+            <strong style="color:#4053c7">{{ price_discount | money }}</strong>
+          </span>
+        </p>
+        {% else %}
+        <p class="ajax_modal_custom_btn_css {{ template | split: '.' | first }}">Patriotic Sale Offer</p>
+        {% endif %}
+
+
+
+        <script>
+          document.getElementById('openSectionButton').addEventListener('click', function () {
+            var sectionId = 't-and-c-apply-promo-regular';
+            Shopify.openSection('t-and-c-apply-promo-regular');
+            // You might need to adjust the logic here based on your theme's setup
+            // For example, if you're using a different way to handle section visibility or toggling
+          });
+        </script>
+
+      </div>
+    </div>
+    <!-- prepaid value discount-->
+  </div>
+  <p class="offer-callout-simple personalised d-none d-md-block" style="font-size:10px;background-color:#FF3960">Patriotic Sale Offer </p>
+  {% if final_price %}
+  <div class="discountAndPrice {{ template | split: '.' | first }}">
+    <div class="price_2j8lL medium_1n4Qn salePrice_3B6QJ priceContainer"
+      style="display:flex;gap:8px;align-items:center;vertical-align:middle;flex-wrap:wrap" aria-hidden="true">
+      <div><strong>{{ final_price | money }}</strong>
+      </div>
+      <span>
+        <label class="lbl2 on-sale2 {{ template | split: '.' | first }}">
+          {% if final_price %}
+          {% assign original_price = product.variants.first.compare_at_price %}
+          {% assign savings_amount = original_price | minus: final_price %}
+          {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+          <span style="color:#0079C1;font-weight:500 {{ template | split: '.' | first }}">Total Save </span>{{
+          savings_percent }}%
+          {% endif %}
+        </label>
+      </span>
+      <style>
+        .template-collection .lbl2.on-sale2 {
+          font-size: 14px !important
+        }
+
+        .lbl2.on-sale2 {
+          color: #F38547 !important;
+          background: none !important;
+          border: none !important;
+          white-space: nowrap;
+          font-weight: 700;
+          font-size: 20px;
+        }
+      </style>
+      {% comment %} <div style="display:flex;gap:5px;align-items:center;vertical-align:middle">
+
+      </div> {% endcomment %}
+    </div>
+  </div>
+  {% endif %}
+
+
+</promo-ticker>
