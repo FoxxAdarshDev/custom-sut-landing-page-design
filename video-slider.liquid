@@ -278,91 +278,136 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function playCurrentVideo(currentSlide) {
     const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
-    if (!currentSlideElement) return;
+    if (!currentSlideElement) {
+      console.log('No slide element found for index', currentSlide);
+      return;
+    }
 
     const video = currentSlideElement.querySelector('video');
-    if (video) {
-      console.log('Playing video on slide', currentSlide);
-      currentVideoSlide = currentSlide;
+    if (!video) {
+      console.log('No video found on slide', currentSlide);
+      return;
+    }
 
-      // Remove any existing event listeners to prevent duplicates
-      video.removeEventListener('pause', handleVideoPause);
-      video.removeEventListener('ended', handleVideoEnded);
+    console.log('Playing video on slide', currentSlide);
+    currentVideoSlide = currentSlide;
 
-      // Set video properties
-      video.muted = true;
-      video.loop = true; // Enable looping to prevent black screen
-      video.controls = false;
-      video.preload = "auto";
+    // Force stop any other videos first
+    document.querySelectorAll('video').forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.currentTime = 0;
+      }
+    });
 
-      // Add event listeners
-      video.addEventListener('pause', handleVideoPause);
-      video.addEventListener('ended', handleVideoEnded);
+    // Remove any existing event listeners to prevent duplicates
+    video.removeEventListener('pause', handleVideoPause);
+    video.removeEventListener('ended', handleVideoEnded);
 
-      // Enhanced play attempt with multiple fallbacks
-      const attemptPlay = async () => {
-        try {
-          // Reset video position
-          video.currentTime = 0;
+    // Set video properties
+    video.muted = true;
+    video.loop = true;
+    video.controls = false;
+    video.preload = "auto";
+    video.autoplay = true;
+
+    // Add event listeners
+    video.addEventListener('pause', handleVideoPause);
+    video.addEventListener('ended', handleVideoEnded);
+
+    // Enhanced play attempt with aggressive retry logic
+    const attemptPlay = async (attempt = 1) => {
+      console.log(`Video play attempt ${attempt} for slide ${currentSlide}`);
+      
+      try {
+        // Always reset video position first
+        video.pause();
+        video.currentTime = 0;
+        
+        // Force reload the video source
+        const src = video.src;
+        video.src = '';
+        video.src = src;
+        video.load();
+        
+        // Wait for video to be ready
+        await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => reject(new Error('Video load timeout')), 5000);
           
-          // Wait for video to be ready
-          if (video.readyState < 2) {
-            await new Promise((resolve) => {
-              video.addEventListener('loadeddata', resolve, { once: true });
-              video.load();
-            });
+          video.addEventListener('loadeddata', () => {
+            clearTimeout(timeout);
+            resolve();
+          }, { once: true });
+          
+          video.addEventListener('canplay', () => {
+            clearTimeout(timeout);
+            resolve();
+          }, { once: true });
+        });
+
+        // Attempt to play
+        video.currentTime = 0;
+        const playPromise = video.play();
+        await playPromise;
+        
+        console.log(`Video playing successfully on slide ${currentSlide} (attempt ${attempt})`);
+        
+        // Verify video is actually playing after a short delay
+        setTimeout(() => {
+          if (video.paused && currentVideoSlide === currentSlide) {
+            console.log('Video was paused unexpectedly, retrying...');
+            video.play().catch(e => console.log('Verification retry failed:', e));
           }
-
-          // Attempt to play
-          await video.play();
-          console.log('Video playing successfully on slide', currentSlide);
-        } catch (error) {
-          console.log('First play attempt failed, trying again...', error);
-          
-          // Second attempt after a delay
-          setTimeout(async () => {
-            try {
-              video.load();
-              video.currentTime = 0;
-              await video.play();
-              console.log('Video playing on second attempt');
-            } catch (secondError) {
-              console.log('Second play attempt also failed:', secondError);
-              
-              // Third attempt with user interaction simulation
-              setTimeout(() => {
-                video.muted = true;
-                video.currentTime = 0;
-                video.play().catch(e => console.log('Final play attempt failed:', e));
-              }, 1000);
-            }
-          }, 500);
-        }
-      };
-
-      // Function to handle video pause events
-      function handleVideoPause(e) {
-        // Only auto-resume if the video is on the current slide and not manually paused
-        if (currentVideoSlide === currentSlide && !video.ended && !video.seeking) {
+        }, 1000);
+        
+      } catch (error) {
+        console.log(`Video play attempt ${attempt} failed:`, error);
+        
+        if (attempt < 5 && currentVideoSlide === currentSlide) {
+          // Exponential backoff retry
+          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
           setTimeout(() => {
             if (currentVideoSlide === currentSlide) {
-              video.play().catch(err => console.log('Resume after pause failed:', err));
+              attemptPlay(attempt + 1);
             }
-          }, 100);
+          }, delay);
+        } else {
+          console.log('All video play attempts failed for slide', currentSlide);
         }
       }
+    };
 
-      // Function to handle video end events
-      function handleVideoEnded(e) {
-        if (currentVideoSlide === currentSlide) {
+    // Function to handle video pause events
+    function handleVideoPause(e) {
+      console.log('Video pause event on slide', currentSlide);
+      // Only auto-resume if the video is on the current slide and not manually paused
+      if (currentVideoSlide === currentSlide && !video.ended && !video.seeking) {
+        setTimeout(() => {
+          if (currentVideoSlide === currentSlide && video.paused) {
+            console.log('Auto-resuming paused video on slide', currentSlide);
+            video.play().catch(err => console.log('Resume after pause failed:', err));
+          }
+        }, 200);
+      }
+    }
+
+    // Function to handle video end events
+    function handleVideoEnded(e) {
+      console.log('Video ended on slide', currentSlide);
+      if (currentVideoSlide === currentSlide) {
+        setTimeout(() => {
           video.currentTime = 0;
           video.play().catch(err => console.log('Restart after end failed:', err));
-        }
+        }, 100);
       }
-
-      // Start playing
-      attemptPlay();
     }
+
+    // Start playing with delay
+    setTimeout(() => {
+      if (currentVideoSlide === currentSlide) {
+        attemptPlay();
+      }
+    }, 200);
   }
 
   function initializeSlider() {
@@ -405,8 +450,9 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       console.log(`Slide changing from ${currentSlide} to ${nextSlide}`);
       
-      // Stop current videos but don't reset currentVideoSlide yet
+      // Stop current videos and reset currentVideoSlide
       stopAllVideos();
+      currentVideoSlide = null;
 
       // Pre-check if next slide is video and set timing immediately
       const nextSlideElement = document.querySelector(`.slick-slide[data-slick-index="${nextSlide}"]`);
@@ -420,9 +466,12 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, false);
       }
 
-      // Pre-load next video if it exists
+      // Pre-load and prepare next video if it exists
       const nextVideo = nextSlideElement ? nextSlideElement.querySelector('video') : null;
       if (nextVideo) {
+        // Reset video completely
+        nextVideo.pause();
+        nextVideo.currentTime = 0;
         nextVideo.muted = true;
         nextVideo.loop = true;
         nextVideo.preload = "auto";
@@ -433,22 +482,43 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
       console.log(`Slide changed to ${currentSlide}`);
       
+      // Always stop all videos first to ensure clean state
+      stopAllVideos();
+      
       // Check if current slide is a video slide
       const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
       const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
 
-      // Ensure timing is set correctly (double-check)
       if (isVideoSlide) {
-        console.log('Current slide is video - ensuring 70 second timing');
+        console.log('Current slide is video - ensuring 70 second timing and starting video');
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
         
-        // Play video with delay to ensure slide transition is complete
-        setTimeout(() => playCurrentVideo(currentSlide), 800);
+        // Force video restart with longer delay for manual navigation
+        setTimeout(() => {
+          console.log('Force starting video for slide', currentSlide);
+          playCurrentVideo(currentSlide);
+        }, 1000);
       } else {
         console.log('Current slide is image - ensuring 8 second timing');
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, true);
         currentVideoSlide = null; // Clear current video slide reference
       }
+    });
+
+    // Enhanced handlers for manual navigation (arrows and dots)
+    $('.homepage-slider').on('click', '.slick-arrow, .slick-dots button', function() {
+      console.log('Manual navigation detected - will handle video restart');
+      // Small delay to let the slide change complete, then force video check
+      setTimeout(() => {
+        const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+        const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+        const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
+        
+        if (isVideoSlide) {
+          console.log('Manual navigation to video slide - force restart');
+          setTimeout(() => playCurrentVideo(currentSlide), 500);
+        }
+      }, 100);
     });
 
     // Play video on first slide after initialization (since first slide is video slide 3)
