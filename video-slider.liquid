@@ -626,6 +626,13 @@ document.addEventListener('visibilitychange', function() {
   if (!document.hidden) {
     // When page becomes visible again, force restart current video
     setTimeout(() => {
+      // Force reinitialize slider if needed
+      if (!sliderInitialized || !$('.homepage-slider').hasClass('slick-initialized')) {
+        console.log('Slider not initialized, reinitializing...');
+        initializeSlider();
+        return;
+      }
+      
       const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
       const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
       
@@ -655,31 +662,37 @@ document.addEventListener('visibilitychange', function() {
 window.addEventListener('pageshow', function(event) {
   console.log('Page show event - persisted:', event.persisted);
   
-  // If page was loaded from cache (back/forward), restart video
-  if (event.persisted) {
-    setTimeout(() => {
-      const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
-      const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+  // Always reinitialize when page shows (whether from cache or fresh load)
+  setTimeout(() => {
+    // Check if slider exists and is initialized
+    if (!$('.homepage-slider').length || !$('.homepage-slider').hasClass('slick-initialized')) {
+      console.log('Slider missing or not initialized - reinitializing...');
+      initializeSlider();
+      return;
+    }
+    
+    const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+    const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+    
+    if (currentSlideElement) {
+      const hasVideoSlideClass = currentSlideElement.querySelector('.video-slide');
+      const hasVideoElement = currentSlideElement.querySelector('video');
+      const slideItemHasVideoClass = currentSlideElement.querySelector('.slide-item.video-slide');
+      const isVideoSlide = hasVideoSlideClass || hasVideoElement || slideItemHasVideoClass;
       
-      if (currentSlideElement) {
-        const hasVideoSlideClass = currentSlideElement.querySelector('.video-slide');
-        const hasVideoElement = currentSlideElement.querySelector('video');
-        const slideItemHasVideoClass = currentSlideElement.querySelector('.slide-item.video-slide');
-        const isVideoSlide = hasVideoSlideClass || hasVideoElement || slideItemHasVideoClass;
+      if (isVideoSlide) {
+        console.log('Page restored - restarting video on slide', currentSlide);
+        // Reset slider state and restart video
+        $('.homepage-slider').slick('slickPause');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
+        $('.homepage-slider').slick('slickPlay');
         
-        if (isVideoSlide) {
-          console.log('Page restored from cache - restarting video on slide', currentSlide);
-          // Reset slider state and restart video
-          $('.homepage-slider').slick('slickPause');
-          $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
-          $('.homepage-slider').slick('slickPlay');
-          
-          // Force restart video
-          setTimeout(() => playCurrentVideo(currentSlide), 800);
-        }
+        // Force restart video with multiple attempts
+        setTimeout(() => playCurrentVideo(currentSlide), 800);
+        setTimeout(() => playCurrentVideo(currentSlide), 1500);
       }
-    }, 300);
-  }
+    }
+  }, 300);
 });
 
 // Handle page hiding (when navigating away)
@@ -733,6 +746,13 @@ document.addEventListener('visibilitychange', function() {
     console.log('User returned to tab - checking for video restart');
     
     setTimeout(() => {
+      // Check if slider needs reinitialization
+      if (!$('.homepage-slider').length || !$('.homepage-slider').hasClass('slick-initialized')) {
+        console.log('Slider needs reinitialization after return');
+        initializeSlider();
+        return;
+      }
+      
       const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
       console.log('Current slide after return:', currentSlide);
       
@@ -765,6 +785,56 @@ document.addEventListener('visibilitychange', function() {
       }
     }, 800);
   }
+});
+
+// Add comprehensive page load handler
+window.addEventListener('load', function() {
+  console.log('Page loaded - ensuring slider is properly initialized');
+  
+  // Wait for DOM to be fully ready
+  setTimeout(() => {
+    if (!$('.homepage-slider').hasClass('slick-initialized')) {
+      console.log('Slider not initialized on page load - initializing...');
+      initializeSlider();
+    } else {
+      console.log('Slider already initialized on page load');
+      // Still check for video on current slide
+      const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+      const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+      
+      if (currentSlideElement) {
+        const video = currentSlideElement.querySelector('video');
+        if (video) {
+          console.log('Found video on page load - ensuring it plays');
+          setTimeout(() => playCurrentVideo(currentSlide), 1000);
+        }
+      }
+    }
+  }, 1000);
+});
+
+// Add handler for browser back/forward navigation
+window.addEventListener('popstate', function(event) {
+  console.log('Popstate event - browser navigation detected');
+  
+  setTimeout(() => {
+    if (!$('.homepage-slider').hasClass('slick-initialized')) {
+      console.log('Slider not initialized after navigation - reinitializing...');
+      initializeSlider();
+    } else {
+      // Force restart current video if it exists
+      const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+      const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+      
+      if (currentSlideElement) {
+        const video = currentSlideElement.querySelector('video');
+        if (video) {
+          console.log('Found video after navigation - force restart');
+          playCurrentVideo(currentSlide);
+        }
+      }
+    }
+  }, 500);
 });
 </script>
 
