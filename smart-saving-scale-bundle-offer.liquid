@@ -5,43 +5,35 @@
 <script>
 document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
     
-    // Get the discounted price from promo-ticker if available (same logic as simple-minimilistic.liquid)
-    const promoTickerPrice = document.querySelector('.discountAndPrice .priceContainer strong');
-    let basePrice;
-    
-    if (promoTickerPrice) {
-        // Use the promo-ticker calculated final price as the base price for bulk calculations
-        basePrice = parseFloat(promoTickerPrice.innerText.replace("$","").replace(",",""));
-    } else {
-        // Fallback to original product price
-        basePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
-    }
+    // Use the original product price (before any discounts) as the base for bulk calculations
+    // This matches the logic in simple-minimilistic.liquid
+    let basePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
     
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
     
     if(isNaN(basePrice))console.error("Error: Unable to parse product price.");else{
         // Calculate bulk savings using the same logic as simple-minimilistic.liquid
-        // Use the final discounted price from promo ticker as the base for bulk calculations
+        // Use the original product price as the base for bulk calculations
         
-        // Calculate for 2+ items with additional bulk discount
+        // Calculate for 2+ items with bulk discount
         const qty2 = 2;
-        const bulkDiscount2Percent = 5; // Additional 5% bulk discount on final price
+        const bulkDiscount2Percent = 5; // 5% bulk discount on original price
         const regularTotal2 = basePrice * qty2;
         const discountedTotal2 = regularTotal2 * (1 - bulkDiscount2Percent / 100);
         const totalSavings2 = regularTotal2 - discountedTotal2;
         const perItemSavings2 = totalSavings2 / qty2;
 
-        // Calculate for 3+ items with additional bulk discount  
+        // Calculate for 3+ items with bulk discount  
         const qty3 = 3;
-        const bulkDiscount3Percent = 10; // Additional 10% bulk discount on final price
+        const bulkDiscount3Percent = 10; // 10% bulk discount on original price
         const regularTotal3 = basePrice * qty3;
         const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3Percent / 100);
         const totalSavings3 = regularTotal3 - discountedTotal3;
         const perItemSavings3 = totalSavings3 / qty3;
 
-        // Calculate for 5+ items with additional bulk discount
+        // Calculate for 5+ items with bulk discount
         const qty5 = 5;
-        const bulkDiscount5Percent = 15; // Additional 15% bulk discount on final price
+        const bulkDiscount5Percent = 15; // 15% bulk discount on original price
         const regularTotal5 = basePrice * qty5;
         const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5Percent / 100);
         const totalSavings5 = regularTotal5 - discountedTotal5;
