@@ -2,6 +2,60 @@
   {% if page_id != 110102085787 %}
     <style>
 
+/* Small Timer Badge at Top */
+.small-timer-badge {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background: linear-gradient(45deg, #dc3545, #0071ce);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ffd700;
+}
+
+.small-timer-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.small-timer-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.small-timer-units {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.small-timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 20px;
+}
+
+.small-timer-label {
+  font-size: 8px;
+  opacity: 0.8;
+}
+
+.small-timer-separator {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 2px;
+}
+
 .patriotic-sale-badge {
   position: relative;
   background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
@@ -20,6 +74,24 @@
   overflow: hidden;
   border: 2px solid #ffd700;
   min-width: 200px;
+}
+
+/* Sale Ended State */
+.patriotic-sale-badge.sale-ended {
+  background: linear-gradient(45deg, #666 0%, #999 50%, #666 100%);
+  animation: none;
+  border-color: #ccc;
+}
+
+.patriotic-sale-badge.sale-ended .sale-title {
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+.small-timer-badge.sale-ended {
+  background: linear-gradient(45deg, #666, #999);
+  border-color: #ccc;
 }
 
 .patriotic-sale-badge::before {
@@ -124,6 +196,30 @@ a.patriotic-sale-badge:hover, a.patriotic-sale-badge:active {
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+  .small-timer-badge {
+    top: 5px;
+    right: 10px;
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+  
+  .small-timer-text {
+    font-size: 8px;
+  }
+  
+  .small-timer-unit {
+    font-size: 10px;
+    min-width: 16px;
+  }
+  
+  .small-timer-label {
+    font-size: 7px;
+  }
+  
+  .small-timer-separator {
+    font-size: 10px;
+  }
+  
   .patriotic-sale-badge {
     min-width: 180px;
     padding: 10px 6px;
@@ -145,9 +241,38 @@ a.patriotic-sale-badge:hover, a.patriotic-sale-badge:active {
 }
     </style>
 
+<!-- Small Timer Badge at Top -->
+<div class="small-timer-badge" id="small-timer-badge">
+  <div class="small-timer-content">
+    <span class="small-timer-text">SALE ENDS IN:</span>
+    <div class="small-timer-units">
+      <span class="small-timer-unit">
+        <span id="small-days">00</span>
+        <span class="small-timer-label">D</span>
+      </span>
+      <span class="small-timer-separator">:</span>
+      <span class="small-timer-unit">
+        <span id="small-hours">00</span>
+        <span class="small-timer-label">H</span>
+      </span>
+      <span class="small-timer-separator">:</span>
+      <span class="small-timer-unit">
+        <span id="small-minutes">00</span>
+        <span class="small-timer-label">M</span>
+      </span>
+      <span class="small-timer-separator">:</span>
+      <span class="small-timer-unit">
+        <span id="small-seconds">00</span>
+        <span class="small-timer-label">S</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Sale Badge -->
 <a href="/pages/us-independence-day-sale-25" target="_blank" rel="nofollow" class="patriotic-sale-badge" id="patriotic-sale-badge">
-  <span class="sale-title">Foxx Biggest Patriotic Sale</span>
-  <div class="countdown-timer-mini">
+  <span class="sale-title" id="sale-title-text">Foxx Biggest Patriotic Sale</span>
+  <div class="countdown-timer-mini" id="countdown-timer-container">
     <div class="timer-unit-mini">
       <span class="timer-number-mini" id="days-mini">00</span>
       <span class="timer-label-mini">Days</span>
@@ -180,10 +305,17 @@ a.patriotic-sale-badge:hover, a.patriotic-sale-badge:active {
       const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
+      // Update main countdown
       document.getElementById('days-mini').textContent = days.toString().padStart(2, '0');
       document.getElementById('hours-mini').textContent = hours.toString().padStart(2, '0');
       document.getElementById('minutes-mini').textContent = minutes.toString().padStart(2, '0');
       document.getElementById('seconds-mini').textContent = seconds.toString().padStart(2, '0');
+
+      // Update small timer
+      document.getElementById('small-days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('small-hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('small-minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('small-seconds').textContent = seconds.toString().padStart(2, '0');
 
       // Add urgency pulse when less than 24 hours left
       const badge = document.getElementById('patriotic-sale-badge');
@@ -192,13 +324,23 @@ a.patriotic-sale-badge:hover, a.patriotic-sale-badge:active {
       }
     } else {
       // Sale ended
-      document.getElementById('days-mini').textContent = '00';
-      document.getElementById('hours-mini').textContent = '00';
-      document.getElementById('minutes-mini').textContent = '00';
-      document.getElementById('seconds-mini').textContent = '00';
+      const badge = document.getElementById('patriotic-sale-badge');
+      const smallTimer = document.getElementById('small-timer-badge');
+      const saleTitle = document.getElementById('sale-title-text');
+      const countdownContainer = document.getElementById('countdown-timer-container');
       
-      // Change text to indicate sale ended
-      document.querySelector('.sale-title').textContent = 'Sale Ended!';
+      // Add sale ended classes
+      badge.classList.add('sale-ended');
+      smallTimer.classList.add('sale-ended');
+      
+      // Hide countdown timer and show "SALE ENDED!" message
+      countdownContainer.style.display = 'none';
+      saleTitle.textContent = 'SALE ENDED!';
+      saleTitle.style.fontSize = '14px';
+      saleTitle.style.fontWeight = '700';
+      
+      // Update small timer to show sale ended
+      document.querySelector('.small-timer-content').innerHTML = '<span style="font-size: 12px; font-weight: 700;">SALE ENDED!</span>';
     }
   }
 
