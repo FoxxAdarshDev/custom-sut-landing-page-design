@@ -192,27 +192,24 @@
         {% if percent_tag != '' %}
         {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
         {% assign final_price = product.price | minus: price_discount %}
-        <!-- Revolutionary Discount Display -->
-        <div class="revolutionary-discount-card">
-          <div class="discount-header">
-            <div class="patriotic-badge-mini">🇺🇸 INDEPENDENCE SPECIAL</div>
-          </div>
-          
-          <div class="main-discount-display">
+        <!-- Compact Independence Special Card -->
+        <div class="compact-promo-card">
+          <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
+          <div class="promo-content">
             <div class="discount-circle">
-              <span class="discount-number">{{ percent_tag }}%</span>
-              <span class="discount-text">OFF</span>
+              <span class="discount-percent">{{ percent_tag }}%</span>
+              <span class="discount-off">OFF</span>
             </div>
-            <div class="discount-details">
-              <div class="instant-savings">
-                <span class="savings-label">Instant Savings:</span>
-                {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
-                <span class="savings-amount">{{ price_discount | money }}</span>
-              </div>
-              <p id="openSectionButton" class="terms-link" data-no-instant rel="nofollow">
-                <small>🛡️ Sale Terms & Conditions</small>
-              </p>
+            <div class="savings-info">
+              <div class="savings-label">Instant Savings:</div>
+              {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+              <div class="savings-amount">${{ price_discount | money_without_currency }}</div>
             </div>
+          </div>
+          <div class="terms-footer">
+            <small id="openSectionButton" class="terms-link" data-no-instant rel="nofollow">
+              🛡️ Sale Terms & Conditions
+            </small>
           </div>
         </div>
         {% else %}
@@ -233,108 +230,100 @@
     </div>
     
     <style>
-      .revolutionary-discount-card {
-        background: linear-gradient(135deg, #002868 0%, #BF0A30 100%);
-        border-radius: 12px;
-        padding: 15px;
-        margin: 10px 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      .compact-promo-card {
+        background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+        border-radius: 16px;
+        padding: 16px;
+        margin: 8px 0;
+        max-width: 320px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
       }
 
-      .revolutionary-discount-card::before {
-        content: '★';
+      .compact-promo-card::before {
+        content: '⚡';
         position: absolute;
-        top: -5px;
-        right: -5px;
-        font-size: 30px;
-        color: #ffd700;
-        opacity: 0.3;
-        animation: twinkle 2s infinite;
+        top: 8px;
+        left: 8px;
+        font-size: 16px;
+        opacity: 0.6;
+        animation: flash 2s infinite;
       }
 
-      @keyframes twinkle {
-        0%, 100% { opacity: 0.3; transform: rotate(0deg); }
-        50% { opacity: 0.8; transform: rotate(180deg); }
+      @keyframes flash {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
       }
 
-      .discount-header {
-        text-align: center;
-        margin-bottom: 10px;
-      }
-
-      .patriotic-badge-mini {
-        background: rgba(255, 255, 255, 0.2);
-        color: #ffd700;
-        padding: 4px 8px;
-        border-radius: 15px;
-        font-size: 9px;
+      .promo-badge {
+        background: rgba(255, 193, 7, 0.9);
+        color: #1e3a8a;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 10px;
         font-weight: 700;
+        text-align: center;
+        margin-bottom: 12px;
         display: inline-block;
-        border: 1px solid rgba(255, 215, 0, 0.3);
       }
 
-      .main-discount-display {
+      .promo-content {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 16px;
+        margin-bottom: 8px;
       }
 
       .discount-circle {
-        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        background: linear-gradient(45deg, #ffc107, #ffeb3b);
         border-radius: 50%;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
-        animation: pulse-glow 2s infinite;
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        flex-shrink: 0;
       }
 
-      @keyframes pulse-glow {
-        0%, 100% { transform: scale(1); box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4); }
-        50% { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6); }
-      }
-
-      .discount-number {
+      .discount-percent {
         font-size: 18px;
         font-weight: 900;
-        color: #002868;
+        color: #1e3a8a;
         line-height: 1;
       }
 
-      .discount-text {
-        font-size: 10px;
+      .discount-off {
+        font-size: 8px;
         font-weight: 700;
-        color: #002868;
+        color: #1e3a8a;
         line-height: 1;
       }
 
-      .discount-details {
+      .savings-info {
         flex: 1;
         color: white;
       }
 
-      .instant-savings {
-        margin-bottom: 8px;
-      }
-
       .savings-label {
-        display: block;
         font-size: 11px;
-        color: #ffd700;
+        color: #ffc107;
         font-weight: 600;
+        margin-bottom: 4px;
       }
 
       .savings-amount {
-        display: block;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 900;
         color: white;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .terms-footer {
+        text-align: center;
+        margin-top: 8px;
       }
 
       .terms-link {
@@ -343,11 +332,10 @@
         font-size: 9px;
         transition: color 0.3s ease;
         cursor: pointer;
-        margin: 0;
       }
 
       .terms-link:hover {
-        color: #ffd700;
+        color: #ffc107;
       }
 
       .fallback-offer {
@@ -357,6 +345,10 @@
         color: white;
         font-weight: 600;
         justify-content: center;
+        padding: 16px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+        border-radius: 16px;
+        margin: 8px 0;
       }
 
       .patriotic-shield {
@@ -365,125 +357,106 @@
 
       /* Mobile responsiveness */
       @media (max-width: 768px) {
-        .discount-circle {
-          width: 60px;
-          height: 60px;
+        .compact-promo-card {
+          max-width: 100%;
+          padding: 12px;
         }
         
-        .discount-number {
+        .promo-content {
+          gap: 12px;
+        }
+        
+        .discount-circle {
+          width: 50px;
+          height: 50px;
+        }
+        
+        .discount-percent {
           font-size: 16px;
         }
         
         .savings-amount {
-          font-size: 14px;
+          font-size: 18px;
         }
       }
     </style>
     
-    <!-- Final Price Display -->
+    <!-- Compact Final Price Display -->
     {% if final_price %}
-    <div class="final-price-showcase {{ template | split: '.' | first }}">
-      <div class="price-container">
-        <div class="final-price-section">
-          <span class="price-label">Your Price:</span>
-          <span class="final-price-value">{{ final_price | money }}</span>
-        </div>
-        
-        <div class="total-savings-badge">
-          {% assign original_price = product.variants.first.compare_at_price %}
-          {% assign savings_amount = original_price | minus: final_price %}
-          {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-          <div class="savings-icon">💰</div>
-          <div class="savings-info">
-            <span class="total-saved">You Save {{ savings_percent }}%</span>
-            <span class="total-amount">({{ savings_amount | money }})</span>
-          </div>
-        </div>
+    <div class="compact-price-display {{ template | split: '.' | first }}">
+      <div class="price-row">
+        <span class="price-label">Your Price:</span>
+        <span class="final-price-value">{{ final_price | money }}</span>
+      </div>
+      
+      {% assign original_price = product.variants.first.compare_at_price %}
+      {% assign savings_amount = original_price | minus: final_price %}
+      {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+      <div class="compact-savings-badge">
+        <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
       </div>
     </div>
     {% endif %}
 
     <style>
-      .final-price-showcase {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 10px 0;
-        border: 2px solid #e9ecef;
+      .compact-price-display {
+        background: #f8fdf9;
+        border-radius: 12px;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #d1f2dd;
+        max-width: 320px;
       }
 
-      .price-container {
+      .price-row {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .final-price-section {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
       }
 
       .price-label {
-        color: #6c757d;
+        color: #6b7280;
         font-size: 14px;
         font-weight: 500;
       }
 
       .final-price-value {
-        color: #28a745;
-        font-size: 24px;
+        color: #059669;
+        font-size: 20px;
         font-weight: 900;
         font-family: 'Arial', sans-serif;
       }
 
-      .total-savings-badge {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(45deg, #28a745, #20c997);
+      .compact-savings-badge {
+        background: linear-gradient(45deg, #059669, #10b981);
         color: white;
-        padding: 8px 12px;
+        padding: 6px 12px;
         border-radius: 8px;
-        width: fit-content;
+        text-align: center;
       }
 
-      .savings-icon {
-        font-size: 16px;
-      }
-
-      .savings-info {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-      }
-
-      .total-saved {
-        font-weight: 700;
-        font-size: 12px;
-      }
-
-      .total-amount {
+      .savings-text {
+        font-weight: 600;
         font-size: 11px;
-        opacity: 0.9;
       }
 
       /* Template-specific adjustments */
       .template-collection .final-price-value {
-        font-size: 20px;
+        font-size: 18px;
       }
 
-      .template-collection .total-savings-badge {
-        padding: 6px 10px;
+      .template-collection .compact-price-display {
+        max-width: 100%;
       }
 
       @media (max-width: 768px) {
-        .final-price-value {
-          font-size: 20px;
+        .compact-price-display {
+          max-width: 100%;
         }
         
-        .price-container {
-          gap: 8px;
+        .final-price-value {
+          font-size: 18px;
         }
       }
     </style>
