@@ -307,11 +307,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-      setTimeout(() => playCurrentVideo(currentSlide), 300);
+      // Check if current slide is a video slide and adjust autoplay timing
+      const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
+      const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
+
+      if (isVideoSlide) {
+        // Video slide: set autoplay to 70 seconds (1 min 10 sec)
+        console.log('Setting autoplay to 70 seconds for video slide');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
+      } else {
+        // Image slide: set autoplay to 8 seconds
+        console.log('Setting autoplay to 8 seconds for image slide');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, true);
+      }
+
+      // Play video with longer delay to ensure slide transition is complete
+      setTimeout(() => playCurrentVideo(currentSlide), 500);
     });
 
-    // Play video on first slide
-    setTimeout(() => playCurrentVideo(0), 500);
+    // Set initial autoplay timing and play video on first slide
+    setTimeout(() => {
+      const firstSlideElement = document.querySelector(`.slick-slide[data-slick-index="0"]`);
+      const isFirstSlideVideo = firstSlideElement && firstSlideElement.querySelector('.video-slide');
+
+      if (isFirstSlideVideo) {
+        // First slide is video: set autoplay to 70 seconds
+        console.log('Initial slide is video, setting autoplay to 70 seconds');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
+      }
+      playCurrentVideo(0);
+    }, 1000);
   }
 
   // Initialize slider
