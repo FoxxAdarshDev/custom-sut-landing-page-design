@@ -1,5 +1,6 @@
 
 
+
 <style>
   .homepage-slider { 
     display: block !important; 
@@ -99,8 +100,8 @@
   height: 600px !important;
   overflow: hidden;
   display: flex !important;
-  align-items: stretch; /* Changed from center to stretch */
-  justify-content: stretch; /* Changed from center to stretch */
+  align-items: center;
+  justify-content: center;
   background: #000;
 }
 
@@ -110,7 +111,7 @@
   }
 }
 
-/* Video container and styling */
+/* Video container and styling - FIXED FOR PROPER SIZING */
 .video-container {
   position: relative;
   width: 100%;
@@ -124,15 +125,27 @@
 }
 
 .slide-video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover; /* Changed from contain to cover to fill entire space */
-  object-position: center;
-  display: block;
-  background: #000;
-  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
   min-width: 100%;
   min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-50%, -50%);
+  background: #000;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* Ensure video fills the entire container */
+@media screen and (max-width: 768px) {
+  .slide-video {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
 /* Image container and styling */
@@ -251,22 +264,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   let sliderInitialized = false;
 
-  // Prevent videos from pausing when page becomes inactive
-  document.addEventListener('visibilitychange', function() {
-    if (!document.hidden) {
-      // When page becomes visible again, resume current video if it exists
-      setTimeout(() => {
-        const currentSlideIndex = $('.homepage-slider').slick('slickCurrentSlide');
-        const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlideIndex}"]`);
-        const currentVideo = currentSlideElement ? currentSlideElement.querySelector('video') : null;
-        
-        if (currentVideo && currentVideo.paused && !currentVideo.ended) {
-          currentVideo.play().catch(e => console.log('Resume on visibility change failed:', e));
-        }
-      }, 200);
-    }
-  });
-
   function stopAllVideos() {
     document.querySelectorAll('.slide-video').forEach(video => {
       try {
@@ -286,29 +283,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (video) {
       console.log('Playing video on slide', currentSlide);
 
-      // Store current time before reloading
-      const currentTime = video.currentTime || 0;
-      
       // Force reload the video to ensure it's properly loaded
       video.load();
       video.muted = true;
       
-      // Prevent browser from pausing video when page becomes inactive
+      // Enhanced event listeners to prevent pausing
       video.addEventListener('pause', function(e) {
-        if (document.hidden) {
-          // Resume video after a small delay if page becomes visible again
+        if (!video.ended && !video.seeking) {
           setTimeout(() => {
-            if (!document.hidden && !video.ended) {
-              video.play().catch(err => console.log('Resume after visibility change failed:', err));
-            }
+            video.play().catch(err => console.log('Resume after pause failed:', err));
           }, 100);
         }
+      });
+
+      // Prevent browser from pausing on visibility change
+      video.addEventListener('webkitbeginfullscreen', function(e) {
+        e.preventDefault();
       });
 
       // Wait for video to be ready before playing
       const attemptPlay = () => {
         if (video.readyState >= 2) {
-          // Reset to beginning for fresh start
           video.currentTime = 0;
           video.play().catch(e => {
             console.log('Video play failed, retrying...', e);
@@ -413,6 +408,34 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeSlider();
   setTimeout(initializeSlider, 1000);
   setTimeout(initializeSlider, 3000);
+});
+
+// Enhanced global visibility change handler to prevent video pausing
+document.addEventListener('visibilitychange', function() {
+  // Do nothing - let videos continue playing in background
+});
+
+// Prevent video pausing on window blur/focus
+window.addEventListener('blur', function() {
+  // Keep videos playing even when window loses focus
+  document.querySelectorAll('.slide-video').forEach(video => {
+    if (!video.ended && video.paused) {
+      setTimeout(() => {
+        video.play().catch(e => console.log('Resume on blur failed:', e));
+      }, 100);
+    }
+  });
+});
+
+window.addEventListener('focus', function() {
+  // Ensure videos continue playing when window gains focus
+  document.querySelectorAll('.slide-video').forEach(video => {
+    if (!video.ended && video.paused) {
+      setTimeout(() => {
+        video.play().catch(e => console.log('Resume on focus failed:', e));
+      }, 100);
+    }
+  });
 });
 </script>
 
