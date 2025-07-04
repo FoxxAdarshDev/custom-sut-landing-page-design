@@ -5,87 +5,52 @@
 <script>
 document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
     
-    // Use the same final price calculation logic as promo-ticker-collection-feb-promo.liquid
+    // Use the same final discounted price calculation logic as simple-minimilistic.liquid
     let basePrice;
     
-    // First, get the product's base price
-    const productPrice = parseFloat(e.innerText.replace("$","").replace(",",""));
-    
-    // Check if there's a percent tag discount applied (same as promo ticker)
-    const discountElements = document.querySelectorAll('[class*="percent"], [data-percent], .promo-ticker .ajax_modal_custom_btn_css');
-    let percentDiscount = 0;
-    
-    // Try to extract percent from promo ticker or other discount elements
-    discountElements.forEach(element => {
-        const text = element.textContent || element.innerText;
-        const percentMatch = text.match(/(\d+)%\s*OFF/i);
-        if (percentMatch) {
-            percentDiscount = parseInt(percentMatch[1]);
-        }
-    });
-    
-    // Calculate final discounted price (same logic as promo ticker final_price)
-    if (percentDiscount > 0) {
-        const priceDiscount = productPrice * percentDiscount / 100;
-        basePrice = productPrice - priceDiscount;
+    // Get the product's sale price (same as simple-minimilistic.liquid)
+    const salePriceElement = document.querySelector('.sale-price');
+    if (salePriceElement) {
+        // Extract price from sale price element (e.g., from "$300.08" get 300.08)
+        const salePriceText = salePriceElement.textContent || salePriceElement.innerText;
+        basePrice = parseFloat(salePriceText.replace("$","").replace(",",""));
     } else {
-        // Fallback: try to get sale price from elements
-        const salePriceElement = document.querySelector('.sale-price, .salePrice_3B6QJ, .product-single__sale-price');
-        if (salePriceElement) {
-            const salePriceText = salePriceElement.textContent || salePriceElement.innerText;
-            basePrice = parseFloat(salePriceText.replace("$","").replace(",",""));
-        } else {
-            basePrice = productPrice;
-        }
+        // Fallback to ProductPrice1 if sale-price element not found
+        basePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
     }
     
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
     
     if(isNaN(basePrice))console.error("Error: Unable to parse product price.");else{
-        // Calculate bulk savings using the SAME logic as simple-minimilistic.liquid
-        // Use the sale price as the base and apply additional bulk discounts
-        
-        // Get the actual discount percentage from the product card
+        // Use EXACT same logic as simple-minimilistic.liquid
+        // Get the actual discount percentage from discount badge
         const discountLabel = document.querySelector('.discount-label');
-        let baseDiscountPercent = 0;
+        let discountPercentage = 0;
         if (discountLabel) {
             const discountText = discountLabel.textContent;
-            baseDiscountPercent = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
+            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
         }
         
-        // Calculate for 2+ items with additional bulk discount
-        const qty2 = 2;
-        const additionalBulkDiscount2 = 5; // Additional 5% bulk discount
-        const totalDiscount2 = baseDiscountPercent + additionalBulkDiscount2;
-        const regularTotal2 = basePrice * qty2;
-        const discountedTotal2 = regularTotal2 * (1 - totalDiscount2 / 100);
-        const totalSavings2 = regularTotal2 - discountedTotal2;
-        const perItemSavings2 = totalSavings2 / qty2;
-
-        // Calculate for 3+ items with additional bulk discount  
-        const qty3 = 3;
-        const additionalBulkDiscount3 = 10; // Additional 10% bulk discount
-        const totalDiscount3 = baseDiscountPercent + additionalBulkDiscount3;
-        const regularTotal3 = basePrice * qty3;
-        const discountedTotal3 = regularTotal3 * (1 - totalDiscount3 / 100);
-        const totalSavings3 = regularTotal3 - discountedTotal3;
-        const perItemSavings3 = totalSavings3 / qty3;
-
-        // Calculate for 5+ items with additional bulk discount
-        const qty5 = 5;
-        const additionalBulkDiscount5 = 15; // Additional 15% bulk discount
-        const totalDiscount5 = baseDiscountPercent + additionalBulkDiscount5;
-        const regularTotal5 = basePrice * qty5;
-        const discountedTotal5 = regularTotal5 * (1 - totalDiscount5 / 100);
-        const totalSavings5 = regularTotal5 - discountedTotal5;
-        const perItemSavings5 = totalSavings5 / qty5;
+        // Calculate final discounted price (same as simple-minimilistic)
+        const finalPrice = basePrice * (1 - discountPercentage / 100);
         
-        let e = perItemSavings2,
-            t = perItemSavings3,
-            r = perItemSavings5;
-        document.getElementById("savingsValue2").innerText="$"+a(e.toFixed(2)),
-        document.getElementById("savingsValue3").innerText="$"+a(t.toFixed(2)),
-        document.getElementById("savingsValue5").innerText="$"+a(r.toFixed(2))
+        // Calculate savings as difference between sale price and final discounted price
+        const baseSavingsPerItem = basePrice - finalPrice;
+        
+        // For 2+ items: show the base savings (sale price - final price difference)
+        const perItemSavings2 = baseSavingsPerItem;
+        
+        // For 3+ items: add additional 5% bulk discount savings
+        const additionalDiscount3 = basePrice * 0.05; // Additional 5% of sale price
+        const perItemSavings3 = baseSavingsPerItem + additionalDiscount3;
+        
+        // For 5+ items: add additional 10% bulk discount savings  
+        const additionalDiscount5 = basePrice * 0.10; // Additional 10% of sale price
+        const perItemSavings5 = baseSavingsPerItem + additionalDiscount5;
+        
+        document.getElementById("savingsValue2").innerText="$"+a(perItemSavings2.toFixed(2)),
+        document.getElementById("savingsValue3").innerText="$"+a(perItemSavings3.toFixed(2)),
+        document.getElementById("savingsValue5").innerText="$"+a(perItemSavings5.toFixed(2))
     }
 }e();var t={childList:!0,subtree:!0,characterData:!0};const r=new MutationObserver(e),n=new MutationObserver(e);var o=document.getElementById("ProductPrice1"),a=document.getElementById("ComparePrice1");r.observe(o,t),n.observe(a,t);const c=document.querySelectorAll(".pdp-custom-payment-button");c.forEach(n=>{n.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById("AddToCartForm");var r=t.querySelector("#productSelect").value,e=parseInt(n.getAttribute("data-qty"))||1;r=r,e=e,fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest"},body:JSON.stringify({id:r,quantity:e})}).then(e=>e.json()).then(e=>{console.log("Item added to cart:",e)}).catch(e=>{console.error("Error:",e)})})})});
 
