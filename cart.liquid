@@ -591,15 +591,17 @@ div.af_tag span.af_coupon_text {
               <strong>⚠ Cart Changed!</strong> Click "{{ 'cart.general.update' | t }}" to save your changes
             </div>
           </div>
-          <div class="cart__total">
-            <span>Cart Total: </span>
-            {% assign totalComparePrice = 0 %}
-            {% for item in cart.items %}
-            {% assign variantComparePrice = item.variant.compare_at_price | times: item.quantity %}
-            {% assign totalComparePrice = totalComparePrice | plus: variantComparePrice %}
-            {% endfor %}
-            <span>{{ totalComparePrice | money }}</span>
-          </div>
+          <!-- Cart Summary for Desktop -->
+          <div class="cart-summary-desktop">
+            <div class="cart__total">
+              <span>Cart Total: </span>
+              {% assign totalComparePrice = 0 %}
+              {% for item in cart.items %}
+              {% assign variantComparePrice = item.variant.compare_at_price | times: item.quantity %}
+              {% assign totalComparePrice = totalComparePrice | plus: variantComparePrice %}
+              {% endfor %}
+              <span>{{ totalComparePrice | money }}</span>
+            </div>
 
             <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}:</span>
             {% assign totalSubtotalPrice = 0 %}
@@ -636,42 +638,42 @@ div.af_tag span.af_coupon_text {
             <span>To Pay: <span class="h5">{{ totalSubtotalPrice | money }}</span> </span>
             <br>
 
-          </p>
-          <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+            <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
 
-          {% comment %} Enhanced Validation Logic with Modern UI {% endcomment %}
-        {% assign minimum_order_value = 10000 %}
+            {% comment %} Enhanced Validation Logic with Modern UI {% endcomment %}
+            {% assign minimum_order_value = 10000 %}
 
-        {% if cart.total_price < minimum_order_value %}
-          <!-- Minimum Order Warning -->
-          <div class="minimum-order-warning">
-            <div class="warning-icon">⚠️</div>
-            <div class="warning-content">
-              <p class="warning-title">Minimum Order Required</p>
-              <p class="warning-message">
-                Add <strong>{{ minimum_order_value | minus: cart.total_price | money }}</strong> more to reach the minimum order value of <strong>{{ minimum_order_value | money }}</strong>
-              </p>
-            </div>
+            {% if cart.total_price < minimum_order_value %}
+              <!-- Minimum Order Warning -->
+              <div class="minimum-order-warning">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                  <p class="warning-title">Minimum Order Required</p>
+                  <p class="warning-message">
+                    Add <strong>{{ minimum_order_value | minus: cart.total_price | money }}</strong> more to reach the minimum order value of <strong>{{ minimum_order_value | money }}</strong>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Disabled Checkout Button -->
+              <button type="button" id="enhanced-checkout-btn" class="btn checkout-btn-disabled" disabled>
+                <span class="btn-icon">🔒</span>
+                <span class="btn-text">Minimum Order Required</span>
+              </button>
+            {% else %}
+              <!-- Security Notice -->
+              <div class="security-notice">
+                <div class="security-icon">🛡️</div>
+                <span class="security-text">Secure Checkout Ready</span>
+              </div>
+
+              <!-- Enabled Checkout Button -->
+              <button type="button" id="enhanced-checkout-btn" class="btn checkout-btn-enabled">
+                <span class="btn-icon">💳</span>
+                <span class="btn-text">Proceed to Secure Checkout</span>
+              </button>
+            {% endif %}
           </div>
-
-          <!-- Disabled Checkout Button -->
-          <button type="button" id="enhanced-checkout-btn" class="btn checkout-btn-disabled" disabled>
-            <span class="btn-icon">🔒</span>
-            <span class="btn-text">Minimum Order Required</span>
-          </button>
-        {% else %}
-          <!-- Security Notice -->
-          <div class="security-notice">
-            <div class="security-icon">🛡️</div>
-            <span class="security-text">Secure Checkout Ready</span>
-          </div>
-
-          <!-- Enabled Checkout Button -->
-          <button type="button" id="enhanced-checkout-btn" class="btn checkout-btn-enabled">
-            <span class="btn-icon">💳</span>
-            <span class="btn-text">Proceed to Secure Checkout</span>
-          </button>
-        {% endif %}
 
           {% if additional_checkout_buttons and metafield_data_single == blank  %}
           {% comment %} <div style="display:flex;float:right;"><div class="cart__additional_checkout" style="margin:0;width:240px;margin-right:10px;">{{ content_for_additional_checkout_buttons }} </div></div> {% endcomment %}
@@ -683,6 +685,50 @@ div.af_tag span.af_coupon_text {
     </div>
 
   </form>
+
+  <!-- Sticky Checkout Button -->
+  {% assign minimum_order_value = 10000 %}
+  {% assign cartTotal = 0 %}
+  {% for item in cart.items %}
+    {% assign variantComparePrice = item.variant.compare_at_price | times: item.quantity %}
+    {% assign cartTotal = cartTotal | plus: variantComparePrice %}
+  {% endfor %}
+
+  {% assign toPay = 0 %}
+  {% for item in cart.items %}
+    {% assign linePrice = item.line_price %}
+    {% assign toPay = toPay | plus: linePrice %}
+  {% endfor %}
+
+  {% assign totalDiscountAmount = cartTotal | minus: toPay %}
+
+  <div class="sticky-checkout-bar">
+    <div class="sticky-checkout-content">
+      <div class="sticky-cart-summary">
+        <div class="sticky-total">
+          <span class="sticky-total-label">Total:</span>
+          <span class="sticky-total-amount">{{ toPay | money }}</span>
+        </div>
+        {% if totalDiscountAmount > 0 %}
+          <div class="sticky-savings">
+            <span class="sticky-savings-text">You Save: {{ totalDiscountAmount | money }}</span>
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="sticky-checkout-button">
+        {% if cart.total_price < minimum_order_value %}
+          <button type="button" class="sticky-btn sticky-btn-disabled" disabled>
+            🔒 Minimum Order Required
+          </button>
+        {% else %}
+          <button type="button" id="sticky-checkout-btn" class="sticky-btn sticky-btn-enabled">
+            💳 Secure Checkout
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
 <!-- Model Logic for the custom $100 validation start -->
    {% render 'cart-validating-model' %}
@@ -919,6 +965,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Sticky checkout button functionality
+  const stickyCheckoutBtn = document.getElementById('sticky-checkout-btn');
+  if (stickyCheckoutBtn) {
+    stickyCheckoutBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      if (currentTotal < minimumOrderValue) {
+        showValidationModal();
+      } else {
+        validateAndProceedToCheckout();
+      }
+    });
+  }
+
+  // Show/hide sticky bar on desktop based on scroll
+  function handleStickyBar() {
+    const stickyBar = document.querySelector('.sticky-checkout-bar');
+    const desktopSummary = document.querySelector('.cart-summary-desktop');
+    
+    if (window.innerWidth > 768 && stickyBar && desktopSummary) {
+      const summaryRect = desktopSummary.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      if (summaryRect.bottom < 0) {
+        stickyBar.classList.add('show');
+      } else {
+        stickyBar.classList.remove('show');
+      }
+    }
+  }
+
+  // Add scroll listener for desktop sticky behavior
+  window.addEventListener('scroll', handleStickyBar);
+  window.addEventListener('resize', handleStickyBar);
+
   // Global functions for modal controls
   window.closeValidationModal = function() {
     validationModal.style.display = 'none';
@@ -976,6 +1057,202 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Cart-specific styles that remain inline -->
 <style>
 .red-border{border:2px solid #C70209!important;background-color:#f5e7e7;position:relative;border-radius:10px;padding:10px;margin-bottom:10px;margin-top:10px}.free-gift-label{position:absolute;top:10px;right:10px;background-color:#fcc;color:#000;padding:5px 10px;border-radius:5px;font-weight:700}.cart__image{display:block;width:100%;text-align:center;margin:10px auto}.cart__image-container{width:100%;height:150px;overflow:hidden;margin:0 auto;border-radius:8px}.red-border .cart__image-container{border:2px solid #0071CE;box-shadow:0 4px 8px #0000001a}.cart-image{width:100%;height:100%;object-fit:contain;display:block}.grey-border{border:2px solid #D6D6D6;position:relative;border-radius:10px;padding:10px}.cart_product_title{color:#333}.cart_product_title:hover{color:#333}.cart__remove{display:flex;align-items:center;width:min-content;font-size:14px;color:#ff8080;border:none;border-radius:4px;cursor:pointer;text-decoration:none;transition:background-color .3s ease}.cart__remove:hover{color:#f66}.cart__remove svg{fill:#ff8080}.cart__remove svg:hover{fill:#f66}.af_tag{font-size:14px;color:#000;background-color:#DEDEDE;border:solid 1px #D6D6D6;padding:5px;margin:3px 0;border-radius:5px}div.af_tag{background:#EFF4F7!important;border-radius:20px!important;color:#222;display:flex;-webkit-align-items:center;align-items:center;padding:5px 10px;background:#e5e5e5;border:solid thin #d5d5d5;border-radius:3px!important;margin-right:5px!important;position:relative;transition:all ease-in-out .2s}div.af_tag .af_coupon_wrapper{margin-right:5px}div.af_tag span.af_coupon_wrapper svg{width:15px;height:15px}div.af_tag > *{display:flex;-webkit-align-items:center;align-items:center}#af_kd_tagged_discounts .af_coupon_text_amount{line-height:23px!important}.af_coupon_text_amount{display:grid;max-height:23px;text-align:center}div.af_tag span.af_coupon_text{color:#222}.af_coupon_text.af_coupon_code{visibility:visible!important;position:unset!important}.af_tagged_discounts .af_tag .af_coupon_text{display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden!important}.banner-container{max-width:800px;margin:0 auto;overflow:hidden}.promotional-banner{width:100%;overflow:hidden}
+
+/* Improved Mobile Layout */
+@media (max-width: 768px) {
+  .cart__row {
+    margin-bottom: 15px;
+    padding: 15px 10px;
+  }
+  
+  .cart__row .grid--full {
+    display: block;
+  }
+  
+  .cart__row .grid__item {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
+  
+  .cart__image-container {
+    height: 120px;
+    width: 120px;
+    margin: 0 auto 15px auto;
+  }
+  
+  .cart_product_title {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .cart__row--table-large .grid--full {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cart__row--table-large .grid__item {
+    text-align: center;
+  }
+  
+  .cart__mini-labels {
+    font-weight: 600;
+    color: #666;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .quantity-input {
+    width: 60px !important;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .cart-summary-desktop {
+    display: none;
+  }
+  
+  /* Add margin bottom for sticky button */
+  .main-content {
+    margin-bottom: 120px;
+  }
+}
+
+/* Sticky Checkout Button Styles */
+.sticky-checkout-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 2px solid #e0e0e0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 15px 20px;
+}
+
+.sticky-checkout-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sticky-cart-summary {
+  flex: 1;
+}
+
+.sticky-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.sticky-total-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.sticky-total-amount {
+  font-weight: 700;
+  color: #2f5b96;
+  font-size: 18px;
+}
+
+.sticky-savings {
+  font-size: 14px;
+}
+
+.sticky-savings-text {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.sticky-checkout-button {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.sticky-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+.sticky-btn-enabled {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+}
+
+.sticky-btn-enabled:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.sticky-btn-disabled {
+  background: #6c757d;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Mobile Sticky Button */
+@media (max-width: 768px) {
+  .sticky-checkout-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .sticky-cart-summary {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .sticky-total {
+    justify-content: center;
+  }
+  
+  .sticky-checkout-button {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .sticky-btn {
+    width: 100%;
+    min-width: auto;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .sticky-checkout-bar {
+    padding: 12px 15px;
+  }
+}
+
+/* Desktop - Hide sticky on desktop by default, show on scroll */
+@media (min-width: 769px) {
+  .cart-summary-desktop {
+    display: block;
+  }
+  
+  .sticky-checkout-bar {
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sticky-checkout-bar.show {
+    transform: translateY(0);
+  }
+}
 </style>
 
  {% if cart.item_count > 0 %}
