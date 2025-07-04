@@ -1,3 +1,4 @@
+
 <style>
   .homepage-slider { 
     display: block !important; 
@@ -8,6 +9,9 @@
     border-radius: 12px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
   }
 
   .homepage-slider.slick-initialized {
@@ -28,8 +32,6 @@
   }
 </style>
 
-
-
 <section class="homepage-slider">
   {% comment %} Show slide 3 first {% endcomment %}
   {% assign slide_order = '3,1,2,4,5,6,7,8' | split: ',' %}
@@ -46,18 +48,26 @@
       <div class="slide-item {% if settings[slide_is_video] and settings[slide_video_url] != blank %}video-slide{% else %}image-slide{% endif %}" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
-            <video 
-              class="slide-video" 
-              muted 
-              playsinline
-              preload="auto"
-              data-video-src="{{ settings[slide_video_url] }}"
-            >
-              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+            <div class="video-container">
+              <video 
+                class="slide-video" 
+                muted 
+                playsinline
+                preload="metadata"
+                poster=""
+                data-video-src="{{ settings[slide_video_url] }}"
+              >
+                <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-loading-overlay">
+                <div class="loading-spinner"></div>
+              </div>
+            </div>
           {% else %}
-            {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
+            <div class="image-container">
+              {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
+            </div>
           {% endif %}
         </a>
       </div>
@@ -66,11 +76,121 @@
 </section>
 
 <style>
+/* Base slider styling */
+.homepage-slider {
+  height: 600px !important;
+  min-height: 600px;
+  max-height: 600px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage-slider {
+    height: 400px !important;
+    min-height: 400px;
+    max-height: 400px;
+  }
+}
+
+/* Slide container styling */
 .slide-item {
   position: relative;
   width: 100%;
-  height: auto;
-  min-height: 400px;
+  height: 600px !important;
+  overflow: hidden;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .slide-item {
+    height: 400px !important;
+  }
+}
+
+/* Video slide specific styling */
+.slide-item.video-slide {
+  height: 600px !important;
+  background: #000;
+}
+
+.slide-item.image-slide {
+  height: 600px !important;
+  background: #f5f5f5;
+}
+
+@media screen and (max-width: 768px) {
+  .slide-item.video-slide,
+  .slide-item.image-slide {
+    height: 400px !important;
+  }
+}
+
+/* Video container and styling */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #000;
+  border-radius: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.video-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.video-loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Image container and styling */
+.image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -78,39 +198,17 @@
   background: #f5f5f5;
 }
 
-/* Video slide specific styling */
-.slide-item.video-slide {
-  height: auto;
-  min-height: 500px;
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #f5f5f5;
+  border-radius: 12px;
 }
 
-.slide-item.image-slide {
-  height: 500px;
-}
-
-@media screen and (max-width: 768px) {
-  .slide-item {
-    min-height: 250px;
-  }
-  
-  .slide-item.video-slide {
-    min-height: 300px;
-  }
-  
-  .slide-item.image-slide {
-    height: 300px;
-  }
-}
-
-/* Ensure images scale properly without cropping */
-.slide-item img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
+/* Slide link styling */
 .slide-link {
   display: block;
   width: 100%;
@@ -119,30 +217,36 @@
   overflow: hidden;
 }
 
-.slide-video {
-  width: 100%;
-  height: auto;
-  min-height: 400px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background: #000;
-  border-radius: 12px;
+/* Slick slider overrides */
+.homepage-slider .slick-track {
+  display: flex !important;
+  align-items: stretch;
+  height: 600px !important;
 }
 
 @media screen and (max-width: 768px) {
-  .slide-video {
-    min-height: 250px;
+  .homepage-slider .slick-track {
+    height: 400px !important;
   }
 }
 
-.homepage-slider img {
+.homepage-slider .slick-slide {
+  height: 600px !important;
+  display: flex !important;
+  align-items: center;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage-slider .slick-slide {
+    height: 400px !important;
+  }
+}
+
+.homepage-slider .slick-slide > div {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background: #f5f5f5;
+  overflow: hidden;
 }
 
 /* Ensure videos don't interfere with slider controls */
@@ -154,63 +258,7 @@
   pointer-events: auto;
 }
 
-/* Slick slider height adjustments */
-.homepage-slider {
-  height: auto;
-  min-height: 400px;
-  overflow: hidden;
-  position: relative;
-  background: #f5f5f5;
-  transition: all 0.3s ease;
-}
-
-@media screen and (max-width: 768px) {
-  .homepage-slider {
-    min-height: 250px;
-  }
-}
-
-.homepage-slider .slick-track {
-  display: flex;
-  align-items: stretch;
-  height: auto;
-}
-
-.homepage-slider .slick-slide {
-  height: auto !important;
-  min-height: 400px !important;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 768px) {
-  .homepage-slider .slick-slide {
-    min-height: 250px !important;
-  }
-}
-
-.homepage-slider .slick-slide > div {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-/* Fallback for browsers that don't support :has() */
-@supports not selector(:has(video)) {
-  .slide-item {
-    height: auto;
-    min-height: 350px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .slide-item {
-      min-height: 250px;
-    }
-  }
-}
-
-/* Ensure slider controls are visible */
+/* Slider controls styling */
 .homepage-slider .slick-dots {
   bottom: 20px;
   z-index: 10;
@@ -263,6 +311,75 @@
 document.addEventListener('DOMContentLoaded', function() {
   let sliderInitialized = false;
   let slideTimeout = null;
+  let currentVideoElement = null;
+
+  // Video loading and management
+  function preloadVideo(videoElement) {
+    return new Promise((resolve, reject) => {
+      if (!videoElement) {
+        reject('No video element');
+        return;
+      }
+
+      const loadingOverlay = videoElement.parentElement.querySelector('.video-loading-overlay');
+      
+      videoElement.addEventListener('loadeddata', function() {
+        console.log('Video loaded successfully');
+        if (loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+        }
+        resolve(videoElement);
+      }, { once: true });
+
+      videoElement.addEventListener('error', function(e) {
+        console.error('Video loading error:', e);
+        if (loadingOverlay) {
+          loadingOverlay.innerHTML = '<p style="color: white;">Video unavailable</p>';
+        }
+        reject(e);
+      }, { once: true });
+
+      // Start loading
+      videoElement.load();
+    });
+  }
+
+  function playVideo(videoElement) {
+    return new Promise((resolve, reject) => {
+      if (!videoElement) {
+        reject('No video element');
+        return;
+      }
+
+      // Reset video
+      videoElement.currentTime = 0;
+      
+      const playPromise = videoElement.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Video started playing');
+          resolve(videoElement);
+        }).catch((error) => {
+          console.error('Video play failed:', error);
+          reject(error);
+        });
+      } else {
+        resolve(videoElement);
+      }
+    });
+  }
+
+  function stopAllVideos() {
+    document.querySelectorAll('.slide-video').forEach(video => {
+      try {
+        video.pause();
+        video.currentTime = 0;
+      } catch (e) {
+        console.log('Error stopping video:', e);
+      }
+    });
+  }
 
   // Initialize slider when jQuery and Slick are loaded
   function initializeSlider() {
@@ -280,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
       speed: 500,
       fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
       cssEase: 'linear',
-      autoplay: false, // Disable default autoplay, we'll handle manually
+      autoplay: false,
       arrows: true,
       pauseOnHover: false,
       pauseOnFocus: false,
@@ -307,142 +424,72 @@ document.addEventListener('DOMContentLoaded', function() {
         slideTimeout = null;
       }
 
-      // Pause current videos but don't remove sources
-      $(slick.$slides).each(function() {
-        var video = $(this).find('video')[0];
-        if (video) {
-          try {
-            video.pause();
-            video.currentTime = 0;
-            video.removeAttribute('data-ended');
-            video.onended = null;
-            video.onloadedmetadata = null;
-            video.onerror = null;
-          } catch (e) {
-            console.log('Error pausing video:', e);
-          }
-        }
-      });
+      // Stop all videos
+      stopAllVideos();
+      currentVideoElement = null;
     });
-
-    // Pre-load first video before slider starts
-    function preloadFirstVideo() {
-      var firstSlide = $('.homepage-slider .slide-item').first();
-      var firstVideo = firstSlide.find('video')[0];
-      
-      if (firstVideo) {
-        console.log('Pre-loading first video');
-        firstVideo.load();
-        
-        firstVideo.addEventListener('loadeddata', function() {
-          console.log('First video loaded and ready');
-        });
-      }
-    }
 
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
       console.log('Slide changed to:', currentSlide);
 
       var currentSlideElement = $(slick.$slides[currentSlide]);
       var video = currentSlideElement.find('video')[0];
-      var hasVideo = !!video;
+      var isVideoSlide = currentSlideElement.hasClass('video-slide');
 
-      if (video) {
+      if (isVideoSlide && video) {
         console.log('Starting video on slide', currentSlide);
+        currentVideoElement = video;
         
-        try {
-          // Reset video state
-          video.currentTime = 0;
-          video.removeAttribute('data-ended');
-          
-          // Ensure video is loaded
-          if (video.readyState < 2) { // Less than HAVE_CURRENT_DATA
-            video.load();
-          }
-          
-          // Set up error handling first
-          video.onerror = function(e) {
-            console.log('Video error:', e);
+        // Preload and play video
+        preloadVideo(video)
+          .then(() => playVideo(video))
+          .then(() => {
+            // Set up video end listener
+            video.onended = function() {
+              console.log('Video ended on slide', currentSlide);
+              
+              if (slideTimeout) {
+                clearTimeout(slideTimeout);
+                slideTimeout = null;
+              }
+
+              slideTimeout = setTimeout(function() {
+                console.log('Auto-advancing after video end');
+                if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
+                  $('.homepage-slider').slick('slickNext');
+                }
+              }, 1000);
+            };
+
+            // Set fallback timeout for video (max 60 seconds)
+            var videoDuration = video.duration;
+            var timeoutDuration = 60000;
+            
+            if (videoDuration && videoDuration > 0 && videoDuration < 120) {
+              timeoutDuration = (videoDuration * 1000) + 2000;
+            }
+            
+            if (slideTimeout) {
+              clearTimeout(slideTimeout);
+              slideTimeout = null;
+            }
+            
+            slideTimeout = setTimeout(function() {
+              console.log('Video timeout reached, advancing slide');
+              if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
+                $('.homepage-slider').slick('slickNext');
+              }
+            }, timeoutDuration);
+          })
+          .catch((error) => {
+            console.error('Video error:', error);
             slideTimeout = setTimeout(function() {
               console.log('Video error timeout, advancing slide');
               if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
                 $('.homepage-slider').slick('slickNext');
               }
-            }, 8000);
-          };
-
-          // Set up video end listener
-          video.onended = function() {
-            console.log('Video ended on slide', currentSlide);
-            video.setAttribute('data-ended', 'true');
-
-            if (slideTimeout) {
-              clearTimeout(slideTimeout);
-              slideTimeout = null;
-            }
-
-            slideTimeout = setTimeout(function() {
-              console.log('Auto-advancing after video end');
-              if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
-                $('.homepage-slider').slick('slickNext');
-              }
-            }, 1000);
-          };
-
-          // Set up metadata loaded handler
-          video.onloadeddata = function() {
-            var videoDuration = video.duration;
-            console.log('Video duration:', videoDuration);
-            
-            if (slideTimeout) {
-              clearTimeout(slideTimeout);
-              slideTimeout = null;
-            }
-            
-            // Set fallback timeout (max 60 seconds)
-            var timeoutDuration = 60000;
-            if (videoDuration && videoDuration > 0 && videoDuration < 120) {
-              timeoutDuration = (videoDuration * 1000) + 2000;
-            }
-            
-            slideTimeout = setTimeout(function() {
-              if (!video.getAttribute('data-ended')) {
-                console.log('Video timeout reached, advancing slide');
-                if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
-                  $('.homepage-slider').slick('slickNext');
-                }
-              }
-            }, timeoutDuration);
-
-            // Try to play video after it's loaded
-            var playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.then(function() {
-                console.log('Video started playing successfully');
-              }).catch(function(error) {
-                console.log('Video autoplay failed:', error);
-                slideTimeout = setTimeout(function() {
-                  if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
-                    $('.homepage-slider').slick('slickNext');
-                  }
-                }, 8000);
-              });
-            }
-          };
-
-          // If video is already loaded, try to play immediately
-          if (video.readyState >= 2) { // HAVE_CURRENT_DATA or better
-            video.onloadeddata();
-          }
-
-        } catch (e) {
-          console.log('Error handling video:', e);
-          slideTimeout = setTimeout(function() {
-            if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
-              $('.homepage-slider').slick('slickNext');
-            }
-          }, 8000);
-        }
+            }, 3000);
+          });
 
       } else {
         console.log('Starting image timer on slide', currentSlide);
@@ -455,12 +502,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Pre-load first video and start the first slide
-    preloadFirstVideo();
+    // Preload first video
+    setTimeout(function() {
+      var firstSlide = $('.homepage-slider .slide-item').first();
+      var firstVideo = firstSlide.find('video')[0];
+      
+      if (firstVideo) {
+        console.log('Pre-loading first video');
+        preloadVideo(firstVideo).catch(e => console.log('First video preload failed:', e));
+      }
+    }, 500);
     
+    // Start the first slide
     setTimeout(function() {
       $('.homepage-slider').trigger('afterChange', [null, 0]);
-    }, 1500);
+    }, 1000);
   }
 
   // Override expo function if it exists
@@ -482,46 +538,51 @@ document.addEventListener('DOMContentLoaded', function() {
       slideTimeout = null;
     }
     
-    // Simply pause all videos
-    $('.slide-video').each(function() {
-      try {
-        this.pause();
-      } catch (e) {
-        console.log('Error pausing video on unload:', e);
+    stopAllVideos();
+  });
+
+  // Handle visibility change (when tab becomes inactive/active)
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      if (currentVideoElement) {
+        currentVideoElement.pause();
       }
-    });
+    } else {
+      if (currentVideoElement && currentVideoElement.paused) {
+        playVideo(currentVideoElement).catch(e => console.log('Resume play failed:', e));
+      }
+    }
   });
 });
 </script>
 
 <script>
-          window.addEventListener('load', function() {
-              // Wait for slider to initialize
-              setTimeout(function() {
-                  // Replace slide 1 image (now in position 1) if it's not a video
-                  const slide1 = document.querySelector('.slide-item[data-slide-index="1"]');
-                  if(slide1) {
-                      const slide1Img = slide1.querySelector('img');
-                      const slide1Video = slide1.querySelector('video');
+window.addEventListener('load', function() {
+    // Wait for slider to initialize
+    setTimeout(function() {
+        // Replace slide 1 image (now in position 1) if it's not a video
+        const slide1 = document.querySelector('.slide-item[data-slide-index="1"]');
+        if(slide1) {
+            const slide1Img = slide1.querySelector('img');
+            const slide1Video = slide1.querySelector('video');
 
-                      // Only replace image if there's no video
-                      if(slide1Img && !slide1Video) {
-                          slide1Img.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Rhino_carboy_and_bottles_promo-foxx-life-sciences-home-slideshow-v2.jpg?v=1750361081';
-                      }
-                  }
+            // Only replace image if there's no video
+            if(slide1Img && !slide1Video) {
+                slide1Img.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Rhino_carboy_and_bottles_promo-foxx-life-sciences-home-slideshow-v2.jpg?v=1750361081';
+            }
+        }
 
-                  // Replace slide 2 image (now in position 2) if it's not a video
-                  const slide2 = document.querySelector('.slide-item[data-slide-index="2"]');
-                  if(slide2) {
-                      const slide2Img = slide2.querySelector('img');
-                      const slide2Video = slide2.querySelector('video');
+        // Replace slide 2 image (now in position 2) if it's not a video
+        const slide2 = document.querySelector('.slide-item[data-slide-index="2"]');
+        if(slide2) {
+            const slide2Img = slide2.querySelector('img');
+            const slide2Video = slide2.querySelector('video');
 
-                      // Only replace image if there's no video
-                      if(slide2Img && !slide2Video) {
-                          slide2Img.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Website_ISO_13485_Banner-foxx-life-sciences-HomeSlideshow.jpg?v=1750425783';
-                      }
-                  }
-              }, 500);
-          });
-
-      </script>
+            // Only replace image if there's no video
+            if(slide2Img && !slide2Video) {
+                slide2Img.src = 'https://cdn.shopify.com/s/files/1/1064/0118/files/Website_ISO_13485_Banner-foxx-life-sciences-HomeSlideshow.jpg?v=1750425783';
+            }
+        }
+    }, 500);
+});
+</script>
