@@ -194,7 +194,24 @@
         {% assign final_price = product.price | minus: price_discount %}
         <!-- Promo Elements Container -->
         <div class="promo-elements-container">
-          <!-- Compact Independence Special Card -->
+          <!-- Compact Final Price Display (SHOWN FIRST) -->
+          {% if final_price %}
+          <div class="compact-price-display {{ template | split: '.' | first }}">
+            <div class="price-row">
+              <span class="price-label">Your Price:</span>
+              <span class="final-price-value">{{ final_price | money }}</span>
+            </div>
+            
+            {% assign original_price = product.variants.first.compare_at_price %}
+            {% assign savings_amount = original_price | minus: final_price %}
+            {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+            <div class="compact-savings-badge">
+              <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Compact Independence Special Card (SHOWN SECOND) -->
           <div class="compact-promo-card">
             <div class="promo-header">
               <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
@@ -228,23 +245,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Compact Final Price Display -->
-          {% if final_price %}
-          <div class="compact-price-display {{ template | split: '.' | first }}">
-            <div class="price-row">
-              <span class="price-label">Your Price:</span>
-              <span class="final-price-value">{{ final_price | money }}</span>
-            </div>
-            
-            {% assign original_price = product.variants.first.compare_at_price %}
-            {% assign savings_amount = original_price | minus: final_price %}
-            {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-            <div class="compact-savings-badge">
-              <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
-            </div>
-          </div>
-          {% endif %}
         </div>
         {% else %}
         <div class="fallback-offer">
@@ -296,10 +296,11 @@
     <style>
       .promo-elements-container {
         display: flex;
-        gap: 12px;
+        gap: 8px;
         align-items: stretch;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         margin: 4px 0;
+        width: 100%;
       }
 
       .compact-promo-card {
@@ -307,8 +308,7 @@
         border-radius: 12px;
         padding: 12px;
         flex: 1;
-        min-width: 200px;
-        max-width: 280px;
+        min-width: 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
@@ -458,10 +458,11 @@
         .promo-elements-container {
           flex-direction: column;
           gap: 8px;
+          width: 100%;
         }
         
         .compact-promo-card {
-          max-width: 100%;
+          width: 100%;
           padding: 10px;
         }
         
@@ -528,12 +529,12 @@
         border-radius: 8px;
         padding: 8px;
         border: 1px solid #d1f2dd;
-        flex: 1;
+        flex: 0 0 auto;
         min-width: 150px;
-        max-width: 200px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        order: -1;
       }
 
       .price-row {
@@ -580,7 +581,8 @@
 
       @media (max-width: 768px) {
         .compact-price-display {
-          max-width: 100%;
+          width: 100%;
+          order: -1;
         }
         
         .final-price-value {
