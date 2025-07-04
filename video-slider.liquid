@@ -263,6 +263,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let sliderInitialized = false;
+  let currentVideoSlide = null;
 
   function stopAllVideos() {
     document.querySelectorAll('.slide-video').forEach(video => {
@@ -282,45 +283,84 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = currentSlideElement.querySelector('video');
     if (video) {
       console.log('Playing video on slide', currentSlide);
+      currentVideoSlide = currentSlide;
 
-      // Force reload the video to ensure it's properly loaded
-      video.load();
+      // Remove any existing event listeners to prevent duplicates
+      video.removeEventListener('pause', handleVideoPause);
+      video.removeEventListener('ended', handleVideoEnded);
+
+      // Set video properties
       video.muted = true;
-      
-      // Enhanced event listeners to prevent pausing
-      video.addEventListener('pause', function(e) {
-        if (!video.ended && !video.seeking) {
-          setTimeout(() => {
-            video.play().catch(err => console.log('Resume after pause failed:', err));
-          }, 100);
-        }
-      });
+      video.loop = true; // Enable looping to prevent black screen
+      video.controls = false;
+      video.preload = "auto";
 
-      // Prevent browser from pausing on visibility change
-      video.addEventListener('webkitbeginfullscreen', function(e) {
-        e.preventDefault();
-      });
+      // Add event listeners
+      video.addEventListener('pause', handleVideoPause);
+      video.addEventListener('ended', handleVideoEnded);
 
-      // Wait for video to be ready before playing
-      const attemptPlay = () => {
-        if (video.readyState >= 2) {
+      // Enhanced play attempt with multiple fallbacks
+      const attemptPlay = async () => {
+        try {
+          // Reset video position
           video.currentTime = 0;
-          video.play().catch(e => {
-            console.log('Video play failed, retrying...', e);
-            setTimeout(() => {
+          
+          // Wait for video to be ready
+          if (video.readyState < 2) {
+            await new Promise((resolve) => {
+              video.addEventListener('loadeddata', resolve, { once: true });
+              video.load();
+            });
+          }
+
+          // Attempt to play
+          await video.play();
+          console.log('Video playing successfully on slide', currentSlide);
+        } catch (error) {
+          console.log('First play attempt failed, trying again...', error);
+          
+          // Second attempt after a delay
+          setTimeout(async () => {
+            try {
               video.load();
               video.currentTime = 0;
-              video.play().catch(err => console.log('Second play attempt failed:', err));
-            }, 500);
-          });
-        } else {
-          video.addEventListener('loadeddata', () => {
-            video.currentTime = 0;
-            video.play().catch(e => console.log('Video play failed after loadeddata:', e));
-          }, { once: true });
+              await video.play();
+              console.log('Video playing on second attempt');
+            } catch (secondError) {
+              console.log('Second play attempt also failed:', secondError);
+              
+              // Third attempt with user interaction simulation
+              setTimeout(() => {
+                video.muted = true;
+                video.currentTime = 0;
+                video.play().catch(e => console.log('Final play attempt failed:', e));
+              }, 1000);
+            }
+          }, 500);
         }
       };
 
+      // Function to handle video pause events
+      function handleVideoPause(e) {
+        // Only auto-resume if the video is on the current slide and not manually paused
+        if (currentVideoSlide === currentSlide && !video.ended && !video.seeking) {
+          setTimeout(() => {
+            if (currentVideoSlide === currentSlide) {
+              video.play().catch(err => console.log('Resume after pause failed:', err));
+            }
+          }, 100);
+        }
+      }
+
+      // Function to handle video end events
+      function handleVideoEnded(e) {
+        if (currentVideoSlide === currentSlide) {
+          video.currentTime = 0;
+          video.play().catch(err => console.log('Restart after end failed:', err));
+        }
+      }
+
+      // Start playing
       attemptPlay();
     }
   }
@@ -332,12 +372,10 @@ document.addEventListener('DOMContentLoaded', function() {
       $('.homepage-slider').slick('unslick');
     }
 
-    // Determine initial autoplay speed based on first slide
-    const firstSlideElement = document.querySelector('.slide-item:first-child');
-    const isFirstSlideVideo = firstSlideElement && firstSlideElement.classList.contains('video-slide');
-    const initialAutoplaySpeed = isFirstSlideVideo ? 70000 : 8000;
+    // Always start with 70 seconds for video slides (since first slide is video slide 3)
+    const initialAutoplaySpeed = 70000;
 
-    console.log('Initializing slider with autoplay speed:', initialAutoplaySpeed);
+    console.log('Initializing slider with autoplay speed for video:', initialAutoplaySpeed);
 
     $(".homepage-slider").slick({
       dots: true,
@@ -365,77 +403,106 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle slide changes
     $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+      console.log(`Slide changing from ${currentSlide} to ${nextSlide}`);
+      
+      // Stop current videos but don't reset currentVideoSlide yet
       stopAllVideos();
 
-      // Pre-load the next slide video if it's a video slide
+      // Pre-check if next slide is video and set timing immediately
       const nextSlideElement = document.querySelector(`.slick-slide[data-slick-index="${nextSlide}"]`);
+      const isNextSlideVideo = nextSlideElement && nextSlideElement.querySelector('.video-slide');
+
+      if (isNextSlideVideo) {
+        console.log('Next slide is video - setting 70 second autoplay');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
+      } else {
+        console.log('Next slide is image - setting 8 second autoplay');
+        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, false);
+      }
+
+      // Pre-load next video if it exists
       const nextVideo = nextSlideElement ? nextSlideElement.querySelector('video') : null;
       if (nextVideo) {
-        // Ensure video is fully reset for clean loading
-        nextVideo.pause();
-        nextVideo.currentTime = 0;
+        nextVideo.muted = true;
+        nextVideo.loop = true;
+        nextVideo.preload = "auto";
         nextVideo.load();
       }
     });
 
     $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-      // Check if current slide is a video slide and adjust autoplay timing
+      console.log(`Slide changed to ${currentSlide}`);
+      
+      // Check if current slide is a video slide
       const currentSlideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
       const isVideoSlide = currentSlideElement && currentSlideElement.querySelector('.video-slide');
 
+      // Ensure timing is set correctly (double-check)
       if (isVideoSlide) {
-        // Video slide: set autoplay to 70 seconds (1 min 10 sec)
-        console.log('Setting autoplay to 70 seconds for video slide');
+        console.log('Current slide is video - ensuring 70 second timing');
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, true);
+        
+        // Play video with delay to ensure slide transition is complete
+        setTimeout(() => playCurrentVideo(currentSlide), 800);
       } else {
-        // Image slide: set autoplay to 8 seconds
-        console.log('Setting autoplay to 8 seconds for image slide');
+        console.log('Current slide is image - ensuring 8 second timing');
         $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, true);
+        currentVideoSlide = null; // Clear current video slide reference
       }
-
-      // Play video with longer delay to ensure slide transition is complete
-      setTimeout(() => playCurrentVideo(currentSlide), 1000);
     });
 
-    // Play video on first slide after initialization
+    // Play video on first slide after initialization (since first slide is video slide 3)
     setTimeout(() => {
-      console.log('Playing initial slide video');
+      console.log('Playing initial video slide');
       playCurrentVideo(0);
-    }, 1500);
+    }, 1200);
   }
 
-  // Initialize slider
+  // Initialize slider with multiple attempts
   initializeSlider();
   setTimeout(initializeSlider, 1000);
   setTimeout(initializeSlider, 3000);
 });
 
-// Enhanced global visibility change handler to prevent video pausing
+// Enhanced global visibility change handler
 document.addEventListener('visibilitychange', function() {
-  // Do nothing - let videos continue playing in background
+  if (!document.hidden) {
+    // When page becomes visible again, ensure current video continues playing
+    setTimeout(() => {
+      document.querySelectorAll('.slide-video').forEach(video => {
+        if (video.closest('.slick-slide').classList.contains('slick-active')) {
+          if (video.paused && !video.ended) {
+            video.play().catch(e => console.log('Resume on visibility change failed:', e));
+          }
+        }
+      });
+    }, 200);
+  }
 });
 
 // Prevent video pausing on window blur/focus
 window.addEventListener('blur', function() {
-  // Keep videos playing even when window loses focus
-  document.querySelectorAll('.slide-video').forEach(video => {
-    if (!video.ended && video.paused) {
-      setTimeout(() => {
+  setTimeout(() => {
+    const activeSlide = document.querySelector('.slick-slide.slick-active');
+    if (activeSlide) {
+      const video = activeSlide.querySelector('video');
+      if (video && video.paused && !video.ended) {
         video.play().catch(e => console.log('Resume on blur failed:', e));
-      }, 100);
+      }
     }
-  });
+  }, 100);
 });
 
 window.addEventListener('focus', function() {
-  // Ensure videos continue playing when window gains focus
-  document.querySelectorAll('.slide-video').forEach(video => {
-    if (!video.ended && video.paused) {
-      setTimeout(() => {
+  setTimeout(() => {
+    const activeSlide = document.querySelector('.slick-slide.slick-active');
+    if (activeSlide) {
+      const video = activeSlide.querySelector('video');
+      if (video && video.paused && !video.ended) {
         video.play().catch(e => console.log('Resume on focus failed:', e));
-      }, 100);
+      }
     }
-  });
+  }, 100);
 });
 </script>
 
