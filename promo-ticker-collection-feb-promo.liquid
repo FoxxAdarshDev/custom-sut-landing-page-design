@@ -192,39 +192,59 @@
         {% if percent_tag != '' %}
         {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
         {% assign final_price = product.price | minus: price_discount %}
-        <!-- Compact Independence Special Card -->
-        <div class="compact-promo-card">
-          <div class="promo-header">
-            <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
-            <div class="countdown-timer">
-              <div class="timer-label">Sale Ends:</div>
-              <div class="timer-units">
-                <div class="timer-unit">
-                  <span id="promo-days">02</span>
-                  <label>D</label>
-                </div>
-                <div class="timer-unit">
-                  <span id="promo-hours">06</span>
-                  <label>H</label>
-                </div>
-                <div class="timer-unit">
-                  <span id="promo-minutes">25</span>
-                  <label>M</label>
+        <!-- Promo Elements Container -->
+        <div class="promo-elements-container">
+          <!-- Compact Independence Special Card -->
+          <div class="compact-promo-card">
+            <div class="promo-header">
+              <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
+              <div class="countdown-timer">
+                <div class="timer-label">Sale Ends:</div>
+                <div class="timer-units">
+                  <div class="timer-unit">
+                    <span id="promo-days">02</span>
+                    <label>D</label>
+                  </div>
+                  <div class="timer-unit">
+                    <span id="promo-hours">06</span>
+                    <label>H</label>
+                  </div>
+                  <div class="timer-unit">
+                    <span id="promo-minutes">25</span>
+                    <label>M</label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="promo-content">
-            <div class="discount-circle">
-              <span class="discount-percent">{{ percent_tag }}%</span>
-              <span class="discount-off">OFF</span>
+            <div class="promo-content">
+              <div class="discount-circle">
+                <span class="discount-percent">{{ percent_tag }}%</span>
+                <span class="discount-off">OFF</span>
+              </div>
+              <div class="savings-info">
+                <div class="savings-label">Instant Savings:</div>
+                {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+                <div class="savings-amount">${{ price_discount | money_without_currency }}</div>
+              </div>
             </div>
-            <div class="savings-info">
-              <div class="savings-label">Instant Savings:</div>
-              {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
-              <div class="savings-amount">${{ price_discount | money_without_currency }}</div>
+          </div>
+
+          <!-- Compact Final Price Display -->
+          {% if final_price %}
+          <div class="compact-price-display {{ template | split: '.' | first }}">
+            <div class="price-row">
+              <span class="price-label">Your Price:</span>
+              <span class="final-price-value">{{ final_price | money }}</span>
+            </div>
+            
+            {% assign original_price = product.variants.first.compare_at_price %}
+            {% assign savings_amount = original_price | minus: final_price %}
+            {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+            <div class="compact-savings-badge">
+              <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
             </div>
           </div>
+          {% endif %}
         </div>
         {% else %}
         <div class="fallback-offer">
@@ -274,11 +294,20 @@
     </div>
     
     <style>
+      .promo-elements-container {
+        display: flex;
+        gap: 12px;
+        align-items: stretch;
+        flex-wrap: wrap;
+        margin: 4px 0;
+      }
+
       .compact-promo-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
         border-radius: 12px;
         padding: 12px;
-        margin: 4px 0;
+        flex: 1;
+        min-width: 200px;
         max-width: 280px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         position: relative;
@@ -419,6 +448,11 @@
 
       /* Mobile responsiveness */
       @media (max-width: 768px) {
+        .promo-elements-container {
+          flex-direction: column;
+          gap: 8px;
+        }
+        
         .compact-promo-card {
           max-width: 100%;
           padding: 10px;
@@ -477,31 +511,20 @@
       }
     </style>
     
-    <!-- Compact Final Price Display -->
-    {% if final_price %}
-    <div class="compact-price-display {{ template | split: '.' | first }}">
-      <div class="price-row">
-        <span class="price-label">Your Price:</span>
-        <span class="final-price-value">{{ final_price | money }}</span>
-      </div>
-      
-      {% assign original_price = product.variants.first.compare_at_price %}
-      {% assign savings_amount = original_price | minus: final_price %}
-      {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-      <div class="compact-savings-badge">
-        <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
-      </div>
-    </div>
-    {% endif %}
+    
 
     <style>
       .compact-price-display {
         background: #f8fdf9;
         border-radius: 8px;
         padding: 8px;
-        margin: 4px 0;
         border: 1px solid #d1f2dd;
-        max-width: 280px;
+        flex: 1;
+        min-width: 150px;
+        max-width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       .price-row {
