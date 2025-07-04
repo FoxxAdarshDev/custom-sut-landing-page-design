@@ -115,23 +115,40 @@
 
 <style>
   .red-border {
-      border: 2px solid #C70209!important;
-      background-color: #f5e7e7; /* Light red background color */
+      border: 3px solid #dc3545!important;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffeaea 100%);
       position: relative;
-      border-radius:10px;
-      padding: 10px; /* Adjust padding as needed */
-      margin-bottom:10px;
-      margin-top:10px;
+      border-radius:12px;
+      padding: 15px;
+      margin-bottom:15px;
+      margin-top:15px;
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+  }
+
+  .red-border::before {
+      content: "🎆 INDEPENDENCE DAY SPECIAL";
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      background: linear-gradient(45deg, #dc3545, #0071ce);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 15px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
   }
 
   .free-gift-label {
       position: absolute;
-      top: 10px; /* Adjust positioning as needed */
-      right: 10px; /* Adjust positioning as needed */
-      background-color: #ffcccc; /* Light red background color */
+      top: 10px;
+      right: 10px;
+      background-color: #ffcccc;
       color: black;
-      padding: 5px 10px; /* Adjust padding as needed */
-      border-radius: 5px; /* Optional: rounded corners */
+      padding: 5px 10px;
+      border-radius: 5px;
       font-weight: bold;
   }
 </style>
@@ -177,8 +194,142 @@
 
 
 </style>
-{% comment %} <div class="cart__row {% if item.variant_id == 46258505486 %}red-border{% else %}grey-border{% endif %}" data-id="{{ item.id }}"> {% endcomment %}
-  <div class="cart__row {% if item.variant_id == 46258505486 %}grey-border{% else %}grey-border{% endif %}" data-id="{{ item.id }}">
+{% comment %} Collect all variant IDs from the collections used in simple-minimilistic.liquid {% endcomment %}
+{% assign promo_variant_ids = '' %}
+
+{% comment %} EZclear® Rectangular Carboy (PC) Collection - 32% Off {% endcomment %}
+{% assign ezclear_carboy_collection = collections['ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25'] %}
+{% for product in ezclear_carboy_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Carboy (PC) Collection - 20% Off {% endcomment %}
+{% assign pc_carboy_collection = collections['ezbio-carboy-pc-20-off-us-independence-day-sale-25'] %}
+{% for product in pc_carboy_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Titanium Round Carboy (PC) Collection - 15% Off {% endcomment %}
+{% assign pc_tr_carboy_collection = collections['ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25'] %}
+{% for product in pc_tr_carboy_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Media bottle (PC) Collection - 12% & 10% Off {% endcomment %}
+{% assign ezbio_bottles_12_collection = collections['ezbio-media-bottle-pc-12-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_bottles_12_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% assign ezbio_bottles_10_collection = collections['ezbio-media-bottle-pc-10-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_bottles_10_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Titanium Square Media Bottles (PETG) Collection - 12% Off {% endcomment %}
+{% assign ezbio_ts_bottles_collection = collections['ezbio-titanium-square-media-bottles-petg-12-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_ts_bottles_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Pure PFA Bottle Collection - 40% Off {% endcomment %}
+{% assign pfa_bottles_collection = collections['ezbio-pure-pfa-bottle-40-off-us-independence-day-sale-25'] %}
+{% for product in pfa_bottles_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} CPC® AseptiQuik G Sanitary Connector Collection - 20% Off {% endcomment %}
+{% assign aqg_collection = collections['cpc-aseptiquik-g-sanitary-connector-20-off-us-independence-day-sale-25'] %}
+{% for product in aqg_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} CPC® AseptiQuik S Connector Collection - 50% Off {% endcomment %}
+{% assign aqs_collection = collections['cpc-aseptiquik-s-connector-50-off-us-independence-day-sale-25'] %}
+{% for product in aqs_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} CPC® Steam Thru Connectors Collection - 50% Off {% endcomment %}
+{% assign cpc_stream_thru_connectors_collection = collections['cpc-steam-thru-connectors-50-off-us-independence-day-sale-25'] %}
+{% for product in cpc_stream_thru_connectors_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Bottle Assembly (PC) Collection - 12% Off {% endcomment %}
+{% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-12-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_bottle_assembly_pc_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZLabpure™ Round Carboy (PP) Collection - 25% Off {% endcomment %}
+{% assign ezlabpure_carboy_collection = collections['ezlabpure-round-carboy-pp-25-off-us-independence-day-sale-25'] %}
+{% for product in ezlabpure_carboy_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZgrip® Carboy (PP) Collection - 32% Off {% endcomment %}
+{% assign ezgrip_carboy_collection = collections['ezgrip-carboy-pp-32-off-us-independence-day-sale-25'] %}
+{% for product in ezgrip_carboy_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Carboy (PC) Lab Collection - 32% Off {% endcomment %}
+{% assign ezbio_carboypc_collection = collections['ezbio-carboy-pc-lab-32-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_carboypc_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} EZBio® Carboy (PP) Lab Collection - 32% Off {% endcomment %}
+{% assign ezbio_carboypp_collection = collections['ezbio-carboy-pp-lab-32-off-us-independence-day-sale-25'] %}
+{% for product in ezbio_carboypp_collection.products %}
+  {% for variant in product.variants %}
+    {% assign promo_variant_ids = promo_variant_ids | append: variant.id | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} Convert the comma-separated string to an array for checking {% endcomment %}
+{% assign promo_variant_ids_array = promo_variant_ids | split: ',' %}
+
+{% comment %} Check if current item variant ID is in the promo collections {% endcomment %}
+{% assign is_promo_item = false %}
+{% for promo_id in promo_variant_ids_array %}
+  {% assign promo_id_num = promo_id | plus: 0 %}
+  {% if item.variant_id == promo_id_num %}
+    {% assign is_promo_item = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<div class="cart__row {% if is_promo_item %}red-border{% else %}grey-border{% endif %}" data-id="{{ item.id }}">
       {% comment %} {% if item.variant_id == 46258505486 %}
           <div class="free-gift-label">Free Gift</div>
       {% endif %} {% endcomment %}
