@@ -190,13 +190,13 @@
         {% endfor %}
 
         {% if percent_tag != '' %}
-        {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+        {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
         {% assign final_price = product.price | minus: price_discount %}
         <p id="openSectionButton" class="t4s-ch ajax_modal_custom_btn_css {{ template | split: '.' | first }}"
           data-no-instant rel="nofollow">
           <span>
             Enjoy <strong>{{ percent_tag }}% OFF</strong> & save
-            {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+            {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
             <strong style="color:#4053c7">{{ price_discount | money }}</strong>
           </span>
         </p>
