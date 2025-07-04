@@ -54,7 +54,7 @@
                 muted 
                 playsinline
                 preload="metadata"
-                poster=""
+                src="{{ settings[slide_video_url] }}"
                 data-video-src="{{ settings[slide_video_url] }}"
               >
                 <source src="{{ settings[slide_video_url] }}" type="video/mp4">
@@ -323,24 +323,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const loadingOverlay = videoElement.parentElement.querySelector('.video-loading-overlay');
       
-      videoElement.addEventListener('loadeddata', function() {
-        console.log('Video loaded successfully');
+      // If video is already loaded
+      if (videoElement.readyState >= 3) {
+        console.log('Video already loaded');
         if (loadingOverlay) {
           loadingOverlay.classList.add('hidden');
         }
         resolve(videoElement);
-      }, { once: true });
+        return;
+      }
 
-      videoElement.addEventListener('error', function(e) {
+      const onLoadedData = function() {
+        console.log('Video loaded successfully');
+        if (loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+        }
+        videoElement.removeEventListener('loadeddata', onLoadedData);
+        videoElement.removeEventListener('canplay', onLoadedData);
+        videoElement.removeEventListener('error', onError);
+        resolve(videoElement);
+      };
+
+      const onError = function(e) {
         console.error('Video loading error:', e);
         if (loadingOverlay) {
           loadingOverlay.innerHTML = '<p style="color: white;">Video unavailable</p>';
         }
+        videoElement.removeEventListener('loadeddata', onLoadedData);
+        videoElement.removeEventListener('canplay', onLoadedData);
+        videoElement.removeEventListener('error', onError);
         reject(e);
-      }, { once: true });
+      };
+
+      videoElement.addEventListener('loadeddata', onLoadedData);
+      videoElement.addEventListener('canplay', onLoadedData);
+      videoElement.addEventListener('error', onError);
+
+      // Ensure src is set
+      const videoSrc = videoElement.getAttribute('data-video-src') || videoElement.src;
+      if (videoSrc && videoElement.src !== videoSrc) {
+        videoElement.src = videoSrc;
+      }
 
       // Start loading
       videoElement.load();
+      
+      // Fallback timeout
+      setTimeout(() => {
+        if (videoElement.readyState < 3) {
+          console.log('Video loading timeout, hiding overlay anyway');
+          if (loadingOverlay) {
+            loadingOverlay.classList.add('hidden');
+          }
+          resolve(videoElement);
+        }
+      }, 5000);
     });
   }
 
@@ -354,6 +391,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Reset video
       videoElement.currentTime = 0;
       
+      // Ensure video is muted for autoplay
+      videoElement.muted = true;
+      
       const playPromise = videoElement.play();
       
       if (playPromise !== undefined) {
@@ -362,7 +402,14 @@ document.addEventListener('DOMContentLoaded', function() {
           resolve(videoElement);
         }).catch((error) => {
           console.error('Video play failed:', error);
-          reject(error);
+          // Try playing without resetting currentTime
+          videoElement.play().then(() => {
+            console.log('Video started playing on retry');
+            resolve(videoElement);
+          }).catch((retryError) => {
+            console.error('Video play retry failed:', retryError);
+            reject(retryError);
+          });
         });
       } else {
         resolve(videoElement);
@@ -440,10 +487,21 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Starting video on slide', currentSlide);
         currentVideoElement = video;
         
+        // Hide loading overlay immediately if video is ready
+        const loadingOverlay = video.parentElement.querySelector('.video-loading-overlay');
+        if (video.readyState >= 3 && loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+        }
+        
         // Preload and play video
         preloadVideo(video)
-          .then(() => playVideo(video))
           .then(() => {
+            console.log('Video preloaded, starting playback');
+            return playVideo(video);
+          })
+          .then(() => {
+            console.log('Video playing successfully');
+            
             // Set up video end listener
             video.onended = function() {
               console.log('Video ended on slide', currentSlide);
@@ -483,6 +541,12 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           .catch((error) => {
             console.error('Video error:', error);
+            
+            // Hide loading overlay even on error
+            if (loadingOverlay) {
+              loadingOverlay.classList.add('hidden');
+            }
+            
             slideTimeout = setTimeout(function() {
               console.log('Video error timeout, advancing slide');
               if (slick && $('.homepage-slider').hasClass('slick-initialized')) {
