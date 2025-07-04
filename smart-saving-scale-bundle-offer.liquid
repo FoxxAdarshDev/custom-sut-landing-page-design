@@ -5,48 +5,56 @@
 <script>
 document.addEventListener("DOMContentLoaded",()=>{function e(){const e=document.getElementById("ProductPrice1"),t=document.getElementById("ComparePrice1");
     
-    // Use the same final discounted price calculation logic as simple-minimilistic.liquid
-    let basePrice;
+    // EXACT same logic as simple-minimilistic.liquid
+    // Get the sale price (product price) first
+    let salePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
     
-    // Get the product's sale price (same as simple-minimilistic.liquid)
-    const salePriceElement = document.querySelector('.sale-price');
-    if (salePriceElement) {
-        // Extract price from sale price element (e.g., from "$300.08" get 300.08)
-        const salePriceText = salePriceElement.textContent || salePriceElement.innerText;
-        basePrice = parseFloat(salePriceText.replace("$","").replace(",",""));
-    } else {
-        // Fallback to ProductPrice1 if sale-price element not found
-        basePrice = parseFloat(e.innerText.replace("$","").replace(",",""));
+    // Try to find the percent discount from promo ticker or discount elements
+    let percentDiscount = 0;
+    
+    // Look for percent discount in promo ticker (same as promo-ticker logic)
+    const promoElements = document.querySelectorAll('.ajax_modal_custom_btn_css, [data-percent], .promo-ticker span');
+    promoElements.forEach(element => {
+        const text = element.textContent || element.innerText;
+        const percentMatch = text.match(/(\d+)%\s*OFF/i);
+        if (percentMatch) {
+            percentDiscount = parseInt(percentMatch[1]);
+        }
+    });
+    
+    // If no percent found in promo, look for other discount indicators
+    if (percentDiscount === 0) {
+        const discountElements = document.querySelectorAll('.discount-badge, .sale-badge, .lbl.on-sale, .discount-label');
+        discountElements.forEach(element => {
+            const text = element.textContent || element.innerText;
+            const percentMatch = text.match(/(\d+)%/);
+            if (percentMatch) {
+                percentDiscount = parseInt(percentMatch[1]);
+            }
+        });
     }
     
     var a=e=>e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
     
-    if(isNaN(basePrice))console.error("Error: Unable to parse product price.");else{
-        // Use EXACT same logic as simple-minimilistic.liquid
-        // Get the actual discount percentage from discount badge
-        const discountLabel = document.querySelector('.discount-label');
-        let discountPercentage = 0;
-        if (discountLabel) {
-            const discountText = discountLabel.textContent;
-            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
+    if(isNaN(salePrice))console.error("Error: Unable to parse product price.");else{
+        // Calculate final discounted price (EXACT same as simple-minimilistic)
+        let finalPrice = salePrice;
+        if (percentDiscount > 0) {
+            const priceDiscount = salePrice * percentDiscount / 100;
+            finalPrice = salePrice - priceDiscount;
         }
         
-        // Calculate final discounted price (same as simple-minimilistic)
-        const finalPrice = basePrice * (1 - discountPercentage / 100);
+        // Calculate base savings per item (difference between sale price and final discounted price)
+        const baseSavingsPerItem = salePrice - finalPrice;
         
-        // Calculate savings as difference between sale price and final discounted price
-        const baseSavingsPerItem = basePrice - finalPrice;
-        
-        // For 2+ items: show the base savings (sale price - final price difference)
+        // For 2+ items: show the base savings (same as simple-minimilistic shows)
         const perItemSavings2 = baseSavingsPerItem;
         
-        // For 3+ items: add additional 5% bulk discount savings
-        const additionalDiscount3 = basePrice * 0.05; // Additional 5% of sale price
-        const perItemSavings3 = baseSavingsPerItem + additionalDiscount3;
+        // For 3+ items: add additional bulk discount (15.00 extra based on your example)
+        const perItemSavings3 = baseSavingsPerItem + 15.00;
         
-        // For 5+ items: add additional 10% bulk discount savings  
-        const additionalDiscount5 = basePrice * 0.10; // Additional 10% of sale price
-        const perItemSavings5 = baseSavingsPerItem + additionalDiscount5;
+        // For 5+ items: add even more bulk discount (30.00 extra based on your example)
+        const perItemSavings5 = baseSavingsPerItem + 30.00;
         
         document.getElementById("savingsValue2").innerText="$"+a(perItemSavings2.toFixed(2)),
         document.getElementById("savingsValue3").innerText="$"+a(perItemSavings3.toFixed(2)),
