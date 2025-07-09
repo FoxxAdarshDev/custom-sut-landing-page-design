@@ -329,44 +329,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }, 100);
 
-      // Handle slide changes
-      $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        // Stop current video
-        var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
-        if (currentVideo) {
-          currentVideo.pause();
-          currentVideo.currentTime = 0;
-          isVideoPlaying = false;
-        }
-
-        // Always stop autoplay when changing slides
-        stopSliderAutoplay();
-
-        // Clear advanced timer system for current video
-        if (currentVideo) {
-          // Clear old-style timer
-          if (currentVideo.videoTimer) {
-            clearTimeout(currentVideo.videoTimer);
-            currentVideo.videoTimer = null;
-          }
-
-          // Clear new progress tracking
-          const videoElement = currentVideo;
-          if (videoElement.progressInterval) {
-            clearInterval(videoElement.progressInterval);
-            videoElement.progressInterval = null;
-          }
-
-          // Reset timer state
-          videoElement.videoStartTime = null;
-          videoElement.videoPausedTime = 0;
-          videoElement.totalPlayedTime = 0;
-          videoElement.pauseStartTime = null;
-
-          console.log('🔄 Video timer system cleared for slide change');
-        }
-      });
-
       // Create dedicated video slide handler
       function handleVideoSlideChange(video, currentSlide) {
         console.log('🎥 HANDLING VIDEO SLIDE CHANGE');
@@ -486,6 +448,44 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start trying to play
         tryPlayVideo();
       }
+
+      // Handle slide changes
+      $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // Stop current video
+        var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
+        if (currentVideo) {
+          currentVideo.pause();
+          currentVideo.currentTime = 0;
+          isVideoPlaying = false;
+        }
+
+        // Always stop autoplay when changing slides
+        stopSliderAutoplay();
+
+        // Clear advanced timer system for current video
+        if (currentVideo) {
+          // Clear old-style timer
+          if (currentVideo.videoTimer) {
+            clearTimeout(currentVideo.videoTimer);
+            currentVideo.videoTimer = null;
+          }
+
+          // Clear new progress tracking
+          const videoElement = currentVideo;
+          if (videoElement.progressInterval) {
+            clearInterval(videoElement.progressInterval);
+            videoElement.progressInterval = null;
+          }
+
+          // Reset timer state
+          videoElement.videoStartTime = null;
+          videoElement.videoPausedTime = 0;
+          videoElement.totalPlayedTime = 0;
+          videoElement.pauseStartTime = null;
+
+          console.log('🔄 Video timer system cleared for slide change');
+        }
+      });
 
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
         var currentSlideElement = $(slick.$slides[currentSlide]);
