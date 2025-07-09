@@ -256,10 +256,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Slide changed to:', currentSlide, 'Is video:', !!video);
 
-        if (video) {
-          // Video slide - don't start autoplay, let video ended event handle it
+        // Stop any existing autoplay
+        stopSliderAutoplay();
+
+        if (video && video.src && video.src.trim() !== '') {
+          // Video slide with valid source - play video for full duration (1 min 10 seconds)
           isVideoPlaying = true;
-          stopSliderAutoplay();
+          console.log('Starting video slide - duration will be handled by video ended event');
           
           video.currentTime = 0;
           
@@ -267,26 +270,23 @@ document.addEventListener('DOMContentLoaded', function() {
           if (video.readyState >= 2) {
             video.play().catch(function(error) {
               console.log('Video play failed:', error);
-              // If video fails, treat as image slide and move to next slide
+              // If video fails, treat as image slide
               isVideoPlaying = false;
-              setTimeout(function() {
-                $('.homepage-slider').slick('slickNext');
-              }, 1000);
+              startSliderAutoplay(10000); // 10 seconds for failed video
             });
           } else {
             video.addEventListener('canplaythrough', function() {
               this.play().catch(function(error) {
                 console.log('Video play failed:', error);
                 isVideoPlaying = false;
-                setTimeout(function() {
-                  $('.homepage-slider').slick('slickNext');
-                }, 1000);
+                startSliderAutoplay(10000); // 10 seconds for failed video
               });
             }, { once: true });
           }
         } else {
           // Image slide - start 10 second autoplay
           isVideoPlaying = false;
+          console.log('Starting image slide - 10 second autoplay');
           startSliderAutoplay(10000); // 10 seconds for image slides
         }
       });
@@ -306,15 +306,17 @@ document.addEventListener('DOMContentLoaded', function() {
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
-            // Video ended - go to next slide after video completes naturally
+            // Video ended - go to next slide after video completes naturally (1 min 10 seconds)
             video.addEventListener('ended', function() {
               console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
               var currentSlideIndex = $(this).closest('.slick-slide').data('slick-index');
               console.log('Video ended on slide:', currentSlideIndex);
               
               isVideoPlaying = false;
+              stopSliderAutoplay(); // Make sure autoplay is stopped
+              
               setTimeout(function() {
-                console.log('Moving to next slide after video ended');
+                console.log('Moving to next slide after video ended - next slide will be image with 10s autoplay');
                 $('.homepage-slider').slick('slickNext');
               }, 500);
             });
@@ -371,28 +373,34 @@ document.addEventListener('DOMContentLoaded', function() {
           var firstSlide = $('.homepage-slider .slick-active');
           var firstVideo = firstSlide.find('video')[0];
           
-          if (firstVideo) {
+          console.log('Initial slide setup - has video:', !!firstVideo);
+          
+          if (firstVideo && firstVideo.src && firstVideo.src.trim() !== '') {
+            // First slide is video - play it for full duration
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
+            console.log('First slide is video - playing for full duration');
             
             // Wait for video to be ready before playing
             if (firstVideo.readyState >= 2) {
               firstVideo.play().catch(function(error) {
                 console.log('First video autoplay failed:', error);
                 isVideoPlaying = false;
-                startSliderAutoplay(10000); // 10 seconds for image slides
+                startSliderAutoplay(10000); // 10 seconds if video fails
               });
             } else {
               firstVideo.addEventListener('canplaythrough', function() {
                 this.play().catch(function(error) {
                   console.log('First video autoplay failed:', error);
                   isVideoPlaying = false;
-                  startSliderAutoplay(10000); // 10 seconds for image slides
+                  startSliderAutoplay(10000); // 10 seconds if video fails
                 });
               }, { once: true });
             }
           } else {
+            // First slide is image - start 10 second autoplay
             isVideoPlaying = false;
+            console.log('First slide is image - starting 10 second autoplay');
             startSliderAutoplay(10000); // 10 seconds for image slides
           }
         }, 500);
