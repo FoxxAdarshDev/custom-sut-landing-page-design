@@ -287,36 +287,87 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
 
-        console.log('Slide changed to:', currentSlide, 'Is video:', !!video);
+        console.log('Slide changed to:', currentSlide, 'Has video element:', !!video);
 
         // Always stop existing autoplay first
         stopSliderAutoplay();
 
-        if (video && video.src && video.src.trim() !== '') {
-          // Video slide - play for dynamic duration
+        if (video) {
+          // Video element exists - always treat as video slide, regardless of src loading
           isVideoPlaying = true;
-          console.log('🎥 VIDEO SLIDE DETECTED - Target Duration: 70 seconds');
-          console.log('📹 Video URL:', video.src);
+          console.log('🎥 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+          console.log('📹 Video src:', video.src || 'Loading...');
+          console.log('🎬 Video loading state:', video.readyState);
 
           video.currentTime = 0;
 
-          // Play video immediately
-          var playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              console.log('Video started playing successfully');
-              // Video timer will be set in the 'play' event listener
-            }).catch(function(error) {
-              console.log('Video play failed:', error);
-              // If video fails, treat as image slide
-              isVideoPlaying = false;
-              startSliderAutoplay(10000); // 10 seconds for failed video
-            });
+          // Initialize 70-second timer immediately
+          console.log('⏳ INITIALIZING 70-SECOND TIMER (Video may be loading)');
+          console.log('🎯 Target: 70 seconds | Current: 0.0s');
+
+          const videoElement = video;
+          videoElement.videoStartTime = Date.now();
+          videoElement.videoPausedTime = 0;
+          videoElement.totalPlayedTime = 0;
+          videoElement.pauseStartTime = null;
+
+          // Clear any existing timer
+          if (videoElement.progressInterval) {
+            clearInterval(videoElement.progressInterval);
           }
+
+          // Start 70-second timer immediately
+          videoElement.progressInterval = setInterval(() => {
+            const currentTime = Date.now();
+            const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
+            
+            videoElement.totalPlayedTime = elapsedTime;
+            
+            const progress = (elapsedTime / 70) * 100;
+            const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
+            const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
+            
+            console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
+            
+            if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+              console.log('🎯 70 SECONDS REACHED! Timer complete');
+              console.log('🔄 CHANGING SLIDE NOW...');
+              
+              clearInterval(videoElement.progressInterval);
+              videoElement.progressInterval = null;
+              
+              console.log('✅ Timer system cleared - Slide transition initiated');
+              
+              isVideoPlaying = false;
+              stopSliderAutoplay();
+              $('.homepage-slider').slick('slickNext');
+            }
+          }, 500);
+
+          // Try to play video when ready
+          var tryPlayVideo = function() {
+            if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
+              var playPromise = videoElement.play();
+              if (playPromise !== undefined) {
+                playPromise.then(function() {
+                  console.log('✅ Video started playing successfully');
+                }).catch(function(error) {
+                  console.log('⚠️ Video autoplay failed (but 70s timer continues):', error);
+                });
+              }
+            } else {
+              console.log('⏳ Video still loading, will retry...');
+              setTimeout(tryPlayVideo, 200);
+            }
+          };
+
+          // Start trying to play
+          tryPlayVideo();
+
         } else {
-          // Image slide - start 10 second autoplay
+          // No video element - this is an image slide
           isVideoPlaying = false;
-          console.log('Starting image slide - 10 second autoplay');
+          console.log('📸 Image slide - starting 10 second autoplay');
           startSliderAutoplay(10000); // 10 seconds for image slides
         }
       });
@@ -504,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Start with first slide
+        // Start with first slide - enhanced loading detection
         setTimeout(function() {
           var firstSlide = $('.homepage-slider .slick-active');
           var firstVideo = firstSlide.find('video')[0];
@@ -512,72 +563,80 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('🔍 INITIAL SLIDE SETUP');
           console.log('First slide element:', firstSlide[0]);
           console.log('First video element:', firstVideo);
-          console.log('Video src:', firstVideo ? firstVideo.src : 'No video');
-          console.log('Has video:', !!firstVideo);
 
-          if (firstVideo && firstVideo.src && firstVideo.src.trim() !== '') {
-            // First slide is video - play it for dynamic duration
+          if (firstVideo) {
+            // Video element exists - always treat as video slide
+            console.log('🎥 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+            console.log('📹 Video src:', firstVideo.src || 'Loading...');
+            console.log('🎬 Video loading state:', firstVideo.readyState);
+            
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
-            console.log('🎥 FIRST SLIDE IS VIDEO - Target Duration: 70 seconds');
-            console.log('📹 Video URL:', firstVideo.src);
-            console.log('🎬 Starting video playback tracking...');
 
-            // Initialize advanced progress tracking immediately
+            // Initialize 70-second timer immediately, regardless of loading state
+            console.log('⏳ INITIALIZING 70-SECOND TIMER (Loading: Video may be slow)');
+            console.log('🎯 Target: 70 seconds | Current: 0.0s');
+
             const videoElement = firstVideo;
             videoElement.videoStartTime = Date.now();
             videoElement.videoPausedTime = 0;
             videoElement.totalPlayedTime = 0;
             videoElement.pauseStartTime = null;
 
-            // Play video immediately
-            var playPromise = firstVideo.play();
-            if (playPromise !== undefined) {
-              playPromise.then(function() {
-                console.log('✅ First video started playing successfully');
-                
-                // Start real-time progress tracking immediately
-                if (videoElement.progressInterval) {
-                  clearInterval(videoElement.progressInterval);
-                }
-
-                console.log('🎯 Target: 70 seconds | Current: 0.0s');
-
-                videoElement.progressInterval = setInterval(() => {
-                  if (videoElement.paused) {
-                    return; // Don't update if video is paused
-                  }
-
-                  const currentTime = Date.now();
-                  const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
-                  
-                  videoElement.totalPlayedTime = elapsedTime;
-                  
-                  const progress = (elapsedTime / 70) * 100;
-                  console.log(`⏱️ Video Playback: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
-                  
-                  if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
-                    console.log('🎯 70 SECONDS REACHED! Video playback complete');
-                    console.log('🔄 CHANGING SLIDE NOW...');
-                    
-                    clearInterval(videoElement.progressInterval);
-                    videoElement.progressInterval = null;
-                    
-                    console.log('✅ Timer system cleared - Slide transition initiated');
-                    
-                    isVideoPlaying = false;
-                    stopSliderAutoplay();
-                    $('.homepage-slider').slick('slickNext');
-                  }
-                }, 500);
-              }).catch(function(error) {
-                console.log('❌ First video autoplay failed:', error);
-                isVideoPlaying = false;
-                startSliderAutoplay(10000); // 10 seconds if video fails
-              });
+            // Start 70-second timer immediately
+            if (videoElement.progressInterval) {
+              clearInterval(videoElement.progressInterval);
             }
+
+            videoElement.progressInterval = setInterval(() => {
+              const currentTime = Date.now();
+              const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
+              
+              videoElement.totalPlayedTime = elapsedTime;
+              
+              const progress = (elapsedTime / 70) * 100;
+              const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
+              const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
+              
+              console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
+              
+              if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+                console.log('🎯 70 SECONDS REACHED! Timer complete');
+                console.log('🔄 CHANGING SLIDE NOW...');
+                
+                clearInterval(videoElement.progressInterval);
+                videoElement.progressInterval = null;
+                
+                console.log('✅ Timer system cleared - Slide transition initiated');
+                
+                isVideoPlaying = false;
+                stopSliderAutoplay();
+                $('.homepage-slider').slick('slickNext');
+              }
+            }, 500);
+
+            // Try to play video when ready
+            var tryPlayVideo = function() {
+              if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
+                var playPromise = videoElement.play();
+                if (playPromise !== undefined) {
+                  playPromise.then(function() {
+                    console.log('✅ Video started playing successfully');
+                  }).catch(function(error) {
+                    console.log('⚠️ Video autoplay failed (but 70s timer continues):', error);
+                  });
+                }
+              } else {
+                console.log('⏳ Video still loading, will retry...');
+                setTimeout(tryPlayVideo, 200);
+              }
+            };
+
+            // Start trying to play
+            tryPlayVideo();
+
           } else {
-            // First slide is image - start 10 second autoplay
+            // No video element - this is an image slide
             isVideoPlaying = false;
             console.log('📸 First slide is image - starting 10 second autoplay');
             startSliderAutoplay(10000); // 10 seconds for image slides
