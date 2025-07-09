@@ -179,11 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
               video.removeEventListener('ended', videoEndHandler);
               video.removeEventListener('loadeddata', videoLoadedHandler);
               video.removeEventListener('canplay', videoCanPlayHandler);
+              video.removeEventListener('timeupdate', videoTimeUpdateHandler);
               
               // Add event listeners
               video.addEventListener('ended', videoEndHandler);
               video.addEventListener('loadeddata', videoLoadedHandler);
               video.addEventListener('canplay', videoCanPlayHandler);
+              video.addEventListener('timeupdate', videoTimeUpdateHandler);
               
               // Add error handler
               video.addEventListener('error', function() {
@@ -207,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('Video ended, advancing to next slide');
           setTimeout(function() {
             $('.homepage-slider').slick('slickNext');
-          }, 500);
+          }, 300);
         }
 
         function videoLoadedHandler() {
@@ -218,6 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
         function videoCanPlayHandler() {
           console.log('Video can play');
           this.style.backgroundColor = 'transparent';
+        }
+
+        // Additional time update handler to catch video end
+        function videoTimeUpdateHandler() {
+          if (this.currentTime > 0 && Math.abs(this.duration - this.currentTime) < 0.5) {
+            console.log('Video near end detected via timeupdate');
+            videoEndHandler.call(this);
+          }
         }
 
         // Add listeners initially
@@ -271,6 +281,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Start trying to play
           tryPlayVideo();
+          
+          // Safety timeout - if video doesn't end naturally, advance after duration + 2 seconds
+          setTimeout(function() {
+            if (video && !video.paused && !video.ended) {
+              console.log('Video safety timeout triggered, advancing slide');
+              $('.homepage-slider').slick('slickNext');
+            }
+          }, 72000); // 70 seconds for 1:10 video + 2 second buffer
         }
       });
     };
