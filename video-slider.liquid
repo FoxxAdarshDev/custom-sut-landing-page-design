@@ -344,26 +344,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
             video.addEventListener('play', function() {
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
+                const videoElement = this;
+                
                 // Clear any existing timer
                 if (videoTimer) {
                   clearTimeout(videoTimer);
                 }
 
-                // Use actual video duration or 70 seconds, whichever is longer
-                const videoDuration = this.duration || 70; // fallback to 70 seconds
-                const timerDuration = Math.max(videoDuration * 1000, 70000); // minimum 70 seconds
+                // Initialize advanced progress tracking
+                videoElement.videoStartTime = Date.now();
+                videoElement.videoPausedTime = 0;
+                videoElement.totalPlayedTime = 0;
+                videoElement.pauseStartTime = null;
+                
+                console.log('🎥 Video started playing - Target: 70 seconds');
 
-                console.log('Video started - setting timer for', timerDuration/1000, 'seconds (video duration:', videoDuration, 'seconds)');
+                // Clear any existing progress interval
+                if (videoElement.progressInterval) {
+                  clearInterval(videoElement.progressInterval);
+                }
 
-                // Set timer based on actual video duration
-                videoTimer = setTimeout(() => {
-                  if ($(this).closest('.slick-slide').hasClass('slick-active')) {
-                    console.log('Video timer elapsed, moving to next slide');
+                // Start real-time progress tracking (every 100ms)
+                videoElement.progressInterval = setInterval(() => {
+                  if (videoElement.paused) {
+                    return; // Don't update if video is paused
+                  }
+
+                  const currentTime = Date.now();
+                  const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
+                  
+                  // Update total played time
+                  videoElement.totalPlayedTime = elapsedTime;
+                  
+                  // Real-time console logging
+                  const progress = (elapsedTime / 70) * 100;
+                  console.log(`⏱️ Video Progress: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
+                  
+                  // Check if we've reached 70 seconds of actual playback
+                  if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+                    console.log('🎯 Video reached 70 seconds of playback! Changing slide...');
+                    
+                    // Clear progress tracking
+                    clearInterval(videoElement.progressInterval);
+                    videoElement.progressInterval = null;
+                    
+                    console.log('✅ Timer cleared, moving to next slide');
+                    
+                    // Change slide
                     isVideoPlaying = false;
                     stopSliderAutoplay();
                     $('.homepage-slider').slick('slickNext');
                   }
-                }, timerDuration);
+                }, 100); // Update every 100ms for smooth real-time tracking
               }
             });
 
@@ -390,15 +422,11 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
 
-            // Simple progress logging
+            // Video timeupdate for basic monitoring (optional)
             video.addEventListener('timeupdate', function() {
+              // Basic video position monitoring - real-time progress is handled in 'play' event
               if (this.currentTime > 0 && this.duration > 0) {
-                var progress = (this.currentTime / this.duration) * 100;
-
-                // Log every 10 seconds for better tracking
-                if (Math.floor(this.currentTime) % 10 === 0 && Math.floor(this.currentTime) !== 0) {
-                  console.log('Video at', Math.floor(this.currentTime), 'seconds');
-                }
+                // Optional: You can add additional monitoring here if needed
               }
             });
 
@@ -417,8 +445,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Handle video pause events
             video.addEventListener('pause', function() {
+              const videoElement = this;
+              
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('Video paused - attempting to resume');
+                console.log('⏸️ Video paused - timer paused');
+                
+                // Record pause start time
+                videoElement.pauseStartTime = Date.now();
+                
+                // Attempt to resume after short delay
                 var self = this;
                 setTimeout(function() {
                   if (isVideoPlaying && self.paused) {
@@ -427,6 +462,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                   }
                 }, 100);
+              }
+            });
+
+            // Handle video resume events
+            video.addEventListener('playing', function() {
+              const videoElement = this;
+              
+              if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
+                console.log('▶️ Video resumed - timer resumed');
+                
+                // Add paused time to total paused time
+                if (videoElement.pauseStartTime) {
+                  videoElement.videoPausedTime += (Date.now() - videoElement.pauseStartTime);
+                  videoElement.pauseStartTime = null;
+                }
               }
             });
 
