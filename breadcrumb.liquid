@@ -1,0 +1,256 @@
+{% comment %}
+  Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "{{ shop.name }}",
+            "item": {
+                "@id": "{{ request.origin }}", 
+                "name": "{{ shop.name }}" 
+            }
+        }
+        {% if template contains 'product' %}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ collection.url }}",
+                "name": {{ collection.title | json }} 
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ product.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ product.url }}",
+                "name": {{ product.title | json }} 
+            }
+        }
+        {% elsif template contains 'collection' %}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ collection.url }}",
+                "name": {{ collection.title | json }} 
+            }
+        }
+        {% elsif template == 'blog' %}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ blog.url }}",
+                "name": {{ blog.title | json }}
+            }
+        }
+        {% elsif template == 'article' %}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ blog.url }}",
+                "name": {{ blog.title | json }} 
+            }
+        }
+
+        {% assign article_position = 0 %}
+        {%- for article in blog.articles -%}
+            {%- if article.id == current_article.id -%}
+                {%- assign article_position = forloop.index -%}
+            {%- endif -%}
+        {% endfor %}
+        ,{
+            "@type": "ListItem",
+            "position": {{ article_position | plus: 1 }},
+            "name": {{ article.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ article.url }}",
+                "name": {{ article.title | json }} 
+            }
+        }
+        {% elsif template contains 'page' %}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | json }},
+            "item": {
+                "@id": "{{ request.origin }}{{ page.url }}",
+                "name": {{ page.title | json }} 
+            }
+        }
+        {% endif %}
+    ]
+}
+</script>
+
+
+
+{% unless template == 'index' or template == 'cart' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+  {% if template contains 'product' %}
+
+    {% if collection %}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+
+  {% elsif template contains 'collection' %}
+
+    <!-- Check if this collection has a parent menu that contains it as a sublink -->
+    {% assign parent_menu_found = false %}
+    {% assign parent_menu_title = '' %}
+    {% assign parent_menu_url = '' %}
+    {% assign main_menu_parent = '' %}
+    {% assign is_subcategory_collection = false %}
+    {% assign parent_collection_handle = '' %}
+
+    <!-- Special check for subcategory template - check if current collection is in a linklist with same handle -->
+    {% if template contains 'collection.subcategory' %}
+      {% assign current_collection_handle = collection.handle %}
+      <!-- Check if there's a linklist with same handle as current collection -->
+      {% for linklist_pair in linklists %}
+        {% assign linklist_handle = linklist_pair[0] %}
+        {% assign linklist = linklist_pair[1] %}
+
+        {% if linklist_handle == current_collection_handle %}
+          {% assign is_subcategory_collection = true %}
+          {% assign parent_collection_handle = linklist_handle %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- If it's a subcategory, find the parent collection in the main menu -->
+      {% if is_subcategory_collection %}
+        {% for link in linklists.main-menu.links %}
+          {% if link.object.handle == parent_collection_handle %}
+            {% assign parent_menu_found = true %}
+            {% assign parent_menu_title = link.title %}
+            {% assign parent_menu_url = link.url %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+    <!-- If not a subcategory or parent not found, check main menu for direct sublinks -->
+    {% unless parent_menu_found %}
+      <!-- Check main menu first -->
+      {% for link in linklists.main-menu.links %}
+        {% if link.links != blank %}
+          {% for sublink in link.links %}
+            {% if sublink.url contains collection.url or sublink.object.handle == collection.handle %}
+              {% assign parent_menu_found = true %}
+              {% assign parent_menu_title = link.title %}
+              {% assign parent_menu_url = link.url %}
+              {% assign main_menu_parent = link.title %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% if parent_menu_found %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- If not found in main menu, check other linklists -->
+      {% unless parent_menu_found %}
+        {% for linklist_pair in linklists %}
+          {% assign linklist_handle = linklist_pair[0] %}
+          {% assign linklist = linklist_pair[1] %}
+
+          <!-- Skip main-menu as we already checked it -->
+          {% unless linklist_handle == 'main-menu' %}
+            {% for link in linklist.links %}
+              {% if link.url contains collection.url or link.object.handle == collection.handle %}
+                {% assign parent_menu_found = true %}
+                {% assign parent_menu_title = linklist.title %}
+                {% assign parent_menu_url = '#' %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endunless %}
+
+          {% if parent_menu_found %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+    {% endunless %}
+
+    <!-- If found parent collection, show the hierarchy -->
+    {% if parent_menu_found %}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {{ parent_menu_title | link_to: parent_menu_url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+        <span>{{ current_tags | join: " + " }}</span>
+      {% else %}
+        <span>{{ collection.title }}</span>
+      {% endif %}
+    {% else %}
+      <!-- No parent found, show just the collection -->
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+        <span>{{ current_tags | join: " + " }}</span>
+      {% else %}
+        <span>{{ collection.title }}</span>
+      {% endif %}
+    {% endif %}
+
+  {% elsif template == 'blog' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+
+  {% elsif template == 'article' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ article.title }}</span>
+
+  {% elsif template contains 'page' %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page.title }}</span>
+
+  {% else %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
+{% endunless %}

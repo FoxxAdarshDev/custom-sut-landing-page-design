@@ -1,6 +1,7 @@
 <style>
   .homepage-slider { 
     display: block !important; 
+    /* overflow:hidden; */
     border: 2px solid transparent; 
     background-image: linear-gradient(white, white), linear-gradient(to bottom, #0071ce, #5da8e5, #9dc8ec); 
     background-origin: border-box; 
@@ -100,14 +101,70 @@
 </section>
 
 <style>
+
+  .homepage-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Stretch image to fill container */
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+}
+
 .slide-item {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 420px; /* Base height */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Responsive height adjustments for different screen sizes */
+@media (min-width: 1200px) {
+  .slide-item {
+    height: 500px; /* Taller for large screens */
+  }
+}
+
+@media (min-width: 1400px) {
+  .slide-item {
+    height: 580px; /* Even taller for very large screens */
+  }
+  .homepage-slider img {
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 1600px) {
+  .slide-item {
+    height: 650px; /* Maximum height for extra large screens and TVs */
+  }
+}
+
+@media (min-width: 1920px) {
+  .slide-item {
+    height: 750px; /* Optimal height for full HD and larger displays */
+  }
+}
+
+@media (max-width: 1199px) {
+  .slide-item {
+    height: 420px; /* Standard height for medium screens */
+  }
+}
+
+@media (max-width: 991px) {
+  .slide-item {
+    height: 400px; /* Smaller height for tablets */
+  }
+}
+
+@media (max-width: 767px) {
+  .slide-item {
+    height: auto; /* Mobile height */
+  }
 }
 
 .slide-link {
@@ -122,18 +179,12 @@
 .slide-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Changed from contain to cover for consistent fill */
   max-width: 100%;
   max-height: 100%;
 }
 
-.homepage-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
-}
+
 
 /* Ensure videos don't interfere with slider controls */
 .slick-slide video {
@@ -188,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
     video.currentTime = 0;
 
     const videoElement = video;
-    
+
     // Clear any existing timer
     if (videoElement.progressInterval) {
       clearInterval(videoElement.progressInterval);
@@ -207,31 +258,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start the 70-second timer that tracks actual playback
     videoElement.progressInterval = setInterval(() => {
       const now = Date.now();
-      
-      // Calculate how much time has actually been played
-      if (!videoElement.paused && !videoElement.ended) {
-        // Video is playing - count this time
+
+      // Only count time if page is visible and video is actually playing
+      if (isPageVisible && !videoElement.paused && !videoElement.ended && videoElement.readyState >= 2) {
+        // Video is playing and page is visible - count this time
         if (videoElement.lastResumeTime) {
           const playTime = now - videoElement.lastResumeTime;
           videoElement.actualPlayedTime += playTime;
         }
         videoElement.lastResumeTime = now;
       } else {
-        // Video is paused or ended - don't count time
+        // Video is paused, ended, page hidden, or not ready - don't count time
         videoElement.lastResumeTime = null;
+
+        // If video seems stuck but should be playing and page is visible, try to fix it
+        if (isPageVisible && isVideoPlaying && videoElement.paused && videoElement.readyState >= 2) {
+          console.log('🔧 Video stuck - attempting auto-resume');
+          videoElement.play().catch(error => {
+            console.log('Auto-resume failed:', error);
+          });
+        }
       }
 
       const playedSeconds = videoElement.actualPlayedTime / 1000;
       const progress = (playedSeconds / 70) * 100;
-      
+
       const status = videoElement.paused ? 'PAUSED' : 
                     videoElement.ended ? 'ENDED' : 'PLAYING';
       const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
-      
-      console.log(`⏱️ Video Timer: ${playedSeconds.toFixed(1)}s / 70s (${progress.toFixed(1)}%) - ${status}${loadingStatus}`);
+      const visibilityStatus = !isPageVisible ? ' (Tab Hidden)' : '';
 
-      // Check if we've reached 70 seconds of actual playback
-      if (playedSeconds >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+      // Only log when page is visible to reduce console spam
+      if (isPageVisible) {
+        console.log(`⏱️ Video Timer: ${playedSeconds.toFixed(1)}s / 70s (${progress.toFixed(1)}%) - ${status}${loadingStatus}${visibilityStatus}`);
+      }
+
+      // Check if we've reached 70 seconds of actual playback - ONLY if page is visible and slide is active
+      if (playedSeconds >= 70 && isPageVisible && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
         console.log('🎯 70 SECONDS OF ACTUAL PLAYBACK REACHED!');
         console.log('🔄 CHANGING SLIDE NOW...');
 
@@ -242,7 +305,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         isVideoPlaying = false;
         stopSliderAutoplay();
+
+        // Move to next slide
         $('.homepage-slider').slick('slickNext');
+
+        // The afterChange event will handle starting the appropriate timer for the next slide
       }
     }, 500);
 
@@ -250,10 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var tryPlayVideo = function() {
       if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
         console.log('🎬 Video ready to play - attempting autoplay');
-        
+
         // Initialize the resume time when video starts
         videoElement.lastResumeTime = Date.now();
-        
+
         var playPromise = videoElement.play();
         if (playPromise !== undefined) {
           playPromise.then(function() {
@@ -279,52 +346,52 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to check and initialize the initial slide
   function initializeInitialSlide() {
     console.log('🎯 CHECKING INITIAL SLIDE FOR AUTO-INITIALIZATION');
-    
+
     // Try multiple approaches to find the active slide
     let initialSlide = null;
-    
+
     // Approach 1: Find slide with slick-current and slick-active classes
     initialSlide = $('.homepage-slider .slide-item.slick-current.slick-active');
-    
+
     if (initialSlide.length === 0) {
       console.log('🔍 Approach 1 failed - trying slick-active only');
       // Approach 2: Find slide with slick-active class only
       initialSlide = $('.homepage-slider .slide-item.slick-active');
     }
-    
+
     if (initialSlide.length === 0) {
       console.log('🔍 Approach 2 failed - trying first slide');
       // Approach 3: Get first slide as fallback
       initialSlide = $('.homepage-slider .slide-item').first();
     }
-    
+
     if (initialSlide.length === 0) {
       console.log('❌ No slides found at all');
       return;
     }
-    
+
     console.log('✅ Found initial slide for auto-initialization');
     console.log('📍 Initial slide element:', initialSlide[0]);
     console.log('📍 Initial slide classes:', initialSlide.attr('class'));
     console.log('📍 Initial slide data-slide-index:', initialSlide.attr('data-slide-index'));
-    
+
     // Check if this slide contains a video or image element
     const videoElement = initialSlide.find('video')[0];
     const imageElement = initialSlide.find('img')[0];
-    
+
     if (videoElement) {
       // Check if video has MP4 source
       const videoSrc = videoElement.src || videoElement.getAttribute('src');
       const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
-      
+
       console.log('🎬 Video element found in initial slide');
       console.log('🎬 Video src:', videoSrc);
       console.log('🎬 Is MP4:', isMP4);
-      
+
       if (isMP4) {
         console.log('🎥 MP4 VIDEO SLIDE DETECTED - Initializing 70 second timer for initial slide');
         const slideIndex = initialSlide.attr('data-slide-index') || 0;
-        
+
         // Add a delay to ensure video is properly initialized
         setTimeout(() => {
           console.log('🚀 DELAYED INITIAL VIDEO SETUP - Starting timer system');
@@ -369,28 +436,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Track page visibility - keep videos playing in background
+  // Simplified page visibility tracking for basic functionality only
   document.addEventListener('visibilitychange', function() {
     isPageVisible = !document.hidden;
-    console.log('🔄 Page visibility changed - isPageVisible:', isPageVisible);
-
-    // Don't pause videos when tab becomes hidden - let them continue playing
-    if (isPageVisible) {
-      console.log('📱 Tab is now visible again');
-      // When tab becomes visible again, ensure video continues if it should be playing
-      if (isVideoPlaying) {
-        const activeSlide = $('.homepage-slider .slick-active');
-        const activeVideo = activeSlide.find('video')[0];
-        if (activeVideo && activeVideo.paused) {
-          console.log('▶️ Resuming video playback after tab switch');
-          activeVideo.play().catch(function(error) {
-            console.log('Video resume failed:', error);
-          });
+    // Only pause/resume videos when tab visibility changes, no autoplay interference
+    if (isVideoPlaying) {
+      const activeSlide = $('.homepage-slider .slick-active');
+      const activeVideo = activeSlide.find('video')[0];
+      if (activeVideo) {
+        if (isPageVisible) {
+          // Resume video timer tracking
+          activeVideo.lastResumeTime = Date.now();
+          if (activeVideo.paused) {
+            activeVideo.play().catch(function(error) {
+              console.log('❌ Video resume failed:', error);
+            });
+          }
+        } else {
+          // Pause video timer tracking
+          activeVideo.lastResumeTime = null;
         }
       }
-    } else {
-      console.log('📱 Tab is now hidden - keeping videos running in background');
-      // Don't pause videos - let them continue playing in background
     }
   });
 
@@ -400,19 +466,36 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🕐 Starting autoplay with duration:', duration + 'ms');
     console.log('🕐 Current time:', new Date().toLocaleTimeString());
     console.log('🕐 Timer will fire at:', new Date(Date.now() + duration).toLocaleTimeString());
-    
+
     sliderAutoplayInterval = setInterval(function() {
       console.log('🕐 Timer fired at:', new Date().toLocaleTimeString());
-      if (!isVideoPlaying && !isSlideChanging) {
+      console.log('🔍 Timer check - isVideoPlaying:', isVideoPlaying, 'isSlideChanging:', isSlideChanging, 'isPageVisible:', isPageVisible);
+
+      // Only proceed if page is visible and not currently in a video slide
+      if (isPageVisible && !isVideoPlaying && !isSlideChanging) {
         console.log('📸 Image autoplay timer reached - Moving to next slide');
         isSlideChanging = true;
+
+        // Clear the timer before moving to prevent multiple fires
+        stopSliderAutoplay();
+
+        // Move to next slide
         $('.homepage-slider').slick('slickNext');
+
         // Reset slide changing flag after slide transition completes
         setTimeout(() => {
           isSlideChanging = false;
+          console.log('🔄 Slide changing flag reset');
         }, 1000);
       } else {
-        console.log('🎥 Video is playing or slide is changing - skipping autoplay slide change');
+        console.log('🎥 Conditions not met for slide change');
+        console.log('🔍 Details - Page visible:', isPageVisible, 'Video playing:', isVideoPlaying, 'Slide changing:', isSlideChanging);
+
+        // If page is not visible, pause the timer
+        if (!isPageVisible) {
+          console.log('⏸️ Page not visible - stopping autoplay');
+          stopSliderAutoplay();
+        }
       }
     }, duration);
   }
@@ -425,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  
+
 
 
   // Override the existing expo.initSlickSlider function
@@ -465,12 +548,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }, 100);
 
-      
+
 
       // Handle slide changes
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
         console.log('🔄 beforeChange: from slide', currentSlide, 'to slide', nextSlide);
-        
+
+        // Mark that slide is changing
+        isSlideChanging = true;
+
         // Stop current video
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
@@ -481,11 +567,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Always stop autoplay when changing slides
         stopSliderAutoplay();
-        
-        // Reset slide changing flag after transition
-        setTimeout(() => {
-          isSlideChanging = false;
-        }, 600);
 
         // Clear advanced timer system for current video
         if (currentVideo) {
@@ -515,46 +596,114 @@ document.addEventListener('DOMContentLoaded', function() {
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
+        var image = currentSlideElement.find('img')[0];
 
-        console.log('🔄 Slide changed to:', currentSlide, 'Has video element:', !!video);
+        console.log('🔄 Slide changed to:', currentSlide, 'Has video element:', !!video, 'Has image element:', !!image);
         console.log('📍 Current slide classes:', currentSlideElement.attr('class'));
+
+        // Safety check - if slide is empty/blank, force move to next slide
+        if (!video && !image) {
+          console.log('❌ BLANK SLIDE DETECTED - Moving to next slide immediately');
+          setTimeout(() => {
+            $('.homepage-slider').slick('slickNext');
+          }, 100);
+          return;
+        }
 
         // Always stop any existing timers first
         stopSliderAutoplay();
 
+        // Reset slide changing flag immediately
+        isSlideChanging = false;
+        console.log('🔄 Slide changing flag reset to false in afterChange');
+
+        // Determine slide type and start appropriate timer
         if (video) {
           // Check if video has MP4 source
           const videoSrc = video.src || video.getAttribute('src');
           const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
-          
+
           console.log('🎬 Video src:', videoSrc);
           console.log('🎬 Is MP4:', isMP4);
-          
+
           if (isMP4) {
-            console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+            console.log('🎥 MP4 VIDEO SLIDE DETECTED - Starting 70 second timer');
             handleVideoSlideChange(video, currentSlide);
           } else {
             console.log('📸 Video element found but no MP4 source - treating as image slide');
             isVideoPlaying = false;
             console.log('📸 Image slide - starting 10 second autoplay');
-            setTimeout(() => {
+            if (isPageVisible) {
               startSliderAutoplay(10000);
-            }, 100); // Small delay to ensure state is settled
+            }
           }
-        } else {
-          // No video element - this is an image slide
+        } else if (image) {
+          // Image slide detected
           isVideoPlaying = false;
           console.log('📸 Image slide - starting 10 second autoplay');
-          setTimeout(() => {
+          console.log('📸 Image src:', image.src);
+          console.log('📸 Page visible:', isPageVisible);
+          if (isPageVisible) {
             startSliderAutoplay(10000);
-          }, 100); // Small delay to ensure state is settled
+          }
+        } else {
+          // No video or image found - treat as image slide
+          console.log('❓ No media elements found - treating as image slide');
+          isVideoPlaying = false;
+          if (isPageVisible) {
+            startSliderAutoplay(10000);
+          }
         }
+
+        // Enhanced safety fallback with multiple checks - immediate execution
+        // Force flag reset again as double-check
+        setTimeout(() => {
+          isSlideChanging = false;
+          console.log('🔄 DOUBLE-CHECK: Slide changing flag force-reset to false');
+        }, 50);
+
+        // Safety fallback with reduced delay
+        setTimeout(() => {
+          if (isPageVisible) {
+            const activeSlide = $('.homepage-slider .slick-active');
+            const hasActiveVideo = activeSlide.find('video')[0];
+            const hasActiveImage = activeSlide.find('img')[0];
+
+            console.log('🔄 SAFETY CHECK: Video playing:', isVideoPlaying, 'Autoplay running:', !!sliderAutoplayInterval);
+            console.log('🔄 SAFETY CHECK: Slide changing flag:', isSlideChanging);
+            console.log('🔄 SAFETY CHECK: Active slide has video:', !!hasActiveVideo, 'has image:', !!hasActiveImage);
+
+            if (!isVideoPlaying && !sliderAutoplayInterval) {
+              console.log('🔄 SAFETY FALLBACK: Autoplay not running - force-starting');
+
+              // Ensure flag is definitely false before starting
+              isSlideChanging = false;
+
+              // Double-check what type of slide we're on
+              if (hasActiveVideo) {
+                const videoSrc = hasActiveVideo.src || hasActiveVideo.getAttribute('src');
+                const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
+
+                if (isMP4) {
+                  console.log('🔄 SAFETY: Starting video timer');
+                  handleVideoSlideChange(hasActiveVideo, currentSlide);
+                } else {
+                  console.log('🔄 SAFETY: Starting image timer for video element without MP4');
+                  startSliderAutoplay(10000);
+                }
+              } else {
+                console.log('🔄 SAFETY: Starting image timer');
+                startSliderAutoplay(10000);
+              }
+            }
+          }
+        }, 100);
       });
 
       // Handle video events  
       $('.homepage-slider').on('init', function(event, slick) {
         console.log('🎬 SLICK INITIALIZED - Checking for initial video slide');
-        
+
         // Immediate check for video on current slide
         setTimeout(() => {
           var currentSlide = $('.homepage-slider .slick-current, .homepage-slider .slick-active').first();
@@ -563,11 +712,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentVideo) {
               const videoSrc = currentVideo.src || currentVideo.getAttribute('src');
               const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
-              
+
               console.log('🎯 FOUND ACTIVE SLIDE WITH VIDEO ON INIT');
               console.log('🎬 Video src:', videoSrc);
               console.log('🎬 Is MP4:', isMP4);
-              
+
               if (isMP4) {
                 console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
                 var slideIndex = currentSlide.attr('data-slide-index') || currentSlide.index() || 0;
@@ -602,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('🎬 VIDEO PLAY EVENT - Video started playing');
                 console.log('▶️ Video current time:', videoElement.currentTime);
                 console.log('▶️ Video duration:', videoElement.duration);
-                
+
                 // Mark resume time for timer tracking
                 videoElement.lastResumeTime = Date.now();
               }
@@ -612,10 +761,10 @@ document.addEventListener('DOMContentLoaded', function() {
             video.addEventListener('ended', function() {
               console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
 
-              // Clear the timer since video ended naturally
-              if (videoTimer) {
-                clearTimeout(videoTimer);
-                videoTimer = null;
+              // Clear the progress timer since video ended naturally
+              if (this.progressInterval) {
+                clearInterval(this.progressInterval);
+                this.progressInterval = null;
               }
 
               // Only proceed if this video is currently active
@@ -628,6 +777,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Move to next slide immediately
                 $('.homepage-slider').slick('slickNext');
+
+                // The afterChange event will handle starting the appropriate timer for the next slide
               }
             });
 
@@ -717,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize the first slide with proper timing
         setTimeout(() => {
           console.log('🎬 INITIAL SETUP: Starting initialization checks');
-          
+
           // Check if slider is properly initialized
           if (!$('.homepage-slider').hasClass('slick-initialized')) {
             console.log('⚠️ Slider not fully initialized yet, waiting longer...');
@@ -726,10 +877,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
             return;
           }
-          
+
           // Initialize the first slide
           initializeInitialSlide();
-          
+
           // Additional fallback if nothing was initialized
           setTimeout(() => {
             if (!isVideoPlaying && !sliderAutoplayInterval) {
@@ -739,7 +890,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }, 1000);
         }, 300); // Increased delay for better initialization
-        
+
         // Additional trigger when slider becomes ready
         $('.homepage-slider').on('ready.slick', function() {
           console.log('🎬 SLICK READY EVENT: Slider is fully ready');
@@ -758,6 +909,24 @@ document.addEventListener('DOMContentLoaded', function() {
       expo.initSlickSlider();
     }
   }
+
+  // Debug helper - test manual slide change (remove in production)
+  window.debugSliderNext = function() {
+    console.log('🧪 DEBUG: Manual slide change triggered');
+    console.log('🧪 Current state - isVideoPlaying:', isVideoPlaying, 'isSlideChanging:', isSlideChanging);
+    if ($('.homepage-slider').hasClass('slick-initialized')) {
+      $('.homepage-slider').slick('slickNext');
+    } else {
+      console.log('🧪 Slider not initialized');
+    }
+  };
+
+  // Debug helper - test autoplay start (remove in production)  
+  window.debugStartAutoplay = function() {
+    console.log('🧪 DEBUG: Manual autoplay start triggered');
+    isVideoPlaying = false;
+    startSliderAutoplay(3000); // 3 second test
+  };
 });
 </script>
 
