@@ -295,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (video && video.src && video.src.trim() !== '') {
           // Video slide - play for dynamic duration
           isVideoPlaying = true;
-          console.log('Starting video slide - will play for dynamic duration');
+          console.log('🎥 VIDEO SLIDE DETECTED - Target Duration: 70 seconds');
+          console.log('📹 Video URL:', video.src);
 
           video.currentTime = 0;
 
@@ -357,14 +358,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 videoElement.totalPlayedTime = 0;
                 videoElement.pauseStartTime = null;
                 
-                console.log('🎥 Video started playing - Target: 70 seconds');
+                console.log('🎬 VIDEO PLAYBACK STARTED - Tracking 70 second duration');
+                console.log('🎯 Target: 70 seconds | Current: 0.0s');
 
                 // Clear any existing progress interval
                 if (videoElement.progressInterval) {
                   clearInterval(videoElement.progressInterval);
                 }
 
-                // Start real-time progress tracking (every 100ms)
+                // Start real-time progress tracking (every 500ms for clear console reading)
                 videoElement.progressInterval = setInterval(() => {
                   if (videoElement.paused) {
                     return; // Don't update if video is paused
@@ -376,26 +378,27 @@ document.addEventListener('DOMContentLoaded', function() {
                   // Update total played time
                   videoElement.totalPlayedTime = elapsedTime;
                   
-                  // Real-time console logging
+                  // Real-time console logging every second
                   const progress = (elapsedTime / 70) * 100;
-                  console.log(`⏱️ Video Progress: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
+                  console.log(`⏱️ Video Playback: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
                   
                   // Check if we've reached 70 seconds of actual playback
                   if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
-                    console.log('🎯 Video reached 70 seconds of playback! Changing slide...');
+                    console.log('🎯 70 SECONDS REACHED! Video playback complete');
+                    console.log('🔄 CHANGING SLIDE NOW...');
                     
                     // Clear progress tracking
                     clearInterval(videoElement.progressInterval);
                     videoElement.progressInterval = null;
                     
-                    console.log('✅ Timer cleared, moving to next slide');
+                    console.log('✅ Timer system cleared - Slide transition initiated');
                     
                     // Change slide
                     isVideoPlaying = false;
                     stopSliderAutoplay();
                     $('.homepage-slider').slick('slickNext');
                   }
-                }, 100); // Update every 100ms for smooth real-time tracking
+                }, 500); // Update every 500ms for readable console output
               }
             });
 
@@ -512,7 +515,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // First slide is video - play it for dynamic duration
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
-            console.log('First slide is video - playing for dynamic duration');
+            console.log('🎥 FIRST SLIDE IS VIDEO - Target Duration: 70 seconds');
+            console.log('📹 Starting video playback tracking...');
 
             // Play video immediately
             var playPromise = firstVideo.play();
