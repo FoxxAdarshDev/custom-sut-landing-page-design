@@ -14,6 +14,9 @@
   /* Video loading states */
   .slide-video {
     background-color: #f8f9fa !important;
+  }
+
+  .slide-video:not([data-loaded="true"]) {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="%23666" font-family="Arial" font-size="14">Loading...</text></svg>') !important;
     background-size: contain;
     background-repeat: no-repeat;
@@ -22,6 +25,7 @@
 
   .slide-video[data-loaded="true"] {
     background-image: none !important;
+    background-color: transparent !important;
   }
 
   .homepage-slider img { 
@@ -215,12 +219,32 @@ document.addEventListener('DOMContentLoaded', function() {
           this.style.backgroundColor = 'transparent';
           // Remove poster once video is loaded
           this.removeAttribute('poster');
+          
+          // Try to play if this is the active slide
+          if ($(this).closest('.slick-slide').hasClass('slick-active')) {
+            var self = this;
+            setTimeout(function() {
+              self.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
+              });
+            }, 200);
+          }
         }
 
         function videoCanPlayHandler() {
           console.log('Video can play');
           this.style.backgroundColor = 'transparent';
           this.setAttribute('data-loaded', 'true');
+          
+          // Try to play if this is the active slide
+          if ($(this).closest('.slick-slide').hasClass('slick-active')) {
+            var self = this;
+            setTimeout(function() {
+              self.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
+              });
+            }, 200);
+          }
         }
 
         // Add listeners initially
@@ -233,29 +257,25 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Starting first video');
             firstVideo.currentTime = 0;
             
-            // Ensure video has background while loading
-            firstVideo.style.backgroundColor = '#f8f9fa';
+            // Force load and play
+            firstVideo.load();
             
-            // Try to play immediately if ready
-            if (firstVideo.readyState >= 2) {
-              firstVideo.play().catch(function(error) {
-                console.log('Video autoplay failed:', error);
-              });
-            } else {
-              // Add multiple event listeners to ensure playback starts
-              firstVideo.addEventListener('loadeddata', function() {
-                this.play().catch(function(error) {
+            // Wait for video to be ready
+            function attemptPlay() {
+              if (firstVideo.readyState >= 3) {
+                firstVideo.setAttribute('data-loaded', 'true');
+                firstVideo.style.backgroundColor = 'transparent';
+                firstVideo.play().catch(function(error) {
                   console.log('Video autoplay failed:', error);
                 });
-              });
-              firstVideo.addEventListener('canplay', function() {
-                this.play().catch(function(error) {
-                  console.log('Video autoplay failed:', error);
-                });
-              });
+              } else {
+                setTimeout(attemptPlay, 100);
+              }
             }
+            
+            attemptPlay();
           }
-        }, 500);
+        }, 1000);
       });
 
       // Handle slide changes - play videos with better loading checks
@@ -267,9 +287,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (video) {
           video.currentTime = 0;
           
+          // Force reload if video hasn't loaded properly
+          if (!video.getAttribute('data-loaded')) {
+            video.load();
+          }
+          
           // Wait for video to be ready before playing
           function tryPlayVideo() {
-            if (video.readyState >= 3) {
+            if (video.readyState >= 2) {
+              video.setAttribute('data-loaded', 'true');
+              video.style.backgroundColor = 'transparent';
               video.play().catch(function(error) {
                 console.log('Video play failed:', error);
                 // If video fails to play, advance after 3 seconds
@@ -279,12 +306,28 @@ document.addEventListener('DOMContentLoaded', function() {
               });
             } else {
               // Video not ready, try again in a moment
-              setTimeout(tryPlayVideo, 100);
+              setTimeout(tryPlayVideo, 200);
             }
           }
 
           // Start trying to play
           tryPlayVideo();
+        }
+      });
+
+      // Handle tab visibility changes to prevent white screen
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+          // Page became visible again
+          setTimeout(function() {
+            var activeVideo = $('.homepage-slider .slick-active video')[0];
+            if (activeVideo && activeVideo.paused) {
+              activeVideo.currentTime = 0;
+              activeVideo.play().catch(function(error) {
+                console.log('Video resume failed:', error);
+              });
+            }
+          }, 500);
         }
       });
     };
