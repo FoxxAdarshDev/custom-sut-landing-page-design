@@ -86,7 +86,8 @@
               loop="false"
               controls="false"
               disablepictureinpicture
-              style="width: 100%; height: 100%; object-fit: cover;"
+              controlslist="nodownload nofullscreen noremoteplayback"
+              style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"
               src="{{ settings[slide_video_url] }}"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
@@ -202,8 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Slider autoplay management
   function startSliderAutoplay(duration = 10000) {
     stopSliderAutoplay();
+    console.log('Starting autoplay with duration:', duration + 'ms');
     sliderAutoplayInterval = setInterval(function() {
-      if (isPageVisible && !isVideoPlaying) {
+      if (!isVideoPlaying) {
+        console.log('Autoplay: Moving to next slide');
         $('.homepage-slider').slick('slickNext');
       }
     }, duration);
@@ -255,9 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
           isVideoPlaying = false;
         }
 
-        // Videos are already loaded
-
-        // Stop autoplay when manually changing slides
+        // Always stop autoplay when changing slides
         stopSliderAutoplay();
       });
 
@@ -267,32 +268,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Slide changed to:', currentSlide, 'Is video:', !!video);
 
-        // Stop any existing autoplay
+        // Always stop existing autoplay first
         stopSliderAutoplay();
 
         if (video && video.src && video.src.trim() !== '') {
-          // Video slide with valid source - play video for full duration (1 min 10 seconds)
+          // Video slide - play for full duration (1 min 10 seconds = 70 seconds)
           isVideoPlaying = true;
-          console.log('Starting video slide - duration will be handled by video ended event');
+          console.log('Starting video slide - will play for full duration');
 
           video.currentTime = 0;
 
           // Play video immediately
-          if (video.readyState >= 2) {
-            video.play().catch(function(error) {
+          var playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              console.log('Video started playing successfully');
+            }).catch(function(error) {
               console.log('Video play failed:', error);
               // If video fails, treat as image slide
               isVideoPlaying = false;
               startSliderAutoplay(10000); // 10 seconds for failed video
             });
-          } else {
-            video.addEventListener('canplaythrough', function() {
-              this.play().catch(function(error) {
-                console.log('Video play failed:', error);
-                isVideoPlaying = false;
-                startSliderAutoplay(10000); // 10 seconds for failed video
-              });
-            }, { once: true });
           }
         } else {
           // Image slide - start 10 second autoplay
@@ -329,10 +325,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 isVideoPlaying = false;
                 stopSliderAutoplay();
                 
-                // Move to next slide with a small delay to ensure clean transition
-                setTimeout(function() {
-                  $('.homepage-slider').slick('slickNext');
-                }, 200);
+                // Move to next slide immediately
+                $('.homepage-slider').slick('slickNext');
               }
             });
 
@@ -361,47 +355,20 @@ document.addEventListener('DOMContentLoaded', function() {
               console.log('Video started playing');
             });
 
-            // Prevent video from pausing when tab changes - more aggressive approach
+            // Handle video pause events
             video.addEventListener('pause', function() {
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('Video paused - attempting to resume immediately');
+                console.log('Video paused - attempting to resume');
                 var self = this;
-                
-                // Try multiple times to ensure video resumes
-                var resumeAttempts = 0;
-                var maxAttempts = 5;
-                
-                function attemptResume() {
-                  if (resumeAttempts < maxAttempts && self.paused && isVideoPlaying) {
-                    self.play().then(() => {
-                      console.log('Video successfully resumed on attempt', resumeAttempts + 1);
-                    }).catch(function(error) {
-                      console.log('Video resume attempt', resumeAttempts + 1, 'failed:', error);
-                      resumeAttempts++;
-                      if (resumeAttempts < maxAttempts) {
-                        setTimeout(attemptResume, 200);
-                      }
+                setTimeout(function() {
+                  if (isVideoPlaying && self.paused) {
+                    self.play().catch(function(error) {
+                      console.log('Video resume failed:', error);
                     });
                   }
-                }
-                
-                // Immediate attempt
-                attemptResume();
+                }, 100);
               }
             });
-
-            // Additional safeguard - periodically check if video should be playing
-            var videoCheckInterval = setInterval(function() {
-              if (isVideoPlaying && $(video).closest('.slick-slide').hasClass('slick-active') && video.paused) {
-                console.log('Periodic check: Video should be playing but is paused, attempting resume');
-                video.play().catch(function(error) {
-                  console.log('Periodic resume failed:', error);
-                });
-              }
-            }, 2000); // Check every 2 seconds
-
-            // Store interval reference to clear it later if needed
-            video.checkInterval = videoCheckInterval;
 
 
 
@@ -432,26 +399,21 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('Initial slide setup - has video:', !!firstVideo);
 
           if (firstVideo && firstVideo.src && firstVideo.src.trim() !== '') {
-            // First slide is video - play it for full duration
+            // First slide is video - play it for full duration (1 min 10 seconds)
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
             console.log('First slide is video - playing for full duration');
 
-            // Wait for video to be ready before playing
-            if (firstVideo.readyState >= 2) {
-              firstVideo.play().catch(function(error) {
+            // Play video immediately
+            var playPromise = firstVideo.play();
+            if (playPromise !== undefined) {
+              playPromise.then(function() {
+                console.log('First video started playing successfully');
+              }).catch(function(error) {
                 console.log('First video autoplay failed:', error);
                 isVideoPlaying = false;
                 startSliderAutoplay(10000); // 10 seconds if video fails
               });
-            } else {
-              firstVideo.addEventListener('canplaythrough', function() {
-                this.play().catch(function(error) {
-                  console.log('First video autoplay failed:', error);
-                  isVideoPlaying = false;
-                  startSliderAutoplay(10000); // 10 seconds if video fails
-                });
-              }, { once: true });
             }
           } else {
             // First slide is image - start 10 second autoplay
