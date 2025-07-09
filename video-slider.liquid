@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         }
       } else {
-        // Resume autoplay for image slides
+        // Resume autoplay for image slides - exactly 10 seconds
         startSliderAutoplay(10000);
       }
     }
@@ -248,14 +248,14 @@ document.addEventListener('DOMContentLoaded', function() {
       // Handle slide changes
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
         console.log('Slide changing from', currentSlide, 'to', nextSlide);
-        
+
         // Stop current video and clear its timer
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
           currentVideo.pause();
           currentVideo.currentTime = 0;
           isVideoPlaying = false;
-          
+
           // Clear video timer
           if (currentVideo.videoTimer) {
             clearTimeout(currentVideo.videoTimer);
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Check if we're very close to the end (within 0.5 seconds)
                 if (this.duration - this.currentTime <= 0.5 && $(this).closest('.slick-slide').hasClass('slick-active')) {
                   console.log('Video about to end, preparing to change slide');
-                  
+
                   // Clear timer if exists
                   if (this.videoTimer) {
                     clearTimeout(this.videoTimer);
