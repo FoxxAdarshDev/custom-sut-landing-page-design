@@ -153,6 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let isPageVisible = true;
   let lastVideoSlideIndex = -1;
   let videoSlideCount = 0;
+  let hasInitialOrderExecuted = false; // Track if initial order switch has happened
+
 
   // Progressive video loading function
   function loadVideo(videoElement) {
@@ -215,6 +217,51 @@ document.addEventListener('DOMContentLoaded', function() {
       sliderAutoplayInterval = null;
     }
   }
+
+  // Function to execute video slide order
+  function executeVideoSlideOrder() {
+    console.log('🔄 EXECUTING VIDEO SLIDE ORDER SWITCH');
+
+    // Update slide order - move slide 3 to the front
+    let newSlideOrder = '3,1,2,4,5,6,7,8'; // Restore the desired slide order
+
+    // Get current slide index
+    const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
+
+    // Destroy the slider
+    $('.homepage-slider').slick('unslick');
+
+    // Reinitialize the slider with the correct order
+    $(".homepage-slider").slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+      cssEase: 'linear',
+      autoplay: false, // Manual control
+      arrows: true,
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      initialSlide: 0,  // Ensure it starts at slide 0
+      responsive: [
+        {
+            breakpoint: 480,
+            settings: {
+              arrows: false
+            }
+        }
+      ]
+    });
+
+    // Set flag to indicate order switch has executed
+    hasInitialOrderExecuted = true;
+
+    // Trigger afterChange event on initial load after order switch
+    $('.homepage-slider').slick('slickGoTo', 0, true);
+
+    console.log('✅ ORDER SWITCH COMPLETE - Triggering afterChange on slide 0');
+  }
+
 
   // Override the existing expo.initSlickSlider function
   if (typeof expo !== 'undefined') {
@@ -288,16 +335,33 @@ document.addEventListener('DOMContentLoaded', function() {
         var video = currentSlideElement.find('video')[0];
 
         console.log('Slide changed to:', currentSlide, 'Has video element:', !!video);
+        console.log('🔍 Order switch executed:', hasInitialOrderExecuted);
 
         // Always stop existing autoplay first
         stopSliderAutoplay();
 
         if (video) {
-          // Video element exists - always treat as video slide, regardless of src loading
+          // Check if video has MP4 source before treating as video slide
+          const videoSrc = video.src || video.getAttribute('src');
+          const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
+
+          if (!isMP4) {
+            console.log('❌ Video element found but no MP4 source - treating as image slide');
+            isVideoPlaying = false;
+            startSliderAutoplay(10000); // 10 seconds for image slides
+            return;
+          }
+
+          // Video element exists with MP4 source - treat as video slide
           isVideoPlaying = true;
-          console.log('🎥 VIDEO SLIDE DETECTED - Assigning 70 second timer');
-          console.log('📹 Video src:', video.src || 'Loading...');
+          console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+          console.log('📹 Video src:', videoSrc);
           console.log('🎬 Video loading state:', video.readyState);
+
+          // If this is the result of our order switch, initialize immediately
+          if (hasInitialOrderExecuted && currentSlide === 0) {
+            console.log('🚀 VIDEO SLIDE DETECTED AFTER ORDER SWITCH - INITIALIZING NOW');
+          }
 
           video.currentTime = 0;
 
@@ -320,24 +384,24 @@ document.addEventListener('DOMContentLoaded', function() {
           videoElement.progressInterval = setInterval(() => {
             const currentTime = Date.now();
             const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
-            
+
             videoElement.totalPlayedTime = elapsedTime;
-            
+
             const progress = (elapsedTime / 70) * 100;
             const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
             const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
-            
+
             console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
-            
+
             if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
               console.log('🎯 70 SECONDS REACHED! Timer complete');
               console.log('🔄 CHANGING SLIDE NOW...');
-              
+
               clearInterval(videoElement.progressInterval);
               videoElement.progressInterval = null;
-              
+
               console.log('✅ Timer system cleared - Slide transition initiated');
-              
+
               isVideoPlaying = false;
               stopSliderAutoplay();
               $('.homepage-slider').slick('slickNext');
@@ -397,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
             video.addEventListener('play', function() {
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
                 const videoElement = this;
-                
+
                 // Clear any existing timer
                 if (videoTimer) {
                   clearTimeout(videoTimer);
@@ -408,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 videoElement.videoPausedTime = 0;
                 videoElement.totalPlayedTime = 0;
                 videoElement.pauseStartTime = null;
-                
+
                 console.log('🎬 VIDEO PLAYBACK STARTED - Tracking 70 second duration');
                 console.log('🎯 Target: 70 seconds | Current: 0.0s');
 
@@ -425,25 +489,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
                   const currentTime = Date.now();
                   const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
-                  
+
                   // Update total played time
                   videoElement.totalPlayedTime = elapsedTime;
-                  
+
                   // Real-time console logging every second
                   const progress = (elapsedTime / 70) * 100;
                   console.log(`⏱️ Video Playback: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
-                  
+
                   // Check if we've reached 70 seconds of actual playback
                   if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
                     console.log('🎯 70 SECONDS REACHED! Video playback complete');
                     console.log('🔄 CHANGING SLIDE NOW...');
-                    
+
                     // Clear progress tracking
                     clearInterval(videoElement.progressInterval);
                     videoElement.progressInterval = null;
-                    
+
                     console.log('✅ Timer system cleared - Slide transition initiated');
-                    
+
                     // Change slide
                     isVideoPlaying = false;
                     stopSliderAutoplay();
@@ -500,13 +564,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle video pause events
             video.addEventListener('pause', function() {
               const videoElement = this;
-              
+
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
                 console.log('⏸️ Video paused - timer paused');
-                
+
                 // Record pause start time
                 videoElement.pauseStartTime = Date.now();
-                
+
                 // Attempt to resume after short delay
                 var self = this;
                 setTimeout(function() {
@@ -522,10 +586,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle video resume events
             video.addEventListener('playing', function() {
               const videoElement = this;
-              
+
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
                 console.log('▶️ Video resumed - timer resumed');
-                
+
                 // Add paused time to total paused time
                 if (videoElement.pauseStartTime) {
                   videoElement.videoPausedTime += (Date.now() - videoElement.pauseStartTime);
@@ -555,96 +619,41 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Enhanced initial slide detection - immediate check for first slide video
-        console.log('🔍 IMMEDIATE INITIAL SLIDE SETUP');
-        
-        // Function to initialize video slide logic
-        function initializeVideoSlide(videoElement, slideName) {
-          console.log(`🎥 ${slideName} IS VIDEO - Assigning 70 second timer`);
-          console.log('📹 Video src:', videoElement.src || 'Loading...');
-          console.log('🎬 Video loading state:', videoElement.readyState);
-          
-          isVideoPlaying = true;
-          videoElement.currentTime = 0;
+        // TEMPORARY SLIDE 0 DISPLAY: Show slide 0 for 1 second, then execute video slide order
+        console.log('🎬 INITIAL SETUP: Showing slide 0 temporarily for 1 second');
 
-          // Clear any existing timers first
-          if (videoElement.progressInterval) {
-            clearInterval(videoElement.progressInterval);
-            videoElement.progressInterval = null;
+        // Start with slide 0 (will be detected as image slide)
+        var initialSlideElement = $('.homepage-slider .slide-item').first();
+        var initialSlideVideo = initialSlideElement.find('video')[0];
+
+        console.log('Initial slide element:', initialSlideElement[0]);
+        console.log('Initial slide has video:', !!initialSlideVideo);
+
+        if (initialSlideVideo) {
+          // Check if initial slide video has MP4 source
+          const initialVideoSrc = initialSlideVideo.src || initialSlideVideo.getAttribute('src');
+          const isInitialMP4 = initialVideoSrc && (initialVideoSrc.includes('.mp4') || initialVideoSrc.includes('video/mp4'));
+
+          if (isInitialMP4) {
+            console.log('🎯 INITIAL SLIDE HAS MP4 VIDEO - Will initialize after 1 second');
+            // Don't initialize immediately, wait for the order switch
+            isVideoPlaying = false;
+            startSliderAutoplay(10000); // Temporary autoplay
+          } else {
+            console.log('📸 Initial slide video has no MP4 source - treating as image');
+            isVideoPlaying = false;
+            startSliderAutoplay(10000);
           }
-
-          // Initialize timer tracking
-          videoElement.videoStartTime = Date.now();
-          videoElement.videoPausedTime = 0;
-          videoElement.totalPlayedTime = 0;
-          videoElement.pauseStartTime = null;
-
-          // START 70-SECOND TIMER IMMEDIATELY
-          console.log(`🚀 STARTING 70-SECOND TIMER FOR ${slideName}...`);
-          
-          videoElement.progressInterval = setInterval(() => {
-            const currentTime = Date.now();
-            const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
-            
-            videoElement.totalPlayedTime = elapsedTime;
-            
-            const progress = (elapsedTime / 70) * 100;
-            const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
-            const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
-            
-            console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
-            
-            if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
-              console.log('🎯 70 SECONDS REACHED! Timer complete');
-              console.log('🔄 CHANGING SLIDE NOW...');
-              
-              clearInterval(videoElement.progressInterval);
-              videoElement.progressInterval = null;
-              
-              console.log('✅ Timer system cleared - Slide transition initiated');
-              
-              isVideoPlaying = false;
-              stopSliderAutoplay();
-              $('.homepage-slider').slick('slickNext');
-            }
-          }, 500);
-
-          // Try to play video when ready (but timer runs regardless)
-          var tryPlayVideo = function() {
-            if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
-              var playPromise = videoElement.play();
-              if (playPromise !== undefined) {
-                playPromise.then(function() {
-                  console.log(`✅ ${slideName} video started playing successfully`);
-                }).catch(function(error) {
-                  console.log(`⚠️ ${slideName} video autoplay failed (but 70s timer continues):`, error);
-                });
-              }
-            } else {
-              console.log('⏳ Video still loading, will retry...');
-              setTimeout(tryPlayVideo, 200);
-            }
-          };
-
-          // Start trying to play
-          tryPlayVideo();
-        }
-
-        // IMMEDIATE CHECK: Find the first slide (which should be slide 3) and check for video
-        var firstSlideElement = $('.homepage-slider .slide-item').first();
-        var firstSlideVideo = firstSlideElement.find('video')[0];
-        
-        console.log('First slide element:', firstSlideElement[0]);
-        console.log('First slide has video:', !!firstSlideVideo);
-        
-        if (firstSlideVideo) {
-          console.log('🎯 FIRST SLIDE HAS VIDEO - INITIALIZING IMMEDIATELY');
-          initializeVideoSlide(firstSlideVideo, 'FIRST SLIDE (IMMEDIATE)');
         } else {
-          console.log('📸 First slide is image - starting 10 second autoplay');
+          console.log('📸 Initial slide is image - starting temporary 10 second autoplay');
           isVideoPlaying = false;
           startSliderAutoplay(10000);
         }
+
+        // Execute video slide order switch after 1 second
+        setTimeout(function() {
+          executeVideoSlideOrder();
+        }, 1000);
 
         // BACKUP CHECK: Also check after slider initialization in case of timing issues
         setTimeout(function() {
