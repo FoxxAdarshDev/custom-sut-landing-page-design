@@ -566,7 +566,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (firstVideo) {
             // Video element exists - always treat as video slide
-            console.log('🎥 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+            console.log('🎥 FIRST SLIDE IS VIDEO - Assigning 70 second timer');
             console.log('📹 Video src:', firstVideo.src || 'Loading...');
             console.log('🎬 Video loading state:', firstVideo.readyState);
             
@@ -574,20 +574,26 @@ document.addEventListener('DOMContentLoaded', function() {
             firstVideo.currentTime = 0;
 
             // Initialize 70-second timer immediately, regardless of loading state
-            console.log('⏳ INITIALIZING 70-SECOND TIMER (Loading: Video may be slow)');
+            console.log('⏳ INITIALIZING 70-SECOND TIMER FOR FIRST SLIDE');
             console.log('🎯 Target: 70 seconds | Current: 0.0s');
 
             const videoElement = firstVideo;
+            
+            // Clear any existing timers first
+            if (videoElement.progressInterval) {
+              clearInterval(videoElement.progressInterval);
+              videoElement.progressInterval = null;
+            }
+
+            // Initialize timer tracking
             videoElement.videoStartTime = Date.now();
             videoElement.videoPausedTime = 0;
             videoElement.totalPlayedTime = 0;
             videoElement.pauseStartTime = null;
 
-            // Start 70-second timer immediately
-            if (videoElement.progressInterval) {
-              clearInterval(videoElement.progressInterval);
-            }
-
+            // START 70-SECOND TIMER IMMEDIATELY
+            console.log('🚀 STARTING 70-SECOND TIMER NOW...');
+            
             videoElement.progressInterval = setInterval(() => {
               const currentTime = Date.now();
               const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
@@ -615,13 +621,13 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             }, 500);
 
-            // Try to play video when ready
+            // Try to play video when ready (but timer runs regardless)
             var tryPlayVideo = function() {
               if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
                 var playPromise = videoElement.play();
                 if (playPromise !== undefined) {
                   playPromise.then(function() {
-                    console.log('✅ Video started playing successfully');
+                    console.log('✅ First video started playing successfully');
                   }).catch(function(error) {
                     console.log('⚠️ Video autoplay failed (but 70s timer continues):', error);
                   });
@@ -641,7 +647,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('📸 First slide is image - starting 10 second autoplay');
             startSliderAutoplay(10000); // 10 seconds for image slides
           }
-        }, 500);
+        }, 1000); // Increased timeout to ensure slider is fully initialized
       });
     };
 
