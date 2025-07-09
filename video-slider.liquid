@@ -8,11 +8,21 @@
     background-clip: content-box, border-box; 
     border-radius: 12px;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
+    background-color: #f8f9fa;
   }
 
   .homepage-slider.slick-initialized {
     opacity: 1;
+  }
+
+  /* Video loading states */
+  .slide-video {
+    background-color: #f8f9fa;
+  }
+
+  .slide-video:not([data-loaded="true"]) {
+    background-color: #f8f9fa;
   }
 
   .homepage-slider img { 
@@ -49,10 +59,11 @@
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
             <video 
               class="slide-video" 
-              autoplay 
               muted 
               playsinline
-              style="width: 100%; height: 100%; object-fit: cover;"
+              preload="metadata"
+              poster=""
+              style="width: 100%; height: 100%; object-fit: cover; background-color: #f8f9fa;"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
@@ -155,8 +166,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
 
-      // Handle video end event to auto-advance slide
+      // Handle video loading and playback
       $('.homepage-slider').on('init', function(event, slick) {
+        console.log('Slider initialized');
+        
         // Function to add video event listeners
         function addVideoListeners() {
           $(slick.$slides).each(function() {
@@ -164,22 +177,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (video) {
               // Remove existing listeners to prevent duplicates
               video.removeEventListener('ended', videoEndHandler);
+              video.removeEventListener('loadeddata', videoLoadedHandler);
+              video.removeEventListener('canplay', videoCanPlayHandler);
               
-              // Add ended event listener
+              // Add event listeners
               video.addEventListener('ended', videoEndHandler);
+              video.addEventListener('loadeddata', videoLoadedHandler);
+              video.addEventListener('canplay', videoCanPlayHandler);
               
               // Add error handler
               video.addEventListener('error', function() {
                 console.log('Video error, advancing to next slide');
                 setTimeout(function() {
                   $('.homepage-slider').slick('slickNext');
-                }, 1000);
+                }, 2000);
               });
+
+              // Set background color to prevent black screen
+              video.style.backgroundColor = '#f8f9fa';
+              
+              // Force load the video
+              video.load();
             }
           });
         }
 
-        // Video end handler function
+        // Video event handlers
         function videoEndHandler() {
           console.log('Video ended, advancing to next slide');
           setTimeout(function() {
@@ -187,38 +210,67 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 500);
         }
 
+        function videoLoadedHandler() {
+          console.log('Video loaded');
+          this.setAttribute('data-loaded', 'true');
+        }
+
+        function videoCanPlayHandler() {
+          console.log('Video can play');
+          this.style.backgroundColor = 'transparent';
+        }
+
         // Add listeners initially
         addVideoListeners();
 
-        // Re-add listeners after DOM changes
-        setTimeout(addVideoListeners, 1000);
-
-        // Start first video if present
+        // Start first video with better timing
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
             firstVideo.currentTime = 0;
-            firstVideo.play().catch(function(error) {
-              console.log('Video autoplay failed:', error);
-            });
+            // Wait for video to be ready before playing
+            if (firstVideo.readyState >= 3) {
+              firstVideo.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
+              });
+            } else {
+              firstVideo.addEventListener('canplay', function() {
+                this.play().catch(function(error) {
+                  console.log('Video autoplay failed:', error);
+                });
+              });
+            }
           }
-        }, 500);
+        }, 1000);
       });
 
-      // Handle slide changes - play videos immediately
+      // Handle slide changes - play videos with better loading checks
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
+        console.log('Slide changed to:', currentSlide);
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
 
         if (video) {
           video.currentTime = 0;
-          video.play().catch(function(error) {
-            console.log('Video play failed:', error);
-            // If video fails to play, advance after 3 seconds
-            setTimeout(function() {
-              $('.homepage-slider').slick('slickNext');
-            }, 3000);
-          });
+          
+          // Wait for video to be ready before playing
+          function tryPlayVideo() {
+            if (video.readyState >= 3) {
+              video.play().catch(function(error) {
+                console.log('Video play failed:', error);
+                // If video fails to play, advance after 3 seconds
+                setTimeout(function() {
+                  $('.homepage-slider').slick('slickNext');
+                }, 3000);
+              });
+            } else {
+              // Video not ready, try again in a moment
+              setTimeout(tryPlayVideo, 100);
+            }
+          }
+
+          // Start trying to play
+          tryPlayVideo();
         }
       });
     };
