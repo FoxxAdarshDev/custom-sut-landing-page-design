@@ -322,13 +322,42 @@ document.addEventListener('DOMContentLoaded', function() {
               var currentSlideIndex = $(this).closest('.slick-slide').data('slick-index');
               console.log('Video ended on slide:', currentSlideIndex);
               
+              // Reset video state
               isVideoPlaying = false;
               stopSliderAutoplay(); // Make sure autoplay is stopped
               
-              setTimeout(function() {
-                console.log('Moving to next slide after video ended - next slide will be image with 10s autoplay');
-                $('.homepage-slider').slick('slickNext');
-              }, 500);
+              // Force slide change
+              console.log('Moving to next slide after video ended - next slide will be image with 10s autoplay');
+              $('.homepage-slider').slick('slickNext');
+            });
+
+            // Additional fallback - check if video is near end and force progression
+            video.addEventListener('timeupdate', function() {
+              if (this.currentTime > 0 && this.duration > 0) {
+                var progress = (this.currentTime / this.duration) * 100;
+                
+                // When video is 99% complete, prepare for slide change
+                if (progress >= 99 && isVideoPlaying) {
+                  console.log('Video 99% complete - preparing for slide change');
+                  isVideoPlaying = false;
+                  stopSliderAutoplay();
+                  
+                  // Small delay to ensure video fully ends
+                  setTimeout(function() {
+                    console.log('Forcing slide change after video completion');
+                    $('.homepage-slider').slick('slickNext');
+                  }, 100);
+                }
+                
+                // Only log major milestones to avoid console spam
+                if (progress >= 25 && progress < 26) {
+                  console.log('Video 25% complete');
+                } else if (progress >= 50 && progress < 51) {
+                  console.log('Video 50% complete');
+                } else if (progress >= 75 && progress < 76) {
+                  console.log('Video 75% complete');
+                }
+              }
             });
 
             // Video loaded - remove loading state
@@ -356,20 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
 
-            // Log video progress for debugging (without forcing slide changes)
-            video.addEventListener('timeupdate', function() {
-              if (this.currentTime > 0 && this.duration > 0) {
-                var progress = (this.currentTime / this.duration) * 100;
-                // Only log major milestones to avoid console spam
-                if (progress >= 25 && progress < 26) {
-                  console.log('Video 25% complete');
-                } else if (progress >= 50 && progress < 51) {
-                  console.log('Video 50% complete');
-                } else if (progress >= 75 && progress < 76) {
-                  console.log('Video 75% complete');
-                }
-              }
-            });
+            
 
             // Video data loaded - start removing loading state
             video.addEventListener('loadeddata', function() {
