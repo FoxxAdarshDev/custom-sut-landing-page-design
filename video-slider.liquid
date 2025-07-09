@@ -257,6 +257,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Always stop autoplay when changing slides
         stopSliderAutoplay();
+		// Clear and reset timer for current video
+              if (currentVideo.videoTimer) {
+                clearTimeout(currentVideo.videoTimer);
+                currentVideo.videoTimer = null;
+              }
+
+              // Reset timer state for this video
+              currentVideo.remainingTime = 70000;
+              currentVideo.timerStartTime = null;
       });
 
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
