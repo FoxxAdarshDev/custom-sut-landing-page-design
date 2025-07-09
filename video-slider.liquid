@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
       arrows: true,
       pauseOnHover: false,
       pauseOnFocus: false,
-      initialSlide: 0,  // Ensure it starts at slide 0
+      initialSlide: 1,  // Start at slide 1 temporarily
       responsive: [
         {
             breakpoint: 480,
@@ -256,10 +256,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set flag to indicate order switch has executed
     hasInitialOrderExecuted = true;
 
-    // Trigger afterChange event on initial load after order switch
+    // Trigger afterChange event on initial load after order switch - go to slide 0 (video slide)
     $('.homepage-slider').slick('slickGoTo', 0, true);
 
-    console.log('✅ ORDER SWITCH COMPLETE - Triggering afterChange on slide 0');
+    console.log('✅ ORDER SWITCH COMPLETE - Moving from slide 1 to slide 0 (video slide)');
   }
 
 
@@ -619,15 +619,18 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // TEMPORARY SLIDE 0 DISPLAY: Show slide 0 for 1 second, then execute video slide order
-        console.log('🎬 INITIAL SETUP: Showing slide 0 temporarily for 1 second');
+        // TEMPORARY SLIDE 1 DISPLAY: Show slide 1 for 1 second, then execute video slide order
+        console.log('🎬 INITIAL SETUP: Showing slide 1 temporarily for 1 second');
 
-        // Start with slide 0 (will be detected as image slide)
-        var initialSlideElement = $('.homepage-slider .slide-item').first();
+        // Force slider to go to slide 1 (index 1) immediately
+        $('.homepage-slider').slick('slickGoTo', 1, true);
+
+        // Start with slide 1 (will be detected as image slide)
+        var initialSlideElement = $('.homepage-slider .slide-item[data-slide-index="1"]');
         var initialSlideVideo = initialSlideElement.find('video')[0];
 
-        console.log('Initial slide element:', initialSlideElement[0]);
-        console.log('Initial slide has video:', !!initialSlideVideo);
+        console.log('Initial slide element (slide 1):', initialSlideElement[0]);
+        console.log('Initial slide 1 has video:', !!initialSlideVideo);
 
         if (initialSlideVideo) {
           // Check if initial slide video has MP4 source
@@ -635,17 +638,17 @@ document.addEventListener('DOMContentLoaded', function() {
           const isInitialMP4 = initialVideoSrc && (initialVideoSrc.includes('.mp4') || initialVideoSrc.includes('video/mp4'));
 
           if (isInitialMP4) {
-            console.log('🎯 INITIAL SLIDE HAS MP4 VIDEO - Will initialize after 1 second');
+            console.log('🎯 INITIAL SLIDE 1 HAS MP4 VIDEO - Will initialize after 1 second');
             // Don't initialize immediately, wait for the order switch
             isVideoPlaying = false;
             startSliderAutoplay(10000); // Temporary autoplay
           } else {
-            console.log('📸 Initial slide video has no MP4 source - treating as image');
+            console.log('📸 Initial slide 1 video has no MP4 source - treating as image');
             isVideoPlaying = false;
             startSliderAutoplay(10000);
           }
         } else {
-          console.log('📸 Initial slide is image - starting temporary 10 second autoplay');
+          console.log('📸 Initial slide 1 is image - starting temporary 10 second autoplay');
           isVideoPlaying = false;
           startSliderAutoplay(10000);
         }
