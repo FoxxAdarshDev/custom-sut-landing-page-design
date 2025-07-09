@@ -203,7 +203,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (isMP4) {
         console.log('🎥 MP4 VIDEO SLIDE DETECTED - Initializing 70 second timer for initial slide');
         const slideIndex = initialSlide.attr('data-slide-index') || 0;
-        handleVideoSlideChange(videoElement, slideIndex);
+        
+        // Add a delay to ensure video is properly initialized
+        setTimeout(() => {
+          console.log('🚀 DELAYED INITIAL VIDEO SETUP - Starting timer system');
+          handleVideoSlideChange(videoElement, slideIndex);
+        }, 200);
       } else {
         console.log('📸 Video element has no MP4 source - treating as image slide with 10 second duration');
         isVideoPlaying = false;
@@ -709,6 +714,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }, 1000);
         }, 300); // Increased delay for better initialization
+        
+        // Additional trigger when slider becomes ready
+        $('.homepage-slider').on('ready.slick', function() {
+          console.log('🎬 SLICK READY EVENT: Slider is fully ready');
+          setTimeout(() => {
+            if (!isVideoPlaying && !sliderAutoplayInterval) {
+              console.log('🎬 SLICK READY: Triggering delayed initialization');
+              initializeInitialSlide();
+            }
+          }, 100);
+        });
       });
     };
 
