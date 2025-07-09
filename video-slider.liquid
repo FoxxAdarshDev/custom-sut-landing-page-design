@@ -1,3 +1,4 @@
+
 <style>
   .homepage-slider { 
     display: block !important; 
@@ -168,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Handle video loading and playback
       $('.homepage-slider').on('init', function(event, slick) {
         console.log('Slider initialized');
-
+        
         // Function to add video event listeners
         function addVideoListeners() {
           $(slick.$slides).each(function() {
@@ -178,20 +179,15 @@ document.addEventListener('DOMContentLoaded', function() {
               video.removeEventListener('ended', videoEndHandler);
               video.removeEventListener('loadeddata', videoLoadedHandler);
               video.removeEventListener('canplay', videoCanPlayHandler);
-              video.removeEventListener('timeupdate', videoTimeUpdateHandler);
-              video.removeEventListener('loadstart', videoLoadStartHandler);
-
+              
               // Add event listeners
               video.addEventListener('ended', videoEndHandler);
               video.addEventListener('loadeddata', videoLoadedHandler);
               video.addEventListener('canplay', videoCanPlayHandler);
-              video.addEventListener('timeupdate', videoTimeUpdateHandler);
-              video.addEventListener('loadstart', videoLoadStartHandler);
-
+              
               // Add error handler
               video.addEventListener('error', function() {
                 console.log('Video error, advancing to next slide');
-                this.style.backgroundColor = '#f8f9fa';
                 setTimeout(function() {
                   $('.homepage-slider').slick('slickNext');
                 }, 2000);
@@ -199,14 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
               // Set background color to prevent black screen
               video.style.backgroundColor = '#f8f9fa';
-
-              // Add poster attribute to prevent black screen
-              if (!video.getAttribute('poster')) {
-                video.setAttribute('poster', 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y4ZjlmYSIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TG9hZGluZy4uLjwvdGV4dD48L3N2Zz4=');
-              }
-
-              // Force load the video with preload
-              video.preload = 'metadata';
+              
+              // Force load the video
               video.load();
             }
           });
@@ -217,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('Video ended, advancing to next slide');
           setTimeout(function() {
             $('.homepage-slider').slick('slickNext');
-          }, 300);
+          }, 500);
         }
 
         function videoLoadedHandler() {
@@ -228,19 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function videoCanPlayHandler() {
           console.log('Video can play');
           this.style.backgroundColor = 'transparent';
-        }
-
-        // Additional time update handler to catch video end
-        function videoTimeUpdateHandler() {
-          if (this.currentTime > 0 && Math.abs(this.duration - this.currentTime) < 0.5) {
-            console.log('Video near end detected via timeupdate');
-            videoEndHandler.call(this);
-          }
-        }
-
-        function videoLoadStartHandler() {
-          console.log('Video load started');
-          this.style.backgroundColor = '#f8f9fa';
         }
 
         // Add listeners initially
@@ -275,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (video) {
           video.currentTime = 0;
-
+          
           // Wait for video to be ready before playing
           function tryPlayVideo() {
             if (video.readyState >= 3) {
@@ -294,14 +271,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Start trying to play
           tryPlayVideo();
-
-          // Safety timeout - if video doesn't end naturally, advance after duration + 2 seconds
-          setTimeout(function() {
-            if (video && !video.paused && !video.ended) {
-              console.log('Video safety timeout triggered, advancing slide');
-              $('.homepage-slider').slick('slickNext');
-            }
-          }, 72000); // 70 seconds for 1:10 video + 2 second buffer
         }
       });
     };
