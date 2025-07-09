@@ -150,6 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let sliderAutoplayInterval;
   let isVideoPlaying = false;
   let isPageVisible = true;
+  let lastVideoSlideIndex = -1;
+  let videoSlideCount = 0;
 
   // Progressive video loading function
   function loadVideo(videoElement) {
@@ -252,6 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
 
+        console.log('Slide changed to:', currentSlide, 'Is video:', !!video);
+
         if (video) {
           // Video slide - don't start autoplay, let video ended event handle it
           isVideoPlaying = true;
@@ -263,16 +267,20 @@ document.addEventListener('DOMContentLoaded', function() {
           if (video.readyState >= 2) {
             video.play().catch(function(error) {
               console.log('Video play failed:', error);
-              // If video fails, treat as image slide
+              // If video fails, treat as image slide and move to next slide
               isVideoPlaying = false;
-              startSliderAutoplay(10000); // 10 seconds for image slides
+              setTimeout(function() {
+                $('.homepage-slider').slick('slickNext');
+              }, 1000);
             });
           } else {
             video.addEventListener('canplaythrough', function() {
               this.play().catch(function(error) {
                 console.log('Video play failed:', error);
                 isVideoPlaying = false;
-                startSliderAutoplay(10000); // 10 seconds for image slides
+                setTimeout(function() {
+                  $('.homepage-slider').slick('slickNext');
+                }, 1000);
               });
             }, { once: true });
           }
@@ -285,6 +293,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle video events
       $('.homepage-slider').on('init', function(event, slick) {
+        // Count video slides
+        videoSlideCount = 0;
+        $(slick.$slides).each(function(index) {
+          if ($(this).find('video')[0]) {
+            videoSlideCount++;
+          }
+        });
+        console.log('Total video slides:', videoSlideCount, 'Total slides:', slick.$slides.length);
+        
         // Add video event listeners
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
@@ -292,8 +309,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Video ended - go to next slide after video completes naturally
             video.addEventListener('ended', function() {
               console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
+              var currentSlideIndex = $(this).closest('.slick-slide').data('slick-index');
+              console.log('Video ended on slide:', currentSlideIndex);
+              
               isVideoPlaying = false;
               setTimeout(function() {
+                console.log('Moving to next slide after video ended');
                 $('.homepage-slider').slick('slickNext');
               }, 500);
             });
