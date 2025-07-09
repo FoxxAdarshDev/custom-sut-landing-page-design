@@ -1,3 +1,4 @@
+
 <style>
   .homepage-slider { 
     display: block !important; 
@@ -8,9 +9,6 @@
     border-radius: 12px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    height: 600px;
-    overflow: hidden;
-    position: relative;
   }
 
   .homepage-slider.slick-initialized {
@@ -31,6 +29,8 @@
   }
 </style>
 
+
+
 <section class="homepage-slider">
   {% comment %} Show slide 3 first {% endcomment %}
   {% assign slide_order = '3,1,2,4,5,6,7,8' | split: ',' %}
@@ -44,27 +44,21 @@
     {% capture slide_video_url %}slide_{{ i }}_video_url{% endcapture %}
 
     {% if settings[slide] %}
-      <div class="slide-item {% if settings[slide_is_video] and settings[slide_video_url] != blank %}video-slide{% else %}image-slide{% endif %}" data-slide-index="{{ forloop.index0 }}">
+      <div class="slide-item" data-slide-index="{{ forloop.index0 }}">
         <a href="{{ settings[slide_link] }}" class="slide-link">
           {% if settings[slide_is_video] and settings[slide_video_url] != blank %}
-            <div class="video-container">
-              <video 
-                class="slide-video" 
-                muted 
-                playsinline
-                loop
-                preload="auto"
-                src="{{ settings[slide_video_url] }}"
-                data-video-duration="70"
-              >
-                <source src="{{ settings[slide_video_url] }}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <video 
+              class="slide-video" 
+              autoplay 
+              muted 
+              playsinline
+              style="width: 100%; height: 100%; object-fit: cover;"
+            >
+              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
           {% else %}
-            <div class="image-container">
-              {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
-            </div>
+            {{ slide_img | asset_url | img_tag: settings[slide_alt] }}
           {% endif %}
         </a>
       </div>
@@ -73,325 +67,136 @@
 </section>
 
 <style>
-/* Base slider styling */
-.homepage-slider {
-  height: 600px !important;
-  min-height: 600px;
-  max-height: 600px;
-  overflow: hidden;
-  position: relative;
-  background: #000;
-  width: 100%;
-}
 
-@media screen and (max-width: 768px) {
-  .homepage-slider {
-    height: 400px !important;
-    min-height: 400px;
-    max-height: 400px;
-  }
-}
 
-/* Slide container styling */
 .slide-item {
   position: relative;
   width: 100%;
-  height: 600px !important;
-  overflow: hidden;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
-
-@media screen and (max-width: 768px) {
-  .slide-item {
-    height: 400px !important;
-  }
-}
-
-/* Video container and styling */
-.video-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.slide-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: translate(-50%, -50%);
-  background: #000;
-  border-radius: 12px;
-  z-index: 1;
-}
-
-/* Image container and styling */
-.image-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  height: 450px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
 }
 
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background: #f5f5f5;
-  border-radius: 12px;
-}
-
-/* Slide link styling */
 .slide-link {
   display: block;
   width: 100%;
   height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Slick slider overrides */
-.homepage-slider .slick-track {
-  display: flex !important;
-  align-items: stretch;
-  height: 600px !important;
-}
-
-@media screen and (max-width: 768px) {
-  .homepage-slider .slick-track {
-    height: 400px !important;
-  }
-}
-
-.homepage-slider .slick-slide {
-  height: 600px !important;
-  display: flex !important;
+  display: flex;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
-  .homepage-slider .slick-slide {
-    height: 400px !important;
-  }
-}
-
-.homepage-slider .slick-slide > div {
+.slide-video {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-/* Slider controls styling */
-.homepage-slider .slick-dots {
-  bottom: 20px;
-  z-index: 10;
-  position: absolute;
+.homepage-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.homepage-slider .slick-prev,
-.homepage-slider .slick-next {
-  z-index: 10;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+/* Ensure videos don't interfere with slider controls */
+.slick-slide video {
+  pointer-events: none;
 }
 
-.homepage-slider .slick-prev {
-  left: 20px;
-}
-
-.homepage-slider .slick-next {
-  right: 20px;
-}
-
-/* Style the dots */
-.homepage-slider .slick-dots li button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.homepage-slider .slick-dots li.slick-active button {
-  background: rgba(255, 255, 255, 1);
-}
-
-/* Style the arrows */
-.homepage-slider .slick-prev:before,
-.homepage-slider .slick-next:before {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 30px;
-}
-
-.homepage-slider .slick-prev:hover:before,
-.homepage-slider .slick-next:hover:before {
-  color: rgba(255, 255, 255, 1);
+.slick-slide.slick-active video {
+  pointer-events: auto;
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  let sliderInitialized = false;
-
-  // Simple function to play video
-  function playVideo(slideIndex) {
-    const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
-    if (!slideElement) return;
-
-    const video = slideElement.querySelector('video');
-    if (!video) return;
-
-    // Set video properties
-    video.muted = true;
-    video.loop = true;
-    video.preload = 'auto';
-
-    // Try to play video
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        console.log('Video play failed:', error);
-        // Retry after short delay
-        setTimeout(() => {
-          video.play().catch(e => console.log('Retry failed:', e));
-        }, 200);
-      });
-    }
-  }
-
-  // Pause all videos
-  function pauseAllVideos() {
-    document.querySelectorAll('.slide-video').forEach(video => {
-      video.pause();
-    });
-  }
-
-  // Check if slide has video based on slide element content
-  function isVideoSlide(slideIndex) {
-    const slideElement = document.querySelector(`.slick-slide[data-slick-index="${slideIndex}"]`);
-    return slideElement && slideElement.querySelector('.video-slide');
-  }
-
-  function initializeSlider() {
-    if (sliderInitialized || typeof $ === 'undefined' || !$.fn.slick) return;
-
-    if ($('.homepage-slider').hasClass('slick-initialized')) {
-      $('.homepage-slider').slick('unslick');
-    }
-
-    // Check if first slide is video to set initial timing
-    const firstSlideIsVideo = document.querySelector('.slide-item:first-child .video-slide');
-    const initialAutoplaySpeed = firstSlideIsVideo ? 70000 : 8000;
-
-    $(".homepage-slider").slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
-      cssEase: 'linear',
-      autoplay: true,
-      autoplaySpeed: initialAutoplaySpeed,
-      arrows: true,
-      pauseOnHover: false,
-      pauseOnFocus: false,
-      adaptiveHeight: false,
-      responsive: [
-        {
-            breakpoint: 480,
-            settings: {
-              arrows: false
-            }
-        }
-      ]
-    });
-
-    sliderInitialized = true;
-
-    // Handle slide changes
-    $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-      pauseAllVideos();
-      
-      // Set autoplay speed based on next slide type
-      if (isVideoSlide(nextSlide)) {
-        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 70000, false);
-      } else {
-        $('.homepage-slider').slick('slickSetOption', 'autoplaySpeed', 8000, false);
+  // Override the existing expo.initSlickSlider function to handle videos
+  if (typeof expo !== 'undefined') {
+    expo.initSlickSlider = function(){
+      // Check if slider already exists and destroy it
+      if ($('.homepage-slider').hasClass('slick-initialized')) {
+        $('.homepage-slider').slick('unslick');
       }
-    });
 
-    $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
-      if (isVideoSlide(currentSlide)) {
-        setTimeout(() => playVideo(currentSlide), 200);
-      }
-    });
-
-    // Preload all videos
-    setTimeout(() => {
-      document.querySelectorAll('.slide-video').forEach(video => {
-        video.muted = true;
-        video.loop = true;
-        video.preload = 'auto';
-        video.load();
-      });
-    }, 100);
-
-    // Play initial video if first slide is video
-    setTimeout(() => {
-      if (isVideoSlide(0)) {
-        playVideo(0);
-      }
-    }, 300);
-  }
-
-  // Initialize slider
-  initializeSlider();
-
-  // Fallback initialization
-  setTimeout(initializeSlider, 1000);
-});
-
-// Simple visibility change handler
-document.addEventListener('visibilitychange', function() {
-  if (!document.hidden) {
-    // When page becomes visible, continue playing current video
-    setTimeout(() => {
-      if (typeof $ !== 'undefined' && $('.homepage-slider').hasClass('slick-initialized')) {
-        const currentSlide = $('.homepage-slider').slick('slickCurrentSlide');
-        const slideElement = document.querySelector(`.slick-slide[data-slick-index="${currentSlide}"]`);
-        if (slideElement && slideElement.querySelector('.video-slide')) {
-          const video = slideElement.querySelector('video');
-          if (video && video.paused) {
-            video.play().catch(e => console.log('Resume failed:', e));
+      // Initialize slider with video support
+      $(".homepage-slider").slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: {% if settings.slider_home_transition == 'fade' %}true{% else %}false{% endif %},
+        cssEase: 'linear',
+        autoplay: false, // Disable autoplay - videos will control timing
+        arrows: true,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        responsive: [
+          {
+              breakpoint: 480,
+              settings: {
+                arrows: false
+              }
           }
+        ]
+      });
+
+      // Handle video playback in slider
+      $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // Pause current video and reset to beginning
+        var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
+        if (currentVideo) {
+          currentVideo.pause();
+          currentVideo.currentTime = 0;
         }
-      }
-    }, 200);
+      });
+
+      // Handle video end event to auto-advance slide
+      $('.homepage-slider').on('init', function(event, slick) {
+        // Add event listeners to all videos
+        $(slick.$slides).each(function() {
+          var video = $(this).find('video')[0];
+          if (video) {
+            video.addEventListener('ended', function() {
+              // Auto-advance to next slide when video ends
+              $('.homepage-slider').slick('slickNext');
+            });
+          }
+        });
+
+        // Start first video if present
+        setTimeout(function() {
+          var firstVideo = $('.homepage-slider .slick-active video')[0];
+          if (firstVideo) {
+            firstVideo.currentTime = 0;
+            firstVideo.play();
+          }
+        }, 500);
+      });
+
+      // Handle slide changes - play videos immediately
+      $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
+        var currentSlideElement = $(slick.$slides[currentSlide]);
+        var video = currentSlideElement.find('video')[0];
+
+        if (video) {
+          video.currentTime = 0;
+          video.play();
+        }
+      });
+    };
+
+    // Reinitialize the slider if expo is already loaded
+    if (typeof $ !== 'undefined' && $.fn.slick) {
+      expo.initSlickSlider();
+    }
   }
 });
 </script>
-
 <script>
 window.addEventListener('load', function() {
     setTimeout(function() {
