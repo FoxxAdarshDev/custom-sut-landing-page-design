@@ -154,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let lastVideoSlideIndex = -1;
   let videoSlideCount = 0;
   let hasInitialOrderExecuted = false; // Track if initial order switch has happened
+  let isSlideChanging = false; // Prevent rapid slide changes
 
   // Create dedicated video slide handler - moved to global scope
   function handleVideoSlideChange(video, currentSlide) {
@@ -396,19 +397,29 @@ document.addEventListener('DOMContentLoaded', function() {
   // Slider autoplay management
   function startSliderAutoplay(duration = 10000) {
     stopSliderAutoplay();
-    console.log('Starting autoplay with duration:', duration + 'ms');
+    console.log('🕐 Starting autoplay with duration:', duration + 'ms');
+    console.log('🕐 Current time:', new Date().toLocaleTimeString());
+    console.log('🕐 Timer will fire at:', new Date(Date.now() + duration).toLocaleTimeString());
+    
     sliderAutoplayInterval = setInterval(function() {
-      if (!isVideoPlaying) {
+      console.log('🕐 Timer fired at:', new Date().toLocaleTimeString());
+      if (!isVideoPlaying && !isSlideChanging) {
         console.log('📸 Image autoplay timer reached - Moving to next slide');
+        isSlideChanging = true;
         $('.homepage-slider').slick('slickNext');
+        // Reset slide changing flag after slide transition completes
+        setTimeout(() => {
+          isSlideChanging = false;
+        }, 1000);
       } else {
-        console.log('🎥 Video is playing - skipping autoplay slide change');
+        console.log('🎥 Video is playing or slide is changing - skipping autoplay slide change');
       }
     }, duration);
   }
 
   function stopSliderAutoplay() {
     if (sliderAutoplayInterval) {
+      console.log('🛑 Stopping autoplay timer');
       clearInterval(sliderAutoplayInterval);
       sliderAutoplayInterval = null;
     }
@@ -458,6 +469,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle slide changes
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        console.log('🔄 beforeChange: from slide', currentSlide, 'to slide', nextSlide);
+        
         // Stop current video
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
@@ -468,6 +481,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Always stop autoplay when changing slides
         stopSliderAutoplay();
+        
+        // Reset slide changing flag after transition
+        setTimeout(() => {
+          isSlideChanging = false;
+        }, 600);
 
         // Clear advanced timer system for current video
         if (currentVideo) {
@@ -501,6 +519,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('🔄 Slide changed to:', currentSlide, 'Has video element:', !!video);
         console.log('📍 Current slide classes:', currentSlideElement.attr('class'));
 
+        // Always stop any existing timers first
+        stopSliderAutoplay();
+
         if (video) {
           // Check if video has MP4 source
           const videoSrc = video.src || video.getAttribute('src');
@@ -514,17 +535,19 @@ document.addEventListener('DOMContentLoaded', function() {
             handleVideoSlideChange(video, currentSlide);
           } else {
             console.log('📸 Video element found but no MP4 source - treating as image slide');
-            stopSliderAutoplay();
             isVideoPlaying = false;
             console.log('📸 Image slide - starting 10 second autoplay');
-            startSliderAutoplay(10000);
+            setTimeout(() => {
+              startSliderAutoplay(10000);
+            }, 100); // Small delay to ensure state is settled
           }
         } else {
           // No video element - this is an image slide
-          stopSliderAutoplay();
           isVideoPlaying = false;
           console.log('📸 Image slide - starting 10 second autoplay');
-          startSliderAutoplay(10000); // 10 seconds for image slides
+          setTimeout(() => {
+            startSliderAutoplay(10000);
+          }, 100); // Small delay to ensure state is settled
         }
       });
 
