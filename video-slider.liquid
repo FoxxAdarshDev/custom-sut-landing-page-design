@@ -51,12 +51,12 @@
               class="slide-video" 
               muted 
               playsinline
-              preload="metadata"
+              preload="auto"
               poster="https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880"
-              style="width: 100%; height: 100%; object-fit: cover; background-image: url('https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880'); background-size: cover; background-position: center;"
-              data-src="{{ settings[slide_video_url] }}"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              src="{{ settings[slide_video_url] }}"
             >
-              <source data-src="{{ settings[slide_video_url] }}" type="video/mp4">
+              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           {% else %}
@@ -94,10 +94,6 @@
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
-  background-image: url('https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .homepage-slider img {
@@ -131,10 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     var dataSrc = videoElement.getAttribute('data-src');
     if (dataSrc) {
-      // Show loading indicator
-      videoElement.style.backgroundImage = 'url("https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880")';
-      
-      // Load video source
+      // Load video source immediately
       videoElement.src = dataSrc;
       videoElement.load();
       
@@ -149,32 +142,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Track page visibility
+  // Track page visibility - but don't pause videos
   document.addEventListener('visibilitychange', function() {
     isPageVisible = !document.hidden;
     
+    // Only manage autoplay timer, don't pause videos
     if (isPageVisible) {
-      // Page became visible - resume current slide
-      setTimeout(function() {
-        var activeSlide = $('.homepage-slider .slick-active');
-        var activeVideo = activeSlide.find('video')[0];
-        
-        if (activeVideo && !activeVideo.ended) {
-          // Resume video from where it left off
-          activeVideo.play().catch(function(error) {
-            console.log('Video resume failed:', error);
-          });
-        } else if (!activeVideo) {
-          // Resume autoplay for image slides
-          startSliderAutoplay();
-        }
-      }, 200);
-    } else {
-      // Page hidden - pause video but don't reset
-      var activeVideo = $('.homepage-slider .slick-active video')[0];
-      if (activeVideo) {
-        activeVideo.pause();
+      if (!isVideoPlaying) {
+        startSliderAutoplay();
       }
+    } else {
       stopSliderAutoplay();
     }
   });
@@ -235,11 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
           isVideoPlaying = false;
         }
         
-        // Preload next slide video
-        var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
-        if (nextVideo && !nextVideo.src) {
-          loadVideo(nextVideo);
-        }
+        // Videos are already loaded
         
         // Stop autoplay when manually changing slides
         stopSliderAutoplay();
@@ -254,10 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
           isVideoPlaying = true;
           stopSliderAutoplay();
           
-          // Ensure video is loaded before playing
-          if (!video.src) {
-            loadVideo(video);
-          }
+          // Video is already loaded
           
           video.currentTime = 0;
           
@@ -323,10 +293,8 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
 
-            // Only preload first video immediately, others on demand
-            if (index === 0) {
-              loadVideo(video);
-            }
+            // Load all videos immediately for faster playback
+            loadVideo(video);
           }
         });
 
@@ -336,10 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
           var firstVideo = firstSlide.find('video')[0];
           
           if (firstVideo) {
-            // Ensure first video is loaded
-            if (!firstVideo.src) {
-              loadVideo(firstVideo);
-            }
+            // Video is already loaded
             
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
