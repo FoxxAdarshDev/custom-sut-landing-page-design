@@ -157,23 +157,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle video end event to auto-advance slide
       $('.homepage-slider').on('init', function(event, slick) {
-        // Add event listeners to all videos
-        $(slick.$slides).each(function() {
-          var video = $(this).find('video')[0];
-          if (video) {
-            video.addEventListener('ended', function() {
-              // Auto-advance to next slide when video ends
-              $('.homepage-slider').slick('slickNext');
-            });
-          }
-        });
+        // Function to add video event listeners
+        function addVideoListeners() {
+          $(slick.$slides).each(function() {
+            var video = $(this).find('video')[0];
+            if (video) {
+              // Remove existing listeners to prevent duplicates
+              video.removeEventListener('ended', videoEndHandler);
+              
+              // Add ended event listener
+              video.addEventListener('ended', videoEndHandler);
+              
+              // Add error handler
+              video.addEventListener('error', function() {
+                console.log('Video error, advancing to next slide');
+                setTimeout(function() {
+                  $('.homepage-slider').slick('slickNext');
+                }, 1000);
+              });
+            }
+          });
+        }
+
+        // Video end handler function
+        function videoEndHandler() {
+          console.log('Video ended, advancing to next slide');
+          setTimeout(function() {
+            $('.homepage-slider').slick('slickNext');
+          }, 500);
+        }
+
+        // Add listeners initially
+        addVideoListeners();
+
+        // Re-add listeners after DOM changes
+        setTimeout(addVideoListeners, 1000);
 
         // Start first video if present
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
             firstVideo.currentTime = 0;
-            firstVideo.play();
+            firstVideo.play().catch(function(error) {
+              console.log('Video autoplay failed:', error);
+            });
           }
         }, 500);
       });
@@ -185,7 +212,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (video) {
           video.currentTime = 0;
-          video.play();
+          video.play().catch(function(error) {
+            console.log('Video play failed:', error);
+            // If video fails to play, advance after 3 seconds
+            setTimeout(function() {
+              $('.homepage-slider').slick('slickNext');
+            }, 3000);
+          });
         }
       });
     };
