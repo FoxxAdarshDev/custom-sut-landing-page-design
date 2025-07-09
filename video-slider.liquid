@@ -555,30 +555,25 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Start with first slide - enhanced loading detection
+        // Enhanced initial slide detection - check both current active slide and potentially first slide
         setTimeout(function() {
-          var firstSlide = $('.homepage-slider .slick-active');
-          var firstVideo = firstSlide.find('video')[0];
+          var activeSlide = $('.homepage-slider .slick-active');
+          var activeVideo = activeSlide.find('video')[0];
 
-          console.log('🔍 INITIAL SLIDE SETUP');
-          console.log('First slide element:', firstSlide[0]);
-          console.log('First video element:', firstVideo);
+          console.log('🔍 ENHANCED INITIAL SLIDE SETUP');
+          console.log('Active slide element:', activeSlide[0]);
+          console.log('Active slide index:', activeSlide.index());
+          console.log('Active video element:', activeVideo);
 
-          if (firstVideo) {
-            // Video element exists - always treat as video slide
-            console.log('🎥 FIRST SLIDE IS VIDEO - Assigning 70 second timer');
-            console.log('📹 Video src:', firstVideo.src || 'Loading...');
-            console.log('🎬 Video loading state:', firstVideo.readyState);
+          // Function to initialize video slide logic
+          function initializeVideoSlide(videoElement, slideName) {
+            console.log(`🎥 ${slideName} IS VIDEO - Assigning 70 second timer`);
+            console.log('📹 Video src:', videoElement.src || 'Loading...');
+            console.log('🎬 Video loading state:', videoElement.readyState);
             
             isVideoPlaying = true;
-            firstVideo.currentTime = 0;
+            videoElement.currentTime = 0;
 
-            // Initialize 70-second timer immediately, regardless of loading state
-            console.log('⏳ INITIALIZING 70-SECOND TIMER FOR FIRST SLIDE');
-            console.log('🎯 Target: 70 seconds | Current: 0.0s');
-
-            const videoElement = firstVideo;
-            
             // Clear any existing timers first
             if (videoElement.progressInterval) {
               clearInterval(videoElement.progressInterval);
@@ -592,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
             videoElement.pauseStartTime = null;
 
             // START 70-SECOND TIMER IMMEDIATELY
-            console.log('🚀 STARTING 70-SECOND TIMER NOW...');
+            console.log(`🚀 STARTING 70-SECOND TIMER FOR ${slideName}...`);
             
             videoElement.progressInterval = setInterval(() => {
               const currentTime = Date.now();
@@ -627,9 +622,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 var playPromise = videoElement.play();
                 if (playPromise !== undefined) {
                   playPromise.then(function() {
-                    console.log('✅ First video started playing successfully');
+                    console.log(`✅ ${slideName} video started playing successfully`);
                   }).catch(function(error) {
-                    console.log('⚠️ Video autoplay failed (but 70s timer continues):', error);
+                    console.log(`⚠️ ${slideName} video autoplay failed (but 70s timer continues):`, error);
                   });
                 }
               } else {
@@ -640,12 +635,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Start trying to play
             tryPlayVideo();
+          }
 
+          // Check if active slide has video
+          if (activeVideo) {
+            initializeVideoSlide(activeVideo, 'ACTIVE SLIDE');
           } else {
-            // No video element - this is an image slide
+            // No video in active slide - check if this is an image slide
             isVideoPlaying = false;
-            console.log('📸 First slide is image - starting 10 second autoplay');
+            console.log('📸 Active slide is image - starting 10 second autoplay');
             startSliderAutoplay(10000); // 10 seconds for image slides
+          }
+
+          // Additional check: If slide 3 is first but not yet active, wait for activation
+          var firstSlideElement = $('.homepage-slider .slide-item').first();
+          var firstSlideVideo = firstSlideElement.find('video')[0];
+          
+          if (firstSlideVideo && !activeVideo) {
+            console.log('🔍 DETECTED: First slide has video but not yet active');
+            console.log('⏳ Waiting for slide to become active...');
+            
+            // Set up observer for when slide becomes active
+            var checkActiveInterval = setInterval(function() {
+              var nowActiveSlide = $('.homepage-slider .slick-active');
+              var nowActiveVideo = nowActiveSlide.find('video')[0];
+              
+              if (nowActiveVideo && nowActiveVideo === firstSlideVideo) {
+                console.log('🎯 FIRST SLIDE WITH VIDEO NOW ACTIVE!');
+                clearInterval(checkActiveInterval);
+                
+                // Stop any existing image autoplay
+                stopSliderAutoplay();
+                
+                // Initialize video slide
+                initializeVideoSlide(nowActiveVideo, 'FIRST SLIDE (NOW ACTIVE)');
+              }
+            }, 200);
+            
+            // Clear interval after 5 seconds to prevent infinite checking
+            setTimeout(function() {
+              clearInterval(checkActiveInterval);
+            }, 5000);
           }
         }, 1000); // Increased timeout to ensure slider is fully initialized
       });
