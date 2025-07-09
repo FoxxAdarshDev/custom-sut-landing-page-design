@@ -336,6 +336,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Start 70-second timer immediately
         videoElement.progressInterval = setInterval(() => {
+          // Only count time when video is actually playing
+          if (videoElement.paused) {
+            console.log(`⏸️ Video Timer: PAUSED - not counting time`);
+            return; // Don't count time while paused
+          }
+
           const currentTime = Date.now();
           const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
 
@@ -447,7 +453,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Start real-time progress tracking (every 500ms for clear console reading)
                 videoElement.progressInterval = setInterval(() => {
+                  // Only count time when video is actually playing
                   if (videoElement.paused) {
+                    console.log(`⏸️ Video Playback: PAUSED - timer suspended`);
                     return; // Don't update if video is paused
                   }
 
@@ -530,21 +538,25 @@ document.addEventListener('DOMContentLoaded', function() {
               const videoElement = this;
 
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('⏸️ Video paused - timer paused');
+                console.log('⏸️ Video paused - timer will be suspended');
 
-                // Record pause start time
+                // Record pause start time for accurate time tracking
                 videoElement.pauseStartTime = Date.now();
 
-                // Always try to resume video regardless of page visibility
-                var self = this;
-                setTimeout(function() {
-                  if (isVideoPlaying && self.paused) {
-                    console.log('🔄 Auto-resuming video after pause');
-                    self.play().catch(function(error) {
-                      console.log('Video resume failed:', error);
-                    });
-                  }
-                }, 100);
+                // Only try to auto-resume if page is visible
+                if (isPageVisible) {
+                  var self = this;
+                  setTimeout(function() {
+                    if (isVideoPlaying && self.paused && isPageVisible) {
+                      console.log('🔄 Auto-resuming video after pause (page visible)');
+                      self.play().catch(function(error) {
+                        console.log('Video resume failed:', error);
+                      });
+                    }
+                  }, 100);
+                } else {
+                  console.log('🔄 Page not visible - will resume when tab becomes active');
+                }
               }
             });
 
@@ -553,12 +565,14 @@ document.addEventListener('DOMContentLoaded', function() {
               const videoElement = this;
 
               if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('▶️ Video resumed - timer resumed');
+                console.log('▶️ Video resumed - timer will continue');
 
-                // Add paused time to total paused time
+                // Add paused time to total paused time for accurate tracking
                 if (videoElement.pauseStartTime) {
-                  videoElement.videoPausedTime += (Date.now() - videoElement.pauseStartTime);
+                  const pauseDuration = Date.now() - videoElement.pauseStartTime;
+                  videoElement.videoPausedTime += pauseDuration;
                   videoElement.pauseStartTime = null;
+                  console.log(`⏱️ Added ${(pauseDuration/1000).toFixed(1)}s pause time to tracking`);
                 }
               }
             });
