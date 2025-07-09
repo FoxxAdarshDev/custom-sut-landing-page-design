@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Don't pause videos, just manage autoplay timer
     if (isPageVisible) {
       if (!isVideoPlaying) {
-        startSliderAutoplay();
+        startSliderAutoplay(10000); // 10 seconds for image slides
       }
     } else {
       stopSliderAutoplay();
@@ -187,13 +187,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Slider autoplay management
-  function startSliderAutoplay() {
+  function startSliderAutoplay(duration = 10000) {
     stopSliderAutoplay();
     sliderAutoplayInterval = setInterval(function() {
       if (isPageVisible && !isVideoPlaying) {
         $('.homepage-slider').slick('slickNext');
       }
-    }, 10000); // 10 seconds for image slides
+    }, duration);
   }
 
   function stopSliderAutoplay() {
@@ -253,11 +253,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var video = currentSlideElement.find('video')[0];
 
         if (video) {
-          // Video slide
+          // Video slide - don't start autoplay, let video ended event handle it
           isVideoPlaying = true;
           stopSliderAutoplay();
-          
-          // Video is already loaded
           
           video.currentTime = 0;
           
@@ -267,21 +265,21 @@ document.addEventListener('DOMContentLoaded', function() {
               console.log('Video play failed:', error);
               // If video fails, treat as image slide
               isVideoPlaying = false;
-              startSliderAutoplay();
+              startSliderAutoplay(10000); // 10 seconds for image slides
             });
           } else {
             video.addEventListener('canplaythrough', function() {
               this.play().catch(function(error) {
                 console.log('Video play failed:', error);
                 isVideoPlaying = false;
-                startSliderAutoplay();
+                startSliderAutoplay(10000); // 10 seconds for image slides
               });
             }, { once: true });
           }
         } else {
-          // Image slide
+          // Image slide - start 10 second autoplay
           isVideoPlaying = false;
-          startSliderAutoplay();
+          startSliderAutoplay(10000); // 10 seconds for image slides
         }
       });
 
@@ -291,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
-            // Video ended - go to next slide
+            // Video ended - go to next slide after video completes (1 min 10 seconds)
             video.addEventListener('ended', function() {
               isVideoPlaying = false;
               setTimeout(function() {
@@ -316,12 +314,12 @@ document.addEventListener('DOMContentLoaded', function() {
               this.classList.remove('video-loading');
             });
 
-            // Video error - treat as image slide
+            // Video error - treat as image slide with 10 second autoplay
             video.addEventListener('error', function() {
               console.log('Video error, treating as image slide');
               isVideoPlaying = false;
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
-                startSliderAutoplay();
+                startSliderAutoplay(10000); // 10 seconds for image slides
               }
             });
 
@@ -336,8 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
           var firstVideo = firstSlide.find('video')[0];
           
           if (firstVideo) {
-            // Video is already loaded
-            
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
             
@@ -346,20 +342,20 @@ document.addEventListener('DOMContentLoaded', function() {
               firstVideo.play().catch(function(error) {
                 console.log('First video autoplay failed:', error);
                 isVideoPlaying = false;
-                startSliderAutoplay();
+                startSliderAutoplay(10000); // 10 seconds for image slides
               });
             } else {
               firstVideo.addEventListener('canplaythrough', function() {
                 this.play().catch(function(error) {
                   console.log('First video autoplay failed:', error);
                   isVideoPlaying = false;
-                  startSliderAutoplay();
+                  startSliderAutoplay(10000); // 10 seconds for image slides
                 });
               }, { once: true });
             }
           } else {
             isVideoPlaying = false;
-            startSliderAutoplay();
+            startSliderAutoplay(10000); // 10 seconds for image slides
           }
         }, 500);
       });
