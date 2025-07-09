@@ -247,25 +247,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Handle slide changes
       $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        // Stop current video
+        console.log('Slide changing from', currentSlide, 'to', nextSlide);
+        
+        // Stop current video and clear its timer
         var currentVideo = $(slick.$slides[currentSlide]).find('video')[0];
         if (currentVideo) {
           currentVideo.pause();
           currentVideo.currentTime = 0;
           isVideoPlaying = false;
+          
+          // Clear video timer
+          if (currentVideo.videoTimer) {
+            clearTimeout(currentVideo.videoTimer);
+            currentVideo.videoTimer = null;
+          }
         }
 
         // Always stop autoplay when changing slides
         stopSliderAutoplay();
-		// Clear and reset timer for current video
-              if (currentVideo.videoTimer) {
-                clearTimeout(currentVideo.videoTimer);
-                currentVideo.videoTimer = null;
-              }
-
-              // Reset timer state for this video
-              currentVideo.remainingTime = 70000;
-              currentVideo.timerStartTime = null;
       });
 
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
@@ -329,37 +328,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
             video.addEventListener('play', function() {
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
-                // Clear any existing timer
-                if (videoTimer) {
-                  clearTimeout(videoTimer);
+                // Clear any existing timer for this video
+                if (this.videoTimer) {
+                  clearTimeout(this.videoTimer);
+                  this.videoTimer = null;
                 }
 
-                // Use actual video duration or 70 seconds, whichever is longer
+                // Use actual video duration, minimum 70 seconds (1 min 10 sec)
                 const videoDuration = this.duration || 70; // fallback to 70 seconds
                 const timerDuration = Math.max(videoDuration * 1000, 70000); // minimum 70 seconds
 
                 console.log('Video started - setting timer for', timerDuration/1000, 'seconds (video duration:', videoDuration, 'seconds)');
 
-                // Set timer based on actual video duration
-                videoTimer = setTimeout(() => {
+                // Set timer based on actual video duration, store on video element
+                this.videoTimer = setTimeout(() => {
                   if ($(this).closest('.slick-slide').hasClass('slick-active')) {
                     console.log('Video timer elapsed, moving to next slide');
                     isVideoPlaying = false;
                     stopSliderAutoplay();
-                    $('.homepage-slider').slick('slickNext');
+                    setTimeout(() => {
+                      $('.homepage-slider').slick('slickNext');
+                    }, 200);
                   }
                 }, timerDuration);
               }
             });
 
-            // Handle natural video end (if video is shorter than 70 seconds)
+            // Handle natural video end
             video.addEventListener('ended', function() {
               console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
 
               // Clear the timer since video ended naturally
-              if (videoTimer) {
-                clearTimeout(videoTimer);
-                videoTimer = null;
+              if (this.videoTimer) {
+                clearTimeout(this.videoTimer);
+                this.videoTimer = null;
               }
 
               // Only proceed if this video is currently active
@@ -371,18 +373,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 stopSliderAutoplay();
 
                 // Move to next slide immediately
-                $('.homepage-slider').slick('slickNext');
+                setTimeout(() => {
+                  $('.homepage-slider').slick('slickNext');
+                }, 500);
               }
             });
 
-            // Simple progress logging
+            // Video progress tracking with end detection
             video.addEventListener('timeupdate', function() {
               if (this.currentTime > 0 && this.duration > 0) {
                 var progress = (this.currentTime / this.duration) * 100;
 
                 // Log every 10 seconds for better tracking
                 if (Math.floor(this.currentTime) % 10 === 0 && Math.floor(this.currentTime) !== 0) {
-                  console.log('Video at', Math.floor(this.currentTime), 'seconds');
+                  console.log('Video at', Math.floor(this.currentTime), 'seconds -', Math.round(progress) + '% complete');
+                }
+
+                // Check if we're very close to the end (within 0.5 seconds)
+                if (this.duration - this.currentTime <= 0.5 && $(this).closest('.slick-slide').hasClass('slick-active')) {
+                  console.log('Video about to end, preparing to change slide');
+                  
+                  // Clear timer if exists
+                  if (this.videoTimer) {
+                    clearTimeout(this.videoTimer);
+                    this.videoTimer = null;
+                  }
                 }
               }
             });
