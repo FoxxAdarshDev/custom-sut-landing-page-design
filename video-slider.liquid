@@ -289,28 +289,13 @@ document.addEventListener('DOMContentLoaded', function() {
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
-            // Video ended - go to next slide after video completes (1 min 10 seconds)
+            // Video ended - go to next slide after video completes naturally
             video.addEventListener('ended', function() {
-              console.log('Video ended, moving to next slide');
+              console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
               isVideoPlaying = false;
               setTimeout(function() {
                 $('.homepage-slider').slick('slickNext');
               }, 500);
-            });
-
-            // Backup timer for video slides (in case ended event doesn't fire)
-            video.addEventListener('loadedmetadata', function() {
-              var videoDuration = this.duration;
-              console.log('Video duration:', videoDuration);
-              
-              // Set a backup timer slightly longer than video duration
-              setTimeout(() => {
-                if (isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                  console.log('Backup timer triggered for video slide');
-                  isVideoPlaying = false;
-                  $('.homepage-slider').slick('slickNext');
-                }
-              }, (videoDuration + 1) * 1000); // Add 1 second buffer
             });
 
             // Video loaded - remove loading state
@@ -326,16 +311,17 @@ document.addEventListener('DOMContentLoaded', function() {
               console.log('Video started playing');
             });
 
-            // Monitor video progress and force slide change if video gets stuck
+            // Log video progress for debugging (without forcing slide changes)
             video.addEventListener('timeupdate', function() {
               if (this.currentTime > 0 && this.duration > 0) {
                 var progress = (this.currentTime / this.duration) * 100;
-                
-                // If video is 98% complete and still playing, force next slide
-                if (progress >= 98 && isVideoPlaying && $(this).closest('.slick-slide').hasClass('slick-active')) {
-                  console.log('Video 98% complete, forcing next slide');
-                  isVideoPlaying = false;
-                  $('.homepage-slider').slick('slickNext');
+                // Only log major milestones to avoid console spam
+                if (progress >= 25 && progress < 26) {
+                  console.log('Video 25% complete');
+                } else if (progress >= 50 && progress < 51) {
+                  console.log('Video 50% complete');
+                } else if (progress >= 75 && progress < 76) {
+                  console.log('Video 75% complete');
                 }
               }
             });
