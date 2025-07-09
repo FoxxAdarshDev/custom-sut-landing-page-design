@@ -555,129 +555,112 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Enhanced initial slide detection - check both current active slide and potentially first slide
-        setTimeout(function() {
-          var activeSlide = $('.homepage-slider .slick-active');
-          var activeVideo = activeSlide.find('video')[0];
+        // Enhanced initial slide detection - immediate check for first slide video
+        console.log('🔍 IMMEDIATE INITIAL SLIDE SETUP');
+        
+        // Function to initialize video slide logic
+        function initializeVideoSlide(videoElement, slideName) {
+          console.log(`🎥 ${slideName} IS VIDEO - Assigning 70 second timer`);
+          console.log('📹 Video src:', videoElement.src || 'Loading...');
+          console.log('🎬 Video loading state:', videoElement.readyState);
+          
+          isVideoPlaying = true;
+          videoElement.currentTime = 0;
 
-          console.log('🔍 ENHANCED INITIAL SLIDE SETUP');
-          console.log('Active slide element:', activeSlide[0]);
-          console.log('Active slide index:', activeSlide.index());
-          console.log('Active video element:', activeVideo);
+          // Clear any existing timers first
+          if (videoElement.progressInterval) {
+            clearInterval(videoElement.progressInterval);
+            videoElement.progressInterval = null;
+          }
 
-          // Function to initialize video slide logic
-          function initializeVideoSlide(videoElement, slideName) {
-            console.log(`🎥 ${slideName} IS VIDEO - Assigning 70 second timer`);
-            console.log('📹 Video src:', videoElement.src || 'Loading...');
-            console.log('🎬 Video loading state:', videoElement.readyState);
+          // Initialize timer tracking
+          videoElement.videoStartTime = Date.now();
+          videoElement.videoPausedTime = 0;
+          videoElement.totalPlayedTime = 0;
+          videoElement.pauseStartTime = null;
+
+          // START 70-SECOND TIMER IMMEDIATELY
+          console.log(`🚀 STARTING 70-SECOND TIMER FOR ${slideName}...`);
+          
+          videoElement.progressInterval = setInterval(() => {
+            const currentTime = Date.now();
+            const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
             
-            isVideoPlaying = true;
-            videoElement.currentTime = 0;
-
-            // Clear any existing timers first
-            if (videoElement.progressInterval) {
+            videoElement.totalPlayedTime = elapsedTime;
+            
+            const progress = (elapsedTime / 70) * 100;
+            const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
+            const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
+            
+            console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
+            
+            if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+              console.log('🎯 70 SECONDS REACHED! Timer complete');
+              console.log('🔄 CHANGING SLIDE NOW...');
+              
               clearInterval(videoElement.progressInterval);
               videoElement.progressInterval = null;
+              
+              console.log('✅ Timer system cleared - Slide transition initiated');
+              
+              isVideoPlaying = false;
+              stopSliderAutoplay();
+              $('.homepage-slider').slick('slickNext');
             }
+          }, 500);
 
-            // Initialize timer tracking
-            videoElement.videoStartTime = Date.now();
-            videoElement.videoPausedTime = 0;
-            videoElement.totalPlayedTime = 0;
-            videoElement.pauseStartTime = null;
-
-            // START 70-SECOND TIMER IMMEDIATELY
-            console.log(`🚀 STARTING 70-SECOND TIMER FOR ${slideName}...`);
-            
-            videoElement.progressInterval = setInterval(() => {
-              const currentTime = Date.now();
-              const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
-              
-              videoElement.totalPlayedTime = elapsedTime;
-              
-              const progress = (elapsedTime / 70) * 100;
-              const loadingStatus = videoElement.readyState < 2 ? ' (Loading...)' : '';
-              const playingStatus = videoElement.paused ? ' (Paused)' : ' (Playing)';
-              
-              console.log(`⏱️ Video Timer: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)${loadingStatus}${playingStatus}`);
-              
-              if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('🎯 70 SECONDS REACHED! Timer complete');
-                console.log('🔄 CHANGING SLIDE NOW...');
-                
-                clearInterval(videoElement.progressInterval);
-                videoElement.progressInterval = null;
-                
-                console.log('✅ Timer system cleared - Slide transition initiated');
-                
-                isVideoPlaying = false;
-                stopSliderAutoplay();
-                $('.homepage-slider').slick('slickNext');
+          // Try to play video when ready (but timer runs regardless)
+          var tryPlayVideo = function() {
+            if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
+              var playPromise = videoElement.play();
+              if (playPromise !== undefined) {
+                playPromise.then(function() {
+                  console.log(`✅ ${slideName} video started playing successfully`);
+                }).catch(function(error) {
+                  console.log(`⚠️ ${slideName} video autoplay failed (but 70s timer continues):`, error);
+                });
               }
-            }, 500);
+            } else {
+              console.log('⏳ Video still loading, will retry...');
+              setTimeout(tryPlayVideo, 200);
+            }
+          };
 
-            // Try to play video when ready (but timer runs regardless)
-            var tryPlayVideo = function() {
-              if (videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
-                var playPromise = videoElement.play();
-                if (playPromise !== undefined) {
-                  playPromise.then(function() {
-                    console.log(`✅ ${slideName} video started playing successfully`);
-                  }).catch(function(error) {
-                    console.log(`⚠️ ${slideName} video autoplay failed (but 70s timer continues):`, error);
-                  });
-                }
-              } else {
-                console.log('⏳ Video still loading, will retry...');
-                setTimeout(tryPlayVideo, 200);
-              }
-            };
+          // Start trying to play
+          tryPlayVideo();
+        }
 
-            // Start trying to play
-            tryPlayVideo();
+        // IMMEDIATE CHECK: Find the first slide (which should be slide 3) and check for video
+        var firstSlideElement = $('.homepage-slider .slide-item').first();
+        var firstSlideVideo = firstSlideElement.find('video')[0];
+        
+        console.log('First slide element:', firstSlideElement[0]);
+        console.log('First slide has video:', !!firstSlideVideo);
+        
+        if (firstSlideVideo) {
+          console.log('🎯 FIRST SLIDE HAS VIDEO - INITIALIZING IMMEDIATELY');
+          initializeVideoSlide(firstSlideVideo, 'FIRST SLIDE (IMMEDIATE)');
+        } else {
+          console.log('📸 First slide is image - starting 10 second autoplay');
+          isVideoPlaying = false;
+          startSliderAutoplay(10000);
+        }
+
+        // BACKUP CHECK: Also check after slider initialization in case of timing issues
+        setTimeout(function() {
+          if (!isVideoPlaying) { // Only if we haven't already initialized a video
+            var activeSlide = $('.homepage-slider .slick-active');
+            var activeVideo = activeSlide.find('video')[0];
+
+            console.log('🔍 BACKUP CHECK - Active slide:', activeSlide[0]);
+            console.log('🔍 BACKUP CHECK - Active video:', activeVideo);
+
+            if (activeVideo) {
+              console.log('🎯 BACKUP CHECK FOUND VIDEO - INITIALIZING');
+              initializeVideoSlide(activeVideo, 'ACTIVE SLIDE (BACKUP)');
+            }
           }
-
-          // Check if active slide has video
-          if (activeVideo) {
-            initializeVideoSlide(activeVideo, 'ACTIVE SLIDE');
-          } else {
-            // No video in active slide - check if this is an image slide
-            isVideoPlaying = false;
-            console.log('📸 Active slide is image - starting 10 second autoplay');
-            startSliderAutoplay(10000); // 10 seconds for image slides
-          }
-
-          // Additional check: If slide 3 is first but not yet active, wait for activation
-          var firstSlideElement = $('.homepage-slider .slide-item').first();
-          var firstSlideVideo = firstSlideElement.find('video')[0];
-          
-          if (firstSlideVideo && !activeVideo) {
-            console.log('🔍 DETECTED: First slide has video but not yet active');
-            console.log('⏳ Waiting for slide to become active...');
-            
-            // Set up observer for when slide becomes active
-            var checkActiveInterval = setInterval(function() {
-              var nowActiveSlide = $('.homepage-slider .slick-active');
-              var nowActiveVideo = nowActiveSlide.find('video')[0];
-              
-              if (nowActiveVideo && nowActiveVideo === firstSlideVideo) {
-                console.log('🎯 FIRST SLIDE WITH VIDEO NOW ACTIVE!');
-                clearInterval(checkActiveInterval);
-                
-                // Stop any existing image autoplay
-                stopSliderAutoplay();
-                
-                // Initialize video slide
-                initializeVideoSlide(nowActiveVideo, 'FIRST SLIDE (NOW ACTIVE)');
-              }
-            }, 200);
-            
-            // Clear interval after 5 seconds to prevent infinite checking
-            setTimeout(function() {
-              clearInterval(checkActiveInterval);
-            }, 5000);
-          }
-        }, 1000); // Increased timeout to ensure slider is fully initialized
+        }, 500); // Shorter timeout for backup check
       });
     };
 
