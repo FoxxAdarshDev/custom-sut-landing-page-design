@@ -257,15 +257,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Always stop autoplay when changing slides
         stopSliderAutoplay();
-    // Clear and reset timer for current video
-              if (currentVideo.videoTimer) {
-                clearTimeout(currentVideo.videoTimer);
-                currentVideo.videoTimer = null;
-              }
 
-              // Reset timer state for this video
-              currentVideo.remainingTime = 50000;
-              currentVideo.timerStartTime = null;
+        // Clear advanced timer system for current video
+        if (currentVideo) {
+          // Clear old-style timer
+          if (currentVideo.videoTimer) {
+            clearTimeout(currentVideo.videoTimer);
+            currentVideo.videoTimer = null;
+          }
+
+          // Clear new progress tracking
+          const videoElement = currentVideo;
+          if (videoElement.progressInterval) {
+            clearInterval(videoElement.progressInterval);
+            videoElement.progressInterval = null;
+          }
+
+          // Reset timer state
+          videoElement.videoStartTime = null;
+          videoElement.videoPausedTime = 0;
+          videoElement.totalPlayedTime = 0;
+          videoElement.pauseStartTime = null;
+
+          console.log('🔄 Video timer system cleared for slide change');
+        }
       });
 
       $('.homepage-slider').on('afterChange', function(event, slick, currentSlide) {
