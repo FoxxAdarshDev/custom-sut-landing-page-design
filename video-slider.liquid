@@ -509,23 +509,69 @@ document.addEventListener('DOMContentLoaded', function() {
           var firstSlide = $('.homepage-slider .slick-active');
           var firstVideo = firstSlide.find('video')[0];
 
-          console.log('Initial slide setup - has video:', !!firstVideo);
+          console.log('🔍 INITIAL SLIDE SETUP');
+          console.log('First slide element:', firstSlide[0]);
+          console.log('First video element:', firstVideo);
+          console.log('Video src:', firstVideo ? firstVideo.src : 'No video');
+          console.log('Has video:', !!firstVideo);
 
           if (firstVideo && firstVideo.src && firstVideo.src.trim() !== '') {
             // First slide is video - play it for dynamic duration
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
             console.log('🎥 FIRST SLIDE IS VIDEO - Target Duration: 70 seconds');
-            console.log('📹 Starting video playback tracking...');
+            console.log('📹 Video URL:', firstVideo.src);
+            console.log('🎬 Starting video playback tracking...');
+
+            // Initialize advanced progress tracking immediately
+            const videoElement = firstVideo;
+            videoElement.videoStartTime = Date.now();
+            videoElement.videoPausedTime = 0;
+            videoElement.totalPlayedTime = 0;
+            videoElement.pauseStartTime = null;
 
             // Play video immediately
             var playPromise = firstVideo.play();
             if (playPromise !== undefined) {
               playPromise.then(function() {
-                console.log('First video started playing successfully');
-                // Video timer will be set in the 'play' event listener
+                console.log('✅ First video started playing successfully');
+                
+                // Start real-time progress tracking immediately
+                if (videoElement.progressInterval) {
+                  clearInterval(videoElement.progressInterval);
+                }
+
+                console.log('🎯 Target: 70 seconds | Current: 0.0s');
+
+                videoElement.progressInterval = setInterval(() => {
+                  if (videoElement.paused) {
+                    return; // Don't update if video is paused
+                  }
+
+                  const currentTime = Date.now();
+                  const elapsedTime = (currentTime - videoElement.videoStartTime - videoElement.videoPausedTime) / 1000;
+                  
+                  videoElement.totalPlayedTime = elapsedTime;
+                  
+                  const progress = (elapsedTime / 70) * 100;
+                  console.log(`⏱️ Video Playback: ${elapsedTime.toFixed(1)}s / 70s (${progress.toFixed(1)}%)`);
+                  
+                  if (elapsedTime >= 70 && $(videoElement).closest('.slick-slide').hasClass('slick-active')) {
+                    console.log('🎯 70 SECONDS REACHED! Video playback complete');
+                    console.log('🔄 CHANGING SLIDE NOW...');
+                    
+                    clearInterval(videoElement.progressInterval);
+                    videoElement.progressInterval = null;
+                    
+                    console.log('✅ Timer system cleared - Slide transition initiated');
+                    
+                    isVideoPlaying = false;
+                    stopSliderAutoplay();
+                    $('.homepage-slider').slick('slickNext');
+                  }
+                }, 500);
               }).catch(function(error) {
-                console.log('First video autoplay failed:', error);
+                console.log('❌ First video autoplay failed:', error);
                 isVideoPlaying = false;
                 startSliderAutoplay(10000); // 10 seconds if video fails
               });
@@ -533,7 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
           } else {
             // First slide is image - start 10 second autoplay
             isVideoPlaying = false;
-            console.log('First slide is image - starting 10 second autoplay');
+            console.log('📸 First slide is image - starting 10 second autoplay');
             startSliderAutoplay(10000); // 10 seconds for image slides
           }
         }, 500);
