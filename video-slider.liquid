@@ -310,9 +310,39 @@ document.addEventListener('DOMContentLoaded', function() {
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
-            // Video ended - go to next slide after video completes naturally
+            // Set up 70-second timer for videos (1 min 10 seconds)
+            let videoTimer = null;
+
+            video.addEventListener('play', function() {
+              if ($(this).closest('.slick-slide').hasClass('slick-active')) {
+                console.log('Video started - setting 70 second timer');
+
+                // Clear any existing timer
+                if (videoTimer) {
+                  clearTimeout(videoTimer);
+                }
+
+                // Set timer for exactly 70 seconds (1 min 10 seconds)
+                videoTimer = setTimeout(() => {
+                  if ($(this).closest('.slick-slide').hasClass('slick-active')) {
+                    console.log('70 seconds elapsed, moving to next slide');
+                    isVideoPlaying = false;
+                    stopSliderAutoplay();
+                    $('.homepage-slider').slick('slickNext');
+                  }
+                }, 70000); // 70 seconds = 1 min 10 seconds
+              }
+            });
+
+            // Handle natural video end (if video is shorter than 70 seconds)
             video.addEventListener('ended', function() {
               console.log('Video ended naturally at:', this.currentTime, 'of', this.duration);
+
+              // Clear the timer since video ended naturally
+              if (videoTimer) {
+                clearTimeout(videoTimer);
+                videoTimer = null;
+              }
 
               // Only proceed if this video is currently active
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
@@ -327,14 +357,14 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
 
-            // Simple progress logging without interference
+            // Simple progress logging
             video.addEventListener('timeupdate', function() {
               if (this.currentTime > 0 && this.duration > 0) {
                 var progress = (this.currentTime / this.duration) * 100;
 
-                // Only log major milestones to avoid console spam
-                if (Math.floor(progress) % 25 === 0 && Math.floor(progress) !== 0) {
-                  console.log('Video ' + Math.floor(progress) + '% complete');
+                // Log every 10 seconds for better tracking
+                if (Math.floor(this.currentTime) % 10 === 0 && Math.floor(this.currentTime) !== 0) {
+                  console.log('Video at', Math.floor(this.currentTime), 'seconds');
                 }
               }
             });
