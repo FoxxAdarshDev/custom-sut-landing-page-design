@@ -7,22 +7,21 @@
     background-origin: border-box; 
     background-clip: content-box, border-box; 
     border-radius: 12px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    background-color: #f8f9fa;
-  }
-
-  .homepage-slider.slick-initialized {
     opacity: 1;
+    background-color: #f8f9fa;
   }
 
   /* Video loading states */
   .slide-video {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa !important;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="%23666" font-family="Arial" font-size="14">Loading...</text></svg>') !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
-  .slide-video:not([data-loaded="true"]) {
-    background-color: #f8f9fa;
+  .slide-video[data-loaded="true"] {
+    background-image: none !important;
   }
 
   .homepage-slider img { 
@@ -62,7 +61,7 @@
               muted 
               playsinline
               preload="metadata"
-              poster=""
+              poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' fill='%23f8f9fa'/><text x='400' y='225' text-anchor='middle' dominant-baseline='middle' fill='%23666' font-family='Arial' font-size='24'>Loading Video...</text></svg>"
               style="width: 100%; height: 100%; object-fit: cover; background-color: #f8f9fa;"
             >
               <source src="{{ settings[slide_video_url] }}" type="video/mp4">
@@ -213,27 +212,42 @@ document.addEventListener('DOMContentLoaded', function() {
         function videoLoadedHandler() {
           console.log('Video loaded');
           this.setAttribute('data-loaded', 'true');
+          this.style.backgroundColor = 'transparent';
+          // Remove poster once video is loaded
+          this.removeAttribute('poster');
         }
 
         function videoCanPlayHandler() {
           console.log('Video can play');
           this.style.backgroundColor = 'transparent';
+          this.setAttribute('data-loaded', 'true');
         }
 
         // Add listeners initially
         addVideoListeners();
 
-        // Start first video with better timing
+        // Start first video immediately after initialization
         setTimeout(function() {
           var firstVideo = $('.homepage-slider .slick-active video')[0];
           if (firstVideo) {
+            console.log('Starting first video');
             firstVideo.currentTime = 0;
-            // Wait for video to be ready before playing
-            if (firstVideo.readyState >= 3) {
+            
+            // Ensure video has background while loading
+            firstVideo.style.backgroundColor = '#f8f9fa';
+            
+            // Try to play immediately if ready
+            if (firstVideo.readyState >= 2) {
               firstVideo.play().catch(function(error) {
                 console.log('Video autoplay failed:', error);
               });
             } else {
+              // Add multiple event listeners to ensure playback starts
+              firstVideo.addEventListener('loadeddata', function() {
+                this.play().catch(function(error) {
+                  console.log('Video autoplay failed:', error);
+                });
+              });
               firstVideo.addEventListener('canplay', function() {
                 this.play().catch(function(error) {
                   console.log('Video autoplay failed:', error);
@@ -241,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
               });
             }
           }
-        }, 1000);
+        }, 500);
       });
 
       // Handle slide changes - play videos with better loading checks
