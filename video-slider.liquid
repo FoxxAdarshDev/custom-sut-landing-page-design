@@ -51,11 +51,12 @@
               class="slide-video" 
               muted 
               playsinline
-              preload="auto"
+              preload="metadata"
               poster="https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880"
               style="width: 100%; height: 100%; object-fit: cover; background-image: url('https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880'); background-size: cover; background-position: center;"
+              data-src="{{ settings[slide_video_url] }}"
             >
-              <source src="{{ settings[slide_video_url] }}" type="video/mp4">
+              <source data-src="{{ settings[slide_video_url] }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           {% else %}
@@ -123,6 +124,30 @@ document.addEventListener('DOMContentLoaded', function() {
   let sliderAutoplayInterval;
   let isVideoPlaying = false;
   let isPageVisible = true;
+
+  // Progressive video loading function
+  function loadVideo(videoElement) {
+    if (!videoElement || videoElement.src) return;
+    
+    var dataSrc = videoElement.getAttribute('data-src');
+    if (dataSrc) {
+      // Show loading indicator
+      videoElement.style.backgroundImage = 'url("https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880")';
+      
+      // Load video source
+      videoElement.src = dataSrc;
+      videoElement.load();
+      
+      // Add loading event listeners
+      videoElement.addEventListener('canplaythrough', function() {
+        this.style.backgroundImage = 'none';
+      }, { once: true });
+      
+      videoElement.addEventListener('loadeddata', function() {
+        this.style.backgroundImage = 'none';
+      }, { once: true });
+    }
+  }
 
   // Track page visibility
   document.addEventListener('visibilitychange', function() {
@@ -210,6 +235,12 @@ document.addEventListener('DOMContentLoaded', function() {
           isVideoPlaying = false;
         }
         
+        // Preload next slide video
+        var nextVideo = $(slick.$slides[nextSlide]).find('video')[0];
+        if (nextVideo && !nextVideo.src) {
+          loadVideo(nextVideo);
+        }
+        
         // Stop autoplay when manually changing slides
         stopSliderAutoplay();
       });
@@ -223,16 +254,31 @@ document.addEventListener('DOMContentLoaded', function() {
           isVideoPlaying = true;
           stopSliderAutoplay();
           
+          // Ensure video is loaded before playing
+          if (!video.src) {
+            loadVideo(video);
+          }
+          
           video.currentTime = 0;
           
           // Play video immediately if page is visible
           if (isPageVisible) {
-            video.play().catch(function(error) {
-              console.log('Video play failed:', error);
-              // If video fails, treat as image slide
-              isVideoPlaying = false;
-              startSliderAutoplay();
-            });
+            if (video.readyState >= 2) {
+              video.play().catch(function(error) {
+                console.log('Video play failed:', error);
+                // If video fails, treat as image slide
+                isVideoPlaying = false;
+                startSliderAutoplay();
+              });
+            } else {
+              video.addEventListener('canplaythrough', function() {
+                this.play().catch(function(error) {
+                  console.log('Video play failed:', error);
+                  isVideoPlaying = false;
+                  startSliderAutoplay();
+                });
+              }, { once: true });
+            }
           }
         } else {
           // Image slide
@@ -246,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Handle video events
       $('.homepage-slider').on('init', function(event, slick) {
         // Add video event listeners
-        $(slick.$slides).each(function() {
+        $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
             // Video ended - go to next slide
@@ -270,10 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Video error - keep showing banner
             video.addEventListener('error', function() {
               this.style.backgroundImage = 'url("https://cdn.shopify.com/s/files/1/1064/0118/files/video-slider-thumbnail.png?v=1752060880")';
-            });
-
-            // Video error
-            video.addEventListener('error', function() {
               console.log('Video error, treating as image slide');
               isVideoPlaying = false;
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
@@ -281,8 +323,10 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
 
-            // Preload video
-            video.load();
+            // Only preload first video immediately, others on demand
+            if (index === 0) {
+              loadVideo(video);
+            }
           }
         });
 
@@ -292,14 +336,30 @@ document.addEventListener('DOMContentLoaded', function() {
           var firstVideo = firstSlide.find('video')[0];
           
           if (firstVideo) {
+            // Ensure first video is loaded
+            if (!firstVideo.src) {
+              loadVideo(firstVideo);
+            }
+            
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
             if (isPageVisible) {
-              firstVideo.play().catch(function(error) {
-                console.log('First video autoplay failed:', error);
-                isVideoPlaying = false;
-                startSliderAutoplay();
-              });
+              // Wait for video to be ready before playing
+              if (firstVideo.readyState >= 2) {
+                firstVideo.play().catch(function(error) {
+                  console.log('First video autoplay failed:', error);
+                  isVideoPlaying = false;
+                  startSliderAutoplay();
+                });
+              } else {
+                firstVideo.addEventListener('canplaythrough', function() {
+                  this.play().catch(function(error) {
+                    console.log('First video autoplay failed:', error);
+                    isVideoPlaying = false;
+                    startSliderAutoplay();
+                  });
+                }, { once: true });
+              }
             }
           } else {
             isVideoPlaying = false;
