@@ -278,9 +278,9 @@ document.addEventListener('DOMContentLoaded', function() {
         stopSliderAutoplay();
 
         if (video && video.src && video.src.trim() !== '') {
-          // Video slide - play for full duration (1 min 10 seconds = 70 seconds)
+          // Video slide - play for dynamic duration
           isVideoPlaying = true;
-          console.log('Starting video slide - will play for full duration');
+          console.log('Starting video slide - will play for dynamic duration');
 
           video.currentTime = 0;
 
@@ -289,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
           if (playPromise !== undefined) {
             playPromise.then(function() {
               console.log('Video started playing successfully');
+              // Video timer will be set in the 'play' event listener
             }).catch(function(error) {
               console.log('Video play failed:', error);
               // If video fails, treat as image slide
@@ -319,27 +320,35 @@ document.addEventListener('DOMContentLoaded', function() {
         $(slick.$slides).each(function(index) {
           var video = $(this).find('video')[0];
           if (video) {
-            // Set up 70-second timer for videos (1 min 10 seconds)
+            // Set up dynamic timer for videos based on actual duration
             let videoTimer = null;
+
+            video.addEventListener('loadedmetadata', function() {
+              console.log('Video metadata loaded - duration:', this.duration);
+            });
 
             video.addEventListener('play', function() {
               if ($(this).closest('.slick-slide').hasClass('slick-active')) {
-                console.log('Video started - setting 70 second timer');
-
                 // Clear any existing timer
                 if (videoTimer) {
                   clearTimeout(videoTimer);
                 }
 
-                // Set timer for exactly 70 seconds (1 min 10 seconds)
+                // Use actual video duration or 70 seconds, whichever is longer
+                const videoDuration = this.duration || 70; // fallback to 70 seconds
+                const timerDuration = Math.max(videoDuration * 1000, 70000); // minimum 70 seconds
+
+                console.log('Video started - setting timer for', timerDuration/1000, 'seconds (video duration:', videoDuration, 'seconds)');
+
+                // Set timer based on actual video duration
                 videoTimer = setTimeout(() => {
                   if ($(this).closest('.slick-slide').hasClass('slick-active')) {
-                    console.log('70 seconds elapsed, moving to next slide');
+                    console.log('Video timer elapsed, moving to next slide');
                     isVideoPlaying = false;
                     stopSliderAutoplay();
                     $('.homepage-slider').slick('slickNext');
                   }
-                }, 70000); // 70 seconds = 1 min 10 seconds
+                }, timerDuration);
               }
             });
 
@@ -435,16 +444,17 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('Initial slide setup - has video:', !!firstVideo);
 
           if (firstVideo && firstVideo.src && firstVideo.src.trim() !== '') {
-            // First slide is video - play it for full duration (1 min 10 seconds)
+            // First slide is video - play it for dynamic duration
             isVideoPlaying = true;
             firstVideo.currentTime = 0;
-            console.log('First slide is video - playing for full duration');
+            console.log('First slide is video - playing for dynamic duration');
 
             // Play video immediately
             var playPromise = firstVideo.play();
             if (playPromise !== undefined) {
               playPromise.then(function() {
                 console.log('First video started playing successfully');
+                // Video timer will be set in the 'play' event listener
               }).catch(function(error) {
                 console.log('First video autoplay failed:', error);
                 isVideoPlaying = false;
