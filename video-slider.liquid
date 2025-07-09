@@ -180,23 +180,26 @@ document.addEventListener('DOMContentLoaded', function() {
   // Track page visibility - keep videos playing in background
   document.addEventListener('visibilitychange', function() {
     isPageVisible = !document.hidden;
+    console.log('🔄 Page visibility changed - isPageVisible:', isPageVisible);
 
+    // Don't pause videos when tab becomes hidden - let them continue playing
     if (isPageVisible) {
-      // When tab becomes visible again, resume video if needed
+      console.log('📱 Tab is now visible again');
+      // When tab becomes visible again, ensure video continues if it should be playing
       if (isVideoPlaying) {
         const activeSlide = $('.homepage-slider .slick-active');
         const activeVideo = activeSlide.find('video')[0];
         if (activeVideo && activeVideo.paused) {
+          console.log('▶️ Resuming video playback after tab switch');
           activeVideo.play().catch(function(error) {
             console.log('Video resume failed:', error);
           });
         }
-      } else {
-        // Resume autoplay for image slides
-        startSliderAutoplay(10000);
       }
+    } else {
+      console.log('📱 Tab is now hidden - keeping videos running in background');
+      // Don't pause videos - let them continue playing in background
     }
-    // Keep videos playing even when tab is hidden - don't pause them
   });
 
   // Slider autoplay management
@@ -532,17 +535,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Record pause start time
                 videoElement.pauseStartTime = Date.now();
 
-                // Only try to resume if page is visible (not switched to another tab)
-                if (isPageVisible) {
-                  var self = this;
-                  setTimeout(function() {
-                    if (isVideoPlaying && self.paused && isPageVisible) {
-                      self.play().catch(function(error) {
-                        console.log('Video resume failed:', error);
-                      });
-                    }
-                  }, 100);
-                }
+                // Always try to resume video regardless of page visibility
+                var self = this;
+                setTimeout(function() {
+                  if (isVideoPlaying && self.paused) {
+                    console.log('🔄 Auto-resuming video after pause');
+                    self.play().catch(function(error) {
+                      console.log('Video resume failed:', error);
+                    });
+                  }
+                }, 100);
               }
             });
 
@@ -597,20 +599,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (isFirstMP4) {
             console.log('🎯 FIRST SLIDE HAS MP4 VIDEO - Starting with video slide');
-            // Start directly with video slide
-            $('.homepage-slider').slick('slickGoTo', 0, true);
             
-            // Trigger video initialization immediately
-            setTimeout(function() {
-              console.log('🚀 TRIGGERING VIDEO INITIALIZATION FOR FIRST SLIDE');
-              // Simulate afterChange event for video slide
-              var currentSlideElement = $(slick.$slides[0]);
-              var video = currentSlideElement.find('video')[0];
-              
-              if (video) {
-                handleVideoSlideChange(video, 0);
-              }
-            }, 100);
+            // Immediately trigger video initialization for first slide
+            console.log('🚀 INITIALIZING FIRST SLIDE VIDEO IMMEDIATELY');
+            handleVideoSlideChange(firstSlideVideo, 0);
           } else {
             console.log('📸 First slide video has no MP4 source - treating as image');
             isVideoPlaying = false;
