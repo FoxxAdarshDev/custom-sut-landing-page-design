@@ -208,8 +208,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Starting autoplay with duration:', duration + 'ms');
     sliderAutoplayInterval = setInterval(function() {
       if (!isVideoPlaying) {
-        console.log('Autoplay: Moving to next slide');
+        console.log('📸 Image autoplay timer reached - Moving to next slide');
         $('.homepage-slider').slick('slickNext');
+      } else {
+        console.log('🎥 Video is playing - skipping autoplay slide change');
       }
     }, duration);
   }
@@ -393,10 +395,27 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentSlideElement = $(slick.$slides[currentSlide]);
         var video = currentSlideElement.find('video')[0];
 
-        console.log('Slide changed to:', currentSlide, 'Has video element:', !!video);
+        console.log('🔄 Slide changed to:', currentSlide, 'Has video element:', !!video);
+        console.log('📍 Current slide classes:', currentSlideElement.attr('class'));
 
         if (video) {
-          handleVideoSlideChange(video, currentSlide);
+          // Check if video has MP4 source
+          const videoSrc = video.src || video.getAttribute('src');
+          const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
+          
+          console.log('🎬 Video src:', videoSrc);
+          console.log('🎬 Is MP4:', isMP4);
+          
+          if (isMP4) {
+            console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+            handleVideoSlideChange(video, currentSlide);
+          } else {
+            console.log('📸 Video element found but no MP4 source - treating as image slide');
+            stopSliderAutoplay();
+            isVideoPlaying = false;
+            console.log('📸 Image slide - starting 10 second autoplay');
+            startSliderAutoplay(10000);
+          }
         } else {
           // No video element - this is an image slide
           stopSliderAutoplay();
@@ -598,35 +617,47 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Check if we have video slides and start with video slide if available
-        var firstSlideElement = $(slick.$slides[0]);
-        var firstSlideVideo = firstSlideElement.find('video')[0];
-        
-        console.log('🎬 INITIAL SETUP: Checking first slide for video content');
-        console.log('First slide element:', firstSlideElement[0]);
-        console.log('First slide has video:', !!firstSlideVideo);
+        // Check for slick-current slick-active slide and initialize properly
+        setTimeout(() => {
+          console.log('🎬 INITIAL SETUP: Checking for active slide with video content');
+          
+          // Find the slide with slick-current slick-active classes
+          var activeSlide = $('.homepage-slider .slick-current.slick-active');
+          if (activeSlide.length === 0) {
+            // Fallback to first slide if no active slide found
+            activeSlide = $(slick.$slides[0]);
+          }
+          
+          var activeVideo = activeSlide.find('video')[0];
+          var activeSlideIndex = activeSlide.attr('data-slide-index') || 0;
+          
+          console.log('Active slide element:', activeSlide[0]);
+          console.log('Active slide index:', activeSlideIndex);
+          console.log('Active slide has video:', !!activeVideo);
 
-        if (firstSlideVideo) {
-          // Check if first slide video has MP4 source
-          const firstVideoSrc = firstSlideVideo.src || firstSlideVideo.getAttribute('src');
-          const isFirstMP4 = firstVideoSrc && (firstVideoSrc.includes('.mp4') || firstVideoSrc.includes('video/mp4'));
+          if (activeVideo) {
+            // Check if active slide video has MP4 source
+            const activeVideoSrc = activeVideo.src || activeVideo.getAttribute('src');
+            const isActiveMP4 = activeVideoSrc && (activeVideoSrc.includes('.mp4') || activeVideoSrc.includes('video/mp4'));
 
-          if (isFirstMP4) {
-            console.log('🎯 FIRST SLIDE HAS MP4 VIDEO - Starting with video slide');
-            
-            // Immediately trigger video initialization for first slide
-            console.log('🚀 INITIALIZING FIRST SLIDE VIDEO IMMEDIATELY');
-            handleVideoSlideChange(firstSlideVideo, 0);
+            if (isActiveMP4) {
+              console.log('🎯 ACTIVE SLIDE HAS MP4 VIDEO - Starting with video slide');
+              console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+              
+              // Immediately trigger video initialization for active slide
+              console.log('🚀 INITIALIZING ACTIVE SLIDE VIDEO IMMEDIATELY');
+              handleVideoSlideChange(activeVideo, activeSlideIndex);
+            } else {
+              console.log('📸 Active slide video has no MP4 source - treating as image');
+              isVideoPlaying = false;
+              startSliderAutoplay(10000);
+            }
           } else {
-            console.log('📸 First slide video has no MP4 source - treating as image');
+            console.log('📸 Active slide is image - starting with image autoplay');
             isVideoPlaying = false;
             startSliderAutoplay(10000);
           }
-        } else {
-          console.log('📸 First slide is image - starting with image autoplay');
-          isVideoPlaying = false;
-          startSliderAutoplay(10000);
-        }
+        }, 100); // Small delay to ensure Slick has fully initialized
       });
     };
 
