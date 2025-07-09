@@ -425,8 +425,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
 
-      // Handle video events
+      // Handle video events  
       $('.homepage-slider').on('init', function(event, slick) {
+        console.log('🎬 SLICK INITIALIZED - Checking for initial video slide');
+        
+        // Immediate check for video on current slide
+        setTimeout(() => {
+          var currentSlide = $('.homepage-slider .slick-current, .homepage-slider .slick-active').first();
+          if (currentSlide.length > 0) {
+            var currentVideo = currentSlide.find('video')[0];
+            if (currentVideo) {
+              const videoSrc = currentVideo.src || currentVideo.getAttribute('src');
+              const isMP4 = videoSrc && (videoSrc.includes('.mp4') || videoSrc.includes('video/mp4'));
+              
+              console.log('🎯 FOUND ACTIVE SLIDE WITH VIDEO ON INIT');
+              console.log('🎬 Video src:', videoSrc);
+              console.log('🎬 Is MP4:', isMP4);
+              
+              if (isMP4) {
+                console.log('🎥 MP4 VIDEO SLIDE DETECTED - Assigning 70 second timer');
+                var slideIndex = currentSlide.attr('data-slide-index') || currentSlide.index() || 0;
+                handleVideoSlideChange(currentVideo, slideIndex);
+              }
+            }
+          }
+        }, 50);
         // Count video slides
         videoSlideCount = 0;
         $(slick.$slides).each(function(index) {
@@ -624,14 +647,19 @@ document.addEventListener('DOMContentLoaded', function() {
           // Find the slide with slick-current slick-active classes
           var activeSlide = $('.homepage-slider .slick-current.slick-active');
           if (activeSlide.length === 0) {
-            // Fallback to first slide if no active slide found
+            // Fallback to any slide with slick-active class
+            activeSlide = $('.homepage-slider .slick-active');
+          }
+          if (activeSlide.length === 0) {
+            // Final fallback to first slide
             activeSlide = $(slick.$slides[0]);
           }
           
           var activeVideo = activeSlide.find('video')[0];
-          var activeSlideIndex = activeSlide.attr('data-slide-index') || 0;
+          var activeSlideIndex = activeSlide.attr('data-slide-index') || activeSlide.index() || 0;
           
           console.log('Active slide element:', activeSlide[0]);
+          console.log('Active slide classes:', activeSlide.attr('class'));
           console.log('Active slide index:', activeSlideIndex);
           console.log('Active slide has video:', !!activeVideo);
 
@@ -639,6 +667,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if active slide video has MP4 source
             const activeVideoSrc = activeVideo.src || activeVideo.getAttribute('src');
             const isActiveMP4 = activeVideoSrc && (activeVideoSrc.includes('.mp4') || activeVideoSrc.includes('video/mp4'));
+
+            console.log('🎬 Video src:', activeVideoSrc);
+            console.log('🎬 Is MP4:', isActiveMP4);
 
             if (isActiveMP4) {
               console.log('🎯 ACTIVE SLIDE HAS MP4 VIDEO - Starting with video slide');
@@ -657,7 +688,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isVideoPlaying = false;
             startSliderAutoplay(10000);
           }
-        }, 100); // Small delay to ensure Slick has fully initialized
+        }, 200); // Increased delay to ensure Slick classes are fully applied
       });
     };
 
