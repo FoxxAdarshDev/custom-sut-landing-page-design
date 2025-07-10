@@ -44,360 +44,146 @@
                 {% comment %} Initialize product counter {% endcomment %}
                 {% assign total_products_count = 0 %}
 
+                {% comment %} Define all collections {% endcomment %}
+                {% assign all_collections = 'ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25,ezbio-carboy-pc-20-off-us-independence-day-sale-25,ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25,ezbio-media-bottle-pc-12-off-us-independence-day-sale-25,ezbio-media-bottle-pc-10-off-us-independence-day-sale-25,ezbio-titanium-square-media-bottles-petg-12-off-us-independence-day-sale-25,ezbio-pure-pfa-bottle-40-off-us-independence-day-sale-25,cpc-aseptiquik-g-sanitary-connector-20-off-us-independence-day-sale-25,cpc-aseptiquik-s-connector-50-off-us-independence-day-sale-25,cpc-steam-thru-connectors-50-off-us-independence-day-sale-25,ezbio-bottle-assembly-pc-12-off-us-independence-day-sale-25,ezlabpure-round-carboy-pp-25-off-us-independence-day-sale-25,ezgrip-carboy-pp-32-off-us-independence-day-sale-25,ezbio-carboy-pc-lab-32-off-us-independence-day-sale-25,ezbio-carboy-pp-lab-32-off-us-independence-day-sale-25' | split: ',' %}
+
                 {% comment %} Count total products first {% endcomment %}
-                {% assign collection_1 = collections['ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25'] %}
-                {% if collection_1 and collection_1.products.size > 0 %}
-                    {% for product in collection_1.products %}
-                        {% if product.available %}
-                            {% assign total_products_count = total_products_count | plus: 1 %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                {% for collection_handle in all_collections %}
+                    {% assign current_collection = collections[collection_handle] %}
+                    {% if current_collection and current_collection.products.size > 0 %}
+                        {% for product in current_collection.products %}
+                            {% if product.available %}
+                                {% assign total_products_count = total_products_count | plus: 1 %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
 
-                {% assign collection_2 = collections['ezbio-carboy-pc-20-off-us-independence-day-sale-25'] %}
-                {% if collection_2 and collection_2.products.size > 0 %}
-                    {% for product in collection_2.products %}
-                        {% if product.available %}
-                            {% assign total_products_count = total_products_count | plus: 1 %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-                {% assign collection_3 = collections['ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25'] %}
-                {% if collection_3 and collection_3.products.size > 0 %}
-                    {% for product in collection_3.products %}
-                        {% if product.available %}
-                            {% assign total_products_count = total_products_count | plus: 1 %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-                {% comment %} Display products from Collection 1 {% endcomment %}
-                {% if collection_1 and collection_1.products.size > 0 %}
-                    {% assign shuffled_collection_1 = collection_1.products | shuffle %}
-                    {% for product in shuffled_collection_1 %}
-                        {% if product.available %}
-                    <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
-                                <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
-                                    {% for variant in product.variants %}
-                                    {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
-                                    {% if variant.available %}
-                                    <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
-                                        %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
-                                        bold_variant_price | money_with_currency }}</option>
-                                    {% else %}
-                                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                                    {% endif %}
-                                    {% endfor %}
-                                </select>
-                                <div class="pageComponent style__backgroundImage" 
-                                    style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative; display: block;">
-                                    <div class="PseudoTupleRevamp__ribbon">
-                                        <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
-                                    </div>
-                                    <div class="style__leftDetailWrapper style__horizontalWrapper"
-                                        style="margin-top: 2px; padding-top: 0px;">
-                                        <div class="style__coverImageWrapper"><img class="style__projectImage"
-                                                src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                                            <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
-                                                    class="style__vectorIcon" resizemode="cover"
-                                                    src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
-                                                    <p class="style__rera">
-                                                        {% assign vendor_words = product.vendor | split: ' ' %}
-                                                        {% if vendor_words.size == 1 %}
-                                                            {{ product.vendor }}
-                                                        {% else %}
-                                                            {% for word in vendor_words %}
-                                                                {{ word | slice: 0, 1 }}
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </p>                                        
-                                            </div>
+                {% comment %} Display products from all collections {% endcomment %}
+                {% for collection_handle in all_collections %}
+                    {% assign current_collection = collections[collection_handle] %}
+                    {% if current_collection and current_collection.products.size > 0 %}
+                        {% assign shuffled_collection = current_collection.products | shuffle %}
+                        {% for product in shuffled_collection %}
+                            {% if product.available %}
+                                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
+                                    <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
+                                        {% for variant in product.variants %}
+                                        {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
+                                        {% if variant.available %}
+                                        <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
+                                            %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
+                                            bold_variant_price | money_with_currency }}</option>
+                                        {% else %}
+                                        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <div class="pageComponent style__backgroundImage" 
+                                        style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative; display: block;">
+                                        <div class="PseudoTupleRevamp__ribbon">
+                                            <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
                                         </div>
-                                        <div class="style__detailWrapper">
-                                            <a style="color:#0D0D0D"
-                                                href="{{ product.url }}">
-                                                <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
-                                                        product.title  | slice: 0, 40 }}</span></p>
-                                            </a>
-                                            <div class="style__horizontalWrapper style__priceConfigWrapper">
-                                                <p class="style__priceRange style__textWrapper">
-                                                    {% assign percent_tag = '' %}
-                                                    {% for tag in product.tags %}
-                                                        {% if tag contains 'percent_' %}
-                                                            {% assign percent_tag = tag | remove: 'percent_' %}
-                                                            {% break %}
-                                                        {% endif %}
-                                                    {% endfor %}
-
-                                                    {% if percent_tag != '' %}
-                                                        {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
-                                                        {% assign final_price = product.price | minus: price_discount %}
-                                                    {% endif %}
-
-                                                    {% if final_price %}
-                                                        <span style="font-weight: 700;">{{ final_price | money }}</span>
-                                                    {% else %}
-                                                        <span style="font-weight: 700;">{{ product.price | money }}</span>
-                                                    {% endif %}
-                                                </p>                                    
-                                                <p
-                                                    style="font-size: 14px; color: rgb(235, 236, 240); padding-left: 4px; padding-right: 4px;">
-                                                    |
-                                                </p>
-                                                <p class="style__config style__textWrapper">
-                                                    <span class="skuDisplay1" data-product-id="{{ product.id }}"
-                                                        data-sku=""></span>
-                                                </p>
-                                            </div>
-                                            <div class="style__horizontalWrapper style__posessionWrapper">
-                                                <p class="style__textWrapper"></p>
-                                                        <p class="style__posessionStatus">
-                                                        <span style="font-weight: 600; color: rgb(0, 128, 0);">
-                                                            {% assign original_price = product.variants.first.compare_at_price %}
-                                                            {% if original_price > 0 %}
-                                                                {% assign saving_per_product = original_price | minus: product.price %}
-                                                                {% assign savings_amount = saving_per_product %}
-                                                                {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-                                                                {{ savings_percent }}%
+                                        <div class="style__leftDetailWrapper style__horizontalWrapper"
+                                            style="margin-top: 2px; padding-top: 0px;">
+                                            <div class="style__coverImageWrapper"><img class="style__projectImage"
+                                                    src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                                                <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
+                                                        class="style__vectorIcon" resizemode="cover"
+                                                        src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
+                                                        <p class="style__rera">
+                                                            {% assign vendor_words = product.vendor | split: ' ' %}
+                                                            {% if vendor_words.size == 1 %}
+                                                                {{ product.vendor }}
                                                             {% else %}
-                                                                No Discount
+                                                                {% for word in vendor_words %}
+                                                                    {{ word | slice: 0, 1 }}
+                                                                {% endfor %}
                                                             {% endif %}
-                                                        </span>
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
-                                                                <path d="M7 24h-4.875l6-1.221-1.716-1.708 4.183-4.108 3.001 3.002 10.508-10.422-1.41-1.418-9.094 9.015-2.991-2.993-5.613 5.512-1.667-1.66-1.201 6.001z" />
-                                                            </svg>&nbsp;price decrease today
-                                                        </span>
-                                                    </p>
+                                                        </p>                                        
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <img class="style__dashedLine"
-                                        src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
-                                </div>
-                            </form>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                                            <div class="style__detailWrapper">
+                                                <a style="color:#0D0D0D"
+                                                    href="{{ product.url }}">
+                                                    <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
+                                                            product.title  | slice: 0, 40 }}</span></p>
+                                                </a>
+                                                <div class="style__horizontalWrapper style__priceConfigWrapper">
+                                                    <p class="style__priceRange style__textWrapper">
+                                                        {% assign percent_tag = '' %}
+                                                        {% for tag in product.tags %}
+                                                            {% if tag contains 'percent_' %}
+                                                                {% assign percent_tag = tag | remove: 'percent_' %}
+                                                                {% break %}
+                                                            {% endif %}
+                                                        {% endfor %}
 
-                {% comment %} Display products from Collection 2 {% endcomment %}
-                {% if collection_2 and collection_2.products.size > 0 %}
-                    {% assign shuffled_collection_2 = collection_2.products | shuffle %}
-                    {% for product in shuffled_collection_2 %}
-                        {% if product.available %}
-                            <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
-                                <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
-                                    {% for variant in product.variants %}
-                                    {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
-                                    {% if variant.available %}
-                                    <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
-                                        %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
-                                        bold_variant_price | money_with_currency }}</option>
-                                    {% else %}
-                                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                                    {% endif %}
-                                    {% endfor %}
-                                </select>
-                                <div class="pageComponent style__backgroundImage" 
-                                    style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative; display: block;">
-                                    <div class="PseudoTupleRevamp__ribbon">
-                                        <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
-                                    </div>
-                                    <div class="style__leftDetailWrapper style__horizontalWrapper"
-                                        style="margin-top: 2px; padding-top: 0px;">
-                                        <div class="style__coverImageWrapper"><img class="style__projectImage"
-                                                src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                                            <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
-                                                    class="style__vectorIcon" resizemode="cover"
-                                                    src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
-                                                    <p class="style__rera">
-                                                        {% assign vendor_words = product.vendor | split: ' ' %}
-                                                        {% if vendor_words.size == 1 %}
-                                                            {{ product.vendor }}
+                                                        {% if percent_tag != '' %}
+                                                            {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+                                                            {% assign final_price = product.price | minus: price_discount %}
+                                                        {% endif %}
+
+                                                        {% if final_price %}
+                                                            <span style="font-weight: 700;">{{ final_price | money }}</span>
                                                         {% else %}
-                                                            {% for word in vendor_words %}
-                                                                {{ word | slice: 0, 1 }}
-                                                            {% endfor %}
+                                                            <span style="font-weight: 700;">{{ product.price | money }}</span>
                                                         {% endif %}
-                                                    </p>                                        
-                                            </div>
-                                        </div>
-                                        <div class="style__detailWrapper">
-                                            <a style="color:#0D0D0D"
-                                                href="{{ product.url }}">
-                                                <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
-                                                        product.title  | slice: 0, 40 }}</span></p>
-                                            </a>
-                                            <div class="style__horizontalWrapper style__priceConfigWrapper">
-                                                <p class="style__priceRange style__textWrapper">
-                                                    {% assign percent_tag = '' %}
-                                                    {% for tag in product.tags %}
-                                                        {% if tag contains 'percent_' %}
-                                                            {% assign percent_tag = tag | remove: 'percent_' %}
-                                                            {% break %}
-                                                        {% endif %}
-                                                    {% endfor %}
-
-                                                    {% if percent_tag != '' %}
-                                                        {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
-                                                        {% assign final_price = product.price | minus: price_discount %}
-                                                    {% endif %}
-
-                                                    {% if final_price %}
-                                                        <span style="font-weight: 700;">{{ final_price | money }}</span>
-                                                    {% else %}
-                                                        <span style="font-weight: 700;">{{ product.price | money }}</span>
-                                                    {% endif %}
-                                                </p>                                    
-                                                <p
-                                                    style="font-size: 14px; color: rgb(235, 236, 240); padding-left: 4px; padding-right: 4px;">
-                                                    |
-                                                </p>
-                                                <p class="style__config style__textWrapper">
-                                                    <span class="skuDisplay1" data-product-id="{{ product.id }}"
-                                                        data-sku=""></span>
-                                                </p>
-                                            </div>
-                                            <div class="style__horizontalWrapper style__posessionWrapper">
-                                                <p class="style__textWrapper"></p>
-                                                        <p class="style__posessionStatus">
-                                                        <span style="font-weight: 600; color: rgb(0, 128, 0);">
-                                                            {% assign original_price = product.variants.first.compare_at_price %}
-                                                            {% if original_price > 0 %}
-                                                                {% assign saving_per_product = original_price | minus: product.price %}
-                                                                {% assign savings_amount = saving_per_product %}
-                                                                {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-                                                                {{ savings_percent }}%
-                                                            {% else %}
-                                                                No Discount
-                                                            {% endif %}
-                                                        </span>
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
-                                                                <path d="M7 24h-4.875l6-1.221-1.716-1.708 4.183-4.108 3.001 3.002 10.508-10.422-1.41-1.418-9.094 9.015-2.991-2.993-5.613 5.512-1.667-1.66-1.201 6.001z" />
-                                                            </svg>&nbsp;price decrease today
-                                                        </span>
+                                                    </p>                                    
+                                                    <p
+                                                        style="font-size: 14px; color: rgb(235, 236, 240); padding-left: 4px; padding-right: 4px;">
+                                                        |
                                                     </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img class="style__dashedLine"
-                                        src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
-                                </div>
-                            </form>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-                {% comment %} Display products from Collection 3 {% endcomment %}
-                {% if collection_3 and collection_3.products.size > 0 %}
-                    {% assign shuffled_collection_3 = collection_3.products | shuffle %}
-                    {% for product in shuffled_collection_3 %}
-                        {% if product.available %}
-                            <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
-                                <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
-                                    {% for variant in product.variants %}
-                                    {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
-                                    {% if variant.available %}
-                                    <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
-                                        %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
-                                        bold_variant_price | money_with_currency }}</option>
-                                    {% else %}
-                                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                                    {% endif %}
-                                    {% endfor %}
-                                </select>
-                                <div class="pageComponent style__backgroundImage" 
-                                    style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative; display: block;">
-                                    <div class="PseudoTupleRevamp__ribbon">
-                                        <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
-                                    </div>
-                                    <div class="style__leftDetailWrapper style__horizontalWrapper"
-                                        style="margin-top: 2px; padding-top: 0px;">
-                                        <div class="style__coverImageWrapper"><img class="style__projectImage"
-                                                src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                                            <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
-                                                    class="style__vectorIcon" resizemode="cover"
-                                                    src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
-                                                    <p class="style__rera">
-                                                        {% assign vendor_words = product.vendor | split: ' ' %}
-                                                        {% if vendor_words.size == 1 %}
-                                                            {{ product.vendor }}
-                                                        {% else %}
-                                                            {% for word in vendor_words %}
-                                                                {{ word | slice: 0, 1 }}
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </p>                                        
-                                            </div>
-                                        </div>
-                                        <div class="style__detailWrapper">
-                                            <a style="color:#0D0D0D"
-                                                href="{{ product.url }}">
-                                                <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
-                                                        product.title  | slice: 0, 40 }}</span></p>
-                                            </a>
-                                            <div class="style__horizontalWrapper style__priceConfigWrapper">
-                                                <p class="style__priceRange style__textWrapper">
-                                                    {% assign percent_tag = '' %}
-                                                    {% for tag in product.tags %}
-                                                        {% if tag contains 'percent_' %}
-                                                            {% assign percent_tag = tag | remove: 'percent_' %}
-                                                            {% break %}
-                                                        {% endif %}
-                                                    {% endfor %}
-
-                                                    {% if percent_tag != '' %}
-                                                        {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
-                                                        {% assign final_price = product.price | minus: price_discount %}
-                                                    {% endif %}
-
-                                                    {% if final_price %}
-                                                        <span style="font-weight: 700;">{{ final_price | money }}</span>
-                                                    {% else %}
-                                                        <span style="font-weight: 700;">{{ product.price | money }}</span>
-                                                    {% endif %}
-                                                </p>                                    
-                                                <p
-                                                    style="font-size: 14px; color: rgb(235, 236, 240); padding-left: 4px; padding-right: 4px;">
-                                                    |
-                                                </p>
-                                                <p class="style__config style__textWrapper">
-                                                    <span class="skuDisplay1" data-product-id="{{ product.id }}"
-                                                        data-sku=""></span>
-                                                </p>
-                                            </div>
-                                            <div class="style__horizontalWrapper style__posessionWrapper">
-                                                <p class="style__textWrapper"></p>
-                                                        <p class="style__posessionStatus">
-                                                        <span style="font-weight: 600; color: rgb(0, 128, 0);">
-                                                            {% assign original_price = product.variants.first.compare_at_price %}
-                                                            {% if original_price > 0 %}
-                                                                {% assign saving_per_product = original_price | minus: product.price %}
-                                                                {% assign savings_amount = saving_per_product %}
-                                                                {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-                                                                {{ savings_percent }}%
-                                                            {% else %}
-                                                                No Discount
-                                                            {% endif %}
-                                                        </span>
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
-                                                                <path d="M7 24h-4.875l6-1.221-1.716-1.708 4.183-4.108 3.001 3.002 10.508-10.422-1.41-1.418-9.094 9.015-2.991-2.993-5.613 5.512-1.667-1.66-1.201 6.001z" />
-                                                            </svg>&nbsp;price decrease today
-                                                        </span>
+                                                    <p class="style__config style__textWrapper">
+                                                        <span class="skuDisplay1" data-product-id="{{ product.id }}"
+                                                            data-sku=""></span>
                                                     </p>
+                                                </div>
+                                                <div class="style__horizontalWrapper style__posessionWrapper">
+                                                    <p class="style__textWrapper"></p>
+                                                            <p class="style__posessionStatus">
+                                                            <span style="font-weight: 600; color: rgb(0, 128, 0);">
+                                                                {% assign original_price = product.variants.first.compare_at_price %}
+                                                                {% if original_price and original_price > 0 %}
+                                                                    {% assign saving_per_product = original_price | minus: product.price %}
+                                                                    {% assign savings_amount = saving_per_product %}
+                                                                    {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+                                                                    {{ savings_percent }}%
+                                                                {% else %}
+                                                                    {% comment %} Calculate discount from collection handle {% endcomment %}
+                                                                    {% assign collection_parts = collection_handle | split: '-' %}
+                                                                    {% for part in collection_parts %}
+                                                                        {% if part contains 'off' %}
+                                                                            {% assign discount_index = forloop.index0 | minus: 1 %}
+                                                                            {% assign discount_part = collection_parts[discount_index] %}
+                                                                            {% if discount_part contains 'percent' %}
+                                                                                {% assign discount_percent = discount_part | remove: 'percent' %}
+                                                                                {{ discount_percent }}%
+                                                                            {% else %}
+                                                                                {{ discount_part }}%
+                                                                            {% endif %}
+                                                                            {% break %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            </span>
+                                                            <span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
+                                                                    <path d="M7 24h-4.875l6-1.221-1.716-1.708 4.183-4.108 3.001 3.002 10.508-10.422-1.41-1.418-9.094 9.015-2.991-2.993-5.613 5.512-1.667-1.66-1.201 6.001z" />
+                                                                </svg>&nbsp;price decrease today
+                                                            </span>
+                                                        </p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <img class="style__dashedLine"
+                                            src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
                                     </div>
-                                    <img class="style__dashedLine"
-                                        src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
-                                </div>
-                            </form>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                                </form>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
                 <script>
                     // JavaScript to fetch and display SKU for each product
                     document.addEventListener('DOMContentLoaded', function () {
