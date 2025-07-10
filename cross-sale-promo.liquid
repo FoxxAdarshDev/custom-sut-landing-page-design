@@ -1,0 +1,284 @@
+<style>
+/* Add loader styles */
+.loader,.loader1,.loader2{border:8px solid #f3f3f3;border-top:8px solid #3498db;border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;margin:20px auto}.loader{position:relative;top:0!important;left:0!important}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.icon-container{margin-right:20px}.icon-container svg{width:40px;height:40px}.randomize-products-third{overflow-y:hidden!important;padding:10px;overflow-x:auto!important}.randomize-products-third::-webkit-scrollbar{width:5px;height:4px;background-color:#fff}.randomize-products-third::-webkit-scrollbar-thumb{background:#888}.product_page_top_form_section{display:flex;align-items:center;padding:4px 0 8px;gap:5px;justify-content:space-between}.cross-category-picks-section{display:grid!important;grid-template-columns:1fr!important;overflow:hidden;justify-content:space-between;padding:0;border-radius:8px;margin-top:30px;margin-bottom:30px}.cross-category-picks-container{display:grid;grid-template-columns:1fr;border-radius:8px;margin:0 12px 0 0;gap:10px;box-sizing:border-box;min-height:fit-content;padding:20px 8px}.cross-category-picks-list{display:flex;overflow:hidden;gap:10px;justify-content:flex-start;margin-top:10px}.cross-category-picks-row{display:flex;flex-flow:row nowrap;align-items:center}
+</style>
+<style>
+.buttons__primaryRegular{box-shadow:0 1px 4px 0 rgba(0,106,194,.2);background:#0078db;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;outline:0;margin:0;vertical-align:middle;cursor:pointer;border:0;min-height:40px;padding:8px 16px;font-size:14px;line-height:20px;font-weight:700;color:#fff;display:inline-block;text-align:center;vertical-align:middle}.buttons__primaryRegular:active{background:#005ca8}.buttons__primaryRegular:hover{background:#006ac2}.buttons__primaryRegular{box-shadow:0 1px 4px 0 rgba(0,106,194,0.2);background:#0078DB;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;outline:none;margin:0;vertical-align:middle;cursor:pointer;border:0;min-height:auto;padding:8px 16px;font-size:14px;line-height:20px;font-weight:700;color:#fff;display:inline-block;text-align:center;vertical-align:middle}.buttons__primaryRegular:active{background:#005CA8}.buttons__primaryRegular:hover{background:#006AC2}.style__backgroundImage{width:360px;height:min-content;background-image:url(https://cdn.shopify.com/s/files/1/1064/0118/files/NLPTupleBackgroundDesktop.png?v=1713284258);background-size:cover;background-position:center;padding-left:2px;padding-right:2px}.style__leftTagWrapper{flex-direction:row;padding-top:8px}.style__leftTag{background-color:#ffe6bc;flex-direction:row;display:flex;flex-wrap:wrap;align-content:center}.style__leftTagText{font-size:12px;font-weight:700;line-height:16px;color:#091e42;padding-left:6px;padding-right:2px;margin-top:1px;margin-bottom:1px;text-transform:uppercase}.style__leftTagSubtract{width:12px;height:18px;margin-left:-2px}.style__horizontalWrapper{display:flex;flex-direction:row}.style__textWrapper{white-space:nowrap;-webkit-line-clamp:1;-webkit-box-orient:vertical;text-overflow:ellipsis;overflow:hidden}.style__detailWrapper{margin-left:20px;width:228px}.style__leftDetailWrapper{margin-left:20px;margin-right:20px}.style__coverImageWrapper{margin-top:10px;border-radius:50%;width:72px;height:72px;resize:cover}.style__projectImage{flex:1;border-radius:50%;width:72px;height:72px}.style__verifiedtagwrapper{background-color:#091e42;justify-content:center;border-radius:4.5px;flex-direction:row;align-items:center;margin-inline:auto!important;margin-top:-16px;width:50px;z-index:1;position:relative;padding:2px 4px}.style__vectorIcon{width:10px;height:12px;margin-right:4px}.style__rera{color:#8FFFF9;font-weight:700;letter-spacing:-.4px;font-size:10px;line-height:12px}.style__projectName{font-size:16px;line-height:24px;font-weight:400;white-space:pre-wrap;-webkit-line-clamp:2;text-overflow:ellipsis;display:-webkit-box!important}.style__address{font-size:14px;font-weight:400;line-height:20px}.style__priceConfigWrapper{margin-top:8px;align-items:center}.style__priceRange{font-size:14px;line-height:20px;font-weight:400}.style__config{font-size:14px;line-height:20px;font-weight:400;flex:1}.style__posessionWrapper{margin-top:4px;height:16px}.style__posessionStatus{white-space:wrap;font-size:12px;line-height:16px;font-weight:400;color:#42526e;-webkit-line-clamp:1;-webkit-box-orient:vertical;text-overflow:ellipsis;display:-webkit-box!important}.style__dashedLine{right:20px;width:320.1px;height:2px;left:20px;display:flex;margin-top:10px;position:relative}.style__button{height:34.9px;position:relative!important;background-color:#0078DB!important;padding:6px 14px}.style__bottomWrapper{padding-bottom:12px;padding-left:20px;padding-right:22px;justify-content:space-between}.style__BottomOffersLeftIcon{width:16px;height:16px;margin-right:8px}.style__bottomLeftOfferInnerWrapper{flex:1}.style__bottomOffersText{font-size:12px;font-weight:600;color:#253858;line-height:16px;white-space:normal;margin-right:8px;display:-webkit-box;-webkit-line-clamp:3}.buttons__primaryRegular{box-shadow:0 1px 4px 0 rgba(0,106,194,0.2);background:#0078DB;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;outline:none;margin:0;vertical-align:middle;cursor:pointer;border:0;min-height:auto;padding:8px 16px;font-size:14px;line-height:20px;font-weight:700;color:#fff;display:inline-block;text-align:center;vertical-align:middle}.buttons__primaryRegular:active{background:#005CA8}.buttons__primaryRegular:hover{background:#006AC2}.style__leftDetailWrapper div,.style__leftDetailWrapper img,.style__leftDetailWrapper span,.style__leftDetailWrapper p{margin-bottom:0!important;padding-bottom:0!important;border:0!important;vertical-align:baseline!important}.PseudoTupleRevamp__ribbon{width:min-content;height:18px;background:#d6efff;clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%,calc(100% - 92px) 50%);font-weight:700;font-size:10px;line-height:16px;text-transform:uppercase;color:#091e42;display:flex;justify-content:flex-end;align-items:center;padding-right:12px;padding-left:32px;padding-top:0}.cross_category_top_sec{height:100%;padding:18px 24px 32px;background-color:#f0f9ff;border-radius:10px;
+; background-image: url('https://cdn.shopify.com/s/files/1/1064/0118/files/snow-left-foxx-life-sciences-top-header.webp?v=1734793181'),
+                          url('https://cdn.shopify.com/s/files/1/1064/0118/files/snow_r-foxx-life-sciences-top.webp?v=1734792910');
+        background-repeat: no-repeat, no-repeat;
+        background-position: left top, right bottom;border:2px dashed #121212}@media screen and (max-width:767px){.cross_category_top_sec{padding:0!important}.style__bottomWrapper{display:flex;flex-direction:column;gap:10px}.product_page_top_form_section{padding:20px 10px!important}.style__backgroundImage{width:286px!important;-webkit-box-align:stretch;-webkit-box-direction:normal;-webkit-box-orient:vertical;align-items:stretch;border:0 solid #000;box-sizing:border-box;display:flex;flex-basis:auto;flex-direction:column;flex-shrink:0;margin:0;min-height:0;min-width:0;padding:0;position:relative;z-index:0}.cross-category-picks-container{padding:0!important}}a.pageComponent.style__button:hover{color:#dbd5d5!important}.t4s-pr-choose__title{font-size:22px;text-transform:capitalize!important}.t4s-pr-choose__title strong{color:#005CA8}
+@media screen and (max-width: 767px) {
+    .product_page_top_form_section{
+        display:block;
+    }
+    .product_page_top_form_section {
+        padding-bottom:0px!important
+    }
+}
+
+</style>
+<section class="cross-category-picks-section">
+    <!-- First column -->
+    <div class="cross-category-picks-column cross_category_top_sec" style="background-color:#F5E7E7!important">
+        <div class="cross-category-picks-container" style="background:none!important">
+            <div class="product_page_top_form_section">
+               <div>
+                <h4 class="t4s-pr-choose__title t4s-truncate" style="color:#AF1F24">Foxx Biggest Patriotic<strong></strong> Sale!</h4>
+                <p class="offer-callout-simple personalised d-none d-md-block">
+                   You’ll love these great deals that were handpicked just for you.</p> 
+               </div>
+               <div>
+                {% comment %} {% render 'bfs-product-timer', product: product %} {% endcomment %}
+               </div>
+            </div>
+
+            <div class="loader-container loading-contn" id="loaderContainer">
+                <div class="loader" id="loaderezbiosale"></div>
+            </div>
+
+            <div class="pcbottlehide cross-category-picks-list randomize-products-third">
+                {% assign collections_to_show = "ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25, ezbio-carboy-pc-20-off-us-independence-day-sale-25, ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25" | split: ',' %} 
+                {% comment %} {% assign collections_to_show = "all" %} {% endcomment %}
+
+                {% for collection_name in collections_to_show %}
+                {% assign current_collection = collections[collection_name].products | shuffle %}
+
+                {% for product in current_collection %}
+                 {% if product.available %}
+                    {% comment %} <a class="cross-category-picks-item" style="display:none"
+                    href="{{ product.url }}">
+                     <div class="cross-category-picks-row">
+                         <div class="cross-category-picks-image">
+                             <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"
+                                  title="{{ product.title }}">
+                             <div class="mask"></div>
+                         </div>
+                         <div class="cross-category-picks-details">
+                             <div class="product_details_title_area">
+                                 <span title="{{ product.title }}">{{ product.title | slice: 0, 40 }}</span>
+                             </div>
+                             <div class="cross-category-picks-price-area">
+                              <!--  christmas offer snippet -->
+                            {% comment %} {% render 'promo-ticker-collection-feb-promo' %} {% endcomment %}
+                             </div>
+                         </div>
+                     </div>
+                 </a> {% endcomment %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                    <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
+                        {% for variant in product.variants %}
+                        {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
+                        {% if variant.available %}
+                        <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
+                            %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
+                            bold_variant_price | money_with_currency }}</option>
+                        {% else %}
+                        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <div class="pageComponent style__backgroundImage" style="display:none"
+                        style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative;">
+                        <div class="PseudoTupleRevamp__ribbon">
+                            <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
+                        </div>
+                        <div class="style__leftDetailWrapper style__horizontalWrapper"
+                            style="margin-top: 2px; padding-top: 0px;">
+                            <div class="style__coverImageWrapper"><img class="style__projectImage"
+                                    src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                                <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
+                                        class="style__vectorIcon" resizemode="cover"
+                                        src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
+                                        <p class="style__rera">
+                                            {% assign vendor_words = product.vendor | split: ' ' %}
+                                            {% if vendor_words.size == 1 %}
+                                                {{ product.vendor }}
+                                            {% else %}
+                                                {% for word in vendor_words %}
+                                                    {{ word | slice: 0, 1 }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </p>                                        
+                                </div>
+                            </div>
+                            <div class="style__detailWrapper">
+                                <a style="color:#0D0D0D"
+                                    href="{{ product.url }}">
+                                    <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
+                                            product.title  | slice: 0, 40 }}</span></p>
+                                </a>
+                                {% comment %} <p class="style__address style__textWrapper">{{ product1.type }}</p> {% endcomment %}
+                                <div class="style__horizontalWrapper style__priceConfigWrapper">
+                                    <p class="style__priceRange style__textWrapper">
+                                        {% assign percent_tag = '' %}
+                                        {% for tag in product.tags %}
+                                            {% if tag contains 'percent_' %}
+                                                {% assign percent_tag = tag | remove: 'percent_' %}
+                                                {% break %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if percent_tag != '' %}
+                                            {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
+                                            {% assign final_price = product.price | minus: price_discount %}
+                                        {% endif %}
+
+                                        {% if final_price %}
+                                            <span style="font-weight: 700;">{{ final_price | money }}</span>
+                                        {% else %}
+                                            <span style="font-weight: 700;">{{ product.price | money }}</span>
+                                        {% endif %}
+                                    </p>                                    
+                                    <p
+                                        style="font-size: 14px; color: rgb(235, 236, 240); padding-left: 4px; padding-right: 4px;">
+                                        |
+                                    </p>
+                                    <p class="style__config style__textWrapper">
+
+                                        <span class="skuDisplay1" data-product-id="{{ product.id }}"
+                                            data-sku=""></span>
+                                    </p>
+
+
+                                </div>
+                                <div class="style__horizontalWrapper style__posessionWrapper">
+                                    <p class="style__textWrapper"></p>
+                                            <p class="style__posessionStatus">
+                                            <span style="font-weight: 600; color: rgb(0, 128, 0);">
+
+                                                {% assign original_price = product.variants.first.compare_at_price %}
+                                                {% assign saving_per_product = original_price | divided_by: 4 %} <!-- Price saved for the free product -->
+                                                {% assign savings_amount = saving_per_product %} <!-- Total savings when buying 3 items to get 1 free -->
+                                                {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+
+                                                {{""}} {{ savings_percent }}%
+                                            </span>
+
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
+                                                    <path d="M7 24h-4.875l6-1.221-1.716-1.708 4.183-4.108 3.001 3.002 10.508-10.422-1.41-1.418-9.094 9.015-2.991-2.993-5.613 5.512-1.667-1.66-1.201 6.001z" />
+                                                </svg>&nbsp;price decrease today
+                                            </span>
+                                        </p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <img class="style__dashedLine"
+                            src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
+
+                    </div>
+                </form>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+                <script>
+                    // JavaScript to fetch and display SKU for each product
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var productSelects = document.querySelectorAll('.product-single__variants');
+
+                        // Function to update SKU display
+                        function updateSkuDisplays() {
+                            productSelects.forEach(function (select) {
+                                var productId = select.getAttribute('data-product-id');
+                                var correspondingSkuDisplay = document.querySelector('.skuDisplay1[data-product-id="' + productId + '"]');
+
+                                if (correspondingSkuDisplay) {
+                                    var selectedOption = select.options[select.selectedIndex];
+                                    var sku = selectedOption.getAttribute('data-sku');
+                                    correspondingSkuDisplay.setAttribute('data-sku', sku); // Update data-sku attribute
+                                    correspondingSkuDisplay.textContent = '' + sku; // Display SKU below each span
+                                }
+                            });
+                        }
+
+                        // Initial update on page load
+                        updateSkuDisplays();
+
+                        // Update SKU display when option changes
+                        productSelects.forEach(function (select) {
+                            select.addEventListener('change', updateSkuDisplays);
+                        });
+                    });
+                </script>
+            </div>
+            <script>
+                window.setTimeout(function () {
+                    hideLoader();
+                    randomizeAllProducts1('.pcbottlehide', 'loaderezbiosale'); // Call randomizeAllProducts1 to randomize products
+                    showProductList1('.pcbottlehide'); // Manually call showProductList1()
+                }, 2000); // Change the timeout to 2000 milliseconds (2 seconds)
+
+                function hideLoader() {
+                    document.querySelector('.loader').style.display = 'none';
+                }
+
+                // Function to hide product list
+                function hideProductList(productListClass) {
+                    var productListElement = document.querySelectorAll(productListClass + ' .style__backgroundImage');
+                    if (productListElement) {
+                        productListElement.forEach(function (item) {
+                            item.style.display = 'none';
+                        });
+                    }
+                }
+
+                // Function to show product list
+                function showProductList1(productListClass) {
+                    var productListElement = document.querySelectorAll(productListClass + ' .style__backgroundImage');
+                    if (productListElement) {
+                        productListElement.forEach(function (item) {
+                            item.style.display = 'block'; // Change style to display: block
+                        });
+                    }
+                }
+
+                function randomizeAllProducts1(containerClass, loaderId) {
+                    var containerElement = document.querySelector(containerClass);
+                    var products = Array.from(containerElement.children);
+
+                    // Clear the container
+                    containerElement.innerHTML = '';
+
+                    // Append products in the desired order with randomized items
+                    randomizeCollection(products);
+
+                    products.forEach(function (product) {
+                        product.style.visibility = 'visible';
+                        containerElement.appendChild(product);
+                    });
+
+                    // Hide the loader
+                    var loaderElement = document.getElementById(loaderId);
+                    if (loaderElement) {
+                        loaderElement.style.display = 'none';
+                    }
+
+                    // Show the product list
+                    showProductList1(containerClass);
+                }
+
+                // Helper function to shuffle an array
+                function shuffleArray(array) {
+                    for (var i = array.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                    return array;
+                }
+
+                // Helper function to randomize collection
+                function randomizeCollection(collection) {
+                    collection = shuffleArray(collection);
+                }
+            </script>
+
+        </div>
+    </div>
+</section>
