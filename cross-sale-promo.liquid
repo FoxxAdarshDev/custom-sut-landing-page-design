@@ -195,22 +195,26 @@
                                         <img class="style__dashedLine"
                                             src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
                                         <div class="style__bottomWrapper">
-                                            {% comment %} Show variant selector if product has multiple variants {% endcomment %}
+                                            {% comment %} Show variant options if product has multiple variants {% endcomment %}
                                             {% if product.variants.size > 1 %}
                                                 <div style="margin-bottom: 10px;">
                                                     <label style="font-size: 12px; color: #666; margin-bottom: 5px; display: block;">Options:</label>
-                                                    <select class="variant-selector" data-product-id="{{ product.id }}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                                                    <div class="variant-options" data-product-id="{{ product.id }}" style="display: flex; flex-wrap: wrap; gap: 5px;">
                                                         {% for variant in product.variants %}
                                                         {%- include 'bold-variant' with variant, hide_action: 'skip' -%}
                                                         {% if variant.available %}
-                                                        <option {% if variant==bold_selected_or_first_available_variant %} selected="selected" {% endif
-                                                            %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{
-                                                            bold_variant_price | money_with_currency }}</option>
+                                                        <label class="variant-option" style="display: flex; align-items: center; font-size: 11px; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; background: #f9f9f9;">
+                                                            <input type="radio" name="variant-{{ product.id }}" value="{{ variant.id }}" data-sku="{{ variant.sku }}" data-price="{{ bold_variant_price | money_with_currency }}" {% if variant==bold_selected_or_first_available_variant %} checked {% endif %} style="margin-right: 5px;">
+                                                            <span>{{ variant.title }}</span>
+                                                        </label>
                                                         {% else %}
-                                                        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                                                        <label class="variant-option-disabled" style="display: flex; align-items: center; font-size: 11px; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; background: #f0f0f0; color: #999; cursor: not-allowed;">
+                                                            <input type="radio" disabled style="margin-right: 5px;">
+                                                            <span>{{ variant.title }} - Sold Out</span>
+                                                        </label>
                                                         {% endif %}
                                                         {% endfor %}
-                                                    </select>
+                                                    </div>
                                                 </div>
                                             {% endif %}
 
@@ -262,12 +266,24 @@
                             }
                         }
 
-                        // Handle variant selector changes
+                        // Handle variant selector changes (dropdowns)
                         variantSelectors.forEach(function (select) {
                             select.addEventListener('change', function () {
                                 var productId = this.getAttribute('data-product-id');
                                 var selectedValue = this.value;
                                 syncVariantSelectors(productId, selectedValue);
+                            });
+                        });
+
+                        // Handle variant radio button changes
+                        var variantRadios = document.querySelectorAll('input[name^="variant-"]');
+                        variantRadios.forEach(function (radio) {
+                            radio.addEventListener('change', function () {
+                                if (this.checked) {
+                                    var productId = this.name.replace('variant-', '');
+                                    var selectedValue = this.value;
+                                    syncVariantSelectors(productId, selectedValue);
+                                }
                             });
                         });
 
