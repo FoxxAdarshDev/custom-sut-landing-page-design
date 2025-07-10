@@ -114,7 +114,7 @@
                                                     <p class="style__textWrapper style__projectName"><span style="font-weight: 700;color:#333333">{{
                                                             product.title  | slice: 0, 40 }}</span></p>
                                                 </a>
-                                                <div class="style__horizontalWrapper style__priceConfigWrapper">
+                                                <div class="style__horizontalWrapper style__priceConfigWrapper" style="margin-top: 4px;">
                                                     <p class="style__priceRange style__textWrapper">
                                                         {% comment %} Calculate discount from collection handle {% endcomment %}
                                                         {% assign discount_percentage = '' %}
@@ -214,19 +214,16 @@
                                                 </div>
                                             {% endif %}
                                             
-                                            {% comment %} Quantity selector {% endcomment %}
-                                            <div style="margin-bottom: 10px;">
-                                                <label style="font-size: 12px; color: #666; margin-bottom: 5px; display: block;">Quantity:</label>
-                                                <div style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 4px; width: fit-content;">
-                                                    <button type="button" class="qty-btn" data-action="decrease" data-product-id="{{ product.id }}" style="background: none; border: none; padding: 8px 12px; cursor: pointer; font-size: 16px; color: #666;">-</button>
-                                                    <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input" data-product-id="{{ product.id }}" style="border: none; width: 50px; text-align: center; padding: 8px 4px; font-size: 14px;">
-                                                    <button type="button" class="qty-btn" data-action="increase" data-product-id="{{ product.id }}" style="background: none; border: none; padding: 8px 12px; cursor: pointer; font-size: 16px; color: #666;">+</button>
+                                            {% comment %} Quantity and Add to Cart in same row {% endcomment %}
+                                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                                                <div style="flex: 0 0 auto;">
+                                                    <label style="font-size: 12px; color: #666; margin-bottom: 3px; display: block;">Qty:</label>
+                                                    <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input" data-product-id="{{ product.id }}" style="border: 1px solid #ddd; border-radius: 4px; width: 60px; text-align: center; padding: 6px 4px; font-size: 14px;">
                                                 </div>
+                                                <button type="submit" class="buttons__primaryRegular" style="flex: 1; margin-top: 18px;">
+                                                    Add to Cart
+                                                </button>
                                             </div>
-                                            
-                                            <button type="submit" class="buttons__primaryRegular" style="width: 100%; margin-top: 10px;">
-                                                Add to Cart
-                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -239,7 +236,7 @@
                     document.addEventListener('DOMContentLoaded', function () {
                         var productSelects = document.querySelectorAll('.product-single__variants');
                         var variantSelectors = document.querySelectorAll('.variant-selector');
-                        var qtyButtons = document.querySelectorAll('.qty-btn');
+                        // qtyButtons variable removed - using default number input controls
 
                         // Function to update SKU display
                         function updateSkuDisplays() {
@@ -274,27 +271,7 @@
                             });
                         });
 
-                        // Handle quantity button clicks
-                        qtyButtons.forEach(function (button) {
-                            button.addEventListener('click', function () {
-                                var productId = this.getAttribute('data-product-id');
-                                var action = this.getAttribute('data-action');
-                                var qtyInput = document.querySelector('.qty-input[data-product-id="' + productId + '"]');
-                                
-                                if (qtyInput) {
-                                    var currentQty = parseInt(qtyInput.value);
-                                    var newQty = currentQty;
-                                    
-                                    if (action === 'increase' && currentQty < 99) {
-                                        newQty = currentQty + 1;
-                                    } else if (action === 'decrease' && currentQty > 1) {
-                                        newQty = currentQty - 1;
-                                    }
-                                    
-                                    qtyInput.value = newQty;
-                                }
-                            });
-                        });
+                        // Quantity buttons removed - using default number input controls
 
                         // Initial update on page load
                         updateSkuDisplays();
