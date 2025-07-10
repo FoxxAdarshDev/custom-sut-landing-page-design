@@ -26,7 +26,10 @@
                <div>
                 <h4 class="t4s-pr-choose__title t4s-truncate" style="color:#AF1F24">Foxx Biggest Patriotic<strong></strong> Sale!</h4>
                 <p class="offer-callout-simple personalised d-none d-md-block">
-                   You’ll love these great deals that were handpicked just for you.</p> 
+                   You'll love these great deals that were handpicked just for you.</p>
+                <div id="product-count-display" style="background: #AF1F24; color: white; padding: 8px 15px; border-radius: 20px; font-weight: 700; margin-top: 10px; display: inline-block;">
+                    <span id="loaded-count">0</span> Products Loaded
+                </div> 
                </div>
                <div>
                 {% comment %} {% render 'bfs-product-timer', product: product %} {% endcomment %}
@@ -41,11 +44,14 @@
                 {% assign collections_to_show = "ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25, ezbio-carboy-pc-20-off-us-independence-day-sale-25, ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25" | split: ',' %} 
                 {% comment %} {% assign collections_to_show = "all" %} {% endcomment %}
 
+                {% assign total_products_count = 0 %}
+
                 {% for collection_name in collections_to_show %}
                     {% assign current_collection = collections[collection_name].products | shuffle %}
-                    
+
                     {% for product in current_collection %}
                         {% if product.available %}
+                            {% assign total_products_count = total_products_count | plus: 1 %}
                             <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
                                 <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
                                     {% for variant in product.variants %}
@@ -124,10 +130,14 @@
                                                         <p class="style__posessionStatus">
                                                         <span style="font-weight: 600; color: rgb(0, 128, 0);">
                                                             {% assign original_price = product.variants.first.compare_at_price %}
-                                                            {% assign saving_per_product = original_price | divided_by: 4 %}
-                                                            {% assign savings_amount = saving_per_product %}
-                                                            {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
-                                                            {{""}} {{ savings_percent }}%
+                                                            {% if original_price > 0 %}
+                                                                {% assign saving_per_product = original_price | minus: product.price %}
+                                                                {% assign savings_amount = saving_per_product %}
+                                                                {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+                                                                {{ savings_percent }}%
+                                                            {% else %}
+                                                                No Discount
+                                                            {% endif %}
                                                         </span>
                                                         <span>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#008000" width="12" height="12" viewBox="0 0 24 24">
@@ -180,6 +190,11 @@
                     hideLoader();
                     randomizeAllProducts1('.pcbottlehide', 'loaderezbiosale'); // Call randomizeAllProducts1 to randomize products
                     showProductList1('.pcbottlehide'); // Manually call showProductList1()
+
+                    // Update the product count display
+                    var totalProducts = {{ total_products_count }};
+                    document.getElementById('loaded-count').textContent = totalProducts;
+
                 }, 2000); // Change the timeout to 2000 milliseconds (2 seconds)
 
                 function hideLoader() {
