@@ -44,7 +44,7 @@
                 {% for collection_name in collections_to_show %}
                     {% assign current_collection = collections[collection_name].products | shuffle %}
                     
-                    {% for product in current_collection limit: 2 %}
+                    {% for product in current_collection %}
                         {% if product.available %}
                             <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
                                 <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
