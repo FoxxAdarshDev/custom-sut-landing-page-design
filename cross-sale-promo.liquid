@@ -40,7 +40,7 @@
                 <div class="loader" id="loaderezbiosale"></div>
             </div>
 
-            <div class="pcbottlehide cross-category-picks-list randomize-products-third">
+            <div class="pcbottlehide cross-category-picks-list randomize-products-third" style="display: none;">
                 {% comment %} Initialize product counter {% endcomment %}
                 {% assign total_products_count = 0 %}
 
@@ -88,18 +88,22 @@
                                             style="margin-top: 2px; padding-top: 0px;">
                                             <div class="style__coverImageWrapper"><img class="style__projectImage"
                                                     src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                                                <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%"><img
+                                                <div class="style__verifiedtagwrapper style__horizontalWrapper" style="width:100%; background-color:#AF1F24;"><img
                                                         class="style__vectorIcon" resizemode="cover"
                                                         src="https://cdn.shopify.com/s/files/1/1064/0118/files/NL_blue-tag_fls.png?v=1713286021">
                                                         <p class="style__rera">
-                                                            {% assign vendor_words = product.vendor | split: ' ' %}
-                                                            {% if vendor_words.size == 1 %}
-                                                                {{ product.vendor }}
-                                                            {% else %}
-                                                                {% for word in vendor_words %}
-                                                                    {{ word | slice: 0, 1 }}
-                                                                {% endfor %}
-                                                            {% endif %}
+                                                            {% comment %} Extract discount percentage from collection handle {% endcomment %}
+                                                            {% assign discount_percentage = '' %}
+                                                            {% assign collection_parts = collection_handle | split: '-' %}
+                                                            {% for part in collection_parts %}
+                                                                {% if part contains 'off' %}
+                                                                    {% assign discount_index = forloop.index0 | minus: 1 %}
+                                                                    {% assign discount_part = collection_parts[discount_index] %}
+                                                                    {% assign discount_percentage = discount_part %}
+                                                                    {% break %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {{ discount_percentage }}% OFF
                                                         </p>                                        
                                                 </div>
                                             </div>
@@ -111,21 +115,31 @@
                                                 </a>
                                                 <div class="style__horizontalWrapper style__priceConfigWrapper">
                                                     <p class="style__priceRange style__textWrapper">
-                                                        {% assign percent_tag = '' %}
-                                                        {% for tag in product.tags %}
-                                                            {% if tag contains 'percent_' %}
-                                                                {% assign percent_tag = tag | remove: 'percent_' %}
+                                                        {% comment %} Calculate discount from collection handle {% endcomment %}
+                                                        {% assign discount_percentage = '' %}
+                                                        {% assign collection_parts = collection_handle | split: '-' %}
+                                                        {% for part in collection_parts %}
+                                                            {% if part contains 'off' %}
+                                                                {% assign discount_index = forloop.index0 | minus: 1 %}
+                                                                {% assign discount_part = collection_parts[discount_index] %}
+                                                                {% assign discount_percentage = discount_part | plus: 0 %}
                                                                 {% break %}
                                                             {% endif %}
                                                         {% endfor %}
 
-                                                        {% if percent_tag != '' %}
-                                                            {% assign price_discount = product.price | times: percent_tag | divided_by: 100 %}
-                                                            {% assign final_price = product.price | minus: price_discount %}
-                                                        {% endif %}
-
-                                                        {% if final_price %}
-                                                            <span style="font-weight: 700;">{{ final_price | money }}</span>
+                                                        {% if discount_percentage != '' and discount_percentage > 0 %}
+                                                            {% assign original_price = product.price | times: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign original_price = product.price | times: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | times: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | divided_by: 1 | minus: discount_percentage | times: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | times: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | divided_by: 1 | minus: discount_percentage | plus: 100 | divided_by: 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | times: 100 | divided_by: 100 | minus: discount_percentage | divided_by: 1 | minus: discount_percentage %}
+                                                            {% assign discount_multiplier = 100 | minus: discount_percentage %}
+                                                            {% assign calculated_original = product.price | times: 100 | divided_by: discount_multiplier %}
+                                                            
+                                                            <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">{{ calculated_original | money }}</span>
+                                                            <span style="font-weight: 700; color: #AF1F24; margin-left: 8px;">{{ product.price | money }}</span>
                                                         {% else %}
                                                             <span style="font-weight: 700;">{{ product.price | money }}</span>
                                                         {% endif %}
@@ -216,87 +230,50 @@
             </div>
             <script>
                 window.setTimeout(function () {
+                    // Hide the loader
                     hideLoader();
                     
                     // Update the product count display
                     var totalProducts = {{ total_products_count }};
                     document.getElementById('loaded-count').textContent = totalProducts;
                     
-                    // Ensure products are visible
-                    showProductList1('.pcbottlehide');
+                    // Show the product container
+                    var productContainer = document.querySelector('.pcbottlehide');
+                    if (productContainer) {
+                        productContainer.style.display = 'flex';
+                    }
                     
                     // Then randomize if needed
                     randomizeAllProducts1('.pcbottlehide', 'loaderezbiosale');
 
-                }, 1000); // Reduced timeout to 1 second
+                }, 2000); // 2 second loading simulation
 
                 function hideLoader() {
-                    document.querySelector('.loader').style.display = 'none';
-                }
-
-                // Function to hide product list
-                function hideProductList(productListClass) {
-                    var productListElement = document.querySelectorAll(productListClass + ' .style__backgroundImage');
-                    if (productListElement) {
-                        productListElement.forEach(function (item) {
-                            item.style.display = 'none';
-                        });
-                    }
-                }
-
-                // Function to show product list
-                function showProductList1(productListClass) {
-                    var productListElement = document.querySelectorAll(productListClass + ' .style__backgroundImage');
-                    if (productListElement && productListElement.length > 0) {
-                        productListElement.forEach(function (item) {
-                            item.style.display = 'block'; // Change style to display: block
-                            item.style.visibility = 'visible'; // Ensure visibility
-                        });
-                        console.log('Showing', productListElement.length, 'products');
-                    } else {
-                        console.log('No products found to show');
+                    var loaderContainer = document.getElementById('loaderContainer');
+                    if (loaderContainer) {
+                        loaderContainer.style.display = 'none';
                     }
                 }
 
                 function randomizeAllProducts1(containerClass, loaderId) {
                     var containerElement = document.querySelector(containerClass);
+                    if (!containerElement) return;
+                    
                     var products = Array.from(containerElement.children);
 
-                    // Clear the container
+                    // Shuffle the products
+                    for (var i = products.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var temp = products[i];
+                        products[i] = products[j];
+                        products[j] = temp;
+                    }
+
+                    // Clear container and re-append shuffled products
                     containerElement.innerHTML = '';
-
-                    // Append products in the desired order with randomized items
-                    randomizeCollection(products);
-
                     products.forEach(function (product) {
-                        product.style.visibility = 'visible';
                         containerElement.appendChild(product);
                     });
-
-                    // Hide the loader
-                    var loaderElement = document.getElementById(loaderId);
-                    if (loaderElement) {
-                        loaderElement.style.display = 'none';
-                    }
-
-                    // Show the product list
-                    showProductList1(containerClass);
-                }
-
-                // Helper function to shuffle an array
-                function shuffleArray(array) {
-                    for (var i = array.length - 1; i > 0; i--) {
-                        var j = Math.floor(Math.random() * (i + 1));
-                        var temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
-                    }
-                    return array;
-                }
-
-                // Helper function to randomize collection
-                function randomizeCollection(collection) {
-                    collection = shuffleArray(collection);
                 }
             </script>
 
