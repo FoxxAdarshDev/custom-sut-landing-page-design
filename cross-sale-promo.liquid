@@ -44,28 +44,18 @@
                 {% comment %} Define collections array {% endcomment %}
                 {% assign collection_handles = "ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25, ezbio-carboy-pc-20-off-us-independence-day-sale-25, ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25" | split: ',' %}
                 
-                {% comment %} Initialize arrays to store all products {% endcomment %}
-                {% assign all_products_array = '' | split: ',' %}
+                {% comment %} Initialize product counter {% endcomment %}
                 {% assign total_products_count = 0 %}
 
-                {% comment %} First, collect all products from each collection {% endcomment %}
+                {% comment %} Loop through each collection and display products {% endcomment %}
                 {% for collection_handle in collection_handles %}
                     {% assign collection_handle = collection_handle | strip %}
                     {% assign current_collection = collections[collection_handle] %}
                     
                     {% if current_collection %}
-                        {% for product in current_collection.products %}
-                            {% if product.available %}
-                                {% assign all_products_array = all_products_array | concat: product %}
-                                {% assign total_products_count = total_products_count | plus: 1 %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-
-                {% comment %} Now display all collected products {% endcomment %}
-                {% assign shuffled_products = all_products_array | shuffle %}
-                {% for product in shuffled_products %}
+                        {% assign collection_products = current_collection.products | where: 'available', true | shuffle %}
+                        {% for product in collection_products %}
+                            {% assign total_products_count = total_products_count | plus: 1 %}
                             <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
                         <select name="id" class="product-single__variants" data-product-id="{{ product.id }}">
                             {% for variant in product.variants %}
@@ -166,6 +156,8 @@
                                 src="https://cdn.shopify.com/s/files/1/1064/0118/files/Dashed_Line_fls-v3.png?v=1713286256">
                         </div>
                     </form>
+                        {% endfor %}
+                    {% endif %}
                 {% endfor %}
                 <script>
                     // JavaScript to fetch and display SKU for each product
