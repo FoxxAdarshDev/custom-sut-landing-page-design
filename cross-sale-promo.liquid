@@ -94,8 +94,8 @@
                             {% endif %}
                             {% endfor %}
                         </select>
-                        <div class="pageComponent style__backgroundImage" style="display:none"
-                            style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative;">
+                        <div class="pageComponent style__backgroundImage" 
+                            style="margin-right: 15px; padding-top: 5.7px; cursor: pointer; position: relative; display: block;">
                             <div class="PseudoTupleRevamp__ribbon">
                                 <div style="width:100%;line-height:normal">PATRIOTICSALE</div>
                             </div>
@@ -215,14 +215,18 @@
             <script>
                 window.setTimeout(function () {
                     hideLoader();
-                    randomizeAllProducts1('.pcbottlehide', 'loaderezbiosale'); // Call randomizeAllProducts1 to randomize products
-                    showProductList1('.pcbottlehide'); // Manually call showProductList1()
-
+                    
                     // Update the product count display
                     var totalProducts = {{ total_products_count }};
                     document.getElementById('loaded-count').textContent = totalProducts;
+                    
+                    // Ensure products are visible
+                    showProductList1('.pcbottlehide');
+                    
+                    // Then randomize if needed
+                    randomizeAllProducts1('.pcbottlehide', 'loaderezbiosale');
 
-                }, 2000); // Change the timeout to 2000 milliseconds (2 seconds)
+                }, 1000); // Reduced timeout to 1 second
 
                 function hideLoader() {
                     document.querySelector('.loader').style.display = 'none';
@@ -241,10 +245,14 @@
                 // Function to show product list
                 function showProductList1(productListClass) {
                     var productListElement = document.querySelectorAll(productListClass + ' .style__backgroundImage');
-                    if (productListElement) {
+                    if (productListElement && productListElement.length > 0) {
                         productListElement.forEach(function (item) {
                             item.style.display = 'block'; // Change style to display: block
+                            item.style.visibility = 'visible'; // Ensure visibility
                         });
+                        console.log('Showing', productListElement.length, 'products');
+                    } else {
+                        console.log('No products found to show');
                     }
                 }
 
