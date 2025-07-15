@@ -1,0 +1,1319 @@
+<style>
+     .trade-show-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 0px;
+        }
+
+        .trade-show-section-title {
+            color: #0071ce;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 40px 0 30px 0;
+            text-align: left;
+            border-bottom: 3px solid #0071ce;
+            padding-bottom: 10px;
+        }
+
+        .trade-show-event-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .trade-show-event-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #f0f0f0;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trade-show-event-card:hover {
+            /* transform: translateY(-8px); */
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+            border-color: #0071ce;
+        }
+
+        .trade-show-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .trade-show-card-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .trade-show-card-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .trade-show-booth-info {
+            background: linear-gradient(135deg, #0071ce, #005bb5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin: 0px;
+            box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+            width: fit-content;
+        }
+
+        .trade-show-read-more-link {
+            color: #0071ce;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 0px;
+            display: inline;
+            font-weight: 500;
+        }
+
+        .trade-show-event-logo {
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e9ecef;
+        }
+
+        .trade-show-event-card h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            line-height: 1.3;
+        }
+
+        .trade-show-event-dates {
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trade-show-event-description {
+            margin: 0 0 20px 0;
+            color: #6c757d;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .trade-show-event-details {
+            text-align: left;
+            margin: 10px 0;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 15px;
+            border-left: 4px solid #0071ce;
+        }
+
+        .trade-show-detail-row {
+            display: flex;
+            margin: 8px 0;
+            align-items: flex-start;
+        }
+
+        .trade-show-detail-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.8rem;
+            width: 75px;
+            flex-shrink: 0;
+        }
+
+        .trade-show-detail-value {
+            color: #2c3e50;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .trade-show-location-link {
+            color: #0071ce;
+            text-decoration: none;
+        }
+
+        .trade-show-location-link:hover {
+            text-decoration: underline;
+        }
+
+        .trade-show-event-actions {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .trade-show-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0071ce, #005bb5);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            min-height: 48px;
+        }
+
+        .trade-show-btn:hover {
+            background: linear-gradient(135deg, #005bb5, #004494);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 113, 206, 0.3);
+        }
+
+        .trade-show-view-event-btn {
+            flex: 0 0 auto;
+            min-width: 120px;
+            font-size: 0.75rem;
+            padding: 10px 16px;
+        }
+
+        .trade-show-calendar-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            position: relative;
+            flex: 1;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 14px 25px;
+        }
+
+        .trade-show-calendar-btn:hover {
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+        }
+
+        .trade-show-calendar-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .trade-show-calendar-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            margin-top: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 200px;
+            overflow: hidden;
+        }
+
+        .trade-show-calendar-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .trade-show-calendar-option {
+            display: block;
+            padding: 10px 16px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #e9ecef;
+            transition: background-color 0.2s ease;
+        }
+
+        .trade-show-calendar-option:first-child {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .trade-show-calendar-option:last-child {
+            border-bottom: none;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .trade-show-calendar-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .trade-show-closed-banner {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+            width: fit-content;
+        }
+
+        .trade-show-past-event-card {
+            opacity: 0.85;
+            position: relative;
+        }
+
+        .trade-show-past-event-card:hover {
+            border:2px solid #dc3545;
+        }
+
+        .past-trade-show-btn {
+             background: linear-gradient(135deg, #cb5965, #be545f)!important;
+        }
+
+         .past-trade-show-btn:hover {
+             background: linear-gradient(135deg, #dc3545, #c82333)!important;
+              color: #c8999e
+        }
+
+        .trade-show-past-event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(220, 53, 69, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+            border-radius: 25px;
+        }
+
+        /* Modal Styles */
+        .trade-show-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .trade-show-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trade-show-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+        }
+
+        .trade-show-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .trade-show-modal-close:hover {
+            color: #000;
+        }
+
+        .trade-show-modal h3 {
+            color: #0071ce;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .trade-show-modal-details {
+            color: #2c3e50;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .trade-show-event-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .trade-show-event-card {
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .trade-show-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .trade-show-card-right {
+                align-self: flex-end;
+            }
+
+            .trade-show-section-title {
+                font-size: 1.6rem;
+                text-align: center;
+            }
+
+            .trade-show-event-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .trade-show-modal-content {
+                max-width: 90%;
+                margin: 10px;
+                padding: 20px;
+            }
+        }
+
+        .trade-show-year-subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 20px 0;
+            text-align: left;
+        }
+</style>
+
+     <div class="trade-show-container">
+
+        <div  class="page-masthead timestamp_last_updated">
+        <h2 class="trade-show-section-title">Upcoming Events 2025</h2>
+          <p>5</p>
+        </div>
+
+        <div class="trade-show-event-container">
+
+                <!-- -->
+                 <!-- India Lab Expo -->
+            <div class="trade-show-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-event-dates">📅 September 18-20, 2025</div>
+                          <div class="trade-show-booth-info">🏢 Booth No: H4-B42</div>
+                        <h3>India Lab Expo</h3>
+                        <div class="trade-show-event-description">
+                            India's premier laboratory and analytical instrumentation exhibition, connecting global suppliers with Indian laboratory professionals across pharmaceuticals, biotechnology, and research sectors.
+                            <span class="trade-show-read-more-link" onclick="openModal('india-lab-expo-modal')">Read More</span>
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWne2V6HvsIzZuw19mOKYsYOmXa5BWB93MEQ&s" alt="India Lab Expo Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">10:00 AM - 6:00 PM</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Hyderabad/India</span>
+                    </div>
+                      {% comment %} <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Messe München</span>
+                    </div> {% endcomment %}
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=HITEX+Exhibition+Centre,Hyderabad,Telangana,India" target="_blank" class="trade-show-location-link">
+                                📍 HITEX Exhibition Centre, Hyderabad, India
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://analyticalabindia.com/en/analytica-anacon-india-2025/exhibitor-directory/exhibitors-brands/" target="_blank" class="trade-show-btn trade-show-view-event-btn">Locater</a>
+                    <div class="trade-show-calendar-container">
+                        <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                            📅 Add to Calendar
+                        </button>
+                        <div class="trade-show-calendar-dropdown">
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google', 'india-lab-expo')">Google Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook', 'india-lab-expo')">Outlook</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo', 'india-lab-expo')">Yahoo Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple', 'india-lab-expo')">Apple Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics', 'india-lab-expo')">Download ICS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISPE Boston -->
+            <div class="trade-show-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-event-dates">📅 October 1, 2025</div>
+                          <div class="trade-show-booth-info">🏢 Booth No: E-194, E-165</div>
+                        <h3>ISPE Boston - 1 Day</h3>
+                        <div class="trade-show-event-description">
+                            An intensive one-day pharmaceutical manufacturing event organized by ISPE Boston, focusing on the latest trends, technologies, and regulatory updates in pharmaceutical manufacturing.
+                            <span class="trade-show-read-more-link" onclick="openModal('ispe-boston-modal')">Read More</span>
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://www.ispeboston.org/wp-content/uploads/2017/08/web_logo.png" alt="ISPE Boston Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">8:00 AM - 6:00 PM</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Boston, MA/USA</span>
+                    </div>
+                      {% comment %} <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">ISPE</span>
+                    </div> {% endcomment %}
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=Gillette+Stadium,1+Patriot+Pl,Foxborough,MA,USA" target="_blank" class="trade-show-location-link">
+                                📍 Gillette Stadium, Foxborough, MA
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://productshow.ispeboston.org/exhibitors-list-by-company-category/" target="_blank" class="trade-show-btn trade-show-view-event-btn">Locater</a>
+                    <div class="trade-show-calendar-container">
+                        <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                            📅 Add to Calendar
+                        </button>
+                        <div class="trade-show-calendar-dropdown">
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google', 'ispe-boston')">Google Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook', 'ispe-boston')">Outlook</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo', 'ispe-boston')">Yahoo Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple', 'ispe-boston')">Apple Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics', 'ispe-boston')">Download ICS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- CPHI Europe -->
+            <div class="trade-show-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-event-dates">📅 October 28-30, 2025</div>
+                          <div class="trade-show-booth-info">🏢 Booth No: 4.1F75</div>
+                        <h3>CPHI Europe</h3>
+                        <div class="trade-show-event-description">
+                            The world's largest pharmaceutical manufacturing and development event, bringing together the entire pharmaceutical supply chain for networking, sourcing, and knowledge sharing.
+                            <span class="trade-show-read-more-link" onclick="openModal('cphi-europe-modal')">Read More</span>
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZH-uj6KvnLudu6bMVbHC-RZpI1HptdHLtpA&s" alt="CPHI Europe Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">9:00 AM - 5:00 PM</span>
+                    </div>
+                      <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Frankfurt/Germany</span>
+                    </div>
+                      {% comment %} <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Informa Markets</span>
+                    </div> {% endcomment %}
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=Messe+Frankfurt,Ludwig-Erhard-Anlage+1,60327+Frankfurt+am+Main,Germany" target="_blank" class="trade-show-location-link">
+                                📍 Messe Frankfurt, Germany
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://www.cphi-online.com/46/company/32/29/43/exhibitor322943-557.html" target="_blank" class="trade-show-btn trade-show-view-event-btn">Locater</a>
+                    <div class="trade-show-calendar-container">
+                        <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                            📅 Add to Calendar
+                        </button>
+                        <div class="trade-show-calendar-dropdown">
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google', 'cphi-europe')">Google Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook', 'cphi-europe')">Outlook</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo', 'cphi-europe')">Yahoo Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple', 'cphi-europe')">Apple Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics', 'cphi-europe')">Download ICS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab Innovations -->
+            <div class="trade-show-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-event-dates">📅 October 29-30, 2025</div>
+                          <div class="trade-show-booth-info">🏢 Booth No: L124</div>
+                        <h3>Lab Innovations</h3>
+                        <div class="trade-show-event-description">
+                            Lab Innovations is the UK's leading laboratory technology exhibition, showcasing the latest analytical instrumentation, laboratory equipment, and services to the scientific community.
+                            <span class="trade-show-read-more-link" onclick="openModal('lab-innovations-modal')">Read More</span>
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://easyfairsassets.com/sites/207/2024/03/Untitled-design-34.png" alt="Lab Innovation" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">9:00 AM - 5:00 PM</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Birmingham/United Kingdom</span>
+                    </div>
+                     {% comment %} <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Easyfairs</span>
+                    </div> {% endcomment %}
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=NEC,Birmingham,UK" target="_blank" class="trade-show-location-link">
+                                📍 NEC, Birmingham, UK
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://www.lab-innovations.com/exhibitor/foxx-life-sciences/" target="_blank" class="trade-show-btn trade-show-view-event-btn">Locater</a>
+                    <div class="trade-show-calendar-container">
+                        <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                            📅 Add to Calendar
+                        </button>
+                        <div class="trade-show-calendar-dropdown">
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google', 'lab-innovations')">Google Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook', 'lab-innovations')">Outlook</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo', 'lab-innovations')">Yahoo Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple', 'lab-innovations')">Apple Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics', 'lab-innovations')">Download ICS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- CPHI India -->
+            <div class="trade-show-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-event-dates">📅 November 26-28, 2025</div>
+                          <div class="trade-show-booth-info">🏢 Booth No: 12.C44</div>
+                        <h3>CPHI India</h3>
+                        <div class="trade-show-event-description">
+                            India's leading pharmaceutical manufacturing exhibition, connecting global pharmaceutical companies with Indian manufacturers and suppliers in one of the world's fastest-growing pharmaceutical markets.
+                            <span class="trade-show-read-more-link" onclick="openModal('cphi-india-modal')">Read More</span>
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://www.cphi.com/content/experience-fragments/esa/hn/cphi/india/n1-navigation-bar-experience-fragment/master/_jcr_content/root/n1navigationbar/image2.coreimg.png/1700730979947/cphi-pmec-logo-rgb-india-colour-stacked.png" alt="CPHI India Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">10:00 AM - 6:00 PM</span>
+                    </div>
+                      <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Delhi/India</span>
+                    </div>
+                       {% comment %} <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Informa Markets</span>
+                    </div> {% endcomment %}
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=India+Expo+Centre,Greater+Noida,New+Delhi,India" target="_blank" class="trade-show-location-link">
+                                📍 India Expo Centre, New Delhi
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://www.cphi-online.com/46/company/31/77/36/exhibitor317736-583.html" target="_blank" class="trade-show-btn trade-show-view-event-btn">Locater</a>
+                    <div class="trade-show-calendar-container">
+                        <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                            📅 Add to Calendar
+                        </button>
+                        <div class="trade-show-calendar-dropdown">
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google', 'cphi-india')">Google Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook', 'cphi-india')">Outlook</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo', 'cphi-india')">Yahoo Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple', 'cphi-india')">Apple Calendar</a>
+                            <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics', 'cphi-india')">Download ICS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} <h2 class="trade-show-section-title">Past Events (2025)</h2> {% endcomment %}
+          <div  class="page-masthead timestamp_last_updated">
+        <h2 class="trade-show-section-title">Past Events (2025)</h2>
+          <p>4</p>
+        </div>
+        {% comment %} <p class="trade-show-year-subtitle">2025  Past Events</p> {% endcomment %}
+
+        <div class="trade-show-event-container">
+            <!-- Interphex -->
+            <div class="trade-show-event-card trade-show-past-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-closed-banner">🚫 Event Closed - See You Next Year!</div>
+                        <div class="trade-show-event-dates">📅 April 1-3, 2025</div>
+                        <h3>Interphex</h3>
+                         <div class="trade-show-event-description">
+                           INTERPHEX is the leading global pharmaceutical and biotechnology event that fuses essential industry innovation with expert-led conferences.
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe1GeTmlkIDuLAWrhx4rrbEjJsILcKt5EIrg&s" alt="Interphex Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">9:00 AM - 5:00 PM</span>
+                    </div>
+                       <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">New York/USA</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">RX Global</span>
+                    </div>
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=Javits+Center,655+W+34th+St,New+York,NY,USA" target="_blank" class="trade-show-location-link">
+                                📍 Javits Center, New York, NY
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://www.interphex.com/" target="_blank" class="trade-show-btn past-trade-show-btn">View Event</a>
+                </div>
+            </div>
+
+            <!-- World Vaccine Summit -->
+            <div class="trade-show-event-card trade-show-past-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-closed-banner">🚫 Event Closed - See You Next Year!</div>
+                        <div class="trade-show-event-dates">📅 March 4-5, 2025</div>
+                        <h3>World Vaccine Summit</h3>
+                        <div class="trade-show-event-description">
+                          The Vaccine World Summit unites key stakeholders from various sectors to strategize and collaborate on overcoming challenges and capitalizing on opportunities in vaccine development, distribution, and manufacturing.
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHc3Wh9dvX8QaqXnRZjBQpXmm39J0SrO9u9w&s" alt="World Vaccine Summit Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">8:00 AM - 6:00 PM</span>
+                    </div>
+                      <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Pune/India</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">DECHEMA</span>
+                    </div>
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=JW+Marriott+Hotel,Senapati+Bapat+Rd,Pune,Maharashtra,India" target="_blank" class="trade-show-location-link">
+                                📍 JW Marriott Hotel, Pune, India
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://www.imapac.com/events/vaccines-world-summit-2025" target="_blank" class="trade-show-btn past-trade-show-btn">View Event</a>
+                </div>
+            </div>
+
+            <!-- Pittcon -->
+            <div class="trade-show-event-card trade-show-past-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-closed-banner">🚫 Event Closed - See You Next Year!</div>
+                        <div class="trade-show-event-dates">📅 March 1-5, 2025</div>
+                        <h3>Pittcon</h3>
+                        <div class="trade-show-event-description">
+                          Pittcon is a dynamic, international conference and exposition on laboratory science, a venue for presenting the latest advances in analytical.
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3thiIRaBgQ29Vqo61FfO9jZufLcOmG19D0A&s" alt="Pittcon Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">8:00 AM - 5:00 PM</span>
+                    </div>
+                      <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Boston, MA/USA</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Pittcon</span>
+                    </div>
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=Boston+Convention+and+Exhibition+Center,Boston,MA,USA" target="_blank" class="trade-show-location-link">
+                                📍 Boston Convention Center, MA
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://pittcon.org/" target="_blank" class="trade-show-btn past-trade-show-btn">View Event</a>
+                </div>
+            </div>
+
+            <!-- BioAsia -->
+            <div class="trade-show-event-card trade-show-past-event-card">
+                <div class="trade-show-card-header">
+                    <div class="trade-show-card-left">
+                        <div class="trade-show-closed-banner">🚫 Event Closed - See You Next Year!</div>
+                        <div class="trade-show-event-dates">📅 February 24-26, 2025</div>
+                        <h3>BioAsia</h3>
+                         <div class="trade-show-event-description">
+                         BioAsia is an international business convention focused on the biotechnology and biopharma industry, hosted annually in Hyderabad, Telangana, India.
+                        </div>
+                    </div>
+                    <div class="trade-show-card-right">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7WwDrF6i8w-JCJzZDpZaFxeIgkhLSUm6Mdg&s" alt="BioAsia Logo" class="trade-show-event-logo">
+                    </div>
+                </div>
+                <div class="trade-show-event-details">
+                    <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Time:</span>
+                        <span class="trade-show-detail-value">9:00 AM - 6:00 PM</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">City/Country:</span>
+                        <span class="trade-show-detail-value">Hyderabad/India</span>
+                    </div>
+                     <div class="trade-show-detail-row" style="gap:10px;align-items:center">
+                        <span class="trade-show-detail-label">Organizer:</span>
+                        <span class="trade-show-detail-value">Government of Telangana</span>
+                    </div>
+                    <div class="trade-show-detail-row">
+                        <span class="trade-show-detail-label">Location:</span>
+                        <span class="trade-show-detail-value">
+                            <a href="https://maps.google.com/?q=HICC,Hyderabad+International+Convention+Centre,India" target="_blank" class="trade-show-location-link">
+                                📍 HICC, Hyderabad, India
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="trade-show-event-actions">
+                    <a href="https://bioasia.in/" target="_blank" class="trade-show-btn past-trade-show-btn">View Event</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="lab-innovations-modal" class="trade-show-modal">
+        <div class="trade-show-modal-content">
+            <button class="trade-show-modal-close" onclick="closeModal('lab-innovations-modal')">&times;</button>
+            <h3>Lab Innovations 2025</h3>
+            <div class="trade-show-modal-details">
+                <p><strong>Event Overview:</strong> Lab Innovations is the UK's leading laboratory technology exhibition, showcasing the latest analytical instrumentation, laboratory equipment, and services to the scientific community.</p>
+
+                <p><strong>About the Event:</strong> Lab Innovations brings together over 300 exhibitors and 5,000 laboratory professionals. The event features live demonstrations, technical seminars, and networking opportunities. Key focus areas include analytical instrumentation, laboratory automation, consumables, and services.</p>
+
+                <p><strong>Who Should Attend:</strong></p>
+                <ul>
+                    <li>Laboratory managers and technicians</li>
+                    <li>Research scientists and analysts</li>
+                    <li>Quality control professionals</li>
+                    <li>Procurement specialists</li>
+                    <li>Academic researchers</li>
+                </ul>
+
+                <p><strong>Key Exhibition Areas:</strong></p>
+                <ul>
+                    <li>Analytical & Testing Equipment</li>
+                    <li>Laboratory Automation</li>
+                    <li>Consumables & Supplies</li>
+                    <li>Laboratory Services</li>
+                    <li>Software & Data Management</li>
+                </ul>
+
+                <p><strong>Foxx Life Sciences Participation:</strong> Visit our booth to discover our latest laboratory consumables, liquid handling solutions, and specialized products for pharmaceutical and biotechnology applications. Our experts will be available to discuss custom solutions and answer technical questions.</p>
+
+                <p><strong>Event Highlights:</strong></p>
+                <ul>
+                    <li>Free-to-attend exhibition</li>
+                    <li>Educational seminars and workshops</li>
+                    <li>Networking receptions</li>
+                    <li>New product launches</li>
+                    <li>Technology demonstrations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="india-lab-expo-modal" class="trade-show-modal">
+        <div class="trade-show-modal-content">
+            <button class="trade-show-modal-close" onclick="closeModal('india-lab-expo-modal')">&times;</button>
+            <h3>India Lab Expo 2025</h3>
+            <div class="trade-show-modal-details">
+                <p><strong>Event Overview:</strong> India's premier laboratory and analytical instrumentation exhibition, connecting global suppliers with Indian laboratory professionals across pharmaceuticals, biotechnology, and research sectors.</p>
+
+                <p><strong>About the Event:</strong> India Lab Expo is the country's largest trade fair for laboratory and analytical technology. The event attracts over 15,000 visitors and 400+ exhibitors from around the world, showcasing cutting-edge laboratory instruments, equipment, and services.</p>
+
+                <p><strong>Market Focus:</strong></p>
+                <ul>
+                    <li>Pharmaceutical & Biotechnology</li>
+                    <li>Chemical & Petrochemical</li>
+                    <li>Food & Beverage Testing</li>
+                    <li>Environmental Testing</li>
+                    <li>Academic & Research Institutes</li>
+                </ul>
+
+                <p><strong>Product Categories:</strong></p>
+                <ul>
+                    <li>Analytical Instruments</li>
+                    <li>Laboratory Equipment</li>
+                    <li>Consumables & Reagents</li>
+                    <li>Laboratory Furniture</li>
+                    <li>Safety Equipment</li>
+                </ul>
+
+                <p><strong>Foxx Life Sciences Participation:</strong> Discover our comprehensive range of laboratory consumables specifically designed for the Indian market, including sterile and non-sterile products for pharmaceutical and biotechnology applications.</p>
+
+                <p><strong>Conference Program:</strong> The event features technical presentations, panel discussions, and workshops covering latest trends in laboratory technology, regulatory updates, and best practices in laboratory management.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="ispe-boston-modal" class="trade-show-modal">
+        <div class="trade-show-modal-content">
+            <button class="trade-show-modal-close" onclick="closeModal('ispe-boston-modal')">&times;</button>
+            <h3>ISPE Boston - 1 Day Event 2025</h3>
+            <div class="trade-show-modal-details">
+                <p><strong>Event Overview:</strong> An intensive one-day pharmaceutical manufacturing event organized by ISPE Boston, focusing on the latest trends, technologies, and regulatory updates in pharmaceutical manufacturing.</p>
+
+                <p><strong>About the Event:</strong> This exclusive one-day event brings together pharmaceutical manufacturing professionals from the New England region. Sessions cover topics including process optimization, quality systems, and emerging technologies in pharmaceutical manufacturing.</p>
+
+                <p><strong>Target Audience:</strong></p>
+                <ul>
+                    <li>Pharmaceutical manufacturing professionals</li>
+                    <li>Process engineers</li>
+                    <li>Quality assurance managers</li>
+                    <li>Regulatory affairs specialists</li>
+                    <li>Technology suppliers</li>
+                </ul>
+
+                <p><strong>Key Topics:</strong></p>
+                <ul>
+                    <li>Advanced Manufacturing Technologies</li>
+                    <li>Quality by Design (QbD)</li>
+                    <li>Regulatory Compliance</li>
+                    <li>Process Analytical Technology (PAT)</li>
+                    <li>Continuous Manufacturing</li>
+                </ul>
+
+                <p><strong>Foxx Life Sciences Participation:</strong> Learn about our specialized pharmaceutical-grade consumables and how they can enhance your manufacturing processes while ensuring compliance with FDA and cGMP requirements.</p>
+
+                <p><strong>Networking Opportunities:</strong> The event provides excellent networking opportunities with local pharmaceutical professionals, allowing for knowledge sharing and business development in the New England region.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="cphi-europe-modal" class="trade-show-modal">
+        <div class="trade-show-modal-content">
+            <button class="trade-show-modal-close" onclick="closeModal('cphi-europe-modal')">&times;</button>
+            <h3>CPHI Europe 2025</h3>
+            <div class="trade-show-modal-details">
+                <p><strong>Event Overview:</strong> The world's largest pharmaceutical manufacturing and development event, bringing together the entire pharmaceutical supply chain for networking, sourcing, and knowledge sharing.</p>
+
+                <p><strong>About the Event:</strong> CPHI Europe attracts over 45,000 pharmaceutical professionals and 2,500+ exhibitors from around the globe. The event spans ingredients, machinery, packaging, outsourcing, and finished dosage, making it the most comprehensive pharmaceutical event.</p>
+
+                <p><strong>Event Zones:</strong></p>
+                <ul>
+                    <li>Ingredients Zone - APIs, excipients, intermediates</li>
+                    <li>Machinery Zone - Processing and packaging equipment</li>
+                    <li>Packaging Zone - Primary and secondary packaging</li>
+                    <li>Outsourcing Zone - Contract services</li>
+                    <li>Finished Dosage Zone - Formulation and delivery</li>
+                </ul>
+
+                <p><strong>Co-located Events:</strong></p>
+                <ul>
+                    <li>P-MEC Europe - Processing & Manufacturing</li>
+                    <li>InnoPack - Pharmaceutical Packaging</li>
+                    <li>BioPh - Biopharmaceutical Development</li>
+                    <li>ICSE - Contract Services</li>
+                </ul>
+
+                <p><strong>Foxx Life Sciences Participation:</strong> Explore our complete portfolio of pharmaceutical consumables, from basic laboratory supplies to specialized single-use bioprocessing solutions designed for European market requirements.</p>
+
+                <p><strong>Conference Program:</strong> The event features over 250 presentations covering drug development, manufacturing excellence, regulatory affairs, and market access strategies.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="cphi-india-modal" class="trade-show-modal">
+        <div class="trade-show-modal-content">
+            <button class="trade-show-modal-close" onclick="closeModal('cphi-india-modal')">&times;</button>
+            <h3>CPHI India 2025</h3>
+            <div class="trade-show-modal-details">
+                <p><strong>Event Overview:</strong> India's leading pharmaceutical manufacturing exhibition, connecting global pharmaceutical companies with Indian manufacturers and suppliers in one of the world's fastest-growing pharmaceutical markets.</p>
+
+                <p><strong>About the Event:</strong> CPHI India is South Asia's largest pharmaceutical exhibition, featuring over 1,000 exhibitors and attracting 25,000+ visitors. The event covers the entire pharmaceutical value chain from APIs to finished dosage forms.</p>
+
+                <p><strong>Market Significance:</strong></p>
+                <ul>
+                    <li>India is the world's largest provider of generic drugs</li>
+                    <li>Supplies over 50% of global vaccine demand</li>
+                    <li>Third-largest pharmaceutical market by volume</li>
+                    <li>Growing biopharmaceutical sector</li>
+                </ul>
+
+                <p><strong>Product Categories:</strong></p>
+                <ul>
+                    <li>Active Pharmaceutical Ingredients (APIs)</li>
+                    <li>Pharmaceutical Machinery</li>
+                    <li>Packaging Materials</li>
+                    <li>Contract Manufacturing Services</li>
+                    <li>Laboratory Equipment & Consumables</li>
+                </ul>
+
+                <p><strong>Foxx Life Sciences Participation:</strong> Meet our team to discuss custom solutions for the Indian pharmaceutical market, including cost-effective consumables and specialized products for generic drug manufacturing.</p>
+
+                <p><strong>Conference Highlights:</strong> The event features regulatory updates, market insights, and technical presentations focusing on manufacturing excellence, quality compliance, and business development in the Indian pharmaceutical sector.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced event data for calendar integration with full details
+        const eventData = {
+            'lab-innovations': {
+                title: 'Lab Innovations 2025',
+                start: '20251029T090000',
+                end: '20251030T170000',
+                description: `Lab Innovations - Leading exhibition for the laboratory technology and analytical instrumentation industry.
+
+About the Event: Lab Innovations brings together over 300 exhibitors and 5,000 laboratory professionals. The event features live demonstrations, technical seminars, and networking opportunities. Key focus areas include analytical instrumentation, laboratory automation, consumables, and services.
+
+Foxx Life Sciences Participation: Visit our booth to discover our latest laboratory consumables, liquid handling solutions, and specialized products for pharmaceutical and biotechnology applications.
+
+Organized by: Easyfairs
+Website: https://www.lab-innovations.com/
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'NEC, Birmingham, UK',
+                url: 'https://www.lab-innovations.com/',
+                mapLocation: 'NEC,Birmingham,UK'
+            },
+            'india-lab-expo': {
+                title: 'India Lab Expo 2025',
+                start: '20250918T100000',
+                end: '20250920T180000',
+                description: `India Lab Expo - Premier laboratory and analytical instrumentation exhibition.
+
+About the Event: India Lab Expo is the country's largest trade fair for laboratory and analytical technology. The event attracts over 15,000 visitors and 400+ exhibitors from around the world, showcasing cutting-edge laboratory instruments, equipment, and services.
+
+Foxx Life Sciences Participation: Discover our comprehensive range of laboratory consumables specifically designed for the Indian market, including sterile and non-sterile products for pharmaceutical and biotechnology applications.
+
+Organized by: Messe München
+Website: https://www.indialabexpo.com/
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'HITEX Exhibition Centre, Hyderabad, Telangana, India',
+                url: 'https://www.indialabexpo.com/',
+                mapLocation: 'HITEX+Exhibition+Centre,Hyderabad,Telangana,India'
+            },
+            'ispe-boston': {
+                title: 'ISPE Boston - 1 Day Event 2025',
+                start: '20251001T080000',
+                end: '20251001T180000',
+                description: `ISPE Boston one-day pharmaceutical manufacturing event.
+
+About the Event: This exclusive one-day event brings together pharmaceutical manufacturing professionals from the New England region. Sessions cover topics including process optimization, quality systems, and emerging technologies in pharmaceutical manufacturing.
+
+Foxx Life Sciences Participation: Learn about our specialized pharmaceutical-grade consumables and how they can enhance your manufacturing processes while ensuring compliance with FDA and cGMP requirements.
+
+Organized by: ISPE
+Website: https://ispe.org/
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'Gillette Stadium, 1 Patriot Pl, Foxborough, MA, USA',
+                url: 'https://ispe.org/',
+                mapLocation: 'Gillette+Stadium,1+Patriot+Pl,Foxborough,MA,USA'
+            },
+            'cphi-europe': {
+                title: 'CPHI Europe 2025',
+                start: '20251028T090000',
+                end: '20251030T170000',
+                description: `CPHI Europe - Leading pharmaceutical manufacturing and development event.
+
+About the Event: CPHI Europe attracts over 45,000 pharmaceutical professionals and 2,500+ exhibitors from around the globe. The event spans ingredients, machinery, packaging, outsourcing, and finished dosage, making it the most comprehensive pharmaceutical event.
+
+Foxx Life Sciences Participation: Explore our complete portfolio of pharmaceutical consumables, from basic laboratory supplies to specialized single-use bioprocessing solutions designed for European market requirements.
+
+Organized by: Informa Markets
+Website: https://www.cphi.com/europe/en/home.html
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'Messe Frankfurt, Ludwig-Erhard-Anlage 1, 60327 Frankfurt am Main, Germany',
+                url: 'https://www.cphi.com/europe/en/home.html',
+                mapLocation: 'Messe+Frankfurt,Ludwig-Erhard-Anlage+1,60327+Frankfurt+am+Main,Germany'
+            },
+            'cphi-india': {
+                title: 'CPHI India 2025',
+                start: '20251126T100000',
+                end: '20251128T180000',
+                description: `CPHI India - Pharmaceutical manufacturing and development exhibition.
+
+About the Event: CPHI India is South Asia's largest pharmaceutical exhibition, featuring over 1,000 exhibitors and attracting 25,000+ visitors. The event covers the entire pharmaceutical value chain from APIs to finished dosage forms.
+
+Foxx Life Sciences Participation: Meet our team to discuss custom solutions for the Indian pharmaceutical market, including cost-effective consumables and specialized products for generic drug manufacturing.
+
+Organized by: Informa Markets
+Website: https://www.cphi.com/india/en/home.html
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'India Expo Centre, Greater Noida, New Delhi, India',
+                url: 'https://www.cphi.com/india/en/home.html',
+                mapLocation: 'India+Expo+Centre,Greater+Noida,New+Delhi,India'
+            }
+        };
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('trade-show-modal')) {
+                e.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function toggleCalendarDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isVisible = dropdown.classList.contains('show');
+
+            // Close all other dropdowns
+            document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => d.classList.remove('show'));
+
+            // Toggle current dropdown
+            if (!isVisible) {
+                dropdown.classList.add('show');
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function closeDropdown(e) {
+                if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                    document.removeEventListener('click', closeDropdown);
+                }
+            });
+        }
+
+        function formatDateForOutlook(dateStr) {
+            // Convert YYYYMMDDTHHMMSS to YYYY-MM-DDTHH:MM:SS
+            const year = dateStr.substring(0, 4);
+            const month = dateStr.substring(4, 6);
+            const day = dateStr.substring(6, 8);
+            const hour = dateStr.substring(9, 11);
+            const minute = dateStr.substring(11, 13);
+            const second = dateStr.substring(13, 15);
+
+            return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+        }
+
+        function formatDateForYahoo(dateStr) {
+            // Convert to YYYYMMDD format for Yahoo
+            return dateStr.substring(0, 8);
+        }
+
+        function addToCalendar(platform, eventKey) {
+            const event = eventData[eventKey];
+            if (!event) return;
+
+            let url = '';
+
+            switch(platform) {
+                case 'google':
+                    url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}Z/${event.end}Z&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&url=${encodeURIComponent(event.url)}`;
+                    window.open(url, '_blank');
+                    break;
+
+                case 'outlook':
+                    const startDateOutlook = formatDateForOutlook(event.start);
+                    const endDateOutlook = formatDateForOutlook(event.end);
+                    url = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(event.title)}&startdt=${startDateOutlook}&enddt=${endDateOutlook}&body=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+                    window.open(url, '_blank');
+                    break;
+
+                case 'yahoo':
+                    const startDateYahoo = formatDateForYahoo(event.start);
+                    const endDateYahoo = formatDateForYahoo(event.end);
+                    const startTime = event.start.substring(9, 11) + event.start.substring(11, 13);
+                    const endTime = event.end.substring(9, 11) + event.end.substring(11, 13);
+                    url = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(event.title)}&st=${startDateYahoo}&et=${endDateYahoo}&desc=${encodeURIComponent(event.description)}&in_loc=${encodeURIComponent(event.location)}`;
+                    window.open(url, '_blank');
+                    break;
+
+                case 'apple':
+                case 'ics':
+                    downloadICS(event);
+                    break;
+            }
+
+            // Close dropdown
+            document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => d.classList.remove('show'));
+        }
+
+        function formatICSDate(dateStr) {
+            // Convert from YYYYMMDDTHHMMSS to YYYYMMDDTHHMMSSZ
+            return dateStr + 'Z';
+        }
+
+        function downloadICS(event) {
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const uid = `${Date.now()}@foxxlifesciences.com`;
+
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Foxx Life Sciences//Trade Shows//EN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${timestamp}
+DTSTART:${formatICSDate(event.start)}
+DTEND:${formatICSDate(event.end)}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description.replace(/\n/g, '\\n')}
+LOCATION:${event.location}
+URL:${event.url}
+ORGANIZER;CN=Foxx Life Sciences:mailto:sales@foxxlifesciences.com
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: ${event.title}
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${event.title.replace(/[^a-zA-Z0-9]/g, '_')}.ics`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
