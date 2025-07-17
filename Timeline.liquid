@@ -88,7 +88,7 @@
         position: relative;
         width: 100%;
         min-width: 3200px;
-        height: 400px;
+        height: 600px;
         margin: 0 auto;
     }
 
@@ -138,13 +138,15 @@
 
     /* Alternating positions - odd items above, even items below */
     .timeline-item:nth-child(odd) {
-        align-self: flex-start;
-        padding-top: 20px;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 80px;
     }
 
     .timeline-item:nth-child(even) {
-        align-self: flex-end;
-        padding-bottom: 20px;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 80px;
         flex-direction: column-reverse;
     }
 
@@ -194,12 +196,12 @@
 
     .timeline-item:nth-child(odd) .timeline-dot::after {
         bottom: -10px;
-        height: 60px;
+        height: 100px;
     }
 
     .timeline-item:nth-child(even) .timeline-dot::after {
         top: -10px;
-        height: 60px;
+        height: 100px;
     }
 
     .timeline-item:nth-child(even) .timeline-dot {
@@ -226,10 +228,12 @@
         border: 1px solid #f0f0f0;
         transition: all 0.3s ease;
         width: 140px;
-        min-height: 150px;
+        height: 180px;
         display: flex;
         flex-direction: column;
         text-align: center;
+        margin: 10px 0;
+        justify-content: space-between;
     }
 
     .timeline-card:hover {
@@ -292,7 +296,7 @@
 
         .timeline-track {
             min-width: 1800px;
-            height: 300px;
+            height: 500px;
         }
 
         .timeline-line {
@@ -312,7 +316,7 @@
 
         .timeline-card {
             width: 100px;
-            min-height: 120px;
+            height: 180px;
             padding: 8px;
         }
 
@@ -344,11 +348,11 @@
         }
 
         .timeline-item:nth-child(odd) .timeline-dot::after {
-            height: 40px;
+            height: 80px;
         }
 
         .timeline-item:nth-child(even) .timeline-dot::after {
-            height: 40px;
+            height: 80px;
         }
 
         .main-title {
