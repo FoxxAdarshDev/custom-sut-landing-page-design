@@ -1,10 +1,5 @@
-<style>
-    /* Force display block for empty elements */
-    .timeline-dot *:empty,
-    .timeline-container *:empty {
-        display: block !important;
-    }
 
+<style>
     .timeline-container {
         width: 100%;
         margin: 0;
@@ -88,7 +83,7 @@
         position: relative;
         width: 100%;
         min-width: 3200px;
-        height: 400px;
+        height: 500px;
         margin: 0 auto;
     }
 
@@ -99,8 +94,7 @@
         left: 5%;
         right: 5%;
         height: 4px;
-        background: transparent;
-        border-top: 4px dotted #2196F3;
+        background: #2196F3;
         border-radius: 2px;
         transform: translateY(-50%);
         animation: drawLine 3s ease-out;
@@ -135,17 +129,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 100%;
+        justify-content: center;
     }
 
     /* Alternating positions - odd items above, even items below */
     .timeline-item:nth-child(odd) {
-        align-self: flex-start;
-        padding-top: 30px;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
     }
 
     .timeline-item:nth-child(even) {
-        align-self: flex-end;
-        padding-bottom: 30px;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 50px;
         flex-direction: column-reverse;
     }
 
@@ -178,10 +176,10 @@
         box-shadow: 0 0 0 3px #2196F3, 0 4px 15px rgba(33, 150, 243, 0.4);
         animation: pulse 2s infinite;
         z-index: 20;
-        margin: 0 0 10px 0;
+        margin: 10px 0;
     }
 
-    /* Connecting lines from main line to cards */
+    /* Connecting lines from main line to cards - FIXED */
     .timeline-dot::after {
         content: '';
         position: absolute;
@@ -193,19 +191,16 @@
         border-radius: 1px;
     }
 
+    /* For odd items (above the line) */
     .timeline-item:nth-child(odd) .timeline-dot::after {
-        bottom: -10px;
-        height: 45px;
+        top: 100%;
+        height: 80px;
     }
 
+    /* For even items (below the line) */
     .timeline-item:nth-child(even) .timeline-dot::after {
-        top: -10px;
-        height: 45px;
-    }
-
-    .timeline-item:nth-child(even) .timeline-dot {
-        margin: 10px 0 0 0;
-        order: 2;
+        bottom: 100%;
+        height: 80px;
     }
 
     @keyframes pulse {
@@ -231,8 +226,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        margin-top: 15px;
-        margin-bottom: 15px;
+        margin: 10px 0;
     }
 
     .timeline-card:hover {
@@ -295,13 +289,14 @@
 
         .timeline-track {
             min-width: 1800px;
-            height: 300px;
+            height: 400px;
         }
 
         .timeline-line {
             left: 3%;
             right: 3%;
             height: 3px;
+            width: 94%;
         }
 
         .timeline-items {
@@ -347,11 +342,11 @@
         }
 
         .timeline-item:nth-child(odd) .timeline-dot::after {
-            height: 40px;
+            height: 60px;
         }
 
         .timeline-item:nth-child(even) .timeline-dot::after {
-            height: 40px;
+            height: 60px;
         }
 
         .main-title {
