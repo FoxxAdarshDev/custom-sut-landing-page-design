@@ -97,8 +97,8 @@
     .timeline-line {
         position: absolute;
         top: 50%;
-        left: 2%;
-        width: 96%;
+        left: 0;
+        width: 100%;
         height: 4px;
         background: linear-gradient(90deg, #2196F3 0%, #4CAF50 50%, #FF9800 100%);
         border-radius: 2px;
@@ -112,18 +112,15 @@
         height: 100%;
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
-        padding: 0 2%;
+        padding: 0;
         z-index: 10;
-        gap: 10px;
     }
 
     .timeline-item {
         position: relative;
-        flex: 1;
-        min-width: 120px;
-        max-width: 150px;
+        width: 140px;
         animation: fadeInUp 0.8s ease-out forwards;
         opacity: 1;
         transform: translateY(0);
@@ -136,12 +133,12 @@
     /* Alternating positions - odd items above, even items below */
     .timeline-item:nth-child(odd) {
         align-items: center;
-        margin-top: -120px;
+        margin-top: -180px;
     }
 
     .timeline-item:nth-child(even) {
         align-items: center;
-        margin-top: 120px;
+        margin-top: 60px;
         flex-direction: column-reverse;
     }
 
@@ -174,11 +171,11 @@
         box-shadow: 0 0 0 3px #2196F3, 0 4px 15px rgba(33, 150, 243, 0.4);
         animation: pulse 2s infinite;
         z-index: 20;
-        margin: 15px 0;
+        margin: 10px 0;
     }
 
-    /* Connecting lines from main line to cards */
-    .timeline-dot::after {
+    /* Connecting lines from dots to main center line */
+    .timeline-dot::before {
         content: '';
         position: absolute;
         left: 50%;
@@ -189,14 +186,16 @@
         border-radius: 1px;
     }
 
-    .timeline-item:nth-child(odd) .timeline-dot::after {
+    /* Lines connecting to center line for odd items (above) */
+    .timeline-item:nth-child(odd) .timeline-dot::before {
         top: 100%;
-        height: 110px;
+        height: 165px;
     }
 
-    .timeline-item:nth-child(even) .timeline-dot::after {
+    /* Lines connecting to center line for even items (below) */
+    .timeline-item:nth-child(even) .timeline-dot::before {
         bottom: 100%;
-        height: 110px;
+        height: 45px;
     }
 
     @keyframes pulse {
@@ -222,6 +221,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
+        position: relative;
     }
 
     .timeline-card:hover {
@@ -283,23 +283,28 @@
         }
 
         .timeline-track {
-            min-width: 1600px;
-            height: 300px;
+            min-width: 1800px;
+            height: 350px;
         }
 
         .timeline-line {
-            left: 3%;
-            right: 3%;
             height: 3px;
         }
 
         .timeline-items {
-            padding: 0 3%;
+            padding: 0 20px;
         }
 
         .timeline-item {
-            min-width: 120px;
-            width: 7%;
+            width: 120px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            margin-top: -140px;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-top: 40px;
         }
 
         .timeline-card {
@@ -335,12 +340,12 @@
             width: 1px;
         }
 
-        .timeline-item:nth-child(odd) .timeline-dot::after {
-            height: 40px;
+        .timeline-item:nth-child(odd) .timeline-dot::before {
+            height: 125px;
         }
 
-        .timeline-item:nth-child(even) .timeline-dot::after {
-            height: 40px;
+        .timeline-item:nth-child(even) .timeline-dot::before {
+            height: 25px;
         }
 
         .main-title {
