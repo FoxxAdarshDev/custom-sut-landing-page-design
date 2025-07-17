@@ -1,5 +1,11 @@
 
 <style>
+    /* Force display block for empty elements */
+    .timeline-dot *:empty,
+    .timeline-container *:empty {
+        display: block !important;
+    }
+
     .timeline-container {
         width: 100%;
         margin: 0;
