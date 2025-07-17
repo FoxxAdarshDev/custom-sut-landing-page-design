@@ -1,5 +1,11 @@
 
 <style>
+    /* Force display block for empty elements */
+    .timeline-dot *:empty,
+    .timeline-container *:empty {
+        display: block !important;
+    }
+
     .timeline-container {
         width: 100%;
         margin: 0;
@@ -405,7 +411,7 @@
         <div class="timeline-track">
             <div class="timeline-line"></div>
             <div class="timeline-items">
-                <!-- 2006 -->
+                 <!-- 2006 -->
                 <div class="timeline-item">
                     <div class="timeline-card">
                         <div class="timeline-year">2006</div>
@@ -526,19 +532,96 @@
                     <div class="timeline-dot"></div>
                 </div>
 
+                <!-- 2008 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2008</div>
+                        <img src="https://via.placeholder.com/140x60/607D8B/white?text=Purchase" alt="Purchase" class="timeline-image">
+                        <div class="timeline-title">Taylor Purchased</div>
+                        <div class="timeline-description">100 percent of original IP and created Foxx Life Sciences</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2009 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2009</div>
+                        <img src="https://via.placeholder.com/140x60/9C27B0/white?text=Office" alt="Office" class="timeline-image">
+                        <div class="timeline-title">Taylor Established New Hampshire Office</div>
+                        <div class="timeline-description">32 miles (52km) north of Boston</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2011-12 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2011-12</div>
+                        <img src="https://via.placeholder.com/140x60/FF9800/white?text=EZclear" alt="EZclear" class="timeline-image">
+                        <div class="timeline-title">EZclear Carboys, EZwaste and Versacap</div>
+                        <div class="timeline-description">SUT 2.5L - 75L were launched with a focus on technology</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2014 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2014</div>
+                        <img src="https://via.placeholder.com/140x60/E91E63/white?text=Launch" alt="Launch" class="timeline-image">
+                        <div class="timeline-title">Launch of Versacap</div>
+                        <div class="timeline-description">Syringe filters, EZbio Bottles, die cut membranes</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2017-18 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2017-18</div>
+                        <img src="https://via.placeholder.com/140x60/009688/white?text=Foxx" alt="Foxx" class="timeline-image">
+                        <div class="timeline-title">Foxx Launched</div>
+                        <div class="timeline-description">The patented EZnectr line of glass bottles, flasks & carboys and HPLC Chromacaps</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2019 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2019</div>
+                        <img src="https://via.placeholder.com/140x60/795548/white?text=Bridge" alt="Bridge" class="timeline-image">
+                        <div class="timeline-title">Considered the 'Bridge to India'</div>
+                        <div class="timeline-description">Foxx Inaugurated 1st State-of-the-art Manufacturing Plant in Hyderabad, India</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2024</div>
+                        <img src="https://via.placeholder.com/140x60/4CAF50/white?text=Launch" alt="Launch" class="timeline-image">
+                        <div class="timeline-title">Launched Exciting New EZbio Ultra Bags & Rhino</div>
+                        <div class="timeline-description">Coated Bottles and Carboys</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
                 <!-- 2025 -->
                 <div class="timeline-item">
                     <div class="timeline-card">
                         <div class="timeline-year">2025</div>
-                        <img src="https://via.placeholder.com/140x60/4CAF50/white?text=India" alt="India" class="timeline-image">
+                        <img src="https://via.placeholder.com/140x60/FF5722/white?text=India" alt="India" class="timeline-image">
                         <div class="timeline-title">Celebrating 5 Years India</div>
-                        <div class="timeline-description">2 new manufacturing facilities launched</div>
+                        <div class="timeline-description">2 Launch of Manufacturing Facilities</div>
                     </div>
                     <div class="timeline-dot"></div>
                 </div>
             </div>
         </div>
-        
+
         <div class="scroll-indicator" style="display: none;">
             <p>← Scroll to explore our journey →</p>
         </div>
@@ -549,7 +632,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const timelineContainer = document.getElementById('timelineContainer');
         const scrollIndicator = document.querySelector('.scroll-indicator');
-        
+
         // Show scroll indicator on mobile
         if (window.innerWidth <= 768) {
             scrollIndicator.style.display = 'block';
@@ -557,7 +640,7 @@
 
         // Add loading class initially
         timelineContainer.classList.add('loading');
-        
+
         // Remove loading class after page loads
         setTimeout(() => {
             timelineContainer.classList.remove('loading');
