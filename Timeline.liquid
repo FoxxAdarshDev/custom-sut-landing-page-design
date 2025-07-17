@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foxx Growth Story Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .timeline-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 3px solid #2196F3;
+        }
+
+        .timeline-header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .company-logo {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInRight 1.5s ease-out;
+        }
+
+        .logo-text {
+            color: #2196F3;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .logo-tagline {
+            color: #666;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .timeline-content {
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        /* Desktop Timeline */
+        .timeline-track {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2196F3 0%, #4CAF50 50%, #FF9800 100%);
+            border-radius: 2px;
+            transform: translateY(-50%);
+            animation: drawLine 3s ease-out;
+        }
+
+        @keyframes drawLine {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .timeline-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timeline-item {
+            position: relative;
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+        .timeline-item:nth-child(5) { animation-delay: 1.0s; }
+        .timeline-item:nth-child(6) { animation-delay: 1.2s; }
+        .timeline-item:nth-child(7) { animation-delay: 1.4s; }
+        .timeline-item:nth-child(8) { animation-delay: 1.6s; }
+        .timeline-item:nth-child(9) { animation-delay: 1.8s; }
+        .timeline-item:nth-child(10) { animation-delay: 2.0s; }
+
+        .timeline-dot {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #2196F3;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #2196F3, 0 5px 15px rgba(33, 150, 243, 0.3);
+            animation: pulse 2s infinite;
+            z-index: 20;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 3px #2196F3, 0 5px 15px rgba(33, 150, 243, 0.3);
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.2);
+                box-shadow: 0 0 0 6px rgba(33, 150, 243, 0.6), 0 8px 25px rgba(33, 150, 243, 0.5);
+            }
+        }
+
+        .timeline-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(33, 150, 243, 0.2);
+            border-color: #2196F3;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-card:hover .timeline-image {
+            transform: scale(1.05);
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .timeline-description {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        /* Mobile Horizontal Timeline */
+        @media (max-width: 768px) {
+            .timeline-content {
+                padding: 30px 20px;
+            }
+
+            .timeline-track {
+                margin: 20px 0;
+            }
+
+            .timeline-line {
+                top: 20px;
+                height: 3px;
+                background: linear-gradient(90deg, #2196F3 0%, #4CAF50 50%, #FF9800 100%);
+            }
+
+            .timeline-items {
+                display: flex;
+                overflow-x: auto;
+                gap: 20px;
+                padding: 40px 0 20px 0;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .timeline-items::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .timeline-items::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+
+            .timeline-items::-webkit-scrollbar-thumb {
+                background: #2196F3;
+                border-radius: 10px;
+            }
+
+            .timeline-item {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+            }
+
+            .timeline-dot {
+                top: -40px;
+                width: 16px;
+                height: 16px;
+                border: 3px solid white;
+            }
+
+            .timeline-card {
+                min-height: 320px;
+                padding: 15px;
+            }
+
+            .timeline-year {
+                font-size: 1rem;
+                padding: 6px 12px;
+            }
+
+            .timeline-image {
+                height: 100px;
+            }
+
+            .timeline-title {
+                font-size: 0.9rem;
+            }
+
+            .timeline-description {
+                font-size: 0.8rem;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .company-logo {
+                position: static;
+                display: inline-block;
+                margin-top: 20px;
+                padding: 10px;
+            }
+
+            .timeline-header {
+                padding: 30px 20px;
+            }
+        }
+
+        @keyframes slideInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Animation */
+        .timeline-container.loading .timeline-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Scroll Indicator for Mobile */
+        @media (max-width: 768px) {
+            .scroll-indicator {
+                text-align: center;
+                margin-top: 20px;
+                color: #666;
+                font-size: 0.9rem;
+                animation: bounce 2s infinite;
+            }
+
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                60% { transform: translateY(-5px); }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container" id="timelineContainer">
+        <div class="timeline-header">
+            <h1 class="main-title">FOXX GROWTH STORY</h1>
+            <div class="company-logo">
+                <p class="logo-text">Foxx Life Sciences</p>
+                <p class="logo-tagline">Our Innovation. Your Opportunity.</p>
+            </div>
+        </div>
+
+        <div class="timeline-content">
+            <div class="timeline-track">
+                <div class="timeline-line"></div>
+                <div class="timeline-items">
+                    <!-- 2006 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2006</div>
+                            <img src="https://via.placeholder.com/200x120/2196F3/white?text=First+Design" alt="First Design" class="timeline-image">
+                            <div class="timeline-title">First Design of Foxx Products</div>
+                            <div class="timeline-description">At Nypro Life Sciences, the foundation was laid for innovative bioprocessing solutions.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2007 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2007</div>
+                            <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Joint+Venture" alt="Joint Venture" class="timeline-image">
+                            <div class="timeline-title">Thomas Foxx Taylor and Nypro created joint venture</div>
+                            <div class="timeline-description">Strategic partnership formed to develop research products and advance bioprocessing technology.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2008 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2008</div>
+                            <img src="https://via.placeholder.com/200x120/FF9800/white?text=Taylor+Formed" alt="Taylor Formed" class="timeline-image">
+                            <div class="timeline-title">Taylor formed Joint venture with Nypro</div>
+                            <div class="timeline-description">Official formation of the joint venture to create Foxx Life Sciences and expand market reach.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2009 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2009</div>
+                            <img src="https://via.placeholder.com/200x120/9C27B0/white?text=Office+Established" alt="Office Established" class="timeline-image">
+                            <div class="timeline-title">Taylor established New Hampshire office</div>
+                            <div class="timeline-description">Expanded operations with a new office 32 miles from North Boston, strengthening East Coast presence.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2010 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2010</div>
+                            <img src="https://via.placeholder.com/200x120/F44336/white?text=EzClear+Bottle" alt="EzClear Bottle" class="timeline-image">
+                            <div class="timeline-title">EzClear Bottle Top Filter</div>
+                            <div class="timeline-description">Revolutionary bottle top filter and bottle were launched with 7 patents, setting new industry standards.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2013 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2013</div>
+                            <img src="https://via.placeholder.com/200x120/607D8B/white?text=First+Class+7" alt="First Class 7" class="timeline-image">
+                            <div class="timeline-title">First Class 7 Clean Room</div>
+                            <div class="timeline-description">Advanced clean room and sterile bottle technologies were created to meet pharmaceutical standards.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2015-16 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2015-16</div>
+                            <img src="https://via.placeholder.com/200x120/795548/white?text=Product+Range" alt="Product Range" class="timeline-image">
+                            <div class="timeline-title">Expanded Product Range</div>
+                            <div class="timeline-description">A wide range of patented mixing bowl technologies, DOT legal carboys, containers and custom tubing sets.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2018 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2018</div>
+                            <img src="https://via.placeholder.com/200x120/009688/white?text=Opening+P2" alt="Opening P2" class="timeline-image">
+                            <div class="timeline-title">Opening of P2 Facility</div>
+                            <div class="timeline-description">State-of-the-art P2 Facility in Londonderry opened to expand manufacturing capabilities.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2019-21 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2019-21</div>
+                            <img src="https://via.placeholder.com/200x120/3F51B5/white?text=Auto+Assembler" alt="Auto Assembler" class="timeline-image">
+                            <div class="timeline-title">Auto launched Assembler</div>
+                            <div class="timeline-description">Breakthrough automation technology launched with EZBio Auto Assembler for streamlined manufacturing.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2023 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2023</div>
+                            <img src="https://via.placeholder.com/200x120/E91E63/white?text=New+Global+Record" alt="New Global Record" class="timeline-image">
+                            <div class="timeline-title">Foxx sets a New Global Record</div>
+                            <div class="timeline-description">Achieved record production of 198,730 Gallons delivery with NEW CLASS VI BioProcess Titanium Technology.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2025 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-year">2025</div>
+                            <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Celebrating+India" alt="Celebrating India" class="timeline-image">
+                            <div class="timeline-title">Celebrating 5 Years in India</div>
+                            <div class="timeline-description">Milestone celebration of successful operations and Launch of 2 new Manufacturing Facilities in India.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" style="display: none;">
+                <p>← Swipe to explore our journey →</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineContainer = document.getElementById('timelineContainer');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            // Show scroll indicator on mobile
+            if (window.innerWidth <= 768) {
+                scrollIndicator.style.display = 'block';
+            }
+
+            // Add loading class initially
+            timelineContainer.classList.add('loading');
+            
+            // Remove loading class after page loads
+            setTimeout(() => {
+                timelineContainer.classList.remove('loading');
+            }, 500);
+
+            // Intersection Observer for timeline items
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all timeline items
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 768) {
+                    scrollIndicator.style.display = 'block';
+                } else {
+                    scrollIndicator.style.display = 'none';
+                }
+            });
+
+            // Auto-scroll animation for mobile (optional)
+            const timelineItems = document.querySelector('.timeline-items');
+            if (window.innerWidth <= 768 && timelineItems) {
+                let scrollAmount = 0;
+                const maxScroll = timelineItems.scrollWidth - timelineItems.clientWidth;
+                
+                // Optional: Add subtle auto-scroll hint
+                setTimeout(() => {
+                    timelineItems.scrollTo({
+                        left: 50,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        timelineItems.scrollTo({
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                    }, 1000);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
