@@ -1,11 +1,5 @@
 
 <style>
-    /* Force display block for empty elements */
-    .timeline-dot *:empty,
-    .timeline-container *:empty {
-        display: block !important;
-    }
-
     .timeline-container {
         width: 100%;
         margin: 0;
@@ -88,8 +82,8 @@
     .timeline-track {
         position: relative;
         width: 100%;
-        min-width: 2400px;
-        height: 500px;
+        min-width: 1800px;
+        height: 400px;
         margin: 0 auto;
     }
 
@@ -97,14 +91,20 @@
     .timeline-line {
         position: absolute;
         top: 50%;
-        left: 0;
-        width: 100%;
+        left: 5%;
+        right: 5%;
         height: 4px;
         background: linear-gradient(90deg, #2196F3 0%, #4CAF50 50%, #FF9800 100%);
         border-radius: 2px;
         transform: translateY(-50%);
-        z-index: 5;
+        animation: drawLine 3s ease-out;
+        z-index: 1;
         box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+    }
+
+    @keyframes drawLine {
+        0% { width: 0; }
+        100% { width: 90%; }
     }
 
     .timeline-items {
@@ -112,33 +112,33 @@
         height: 100%;
         width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
-        padding: 0;
+        padding: 0 5%;
         z-index: 10;
     }
 
     .timeline-item {
         position: relative;
-        width: 140px;
+        width: 8%;
+        min-width: 140px;
         animation: fadeInUp 0.8s ease-out forwards;
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 0;
+        transform: translateY(30px);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
     }
 
     /* Alternating positions - odd items above, even items below */
     .timeline-item:nth-child(odd) {
-        align-items: center;
-        margin-top: -180px;
+        align-self: flex-start;
+        padding-top: 20px;
     }
 
     .timeline-item:nth-child(even) {
-        align-items: center;
-        margin-top: 60px;
+        align-self: flex-end;
+        padding-bottom: 20px;
         flex-direction: column-reverse;
     }
 
@@ -154,12 +154,6 @@
     .timeline-item:nth-child(10) { animation-delay: 2.0s; }
     .timeline-item:nth-child(11) { animation-delay: 2.2s; }
     .timeline-item:nth-child(12) { animation-delay: 2.4s; }
-    .timeline-item:nth-child(13) { animation-delay: 2.6s; }
-    .timeline-item:nth-child(14) { animation-delay: 2.8s; }
-    .timeline-item:nth-child(15) { animation-delay: 3.0s; }
-    .timeline-item:nth-child(16) { animation-delay: 3.2s; }
-    .timeline-item:nth-child(17) { animation-delay: 3.4s; }
-    .timeline-item:nth-child(18) { animation-delay: 3.6s; }
 
     .timeline-dot {
         position: relative;
@@ -171,31 +165,34 @@
         box-shadow: 0 0 0 3px #2196F3, 0 4px 15px rgba(33, 150, 243, 0.4);
         animation: pulse 2s infinite;
         z-index: 20;
-        margin: 10px 0;
+        margin: 0 0 10px 0;
     }
 
-    /* Connecting lines from dots to main center line */
-    .timeline-dot::before {
+    /* Connecting lines from main line to cards */
+    .timeline-dot::after {
         content: '';
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        width: 3px;
+        width: 2px;
         background: #2196F3;
-        z-index: 15;
+        z-index: 5;
         border-radius: 1px;
     }
 
-    /* Lines connecting to center line for odd items (above) */
-    .timeline-item:nth-child(odd) .timeline-dot::before {
-        top: 100%;
-        height: 165px;
+    .timeline-item:nth-child(odd) .timeline-dot::after {
+        bottom: -10px;
+        height: 60px;
     }
 
-    /* Lines connecting to center line for even items (below) */
-    .timeline-item:nth-child(even) .timeline-dot::before {
-        bottom: 100%;
-        height: 45px;
+    .timeline-item:nth-child(even) .timeline-dot::after {
+        top: -10px;
+        height: 60px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+        margin: 10px 0 0 0;
+        order: 2;
     }
 
     @keyframes pulse {
@@ -212,16 +209,15 @@
     .timeline-card {
         background: white;
         border-radius: 10px;
-        padding: 15px;
+        padding: 12px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         border: 1px solid #f0f0f0;
         transition: all 0.3s ease;
         width: 140px;
-        min-height: 160px;
+        min-height: 150px;
         display: flex;
         flex-direction: column;
         text-align: center;
-        position: relative;
     }
 
     .timeline-card:hover {
@@ -233,21 +229,21 @@
     .timeline-year {
         background: linear-gradient(135deg, #2196F3, #1976D2);
         color: white;
-        padding: 8px 12px;
+        padding: 4px 8px;
         border-radius: 12px;
         font-weight: bold;
-        font-size: 1.2rem;
+        font-size: 0.9rem;
         text-align: center;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
     }
 
     .timeline-image {
         width: 100%;
-        height: 70px;
+        height: 60px;
         object-fit: cover;
         border-radius: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         transition: transform 0.3s ease;
     }
 
@@ -256,18 +252,18 @@
     }
 
     .timeline-title {
-        font-size: 1.1rem;
+        font-size: 0.75rem;
         font-weight: bold;
         color: #333;
-        margin-bottom: 8px;
-        line-height: 1.3;
+        margin-bottom: 4px;
+        line-height: 1.2;
         flex-grow: 1;
     }
 
     .timeline-description {
-        font-size: 1rem;
+        font-size: 0.65rem;
         color: #666;
-        line-height: 1.4;
+        line-height: 1.3;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
@@ -283,51 +279,46 @@
         }
 
         .timeline-track {
-            min-width: 1800px;
-            height: 350px;
+            min-width: 1200px;
+            height: 300px;
         }
 
         .timeline-line {
+            left: 3%;
+            right: 3%;
             height: 3px;
         }
 
         .timeline-items {
-            padding: 0 20px;
+            padding: 0 3%;
         }
 
         .timeline-item {
-            width: 120px;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            margin-top: -140px;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-top: 40px;
+            min-width: 100px;
+            width: 7%;
         }
 
         .timeline-card {
-            width: 120px;
-            min-height: 140px;
-            padding: 10px;
+            width: 100px;
+            min-height: 120px;
+            padding: 8px;
         }
 
         .timeline-year {
-            font-size: 0.9rem;
-            padding: 4px 8px;
+            font-size: 0.8rem;
+            padding: 3px 6px;
         }
 
         .timeline-image {
-            height: 50px;
+            height: 40px;
         }
 
         .timeline-title {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .timeline-description {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
         }
 
         .timeline-dot {
@@ -340,12 +331,12 @@
             width: 1px;
         }
 
-        .timeline-item:nth-child(odd) .timeline-dot::before {
-            height: 125px;
+        .timeline-item:nth-child(odd) .timeline-dot::after {
+            height: 40px;
         }
 
-        .timeline-item:nth-child(even) .timeline-dot::before {
-            height: 25px;
+        .timeline-item:nth-child(even) .timeline-dot::after {
+            height: 40px;
         }
 
         .main-title {
@@ -535,90 +526,13 @@
                     <div class="timeline-dot"></div>
                 </div>
 
-                <!-- 2008 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2008</div>
-                        <img src="https://via.placeholder.com/140x60/607D8B/white?text=Purchase" alt="Purchase" class="timeline-image">
-                        <div class="timeline-title">Taylor Purchased</div>
-                        <div class="timeline-description">100 percent of original IP and created Foxx Life Sciences</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2009 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2009</div>
-                        <img src="https://via.placeholder.com/140x60/9C27B0/white?text=Office" alt="Office" class="timeline-image">
-                        <div class="timeline-title">Taylor Established New Hampshire Office</div>
-                        <div class="timeline-description">32 miles (52km) north of Boston</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2011-12 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2011-12</div>
-                        <img src="https://via.placeholder.com/140x60/FF9800/white?text=EZclear" alt="EZclear" class="timeline-image">
-                        <div class="timeline-title">EZclear Carboys, EZwaste and Versacap</div>
-                        <div class="timeline-description">SUT 2.5L - 75L were launched with a focus on technology</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2014 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2014</div>
-                        <img src="https://via.placeholder.com/140x60/E91E63/white?text=Launch" alt="Launch" class="timeline-image">
-                        <div class="timeline-title">Launch of Versacap</div>
-                        <div class="timeline-description">Syringe filters, EZbio Bottles, die cut membranes</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2017-18 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2017-18</div>
-                        <img src="https://via.placeholder.com/140x60/009688/white?text=Foxx" alt="Foxx" class="timeline-image">
-                        <div class="timeline-title">Foxx Launched</div>
-                        <div class="timeline-description">The patented EZnectr line of glass bottles, flasks & carboys and HPLC Chromacaps</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2019 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2019</div>
-                        <img src="https://via.placeholder.com/140x60/795548/white?text=Bridge" alt="Bridge" class="timeline-image">
-                        <div class="timeline-title">Considered the 'Bridge to India'</div>
-                        <div class="timeline-description">Foxx Inaugurated 1st State-of-the-art Manufacturing Plant in Hyderabad, India</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <!-- 2024 -->
-                <div class="timeline-item">
-                    <div class="timeline-card">
-                        <div class="timeline-year">2024</div>
-                        <img src="https://via.placeholder.com/140x60/4CAF50/white?text=Launch" alt="Launch" class="timeline-image">
-                        <div class="timeline-title">Launched Exciting New EZbio Ultra Bags & Rhino</div>
-                        <div class="timeline-description">Coated Bottles and Carboys</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
                 <!-- 2025 -->
                 <div class="timeline-item">
                     <div class="timeline-card">
                         <div class="timeline-year">2025</div>
-                        <img src="https://via.placeholder.com/140x60/FF5722/white?text=India" alt="India" class="timeline-image">
+                        <img src="https://via.placeholder.com/140x60/4CAF50/white?text=India" alt="India" class="timeline-image">
                         <div class="timeline-title">Celebrating 5 Years India</div>
-                        <div class="timeline-description">2 Launch of Manufacturing Facilities</div>
+                        <div class="timeline-description">2 new manufacturing facilities launched</div>
                     </div>
                     <div class="timeline-dot"></div>
                 </div>
