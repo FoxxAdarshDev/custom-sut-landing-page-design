@@ -1,3 +1,4 @@
+
 <style>
     * {
         margin: 0;
@@ -85,10 +86,11 @@
         position: relative;
     }
 
-    /* Desktop Timeline */
+    /* Desktop Timeline - Alternating Layout */
     .timeline-track {
         position: relative;
-        margin: 40px 0;
+        margin: 80px 0;
+        min-height: 600px;
     }
 
     .timeline-line {
@@ -101,6 +103,7 @@
         border-radius: 2px;
         transform: translateY(-50%);
         animation: drawLine 3s ease-out;
+        z-index: 1;
     }
 
     @keyframes drawLine {
@@ -111,7 +114,7 @@
     .timeline-items {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
+        gap: 0;
         position: relative;
         z-index: 10;
     }
@@ -121,6 +124,18 @@
         animation: fadeInUp 0.8s ease-out forwards;
         opacity: 0;
         transform: translateY(30px);
+        padding: 0 10px;
+    }
+
+    /* Alternating positions */
+    .timeline-item:nth-child(odd) {
+        align-self: start;
+        margin-bottom: 200px;
+    }
+
+    .timeline-item:nth-child(even) {
+        align-self: end;
+        margin-top: 200px;
     }
 
     .timeline-item:nth-child(1) { animation-delay: 0.2s; }
@@ -136,7 +151,6 @@
 
     .timeline-dot {
         position: absolute;
-        top: -60px;
         left: 50%;
         transform: translateX(-50%);
         width: 20px;
@@ -147,6 +161,36 @@
         box-shadow: 0 0 0 3px #2196F3, 0 5px 15px rgba(33, 150, 243, 0.3);
         animation: pulse 2s infinite;
         z-index: 20;
+    }
+
+    /* Position dots relative to timeline line */
+    .timeline-item:nth-child(odd) .timeline-dot {
+        bottom: -10px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+        top: -10px;
+    }
+
+    /* Connecting lines from dot to card */
+    .timeline-dot::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        background: #2196F3;
+        z-index: 5;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot::after {
+        top: -40px;
+        height: 40px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot::after {
+        bottom: -40px;
+        height: 40px;
     }
 
     @keyframes pulse {
@@ -226,6 +270,7 @@
 
         .timeline-track {
             margin: 20px 0;
+            min-height: auto;
         }
 
         .timeline-line {
@@ -260,13 +305,27 @@
         .timeline-item {
             flex: 0 0 280px;
             scroll-snap-align: start;
+            margin: 0;
+            align-self: auto;
+        }
+
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even) {
+            margin: 0;
+            align-self: auto;
         }
 
         .timeline-dot {
             top: -40px;
+            left: 50%;
             width: 16px;
             height: 16px;
             border: 3px solid white;
+            position: absolute;
+        }
+
+        .timeline-dot::after {
+            display: none;
         }
 
         .timeline-card {
@@ -345,216 +404,216 @@
         }
     }
 </style>
-    <div class="timeline-container" id="timelineContainer">
-        <div class="timeline-header">
-            <h1 class="main-title">FOXX GROWTH STORY</h1>
-            <div class="company-logo">
-                <p class="logo-text">Foxx Life Sciences</p>
-                <p class="logo-tagline">Our Innovation. Your Opportunity.</p>
-            </div>
-        </div>
 
-        <div class="timeline-content">
-            <div class="timeline-track">
-                <div class="timeline-line"></div>
-                <div class="timeline-items">
-                    <!-- 2006 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2006</div>
-                            <img src="https://via.placeholder.com/200x120/2196F3/white?text=First+Design" alt="First Design" class="timeline-image">
-                            <div class="timeline-title">First Design of Foxx Products</div>
-                            <div class="timeline-description">At Nypro Life Sciences, the foundation was laid for innovative bioprocessing solutions.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2007 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2007</div>
-                            <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Joint+Venture" alt="Joint Venture" class="timeline-image">
-                            <div class="timeline-title">Thomas Foxx Taylor and Nypro created joint venture</div>
-                            <div class="timeline-description">Strategic partnership formed to develop research products and advance bioprocessing technology.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2008 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2008</div>
-                            <img src="https://via.placeholder.com/200x120/FF9800/white?text=Taylor+Formed" alt="Taylor Formed" class="timeline-image">
-                            <div class="timeline-title">Taylor formed Joint venture with Nypro</div>
-                            <div class="timeline-description">Official formation of the joint venture to create Foxx Life Sciences and expand market reach.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2009 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2009</div>
-                            <img src="https://via.placeholder.com/200x120/9C27B0/white?text=Office+Established" alt="Office Established" class="timeline-image">
-                            <div class="timeline-title">Taylor established New Hampshire office</div>
-                            <div class="timeline-description">Expanded operations with a new office 32 miles from North Boston, strengthening East Coast presence.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2010 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2010</div>
-                            <img src="https://via.placeholder.com/200x120/F44336/white?text=EzClear+Bottle" alt="EzClear Bottle" class="timeline-image">
-                            <div class="timeline-title">EzClear Bottle Top Filter</div>
-                            <div class="timeline-description">Revolutionary bottle top filter and bottle were launched with 7 patents, setting new industry standards.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2013 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2013</div>
-                            <img src="https://via.placeholder.com/200x120/607D8B/white?text=First+Class+7" alt="First Class 7" class="timeline-image">
-                            <div class="timeline-title">First Class 7 Clean Room</div>
-                            <div class="timeline-description">Advanced clean room and sterile bottle technologies were created to meet pharmaceutical standards.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2015-16 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2015-16</div>
-                            <img src="https://via.placeholder.com/200x120/795548/white?text=Product+Range" alt="Product Range" class="timeline-image">
-                            <div class="timeline-title">Expanded Product Range</div>
-                            <div class="timeline-description">A wide range of patented mixing bowl technologies, DOT legal carboys, containers and custom tubing sets.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2018 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2018</div>
-                            <img src="https://via.placeholder.com/200x120/009688/white?text=Opening+P2" alt="Opening P2" class="timeline-image">
-                            <div class="timeline-title">Opening of P2 Facility</div>
-                            <div class="timeline-description">State-of-the-art P2 Facility in Londonderry opened to expand manufacturing capabilities.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2019-21 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2019-21</div>
-                            <img src="https://via.placeholder.com/200x120/3F51B5/white?text=Auto+Assembler" alt="Auto Assembler" class="timeline-image">
-                            <div class="timeline-title">Auto launched Assembler</div>
-                            <div class="timeline-description">Breakthrough automation technology launched with EZBio Auto Assembler for streamlined manufacturing.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2023 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2023</div>
-                            <img src="https://via.placeholder.com/200x120/E91E63/white?text=New+Global+Record" alt="New Global Record" class="timeline-image">
-                            <div class="timeline-title">Foxx sets a New Global Record</div>
-                            <div class="timeline-description">Achieved record production of 198,730 Gallons delivery with NEW CLASS VI BioProcess Titanium Technology.</div>
-                        </div>
-                    </div>
-
-                    <!-- 2025 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-card">
-                            <div class="timeline-year">2025</div>
-                            <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Celebrating+India" alt="Celebrating India" class="timeline-image">
-                            <div class="timeline-title">Celebrating 5 Years in India</div>
-                            <div class="timeline-description">Milestone celebration of successful operations and Launch of 2 new Manufacturing Facilities in India.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="scroll-indicator" style="display: none;">
-                <p>← Swipe to explore our journey →</p>
-            </div>
+<div class="timeline-container" id="timelineContainer">
+    <div class="timeline-header">
+        <h1 class="main-title">FOXX GROWTH STORY</h1>
+        <div class="company-logo">
+            <p class="logo-text">Foxx Life Sciences</p>
+            <p class="logo-tagline">Our Innovation. Your Opportunity.</p>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const timelineContainer = document.getElementById('timelineContainer');
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            
-            // Show scroll indicator on mobile
-            if (window.innerWidth <= 768) {
-                scrollIndicator.style.display = 'block';
-            }
+    <div class="timeline-content">
+        <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-items">
+                <!-- 2006 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2006</div>
+                        <img src="https://via.placeholder.com/200x120/2196F3/white?text=First+Design" alt="First Design" class="timeline-image">
+                        <div class="timeline-title">First Design of Foxx Products</div>
+                        <div class="timeline-description">At Nypro Life Sciences, the foundation was laid for innovative bioprocessing solutions.</div>
+                    </div>
+                </div>
 
-            // Add loading class initially
-            timelineContainer.classList.add('loading');
-            
-            // Remove loading class after page loads
-            setTimeout(() => {
-                timelineContainer.classList.remove('loading');
-            }, 500);
+                <!-- 2007 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2007</div>
+                        <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Joint+Venture" alt="Joint Venture" class="timeline-image">
+                        <div class="timeline-title">Thomas Foxx Taylor and Nypro created joint venture</div>
+                        <div class="timeline-description">Strategic partnership formed to develop research products and advance bioprocessing technology.</div>
+                    </div>
+                </div>
 
-            // Intersection Observer for timeline items
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+                <!-- 2008 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2008</div>
+                        <img src="https://via.placeholder.com/200x120/FF9800/white?text=Taylor+Formed" alt="Taylor Formed" class="timeline-image">
+                        <div class="timeline-title">Taylor formed Joint venture with Nypro</div>
+                        <div class="timeline-description">Official formation of the joint venture to create Foxx Life Sciences and expand market reach.</div>
+                    </div>
+                </div>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
+                <!-- 2009 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2009</div>
+                        <img src="https://via.placeholder.com/200x120/9C27B0/white?text=Office+Established" alt="Office Established" class="timeline-image">
+                        <div class="timeline-title">Taylor established New Hampshire office</div>
+                        <div class="timeline-description">Expanded operations with a new office 32 miles from North Boston, strengthening East Coast presence.</div>
+                    </div>
+                </div>
 
-            // Observe all timeline items
-            document.querySelectorAll('.timeline-item').forEach(item => {
-                observer.observe(item);
-            });
+                <!-- 2010 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2010</div>
+                        <img src="https://via.placeholder.com/200x120/F44336/white?text=EzClear+Bottle" alt="EzClear Bottle" class="timeline-image">
+                        <div class="timeline-title">EzClear Bottle Top Filter</div>
+                        <div class="timeline-description">Revolutionary bottle top filter and bottle were launched with 7 patents, setting new industry standards.</div>
+                    </div>
+                </div>
 
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth <= 768) {
-                    scrollIndicator.style.display = 'block';
-                } else {
-                    scrollIndicator.style.display = 'none';
+                <!-- 2013 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2013</div>
+                        <img src="https://via.placeholder.com/200x120/607D8B/white?text=First+Class+7" alt="First Class 7" class="timeline-image">
+                        <div class="timeline-title">First Class 7 Clean Room</div>
+                        <div class="timeline-description">Advanced clean room and sterile bottle technologies were created to meet pharmaceutical standards.</div>
+                    </div>
+                </div>
+
+                <!-- 2015-16 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2015-16</div>
+                        <img src="https://via.placeholder.com/200x120/795548/white?text=Product+Range" alt="Product Range" class="timeline-image">
+                        <div class="timeline-title">Expanded Product Range</div>
+                        <div class="timeline-description">A wide range of patented mixing bowl technologies, DOT legal carboys, containers and custom tubing sets.</div>
+                    </div>
+                </div>
+
+                <!-- 2018 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2018</div>
+                        <img src="https://via.placeholder.com/200x120/009688/white?text=Opening+P2" alt="Opening P2" class="timeline-image">
+                        <div class="timeline-title">Opening of P2 Facility</div>
+                        <div class="timeline-description">State-of-the-art P2 Facility in Londonderry opened to expand manufacturing capabilities.</div>
+                    </div>
+                </div>
+
+                <!-- 2019-21 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2019-21</div>
+                        <img src="https://via.placeholder.com/200x120/3F51B5/white?text=Auto+Assembler" alt="Auto Assembler" class="timeline-image">
+                        <div class="timeline-title">Auto launched Assembler</div>
+                        <div class="timeline-description">Breakthrough automation technology launched with EZBio Auto Assembler for streamlined manufacturing.</div>
+                    </div>
+                </div>
+
+                <!-- 2023 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2023</div>
+                        <img src="https://via.placeholder.com/200x120/E91E63/white?text=New+Global+Record" alt="New Global Record" class="timeline-image">
+                        <div class="timeline-title">Foxx sets a New Global Record</div>
+                        <div class="timeline-description">Achieved record production of 198,730 Gallons delivery with NEW CLASS VI BioProcess Titanium Technology.</div>
+                    </div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2025</div>
+                        <img src="https://via.placeholder.com/200x120/4CAF50/white?text=Celebrating+India" alt="Celebrating India" class="timeline-image">
+                        <div class="timeline-title">Celebrating 5 Years in India</div>
+                        <div class="timeline-description">Milestone celebration of successful operations and Launch of 2 new Manufacturing Facilities in India.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator" style="display: none;">
+            <p>← Swipe to explore our journey →</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const timelineContainer = document.getElementById('timelineContainer');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        // Show scroll indicator on mobile
+        if (window.innerWidth <= 768) {
+            scrollIndicator.style.display = 'block';
+        }
+
+        // Add loading class initially
+        timelineContainer.classList.add('loading');
+        
+        // Remove loading class after page loads
+        setTimeout(() => {
+            timelineContainer.classList.remove('loading');
+        }, 500);
+
+        // Intersection Observer for timeline items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, observerOptions);
 
-            // Auto-scroll animation for mobile (optional)
-            const timelineItems = document.querySelector('.timeline-items');
-            if (window.innerWidth <= 768 && timelineItems) {
-                let scrollAmount = 0;
-                const maxScroll = timelineItems.scrollWidth - timelineItems.clientWidth;
-                
-                // Optional: Add subtle auto-scroll hint
-                setTimeout(() => {
-                    timelineItems.scrollTo({
-                        left: 50,
-                        behavior: 'smooth'
-                    });
-                    
-                    setTimeout(() => {
-                        timelineItems.scrollTo({
-                            left: 0,
-                            behavior: 'smooth'
-                        });
-                    }, 1000);
-                }, 3000);
+        // Observe all timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                scrollIndicator.style.display = 'block';
+            } else {
+                scrollIndicator.style.display = 'none';
             }
         });
-    </script>
 
+        // Auto-scroll animation for mobile (optional)
+        const timelineItems = document.querySelector('.timeline-items');
+        if (window.innerWidth <= 768 && timelineItems) {
+            let scrollAmount = 0;
+            const maxScroll = timelineItems.scrollWidth - timelineItems.clientWidth;
+            
+            // Optional: Add subtle auto-scroll hint
+            setTimeout(() => {
+                timelineItems.scrollTo({
+                    left: 50,
+                    behavior: 'smooth'
+                });
+                
+                setTimeout(() => {
+                    timelineItems.scrollTo({
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }, 1000);
+            }, 3000);
+        }
+    });
+</script>
