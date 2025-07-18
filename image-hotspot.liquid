@@ -1,4 +1,3 @@
-
 {% schema %}
     {
     "name": "Interactive Hotspots",
@@ -245,8 +244,15 @@
         }
 
         .connector-line {
-
-        }
+        position: absolute !important;
+        height: 2px !important;
+        background-color: {{ section.settings.highlight_color }} !important;
+        transform-origin: left center !important;
+        z-index: 250 !important;
+        pointer-events: none !important;
+        display: block !important;
+        opacity: 0.8 !important;
+      }
 
         .interactive-hotspots-wrapper {
         position: relative;
@@ -440,13 +446,15 @@
 
 
         .connector-line {
-        position: absolute;
-        height: 2px;
-        background-color: {{ section.settings.highlight_color }};
-        transform-origin: left center;
-        z-index: 250;
-        pointer-events: none;
-        }
+        position: absolute !important;
+        height: 2px !important;
+        background-color: {{ section.settings.highlight_color }} !important;
+        transform-origin: left center !important;
+        z-index: 250 !important;
+        pointer-events: none !important;
+        display: block !important;
+        opacity: 0.8 !important;
+      }
 
 
         .connector-dot {
@@ -524,65 +532,119 @@
     }
 
     @media (max-width: 768px) {
+      .interactive-hotspots-wrapper {
+        overflow: hidden;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
       .filter-specs-grid,
       .filter-features-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .filter-diagram-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
       .image-container {
+        max-width: 100%;
+        height: auto !important;
+        margin: 0 0 30px;
+        position: relative;
+        padding: 0;
+      }
+
+      .base-image {
         width: 100% !important;
         height: auto !important;
-        max-width: 320px;
-        margin: 0 auto;
+        object-fit: contain !important;
       }
 
       .hotspot-card {
-        position: relative !important;
-        width: 90% !important;
-        max-width: 280px;
-        margin: 10px auto !important;
-        left: 0 !important;
-        top: 0 !important;
-        transform: none !important;
+        position: absolute;
+        width: 140px;
+        max-width: 50vw;
+        transform: scale(0.85);
+        background: rgba(255, 255, 255, 0.95);
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        max-height: 150px;
+        overflow-y: auto;
+        left: 50% !important;
+        transform: translateX(-50%) scale(0.85);
+        margin-top: 10px;
+      }
+
+      .connector-line {
+        display: block !important;
+        opacity: 0.6 !important;
+        pointer-events: none;
       }
 
       .marker-dot {
-        width: 16px !important;
-        height: 16px !important;
+        width: 8px !important;
+        height: 8px !important;
+      }
+
+      .hotspot-card::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .hotspot-card::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      .hotspot-card::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+      }
+
+      .hotspot-card::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      .hotspot-card h3 {
+        line-height: 1.2;
+        font-size: 13px;
+        margin: 5px 0;
+      }
+
+      .hotspot-card .card-text {
+        font-size: 12px;
       }
 
       .connector-line {
         height: 1px !important;
+        opacity: 0.6 !important;
       }
 
       .connector-dot {
-        width: 8px !important;
-        height: 8px !important;
-      }
-      .filter-section-title {
-        font-size: 2.2rem;
+        width: 4px !important;
+        height: 4px !important;
+        opacity: 0.8 !important;
       }
 
-      .filter-config-tabs {
-        flex-direction: column;
-      }
-
-      .filter-specs-grid,
-      .filter-features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-point-item span {
-        font-size: 0.9rem;
-      }
-
-      .hotspot-marker {
-        transform: scale(0.8);
+      .marker-dot {
+        width: 12px !important;
+        height: 12px !important;
       }
 
       .hotspot-content-container {
-        position: relative;
-        margin-top: 20px;
+        pointer-events: none;
+      }
+
+      .hotspot-card.active {
+        pointer-events: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hotspot-card {
+        width: 150px;
+        max-width: 70vw;
+        padding: 8px;
       }
     }
 
@@ -607,10 +669,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (cards.length === 0) return;
 
   let currentIndex = 0;
-  const delay = 2000;
+  const delay = 2000; // Time each card is shown
   const fadeDuration = 500;
-  const resetDelay = 3000; // Adjusted to 3 sec for demo
-  const loopDelay = 120000; // 2 minutes in milliseconds
+  const resetDelay = 3000; // Time before loop restarts on mobile
+  const desktopShowAllDelay = 120000; // 2 minutes to show all cards on desktop
+  const isMobile = window.innerWidth <= 768;
 
   // Function to update connectors and index backdrop only for visible cards
   const updateConnectors = () => {
@@ -700,9 +763,14 @@ document.addEventListener('DOMContentLoaded', function () {
     updateConnectors();
 
     currentIndex++;
+    const isMobile = window.innerWidth <= 768;
     if (currentIndex >= cards.length) {
-      // After showing last card, show all cards for resetDelay
-      setTimeout(() => {
+      if (isMobile) {
+        // For mobile: restart loop after 3 seconds
+        currentIndex = 0;
+        setTimeout(showNextCard, resetDelay);
+      } else {
+        // For desktop: show all cards immediately without any delay
         cards.forEach(card => {
           card.style.opacity = '1';
           card.style.visibility = 'visible';
@@ -710,7 +778,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         updateConnectors();
 
-        // Then hide all and restart cycle after loopDelay (2 minutes)
+        // After 2 minutes, hide all and restart loop
         setTimeout(() => {
           cards.forEach(card => {
             card.style.opacity = '0';
@@ -719,8 +787,8 @@ document.addEventListener('DOMContentLoaded', function () {
           });
           currentIndex = 0;
           showNextCard();
-        }, loopDelay); // Use loopDelay here
-      }, delay);
+        }, desktopShowAllDelay);
+      }
     } else {
       setTimeout(showNextCard, delay);
     }
