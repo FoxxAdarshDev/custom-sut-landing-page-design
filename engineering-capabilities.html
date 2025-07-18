@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Capabilities - Foxx Life Sciences</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .engineering-capabilities-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #0071b9;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #0071b9, #005a91);
+            border-radius: 2px;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .capability-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 113, 185, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0071b9, #005a91);
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 113, 185, 0.15);
+        }
+
+        .capability-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .capability-icon svg {
+            width: 80px;
+            height: 80px;
+            fill: #0071b9;
+            transition: transform 0.3s ease;
+        }
+
+        .capability-card:hover .capability-icon svg {
+            transform: scale(1.1);
+        }
+
+        .capability-title {
+            font-size: 1.5rem;
+            color: #0071b9;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .capability-description {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .engineering-capabilities-section {
+                padding: 60px 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .capability-card {
+                padding: 30px 20px;
+            }
+
+            .capability-icon svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="engineering-capabilities-section">
+        <div class="section-header">
+            <h2 class="section-title">Engineering Capabilities</h2>
+        </div>
+
+        <div class="capabilities-grid">
+            <!-- Engineering Capabilities Card -->
+            <div class="capability-card">
+                <div class="capability-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Engineering/Design Icon -->
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <path d="M30 35 L70 35 L65 25 L35 25 Z" fill="#0071b9"/>
+                        <rect x="25" y="35" width="50" height="30" fill="none" stroke="#0071b9" stroke-width="2"/>
+                        <circle cx="35" cy="50" r="3" fill="#0071b9"/>
+                        <circle cx="50" cy="50" r="3" fill="#0071b9"/>
+                        <circle cx="65" cy="50" r="3" fill="#0071b9"/>
+                        <path d="M30 65 L70 65 L65 75 L35 75 Z" fill="#0071b9"/>
+                        <line x1="40" y1="20" x2="60" y2="20" stroke="#0071b9" stroke-width="2"/>
+                        <line x1="40" y1="80" x2="60" y2="80" stroke="#0071b9" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">Engineering Capabilities</h3>
+                <p class="capability-description">
+                    With our highly experienced team of bioprocess engineers, we design, consult, and optimize the best single-use assembly, or custom product to fit your bioprocess project. With our in-house fast track system, we can innovate your design sketch or specific criteria, from a vision to a reality.
+                </p>
+            </div>
+
+            <!-- Quality Standards Card -->
+            <div class="capability-card">
+                <div class="capability-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Quality/Shield Icon -->
+                        <path d="M50 10 L30 20 L30 45 C30 65 50 85 50 85 C50 85 70 65 70 45 L70 20 Z" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <path d="M50 15 L35 23 L35 43 C35 60 50 75 50 75 C50 75 65 60 65 43 L65 23 Z" fill="#0071b9" opacity="0.2"/>
+                        <path d="M42 45 L47 50 L58 35" fill="none" stroke="#0071b9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="30" r="2" fill="#0071b9"/>
+                        <circle cx="45" cy="35" r="1.5" fill="#0071b9"/>
+                        <circle cx="55" cy="35" r="1.5" fill="#0071b9"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">Stringent Quality Standards</h3>
+                <p class="capability-description">
+                    At Foxx safety and quality are non-negotiable and are a big focus from the ground up. Throughout our products' life cycle, our goal is to ensure quality that exceeds industry standards to make sure your bioprocess needs are satisfied. For the last 13+ years, Foxx has been ISO 13485 certified, passing the thorough and meticulous certification process.
+                </p>
+            </div>
+
+            <!-- Fast Shipping Card -->
+            <div class="capability-card">
+                <div class="capability-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Fast Shipping/Delivery Icon -->
+                        <rect x="10" y="35" width="35" height="25" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <rect x="45" y="45" width="25" height="15" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <path d="M70 45 L80 40 L80 55 L70 60 Z" fill="#0071b9"/>
+                        <circle cx="25" cy="70" r="8" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <circle cx="60" cy="70" r="8" fill="none" stroke="#0071b9" stroke-width="3"/>
+                        <circle cx="25" cy="70" r="3" fill="#0071b9"/>
+                        <circle cx="60" cy="70" r="3" fill="#0071b9"/>
+                        <line x1="33" y1="70" x2="52" y2="70" stroke="#0071b9" stroke-width="3"/>
+                        <!-- Speed lines -->
+                        <line x1="15" y1="25" x2="25" y2="25" stroke="#0071b9" stroke-width="2"/>
+                        <line x1="20" y1="20" x2="30" y2="20" stroke="#0071b9" stroke-width="2"/>
+                        <line x1="25" y1="15" x2="35" y2="15" stroke="#0071b9" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">Fast Shipping & Lead Times</h3>
+                <p class="capability-description">
+                    Our Made-to-Order product lines are designed to have the fastest lead times in the industry to ensure your projects get started right away. Having 5 running ISO 7 cleanrooms and white-rooms worldwide, allows us to manufacture and assemble products in house to be out the door as soon as possible.
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
