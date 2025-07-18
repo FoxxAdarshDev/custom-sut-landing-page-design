@@ -119,11 +119,41 @@ document.addEventListener('DOMContentLoaded', () => {
           const response = await fetch(
             "https://restcountries.com/v3.1/all"
           );
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
           const data = await response.json();
-          return data.map((country) => country.name.common);
+          
+          // Validate that data is an array
+          if (!Array.isArray(data)) {
+            console.error("API response is not an array:", data);
+            return [];
+          }
+          
+          // Filter out any countries that don't have a name.common property
+          const countries = data
+            .filter(country => country.name && country.name.common)
+            .map(country => country.name.common)
+            .sort(); // Sort alphabetically
+          
+          return countries;
         } catch (error) {
           console.error("Error fetching countries:", error);
-          return [];
+          // Return a fallback list of common countries
+          return [
+            "United States",
+            "Canada",
+            "United Kingdom",
+            "Germany",
+            "France",
+            "Australia",
+            "India",
+            "China",
+            "Japan",
+            "Brazil"
+          ].sort();
         }
       }
 
