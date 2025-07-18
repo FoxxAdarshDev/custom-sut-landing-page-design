@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Registration Confirmation | Foxx Bioprocess Custom SUT Catalog</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Registration Confirmation | Foxx Bioprocess Custom SUT Catalog">
+    <meta property="og:description" content="Thank you for registering with Foxx Bioprocess. Your account is now confirmed, and you can access our exclusive custom SUT catalog.">
+    <meta property="og:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <meta property="og:url" content="https://custom-sut-catalog.foxxbioprocess.com/identity/account/registration/confirmation">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Registration Confirmation | Foxx Bioprocess Custom SUT Catalog">
+    <meta name="twitter:description" content="Thank you for registering with Foxx Bioprocess. Your account is now confirmed. Access our exclusive custom SUT catalog.">
+    <meta name="twitter:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <meta name="twitter:site" content="@foxxlifescience">
+
+    <!-- Additional Meta Tags for SEO -->
+    <meta name="description" content="Thank you for registering with Foxx Bioprocess. Your account is now confirmed. Explore our custom SUT catalog and bioprocessing solutions.">
+    <meta name="keywords" content="Foxx Bioprocess, Registration Confirmation, Custom SUT Catalog, Bioprocessing Solutions, Account Confirmation">
+    <meta name="author" content="Foxx Bioprocess">
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .container {
+            /* position: fixed; */
+            top: 0;
+            left: 0;
+            width: 800px;
+            display: block;
+            margin: 10px auto;
+            height: 100%;
+            /* background-color: rgba(0, 0, 0, 0.5); */
+            z-index: 1000;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        #header-container {
+            margin-top: 20px;
+            gap: 20px;
+            background-color: #ffffff;
+        }
+
+        #tf-logo {
+            margin: 0 auto;
+            height: auto;
+            width: auto
+        }
+
+        /* Example CSS */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-height: 50px;
+        }
+
+        .confirmation-box {
+            padding: 20px;
+            /* border: 1px solid #ccc;
+            border-radius: 10px; */
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .confirmation-box img {
+            max-width: 50px;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-box a {
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .application-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            /* margin-top: 20px; */
+        }
+
+        .application-status-main {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px
+        }
+
+
+        .confirmation-details-main {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 5px;
+            padding-bottom: 5px
+        }
+
+        /* .confirmation-details {
+} */
+
+
+        .registration-details-regId {
+            color: blue;
+        }
+
+        .status-details {
+            padding: 10px;
+            padding-bottom: 0px;
+        }
+
+        .column {
+            width: 30%;
+        }
+
+        .column h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .journey-status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Styling for status display */
+        #status-display {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        /* Styling for journey status */
+        .journey-accepted {
+            color: #4CAF50;
+            /* Green */
+        }
+
+        .journey-rejected {
+            color: #F44336;
+            /* Red */
+        }
+
+        .journey-pending {
+            color: #121212;
+            /* Yellow */
+        }
+
+        /* Icon styling */
+        .icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            /* Adjust the padding as needed */
+            text-align: left;
+        }
+
+        .registration-details {
+            background-color: #f0f0f0;
+            padding: 10px;
+            /* margin-top: 20px; */
+        }
+
+        #userDetailsTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .registration-details-main {
+            border: 1px solid #dddddd;
+            margin-top: 20px;
+        }
+
+        #userDetailsTable th,
+        #userDetailsTable td {
+            /* border: 1px solid #dddddd; */
+            padding: 8px;
+            text-align: left;
+        }
+
+        #userDetailsTable th {
+            background-color: #f2f2f2;
+        }
+
+        #userDetailsTable td {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-right: 0px;
+            border-left: 0px;
+        }
+
+        .registration-date {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+
+        .SfJXc8 {
+            font-size: 12px;
+            text-align: center;
+            font-weight: 500;
+            color: #878787;
+            width: 100px;
+            padding-left: 10px;
+        }
+
+        .modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.modern-table-header,
+.modern-table-cell {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    word-wrap: break-word; /* Ensure content is wrapped within cell */
+}
+
+.modern-table-header {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.SfJXc8 {
+    display: inline-block;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+@media (max-width: 600px) {
+    .modern-table, .modern-table-header, .modern-table-cell {
+        display: block;
+        width: 100%;
+    }
+
+    .modern-table-header {
+        text-align: center;
+    }
+}
+
+
+.flex-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+        .flex-container button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .flex-container button:hover {
+            background-color: darkblue;
+        }
+
+
+        .toaster {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s, top 0.5s;
+        }
+        .toaster.show {
+            opacity: 1;
+            top: 40px;
+        }
+        .toaster.success {
+            background-color: #4caf50;
+        }
+        .toaster.error {
+            background-color: #f44336;
+        }
+
+ /* Styles for loader */
+.pulse-container {
+  display: none;
+}
+
+.pulse-bubble {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.pulse-bubble-1 {
+    animation: pulse .4s ease 0s infinite alternate;
+}
+.pulse-bubble-2 {
+    animation: pulse .4s ease .2s infinite alternate;
+}
+.pulse-bubble-3 {
+    animation: pulse .4s ease .4s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: .25;
+    transform: scale(.75);
+  }
+}
+
+    </style>
+    <script>
+ function DisableBackButton() {
+            window.history.forward();
+        }
+
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) {
+            if (evt.persisted) DisableBackButton();
+        }
+
+    </script>
+</head>
+<!-- <p>Foxx Life Sciences is a privately held world leader in custom single-use systems (SUS) including tubing,
+                bag, bottle, flask and carboy assemblies, filtration, fluid management, laboratory safety products,
+                plastic labware, tubing, gaskets, hoses, stainless steel and glassware for the research, biotech, and
+                pharmaceutical industries. With a focus on quality (ISO 13485 since 2010) and our certified ISO Class 7
+                cleanrooms, Foxx is the perfect partner for your next single use custom assembly. Foxx holds a wide
+                variety product patents that allows us to offer highly-competitive products for cost-sensitive projects
+                in extremely short timeline.</p> -->
+
+<body>
+    <div class="container">
+        <div id="header-wrapper">
+            <div id="header-container">
+                <div class="header">
+                    <img id="tf-logo"
+                        src="https://foxxbioprocess.myshopify.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d.png?v=1669752062&width=300"
+                        alt="Brand Logo">
+                </div>
+            </div>
+        </div>
+        <div class="confirmation-box">
+            <img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../releases/preview/2013/png/iconmonstr-checkbox-21.png&r=0&g=153&b=0"
+                alt="Foxx Life Sciences Logo">
+            <p style="color:#009900;font-size:18px" id="userGreeting">Thank You <strong id="userFirstName"></strong></p>
+            <p style="color:#009900;font-size:16px">Congratulation! You have successfully registered for Foxx Bioprocess
+                Custom SUT Catalog.</p>
+            <p>A confirmation email has been sent to <strong id="userEmail"></strong>. If you have not received the
+                email, please check your spams.</p>
+            <hr>
+            <p style="margin-top: 10px;">You will receive a notification on your registered email id, once your request
+                is approved by team. Stay Tuned!</p>
+        </div>
+        <div class="application-status-main">
+            <div class="confirmation-details-main">
+                <div class="confirmation-details">Status <strong>(<span
+                            id="registration-status-main"></span>)</strong>
+                </div>
+                <div class="registration-details-regId">
+                    <p>REGID:<span id="userRegId"></span></p>
+                </div>
+            </div>
+            <div class="application-status">
+                <!-- <div class="column">
+              <h2>Time and Date</h2>
+              <p>Dummy Date</p>
+            </div> -->
+
+                <!-- <div class="journey-status">
+              <p>
+
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="#4CAF50" width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"/></svg>
+                <span> Registered &mdash; Approval Status <br> <span id="confirmation-text"></span> &mdash;</span>
+                <span id="journey-status" ></span>
+              </p>
+            </div> -->
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th class="modern-table-header">User Status</th>
+                        <th class="modern-table-header">Application Status</th>
+                        <th class="modern-table-header">Application Approval Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="modern-table-cell"><span id="status-display-registered"></span></td>
+                        <td class="modern-table-cell"><span id="confirmation-text"></span></td>
+                        <td class="modern-table-cell"><span id="journey-status"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="modern-table-cell">
+                            <div class="SfJXc8">
+                                <strong><span id="userRegistrationDateConfirmationStatus"></span></strong>
+                            </div>
+                        </td>
+                        <td class="modern-table-cell">
+                            &nbsp;
+                        </td>
+                        <td class="modern-table-cell">
+                            <div class="SfJXc8">
+                                <span id="journeyStatusTime"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>            
+            </div>
+            <div class="status-details">
+                <p id="status-display"></p>
+            </div>
+        </div>
+        <div class="registration-details-main">
+            <div class="registration-details">
+                Registration Details
+            </div>
+
+            <table id="userDetailsTable">
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td id="userFirstName2"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td id="userLastName"></td>
+                    </tr>
+                    <tr>
+                        <td>Job Title</td>
+                        <td id="userJobTitle"></td>
+                    </tr>
+                    <tr>
+                        <td>Company</td>
+                        <td id="userCompany"></td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td id="userDepartment"></td>
+                    </tr>
+                    <tr>
+                        <td>Street Address</td>
+                        <td id="userStreetAddress"></td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td id="userCountry"></td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td id="userState"></td>
+                    </tr>
+                    <tr>
+                        <td>Postal Code</td>
+                        <td id="userPostalCode"></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td id="userPhoneNumber"></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td id="userEmail2"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="registration-date">
+                Registration Date/Time:
+                <span id="userRegistrationDate"></span>
+            </div>
+        </div>
+        <div class="flex-container">
+            <button id="registrationAgain">Registration Again</button>
+            <button id="sendConfirmationEmailAgain">Re-send Confirmation Email 
+
+                    <div class="pulse-container" id="loaderresend-confirmation">  
+                    <div style="display:flex; width: 35px;
+                    justify-content: space-between;
+                    align-items: center;">
+                        <div class="pulse-bubble pulse-bubble-1"></div>
+                        <div class="pulse-bubble pulse-bubble-2"></div>
+                        <div class="pulse-bubble pulse-bubble-3"></div>
+                    </div>
+                    </div>
+
+                <!-- <span id="loaderresend-confirmation" class="loaderresend-confirmation"></span> -->
+            </button>
+        </div>
+        <div id="toaster" class="toaster"></div>
+        <!-- <p><strong>Contact Us:</strong> <a href="https://foxxbioprocess.myshopify.com/pages/contact-us"
+                    target="_blank">12 N Wentworth Ave, Londonderry, NH 03053, USA</a></p>
+            <p>Email: <a href="mailto:support@foxxbioprocess.com" style="color:#1040E2">support@foxxbioprocess.com</a>
+            </p> -->
+        <!-- <a href="https://foxxbioprocess.myshopify.com" class="btn-home">Go to Home Page</a> -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                 // Assume localStorage stores a JSON string for "formData"
+                  const storedData = localStorage.getItem("formData");
+                  const formData = storedData ? JSON.parse(storedData) : {};
+                    if (!formData.email) {
+                    throw new Error('No email in local storage');
+                    }
+            const response = await fetch(`/register/user-data?email=${encodeURIComponent(formData.email)}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+
+                const userData = await response.json();
+                const userEmail = userData.email;
+                const userFirstName = userData.firstName;
+                const userRegID = userData.registrationId;
+
+                // Update the greeting message
+                document.getElementById('userFirstName').textContent = userFirstName;
+                document.getElementById('userEmail').textContent = userEmail;
+                document.getElementById('userRegId').textContent = userRegID;
+
+                // Update table with user details
+                const {
+                    firstName,
+                    lastName,
+                    jobTitle,
+                    company,
+                    department,
+                    streetAddress,
+                    selectedCountry,
+                    selectedState,
+                    postalCode,
+                    phoneNumber,
+                    email,
+                    registrationDate
+                } = userData;
+
+                function formatDate(date) {
+                    const options = { weekday: 'short', day: 'numeric', month: 'short' };
+                    const dateObj = new Date(date);
+                    const formattedDate = dateObj.toLocaleDateString('en-US', options);
+
+                    // Add ordinal suffix to day
+                    const day = dateObj.getDate();
+                    let daySuffix;
+                    if (day > 3 && day < 21) {
+                        daySuffix = 'th';
+                    } else {
+                        switch (day % 10) {
+                            case 1: daySuffix = 'st'; break;
+                            case 2: daySuffix = 'nd'; break;
+                            case 3: daySuffix = 'rd'; break;
+                            default: daySuffix = 'th'; break;
+                        }
+                    }
+
+                    // Replace day number with day number + suffix
+                    const formattedDay = day + daySuffix;
+                    const formattedDateWithSuffix = formattedDate.replace(day, formattedDay);
+
+                    return formattedDateWithSuffix;
+                }
+
+
+                // Update the UI with user details
+                document.getElementById('userFirstName2').textContent = firstName;
+                document.getElementById('userLastName').textContent = lastName;
+                document.getElementById('userJobTitle').textContent = jobTitle;
+                document.getElementById('userCompany').textContent = company;
+                document.getElementById('userDepartment').textContent = department;
+                document.getElementById('userStreetAddress').textContent = streetAddress;
+                document.getElementById('userCountry').textContent = selectedCountry;
+                document.getElementById('userState').textContent = selectedState;
+                document.getElementById('userPostalCode').textContent = postalCode;
+                document.getElementById('userPhoneNumber').textContent = phoneNumber;
+                document.getElementById('userEmail2').textContent = email;
+                document.getElementById('userRegistrationDate').textContent = new Date(registrationDate).toLocaleString(); // Format date as needed
+                document.getElementById('userRegistrationDateConfirmationStatus').textContent = formatDate(registrationDate);
+
+                const statusResponseRegistered = await fetch(`/register/user-data?email=${encodeURIComponent(userEmail)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!statusResponseRegistered.ok) {
+                    throw new Error('Failed to fetch Registered Data');
+                }
+
+                const statusDataRegistered = await statusResponseRegistered.json();
+                console.log('Fetched Data:', statusDataRegistered);
+
+                // Update your UI based on the status
+                const statusDisplayRegistered = document.getElementById('status-display-registered');
+
+                if (statusDataRegistered.email) {
+                    statusDisplayRegistered.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="#4CAF50" width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"/></svg> Registered';
+                } else {
+                    statusDisplayRegistered.textContent = 'Not Registered';
+                }
+
+
+                    if (!userEmail) {
+                        registrationStatusMain.textContent = 'Pending';
+                        return;
+                    }
+
+                // Fetch the accepted status based on user's email
+                const statusResponse = await fetch(`/check-status-of-confirmation?email=${encodeURIComponent(userEmail)}`);
+
+                if (!statusResponse.ok) {
+                    throw new Error('Failed to fetch accepted status');
+                }
+
+                const statusData = await statusResponse.json();
+
+                // Update your UI based on the status
+                const statusDisplay = document.getElementById('status-display');
+                const journeyStatus = document.getElementById('journey-status');
+                const registrationStatusMain = document.getElementById('registration-status-main');
+                const confirmationText = document.getElementById('confirmation-text');
+                const journeyStatusTime = document.getElementById('journeyStatusTime');
+
+                if (statusData.accepted === true) {
+                    statusDisplay.innerHTML = `<div style="display:flex;justify-content:space-between"><span>Your Application has been Accepted</span><a style="background-color:blue; padding:10px;color:#fff;border-radius:10px;text-decoration:none" target="_blank" href="/account-center/signin-identifier">Sign In Now</a></div>`;
+                    statusDisplay.classList.add('accepted');
+                    journeyStatus.textContent = 'Accepted';
+                    registrationStatusMain.textContent = 'Accepted';
+                    journeyStatus.classList.add('journey-accepted');
+                    registrationStatusMain.classList.add('journey-accepted');
+                    confirmationText.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="#4CAF50" width="18" height="18" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12s12-5.373 12-12s-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"/></svg> Checked';
+                    addIcon(journeyStatus, 'green-tick');
+
+                    const acceptedDate = new Date(statusData.acceptedTime);
+                    const formattedDate = `${getDayOfWeek(acceptedDate)}, ${getMonthName(acceptedDate)} ${getOrdinalDay(acceptedDate)}, ${acceptedDate.getFullYear()}`;
+                    const formattedTime = formatTime(acceptedDate);
+
+                    journeyStatusTime.innerHTML = `<strong>${formattedDate}, ${formattedTime}</strong>`;
+                } else if (statusData.accepted === false) {
+                    statusDisplay.innerHTML = 'Your Application has been <span style="font-weight:bold;color:#f44366">Rejected</span> due to some reasons. Please try again after some time!';
+                    statusDisplay.classList.add('rejected');
+                    journeyStatus.textContent = 'Rejected';
+                    registrationStatusMain.textContent = 'Rejected';
+                    journeyStatus.classList.add('journey-rejected');
+                    registrationStatusMain.classList.add('journey-rejected');
+                    confirmationText.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="#4CAF50" width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12s12-5.373 12-12s-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"/></svg> Checked';
+                    addIcon(journeyStatus, 'red-cross');
+                    const rejectedDate = new Date(statusData.acceptedTime);
+                    const formattedDate = `${getDayOfWeek(rejectedDate)}, ${getMonthName(rejectedDate)} ${getOrdinalDay(rejectedDate)}, ${rejectedDate.getFullYear()}`;
+                    const formattedTime = formatTime(rejectedDate);
+
+                    journeyStatusTime.innerHTML = `<strong>${formattedDate}, ${formattedTime}</strong>`;
+                } else {
+                    statusDisplay.textContent = 'Pending';
+                    statusDisplay.classList.add('pending');
+                    journeyStatus.textContent = 'Pending';
+                    registrationStatusMain.textContent = 'Pending';
+                    journeyStatus.classList.add('journey-pending');
+                    registrationStatusMain.classList.add('journey-pending');
+                    confirmationText.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 6v8h7v-2h-5v-6h-2zm10.854 7.683l1.998.159c-.132.854-.351 1.676-.652 2.46l-1.8-.905c.2-.551.353-1.123.454-1.714zm-2.548 7.826l-1.413-1.443c-.486.356-1.006.668-1.555.933l.669 1.899c.821-.377 1.591-.844 2.299-1.389zm1.226-4.309c-.335.546-.719 1.057-1.149 1.528l1.404 1.433c.583-.627 1.099-1.316 1.539-2.058l-1.794-.903zm-20.532-5.2c0 6.627 5.375 12 12.004 12 1.081 0 2.124-.156 3.12-.424l-.665-1.894c-.787.2-1.607.318-2.455.318-5.516 0-10.003-4.486-10.003-10s4.487-10 10.003-10c2.235 0 4.293.744 5.959 1.989l-2.05 2.049 7.015 1.354-1.355-7.013-2.184 2.183c-2.036-1.598-4.595-2.562-7.385-2.562-6.629 0-12.004 5.373-12.004 12zm23.773-2.359h-2.076c.163.661.261 1.344.288 2.047l2.015.161c-.01-.755-.085-1.494-.227-2.208z"/></svg> Pending';
+                    addIcon(journeyStatus, 'yellow-pending');
+                }
+
+                // Function to get day of the week (e.g., "Monday")
+                function getDayOfWeek(date) {
+                const options = { weekday: 'long' };
+                return new Intl.DateTimeFormat('en-US', options).format(date);
+                }
+
+                // Function to get month name (e.g., "June")
+                function getMonthName(date) {
+                const options = { month: 'long' };
+                return new Intl.DateTimeFormat('en-US', options).format(date);
+                }
+
+                // Function to get ordinal day (e.g., "22nd")
+                function getOrdinalDay(date) {
+                const day = date.getDate();
+                const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
+                                (day % 10 === 2 && day !== 12) ? 'nd' :
+                                (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+                return `${day}${suffix}`;
+                }
+
+                // Function to format time (e.g., "03:14 pm")
+                function formatTime(date) {
+                const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+                return new Intl.DateTimeFormat('en-US', options).format(date);
+                }
+
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                // Handle error scenario
+                const statusDisplay = document.getElementById('status-display');
+                statusDisplay.textContent = 'Confirmation has been Pending';
+                statusDisplay.classList.add('pending');
+
+
+                const registrationStatusMain = document.getElementById('registration-status-main');
+                registrationStatusMain.textContent = 'Pending';
+
+                const journeyStatus = document.getElementById('journey-status');
+                journeyStatus.textContent = 'Pending';
+                journeyStatus.classList.add('journey-pending');
+
+                const confirmationText = document.getElementById('confirmation-text');
+                confirmationText.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 6v8h7v-2h-5v-6h-2zm10.854 7.683l1.998.159c-.132.854-.351 1.676-.652 2.46l-1.8-.905c.2-.551.353-1.123.454-1.714zm-2.548 7.826l-1.413-1.443c-.486.356-1.006.668-1.555.933l.669 1.899c.821-.377 1.591-.844 2.299-1.389zm1.226-4.309c-.335.546-.719 1.057-1.149 1.528l1.404 1.433c.583-.627 1.099-1.316 1.539-2.058l-1.794-.903zm-20.532-5.2c0 6.627 5.375 12 12.004 12 1.081 0 2.124-.156 3.12-.424l-.665-1.894c-.787.2-1.607.318-2.455.318-5.516 0-10.003-4.486-10.003-10s4.487-10 10.003-10c2.235 0 4.293.744 5.959 1.989l-2.05 2.049 7.015 1.354-1.355-7.013-2.184 2.183c-2.036-1.598-4.595-2.562-7.385-2.562-6.629 0-12.004 5.373-12.004 12zm23.773-2.359h-2.076c.163.661.261 1.344.288 2.047l2.015.161c-.01-.755-.085-1.494-.227-2.208z"/></svg> Pending';
+                addIcon(journeyStatus, 'yellow-pending');
+
+                console.error('Error fetching or displaying user data:', error);
+                // Handle error scenario
+                const userDetailsDiv = document.getElementById('userDetails');
+                userDetailsDiv.innerHTML = '<p>Error fetching user data. Please try again later.</p>';
+            }
+        });
+
+        function addIcon(element, iconName) {
+            let iconPath;
+            switch (iconName) {
+                case 'green-tick':
+                    iconPath = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" clip-rule="evenodd" fill="#4CAF50" width="18" height="18" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"/></svg>';
+                    break;
+                case 'red-cross':
+                    iconPath = '<svg class="icon" clip-rule="evenodd" fill="#f44366" width="18" height="18" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 8.933-2.721-2.722c-.146-.146-.339-.219-.531-.219-.404 0-.75.324-.75.749 0 .193.073.384.219.531l2.722 2.722-2.728 2.728c-.147.147-.22.34-.22.531 0 .427.35.75.751.75.192 0 .384-.073.53-.219l2.728-2.728 2.729 2.728c.146.146.338.219.53.219.401 0 .75-.323.75-.75 0-.191-.073-.384-.22-.531l-2.727-2.728 2.717-2.717c.146-.147.219-.338.219-.531 0-.425-.346-.75-.75-.75-.192 0-.385.073-.531.22z" fill-rule="nonzero"/></svg>';
+                    break;
+                case 'yellow-pending':
+                    iconPath = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 6v8h7v-2h-5v-6h-2zm10.854 7.683l1.998.159c-.132.854-.351 1.676-.652 2.46l-1.8-.905c.2-.551.353-1.123.454-1.714zm-2.548 7.826l-1.413-1.443c-.486.356-1.006.668-1.555.933l.669 1.899c.821-.377 1.591-.844 2.299-1.389zm1.226-4.309c-.335.546-.719 1.057-1.149 1.528l1.404 1.433c.583-.627 1.099-1.316 1.539-2.058l-1.794-.903zm-20.532-5.2c0 6.627 5.375 12 12.004 12 1.081 0 2.124-.156 3.12-.424l-.665-1.894c-.787.2-1.607.318-2.455.318-5.516 0-10.003-4.486-10.003-10s4.487-10 10.003-10c2.235 0 4.293.744 5.959 1.989l-2.05 2.049 7.015 1.354-1.355-7.013-2.184 2.183c-2.036-1.598-4.595-2.562-7.385-2.562-6.629 0-12.004 5.373-12.004 12zm23.773-2.359h-2.076c.163.661.261 1.344.288 2.047l2.015.161c-.01-.755-.085-1.494-.227-2.208z"/></svg>';
+                    break;
+                default:
+                    break;
+            }
+            element.insertAdjacentHTML('afterbegin', iconPath);
+        }
+
+        // Attach session ID to subsequent requests
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a, form').forEach(element => {
+                element.addEventListener('click', event => {
+                    const sessionId = localStorage.getItem('sessionId');
+                    if (sessionId) {
+                        event.target.setAttribute('data-session-id', sessionId);
+                    }
+                });
+
+                element.addEventListener('submit', event => {
+                    const sessionId = localStorage.getItem('sessionId');
+                    if (sessionId) {
+                        event.target.setAttribute('data-session-id', sessionId);
+                    }
+                });
+            });
+        });
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const sendConfirmationEmailAgainButton = document.getElementById('sendConfirmationEmailAgain');
+    const toaster = document.getElementById('toaster');
+    const loader = document.getElementById('loaderresend-confirmation');
+
+    function showToaster(message, type) {
+      toaster.textContent = message;
+      toaster.className = `toaster ${type} show`;
+      setTimeout(() => {
+        toaster.className = `toaster ${type}`;
+      }, 3000);
+    }
+
+    sendConfirmationEmailAgainButton.addEventListener('click', async function () {
+      try {
+        // Assuming you have the user's email stored somewhere in your page
+        const userEmail = document.getElementById('userEmail').textContent;
+
+        // Show loader
+        loader.style.display = 'inline-block';
+
+        const response = await fetch('/resend-confirmation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: userEmail })
+        });
+
+        // Hide loader
+        loader.style.display = 'none';
+
+        if (!response.ok) {
+          throw new Error('Failed to resend confirmation email');
+        }
+
+        showToaster('Confirmation email sent successfully!', 'success');
+      } catch (error) {
+        console.error('Error:', error);
+        showToaster('Failed to send confirmation email', 'error');
+        // Hide loader in case of error
+        loader.style.display = 'none';
+      }
+    });
+  });
+  </script>
+
+<script>
+    document.getElementById("registrationAgain").addEventListener("click", function() {
+        window.open("/identity/account/registration", "_blank");
+    });
+    </script>
+
+<script>
+    const publicVapidKey = "BKZt60cQPBbjvckHNnvDEZGTzDQ6hNQIXc21Sw_DscorvLEx1tsrAr4aMMQ4KvHEsByiE6L7f4MgliCoP52ol00";
+
+    // Check for service worker support
+    if ("serviceWorker" in navigator) {
+      registerServiceWorker().catch(err => console.error(err));
+    }
+
+    // Function to register service worker, subscribe to push notifications, and send subscription data
+    async function registerServiceWorker() {
+      try {
+        // Register Service Worker
+        console.log("Registering service worker...");
+        const register = await navigator.serviceWorker.register("/sw.js", {
+          scope: "/"
+        });
+        console.log("Service Worker Registered:", register);
+
+        // Register Push Notifications
+        console.log("Registering Push...");
+        const subscription = await register.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+        });
+        console.log("Push Subscription:", subscription);
+
+        // Send Push Subscription Data to Backend
+        console.log("Sending Push Subscription to backend...");
+        await fetch("/notifications/subscribe", {
+          method: "POST",
+          body: JSON.stringify(subscription),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Push Subscription sent to backend.");
+      } catch (error) {
+        console.error("Service Worker registration failed:", error);
+      }
+    }
+
+    // Utility function to convert base64 string to Uint8Array
+    function urlBase64ToUint8Array(base64String) {
+      const padding = "=".repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding)
+        .replace(/\-/g, "+")
+        .replace(/_/g, "/");
+
+      const rawData = window.atob(base64);
+      const outputArray = new Uint8Array(rawData.length);
+
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+      return outputArray;
+    }
+  </script>
+
+</body>
+
+</html>
