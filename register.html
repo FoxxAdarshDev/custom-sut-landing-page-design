@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/x-icon" href="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Registration | FoxxBioprocess Custom SUT Catalog</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Registration | FoxxBioprocess Custom SUT Catalog">
+    <meta property="og:description" content="Register to access FoxxBioprocess's exclusive custom SUT catalog. Explore our wide range of custom bioprocessing solutions.">
+    <meta property="og:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <meta property="og:url" content="https://custom-sut-catalog.foxxbioprocess.com/identity/account/registration">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Registration | FoxxBioprocess Custom SUT Catalog">
+    <meta name="twitter:description" content="Register to access FoxxBioprocess's exclusive custom SUT catalog. Explore our wide range of custom bioprocessing solutions.">
+    <meta name="twitter:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+    <meta name="twitter:site" content="@foxxlifescience">
+
+    <!-- Additional Meta Tags for SEO -->
+    <meta name="description" content="Register to access FoxxBioprocess's exclusive custom SUT catalog. Explore our wide range of custom bioprocessing solutions.">
+    <meta name="keywords" content="FoxxBioprocess, Custom SUT Catalog, Bioprocessing Solutions, Custom Bioprocessing, Registration">
+    <meta name="author" content="FoxxBioprocess">
+
+  <style>
+      body {
+          margin: 0;
+          font-family: "Open Sans", sans-serif;
+          font-optical-sizing: auto;
+          font-style: normal;
+          background-color: #f4f4f4;
+      }
+
+    #foxxpittconformmainsec .toaster {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      z-index: 999999;
+      color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    #foxxpittconformmainsec .toaster.success {
+      background-color: #4caf50;
+    }
+
+    #foxxpittconformmainsec .toaster.error {
+      background-color: #f44336;
+    }
+
+    #foxxpittconformmainsec .toaster#authorizedToaster {
+      background-color: #2196F3;
+    }
+
+    #foxxpittconformmainsec .foxxpittconformcontainer {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    }
+
+    #foxxpittconformmainsec .form-group {
+      margin-bottom: 20px;
+    }
+
+    #foxxpittconformmainsec .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    #foxxpittconformmainsec .form-group input,
+    #foxxpittconformmainsec .form-group textarea,
+    #foxxpittconformmainsec .form-group select #foxxpittconformmainsec #stateOptions {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+
+    #foxxpittconformmainsec #stateModal .modal-content-inner input[type=text] {
+      border: 1px solid #121212 !important;
+    }
+
+    #foxxpittconformmainsec .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="rgba(0, 0, 0, 0.54)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><path d="M7 10l5 5 5-5H7z"></path></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px top 50%;
+      background-size: 24px;
+      padding-right: 30px;
+    }
+
+    #foxxpittconformmainsec .form-group .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    #foxxpittconformmainsec .btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #foxxpittconformmainsec .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Your CSS styles here */
+
+    /* Modal styles */
+    #foxxpittconformmainsec .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+
+    #foxxpittconformmainsec .model h2 {
+      line-height: 1.2;
+      margin: 0 1.5rem 0 0;
+    }
+
+    #foxxpittconformmainsec header {
+      background-color: #d7d8dc;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+
+    #foxxpittconformmainsec header h2 {
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin: 0 1.5rem 0 0;
+    }
+
+    #foxxpittconformmainsec .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      /* 15% from the top and centered */
+      border: 1px solid #888;
+      width: fit-content;
+    }
+
+    #foxxpittconformmainsec .modal-content-inner {
+      padding: 20px;
+    }
+
+    /* Adjusted styling for modal and country options */
+    #foxxpittconformmainsec #countryOptions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-count: 3;
+      /* Display country options in 3 columns */
+      column-gap: 20px;
+      /* Add gap between columns for better readability */
+    }
+
+    #foxxpittconformmainsec .country-options {
+      column-count: 3;
+      /* Display country options in 3 columns */
+      column-gap: 20px;
+      /* Add gap between columns for better readability */
+    }
+
+    #foxxpittconformmainsec .country-options label {
+      display: block;
+      /* Ensure labels are displayed as block elements */
+      margin-bottom: 5px;
+      /* Add some spacing between options */
+    }
+
+    #foxxpittconformmainsec .close {
+      color: #003863;
+      cursor: pointer;
+      font-size: 1.625rem;
+      font-weight: 700;
+      line-height: 1;
+      float: right;
+      padding: 5px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    #foxxpittconformmainsec .close:hover,
+    #foxxpittconformmainsec .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #foxxpittconformmainsec input[type="radio"] {
+      margin: 0px !important;
+      margin-right: 3px !important;
+      padding: 0px;
+      padding: 0px;
+    }
+
+
+    #foxxpittconformmainsec #stateOptions .input[type=text] {
+      border: 1px solid #121212 !important;
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      margin: 0 0 1em;
+      color: #333;
+    }
+
+    #foxxpittconformmainsec label {
+      width: fit-content;
+      vertical-align: middle;
+      align-items: center;
+      line-height: 1.1;
+      font-size: 14px;
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: transparent 0px 0px 0px;
+      color: rgb(0, 56, 99);
+      text-align: left;
+      margin: 0.25rem 0px;
+      padding: 0px;
+    }
+
+    #foxxpittconformmainsec label div {
+      align-items: center;
+      /* font-size: 1rem; */
+      margin: 0.25rem 0;
+      padding: 0;
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      color: #003863;
+      line-height: inherit;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      display: flex;
+      margin: 0px;
+      align-items: center;
+    }
+
+    #foxxpittconformmainsec input#countrySearch {
+      border-radius: 1000px;
+      font-size: .875rem;
+      padding-left: 2rem;
+      border: 1px solid #d7d8dc;
+      border-radius: 3px;
+      box-shadow: none;
+      margin-bottom: 0;
+      padding: 0.5rem;
+      position: relative;
+      border-radius: 1000px;
+      width: auto;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+
+    #foxxpittconformmainsec #continueButton,
+    .continueButtonState {
+      background-color: #003863;
+      border-color: #003863;
+      border-width: 0;
+      color: #fff;
+      font-weight: 400;
+      padding: 5px 10px;
+    }
+
+    .EventCardstyles_event_glimpse-modal-close-interphex-registration {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .interphex-form-24-required-label {
+      color: red;
+      font-size: 16px;
+    }
+
+    #interphex24-form-textarea-note {
+      padding: 10px;
+      min-height: 37px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    #interphex24-form-textarea-note::placeholder {
+      text-align: left;
+      letter-spacing: normal;
+    }
+
+    .loading-bubbles {
+      width: auto;
+      display: none;
+    }
+
+    .loading-bubbles div {
+      animation: expand .75s ease-in-out infinite;
+      border-radius: 20px;
+      display: inline-block;
+      transform-origin: center center;
+      margin: 0 3px;
+      width: 10px;
+      height: 10px;
+    }
+
+    .bubble:nth-child(1) {
+      background: #f1c40f;
+    }
+
+    .bubble:nth-child(2) {
+      animation-delay: 180ms;
+      background: #27ae60;
+    }
+
+    .bubble:nth-child(3) {
+      animation-delay: 360ms;
+      background: #e67e22;
+    }
+
+    .bubble:nth-child(4) {
+      animation-delay: 540ms;
+      background: #2980b9;
+    }
+
+
+    @keyframes expand {
+      0% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.55);
+      }
+    }
+
+    .css-18pc7rp {
+      margin-bottom: 32px;
+      color: rgb(28, 45, 56);
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+      text-align: start;
+    }
+
+    .css-18pc7rp a {
+      text-decoration: none;
+      color: rgb(1, 107, 248);
+    }
+
+    .leafygreen-ui-a533bt> :last-child {
+      display: block;
+      padding-bottom: 4px;
+    }
+
+    .leafygreen-ui-81ul7p {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 10px;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      .leafygreen-ui-81ul7p {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+
+    .leafygreen-ui-81ul7p {
+      font-weight: 400;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      color: rgb(92, 108, 117);
+    }
+
+
+    .css-56ctc5 {
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+    }
+
+
+    .css-56ctc5 {
+      flex-direction: row;
+    }
+
+    .css-4oz1a7 {
+      width: 100vw;
+      height: auto;
+      order: 1;
+      background-image: url(https://cdn.shopify.com/s/files/1/1064/0118/files/MicrosoftTeams-image_3_7d8659cc-d3c1-46d4-9a5b-658a2ba0cc1c.jpg?v=1710427248);
+      background-size: contain;
+      background-position: center center;
+      display: -webkit-box;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: inherit;
+      align-items: inherit;
+      position: relative;
+      left: 10px;
+    }
+
+
+
+    .css-4oz1a7::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      /* Adjust the alpha (0.5) for the overlay opacity */
+    }
+
+    @media only screen and (min-width: 1025px) {
+      .css-4oz1a7 {
+        width: 390px;
+        height: 100vh;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-repeat: no-repeat;
+        order: 1;
+        background-image: url(https://cdn.shopify.com/s/files/1/1064/0118/files/MicrosoftTeams-image_3_7d8659cc-d3c1-46d4-9a5b-658a2ba0cc1c.jpg?v=1710427248);
+        display: block;
+        -webkit-box-align: inherit;
+        align-items: inherit;
+        position: absolute;
+      }
+    }
+
+    .css-7m8vjv {
+      width: 100vw;
+      height: auto;
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      padding-left: 0px;
+    }
+
+
+    @media only screen and (min-width: 1025px) {
+      .css-7m8vjv {
+        /* width: calc(385px + 100vw);
+        height: auto;
+        order: 2;
+        padding-left: 220px; */
+      }
+    }
+
+
+    /* .css-7m8vjv {
+        width: calc(-385px + 100vw);
+        height: auto;
+        order: 2;
+
+    } */
+
+    .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            /* background-color: #0382c2; */
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+    border-top: 1px solid #dcdcdc;
+    bottom: 0;
+    padding:20px;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+.language-flag-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: right;
+}
+
+
+.location-detail {
+    line-height: 11px;
+    margin-top: 8px;
+    align-items: center;
+    font-size: 11px;
+    display: flex;
+    float: right;
+}
+
+.country-flag-img {
+    margin-right: 17px;
+    width:16px;
+    height:16px;
+}
+
+.country-name {
+    color: #54545c;
+}
+
+
+/* New css*/
+
+.header-container {
+  position: relative;
+    width: 100vw;
+    height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background:#fff;
+    margin-bottom:20px;
+}
+
+.header-container .sign-in-container {
+    position: absolute;
+    left: 136px;
+    height: 14px;
+    color: #1e8ae7;
+    font-size: 11px;
+    font-weight:700;
+    letter-spacing: 0px;
+    line-height: 14px;
+    text-decoration: none;
+}
+
+.header-container .sign-in-container a {
+    text-decoration: none;
+}
+
+.header-container .sign-in-container::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 3.5px solid transparent;
+    border-bottom: 3.5px solid transparent;
+    border-right: 4px solid;
+    margin-right: 3.5px;
+}
+
+/* .header-container .tf-logo.rebranding {
+    top: 0;
+} */
+
+.header-container .tf-logo {
+    position: absolute;
+}
+
+.tf-reg-banner {
+  display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #222222;
+
+}
+
+.tf-reg-banner .title {
+  font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.tf-reg-banner .subtitle {
+  font-size: 16px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+.list {
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 48px;
+}
+
+.list ul {
+    padding-left: 16px;
+
+}
+
+.list ul > li {
+    float: left;
+    margin-bottom: 8px;
+    margin-right: 20px;
+}
+
+.agree-terms-footer {
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 108px;
+}
+
+.agree-terms-footer p.subtitle {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    padding-right: 10px;
+    font-size: 11px;
+    color: #54545c;
+    line-height: 14px;
+}
+
+.agree-terms-footer p.existing-account {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    position:relative;
+}
+
+.agree-terms-footer p.existing-account:before, .agree-terms-footer p.existing-account:after {
+    content: "";
+    position: absolute;
+    width: min-content;
+    margin-top: 7.5px;
+    border: 1px solid #dcdcdc;
+    border-top: 1px;
+}
+
+.agree-terms-footer p.existing-account:before {
+    margin-left: -185px;
+}
+
+.agree-terms-footer p.existing-account:after {
+    margin-left: 13px;
+}
+
+
+
+
+/**/
+
+ /* The container */
+ .container-checkbox {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-left: 35px !important;
+      margin-bottom: 12px;
+      /* line-height: normal!important; */
+      cursor: pointer;
+      font-size: 22px;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .container-checkbox .checkmark {
+      position: absolute;
+      /* top: 0; */
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container-checkbox:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container-checkbox input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .container-checkbox .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container-checkbox input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container-checkbox .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+
+
+@media screen and  (max-width:767px) {
+  .header-container .sign-in-container {
+    right:0!important;
+    padding:10px;
+    left: revert-layer!important;
+  }
+  .header-container {
+    justify-content: space-between;
+    padding:10px;
+    margin-bottom:10px;
+  }
+
+  .tf-reg-banner {
+    padding:10px;
+  }
+}
+
+  </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const allowNotificationsCheckbox = document.querySelector('#allowNotifications');
+
+  if (allowNotificationsCheckbox) {
+    allowNotificationsCheckbox.addEventListener('change', function() {
+      handleNotificationCheckbox(this.checked);
+    });
+  }
+});
+
+function handleNotificationCheckbox(checked) {
+  if (checked) {
+    if (Notification.permission === "default") {
+      showModal();
+    } else if (Notification.permission === "granted") {
+      console.log('Notifications already allowed.');
+      document.getElementById('allowNotifications').checked = true;
+    } else {
+      showPermissionDeniedAlert();
+      document.getElementById('allowNotifications').checked = false;
+    }
+  } else {
+    console.log('Notifications not allowed');
+    if (Notification.permission === "denied") {
+      showPermissionDeniedAlert();
+    }
+  }
+}
+
+function showModal() {
+  const modal = document.getElementById('notificationModal');
+  const overlay = document.getElementById('overlay');
+  modal.style.display = 'block';
+  overlay.style.display = 'block';
+}
+
+function hideModal() {
+  const modal = document.getElementById('notificationModal');
+  const overlay = document.getElementById('overlay');
+  modal.style.display = 'none';
+  overlay.style.display = 'none';
+}
+
+function askNotificationPermission() {
+  hideModal();
+
+  if (!("Notification" in window)) {
+    console.log("This browser does not support notifications.");
+    return;
+  }
+
+  function requestPermission() {
+    Notification.requestPermission().then((permission) => {
+      console.log('Notification permission response:', permission);
+      if (permission === "granted") {
+        console.log("Notification permission granted.");
+        document.getElementById('allowNotifications').checked = true;
+      } else if (permission === "denied") {
+        console.log("Notification permission denied.");
+        document.getElementById('allowNotifications').checked = false;
+        showPermissionDeniedAlert();
+      } else {
+        console.log("Notification permission dismissed.");
+        setTimeout(requestPermission, 1000); // Retry after 1 second
+      }
+    });
+  }
+
+  requestPermission();
+}
+
+function showPermissionDeniedAlert() {
+  showToasterNotificationDenied("You have denied notification permissions. To enable, please go to site settings and allow notifications", 'error');
+}
+
+function showToasterNotificationDenied(message, type = 'error') {
+  const toaster = document.getElementById('toaster');
+  toaster.textContent = message;
+  toaster.className = 'toaster ' + type;
+  toaster.style.display = 'block';
+}
+
+ // Check for service worker
+ if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.ready.then(function() {
+        console.log("Service worker is active and ready.");
+      }).catch(function(error) {
+        console.error("Service worker registration failed:", error);
+      });
+    }
+
+
+
+</script>
+
+
+
+</head>
+
+<body>
+  <!-- Overlay -->
+  <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2); z-index: 999;"></div>
+
+  <!-- Modal Structure -->
+  <div id="notificationModal" style="display: none; position: fixed; top: 20%; right: 20px; width: 300px; background: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); z-index: 1000;">
+    <p>We promise to only send you relevant content and give you updates on your journey</p>
+    <button style="background-color: #2196F3; color: white; padding: 10px 20px; border: none; cursor: pointer;" onclick="askNotificationPermission()">Okay</button>
+  </div>
+
+  <div class="container">
+    <div class="header-container">
+      <div class="e5i1odf4 sign-in-container">Already have a account?<a
+        href="/account-center/signin-identifier?ref=registration-index"
+        previewlistener="true">&nbsp;Sign In</a></div>
+    <a href="#" class="tf-logo rebranding">
+      <img src="https://foxxbioprocess.myshopify.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d.png?v=1669752062&width=300"
+      alt="Brand Logo" style="max-height: 50px;">
+    </a>
+  </div>
+  <div class="css-56ctc5 e5i1odf3">
+    <div class="css-7m8vjv e5i1odf1">
+      <div id="foxxpittconformmainsec">
+        <div class="tf-reg-banner">
+          <!-- <div class="image-section">
+            <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/illustration-for-create-acct-page-2.png?v=1725646451" alt="Create Account Illustration">
+          </div> -->
+          <span class="title">Why you should create an account</span>
+        <span class="subtitle">Quickly and easily register to take advantage of these benefits:</span>
+           <div class="list">
+            <ul>
+              <li>Customize Products</li>
+              <li>1000+ Custom SUT Library</li>
+              <li>Enquiry Support</li>
+              <li>Quick Response Time</li>
+            </ul>
+           </div>
+        </div>
+        <div class="foxxpittconformcontainer">
+              <form id="registrationForm" action="/identity/auth-ui/email/verify" method="POST" onsubmit="validateForm(event)" style="padding:0px 30px 10px 0px;">
+
+                <div class="form-group">
+                  <div style="margin-bottom:10px;display:block">
+                    <label for="email">Email:<span class="interphex-form-24-required-label">*</span></label>
+                    <p id="email-note" class="leafygreen-ui-81ul7p">We recommend using your work email</p>
+                    <input type="email" id="email" name="email"
+                      placeholder="Enter your valid company email id (xyz@company.xyz)" required>
+                      <button id="changeEmailButton" style="display:none;" onclick="enableEmailField()">Change Email</button>
+                  </div>
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1; padding-right: 10px;">
+                      <label for="firstName">First Name:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                      <label for="lastName">Last Name:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1; padding-right: 10px;">
+                      <label for="jobTitle">Job Title:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="jobTitle" name="jobTitle"
+                        placeholder="Enter your title like, Marketing, President, Sales Manager, Outside Sales" required>
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                      <label for="company">Company or University: <span
+                          class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="company" name="company" placeholder="Enter your Company or University"
+                        required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1; padding-right: 10px;">
+                      <label for="department">Department:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="department" name="department" placeholder="Enter your Department" required>
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                      <label for="streetAddress">Street Address:<span
+                          class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="streetAddress" name="streetAddress" placeholder="Enter your address" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1; padding-right: 10px;">
+                      <label for="postalCode">Zip Code/Postal Code:<span
+                          class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="postalCode" name="postalCode" placeholder="Enter your Zip or postal code"
+                        required>
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                      <label for="country">Country:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="selectedCountry" name="selectedCountry" placeholder="Select your country"
+                        readonly onclick="showCountryModal()">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1; padding-right: 10px;">
+                      <label for="state">State:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="text" id="selectedState" name="selectedState" placeholder="Enter your state" readonly
+                        onclick="showStateModal()">
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                      <label for="phoneNumber">Phone Number:<span class="interphex-form-24-required-label">*</span></label>
+                      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone no" required>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group">
+                  <div style="display: flex;gap:10px">
+                    <div style="flex: 1;">
+                      <label for="note">Note:</label>
+                      <textarea id="interphex24-form-textarea-note" rows="1" cols="50" name="note"
+                        placeholder="Enter your note if any"></textarea>
+                    </div>
+                  </div>
+                </div> -->
+
+
+                <!-- <button type="button" class="btn interphex-24-submit-btn" id="generateOTPButton"
+                  onclick="generateOTP()">Generate OTP</button> -->
+
+                <!-- OTP Field -->
+
+
+                <!-- Verify OTP Button -->
+                <!-- <button type="button" class="btn interphex-24-submit-btn" id="verifyOTPButton" onclick="verifyOTP()">Verify
+                  OTP</button> -->
+
+                  <div style="display:flex;align-items: center;">
+                    <label class="container-checkbox"> I agree to receive notifications about updates and promotions.
+                      <input type="checkbox" name="allowNotifications" id="allowNotifications"  required>
+                      <span class="checkmark"></span>
+                    </label>
+                    <!-- <input type="checkbox" name="allowNotifications" id="allowNotifications" onclick="handleNotificationCheckbox()" required> -->
+                    <!-- <input type="checkbox" name="allowNotifications" id="allowNotifications" onclick="handleNotificationCheckbox()" required>
+                    <span class="checkmark"></span> -->
+                    <!-- <label>
+                      I agree to receive notifications about updates and promotions.
+                    </label> -->
+
+                  </div>
+                  <div class="form-group agree-terms-footer">
+                    <p _ngcontent-c10="" class="subtitle" translate="" data-uw-styling-context="true">
+                      <!---->
+                        By clicking the “Create account” button, by using this website, or by proceeding with the purchase of products or services, you accept and agree to be bound by: (1) the foxxbioprocess.com
+
+                      <!---->
+                      <a _ngcontent-c10="" tabindex="1" target="_blank" translate="" href="#" previewlistener="true" data-uw-styling-context="true">
+                        Terms of Use
+                      </a>
+                      <!----><span _ngcontent-c10="" data-uw-styling-context="true"> ; </span>
+                      and (2) the applicable
+                      <a _ngcontent-c10="" tabindex="1" target="_blank" translate="" href="#" previewlistener="true" data-uw-styling-context="true">
+                        terms and conditions
+                      </a>
+                      <!---->
+                        of sale for the products and services you purchase on foxxbioprocess.com.
+
+                      <!---->
+                    </p>
+                  </div>
+                <div class="form-group" style="display:flex;align-items:center;justify-content:center; position:relative">
+                  <button type="submit" class="btn interphex-24-submit-btn" id="nextButton" disabled>Create Account</button>
+                </div>
+                <div class="agree-terms-footer">
+                <p class="existing-account">
+                  Already have an account?
+                  <a _ngcontent-c10="" id="already-have-an-account-sign-in" tabindex="1" translate="" href="/account-center/signin-identifier?ref=registration-index" previewlistener="true" data-uw-styling-context="true">Sign in</a>
+                </p>
+                </div>
+              </form>
+        </div>
+
+        <div class="toaster" id="toaster">Error message here</div>
+        <div class="toaster" id="authorizedToaster">You are an authorized user</div>
+        <!-- Country Modal -->
+        <div id="countryModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeCountryModal()">&times;</span>
+            <header>
+              <h2>Select a Country</h2>
+            </header>
+            <div class="modal-content-inner">
+              <input type="text" id="countrySearch" onkeyup="searchCountry()" placeholder="Search for countries...">
+              <div id="countryOptionsWrapper">
+                <!-- Country options will be populated dynamically here -->
+                <div id="countryOptions" class="country-options" style="order:2;align-self: flex-start;">
+                  <!-- Country options will be populated dynamically -->
+                </div>
+                <button id="continueButton" onclick="selectCountry()"
+                  style="order:1;width:fit-content;display:none">Continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- State Modal -->
+        <div id="stateModal" class="modal">
+
+          <div class="modal-content">
+            <span class="close" onclick="closeStateModal()">&times;</span>
+            <header>
+              <h2>Type your State/Province</h2>
+            </header>
+            <div class="modal-content-inner">
+              <input type="text" id="stateOptions" name="stateOptions" required>
+              <button class="continueButtonState" onclick="selectState()">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" style="display:none;">
+      <div id="confirmationMessage">
+        <!-- Confirmation message will be inserted here -->
+      </div>
+
+    </div>
+
+    <!-- <div class="css-4oz1a7 e5i1odf0"></div> -->
+  </div>
+  <footer class="footer">
+    <div class="language-flag-wrapper">
+        <div class="location-detail">
+            <img id="countryFlag" class="country-flag-img" src=""  alt="Country Flag">
+            <p id="countryName" class="country-name"></p>
+        </div>
+    </div>
+  </footer>
+
+  <script>
+    // Function to fetch country data
+     function fetchCountryData() {
+        fetch('/get-country')
+            .then(response => response.json())
+            .then(data => {
+            console.log('Country data:', data);
+            const countryName = data.country || 'Not Available'; // Save country name or default to 'Not Available'
+            document.getElementById('countryName').innerText = `${countryName}`;
+            fetchCountryFlag(countryName); // Fetch country flag based on country name
+            })
+            .catch(error => {
+            console.error('Error fetching country:', error.message);
+            document.getElementById('countryName').innerText = 'Country: Not Available';
+            document.getElementById('countryFlag').src = ''; // Clear the country flag if not available
+            });
+        }
+
+    // Function to fetch country flag from your server
+    function fetchCountryFlag(countryName) {
+      fetch(`/get-country-flag/${countryName}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Country flag not found');
+          }
+          return response.blob();
+        })
+        .then(blob => {
+          const flagUrl = URL.createObjectURL(blob);
+          document.getElementById('countryFlag').src = flagUrl;
+        })
+        .catch(error => {
+          console.error('Error fetching country flag:', error.message);
+          document.getElementById('countryFlag').src = ''; // Clear the country flag on error
+        });
+    }
+
+    // Call fetchCountryData() when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchCountryData();
+    });
+  </script>
+
+</div>
+  <script src="/register-script.js"></script>
+
+</body>
+
+</html>
+
+
