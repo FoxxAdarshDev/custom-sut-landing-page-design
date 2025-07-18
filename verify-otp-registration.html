@@ -1,0 +1,838 @@
+<!-- verify-otp-registration.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <title>Passkey Verification | Foxx Bioprocess Custom SUT Catalog</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Passkey Verification | Foxx Bioprocess Custom SUT Catalog">
+  <meta property="og:description" content="Verify your passkey to access Foxx Bioprocess's exclusive custom SUT catalog. Secure your access to our wide range of bioprocessing solutions.">
+  <meta property="og:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+  <meta property="og:url" content="https://custom-sut-catalog.foxxbioprocess.com/identity/auth-ui/email/verify">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Passkey Verification | Foxx Bioprocess Custom SUT Catalog">
+  <meta name="twitter:description" content="Verify your passkey to access Foxx Bioprocess's exclusive custom SUT catalog. Secure your access to our bioprocessing solutions.">
+  <meta name="twitter:image" content="https://foxxbioprocess.com/cdn/shop/files/favicon_foxx_bio_process_Web_32x32.png?v=1702906429">
+  <meta name="twitter:site" content="@foxxlifescience">
+
+  <!-- Additional Meta Tags for SEO -->
+  <meta name="description" content="Verify your passkey to access Foxx Bioprocess's exclusive custom SUT catalog. Secure your access to our bioprocessing solutions.">
+  <meta name="keywords" content="Foxx Bioprocess, Passkey Verification, Custom SUT Catalog, Bioprocessing Solutions, Secure Access">
+  <meta name="author" content="Foxx Bioprocess">
+
+    <!-- Add your CSS or link to a CSS file here -->
+    <style>
+        body {
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            background-color: #f4f4f4;
+        }
+
+        #wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #header-container {
+            margin-top: 20px;
+            gap: 20px;
+            background-color: #ffffff;
+        }
+
+        #tf-logo {
+            margin: 0 auto;
+            height: auto;
+            width: auto
+        }
+
+        /* Example CSS */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-height: 50px;
+        }
+
+        #wrapper #body-wrapper {
+            flex-grow: 1;
+        }
+
+        #body-wrapper {
+            margin-top: 147px;
+            margin-bottom: 128px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #otpVerificationForm {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+
+        .instructions {
+            text-align: center;
+        }
+
+        .problems-instruction {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 20px;
+            max-width: 589px;
+            font-weight: 700;
+        }
+
+        label {
+            font-weight: bold;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .solutions-list ul li {
+            line-height: 22px;
+        }
+
+        #otp {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center; /* Center the text */
+            position: relative; /* Required for absolute positioning */
+            background-color: white; /* Ensure a contrasting background */
+            outline: none; /* Remove default focus outline */
+            caret-color: black; /* Hide the default caret */
+
+        }
+        #otp::placeholder {
+        text-align: center; /* Center the placeholder text */
+        }
+
+
+        #otpTimer {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        #regenerateOtpButton {
+            background: none;
+            border: none;
+            color: #007bff;
+            padding: 0px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            text-decoration: underline;
+            display: none;
+        }
+
+        #registerButton {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #dcdcdc;
+            border: 1px solid #dcdcdc;
+            color: #a2a2a2;
+            cursor: not-allowed;
+            display:inline-block;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #registerButton.enabled {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        #resendInstructions {
+            /* text-align: center; */
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+
+        .assistance-container {
+            font-size: 14px;
+            margin-top: 20px;
+            position: relative;
+            float: left;
+            text-align: center;
+        }
+
+
+        .assistance-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .assistance-container .divider-left {
+            margin-right: 10px;
+        }
+
+        .assistance-container .divider {
+            position: relative;
+            float: left;
+            border: .5px solid #dcdcdc;
+            flex: 1 1 auto;
+            margin-top: 11px;
+        }
+
+        .assistance-container .assistance-txt {
+            line-height: 22px;
+            max-width: 250px;
+        }
+
+
+        .assistance-container .divider-right {
+            margin-left: 10px;
+        }
+
+        .assistance-container .divider {
+            position: relative;
+            float: left;
+            border: .5px solid #dcdcdc;
+            flex: 1 1 auto;
+            margin-top: 11px;
+        }
+
+
+        .dynamic-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .new-account-link {
+            color: #0071d0;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #toaster {
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        #confirmationModal {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        #closeModalButton {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .toaster {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            z-index: 999999;
+            color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .toaster.success {
+            background-color: #4caf50;
+        }
+
+        .toaster.error {
+            background-color: #f44336;
+        }
+
+        .toaster.info {
+            background-color: blue;
+        }
+
+        .toaster#authorizedToaster {
+            background-color: #2196F3;
+        }
+
+
+        .footer {
+    border-top: 1px solid #dcdcdc;
+    bottom: 0;
+    padding:20px;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+.language-flag-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: right;
+}
+
+
+.location-detail {
+    line-height: 11px;
+    margin-top: 8px;
+    align-items: center;
+    font-size: 11px;
+    display: flex;
+    float: right;
+}
+
+.country-flag-img {
+    margin-right: 17px;
+    width:16px;
+    height:16px;
+}
+
+.country-name {
+    color: #54545c;
+}
+
+
+/* Styles for loader */
+.pulse-container {
+  display: none;
+}
+
+.pulse-bubble {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.pulse-bubble-1 {
+    animation: pulse .4s ease 0s infinite alternate;
+}
+.pulse-bubble-2 {
+    animation: pulse .4s ease .2s infinite alternate;
+}
+.pulse-bubble-3 {
+    animation: pulse .4s ease .4s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: .25;
+    transform: scale(.75);
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- verify-OTP-registration.html -->
+    <div id="wrapper">
+        <div id="header-wrapper">
+            <div id="header-container">
+                <div class="header">
+                    <img id="tf-logo"
+                        src="https://foxxbioprocess.myshopify.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d.png?v=1669752062&width=300"
+                        alt="Brand Logo">
+                </div>
+            </div>
+        </div>
+        <div id="body-wrapper">
+            <div class="form-container">
+                <h1>Verify your email address</h1>
+                <div class="instructions" style="display: none;">
+                    <p>A verification code was sent to <span id="userEmail"></span>.</p>
+                    <p>This code will be valid for 1 minutes.</p>
+                </div>
+                <form id="otpVerificationForm" action="/register" method="POST"
+                    onsubmit="handleSubmit(event)">
+                    <input type="hidden" id="email" name="email" value="">
+                    <input type="hidden" id="firstName" name="firstName" placeholder="First Name">
+                    <input type="hidden" id="lastName" name="lastName" placeholder="Last Name">
+                    <input type="hidden" id="jobTitle" name="jobTitle" placeholder="Job Title">
+                    <input type="hidden" id="company" name="company" placeholder="Company">
+                    <input type="hidden" id="department" name="department" placeholder="Department">
+                    <input type="hidden" id="streetAddress" name="streetAddress" placeholder="Street Address">
+                    <input type="hidden" id="postalCode" name="postalCode" placeholder="Postal Code">
+                    <input type="hidden" id="selectedCountry" name="selectedCountry" placeholder="Country">
+                    <input type="hidden" id="selectedState" name="selectedState" placeholder="State">
+                    <input type="hidden" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+                    <label for="otp">Enter the code below</label>
+                    <input type="text" id="otp" name="otp" placeholder="Enter the verification code" required>
+                    <div class="dynamic-section">
+                        <div id="otpTimer"></div>
+
+                        <button type="button" id="regenerateOtpButton">Resend a new code</button>
+
+                    </div>
+                    <div id="resendInstructions">
+                        <div class="problems-instruction">If you don’t see the email in a few minutes, please try the
+                            following:</div>
+                        <div class="solutions-list">
+                            <ul>
+                                <li>Check your junk mail or spam folder</li>
+                                <li id="provide-new-account">If this email address is not valid please <a
+                                        class="new-account-link"
+                                        href="/identity/account/registration?ref=identity/auth-ui/email/verify"><span
+                                            class="new-account-link">provide one here</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="submit" id="registerButton" class="disabled" disabled><span class="register-button-text">Register</span><div class="pulse-container" id="loaderresend-confirmation">  
+                      <div style="display:flex; width: 35px;
+                      justify-content: space-between;
+                      align-items: center;">
+                          <div class="pulse-bubble pulse-bubble-1"></div>
+                          <div class="pulse-bubble pulse-bubble-2"></div>
+                          <div class="pulse-bubble pulse-bubble-3"></div>
+                      </div>
+                      </div></button>
+                    <div class="assistance-container"><span class="divider divider-left"></span>
+                        <div class="assistance-txt"> Need assistance? <a class="new-account-link" href="#"
+                                previewlistener="true">Contact us</a>
+                        </div><span class="divider divider-right"></span>
+                    </div>
+                </form>
+
+                <div id="toaster" class="toaster"></div>
+                <div id="toasterregistering" class="toaster"></div>
+            </div>
+        </div>
+        <footer class="footer">
+          <div class="language-flag-wrapper">
+              <div class="location-detail">
+                  <img id="countryFlag" class="country-flag-img" src=""  alt="Country Flag">
+                  <p id="countryName" class="country-name"></p>&nbsp;
+                  <p id="clientIP" class="client-ip"></p>&nbsp;
+              </div>
+          </div>
+        </footer>
+
+        <script>
+          // Function to fetch country data
+           function fetchCountryData() {
+              fetch('/get-country')
+                  .then(response => response.json())
+                  .then(data => {
+                  console.log('Country data:', data);
+                  const countryName = data.country || 'Not Available'; // Save country name or default to 'Not Available'
+                  document.getElementById('countryName').innerText = `${countryName}`;
+                  fetchCountryFlag(countryName); // Fetch country flag based on country name
+                  })
+                  .catch(error => {
+                  console.error('Error fetching country:', error.message);
+                  document.getElementById('countryName').innerText = 'Country: Not Available';
+                  document.getElementById('countryFlag').src = ''; // Clear the country flag if not available
+                  });
+              }
+
+
+          // Function to fetch country flag from your server
+          function fetchCountryFlag(countryName) {
+            fetch(`/get-country-flag/${countryName}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Country flag not found');
+                }
+                return response.blob();
+              })
+              .then(blob => {
+                const flagUrl = URL.createObjectURL(blob);
+                document.getElementById('countryFlag').src = flagUrl;
+              })
+              .catch(error => {
+                console.error('Error fetching country flag:', error.message);
+                document.getElementById('countryFlag').src = ''; // Clear the country flag on error
+              });
+          }
+            // Function to fetch client IP address
+              function fetchClientIP() {
+                  fetch('/get-client-ip')
+                      .then(response => response.json())
+                      .then(data => {
+                          console.log('Client IP:', data.ip);
+                          document.getElementById('clientIP').innerText = `${data.ip}`;
+                      })
+                      .catch(error => {
+                          console.error('Error fetching client IP:', error.message);
+                          document.getElementById('clientIP').innerText = 'IP Address: Not Available';
+                      });
+              }
+
+
+          // Call fetchCountryData() when the page loads
+          document.addEventListener('DOMContentLoaded', () => {
+            fetchCountryData();
+            fetchClientIP();
+          });
+        </script>
+
+    </div>
+    <script>
+       document.addEventListener('DOMContentLoaded', async function () {
+    let formDataObject = {};
+    let formDataObjectConfirmation = {};
+    let otpTimer = null;
+    const OTP_EXPIRATION_TIME = 60; // 60 seconds
+
+    const instructionsDiv = document.querySelector('.instructions');
+
+    function showInstructions(email) {
+      document.getElementById('userEmail').textContent = email;
+      instructionsDiv.style.display = 'block';
+    }
+
+    function hideInstructions() {
+      instructionsDiv.style.display = 'none';
+    }
+
+    function showToaster(message, type = 'error') {
+      const toaster = document.getElementById('toaster');
+      toaster.textContent = message;
+      toaster.className = 'toaster ' + type;
+      toaster.style.display = 'block';
+      setTimeout(() => {
+        toaster.style.display = 'none';
+      }, 7000);
+    }
+
+    function showToasterRegistration(message, type = 'error') {
+      const toaster = document.getElementById('toasterregistering');
+      toaster.textContent = message;
+      toaster.className = 'toaster ' + type;
+      toaster.style.display = 'block';
+    }
+
+
+    // Regenerate OTP button click handler
+    document.getElementById('regenerateOtpButton').addEventListener('click', async function () {
+      console.log('Regenerate OTP button clicked.');
+      const email = document.getElementById('email').value;
+      document.getElementById('otp').disabled = false;
+      document.getElementById('otp').value = ''; // Clear the OTP input field
+      await generateOTP(email); // Call generateOTP function
+    });
+
+    async function generateOTP(email) {
+    console.log('Checking Registration Status...');
+    showToaster('Checking Registration Status...', 'info');
+
+  try {
+    // Check if user is already registered
+    const response = await fetch(`/check-registration-status?email=${email}`);
+    const data = await response.json();
+
+    if (data.registered) {
+      // User is already registered, show access denied message
+      showToasterRegistration('You are already registered...', 'error');
+      // Return here or exit the function if you want to prevent further execution
+      return;
+    }
+
+    console.log('Generating OTP...');
+    showToaster('Generating Verification Code...', 'success');
+
+    // User is not registered, proceed to generate OTP
+    const generateOtpResponse = await fetch('/generate-otp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email })
+    });
+
+    if (generateOtpResponse.ok) {
+      clearInterval(otpTimer); // Clear any previous timer
+      showToaster('Verification Code generated and sent to your email.', 'success');
+      startOTPTimer();
+      document.getElementById('regenerateOtpButton').style.display = 'none'; // Hide the regenerate button
+      showInstructions(email); // Show instructions when OTP is generated
+    } else {
+      throw new Error('Failed to generate OTP.');
+    }
+  } catch (error) {
+    console.error('Error generating OTP:', error);
+    if (data.registered) {
+      showToasterRegistration('You are already registered...', 'error');
+    } else {
+      showToaster('Failed to generate OTP. Please try again.', 'error');
+    }
+    hideInstructions(); // Hide instructions on failure
+  }
+}
+
+    async function verifyOTP(otp, email) {
+      console.log('Verifying OTP...');
+      try {
+        const response = await fetch('/verify-otp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ otp: otp, email: email })
+        });
+        if (response.ok) {
+          showToaster('Verification Code verified successfully.', 'success');
+          const registerButton = document.getElementById('registerButton');
+          registerButton.classList.remove('disabled'); // Enable the register button
+          registerButton.removeAttribute('disabled'); // Remove disabled attribute
+          registerButton.style.background = '#4caf50'; // Green background color
+          registerButton.style.border = 'none'; // Clear border style
+          registerButton.style.color = 'white'; // White text color
+          registerButton.style.cursor = 'pointer'; // Add cursor pointer
+          document.getElementById('otp').disabled = true;
+          clearInterval(otpTimer); // Clear the OTP timer on successful verification
+          await fetchFormDataConfirmation(email);
+          // Do not submit the form automatically here
+           // Hide otpTimer div
+           const otpTimerDiv = document.getElementById('otpTimer');
+            otpTimerDiv.style.display = 'none';
+            otpTimerDiv.innerText = ''; // Clear the text content
+        } else {
+          throw new Error('Invalid Verification Code.');
+        }
+      } catch (error) {
+        console.error('Error verifying Verification Code:', error);
+        showToaster('Invalid Verification Code. Please try again.');
+      }
+    }
+
+    async function fetchFormData() {
+      console.log('Fetching form data...');
+      try {
+        const response = await fetch('/identity/auth-ui/email/verify/data');
+        if (!response.ok) {
+          throw new Error('Failed to fetch form data.');
+        }
+        formDataObject = await response.json();
+        console.log("Received form Data", formDataObject)
+        document.getElementById('email').value = formDataObject.email;
+        document.getElementById('firstName').value = formDataObject.firstName;
+        document.getElementById('lastName').value = formDataObject.lastName;
+        document.getElementById('jobTitle').value = formDataObject.jobTitle;
+        document.getElementById('company').value = formDataObject.company;
+        document.getElementById('department').value = formDataObject.department;
+        document.getElementById('streetAddress').value = formDataObject.streetAddress;
+        document.getElementById('postalCode').value = formDataObject.postalCode;
+        document.getElementById('selectedCountry').value = formDataObject.selectedCountry;
+        document.getElementById('selectedState').value = formDataObject.selectedState;
+        document.getElementById('phoneNumber').value = formDataObject.phoneNumber;
+
+        console.log('Form data fetched, generating Verification Code...');
+        await generateOTP(formDataObject.email);
+      } catch (error) {
+        console.error('Error fetching form data:', error);
+        showToaster('Failed to load form data. Please try again.', 'error');
+        hideInstructions();
+      }
+    }
+
+    async function fetchFormDataConfirmation(email) {
+      console.log('Fetching confirmation form data...');
+      try {
+        const response = await fetch('/identity/account/registration/confirmation/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: email })
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch confirmation form data.');
+        }
+        formDataObjectConfirmation = await response.json();
+        console.log('Confirmation form data fetched:', formDataObjectConfirmation);
+      } catch (error) {
+        console.error('Error fetching confirmation form data:', error);
+        showToaster('Failed to load confirmation form data. Please try again.', 'error');
+      }
+    }
+
+    function startOTPTimer() {
+      let timeLeft = OTP_EXPIRATION_TIME;
+      const otpTimerDiv = document.getElementById('otpTimer');
+      otpTimerDiv.style.display = 'block'; // Ensure the timer is visible
+
+      otpTimer = setInterval(() => {
+        if (timeLeft > 0) {
+          const timerMessage = `Verification Code is valid for ${timeLeft} seconds.`;
+          otpTimerDiv.textContent = timerMessage;
+
+          if (timeLeft <= 10) {
+            otpTimerDiv.style.color = 'orange'; // Change text color to orange when time is running out
+          } else {
+            otpTimerDiv.style.color = 'green'; // Green text color for normal countdown
+          }
+
+          timeLeft--;
+        } else {
+          clearInterval(otpTimer);
+          otpTimerDiv.textContent = 'Verification Code expired.';
+          otpTimerDiv.style.color = 'red'; // Change text color to red when OTP expires
+          showToaster('Verification Code expired. Please regenerate Verification Code.');
+          document.getElementById('regenerateOtpButton').style.display = 'block'; // Show the regenerate button
+        }
+      }, 1000);
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const otp = document.getElementById('otp').value.trim();
+      const email = document.getElementById('email').value;
+
+      // Check if OTP format is valid
+      if (!/^\d{6}$/.test(otp)) {
+        showToaster('OTP should be exactly 6 digits.', 'error');
+        return;
+      }
+
+      await verifyOTP(otp, email);
+
+    }
+
+    // Call fetchFormData first
+    await fetchFormData();
+
+    // Input event listener for OTP input field
+    document.getElementById('otp').addEventListener('input', debounce(async function () {
+      const otp = this.value.trim();
+      const email = document.getElementById('email').value;
+
+      // Check if OTP format is valid
+      if (!/^\d{6}$/.test(otp)) {
+        if (/^\d+$/.test(otp)) {
+          showToaster('OTP should be exactly 6 digits.', 'error');
+        } else {
+          showToaster('Invalid OTP. Please enter a valid OTP.', 'error');
+        }
+        return;
+      }
+
+      // If OTP format is correct, proceed to verify
+      await verifyOTP(otp, email);
+
+      // If OTP has expired, show expiration message
+      const otpTimerDiv = document.getElementById('otpTimer');
+      if (otpTimerDiv.textContent === 'Verification Code expired.') {
+        showToaster('Verification Code expired. Please regenerate Verification Code.');
+      }
+    }, 500));
+
+    // Register button click handler
+      document.getElementById('registerButton').addEventListener('click', async function (event) {
+      // Validate OTP before proceeding to submission
+      const otp = document.getElementById('otp').value.trim();
+      const email = document.getElementById('email').value;
+
+      // Check if OTP format is valid
+      if (!/^\d{6}$/.test(otp)) {
+          showToaster('Please enter a valid OTP.', 'error');
+          return;
+      }
+       // Show loader animation
+      const buttonTextContainer = this.querySelector('.register-button-text');
+      if (buttonTextContainer) {
+        buttonTextContainer.innerText = 'Registering...';
+      }
+
+      // Show loader animation
+      const loaderContainer = document.getElementById('loaderresend-confirmation');
+      loaderContainer.style.display = 'inline-block';
+
+      // Show registering toaster message
+      showToasterRegistration('Registering...', 'success');
+      });
+
+
+
+    // Debounce function for input events
+    function debounce(func, delay) {
+      let debounceTimer;
+      return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(context, args), delay);
+      };
+    }
+  });
+
+        </script>
+
+</body>
+
+</html>
