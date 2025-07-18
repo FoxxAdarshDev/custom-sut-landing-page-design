@@ -665,137 +665,142 @@
                <script>
 
 document.addEventListener('DOMContentLoaded', function () {
-  const cards = document.querySelectorAll('.hotspot-card');
-  if (cards.length === 0) return;
+  // Get all interactive hotspot sections
+  const sections = document.querySelectorAll('.interactive-hotspots-wrapper');
+  
+  sections.forEach(section => {
+    const sectionId = section.dataset.sectionId;
+    const cards = section.querySelectorAll('.hotspot-card');
+    
+    if (cards.length === 0) return;
 
-  let currentIndex = 0;
-  const delay = 2000; // Time each card is shown
-  const fadeDuration = 500;
-  const resetDelay = 3000; // Time before loop restarts on mobile
-  const desktopShowAllDelay = 120000; // 2 minutes to show all cards on desktop
-  const isMobile = window.innerWidth <= 768;
+    let currentIndex = 0;
+    const delay = 2000; // Time each card is shown
+    const fadeDuration = 500;
+    const resetDelay = 3000; // Time before loop restarts on mobile
+    const desktopShowAllDelay = 120000; // 2 minutes to show all cards on desktop
 
-  // Function to update connectors and index backdrop only for visible cards
-  const updateConnectors = () => {
-    cards.forEach((card, index) => {
-      const visible = card.style.visibility === 'visible';
-      const line = card.querySelector('.connector-line');
-      const dot = card.querySelector('.connector-dot');
-      const borderPos = card.dataset.borderPosition;
+    // Function to update connectors and index backdrop only for visible cards
+    const updateConnectors = () => {
+      cards.forEach((card, index) => {
+        const visible = card.style.visibility === 'visible';
+        const line = card.querySelector('.connector-line');
+        const dot = card.querySelector('.connector-dot');
+        const borderPos = card.dataset.borderPosition;
 
-      // Remove existing index backdrop (if any)
-      let indexBackdrop = card.querySelector('.index-backdrop');
-      if (!indexBackdrop && visible) {
-        indexBackdrop = document.createElement('div');
-        indexBackdrop.classList.add('index-backdrop');
-        card.appendChild(indexBackdrop);
+        // Remove existing index backdrop (if any)
+        let indexBackdrop = card.querySelector('.index-backdrop');
+        if (!indexBackdrop && visible) {
+          indexBackdrop = document.createElement('div');
+          indexBackdrop.classList.add('index-backdrop');
+          card.appendChild(indexBackdrop);
+        }
+
+        if (indexBackdrop && visible) {
+          indexBackdrop.textContent = index + 1;
+
+          const cardRect = card.getBoundingClientRect();
+
+          let dotX = parseFloat(dot.style.left);
+          let dotY = parseFloat(dot.style.top);
+
+          dotX = isNaN(dotX) ? 0 : dotX;
+          dotY = isNaN(dotY) ? 0 : dotY;
+
+          const startX = cardRect.width * (dotX / 100);
+          const startY = cardRect.height * (dotY / 100);
+
+          const borderPoint = getBorderPoint(cardRect, borderPos);
+
+          const deltaX = startX - borderPoint.x;
+          const deltaY = startY - borderPoint.y;
+          const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+          const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+          line.style.cssText = `
+            position: absolute;
+            width: ${length}px;
+            height: 2px;
+            background-color: ${window.getComputedStyle(dot).backgroundColor};
+            transform: rotate(${angle}deg);
+            transform-origin: left center;
+            left: ${borderPoint.x}px;
+            top: ${borderPoint.y}px;
+            display: block;
+          `;
+          dot.style.display = 'block';
+        } else {
+          if (indexBackdrop) indexBackdrop.remove();
+          if (line) line.style.display = 'none';
+          if (dot) dot.style.display = 'none';
+        }
+      });
+    };
+
+    const getBorderPoint = (rect, borderPos) => {
+      let x, y;
+      switch (borderPos) {
+        case 'left': x = 0; y = rect.height / 2; break;
+        case 'right': x = rect.width; y = rect.height / 2; break;
+        case 'top': x = rect.width / 2; y = 0; break;
+        case 'bottom': x = rect.width / 2; y = rect.height; break;
+        default: x = 0; y = 0;
       }
+      return { x, y };
+    };
 
-      if (indexBackdrop && visible) {
-        indexBackdrop.textContent = index + 1;
+    // Show the next card and update visibility accordingly
+    const showNextCard = () => {
+      // Hide all cards initially
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.visibility = 'hidden';
+        card.classList.remove('active');
+      });
 
-        const cardRect = card.getBoundingClientRect();
+      // Show current card
+      const currentCard = cards[currentIndex];
+      currentCard.style.opacity = '1';
+      currentCard.style.visibility = 'visible';
+      currentCard.classList.add('active');
 
-        let dotX = parseFloat(dot.style.left);
-        let dotY = parseFloat(dot.style.top);
+      // Update connectors for the visible card
+      updateConnectors();
 
-        dotX = isNaN(dotX) ? 0 : dotX;
-        dotY = isNaN(dotY) ? 0 : dotY;
-
-        const startX = cardRect.width * (dotX / 100);
-        const startY = cardRect.height * (dotY / 100);
-
-        const borderPoint = getBorderPoint(cardRect, borderPos);
-
-        const deltaX = startX - borderPoint.x;
-        const deltaY = startY - borderPoint.y;
-        const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-
-        line.style.cssText = `
-          position: absolute;
-          width: ${length}px;
-          height: 2px;
-          background-color: ${window.getComputedStyle(dot).backgroundColor};
-          transform: rotate(${angle}deg);
-          transform-origin: left center;
-          left: ${borderPoint.x}px;
-          top: ${borderPoint.y}px;
-          display: block;
-        `;
-        dot.style.display = 'block';
-      } else {
-        if (indexBackdrop) indexBackdrop.remove();
-        if (line) line.style.display = 'none';
-        if (dot) dot.style.display = 'none';
-      }
-    });
-  };
-
-  const getBorderPoint = (rect, borderPos) => {
-    let x, y;
-    switch (borderPos) {
-      case 'left': x = 0; y = rect.height / 2; break;
-      case 'right': x = rect.width; y = rect.height / 2; break;
-      case 'top': x = rect.width / 2; y = 0; break;
-      case 'bottom': x = rect.width / 2; y = rect.height; break;
-      default: x = 0; y = 0;
-    }
-    return { x, y };
-  };
-
-  // Show the next card and update visibility accordingly
-  const showNextCard = () => {
-    // Hide all cards initially
-    cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.visibility = 'hidden';
-      card.classList.remove('active');
-    });
-
-    // Show current card
-    const currentCard = cards[currentIndex];
-    currentCard.style.opacity = '1';
-    currentCard.style.visibility = 'visible';
-    currentCard.classList.add('active');
-
-    // Update connectors for the visible card
-    updateConnectors();
-
-    currentIndex++;
-    const isMobile = window.innerWidth <= 768;
-    if (currentIndex >= cards.length) {
-      if (isMobile) {
-        // For mobile: restart loop after 3 seconds
-        currentIndex = 0;
-        setTimeout(showNextCard, resetDelay);
-      } else {
-        // For desktop: show all cards immediately without any delay
-        cards.forEach(card => {
-          card.style.opacity = '1';
-          card.style.visibility = 'visible';
-          card.classList.add('active');
-        });
-        updateConnectors();
-
-        // After 2 minutes, hide all and restart loop
-        setTimeout(() => {
-          cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.visibility = 'hidden';
-            card.classList.remove('active');
-          });
+      currentIndex++;
+      const isMobile = window.innerWidth <= 768;
+      if (currentIndex >= cards.length) {
+        if (isMobile) {
+          // For mobile: restart loop after 3 seconds
           currentIndex = 0;
-          showNextCard();
-        }, desktopShowAllDelay);
+          setTimeout(showNextCard, resetDelay);
+        } else {
+          // For desktop: show all cards immediately without any delay
+          cards.forEach(card => {
+            card.style.opacity = '1';
+            card.style.visibility = 'visible';
+            card.classList.add('active');
+          });
+          updateConnectors();
+
+          // After 2 minutes, hide all and restart loop
+          setTimeout(() => {
+            cards.forEach(card => {
+              card.style.opacity = '0';
+              card.style.visibility = 'hidden';
+              card.classList.remove('active');
+            });
+            currentIndex = 0;
+            showNextCard();
+          }, desktopShowAllDelay);
+        }
+      } else {
+        setTimeout(showNextCard, delay);
       }
-    } else {
-      setTimeout(showNextCard, delay);
-    }
-  };
+    };
 
-
-  // Start animation loop
-  showNextCard();
+    // Start animation loop for this section
+    showNextCard();
+  });
 });
                </script>
