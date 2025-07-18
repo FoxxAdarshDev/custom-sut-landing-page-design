@@ -1,0 +1,122 @@
+    <style>
+      
+        .engineering-capabilities-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #0071b9;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #0071b9, #005a91);
+            border-radius: 2px;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .capability-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 113, 185, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0071b9, #005a91);
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 113, 185, 0.15);
+        }
+
+        .capability-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .capability-icon svg {
+            width: 80px;
+            height: 80px;
+            fill: #0071b9;
+            transition: transform 0.3s ease;
+        }
+
+        .capability-card:hover .capability-icon svg {
+            transform: scale(1.1);
+        }
+
+        .capability-title {
+            font-size: 1.5rem;
+            color: #0071b9;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .capability-description {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .engineering-capabilities-section {
+                padding: 60px 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .capability-card {
+                padding: 30px 20px;
+            }
+
+            .capability-icon svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
