@@ -861,12 +861,20 @@ app.post("/register", async (req, res) => {
    req.session.confirmedRegistration = true;
    req.session.isEmailVerified = true;
 
+   console.log('Setting session data:', {
+     email: userData.email,
+     allowedAccess: true,
+     confirmedRegistration: true,
+     isEmailVerified: true
+   });
+
    // Save the session before redirecting
    req.session.save((err) => {
      if (err) {
        console.error('Session save error:', err);
        return res.status(500).send('Session error');
      }
+     console.log('Session saved successfully, redirecting to confirmation');
      // Redirect to the confirmation page
      res.redirect('/identity/account/registration/confirmation');
    });
@@ -1057,8 +1065,12 @@ const checkConfirmationAccess = (req, res, next) => {
   const referrer = req.get('Referrer');
   const { allowedAccess, confirmedRegistration, isEmailVerified, notificationAccessAllowed, email } = req.session;
 
+  console.log('Session data:', { email, allowedAccess, confirmedRegistration, isEmailVerified, notificationAccessAllowed });
+  console.log('Referrer:', referrer);
+
   // Allow access if user has a valid session with email (same browser)
-  if (email && req.session.id) {
+  if (email) {
+    console.log('Access granted - user has email in session');
     return next();
   }
 
@@ -1068,10 +1080,12 @@ const checkConfirmationAccess = (req, res, next) => {
     (allowedAccess && confirmedRegistration && isEmailVerified) || 
     notificationAccessAllowed
   ) {
+    console.log('Access granted - proper referrer or session flags');
     // Clear notificationAccessAllowed to avoid future access
     req.session.notificationAccessAllowed = null;
     return next();
   } else {
+    console.log('Access denied - redirecting to denied page');
     return res.redirect('/confirmation/denied');
   }
 };
