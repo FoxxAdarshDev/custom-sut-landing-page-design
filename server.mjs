@@ -1016,21 +1016,21 @@ app.post('/resend-confirmation', async (req, res) => {
 // endpoint use to fetch register user data on ((identity/account/registration/confirmation)) 
 app.get('/register/user-data', async (req, res) => {
   try {
-    // Assuming the user's email is stored in the session
-    const userEmail = req.session.email;
+    // First try to get email from query parameter, then from session
+    const userEmail = req.query.email || req.session.email;
 
     if (!userEmail) {
-      return res.status(400).send('User email is not available in the session.');
+      return res.status(400).json({ error: 'User email is not available in the session or query parameters.' });
     }
 
     const userData = await UserData.findOne({ email: userEmail }).exec();
     if (!userData) {
-      throw new Error('User not found');
+      return res.status(404).json({ error: 'User not found' });
     }
     res.json(userData);
   } catch (error) {
     console.error('Error fetching user data:', error);
-    res.status(500).send('Error fetching user data.');
+    res.status(500).json({ error: 'Error fetching user data.' });
   }
 });
 
