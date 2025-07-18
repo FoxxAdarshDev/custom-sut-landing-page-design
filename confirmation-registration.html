@@ -553,13 +553,30 @@ tbody tr:hover {
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             try {
-                 // Assume localStorage stores a JSON string for "formData"
+                 // Try to get email from localStorage first, then from session
                   const storedData = localStorage.getItem("formData");
                   const formData = storedData ? JSON.parse(storedData) : {};
-                    if (!formData.email) {
-                    throw new Error('No email in local storage');
+                  
+                  let userEmail = formData.email;
+                  
+                  // If no email in localStorage, try to fetch from session
+                  if (!userEmail) {
+                    const sessionResponse = await fetch('/register/user-data', {
+                      method: 'GET',
+                      headers: { 'Content-Type': 'application/json' }
+                    });
+                    
+                    if (sessionResponse.ok) {
+                      const sessionData = await sessionResponse.json();
+                      userEmail = sessionData.email;
                     }
-            const response = await fetch(`/register/user-data?email=${encodeURIComponent(formData.email)}`, {
+                  }
+                  
+                  if (!userEmail) {
+                    throw new Error('No email found in local storage or session');
+                  }
+                  
+            const response = await fetch(`/register/user-data?email=${encodeURIComponent(userEmail)}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
                 });

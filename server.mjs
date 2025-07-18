@@ -861,8 +861,15 @@ app.post("/register", async (req, res) => {
    req.session.confirmedRegistration = true;
    req.session.isEmailVerified = true;
 
-   // Redirect to the confirmation page
-   res.redirect('/identity/account/registration/confirmation');
+   // Save the session before redirecting
+   req.session.save((err) => {
+     if (err) {
+       console.error('Session save error:', err);
+       return res.status(500).send('Session error');
+     }
+     // Redirect to the confirmation page
+     res.redirect('/identity/account/registration/confirmation');
+   });
   } catch (error) {
     console.error("Registration error:", error);
     res.status(500).send("Registration failed.");
@@ -1048,8 +1055,14 @@ app.get('/register/user-data', async (req, res) => {
 
 const checkConfirmationAccess = (req, res, next) => {
   const referrer = req.get('Referrer');
-  const { allowedAccess, confirmedRegistration, isEmailVerified, notificationAccessAllowed } = req.session;
+  const { allowedAccess, confirmedRegistration, isEmailVerified, notificationAccessAllowed, email } = req.session;
 
+  // Allow access if user has a valid session with email (same browser)
+  if (email && req.session.id) {
+    return next();
+  }
+
+  // Allow access from proper referrer or with proper session flags
   if (
     (referrer && referrer.includes('/identity/auth-ui/email/verify')) || 
     (allowedAccess && confirmedRegistration && isEmailVerified) || 
