@@ -1700,7 +1700,7 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
             const originalPriceEl = card.querySelector('.original-price');
             if (originalPriceEl) {
                 const originalPriceText = originalPriceEl.textContent.replace('$', '').replace(/,/g, '');
-                compareAtPrice = Math.round```text
+                compareAtPrice = Math.round
 (parseFloat(originalPriceText) * 100);
             }
             break;
