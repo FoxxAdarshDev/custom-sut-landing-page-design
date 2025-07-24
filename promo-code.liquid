@@ -2737,26 +2737,46 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
     // Populate variant selector in the popup
     const variantSelect = document.getElementById('popup-variant-select');
-    variantSelect.innerHTML = '';  // Clear existing options
+    const variantSelectorContainer = document.getElementById('popupVariantSelector');
+    
+    if (variantSelect && variantSelectorContainer) {
+        variantSelect.innerHTML = '';  // Clear existing options
 
-    // Fetch the product to get all variants
-    fetch(`/products/${productId}.js`)
-    .then(response => response.json())
-    .then(product => {
-      product.variants.forEach(variant => {
-        const option = document.createElement('option');
-        option.value = variant.id;
-        option.text = variant.title;
-        option.dataset.price = variant.price;  // Save the price for this variant
-        variantSelect.appendChild(option);
-      });
+        // Fetch the product to get all variants
+        fetch(`/products/${productId}.js`)
+        .then(response => response.json())
+        .then(product => {
+            if (product.variants && product.variants.length > 1) {
+                // Show variant selector if multiple variants exist
+                variantSelectorContainer.style.display = 'block';
+                
+                product.variants.forEach(variant => {
+                    const option = document.createElement('option');
+                    option.value = variant.id;
+                    option.text = variant.title;
+                    option.dataset.price = variant.price;  // Save the price for this variant
+                    variantSelect.appendChild(option);
+                });
 
-      // Set default selected variant
-      variantSelect.value = selectedProductVariantId;
-    })
-    .catch(error => {
-        console.error('Error fetching product details:', error);
-    });
+                // Set default selected variant
+                variantSelect.value = selectedProductVariantId;
+                
+                // Update selectedProductVariantId when variant changes
+                variantSelect.addEventListener('change', function() {
+                    selectedProductVariantId = this.value;
+                    updatePopupVariant(this);
+                });
+            } else {
+                // Hide variant selector if only one variant
+                variantSelectorContainer.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product details:', error);
+            // Hide variant selector on error
+            variantSelectorContainer.style.display = 'none';
+        });
+    }
 
     // Show overlay first
     const overlay = document.getElementById('overlay');
@@ -2844,7 +2864,21 @@ function selectSavingsOption(quantity) {
 function addToCart() {
     const quantity = document.getElementById('popupQuantity').value;
     const variantSelect = document.getElementById('popup-variant-select');
-    const selectedVariantId = variantSelect.value;
+    let selectedVariantId;
+
+    // Get the selected variant ID from dropdown or use the default one
+    if (variantSelect && variantSelect.value) {
+        selectedVariantId = variantSelect.value;
+    } else {
+        selectedVariantId = selectedProductVariantId;
+    }
+
+    // Ensure we have a valid variant ID
+    if (!selectedVariantId) {
+        console.error('No variant ID found');
+        showAddToCartError();
+        return;
+    }
 
     // Add to cart via AJAX instead of redirect
     fetch('/cart/add.js', {
@@ -2853,12 +2887,18 @@ function addToCart() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: selectedVariantId,
+            id: parseInt(selectedVariantId),
             quantity: parseInt(quantity)
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Product added to cart from popup:', data);
         // Show success notification
         showAddToCartSuccess();
 
@@ -2893,14 +2933,21 @@ function addToCartDirectly(event, productId, productTitle, productImage, product
 
     const productCard = event.target.closest('.product-card');
     const quantityInput = productCard.querySelector('.quantity-input');
-    const quantity = quantityInput.value;
+    const quantity = quantityInput ? quantityInput.value : 1;
     const variantSelect = productCard.querySelector('.variant-selector');
     let selectedVariantId;
 
-    if (variantSelect) {
+    if (variantSelect && variantSelect.value) {
         selectedVariantId = variantSelect.value;
     } else {
         selectedVariantId = productVariantId;
+    }
+
+    // Ensure we have a valid variant ID
+    if (!selectedVariantId) {
+        console.error('No variant ID found for product:', productId);
+        showAddToCartError();
+        return;
     }
 
     fetch('/cart/add.js', {
@@ -2909,12 +2956,18 @@ function addToCartDirectly(event, productId, productTitle, productImage, product
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: selectedVariantId,
+            id: parseInt(selectedVariantId),
             quantity: parseInt(quantity)
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Product added to cart:', data);
         // Show success notification
         showAddToCartSuccess();
 
@@ -2930,7 +2983,9 @@ function addToCartDirectly(event, productId, productTitle, productImage, product
         updateCartInfo();
 
         // Reset quantity to 1 after adding
-        quantityInput.value = 1;
+        if (quantityInput) {
+            quantityInput.value = 1;
+        }
     })
     .catch(error => {
         console.error('Error adding to cart:', error);
@@ -2940,9 +2995,72 @@ function addToCartDirectly(event, productId, productTitle, productImage, product
 
 function updatePopupVariant(selectElement) {
     const selectedVariantId = selectElement.value;
-    // You can perform actions based on the selected variant
-    // For example, update the displayed price or image
-    console.log("Selected variant in popup:", selectedVariantId);
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    const newPrice = selectedOption.dataset.price;
+    
+    console.log("Selected variant in popup:", selectedVariantId, "Price:", newPrice);
+    
+    // Update the selected product variant ID
+    selectedProductVariantId = selectedVariantId;
+    
+    // Update price display if price data is available
+    if (newPrice) {
+        const priceInDollars = parseInt(newPrice) / 100;
+        
+        // Update sale price
+        const popupSalePriceEl = document.getElementById('popupSalePrice');
+        if (popupSalePriceEl) {
+            popupSalePriceEl.textContent = priceInDollars.toFixed(2);
+        }
+        
+        // Calculate and update final price with discount
+        const discountPercentage = selectedProductDiscount || 0;
+        const finalPrice = priceInDollars * (1 - discountPercentage / 100);
+        
+        const popupFinalPriceEl = document.getElementById('popupFinalPrice');
+        if (popupFinalPriceEl) {
+            popupFinalPriceEl.textContent = '$' + finalPrice.toFixed(2);
+        }
+        
+        // Update smart savings calculations
+        updateSmartSavingsForVariant(priceInDollars, discountPercentage);
+    }
+}
+
+function updateSmartSavingsForVariant(priceInDollars, discountPercentage) {
+    // Calculate for 2+ items
+    const qty2 = 2;
+    const regularTotal2 = priceInDollars * qty2;
+    const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
+    const totalSavings2 = regularTotal2 - discountedTotal2;
+    const perItemSavings2 = totalSavings2 / qty2;
+
+    // Calculate for 3+ items
+    const qty3 = 3;
+    const bulkDiscount3 = discountPercentage + 5;
+    const regularTotal3 = priceInDollars * qty3;
+    const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3 / 100);
+    const totalSavings3 = regularTotal3 - discountedTotal3;
+    const perItemSavings3 = totalSavings3 / qty3;
+
+    // Calculate for 5+ items
+    const qty5 = 5;
+    const bulkDiscount5 = discountPercentage + 10;
+    const regularTotal5 = priceInDollars * qty5;
+    const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5 / 100);
+    const totalSavings5 = regularTotal5 - discountedTotal5;
+    const perItemSavings5 = totalSavings5 / qty5;
+
+    // Update savings displays
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    const popupSavingsAmount2El = document.getElementById('popupSavingsAmount2');
+    const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
+    const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
+
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = perItemSavings2.toFixed(2);
+    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = perItemSavings2.toFixed(2);
+    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = perItemSavings3.toFixed(2);
+    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = perItemSavings5.toFixed(2);
 }
 
 function checkForAutomaticCoupons() {
