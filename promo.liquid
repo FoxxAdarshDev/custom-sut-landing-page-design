@@ -456,6 +456,88 @@
       font-size: 1.5rem;
     }
   }
+  .popup-savings-details {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.popup-savings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popup-savings-option .savings-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popup-savings-option .savings-preview:hover {
+  background: #e9ecef;
+}
+
+.popup-savings-option.selected .savings-preview {
+  background: #0071ce;
+  color: white;
+}
+
+.popup-savings-option .arrow {
+  margin: 0 8px;
+  color: #666;
+}
+
+.popup-savings-option.selected .arrow {
+  color: white;
+}
+
+.popup-savings-option .savings-expanded {
+  display: none;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 0 0 6px 6px;
+  margin-top: -1px;
+}
+
+.popup-savings-option.expanded .savings-expanded {
+  display: block;
+}
+
+.popup-savings-option .savings-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-savings-option .savings-details li {
+  padding: 2px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.popup-savings-option .savings-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.popup-savings-option.selected .savings-toggle {
+  color: white;
+}
+
+.popup-savings-option.expanded .savings-toggle {
+  transform: rotate(45deg);
+}
 </style>
 
 <div class="patriotic-sale-container">
@@ -1048,9 +1130,13 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     const popupFinalPriceEl = document.getElementById('popupFinalPrice');
     const popupQuantityEl = document.getElementById('popupQuantity');
 
-    if (popupSalePriceEl) popupSalePriceEl.textContent = formatPrice(productPrice / 100);
+    if (popupSalePriceEl) popupSalePriceEl.textContent = '$' + formatPrice(productPrice / 100);
     if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
     if (popupQuantityEl) popupQuantityEl.value = 1;
+
+    // Update first savings option to show current price
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(finalPrice / 100);
 
     // Show discount badge with the SAME percentage as the product card
     const discountBadge = document.getElementById('popupDiscountBadge');
@@ -1258,7 +1344,7 @@ function showAutomaticCouponNotification(discounts) {
     notification.classList.add('cart-notification', 'success', 'coupon-notification');
 
     const discountNames = discounts.map(d => d.title).join(', ');
-    const totalSavings = discounts.reduce((sum, d) => sum + (d.amount || 0), 0);
+    const totalSavings = discounts.reduce((sum, d => sum + (d.amount || 0), 0);
 
     notification.innerHTML = `
         <div class="notification-content">
@@ -1683,9 +1769,13 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
     const popupFinalPriceEl = document.getElementById('popupFinalPrice');
     const popupQuantityEl = document.getElementById('popupQuantity');
 
-    if (popupSalePriceEl) popupSalePriceEl.textContent = formatPrice(productPrice / 100);
+    if (popupSalePriceEl) popupSalePriceEl.textContent = '$' + formatPrice(productPrice / 100);
     if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
     if (popupQuantityEl) popupQuantityEl.value = 1;
+
+    // Update first savings option to show current price
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(finalPrice / 100);
 
     // Show discount badge with the SAME percentage as the product card
     const discountBadge = document.getElementById('popupDiscountBadge');
@@ -1990,7 +2080,7 @@ function addToCartDirect(productId) {
 
 <div class="add-to-cart-popup" id="addToCartPopup">
     <div class="popup-content">
-        <div class="popup-left-column" id="leftRelatedProducts">
+        <div class="popup-left-column" id="leftRelatedProducts" style="display: none;">
             <h3>✨ Pair it with...</h3>
             <div class="popup-left-products" id="leftRelatedProductsGrid">
                 <!-- Related product recommendations on left -->
@@ -2006,14 +2096,14 @@ function addToCartDirect(productId) {
             <div class="popup-product-details">
                 <div class="popup-product-image">
                     <img id="popupProductImage" src="" alt="Product Image">
-                    <div class="discount-badge" id="popupDiscountBadge">25% OFF</div>
+                    <div class="discount-badge" id="popupDiscountBadge" style="display: none;">25% OFF</div>
                 </div>
 
                 <div class="popup-product-info">
                     <h3 id="popupProductTitle">Product Title</h3>
                     <p>SKU: <span id="popupProductSKU"></span></p>
                     <div class="popup-product-prices">
-                        <span class="original-price" id="popupOriginalPrice">$99.99</span>
+                        <span class="original-price" id="popupOriginalPrice" style="display: none;">$99.99</span>
                         <span class="sale-price" id="popupSalePrice">$79.99</span>
                         <span class="final-price">Now: <span id="popupFinalPrice">$59.99</span></span>
                     </div>
@@ -2037,7 +2127,7 @@ function addToCartDirect(productId) {
                         <div class="savings-preview">
                             1 item
                             <span class="arrow">→</span>
-                            <span class="savings-preview-price">$<span id="popupSavingsPreview"></span></span>
+                            <span class="savings-preview-price">$<span id="popupSavingsPreview">0.00</span></span>
                         </div>
                     </div>
 
@@ -2046,7 +2136,7 @@ function addToCartDirect(productId) {
                             <div class="savings-content">
                                 2+ items
                                 <span class="arrow">→</span>
-                                <span class="savings-preview-price">$<span id="popupSavingsAmount2"></span> each</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount2">0.00</span> each</span>
                             </div>
                             <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
                         </div>
@@ -2065,7 +2155,7 @@ function addToCartDirect(productId) {
                             <div class="savings-content">
                                 3+ items
                                 <span class="arrow">→</span>
-                                <span class="savings-preview-price">$<span id="popupSavingsAmount3"></span> each</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount3">0.00</span> each</span>
                             </div>
                             <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
                         </div>
@@ -2084,7 +2174,7 @@ function addToCartDirect(productId) {
                             <div class="savings-content">
                                 5+ items
                                 <span class="arrow">→</span>
-                                <span class="savings-preview-price">$<span id="popupSavingsAmount5"></span> each</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount5">0.00</span> each</span>
                             </div>
                             <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
                         </div>
