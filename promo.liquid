@@ -814,6 +814,163 @@
 </style>
 
 <script>
+// Add to cart functionality with popup
+let selectedProductId;
+let selectedProductTitle;
+let selectedProductImage;
+let selectedProductSKU;
+let selectedProductPrice;
+let selectedProductVariantId;
+let selectedProductCompareAtPrice;
+let selectedProductDiscount;
+
+function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event) {
+    selectedProductId = productId;
+    selectedProductTitle = productTitle;
+    selectedProductImage = productImage;
+    selectedProductSKU = productSKU;
+    selectedProductPrice = productPrice;
+    selectedProductVariantId = productVariantId;
+    selectedProductCompareAtPrice = compareAtPrice;
+
+    // Find the product card to get discount information by using the event target
+    const productCard = event.target.closest('.product-card');
+    let discountPercentage = 0;
+    let finalPrice = productPrice;
+
+    if (productCard) {
+        const discountLabel = productCard.querySelector('.discount-label');
+        if (discountLabel) {
+            const discountText = discountLabel.textContent;
+            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
+
+            // Calculate final price properly
+            if (discountPercentage > 0) {
+                finalPrice = productPrice * (1 - discountPercentage / 100);
+            }
+        }
+    }
+
+    selectedProductDiscount = discountPercentage;
+
+    // Helper function to format price
+    function formatPrice(price) {
+        const priceInNumber = Number(price);
+        // Always show 2 decimal places for consistency
+        return priceInNumber.toFixed(2);
+    }
+
+    // Populate popup content
+    const popupImageEl = document.getElementById('popupProductImage');
+    const popupTitleEl = document.getElementById('popupProductTitle');
+    const popupSKUEl = document.getElementById('popupProductSKU');
+
+    if (popupImageEl) popupImageEl.src = productImage;
+    if (popupTitleEl) popupTitleEl.textContent = productTitle;
+    if (popupSKUEl) popupSKUEl.textContent = productSKU;
+
+    // Add the original price to the popup
+    const originalPriceElement = document.getElementById('popupOriginalPrice');
+    if (selectedProductCompareAtPrice > 0){
+        originalPriceElement.textContent = '$' + formatPrice(selectedProductCompareAtPrice / 100); // original price
+        originalPriceElement.style.display = 'inline';
+    }else {
+        originalPriceElement.style.display = 'none';
+    }
+
+    const popupSalePriceEl = document.getElementById('popupSalePrice');
+    const popupFinalPriceEl = document.getElementById('popupFinalPrice');
+    const popupQuantityEl = document.getElementById('popupQuantity');
+
+    if (popupSalePriceEl) popupSalePriceEl.textContent = '$' + formatPrice(productPrice / 100);
+    if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
+    if (popupQuantityEl) popupQuantityEl.value = 1;
+
+    // Update first savings option to show current price
+    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(finalPrice / 100);
+
+    // Show discount badge with the SAME percentage as the product card
+    const discountBadge = document.getElementById('popupDiscountBadge');
+    if (discountPercentage > 0) {
+        discountBadge.textContent = discountPercentage + '% OFF';
+        discountBadge.style.display = 'block';
+    } else {
+        discountBadge.style.display = 'none';
+    }
+
+  // Calculate smart savings for different quantities using the SAME logic as product cards
+  const priceInDollars = productPrice / 100;
+
+  // Calculate for 2+ items
+  const qty2 = 2;
+  const regularTotal2 = priceInDollars * qty2;
+  const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
+  const totalSavings2 = regularTotal2 - discountedTotal2;
+  const perItemSavings2 = totalSavings2 / qty2;
+
+  // Calculate for 3+ items - FIXED: Use correct quantity multiplier
+  const qty3 = 3;
+  const bulkDiscount3 = discountPercentage + 5; // Additional 5% bulk discount for 3+ items
+  const regularTotal3 = priceInDollars * qty3;
+  const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3 / 100);
+  const totalSavings3 = regularTotal3 - discountedTotal3;
+  const perItemSavings3 = totalSavings3 / qty3;
+
+  // Calculate for 5+ items - FIXED: Use correct quantity multiplier
+  const qty5 = 5;
+  const bulkDiscount5 = discountPercentage + 10; // Additional 10% bulk discount for 5+ items
+  const regularTotal5 = priceInDollars * qty5;
+  const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5 / 100);
+  const totalSavings5 = regularTotal5 - discountedTotal5;
+  const perItemSavings5 = totalSavings5 / qty5;
+
+    const popupSavingsPreviewEl2 = document.getElementById('popupSavingsPreview');
+    const popupSavingsAmount2El = document.getElementById('popupSavingsAmount2');
+    const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
+    const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
+
+    if (popupSavingsPreviewEl2) popupSavingsPreviewEl2.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = formatPrice(perItemSavings2);
+    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = formatPrice(perItemSavings3);
+    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = formatPrice(perItemSavings5);
+
+    // Reset savings selections
+    document.querySelectorAll('.popup-savings-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+
+    // Show overlay first
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('addToCartPopup');
+
+    overlay.classList.add('show');
+
+    // Small delay for smooth animation
+    setTimeout(() => {
+        popup.classList.add('show');
+    }, 10);
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+
+    // Ensure Add to Cart button is visible
+    const addToCartBtn = document.querySelector('.popup-add-to-cart');
+    if (addToCartBtn) {
+        addToCartBtn.style.display = 'block';
+    }
+
+    // Load current cart info first
+    updateCartInfo();
+
+    // Show related products in left column on desktop only if cart has items
+    setTimeout(() => {
+        if (currentCartCount > 0 && window.innerWidth >= 768) {
+            updateLeftColumnRelatedProducts();
+        }
+    }, 500);
+}
+
 // Global function for opening popup with event handling - MUST BE DEFINED FIRST
 function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice) {
     event.stopPropagation();
@@ -1477,163 +1634,7 @@ function toggleSavings(event, element) {
 }
 
 
-// Add to cart functionality with popup
-let selectedProductId;
-let selectedProductTitle;
-let selectedProductImage;
-let selectedProductSKU;
-let selectedProductPrice;
-let selectedProductVariantId;
-let selectedProductCompareAtPrice;
-let selectedProductDiscount;
 
-
-function openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event) {
-    selectedProductId = productId;
-    selectedProductTitle = productTitle;
-    selectedProductImage = productImage;
-    selectedProductSKU = productSKU;
-    selectedProductPrice = productPrice;
-    selectedProductVariantId = productVariantId;
-    selectedProductCompareAtPrice = compareAtPrice;
-
-    // Find the product card to get discount information by using the event target
-    const productCard = event.target.closest('.product-card');
-    let discountPercentage = 0;
-    let finalPrice = productPrice;
-
-    if (productCard) {
-        const discountLabel = productCard.querySelector('.discount-label');
-        if (discountLabel) {
-            const discountText = discountLabel.textContent;
-            discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
-
-            // Calculate final price properly
-            if (discountPercentage > 0) {
-                finalPrice = productPrice * (1 - discountPercentage / 100);
-            }
-        }
-    }
-
-    selectedProductDiscount = discountPercentage;
-
-    // Helper function to format price
-    function formatPrice(price) {
-        const priceInNumber = Number(price);
-        // Always show 2 decimal places for consistency
-        return priceInNumber.toFixed(2);
-    }
-
-    // Populate popup content
-    const popupImageEl = document.getElementById('popupProductImage');
-    const popupTitleEl = document.getElementById('popupProductTitle');
-    const popupSKUEl = document.getElementById('popupProductSKU');
-
-    if (popupImageEl) popupImageEl.src = productImage;
-    if (popupTitleEl) popupTitleEl.textContent = productTitle;
-    if (popupSKUEl) popupSKUEl.textContent = productSKU;
-
-    // Add the original price to the popup
-    const originalPriceElement = document.getElementById('popupOriginalPrice');
-    if (selectedProductCompareAtPrice > 0){
-        originalPriceElement.textContent = '$' + formatPrice(selectedProductCompareAtPrice / 100); // original price
-        originalPriceElement.style.display = 'inline';
-    }else {
-        originalPriceElement.style.display = 'none';
-    }
-
-    const popupSalePriceEl = document.getElementById('popupSalePrice');
-    const popupFinalPriceEl = document.getElementById('popupFinalPrice');
-    const popupQuantityEl = document.getElementById('popupQuantity');
-
-    if (popupSalePriceEl) popupSalePriceEl.textContent = '$' + formatPrice(productPrice / 100);
-    if (popupFinalPriceEl) popupFinalPriceEl.textContent = '$' + formatPrice(finalPrice / 100);
-    if (popupQuantityEl) popupQuantityEl.value = 1;
-
-    // Update first savings option to show current price
-    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
-    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(finalPrice / 100);
-
-    // Show discount badge with the SAME percentage as the product card
-    const discountBadge = document.getElementById('popupDiscountBadge');
-    if (discountPercentage > 0) {
-        discountBadge.textContent = discountPercentage + '% OFF';
-        discountBadge.style.display = 'block';
-    } else {
-        discountBadge.style.display = 'none';
-    }
-
-  // Calculate smart savings for different quantities using the SAME logic as product cards
-  const priceInDollars = productPrice / 100;
-
-  // Calculate for 2+ items
-  const qty2 = 2;
-  const regularTotal2 = priceInDollars * qty2;
-  const discountedTotal2 = regularTotal2 * (1 - discountPercentage / 100);
-  const totalSavings2 = regularTotal2 - discountedTotal2;
-  const perItemSavings2 = totalSavings2 / qty2;
-
-  // Calculate for 3+ items - FIXED: Use correct quantity multiplier
-  const qty3 = 3;
-  const bulkDiscount3 = discountPercentage + 5; // Additional 5% bulk discount for 3+ items
-  const regularTotal3 = priceInDollars * qty3;
-  const discountedTotal3 = regularTotal3 * (1 - bulkDiscount3 / 100);
-  const totalSavings3 = regularTotal3 - discountedTotal3;
-  const perItemSavings3 = totalSavings3 / qty3;
-
-  // Calculate for 5+ items - FIXED: Use correct quantity multiplier
-  const qty5 = 5;
-  const bulkDiscount5 = discountPercentage + 10; // Additional 10% bulk discount for 5+ items
-  const regularTotal5 = priceInDollars * qty5;
-  const discountedTotal5 = regularTotal5 * (1 - bulkDiscount5 / 100);
-  const totalSavings5 = regularTotal5 - discountedTotal5;
-  const perItemSavings5 = totalSavings5 / qty5;
-
-    const popupSavingsPreviewEl = document.getElementById('popupSavingsPreview');
-    const popupSavingsAmount2El = document.getElementById('popupSavingsAmount2');
-    const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
-    const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
-
-    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(perItemSavings2);
-    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = formatPrice(perItemSavings2);
-    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = formatPrice(perItemSavings3);
-    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = formatPrice(perItemSavings5);
-
-    // Reset savings selections
-    document.querySelectorAll('.popup-savings-option').forEach(option => {
-        option.classList.remove('selected');
-    });
-
-    // Show overlay first
-    const overlay = document.getElementById('overlay');
-    const popup = document.getElementById('addToCartPopup');
-
-    overlay.classList.add('show');
-
-    // Small delay for smooth animation
-    setTimeout(() => {
-        popup.classList.add('show');
-    }, 10);
-
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-
-    // Ensure Add to Cart button is visible
-    const addToCartBtn = document.querySelector('.popup-add-to-cart');
-    if (addToCartBtn) {
-        addToCartBtn.style.display = 'block';
-    }
-
-    // Load current cart info first
-    updateCartInfo();
-
-    // Show related products in left column on desktop only if cart has items
-    setTimeout(() => {
-        if (currentCartCount > 0 && window.innerWidth >= 768) {
-            updateLeftColumnRelatedProducts();
-        }
-    }, 500);
-}
 
 function closeAddToCartPopup() {
     const overlay = document.getElementById('overlay');
