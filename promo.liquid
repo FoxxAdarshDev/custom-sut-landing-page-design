@@ -546,8 +546,11 @@
             <div class="product-price">
               {% assign first_variant = product.variants.first %}
               {% assign discounted_price = first_variant.price | times: 0.75 %}
-              <span class="original-price">${{ first_variant.price | money_without_currency }}</span>
-              <span class="sale-price" id="sale-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+              {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
+                <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
+              {% endif %}
+              <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
+              <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
             </div>
 
             <div class="quantity-controls">
@@ -559,7 +562,10 @@
               </div>
             </div>
 
-            <button class="product-cta" onclick="addToCart({{ product.id }})">Add to Cart</button>
+            <div class="product-buttons">
+              <button class="product-cta add-to-cart-direct" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
+              <button class="product-cta shop-now" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {% if product.variants.first.compare_at_price %}{{ product.variants.first.compare_at_price }}{% else %}0{% endif %})">Shop Now</button>
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -616,8 +622,11 @@
             <div class="product-price">
               {% assign first_variant = product.variants.first %}
               {% assign discounted_price = first_variant.price | times: 0.75 %}
-              <span class="original-price">${{ first_variant.price | money_without_currency }}</span>
-              <span class="sale-price" id="sale-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+              {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
+                <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
+              {% endif %}
+              <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
+              <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
             </div>
 
             <div class="quantity-controls">
@@ -629,7 +638,10 @@
               </div>
             </div>
 
-            <button class="product-cta" onclick="addToCart({{ product.id }})">Add to Cart</button>
+            <div class="product-buttons">
+              <button class="product-cta add-to-cart-direct" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
+              <button class="product-cta shop-now" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {% if product.variants.first.compare_at_price %}{{ product.variants.first.compare_at_price }}{% else %}0{% endif %})">Shop Now</button>
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -1922,4 +1934,177 @@ function handleHashNavigation() {
     }
   }
 }
+
+// Function to add product directly to cart
+function addToCartDirect(productId) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const quantity = parseInt(quantityInput.value);
+
+  // Get variant ID
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
+  let variantId;
+
+  if (variantSelect) {
+      variantId = variantSelect.value;
+  } else {
+      // If no variant selector, assume the first variant
+      const productCard = document.querySelector(`.product-card`);
+      if (productCard) {
+        variantId = productCard.querySelector(`.variant-selector option`).value;
+      } else {
+        console.warn('Variant select not found for product', productId);
+        return;
+      }
+  }
+
+  // Add to cart via AJAX
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: quantity
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Show success message
+    showAddToCartSuccess();
+
+    // Update header cart count immediately
+    updateHeaderCartCount();
+
+    // Update cart info
+    updateCartInfo();
+  })
+  .catch(error => {
+    console.error('Error adding to cart:', error);
+    showAddToCartError();
+  });
+}
 </script>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="add-to-cart-popup" id="addToCartPopup">
+    <div class="popup-content">
+        <div class="popup-left-column" id="leftRelatedProducts">
+            <h3>✨ Pair it with...</h3>
+            <div class="popup-left-products" id="leftRelatedProductsGrid">
+                <!-- Related product recommendations on left -->
+            </div>
+        </div>
+
+        <div class="popup-main-content">
+            <div class="popup-header">
+                <h2>Add to Cart</h2>
+                <span class="popup-close" onclick="closeAddToCartPopup()">×</span>
+            </div>
+
+            <div class="popup-product-details">
+                <div class="popup-product-image">
+                    <img id="popupProductImage" src="" alt="Product Image">
+                    <div class="discount-badge" id="popupDiscountBadge">25% OFF</div>
+                </div>
+
+                <div class="popup-product-info">
+                    <h3 id="popupProductTitle">Product Title</h3>
+                    <p>SKU: <span id="popupProductSKU"></span></p>
+                    <div class="popup-product-prices">
+                        <span class="original-price" id="popupOriginalPrice">$99.99</span>
+                        <span class="sale-price" id="popupSalePrice">$79.99</span>
+                        <span class="final-price">Now: <span id="popupFinalPrice">$59.99</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-quantity-controls">
+                <h3>Select Quantity</h3>
+                <div class="quantity-input-wrapper">
+                    <button type="button" onclick="decreaseQuantity()">−</button>
+                    <input type="number" id="popupQuantity" value="1" min="1">
+                    <button type="button" onclick="increaseQuantity()">+</button>
+                </div>
+            </div>
+
+            <div class="popup-savings">
+                <h3>💰 Smart Savings</h3>
+
+                <div class="popup-savings-options">
+                    <div class="popup-savings-option popup-savings-1 selected" onclick="selectSavingsOption(1)">
+                        <div class="savings-preview">
+                            1 item
+                            <span class="arrow">→</span>
+                            <span class="savings-preview-price">$<span id="popupSavingsPreview"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="popup-savings-option popup-savings-2" onclick="selectSavingsOption(2)">
+                        <div class="savings-preview">
+                            <div class="savings-content">
+                                2+ items
+                                <span class="arrow">→</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount2"></span> each</span>
+                            </div>
+                            <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
+                        </div>
+
+                        <div class="savings-expanded">
+                            <ul class="savings-details">
+                                <li>Each: $<span class="savings-amount"></span></li>
+                                <li>Total: $<span class="total-price"></span></li>
+                                <li>You save: $<span class="total-savings"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="popup-savings-option popup-savings-3" onclick="selectSavingsOption(3)">
+                        <div class="savings-preview">
+                            <div class="savings-content">
+                                3+ items
+                                <span class="arrow">→</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount3"></span> each</span>
+                            </div>
+                            <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
+                        </div>
+
+                        <div class="savings-expanded">
+                            <ul class="savings-details">
+                                <li>Each: $<span class="savings-amount"></span></li>
+                                <li>Total: $<span class="total-price"></span></li>
+                                <li>You save: $<span class="total-savings"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="popup-savings-option popup-savings-5" onclick="selectSavingsOption(5)">
+                        <div class="savings-preview">
+                            <div class="savings-content">
+                                5+ items
+                                <span class="arrow">→</span>
+                                <span class="savings-preview-price">$<span id="popupSavingsAmount5"></span> each</span>
+                            </div>
+                            <button class="savings-toggle" onclick="togglePopupSavings(this)">+</button>
+                        </div>
+
+                        <div class="savings-expanded">
+                            <ul class="savings-details">
+                                <li>Each: $<span class="savings-amount"></span></li>
+                                <li>Total: $<span class="total-price"></span></li>
+                                <li>You save: $<span class="total-savings"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-add-to-cart-area">
+                <button class="popup-add-to-cart" onclick="addToCart()">Add to Cart</button>
+                <!-- Validation Warning Container -->
+                <div id="validation-warning-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
