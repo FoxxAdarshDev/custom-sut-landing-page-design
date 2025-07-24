@@ -1,6 +1,4 @@
 <style>
-
-
   .patriotic-sale-container {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
     min-height: 100vh;
@@ -103,14 +101,6 @@
     letter-spacing: 1px;
   }
 
-  .header-timer-label::before,
-  .header-timer-label::after {
-    content: '';
-    color: #dc3545;
-    font-size: 1.2rem;
-    animation: flash 1.5s infinite;
-  }
-
   .header-countdown {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -149,47 +139,6 @@
     letter-spacing: 0.5px;
   }
 
-  .hero-tab-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .hero-tab-button {
-    padding: 15px 20px;
-    background: white;
-    border: 2px solid #0071ce;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #0071ce;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 2px 6px rgba(0, 113, 206, 0.1);
-  }
-
-  .hero-tab-button.active {
-    background: #0071ce;
-    border-color: #0071ce;
-    color: white;
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
-  }
-
-  .hero-tab-button:hover:not(.active) {
-    background: #f0f8ff;
-    border-color: #005ba6;
-    color: #005ba6;
-    transform: translateX(3px);
-  }
-
   .shop-now-cta {
     background: linear-gradient(45deg, #0071ce, #dc3545);
     color: white;
@@ -220,152 +169,6 @@
     margin: 0 auto;
   }
 
-  .sticky-tab-container {
-    position: fixed;
-    top: 0;
-    left: 55%;
-    transform: translateX(-55%) translateY(-100%);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
-    padding: 5px 5px;
-    z-index: 800;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-    border-bottom: 3px solid #0071ce;
-    max-width: 1100px;
-    width: calc(100% - 40px);
-    border-radius: 0 0 15px 15px;
-  }
-
-  .sticky-tab-container.show {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .sticky-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .sticky-tabs {
-    display: flex;
-    gap: 10px;
-  }
-
-  .sticky-tab-button {
-    padding: 10px 25px;
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #495057;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-  }
-
-  .sticky-tab-button.active {
-    background: linear-gradient(45deg, #1E3A8A, #0071ce);
-    color: white;
-    border-color: #0071ce;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 113, 206, 0.3);
-  }
-
-  .sticky-timer {
-    background: white;
-    border: 2px solid #dc3545;
-    border-radius: 10px;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .sticky-timer-label {
-    color: #dc3545;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-
-  .sticky-countdown {
-    display: flex;
-    gap: 8px;
-  }
-
-  .sticky-countdown-unit {
-    background: white;
-    border: 1px solid #dc3545;
-    border-radius: 4px;
-    padding: 4px 6px;
-    text-align: center;
-    min-width: 35px;
-  }
-
-  .sticky-countdown-unit span {
-    display: block;
-    font-size: 1rem;
-    font-weight: 900;
-    color: #dc3545;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-
-  .sticky-countdown-unit label {
-    font-size: 0.5rem;
-    font-weight: 700;
-    color: #dc3545;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .tab-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-    gap: 10px;
-  }
-
-  .tab-button {
-    padding: 15px 40px;
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #495057;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-  }
-
-  .tab-button.active {
-    background: linear-gradient(45deg, #1E3A8A, #0071ce);
-    color: white;
-    border-color: #0071ce;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 113, 206, 0.3);
-  }
-
-  .tab-button:hover:not(.active) {
-    background: #e9ecef;
-    border-color: #adb5bd;
-    transform: translateY(-1px);
-  }
-
-  .tab-content {
-    display: block;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-
   .collection-section {
     margin-bottom: 80px;
     background: white;
@@ -383,14 +186,6 @@
     min-height: auto;
   }
 
-  .collection-header.reverse {
-    flex-direction: row;
-  }
-
-  .collection-header-content {
-    flex: 1;
-  }
-
   .collection-title {
     font-size: 1.8rem;
     font-weight: 700;
@@ -401,7 +196,7 @@
 
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     padding: 40px;
   }
@@ -413,7 +208,7 @@
     transition: all 0.3s ease;
     border: 2px solid #0071ce;
     position: relative;
-    max-width: 350px;
+    max-width: 400px;
     width: 100%;
     margin: 0 auto;
   }
@@ -431,7 +226,7 @@
   }
 
   .discount-label {
-    background: #0071ce !important;
+    background: #dc3545 !important;
     color: white !important;
     padding: 6px 14px 6px 10px;
     font-weight: 700;
@@ -445,43 +240,8 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
-  .discount-label::before {
-    content: 'Discount';
-    position: absolute;
-    right: 100%;
-    top: 0;
-    bottom: 0;
-    background: #dc3545;
-    color: white;
-    padding: 6px 8px;
-    font-size: 0.6rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    border-radius: 3px 0 0 3px;
-    white-space: nowrap;
-    min-height: 24px;
-    box-sizing: border-box;
-  }
-
-  .discount-label::after {
-    content: '';
-    position: absolute;
-    right: 100%;
-    top: 100%;
-    width: 0;
-    height: 0;
-    border-left: 5px solid #a91e2e;
-    border-bottom: 5px solid transparent;
-  }
-
-  @keyframes glow {
-    from { opacity: 0.7; }
-    to { opacity: 1; }
-  }
-
   .product-image {
-    height: 220px; /* Increased height */
+    height: 220px;
     background: white;
     display: flex;
     align-items: center;
@@ -503,7 +263,7 @@
   .product-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #0071ce; /* Brand blue color */
+    color: #0071ce;
     margin-bottom: 12px;
     line-height: 1.4;
     min-height: 48px;
@@ -516,7 +276,7 @@
   .product-sku {
     color: #666;
     font-size: 0.85rem;
-    margin-bottom: 6px; /* Reduced margin */
+    margin-bottom: 6px;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -525,20 +285,8 @@
     gap: 8px;
   }
 
-  .copy-icon {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    color: #0071ce;
-    transition: color 0.2s ease;
-  }
-
-  .copy-icon:hover {
-    color: #005ba6;
-  }
-
   .product-price {
-    margin-bottom: 12px; /* Reduced margin */
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -551,103 +299,91 @@
   }
 
   .sale-price {
-    color: #0071ce;
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: line-through; /* Strikethrough */
-    font-size: 0.9rem; /* Reduced font size */
-  }
-
-  .final-price {
     color: #dc3545;
     font-size: 1.6rem;
     font-weight: 900;
-    margin-left: 10px;
   }
 
-  .smart-savings {
-    background: #f8f9fa;
+  .variant-selector {
+    margin-bottom: 15px;
+  }
+
+  .variant-selector label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .variant-selector select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
     border-radius: 8px;
-    padding: 6px 8px; /* Further reduced padding */
-    margin: 8px 0 12px 0; /* Reduced margins */
-    border: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    background: white;
+    cursor: pointer;
   }
 
-  .smart-savings-header {
+  .variant-selector select:focus {
+    border-color: #0071ce;
+    outline: none;
+  }
+
+  .quantity-controls {
     display: flex;
     align-items: center;
-    font-weight: 700;
-    color: #495057;
-    font-size: 0.85rem; /* Slightly smaller font */
-    margin-bottom: 4px; /* Reduced margin */
-    justify-content: space-between;
-    cursor: pointer;
+    gap: 12px;
+    margin-bottom: 15px;
   }
 
-  .savings-preview {
-    font-size: 0.75rem; /* Smaller font */
-    color: #6c757d;
-    margin: 0; /* Removed margins */
-    padding: 0; /* Removed padding */
-    line-height: 1.2; /* Tighter line height */
-  }
-
-  .savings-option {
-    background: #d1ecf1;
-    border: 2px solid #bee5eb;
-    border-radius: 6px;
-    padding: 8px 10px;
-    position: relative;
-  }
-
-  .savings-option.most-popular::before {
-    content: 'MOST POPULAR';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #28a745;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.65rem;
-    font-weight: 700;
-  }
-
-  .savings-text {
-    color: #121212;
-    font-size: 0.85rem;
+  .quantity-controls label {
+    font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 2px;
+    color: #333;
+    min-width: 60px;
   }
 
-  .savings-price {
-    color: #495057;
-    font-size: 0.8rem;
+  .quantity-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  .savings-amount {
-    font-weight: 700;
-  }
-
-  .savings-details {
-    display: none;
-    padding-top: 10px;
-  }
-
-  .smart-savings-toggle {
+  .quantity-btn {
+    background: #f8f9fa;
+    border: none;
+    padding: 8px 12px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
     color: #0071ce;
-    user-select: none;
+    transition: background 0.2s ease;
   }
 
-  .smart-savings.expanded .savings-details {
-    display: block;
+  .quantity-btn:hover {
+    background: #e9ecef;
   }
 
-  .smart-savings.expanded .smart-savings-toggle {
-    transform: rotate(180deg);
+  .quantity-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .quantity-input {
+    border: none;
+    padding: 8px 12px;
+    width: 60px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .quantity-input:focus {
+    outline: none;
   }
 
   .product-cta {
@@ -676,116 +412,8 @@
     text-decoration: none;
   }
 
-  .product-card {
-    cursor: pointer;
-  }
-
-  /* Collection Anchor Links */
-  .collection-anchor {
-    color: inherit;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .collection-anchor:hover {
-    color: #005ba6;
-    text-decoration: none;
-  }
-
-  .collection-anchor::after {
-    content: '🔗';
-    opacity: 0;
-    margin-left: 8px;
-    font-size: 0.8em;
-    transition: opacity 0.3s ease;
-  }
-
-  .collection-anchor:hover::after {
-    opacity: 1;
-  }
-
-  /* Smooth scrolling for the entire page */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Offset for fixed headers if any */
-  .collection-section {
-    scroll-margin-top: 20px;
-  }
-
-  /* Toast notification styles */
-  .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .toast.show {
-    opacity: 1;
-  }
-
+  /* Mobile Responsive */
   @media (max-width: 768px) {
-    .sticky-tab-container {
-      width: calc(100% - 20px);
-      padding: 12px 15px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100%);
-    }
-
-    .sticky-tab-container.show {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .sticky-content {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sticky-tabs {
-      gap: 5px;
-    }
-
-    .sticky-tab-button {
-      padding: 8px 12px;
-      font-size: 0.8rem;
-    }
-
-    .sticky-timer {
-      padding: 8px 12px;
-      gap: 10px;
-    }
-
-    .sticky-countdown {
-      gap: 5px;
-    }
-
-    .sticky-countdown-unit {
-      min-width: 30px;
-      padding: 3px 4px;
-    }
-
-    .sticky-countdown-unit span {
-      font-size: 0.9rem;
-    }
-
-    .sticky-countdown-unit label {
-      font-size: 0.6rem;
-    }
-
     .patriotic-sale-container {
       padding: 20px 10px;
     }
@@ -810,53 +438,6 @@
       margin: 0 auto;
     }
 
-    .header-timer {
-      padding: 18px 15px;
-    }
-
-    .header-countdown {
-      gap: 4px;
-    }
-
-    .header-countdown-unit {
-      padding: 6px 4px;
-    }
-
-    .header-countdown-unit span {
-      font-size: 1rem;
-    }
-
-    .header-countdown-unit label {
-      font-size: 0.55rem;
-    }
-
-    .hero-tab-buttons {
-      flex-direction: row;
-      gap: 8px;
-    }
-
-    .hero-tab-button {
-      padding: 12px 12px;
-      font-size: 0.8rem;
-    }
-
-    .shop-now-cta {
-      padding: 12px 25px;
-      font-size: 0.9rem;
-      margin-top: 15px;
-    }
-
-    .tab-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .tab-button {
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 10px;
-    }
-
     .products-grid {
       grid-template-columns: 1fr;
       gap: 20px;
@@ -875,1122 +456,6 @@
       font-size: 1.5rem;
     }
   }
-  .discount-badge {
-    position: absolute;
-    top: -0px; /* Adjust as needed */
-    right: -5px; /* Adjust as needed */
-    z-index: 10;
-}
-
-/* Apple-style Popup Overlay */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  z-index: 10000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Apple-style Popup */
-.add-to-cart-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-  z-index: 10001;
-  max-width: 800px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.add-to-cart-popup.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px 0 24px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.popup-discount-badge {
-  position: absolute;
-  top: 10px;
-  right: 60px;
-  background: #dc3545;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.popup-close {
-  background: rgba(120, 120, 128, 0.12);
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  color: #666;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.popup-close:hover {
-  background: rgba(120, 120, 128, 0.2);
-}
-
-.popup-content {
-  padding: 0 24px 24px 24px;
-}
-
-/* Desktop Layout */
-@media (min-width: 768px) {
-  .popup-content {
-    display: flex;
-    gap: 24px;
-    padding: 24px;
-  }
-
-  .popup-left-section {
-    flex: 0 0 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .popup-right-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.popup-product-image {
-  width: 80px;
-  height: 80px;
-  background: #f8f9fa;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px auto;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-@media (min-width: 768px) {
-  .popup-product-image {
-    width: 200px;
-    height: 200px;
-    margin: 0 0 15px 0;
-  }
-}
-
-.popup-product-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-}
-
-.popup-product-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #0071ce;
-  margin-bottom: 8px;
-  line-height: 1.3;
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.popup-product-sku {
-```html
-  font-size: 14px;
-  color: #86868b;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.popup-product-price {
-  margin-bottom: 20px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.popup-original-price {
-  text-decoration: line-through;
-  color: #999;
-  ```text
-font-size: 0.9rem;
-}
-
-.popup-sale-price {
-  color: #0071ce;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: line-through;
-}
-
-.popup-final-price {
-  color: #dc3545;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-.popup-smart-savings {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  border: 1px solid #e9ecef;
-}
-
-.popup-smart-savings-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 600;
-  color: #495057;
-  font-size: 14px;
-  margin-bottom: 8px;
-  cursor: pointer;
-}
-
-.popup-savings-preview {
-  font-size: 12px;
-  color: #6c757d;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.popup-savings-details {
-  display: none;
-  padding-top: 12px;
-}
-
-.popup-smart-savings.expanded .popup-savings-details {
-  display: block;
-}
-
-.popup-smart-savings.expanded .popup-smart-savings-toggle {
-  transform: rotate(180deg);
-}
-
-.popup-savings-details {
-  display: flex;
-  /* flex-direction: column; */ /* Change to row */
-  flex-direction: row; /* Change to row */
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.popup-savings-option {
-  background: #d1ecf1;
-  border: 2px solid #bee5eb;
-  border-radius: 8px;
-  padding: 10px 8px;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
-  flex: 1; /* Equal width distribution */
-}
-
-.popup-savings-option:hover {
-  border-color: #0071ce;
-  background: #e3f2fd;
-}
-
-.popup-savings-option.selected {
-  border-color: #0071ce;
-  background: #1976d2;
-  color: white;
-}
-
-.popup-savings-option.selected .popup-savings-text,
-.popup-savings-option.selected .popup-savings-price {
-  color: white;
-}
-
-.popup-savings-label {
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  padding: 2px 6px;
-  border-radius: 8px;
-  font-size: 8px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.popup-savings-2 .popup-savings-label {
-  background: #28a745;
-}
-
-.popup-savings-3 .popup-savings-label {
-  background: #1976d2;
-}
-
-.popup-savings-5 .popup-savings-label {
-  background: #ff5722;
-}
-
-.popup-savings-text {
-  color: #121212;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.popup-savings-price {
-  color: #495057;
-  font-size: 10px;
-}
-
-.popup-savings-amount {
-  font-weight: 700;
-}
-
-.popup-quantity-section {
-  margin-bottom: 24px;
-}
-
-.popup-quantity-label {
-  font-size: 16px;
-  font-weight: 500;
-  color: #1d1d1f;
-  margin-bottom: 12px;
-  text-align: center;
-  display: block;
-}
-
-.popup-quantity-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.popup-quantity-btn {
-  background: rgba(0, 0, 0, 0.04);
-  border: none;
-  border-radius: 8px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 18px;
-  font-weight: 500;
-  color: #1d1d1f;
-  user-select: none;
-}
-
-.popup-quantity-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
-  transform: scale(1.05);
-}
-
-.popup-quantity-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.popup-quantity-input {
-  background: rgba(0, 0, 0, 0.04);
-  border: none;
-  border-radius: 8px;
-  width: 60px;
-  height: 44px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: #1d1d1f;
-  outline: none;
-}
-
-.popup-add-to-cart {
-  background: #0071ce;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.popup-add-to-cart:hover {
-  background: #005ba6;
-  transform: translateY(-1px);
-}
-
-.popup-recommended {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 20px;
-  text-align: center;
-}
-
-.popup-recommended h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1d1d1f;
-  margin-bottom: 12px;
-}
-
-.popup-recommended p {
-  font-size: 14px;
-  color: #86868b;
-  margin: 0;
-}
-
-/* Cart Notifications */
-.cart-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: white;
-  border-radius: 12px;
-  padding: 16px 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  z-index: 10002;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-left: 4px solid #28a745;
-  max-width: 350px;
-}
-
-.cart-notification.error {
-  border-left-color: #dc3545;
-}
-
-.cart-notification.coupon-notification {
-  border-left-color: #ffd700;
-  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
-}
-
-.cart-notification.show {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.notification-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.notification-icon {
-  width: 24px;
-  height: 24px;
-  background: #28a745;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-.cart-notification.error .notification-icon {
-  background: #dc3545;
-}
-
-.cart-notification.coupon-notification .notification-icon {
-  background: #ffd700;
-  color: #333;
-  font-size: 16px;
-}
-
-.notification-text {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1d1d1f;
-}
-
-.cart-notification.coupon-notification .notification-text {
-  color: #333;
-}
-
-/* Checkout Section */
-.popup-checkout-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.popup-checkout-section.sticky-active {
-  position: sticky;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  margin: 20px -24px -24px -24px;
-  padding: 12px 24px 16px 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 100;
-}
-
-/* Make Add to Cart button sticky when cart has items */
-.popup-add-to-cart.sticky-active {
-  position: sticky;
-  bottom: 120px;
-  z-index: 101;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
-}
-
-@media (min-width: 768px) {
-  .popup-checkout-section.sticky-active {
-    position: sticky;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    margin: 20px -24px -24px -24px;
-    padding: 12px 24px 16px 24px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .popup-add-to-cart.sticky-active {
-    bottom: 140px;
-  }
-}
-
-.checkout-buttons {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.checkout-btn {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.checkout-btn.primary {
-  background: #0071ce;
-  color: white;
-}
-
-.checkout-btn.primary:hover {
-  background: #005ba6;
-  transform: translateY(-1px);
-}
-
-.checkout-btn.secondary {
-  background: rgba(0, 0, 0, 0.04);
-  color: #1d1d1f;
-}
-
-.checkout-btn.secondary:hover {
-  background: rgba(0, 0, 0, 0.08);
-}
-
-.checkout-icon {
-  font-size: 16px;
-}
-
-/* Related Products */
-.related-products-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.related-products-section h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #0071ce;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.related-products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.related-products-grid::-webkit-scrollbar {
-  width: 4px;
-}
-
-.related-products-grid::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 2px;
-}
-
-.related-products-grid::-webkit-scrollbar-thumb {
-  background: #0071ce;
-  border-radius: 2px;
-}
-
-.related-products-grid::-webkit-scrollbar-thumb:hover {
-  background: #005ba6;
-}
-
-/* Left Column Related Products */
-.left-related-products-section {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.left-related-products-section h3 {
-  font-size: 12px;
-  font-weight: 600;
-  color: #0071ce;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.left-related-products-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-.left-related-products-grid::-webkit-scrollbar {
-  width: 4px;
-}
-
-.left-related-products-grid::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 2px;
-}
-
-.left-related-products-grid::-webkit-scrollbar-thumb {
-  background: #0071ce;
-  border-radius: 2px;
-}
-
-.left-related-products-grid::-webkit-scrollbar-thumb:hover {
-  background: #005ba6;
-}
-
-.left-related-product-card {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.left-related-product-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-color: #0071ce;
-}
-
-.left-related-product-image {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
-}
-
-.left-related-product-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 2px;
-}
-
-.left-related-product-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.left-related-product-info h4 {
-  font-size: 9px;
-  font-weight: 600;
-  color: #1d1d1f;
-  margin-bottom: 3px;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.left-related-product-price {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 3px;
-}
-
-.left-related-sale-price {
-  font-size: 8px;
-  color: #999;
-  text-decoration: line-through;
-}
-
-.left-related-final-price {
-  font-size: 9px;
-  font-weight: 600;
-  color: #dc3545;
-}
-
-.left-related-discount-badge {
-  background: #dc3545;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 8px;
-  font-size: 7px;
-  font-weight: 600;
-  display: inline-block;
-  width: auto;
-  max-width: 50px;
-  text-align: center;
-}
-
-.related-product-card {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.related-product-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #0071ce;
-}
-
-.related-product-image {
-  width: 50px;
-  height: 50px;
-  background: white;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 8px auto;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.related-product-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-.related-placeholder {
-  font-size: 20px;
-  color: #666;
-}
-
-.related-product-info h4 {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1d1d1f;
-  margin-bottom: 6px;
-  line-height: 1.2;
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 28px;
-}
-
-.related-product-price {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.related-sale-price {
-  font-size: 10px;
-  color: #999;
-  text-decoration: line-through;
-}
-
-.related-final-price {
-  font-size: 12px;
-  font-weight: 600;
-  color: #dc3545;
-}
-
-.related-discount-badge {
-  background: #dc3545;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 9px;
-  font-weight: 600;
-  text-align: center;
-  display: inline-block;
-  width: auto;
-  max-width: 60px;
-}
-
-/* Validation Modal Styles */
-.popup-validation-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10003;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-validation-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-}
-
-.popup-validation-content {
-  background: white;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.popup-validation-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.popup-validation-header h3 {
-  margin: 0;
-  color: #1d1d1f;
-  font-size: 18px;
-}
-
-.popup-validation-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
-}
-
-.popup-validation-body {
-  padding: 24px;
-}
-
-.validation-info {
-  margin-bottom: 20px;
-}
-
-.validation-info p {
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-.amount-needed {
-  color: #dc3545;
-  font-weight: 600;
-}
-
-.security-notice {
-  background: #e3f2fd;
-  border: 1px solid #1976d2;
-  border-radius: 8px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.security-icon {
-  font-size: 16px;
-}
-
-.security-text {
-  font-size: 13px;
-  color: #1976d2;
-  line-height: 1.4;
-}
-
-.popup-validation-footer {
-  padding: 20px 24px;
-  border-top: 1px solid #e0e0e0;
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-}
-
-.validation-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.validation-btn.primary {
-  background: #0071ce;
-  color: white;
-}
-
-.validation-btn.primary:hover {
-  background: #005ba6;
-}
-
-.validation-btn.secondary {
-  background: #f5f5f5;
-  color: #666;
-}
-
-.validation-btn.secondary:hover {
-  background: #e0e0e0;
-}
-
-/* Popup validation warning */
-.popup-validation-warning {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 6px;
-  padding: 8px 12px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.validation-icon {
-  font-size: 16px;
-  color: #856404;
-}
-
-.validation-content {
-  flex: 1;
-}
-
-.validation-title {
-  font-weight: 600;
-  color: #856404;
-  margin: 0 0 4px 0;
-  font-size: 14px;
-}
-
-.validation-message {
-  margin: 0;
-  font-size: 13px;
-  color: #856404;
-  line-height: 1.4;
-}
-
-/* Disabled checkout button */
-.checkout-btn.disabled {
-  background: #f5f5f5;
-  color: #999;
-  cursor: not-allowed;
-}
-
-.checkout-btn.disabled:hover {
-  background: #f5f5f5;
-  transform: none;
-}
-
-/* Mobile Responsive */
-@media (max-width: 767px) {
-  .popup-content {
-    display: block !important;
-  }
-
-  .popup-left-section,
-  .popup-right-section {
-    flex: none !important;
-  }
-
-  .popup-checkout-section {
-    position: relative !important;
-    margin: 16px 0 0 0 !important;
-    padding: 16px 0 0 0 !important;
-  }
-
-  .related-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .related-product-card {
-    padding: 8px;
-  }
-
-  .related-product-image {
-    width: 40px;
-    height: 40px;
-  }
-
-  .related-product-info h4 {
-    font-size: 11px;
-    min-height: 22px;
-  }
-
-  .left-related-products-section {
-    display: none !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .add-to-cart-popup {
-    max-width: 95%;
-    margin: 0px;
-    border-radius: 16px;
-  }
-
-  .popup-header {
-    padding: 16px 20px 0 20px;
-  }
-
-  .popup-content {
-    padding: 0 20px 20px 20px;
-  }
-
-  .popup-product-title {
-    font-size: 16px;
-  }
-
-  .popup-product-price {
-    font-size: 18px;
-  }
-
-  .cart-notification {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    max-width: none;
-  }
-
-  .checkout-buttons {
-    flex-direction: column;
-  }
-
-  .related-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-height: 300px;
-  }
-
-  .popup-savings-details {
-    gap: 6px;
-  }
-
-  .popup-savings-text {
-    font-size: 11px;
-  }
-
-  .popup-savings-price {
-    font-size: 9px;
-  }
-
-  .popup-validation-content {
-    width: 95%;
-    margin: 20px;
-  }
-
-  .popup-validation-footer {
-    flex-direction: column;
-  }
-
-  .validation-btn {
-    width: 100%;
-  }
-
-  .popup-add-to-cart.sticky-active {
-    bottom: 100px;
-  }
-
-  .popup-checkout-section.sticky-active {
-    bottom: 0;
-  }
-}
 </style>
 
 <div class="patriotic-sale-container">
@@ -1998,16 +463,16 @@ font-size: 0.9rem;
     <div class="hero-left">
       <div class="independence-badge">US Independence Day Special</div>
       <h1>Our <span class="gradient-text">Biggest</span> Patriotic <span class="gradient-text">Sale</span> of the <span class="gradient-text">Year!</span></h1>
-      <div class="discount">UP TO 50% OFF</div>
-      {% comment %} <div class="sale-subtitle">
+      <div class="discount">UP TO 25% OFF</div>
+      <div class="sale-subtitle">
         Celebrate America's independence with our biggest sale of the year!
-      </div> {% endcomment %}
+      </div>
       <a href="#products-section" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
 
     <div class="hero-right">
       <div class="header-timer">
-        <div class="header-timer-label">Sale Ends July 31st</div>
+        <div class="header-timer-label">Sale Ends August 31st</div>
         <div class="header-countdown">
           <div class="header-countdown-unit">
             <span id="days">02</span>
@@ -2030,834 +495,295 @@ font-size: 0.9rem;
     </div>
   </div>
 
-
-
   <div class="tabs-container" id="products-section">
 
-      <!-- Bioprocess Products -->
-
-      <!-- EZclear® Rectangular Carboy (PC) Collection - 32% Off -->
-      {% assign ezclear_carboy_collection = collections['ezclear-rectangular-carboy-pc-32-off-us-independence-day-sale-25'] %}
-      {% if ezclear_carboy_collection.products.size > 0 %}
-      <div class="collection-section" id="EZclear-Rectangular-Carboy-PC">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZclear-Rectangular-Carboy-PC" class="collection-anchor" onclick="copyCollectionURL(event, 'EZclear-Rectangular-Carboy-PC', 'EZclear® Rectangular Carboy (PC)')">EZclear® Rectangular Carboy (PC)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezclear_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">32% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
+    <!-- EZBio® Centrifuge Tube Assemblies Collection - 25% Off -->
+    {% assign centrifuge_tube_collection = collections['ezbio-centrifuge-tube-assemblies-up-to-25-off'] %}
+    {% if centrifuge_tube_collection.products.size > 0 %}
+    <div class="collection-section" id="EZBio-Centrifuge-Tube-Assemblies">
+      <div class="collection-header">
+        <div class="collection-header-content">
+          <h2 class="collection-title">EZBio® Centrifuge Tube Assemblies</h2>
         </div>
       </div>
-      {% endif %}
-
-      <!-- EZBio® Carboy (PC) Collection  - 20% Off -->
-      {% assign pc_carboy_collection = collections['ezbio-carboy-pc-20-off-us-independence-day-sale-25'] %}
-      {% if pc_carboy_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Carboy-PC">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Carboy-PC-Sterile" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Carboy-PC-Sterile', 'EZBio® Carboy (PC) Sterile')">EZBio® Carboy (PC) Sterile</a>
-            </h2>
+      <div class="products-grid">
+        {% for product in centrifuge_tube_collection.products %}
+        <div class="product-card">
+          <div class="discount-badge">
+            <div class="discount-label">25% OFF</div>
           </div>
-        </div>
-        <div class="products-grid">
-          {% for product in pc_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">20% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="20"></span>
+          <div class="product-image">
+            {% if product.featured_image %}
+              <img id="product-image-{{ product.id }}" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+            {% else %}
+              <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+            {% endif %}
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">{{ product.title }}</h3>
+            {% if product.variants.first.sku != blank %}
+              <div class="product-sku" id="product-sku-{{ product.id }}">
+                {{ product.variants.first.sku }}
               </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
+            {% endif %}
+
+            {% if product.variants.size > 1 %}
+            <div class="variant-selector">
+              <label for="variant-select-{{ product.id }}">Options:</label>
+              <select id="variant-select-{{ product.id }}" onchange="updateProductDetails({{ product.id }})">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" 
+                          data-price="{{ variant.price }}" 
+                          data-sku="{{ variant.sku }}"
+                          data-image="{% if variant.image %}{{ variant.image | img_url: '300x300' }}{% else %}{{ product.featured_image | img_url: '300x300' }}{% endif %}">
+                    {{ variant.title }} - ${{ variant.price | money_without_currency }}
+                  </option>
+                {% endfor %}
+              </select>
             </div>
+            {% endif %}
+
+            <div class="product-price">
+              {% assign first_variant = product.variants.first %}
+              {% assign discounted_price = first_variant.price | times: 0.75 %}
+              <span class="original-price">${{ first_variant.price | money_without_currency }}</span>
+              <span class="sale-price" id="sale-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+            </div>
+
+            <div class="quantity-controls">
+              <label>Qty:</label>
+              <div class="quantity-input-wrapper">
+                <button type="button" class="quantity-btn" onclick="decreaseQuantity({{ product.id }})">−</button>
+                <input type="number" class="quantity-input" id="quantity-{{ product.id }}" value="1" min="1" readonly>
+                <button type="button" class="quantity-btn" onclick="increaseQuantity({{ product.id }})">+</button>
+              </div>
+            </div>
+
+            <button class="product-cta" onclick="addToCart({{ product.id }})">Add to Cart</button>
           </div>
-          {% endfor %}
         </div>
+        {% endfor %}
       </div>
-      {% endif %}
-
-      <!-- EZBio® Titanium Round Carboy (PC) Collection - 15% Off -->
-      {% assign pc_tr_carboy_collection = collections['ezbio-titanium-round-carboy-pc-15-off-us-independence-day-sale-25'] %}
-      {% if pc_tr_carboy_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Titanium-Round-Carboy-PC">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Titanium-Round-Carboy-PC" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Titanium-Round-Carboy-PC', 'EZBio® Titanium Round Carboy (PC)')">EZBio® Titanium Round Carboy (PC)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in pc_tr_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">15% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="15"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZBio® Media bottle (PC) Collection - 12% & 10% Off -->
-      {% assign ezbio_bottles_12_collection = collections['ezbio-media-bottle-pc-12-off-us-independence-day-sale-25'] %}
-      {% assign ezbio_bottles_10_collection = collections['ezbio-media-bottle-pc-10-off-us-independence-day-sale-25'] %}
-      {% assign has_products = false %}
-      {% if ezbio_bottles_12_collection.products.size > 0 or ezbio_bottles_10_collection.products.size > 0 %}
-        {% assign has_products = true %}
-      {% endif %}
-
-      {% if has_products %}
-      <div class="collection-section" id="EZBio-Media-bottle-PC">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Media-bottle-PC" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Media-bottle-PC', 'EZBio® Media bottle (PC)')">EZBio® Media bottle (PC)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezbio_bottles_12_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">12% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-
-          {% for product in ezbio_bottles_10_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">10% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="10"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZBio® Titanium Square Media Bottles (PETG) Collection - 12% Off -->
-      {% assign ezbio_ts_bottles_collection = collections['ezbio-titanium-square-media-bottles-petg-12-off-us-independence-day-sale-25'] %}
-      {% if ezbio_ts_bottles_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Titanium-Square-Media-Bottles-PETG">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Titanium-Square-Media-Bottles-PETG" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Titanium-Square-Media-Bottles-PETG', 'EZBio® Titanium Square Media Bottles (PETG)')">EZBio® Titanium Square Media Bottles (PETG)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezbio_ts_bottles_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">12% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZBio® Pure PFA Bottle Collection - 40% Off -->
-      {% assign pfa_bottles_collection = collections['ezbio-pure-pfa-bottle-40-off-us-independence-day-sale-25'] %}
-      {% if pfa_bottles_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Pure-PFA-Bottle">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Pure-PFA-Bottle" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Pure-PFA-Bottle', 'EZBio® Pure PFA Bottle')">EZBio® Pure PFA Bottle</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in pfa_bottles_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">40% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="40"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- CPC® AseptiQuik G Sanitary Connector Collection - 20% Off -->
-      {% assign aqg_collection = collections['cpc-aseptiquik-g-sanitary-connector-20-off-us-independence-day-sale-25'] %}
-      {% if aqg_collection.products.size > 0 %}
-      <div class="collection-section" id="CPC-AseptiQuik-G-Sanitary-Connector">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#CPC-AseptiQuik-G-Sanitary-Connector" class="collection-anchor" onclick="copyCollectionURL(event, 'CPC-AseptiQuik-G-Sanitary-Connector', 'CPC® AseptiQuik G Sanitary Connector')">CPC® AseptiQuik G Sanitary Connector</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in aqg_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">20% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-   {% endif %}
-
-    <!-- CPC® AseptiQuik S Connector  Collection - 50% Off --> 
-    {% assign aqs_collection = collections['cpc-aseptiquik-s-connector-50-off-us-independence-day-sale-25'] %}
-      {% if aqs_collection.products.size > 0 %}
-      <div class="collection-section" id="CPC-AseptiQuik-S-Connector">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#CPC-AseptiQuik-S-Connector" class="collection-anchor" onclick="copyCollectionURL(event, 'CPC-AseptiQuik-S-Connector', 'CPC® AseptiQuik S Connector')">CPC® AseptiQuik S Connector</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in aqs_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">50% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-   {% endif %}
-
-      <!-- CPC® Steam Thru Connectors Collection - 50% Off -->
-      {% assign cpc_stream_thru_connectors_collection = collections['cpc-steam-thru-connectors-50-off-us-independence-day-sale-25'] %}
-      {% if cpc_stream_thru_connectors_collection.products.size > 0 %}
-      <div class="collection-section" id="CPC-Steam-Thru-Connectors">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#CPC-Steam-Thru-Connectors" class="collection-anchor" onclick="copyCollectionURL(event, 'CPC-Steam-Thru-Connectors', 'CPC® Steam Thru Connectors')">CPC® Steam Thru Connectors</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in cpc_stream_thru_connectors_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">50% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="50"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZBio® Bottle Assembly (PC) Collection - 12% Off -->
-      {% assign ezbio_bottle_assembly_pc_collection = collections['ezbio-bottle-assembly-pc-12-off-us-independence-day-sale-25'] %}
-      {% if ezbio_bottle_assembly_pc_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Bottle-Assembly-PC">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Bottle-Assembly-PC" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Bottle-Assembly-PC', 'EZBio® Bottle Assembly (PC)')">EZBio® Bottle Assembly (PC)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezbio_bottle_assembly_pc_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">12% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="12"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-    <!-- Laboratory Products -->
-
-      <!-- EZLabpure™ Round Carboy (PP) Collection - 25% Off -->
-      {% assign ezlabpure_carboy_collection = collections['ezlabpure-round-carboy-pp-25-off-us-independence-day-sale-25'] %}
-      {% if ezlabpure_carboy_collection.products.size > 0 %}
-      <div class="collection-section" id="EZLabpure-Round-Carboy-PP">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZLabpure-Round-Carboy-PP" class="collection-anchor" onclick="copyCollectionURL(event, 'EZLabpure-Round-Carboy-PP', 'EZLabpure™ Round Carboy (PP)')">EZLabpure™ Round Carboy (PP)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezlabpure_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">25% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="25"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZgrip® Carboy (PP) Collection - 32% Off -->
-      {% assign ezgrip_carboy_collection = collections['ezgrip-carboy-pp-32-off-us-independence-day-sale-25'] %}
-      {% if ezgrip_carboy_collection.products.size > 0 %}
-      <div class="collection-section" id="EZgrip-Carboy-PP">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZgrip-Carboy-PP" class="collection-anchor" onclick="copyCollectionURL(event, 'EZgrip-Carboy-PP', 'EZgrip® Carboy (PP)')">EZgrip® Carboy (PP)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezgrip_carboy_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">32% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-       <!-- EZBio® Carboy (PC) Lab Collection - 32% Off -->
-      {% assign ezbio_carboypc_collection = collections['ezbio-carboy-pc-lab-32-off-us-independence-day-sale-25'] %}
-      {% if ezbio_carboypc_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Carboy-PC-Lab">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Carboy-PC-Lab" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Carboy-PC-Lab', 'EZBio® Carboy (PC)')">EZBio® Carboy (PC)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezbio_carboypc_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">32% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
-      <!-- EZBio Carboy Collection -->
-      {% assign ezbio_carboypp_collection = collections['ezbio-carboy-pp-lab-32-off-us-independence-day-sale-25'] %}
-      {% if ezbio_carboypp_collection.products.size > 0 %}
-      <div class="collection-section" id="EZBio-Carboy-PP-Lab">
-        <div class="collection-header">
-          <div class="collection-header-content">
-            <h2 class="collection-title">
-              <a href="#EZBio-Carboy-PP-Lab" class="collection-anchor" onclick="copyCollectionURL(event, 'EZBio-Carboy-PP-Lab', 'EZBio® Carboy (PP)')">EZBio® Carboy (PP)</a>
-            </h2>
-          </div>
-        </div>
-        <div class="products-grid">
-          {% for product in ezbio_carboypp_collection.products %}
-          <div class="product-card" onclick="window.open('{{ product.url }}', '_blank')">
-            <div class="discount-badge">
-              <div class="discount-label">32% OFF</div>
-            </div>
-            <div class="product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-              {% else %}
-                <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-              {% endif %}
-            </div>
-            <div class="product-content">
-              <h3 class="product-title">{{ product.title }}</h3>
-              {% if product.variants.first.sku != blank %}
-                <div class="product-sku" onclick="copyToClipboard('{{ product.variants.first.sku }}', event)">
-                  {{ product.variants.first.sku }}
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
-                  </svg>
-                </div>
-              {% endif %}
-              <div class="product-price">
-                {% if product.compare_at_price > product.price %}
-                  <span class="original-price">${{ product.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ product.price | money_without_currency }}</span>
-                <span class="final-price" data-sale-price="{{ product.price | money_without_currency }}" data-discount="32"></span>
-              </div>
-              <button class="product-cta" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.compare_at_price | default: 0 }});">Shop Now</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
     </div>
+    {% endif %}
+
+    <!-- EZBio® MTO Centrifuge Tube Assemblies Collection - 25% Off -->
+    {% assign mto_centrifuge_collection = collections['ezbio-mto-centrifuge-tube-assemblies-up-to-25-off'] %}
+    {% if mto_centrifuge_collection.products.size > 0 %}
+    <div class="collection-section" id="EZBio-MTO-Centrifuge-Tube-Assemblies">
+      <div class="collection-header">
+        <div class="collection-header-content">
+          <h2 class="collection-title">EZBio® MTO Centrifuge Tube Assemblies</h2>
+        </div>
+      </div>
+      <div class="products-grid">
+        {% for product in mto_centrifuge_collection.products %}
+        <div class="product-card">
+          <div class="discount-badge">
+            <div class="discount-label">25% OFF</div>
+          </div>
+          <div class="product-image">
+            {% if product.featured_image %}
+              <img id="product-image-{{ product.id }}" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+            {% else %}
+              <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
+            {% endif %}
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">{{ product.title }}</h3>
+            {% if product.variants.first.sku != blank %}
+              <div class="product-sku" id="product-sku-{{ product.id }}">
+                {{ product.variants.first.sku }}
+              </div>
+            {% endif %}
+
+            {% if product.variants.size > 1 %}
+            <div class="variant-selector">
+              <label for="variant-select-{{ product.id }}">Options:</label>
+              <select id="variant-select-{{ product.id }}" onchange="updateProductDetails({{ product.id }})">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" 
+                          data-price="{{ variant.price }}" 
+                          data-sku="{{ variant.sku }}"
+                          data-image="{% if variant.image %}{{ variant.image | img_url: '300x300' }}{% else %}{{ product.featured_image | img_url: '300x300' }}{% endif %}">
+                    {{ variant.title }} - ${{ variant.price | money_without_currency }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+            {% endif %}
+
+            <div class="product-price">
+              {% assign first_variant = product.variants.first %}
+              {% assign discounted_price = first_variant.price | times: 0.75 %}
+              <span class="original-price">${{ first_variant.price | money_without_currency }}</span>
+              <span class="sale-price" id="sale-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+            </div>
+
+            <div class="quantity-controls">
+              <label>Qty:</label>
+              <div class="quantity-input-wrapper">
+                <button type="button" class="quantity-btn" onclick="decreaseQuantity({{ product.id }})">−</button>
+                <input type="number" class="quantity-input" id="quantity-{{ product.id }}" value="1" min="1" readonly>
+                <button type="button" class="quantity-btn" onclick="increaseQuantity({{ product.id }})">+</button>
+              </div>
+            </div>
+
+            <button class="product-cta" onclick="addToCart({{ product.id }})">Add to Cart</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
 </div>
 
-<div id="addToCartPopup" class="add-to-cart-popup">
-    <div class="popup-header">
-        <div></div>
-        <div class="popup-discount-badge" id="popupDiscountBadge"></div>
-        <button class="popup-close" onclick="closeAddToCartPopup()">×</button>
-    </div>
+<script>
+// Countdown Timer
+function updateCountdown() {
+  // Set the date we're counting down to (August 31st, 2025 at 11:59 PM)
+  const countDownDate = new Date('2025-08-31T23:59:59').getTime();
 
-    <div class="popup-content">
-        <div class="popup-left-section">
-            <div class="popup-product-image">
-                <img id="popupProductImage" src="" alt="Product Image">
-            </div>
-            <div class="left-related-products-section" id="leftRelatedProducts" style="display: none;">
-                <h3>💡 You might also like</h3>
-                <div class="left-related-products-grid" id="leftRelatedProductsGrid">
-                </div>
-            </div>
-        </div>
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
 
-        <div class="popup-right-section">
-            <h2 class="popup-product-title" id="popupProductTitle"></h2>
-            <div class="popup-product-sku">SKU: <span id="popupProductSKU"></span></div>
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            <div class="popup-product-price">
-                 {% comment %} Add the original price in popup {% endcomment %}
-                <span class="popup-original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
-                <span class="popup-sale-price">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
+    const dayStr = String(days).padStart(2, '0');
+    const hourStr = String(hours).padStart(2, '0');
+    const minuteStr = String(minutes).padStart(2, '0');
+    const secondStr = String(seconds).padStart(2, '0');
 
-                {% comment %} Add strikethrough to sale price and decrease font size in popup {% endcomment %}
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
-                <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
-            </div>
+    if (daysEl) daysEl.innerHTML = dayStr;
+    if (hoursEl) hoursEl.innerHTML = hourStr;
+    if (minutesEl) minutesEl.innerHTML = minuteStr;
+    if (secondsEl) secondsEl.innerHTML = secondStr;
 
-        <div class="popup-smart-savings">
-            <div class="popup-smart-savings-header">
-                <div style="display: flex; align-items: center;">
-                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/New_Icon.f3cc687da18d1b9a7778597a17d03fcc.gif?v=1712245731" alt="Smart Savings" style="height: 16px; width: 16px; margin-right: 4px;">
-                    Smart Savings
-                </div>
-            </div>
-            <div class="popup-savings-preview">Buy 2 items and save $<span class="popup-savings-preview-amount" id="popupSavingsPreview">0.00</span>/item</div>
-            <div class="popup-savings-details" style="display: flex;">
-                <div class="popup-savings-option popup-savings-2" onclick="selectSavingsOption(2)">
-                    <div class="popup-savings-label">MOST POPULAR</div>
-                    <div class="popup-savings-text">More than 2 Items</div>
-                    <div class="popup-savings-price">and save $<span class="popup-savings-amount" id="popupSavingsAmount2">0.00</span>/item</div>
-                </div>
-                <div class="popup-savings-option popup-savings-3" onclick="selectSavingsOption(3)">
-                    <div class="popup-savings-label">BEST VALUE</div>
-                    <div class="popup-savings-text">More than 3 Items</div>
-                    <div class="popup-savings-price">and save $<span class="popup-savings-amount" id="popupSavingsAmount3">0.00</span>/item</div>
-                </div>
-                <div class="popup-savings-option popup-savings-5" onclick="selectSavingsOption(5)">
-                    <div class="popup-savings-label">MOST SAVINGS</div>
-                    <div class="popup-savings-text">More than 5 Items</div>
-                    <div class="popup-savings-price">and save $<span class="popup-savings-amount" id="popupSavingsAmount5">0.00</span>/item</div>
-                </div>
-            </div>
-        </div>
+    if (distance < 0) {
+      clearInterval(timer);
+      ["days", "hours", "minutes", "seconds"].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.innerHTML = "00";
+      });
+    }
+  }, 1000);
+}
 
-        <div class="popup-quantity-section">
-            <label class="popup-quantity-label">Quantity</label>
-            <div class="popup-quantity-controls">
-                {% comment %} <button class="popup-quantity-btn" onclick="decreaseQuantity()" type="button">−</button> {% endcomment %}
-                <input type="number" class="popup-quantity-input" id="popupQuantity" value="1" min="1" readonly>
-                {% comment %} <button class="popup-quantity-btn" onclick="increaseQuantity()" type="button">+</button> {% endcomment %}
-            </div>
-        </div>
+// Scroll to products function
+function scrollToProducts() {
+  const productsSection = document.getElementById('products-section');
+  if (productsSection) {
+    productsSection.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
 
-        <button class="popup-add-to-cart" onclick="addToCart()">Add to Cart</button>
-        </div>
-    </div>
-</div>
+// Update product details when variant changes
+function updateProductDetails(productId) {
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
+  const selectedOption = variantSelect.options[variantSelect.selectedIndex];
 
-<div id="overlay" class="overlay" onclick="closeAddToCartPopup()"></div>
+  const price = parseFloat(selectedOption.dataset.price);
+  const sku = selectedOption.dataset.sku;
+  const image = selectedOption.dataset.image;
 
+  // Update price with 25% discount
+  const discountedPrice = price * 0.75;
+  const salePriceElement = document.getElementById(`sale-price-${productId}`);
+  if (salePriceElement) {
+    salePriceElement.textContent = `$${(discountedPrice / 100).toFixed(2)}`;
+  }
+
+  // Update SKU
+  const skuElement = document.getElementById(`product-sku-${productId}`);
+  if (skuElement && sku) {
+    skuElement.textContent = sku;
+  }
+
+  // Update image
+  const imageElement = document.getElementById(`product-image-${productId}`);
+  if (imageElement && image) {
+    imageElement.src = image;
+  }
+}
+
+// Quantity controls
+function increaseQuantity(productId) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const currentValue = parseInt(quantityInput.value);
+  quantityInput.value = currentValue + 1;
+}
+
+function decreaseQuantity(productId) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const currentValue = parseInt(quantityInput.value);
+  if (currentValue > 1) {
+    quantityInput.value = currentValue - 1;
+  }
+}
+
+// Add to cart function
+function addToCart(productId) {
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+
+  let variantId;
+  if (variantSelect) {
+    variantId = variantSelect.value;
+  } else {
+    // If no variant selector, get the first variant ID from the product card
+    const productCard = document.querySelector(`#variant-select-${productId}`);
+    if (!productCard) {
+      // Fallback: construct variant ID from product ID (this may need adjustment based on your setup)
+      console.warn('No variant selector found for product', productId);
+      return;
+    }
+  }
+
+  const quantity = parseInt(quantityInput.value);
+
+  // Add to cart via AJAX
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: quantity
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Show success message
+    alert('Product added to cart successfully!');
+    // Optionally redirect to cart or update cart count
+    // window.location.href = '/cart';
+  })
+  .catch(error => {
+    console.error('Error adding to cart:', error);
+    alert('Error adding product to cart. Please try again.');
+  });
+}
+
+// Start countdown when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  updateCountdown();
+});
+</script>
 <script>
 
 // Countdown Timer
