@@ -299,9 +299,17 @@
   }
 
   .sale-price {
+    color: #999;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: line-through;
+  }
+
+  .final-price {
     color: #dc3545;
     font-size: 1.6rem;
     font-weight: 900;
+    margin-left: 10px;
   }
 
   .variant-selector {
@@ -682,17 +690,18 @@
     font-size: 0.9rem;
   }
 
-  .popup-product-prices .sale-price {
-    color: #dc3545;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
+  .popup-sale-price {
+  color: #999;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: line-through;
+}
 
-  .popup-product-prices .final-price {
-    color: #28a745;
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
+.popup-final-price {
+  color: #dc3545;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
 
   .popup-quantity-controls {
     margin-bottom: 20px;
@@ -982,7 +991,7 @@ function updateCountdown() {
   // Set the date we're counting down to (August 31st, 2025 at 11:59 PM)
   const countDownDate = new Date('2025-08-31T23:59:59').getTime();
 
-  const timer = setInterval(function() {
+      const timer = setInterval(function() {
     const now = new Date().getTime();
     const distance = countDownDate - now;
 
@@ -1027,20 +1036,27 @@ function scrollToProducts() {
   }
 }
 
-// Update product details when variant changes
+// Add missing functions for variant changes and direct add to cart
 function updateProductDetails(productId) {
   const variantSelect = document.getElementById(`variant-select-${productId}`);
-  const selectedOption = variantSelect.options[variantSelect.selectedIndex];
+  if (!variantSelect) return;
 
+  const selectedOption = variantSelect.options[variantSelect.selectedIndex];
   const price = parseFloat(selectedOption.dataset.price);
   const sku = selectedOption.dataset.sku;
   const image = selectedOption.dataset.image;
 
-  // Update price with 25% discount
-  const discountedPrice = price * 0.75;
-  const salePriceElement = document.getElementById(`sale-price-${productId}`);
-  if (salePriceElement) {
-    salePriceElement.textContent = `$${(discountedPrice / 100).toFixed(2)}`;
+  // Update price with discount
+  const productCard = variantSelect.closest('.product-card');
+  const discountLabel = productCard.querySelector('.discount-label');
+  const discountText = discountLabel ? discountLabel.textContent : '';
+  const discountPercentage = parseInt(discountText.replace(/[^\d]/g, '')) || 0;
+
+  const finalPrice = price * (1 - discountPercentage / 100);
+  const finalPriceElement = document.getElementById(`final-price-${productId}`);
+
+  if (finalPriceElement) {
+    finalPriceElement.textContent = '$' + (finalPrice / 100).toFixed(2);
   }
 
   // Update SKU
@@ -1056,40 +1072,53 @@ function updateProductDetails(productId) {
   }
 }
 
-// Quantity controls
 function increaseQuantity(productId) {
   const quantityInput = document.getElementById(`quantity-${productId}`);
-  const currentValue = parseInt(quantityInput.value);
-  quantityInput.value = currentValue + 1;
+  if (quantityInput) {
+    const currentValue = parseInt(quantityInput.value);
+    quantityInput.value = currentValue + 1;
+  }
 }
 
 function decreaseQuantity(productId) {
   const quantityInput = document.getElementById(`quantity-${productId}`);
-  const currentValue = parseInt(quantityInput.value);
-  if (currentValue > 1) {
-    quantityInput.value = currentValue - 1;
+  if (quantityInput) {
+    const currentValue = parseInt(quantityInput.value);
+    if (currentValue > 1) {
+      quantityInput.value = currentValue - 1;
+    }
   }
 }
 
-// Add to cart function
-function addToCart(productId) {
-  const variantSelect = document.getElementById(`variant-select-${productId}`);
+function addToCartDirect(productId) {
   const quantityInput = document.getElementById(`quantity-${productId}`);
+  const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
+  // Get variant ID
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
   let variantId;
+
   if (variantSelect) {
     variantId = variantSelect.value;
   } else {
-    // If no variant selector, get the first variant ID from the product card
-    const productCard = document.querySelector(`#variant-select-${productId}`);
-    if (!productCard) {
-      // Fallback: construct variant ID from product ID (this may need adjustment based on your setup)
-      console.warn('No variant selector found for product', productId);
-      return;
+    // Find variant ID from the Shop Now button
+    const productCard = document.querySelector(`.product-card`);
+    const shopButton = productCard ? productCard.querySelector('.product-cta') : null;
+    const onclickAttr = shopButton ? shopButton.getAttribute('onclick') : null;
+
+    if (onclickAttr) {
+      const matches = onclickAttr.match(/openAddToCartPopupWithEvent\([^,]+,\s*\d+,.*?,.*?,.*?,.*?,\s*(\d+)\)/);
+      if (matches) {
+        variantId = matches[1];
+      }
     }
   }
 
-  const quantity = parseInt(quantityInput.value);
+  if (!variantId) {
+    console.error('Variant ID not found for product', productId);
+    showAddToCartError();
+    return;
+  }
 
   // Add to cart via AJAX
   fetch('/cart/add.js', {
@@ -1105,420 +1134,61 @@ function addToCart(productId) {
   .then(response => response.json())
   .then(data => {
     // Show success message
-    alert('Product added to cart successfully!');
-    // Optionally redirect to cart or update cart count
-    // window.location.href = '/cart';
+    showAddToCartSuccess();
+
+    // Update header cart count immediately
+    updateHeaderCartCount();
+
+    // Update cart info
+    updateCartInfo();
   })
   .catch(error => {
     console.error('Error adding to cart:', error);
-    alert('Error adding product to cart. Please try again.');
+    showAddToCartError();
   });
 }
 
 // Start countdown when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCountdown();
+  calculatePricesAndSavings();
+
+  // Initialize cart info
+  updateCartInfo();
+
+  // Handle URL hash navigation on page load
+  handleHashNavigation();
+
+  // Handle hash changes (when user navigates back/forward)
+  window.addEventListener('hashchange', handleHashNavigation);
+
+  // Hide popup and overlay initially
+  const overlay = document.getElementById('overlay');
+  const popup = document.getElementById('addToCartPopup');
+  if (overlay) {
+    overlay.classList.remove('show');
+    overlay.style.visibility = 'hidden';
+  }
+  if (popup) {
+    popup.classList.remove('show');
+    popup.style.visibility = 'visible';
+  }
 });
-</script>
 
-<div class="patriotic-sale-container">
-  <div class="sale-header">
-    <div class="hero-left">
-      <div class="independence-badge">US Independence Day Special</div>
-      <h1>Our <span class="gradient-text">Biggest</span> Patriotic <span class="gradient-text">Sale</span> of the <span class="gradient-text">Year!</span></h1>
-      <div class="discount">UP TO 25% OFF</div>
-      <div class="sale-subtitle">
-        Celebrate America's independence with our biggest sale of the year!
-      </div>
-      <a href="#products-section" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
-    </div>
-
-    <div class="hero-right">
-      <div class="header-timer">
-        <div class="header-timer-label">Sale Ends August 31st</div>
-        <div class="header-countdown">
-          <div class="header-countdown-unit">
-            <span id="days">02</span>
-            <label>Days</label>
-          </div>
-          <div class="header-countdown-unit">
-            <span id="hours">06</span>
-            <label>Hours</label>
-          </div>
-          <div class="header-countdown-unit">
-            <span id="minutes">25</span>
-            <label>Mins</label>
-          </div>
-          <div class="header-countdown-unit">
-            <span id="seconds">41</span>
-            <label>Secs</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tabs-container" id="products-section">
-
-    <!-- EZBio® Centrifuge Tube Assemblies Collection - 25% Off -->
-    {% assign centrifuge_tube_collection = collections['ezbio-centrifuge-tube-assemblies-up-to-25-off'] %}
-    {% if centrifuge_tube_collection.products.size > 0 %}
-    <div class="collection-section" id="EZBio-Centrifuge-Tube-Assemblies">
-      <div class="collection-header">
-        <div class="collection-header-content">
-          <h2 class="collection-title">EZBio® Centrifuge Tube Assemblies</h2>
-        </div>
-      </div>
-      <div class="products-grid">
-        {% for product in centrifuge_tube_collection.products %}
-        <div class="product-card">
-          <div class="discount-badge">
-            <div class="discount-label">25% OFF</div>
-          </div>
-          <div class="product-image">
-            {% if product.featured_image %}
-              <img id="product-image-{{ product.id }}" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-            {% else %}
-              <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-            {% endif %}
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">{{ product.title }}</h3>
-            {% if product.variants.first.sku != blank %}
-              <div class="product-sku" id="product-sku-{{ product.id }}">
-                {{ product.variants.first.sku }}
-              </div>
-            {% endif %}
-
-            {% if product.variants.size > 1 %}
-            <div class="variant-selector">
-              <label for="variant-select-{{ product.id }}">Options:</label>
-              <select id="variant-select-{{ product.id }}" onchange="updateProductDetails({{ product.id }})">
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}" 
-                          data-price="{{ variant.price }}" 
-                          data-sku="{{ variant.sku }}"
-                          data-image="{% if variant.image %}{{ variant.image | img_url: '300x300' }}{% else %}{{ product.featured_image | img_url: '300x300' }}{% endif %}">
-                    {{ variant.title }} - ${{ variant.price | money_without_currency }}
-                  </option>
-                {% endfor %}
-              </select>
-            </div>
-            {% endif %}
-
-            <div class="product-price">
-                {% assign first_variant = product.variants.first %}
-                {% assign discounted_price = first_variant.price | times: 0.75 %}
-                {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
-                  <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
-                <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
-              </div>
-
-            <div class="quantity-controls">
-              <label>Qty:</label>
-              <div class="quantity-input-wrapper">
-                <button type="button" class="quantity-btn" onclick="decreaseQuantity({{ product.id }})">−</button>
-                <input type="number" class="quantity-input" id="quantity-{{ product.id }}" value="1" min="1" readonly>
-                <button type="button" class="quantity-btn" onclick="increaseQuantity({{ product.id }})">+</button>
-              </div>
-            </div>
-
-            <div class="product-buttons" style="display: flex; gap: 10px; margin-top: 15px;">
-                <button class="product-cta" style="flex: 1;" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
-                <button class="product-cta" style="flex: 1;" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {{ product.variants.first.compare_at_price }})">Shop Now</button>
-              </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <!-- EZBio® MTO Centrifuge Tube Assemblies Collection - 25% Off -->
-    {% assign mto_centrifuge_collection = collections['ezbio-mto-centrifuge-tube-assemblies-up-to-25-off'] %}
-    {% if mto_centrifuge_collection.products.size > 0 %}
-    <div class="collection-section" id="EZBio-MTO-Centrifuge-Tube-Assemblies">
-      <div class="collection-header">
-        <div class="collection-header-content">
-          <h2 class="collection-title">EZBio® MTO Centrifuge Tube Assemblies</h2>
-        </div>
-      </div>
-      <div class="products-grid">
-        {% for product in mto_centrifuge_collection.products %}
-        <div class="product-card">
-          <div class="discount-badge">
-            <div class="discount-label">25% OFF</div>
-          </div>
-          <div class="product-image">
-            {% if product.featured_image %}
-              <img id="product-image-{{ product.id }}" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
-            {% else %}
-              <div style="color: #6c757d; font-size: 1rem; text-align: center;">Product Image</div>
-            {% endif %}
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">{{ product.title }}</h3>
-            {% if product.variants.first.sku != blank %}
-              <div class="product-sku" id="product-sku-{{ product.id }}">
-                {{ product.variants.first.sku }}
-              </div>
-            {% endif %}
-
-            {% if product.variants.size > 1 %}
-            <div class="variant-selector">
-              <label for="variant-select-{{ product.id }}">Options:</label>
-              <select id="variant-select-{{ product.id }}" onchange="updateProductDetails({{ product.id }})">
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}" 
-                          data-price="{{ variant.price }}" 
-                          data-sku="{{ variant.sku }}"
-                          data-image="{% if variant.image %}{{ variant.image | img_url: '300x300' }}{% else %}{{ product.featured_image | img_url: '300x300' }}{% endif %}">
-                    {{ variant.title }} - ${{ variant.price | money_without_currency }}
-                  </option>
-                {% endfor %}
-              </select>
-            </div>
-            {% endif %}
-
-            <div class="product-price">
-                {% assign first_variant = product.variants.first %}
-                {% assign discounted_price = first_variant.price | times: 0.75 %}
-                {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
-                  <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
-                {% endif %}
-                <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
-                <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
-              </div>
-
-            <div class="quantity-controls">
-              <label>Qty:</label>
-              <div class="quantity-input-wrapper">
-                <button type="button" class="quantity-btn" onclick="decreaseQuantity({{ product.id }})">−</button>
-                <input type="number" class="quantity-input" id="quantity-{{ product.id }}" value="1" min="1" readonly>
-                <button type="button" class="quantity-btn" onclick="increaseQuantity({{ product.id }})">+</button>
-              </div>
-            </div>
-
-            <div class="product-buttons" style="display: flex; gap: 10px; margin-top: 15px;">
-                <button class="product-cta" style="flex: 1;" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
-                <button class="product-cta" style="flex: 1;" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.variants.first.compare_at_price }})">Shop Now</button>
-              </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-  </div>
-</div>
-
-<script>
-// Countdown Timer
-function updateCountdown() {
-  // Set the date we're counting down to (August 31st, 2025 at 11:59 PM)
-  const countDownDate = new Date('2025-08-31T23:59:59').getTime();
-
-  const timer = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const dayStr = String(days).padStart(2, '0');
-    const hourStr = String(hours).padStart(2, '0');
-    const minuteStr = String(minutes).padStart(2, '0');
-    const secondStr = String(seconds).padStart(2, '0');
-
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    if (daysEl) daysEl.innerHTML = dayStr;
-    if (hoursEl) hoursEl.innerHTML = hourStr;
-    if (minutesEl) minutesEl.innerHTML = minuteStr;
-    if (secondsEl) secondsEl.innerHTML = secondStr;
-
-    if (distance < 0) {
-      clearInterval(timer);
-      ["days", "hours", "minutes", "seconds"].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.innerHTML = "00";
-      });
+// Function to handle URL hash navigation
+function handleHashNavigation() {
+  const hash = window.location.hash;
+  if (hash) {
+    const targetElement = document.querySelector(hash);
+    if (targetElement) {
+      // Small delay to ensure page is fully loaded
+      setTimeout(() => {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
     }
-  }, 1000);
-}
-
-// Scroll to products function
-function scrollToProducts() {
-  const productsSection = document.getElementById('products-section');
-  if (productsSection) {
-    productsSection.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
-}
-
-// Update product details when variant changes
-function updateProductDetails(productId) {
-  const variantSelect = document.getElementById(`variant-select-${productId}`);
-  const selectedOption = variantSelect.options[variantSelect.selectedIndex];
-
-  const price = parseFloat(selectedOption.dataset.price);
-  const sku = selectedOption.dataset.sku;
-  const image = selectedOption.dataset.image;
-
-  // Update price with 25% discount
-  const discountedPrice = price * 0.75;
-  const salePriceElement = document.getElementById(`sale-price-${productId}`);
-  if (salePriceElement) {
-    salePriceElement.textContent = `$${(discountedPrice / 100).toFixed(2)}`;
-  }
-
-  // Update SKU
-  const skuElement = document.getElementById(`product-sku-${productId}`);
-  if (skuElement && sku) {
-    skuElement.textContent = sku;
-  }
-
-  // Update image
-  const imageElement = document.getElementById(`product-image-${productId}`);
-  if (imageElement && image) {
-    imageElement.src = image;
-  }
-}
-
-// Quantity controls
-function increaseQuantity(productId) {
-  const quantityInput = document.getElementById(`quantity-${productId}`);
-  const currentValue = parseInt(quantityInput.value);
-  quantityInput.value = currentValue + 1;
-}
-
-function decreaseQuantity(productId) {
-  const quantityInput = document.getElementById(`quantity-${productId}`);
-  const currentValue = parseInt(quantityInput.value);
-  if (currentValue > 1) {
-    quantityInput.value = currentValue - 1;
-  }
-}
-
-// Add to cart function
-function addToCart(productId) {
-  const variantSelect = document.getElementById(`variant-select-${productId}`);
-  const quantityInput = document.getElementById(`quantity-${productId}`);
-
-  let variantId;
-  if (variantSelect) {
-    variantId = variantSelect.value;
-  } else {
-    // If no variant selector, get the first variant ID from the product card
-    const productCard = document.querySelector(`#variant-select-${productId}`);
-    if (!productCard) {
-      // Fallback: construct variant ID from product ID (this may need adjustment based on your setup)
-      console.warn('No variant selector found for product', productId);
-      return;
-    }
-  }
-
-  const quantity = parseInt(quantityInput.value);
-
-  // Add to cart via AJAX
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      id: variantId,
-      quantity: quantity
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Show success message
-    alert('Product added to cart successfully!');
-    // Optionally redirect to cart or update cart count
-    // window.location.href = '/cart';
-  })
-  .catch(error => {
-    console.error('Error adding to cart:', error);
-    alert('Error adding product to cart. Please try again.');
-  });}
-
-// Start countdown when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  updateCountdown();
-});
-</script>
-<script>
-
-function updateCountdown() {
-  // Set the date we're counting down to (July 31st, 2024 at 11:59 PM)
-  const countDownDate = new Date('2025-07-31T23:59:59').getTime();
-
-  const timer = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const dayStr = String(days).padStart(2, '0');
-    const hourStr = String(hours).padStart(2, '0');
-    const minuteStr = String(minutes).padStart(2, '0');
-    const secondStr = String(seconds).padStart(2, '0');
-
-    // Update main timer
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    if (daysEl) daysEl.innerHTML = dayStr;
-    if (hoursEl) hoursEl.innerHTML = hourStr;
-    if (minutesEl) minutesEl.innerHTML = minuteStr;
-    if (secondsEl) secondsEl.innerHTML = secondStr;
-
-    // Update sticky timer
-    const stickyDaysEl = document.getElementById("sticky-days");
-    const stickyHoursEl = document.getElementById("sticky-hours");
-    const stickyMinutesEl = document.getElementById("sticky-minutes");
-    const stickySecondsEl = document.getElementById("sticky-seconds");
-
-    if (stickyDaysEl) stickyDaysEl.innerHTML = dayStr;
-    if (stickyHoursEl) stickyHoursEl.innerHTML = hourStr;
-    if (stickyMinutesEl) stickyMinutesEl.innerHTML = minuteStr;
-    if (stickySecondsEl) stickySecondsEl.innerHTML = secondStr;
-
-    if (distance < 0) {
-      clearInterval(timer);
-      // Reset both timers
-      ["days", "hours", "minutes", "seconds", "sticky-days", "sticky-hours", "sticky-minutes", "sticky-seconds"].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.innerHTML = "00";
-      });
-    }
-  }, 1000);
-}
-
-// Scroll to products function
-function scrollToProducts() {
-  const productsSection = document.getElementById('products-section');
-  if (productsSection) {
-    productsSection.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
   }
 }
 
@@ -2200,6 +1870,7 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
     if (discountPercentage > 0) {
         discountBadge.textContent = discountPercentage + '% OFF';
         discountBadge.style.display = 'block';
+            discountBadge.style.display = 'block';
     } else {
         discountBadge.style.display = 'none';
     }
@@ -2533,9 +2204,9 @@ function addToCartDirect(productId) {
                     <h3 id="popupProductTitle">Product Title</h3>
                     <p>SKU: <span id="popupProductSKU"></span></p>
                     <div class="popup-product-prices">
-                        <span class="original-price" id="popupOriginalPrice" style="display: none;">$99.99</span>
-                        <span class="sale-price" id="popupSalePrice">$79.99</span>
-                        <span class="final-price">Now: <span id="popupFinalPrice">$59.99</span></span>
+                        <span class="original-price" id="popupOriginalPrice" style="display: none;">$0.00</span>
+                        <span class="popup-sale-price" id="popupSalePrice">$0.00</span>
+                        <span class="popup-final-price" id="popupFinalPrice">$0.00</span>
                     </div>
                 </div>
             </div>
