@@ -2398,6 +2398,24 @@
 <script>
 
 // Countdown Timer
+// Helper function to get product handle from product ID
+function getProductHandleFromId(productId) {
+    // Try to find the product handle from the product cards
+    const productCards = document.querySelectorAll('.product-card');
+    for (const card of productCards) {
+        const shopButton = card.querySelector('.shop-now-btn');
+        if (shopButton) {
+            const onclickAttr = shopButton.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(productId)) {
+                // Extract product handle from the card or page context
+                // This is a fallback method - you might need to adjust based on your data structure
+                return null; // Return null to skip fetch if we can't determine handle
+            }
+        }
+    }
+    return null;
+}
+
 // Global function for opening popup with event handling
 function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice) {
     event.stopPropagation();
@@ -2742,19 +2760,32 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     if (variantSelect && variantSelectorContainer) {
         variantSelect.innerHTML = '';  // Clear existing options
 
-        // Fetch the product to get all variants
-        fetch(`/products/${productId}.js`)
-        .then(response => response.json())
-        .then(product => {
-            if (product.variants && product.variants.length > 1) {
+        // Find the product card to get variant information directly from the DOM
+        const productCards = document.querySelectorAll('.product-card');
+        let matchingProductCard = null;
+
+        // Find the matching product card by checking the onclick attributes or SKU
+        for (const card of productCards) {
+            const cardSku = card.querySelector('.product-sku')?.textContent.trim();
+            if (cardSku === selectedProductSKU) {
+                matchingProductCard = card;
+                break;
+            }
+        }
+
+        if (matchingProductCard) {
+            const cardVariantSelect = matchingProductCard.querySelector('.variant-selector');
+            
+            if (cardVariantSelect && cardVariantSelect.options.length > 1) {
                 // Show variant selector if multiple variants exist
                 variantSelectorContainer.style.display = 'block';
 
-                product.variants.forEach(variant => {
+                // Copy all options from the card's variant selector
+                Array.from(cardVariantSelect.options).forEach(cardOption => {
                     const option = document.createElement('option');
-                    option.value = variant.id;
-                    option.text = variant.title;
-                    option.dataset.price = variant.price;  // Save the price for this variant
+                    option.value = cardOption.value;
+                    option.text = cardOption.text;
+                    option.dataset.price = cardOption.dataset.price;
                     variantSelect.appendChild(option);
                 });
 
@@ -2770,12 +2801,41 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
                 // Hide variant selector if only one variant
                 variantSelectorContainer.style.display = 'none';
             }
-        })
-        .catch(error => {
-            console.error('Error fetching product details:', error);
-            // Hide variant selector on error
-            variantSelectorContainer.style.display = 'none';
-        });
+        } else {
+            // Fallback: try the original fetch method with product handle
+            const productHandle = getProductHandleFromId(productId);
+            if (productHandle) {
+                fetch(`/products/${productHandle}.js`)
+                .then(response => response.json())
+                .then(product => {
+                    if (product.variants && product.variants.length > 1) {
+                        variantSelectorContainer.style.display = 'block';
+
+                        product.variants.forEach(variant => {
+                            const option = document.createElement('option');
+                            option.value = variant.id;
+                            option.text = variant.title;
+                            option.dataset.price = variant.price;
+                            variantSelect.appendChild(option);
+                        });
+
+                        variantSelect.value = selectedProductVariantId;
+                        variantSelect.addEventListener('change', function() {
+                            selectedProductVariantId = this.value;
+                            updatePopupVariant(this);
+                        });
+                    } else {
+                        variantSelectorContainer.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product details:', error);
+                    variantSelectorContainer.style.display = 'none';
+                });
+            } else {
+                variantSelectorContainer.style.display = 'none';
+            }
+        }
     }
 
     // Show overlay first
