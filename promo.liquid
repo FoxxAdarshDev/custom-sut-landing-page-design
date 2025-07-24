@@ -626,14 +626,14 @@
             {% endif %}
 
             <div class="product-price">
-              {% assign first_variant = product.variants.first %}
-              {% assign discounted_price = first_variant.price | times: 0.75 %}
-              {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
-                <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
-              {% endif %}
-              <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
-              <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
-            </div>
+                {% assign first_variant = product.variants.first %}
+                {% assign discounted_price = first_variant.price | times: 0.75 %}
+                {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
+                  <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
+                <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+              </div>
 
             <div class="quantity-controls">
               <label>Qty:</label>
@@ -644,10 +644,10 @@
               </div>
             </div>
 
-            <div class="product-buttons">
-              <button class="product-cta add-to-cart-direct" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
-              <button class="product-cta shop-now" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {% if product.variants.first.compare_at_price %}{{ product.variants.first.compare_at_price }}{% else %}0{% endif %})">Shop Now</button>
-            </div>
+            <div class="product-buttons" style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="product-cta" style="flex: 1;" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
+                <button class="product-cta" style="flex: 1;" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {{ product.variants.first.compare_at_price }})">Shop Now</button>
+              </div>
           </div>
         </div>
         {% endfor %}
@@ -702,14 +702,14 @@
             {% endif %}
 
             <div class="product-price">
-              {% assign first_variant = product.variants.first %}
-              {% assign discounted_price = first_variant.price | times: 0.75 %}
-              {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
-                <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
-              {% endif %}
-              <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
-              <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
-            </div>
+                {% assign first_variant = product.variants.first %}
+                {% assign discounted_price = first_variant.price | times: 0.75 %}
+                {% if first_variant.compare_at_price and first_variant.compare_at_price > first_variant.price %}
+                  <span class="original-price">${{ first_variant.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                <span class="sale-price">${{ first_variant.price | money_without_currency }}</span>
+                <span class="final-price" id="final-price-{{ product.id }}">${{ discounted_price | money_without_currency }}</span>
+              </div>
 
             <div class="quantity-controls">
               <label>Qty:</label>
@@ -720,10 +720,10 @@
               </div>
             </div>
 
-            <div class="product-buttons">
-              <button class="product-cta add-to-cart-direct" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
-              <button class="product-cta shop-now" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.variants.first.price }}, {{ product.variants.first.id }}, {% if product.variants.first.compare_at_price %}{{ product.variants.first.compare_at_price }}{% else %}0{% endif %})">Shop Now</button>
-            </div>
+            <div class="product-buttons" style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="product-cta" style="flex: 1;" onclick="addToCartDirect({{ product.id }})">Add to Cart</button>
+                <button class="product-cta" style="flex: 1;" onclick="openAddToCartPopupWithEvent(event, {{ product.id }}, '{{ product.title | escape }}', '{{ product.featured_image | img_url: '300x300' }}', '{{ product.variants.first.sku }}', {{ product.price }}, {{ product.variants.first.id }}, {{ product.variants.first.compare_at_price }})">Shop Now</button>
+              </div>
           </div>
         </div>
         {% endfor %}
@@ -870,8 +870,7 @@ function addToCart(productId) {
   .catch(error => {
     console.error('Error adding to cart:', error);
     alert('Error adding product to cart. Please try again.');
-  });
-}
+  });}
 
 // Start countdown when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -1701,7 +1700,8 @@ function openRelatedProduct(productId, productTitle, productImage, productSKU, p
             const originalPriceEl = card.querySelector('.original-price');
             if (originalPriceEl) {
                 const originalPriceText = originalPriceEl.textContent.replace('$', '').replace(/,/g, '');
-                compareAtPrice = Math.round(parseFloat(originalPriceText) * 100);
+                compareAtPrice = Math.round```text
+(parseFloat(originalPriceText) * 100);
             }
             break;
         }
