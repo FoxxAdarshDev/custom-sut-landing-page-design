@@ -813,6 +813,157 @@
   }
 </style>
 
+<script>
+// Global function for opening popup with event handling - MUST BE DEFINED FIRST
+function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice) {
+    event.stopPropagation();
+    openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event);
+}
+
+// Countdown Timer
+function updateCountdown() {
+  // Set the date we're counting down to (August 31st, 2025 at 11:59 PM)
+  const countDownDate = new Date('2025-08-31T23:59:59').getTime();
+
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const dayStr = String(days).padStart(2, '0');
+    const hourStr = String(hours).padStart(2, '0');
+    const minuteStr = String(minutes).padStart(2, '0');
+    const secondStr = String(seconds).padStart(2, '0');
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl) daysEl.innerHTML = dayStr;
+    if (hoursEl) hoursEl.innerHTML = hourStr;
+    if (minutesEl) minutesEl.innerHTML = minuteStr;
+    if (secondsEl) secondsEl.innerHTML = secondStr;
+
+    if (distance < 0) {
+      clearInterval(timer);
+      ["days", "hours", "minutes", "seconds"].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.innerHTML = "00";
+      });
+    }
+  }, 1000);
+}
+
+// Scroll to products function
+function scrollToProducts() {
+  const productsSection = document.getElementById('products-section');
+  if (productsSection) {
+    productsSection.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
+// Update product details when variant changes
+function updateProductDetails(productId) {
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
+  const selectedOption = variantSelect.options[variantSelect.selectedIndex];
+
+  const price = parseFloat(selectedOption.dataset.price);
+  const sku = selectedOption.dataset.sku;
+  const image = selectedOption.dataset.image;
+
+  // Update price with 25% discount
+  const discountedPrice = price * 0.75;
+  const salePriceElement = document.getElementById(`sale-price-${productId}`);
+  if (salePriceElement) {
+    salePriceElement.textContent = `$${(discountedPrice / 100).toFixed(2)}`;
+  }
+
+  // Update SKU
+  const skuElement = document.getElementById(`product-sku-${productId}`);
+  if (skuElement && sku) {
+    skuElement.textContent = sku;
+  }
+
+  // Update image
+  const imageElement = document.getElementById(`product-image-${productId}`);
+  if (imageElement && image) {
+    imageElement.src = image;
+  }
+}
+
+// Quantity controls
+function increaseQuantity(productId) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const currentValue = parseInt(quantityInput.value);
+  quantityInput.value = currentValue + 1;
+}
+
+function decreaseQuantity(productId) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const currentValue = parseInt(quantityInput.value);
+  if (currentValue > 1) {
+    quantityInput.value = currentValue - 1;
+  }
+}
+
+// Add to cart function
+function addToCart(productId) {
+  const variantSelect = document.getElementById(`variant-select-${productId}`);
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+
+  let variantId;
+  if (variantSelect) {
+    variantId = variantSelect.value;
+  } else {
+    // If no variant selector, get the first variant ID from the product card
+    const productCard = document.querySelector(`#variant-select-${productId}`);
+    if (!productCard) {
+      // Fallback: construct variant ID from product ID (this may need adjustment based on your setup)
+      console.warn('No variant selector found for product', productId);
+      return;
+    }
+  }
+
+  const quantity = parseInt(quantityInput.value);
+
+  // Add to cart via AJAX
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: quantity
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Show success message
+    alert('Product added to cart successfully!');
+    // Optionally redirect to cart or update cart count
+    // window.location.href = '/cart';
+  })
+  .catch(error => {
+    console.error('Error adding to cart:', error);
+    alert('Error adding product to cart. Please try again.');
+  });
+}
+
+// Start countdown when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  updateCountdown();
+});
+</script>
+
 <div class="patriotic-sale-container">
   <div class="sale-header">
     <div class="hero-left">
@@ -1151,13 +1302,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script>
-
-// Countdown Timer
-// Global function for opening popup with event handling
-function openAddToCartPopupWithEvent(event, productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice) {
-    event.stopPropagation();
-    openAddToCartPopup(productId, productTitle, productImage, productSKU, productPrice, productVariantId, compareAtPrice, event);
-}
 
 function updateCountdown() {
   // Set the date we're counting down to (July 31st, 2024 at 11:59 PM)
@@ -2283,8 +2427,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Hide popup and overlay initially
   const overlay = document.getElementById('overlay');
   const popup = document.getElementById('addToCartPopup');
-  overlay.style.visibility = 'hidden';
-  popup.style.visibility = 'hidden';
+  if (overlay) {
+    overlay.classList.remove('show');
+    overlay.style.visibility = 'hidden';
+  }
+  if (popup) {
+    popup.classList.remove('show');
+    popup.style.visibility = 'hidden';
+  }
 });
 
 // Function to handle URL hash navigation
