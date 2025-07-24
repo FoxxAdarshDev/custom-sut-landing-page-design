@@ -1,4 +1,4 @@
-html
+
 <style>
 
 
@@ -2212,9 +2212,9 @@ html
               <div class="product-quantity">
                 <label for="quantity-{{ product.id }}">Quantity:</label>
                 <div class="quantity-controls">
-                  <button onclick="decreaseQuantity({{ product.id }})">-</button>
+                  {% comment %} <button onclick="decreaseQuantity({{ product.id }})">-</button> {% endcomment %}
                   <input type="number" id="quantity-{{ product.id }}" class="quantity-input" value="1" min="1">
-                  <button onclick="increaseQuantity({{ product.id }})">+</button>
+                  {% comment %} <button onclick="increaseQuantity({{ product.id }})">+</button> {% endcomment %}
                 </div>
               </div>
 
@@ -2290,9 +2290,9 @@ html
               <div class="product-quantity">
                 <label for="quantity-{{ product.id }}">Quantity:</label>
                 <div class="quantity-controls">
-                  <button onclick="decreaseQuantity({{ product.id }})">-</button>
+                  {% comment %} <button onclick="decreaseQuantity({{ product.id }})">-</button> {% endcomment %}
                   <input type="number" id="quantity-{{ product.id }}" class="quantity-input" value="1" min="1">
-                  <button onclick="increaseQuantity({{ product.id }})">+</button>
+                  {% comment %} <button onclick="increaseQuantity({{ product.id }})">+</button> {% endcomment %}
                 </div>
               </div>
 
@@ -2738,7 +2738,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
     // Populate variant selector in the popup
     const variantSelect = document.getElementById('popup-variant-select');
     const variantSelectorContainer = document.getElementById('popupVariantSelector');
-    
+
     if (variantSelect && variantSelectorContainer) {
         variantSelect.innerHTML = '';  // Clear existing options
 
@@ -2749,7 +2749,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
             if (product.variants && product.variants.length > 1) {
                 // Show variant selector if multiple variants exist
                 variantSelectorContainer.style.display = 'block';
-                
+
                 product.variants.forEach(variant => {
                     const option = document.createElement('option');
                     option.value = variant.id;
@@ -2760,7 +2760,7 @@ function openAddToCartPopup(productId, productTitle, productImage, productSKU, p
 
                 // Set default selected variant
                 variantSelect.value = selectedProductVariantId;
-                
+
                 // Update selectedProductVariantId when variant changes
                 variantSelect.addEventListener('change', function() {
                     selectedProductVariantId = this.value;
@@ -2997,31 +2997,31 @@ function updatePopupVariant(selectElement) {
     const selectedVariantId = selectElement.value;
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     const newPrice = selectedOption.dataset.price;
-    
+
     console.log("Selected variant in popup:", selectedVariantId, "Price:", newPrice);
-    
+
     // Update the selected product variant ID
     selectedProductVariantId = selectedVariantId;
-    
+
     // Update price display if price data is available
     if (newPrice) {
         const priceInDollars = parseInt(newPrice) / 100;
-        
+
         // Update sale price
         const popupSalePriceEl = document.getElementById('popupSalePrice');
         if (popupSalePriceEl) {
             popupSalePriceEl.textContent = priceInDollars.toFixed(2);
         }
-        
+
         // Calculate and update final price with discount
         const discountPercentage = selectedProductDiscount || 0;
         const finalPrice = priceInDollars * (1 - discountPercentage / 100);
-        
+
         const popupFinalPriceEl = document.getElementById('popupFinalPrice');
         if (popupFinalPriceEl) {
             popupFinalPriceEl.textContent = '$' + finalPrice.toFixed(2);
         }
-        
+
         // Update smart savings calculations
         updateSmartSavingsForVariant(priceInDollars, discountPercentage);
     }
