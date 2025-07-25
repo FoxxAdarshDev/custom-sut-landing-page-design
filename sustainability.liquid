@@ -211,20 +211,25 @@
         <div class="certifications-grid">
           {% assign certifications = '1,2,3,4,5' | split: ',' %}
           {% for cert_num in certifications %}
-            {% assign cert_image = 'certification_' | append: cert_num | append: '_image' %}
-            {% assign cert_validity = 'certification_' | append: cert_num | append: '_validity' %}
-            {% assign cert_title = 'certification_' | append: cert_num | append: '_title' %}
-            {% assign cert_description = 'certification_' | append: cert_num | append: '_description' %}
+            {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
+            {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
+            {% assign cert_title_key = 'certification_' | append: cert_num | append: '_title' %}
+            {% assign cert_description_key = 'certification_' | append: cert_num | append: '_description' %}
             
-            {% if section.settings[cert_image] != blank %}
+            {% assign cert_image = section.settings[cert_image_key] %}
+            {% assign cert_validity = section.settings[cert_validity_key] %}
+            {% assign cert_title = section.settings[cert_title_key] %}
+            {% assign cert_description = section.settings[cert_description_key] %}
+            
+            {% if cert_image != blank %}
               <div class="certification-card" data-cert="{{ cert_num }}">
                 <div class="certification-logo-container">
-                  <img src="{{ section.settings[cert_image] | img_url: '200x' }}" 
-                       alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                  <img src="{{ cert_image | img_url: '200x' }}" 
+                       alt="{{ cert_title | default: 'Sustainability Certification' }}" 
                        class="certification-badge">
                 </div>
-                {% if section.settings[cert_validity] != blank %}
-                  <p class="certification-validity">{{ section.settings[cert_validity] }}</p>
+                {% if cert_validity != blank %}
+                  <p class="certification-validity">{{ cert_validity }}</p>
                 {% endif %}
                 <button class="certification-learn-more" onclick="openCertificationModal({{ cert_num }})">
                   Learn More
@@ -236,13 +241,19 @@
       </div>
 
       <!-- Certification Modals -->
+      {% assign certifications = '1,2,3,4,5' | split: ',' %}
       {% for cert_num in certifications %}
-        {% assign cert_image = 'certification_' | append: cert_num | append: '_image' %}
-        {% assign cert_validity = 'certification_' | append: cert_num | append: '_validity' %}
-        {% assign cert_title = 'certification_' | append: cert_num | append: '_title' %}
-        {% assign cert_description = 'certification_' | append: cert_num | append: '_description' %}
+        {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
+        {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
+        {% assign cert_title_key = 'certification_' | append: cert_num | append: '_title' %}
+        {% assign cert_description_key = 'certification_' | append: cert_num | append: '_description' %}
         
-        {% if section.settings[cert_image] != blank %}
+        {% assign cert_image = section.settings[cert_image_key] %}
+        {% assign cert_validity = section.settings[cert_validity_key] %}
+        {% assign cert_title = section.settings[cert_title_key] %}
+        {% assign cert_description = section.settings[cert_description_key] %}
+        
+        {% if cert_image != blank %}
           <div id="certificationModal{{ cert_num }}" class="certification-modal">
             <div class="certification-modal-content">
               <div class="certification-modal-header">
@@ -250,17 +261,17 @@
               </div>
               <div class="certification-modal-body">
                 <div class="certification-modal-logo">
-                  <img src="{{ section.settings[cert_image] | img_url: '300x' }}" 
-                       alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                  <img src="{{ cert_image | img_url: '300x' }}" 
+                       alt="{{ cert_title | default: 'Sustainability Certification' }}" 
                        class="certification-modal-badge">
                 </div>
                 <div class="certification-modal-info">
-                  <h3 class="certification-modal-title">{{ section.settings[cert_title] | default: 'Sustainability Certification' }}</h3>
-                  {% if section.settings[cert_validity] != blank %}
-                    <p class="certification-modal-validity">{{ section.settings[cert_validity] }}</p>
+                  <h3 class="certification-modal-title">{{ cert_title | default: 'Sustainability Certification' }}</h3>
+                  {% if cert_validity != blank %}
+                    <p class="certification-modal-validity">{{ cert_validity }}</p>
                   {% endif %}
                   <div class="certification-modal-description">
-                    <p>{{ section.settings[cert_description] | default: 'Learn more about our commitment to sustainability and environmental responsibility.' }}</p>
+                    <p>{{ cert_description | default: 'Learn more about our commitment to sustainability and environmental responsibility.' }}</p>
                   </div>
                 </div>
               </div>
