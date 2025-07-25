@@ -315,10 +315,11 @@
 /* Section 1: Our Approach Banner */
 .sustainability-approach-banner {
   position: relative;
-  height: 300px;
+  height: 400px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
+  overflow: hidden;
 }
 
 .approach-bg-image {
@@ -335,13 +336,13 @@
 .approach-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(0, 113, 185, 0.8);
+  background: rgba(0, 113, 185, 0.7);
   width: 100%;
-  height: 80px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 40px;
+  padding: 0 60px;
 }
 
 .approach-content {
@@ -350,11 +351,12 @@
 
 .approach-heading {
   color: white;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin: 0;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Section 2: Main Content */
@@ -743,13 +745,18 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .sustainability-approach-banner {
+    height: 300px;
+  }
+
   .approach-heading {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
   }
 
   .approach-overlay {
-    padding: 0 20px;
-    height: 70px;
+    padding: 0 30px;
+    height: 100px;
   }
 
   .main-heading {
@@ -783,13 +790,24 @@
 }
 
 @media (max-width: 480px) {
-  .sustainability-approach-banner,
+  .sustainability-approach-banner {
+    height: 250px;
+  }
+
   .sustainability-change-section,
   .sustainability-commitment-section {
     min-height: 300px;
   }
 
-  .approach-heading,
+  .approach-heading {
+    font-size: 1.4rem;
+  }
+
+  .approach-overlay {
+    padding: 0 20px;
+    height: 80px;
+  }
+
   .change-heading,
   .commitment-heading {
     font-size: 1.5rem;
