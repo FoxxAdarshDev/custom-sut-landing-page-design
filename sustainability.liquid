@@ -206,18 +206,55 @@
         </div>
       {% endif %}
 
-      {% if section.settings.certification_image != blank %}
-        <div class="certification-wrapper">
-          <div class="certification-logo-container">
-            <img src="{{ section.settings.certification_image | img_url: '300x' }}" 
-                 alt="Sustainability Certification" 
-                 class="certification-badge">
-          </div>
-          {% if section.settings.certification_validity != blank %}
-            <p class="certification-validity">{{ section.settings.certification_validity }}</p>
+      <div class="certifications-grid">
+        {% for i in (1..5) %}
+          {% assign cert_image = 'certification_image_' | append: i %}
+          {% assign cert_validity = 'certification_validity_' | append: i %}
+          {% assign cert_title = 'certification_title_' | append: i %}
+          {% assign cert_description = 'certification_description_' | append: i %}
+          
+          {% if section.settings[cert_image] != blank %}
+            <div class="certification-wrapper">
+              <div class="certification-logo-container">
+                <img src="{{ section.settings[cert_image] | img_url: '300x' }}" 
+                     alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                     class="certification-badge">
+              </div>
+              {% if section.settings[cert_validity] != blank %}
+                <p class="certification-validity">{{ section.settings[cert_validity] }}</p>
+              {% endif %}
+              {% if section.settings[cert_description] != blank %}
+                <button class="learn-more-btn" data-cert-id="{{ i }}">Learn More</button>
+              {% endif %}
+            </div>
           {% endif %}
-        </div>
-      {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Certification Popups -->
+      {% for i in (1..5) %}
+        {% assign cert_image = 'certification_image_' | append: i %}
+        {% assign cert_title = 'certification_title_' | append: i %}
+        {% assign cert_description = 'certification_description_' | append: i %}
+        
+        {% if section.settings[cert_image] != blank and section.settings[cert_description] != blank %}
+          <div class="certification-popup" id="cert-popup-{{ i }}">
+            <div class="popup-overlay"></div>
+            <div class="popup-content">
+              <button class="popup-close">&times;</button>
+              <div class="popup-logo">
+                <img src="{{ section.settings[cert_image] | img_url: '200x' }}" 
+                     alt="{{ section.settings[cert_title] | default: 'Certification' }}" 
+                     class="popup-certification-badge">
+              </div>
+              <h3 class="popup-title">{{ section.settings[cert_title] | default: 'Certification Details' }}</h3>
+              <div class="popup-description">
+                {{ section.settings[cert_description] }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -408,10 +445,20 @@
   color: white;
 }
 
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
 .certification-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .certification-logo-container {
@@ -428,7 +475,7 @@
 }
 
 .certification-badge {
-  max-width: 200px;
+  max-width: 150px;
   height: auto;
   display: block;
 }
@@ -436,8 +483,122 @@
 .certification-validity {
   font-size: 0.9rem;
   color: #0071b9;
-  margin: 0;
+  margin: 0 0 10px 0;
   font-weight: 600;
+}
+
+.learn-more-btn {
+  background: transparent;
+  border: 2px solid #0071b9;
+  color: #0071b9;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.learn-more-btn:hover {
+  background: #0071b9;
+  color: white;
+}
+
+/* Popup Styles */
+.certification-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
+
+.certification-popup.active {
+  display: block;
+}
+
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-close:hover {
+  color: #333;
+}
+
+.popup-logo {
+  margin-bottom: 20px;
+}
+
+.popup-certification-badge {
+  max-width: 120px;
+  height: auto;
+}
+
+.popup-title {
+  font-size: 1.5rem;
+  color: #0071b9;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.popup-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  text-align: left;
+}
+
+.popup-description p {
+  margin-bottom: 15px;
+}
+
+.popup-description p:last-child {
+  margin-bottom: 0;
 }
 
 /* Section 3: The Change Starts Now */
@@ -764,6 +925,28 @@
     font-size: 1.6rem;
   }
 
+  .certifications-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+
+  .certification-badge {
+    max-width: 120px;
+  }
+
+  .popup-content {
+    padding: 30px 20px;
+    width: 95%;
+  }
+
+  .popup-title {
+    font-size: 1.3rem;
+  }
+
+  .popup-description {
+    font-size: 0.9rem;
+  }
+
   .change-heading {
     font-size: 1.8rem;
   }
@@ -855,16 +1038,63 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(section);
   });
 
-  // Add hover effects to certification logo
-  const certLogo = document.querySelector('.certification-logo-container');
-  if (certLogo) {
-    certLogo.addEventListener('mouseenter', function() {
+  // Add hover effects to certification logos
+  const certLogos = document.querySelectorAll('.certification-logo-container');
+  certLogos.forEach(logo => {
+    logo.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-8px) scale(1.05)';
     });
 
-    certLogo.addEventListener('mouseleave', function() {
+    logo.addEventListener('mouseleave', function() {
       this.style.transform = 'translateY(0) scale(1)';
     });
-  }
+  });
+
+  // Popup functionality
+  const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+  const popups = document.querySelectorAll('.certification-popup');
+  const popupOverlays = document.querySelectorAll('.popup-overlay');
+  const closeBtns = document.querySelectorAll('.popup-close');
+
+  // Open popup
+  learnMoreBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const certId = this.getAttribute('data-cert-id');
+      const popup = document.getElementById(`cert-popup-${certId}`);
+      if (popup) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  // Close popup when clicking overlay
+  popupOverlays.forEach(overlay => {
+    overlay.addEventListener('click', function() {
+      const popup = this.closest('.certification-popup');
+      popup.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
+
+  // Close popup when clicking close button
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const popup = this.closest('.certification-popup');
+      popup.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
+
+  // Close popup on ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const activePopup = document.querySelector('.certification-popup.active');
+      if (activePopup) {
+        activePopup.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+  });
 });
 </script>
