@@ -213,17 +213,17 @@
           {% assign cert_title = 'certification_title_' | append: i %}
           {% assign cert_description = 'certification_description_' | append: i %}
           
-          {% if section.settings[cert_image] != blank %}
+          {% if settings[cert_image] != blank %}
             <div class="certification-wrapper">
               <div class="certification-logo-container">
-                <img src="{{ section.settings[cert_image] | img_url: '300x' }}" 
-                     alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                <img src="{{ settings[cert_image] | img_url: '300x' }}" 
+                     alt="{{ settings[cert_title] | default: 'Sustainability Certification' }}" 
                      class="certification-badge">
               </div>
-              {% if section.settings[cert_validity] != blank %}
-                <p class="certification-validity">{{ section.settings[cert_validity] }}</p>
+              {% if settings[cert_validity] != blank %}
+                <p class="certification-validity">{{ settings[cert_validity] }}</p>
               {% endif %}
-              {% if section.settings[cert_description] != blank %}
+              {% if settings[cert_description] != blank %}
                 <button class="learn-more-btn" data-cert-id="{{ i }}">Learn More</button>
               {% endif %}
             </div>
@@ -237,19 +237,19 @@
         {% assign cert_title = 'certification_title_' | append: i %}
         {% assign cert_description = 'certification_description_' | append: i %}
         
-        {% if section.settings[cert_image] != blank and section.settings[cert_description] != blank %}
+        {% if settings[cert_image] != blank and settings[cert_description] != blank %}
           <div class="certification-popup" id="cert-popup-{{ i }}">
             <div class="popup-overlay"></div>
             <div class="popup-content">
               <button class="popup-close">&times;</button>
               <div class="popup-logo">
-                <img src="{{ section.settings[cert_image] | img_url: '200x' }}" 
-                     alt="{{ section.settings[cert_title] | default: 'Certification' }}" 
+                <img src="{{ settings[cert_image] | img_url: '200x' }}" 
+                     alt="{{ settings[cert_title] | default: 'Certification' }}" 
                      class="popup-certification-badge">
               </div>
-              <h3 class="popup-title">{{ section.settings[cert_title] | default: 'Certification Details' }}</h3>
+              <h3 class="popup-title">{{ settings[cert_title] | default: 'Certification Details' }}</h3>
               <div class="popup-description">
-                {{ section.settings[cert_description] }}
+                {{ settings[cert_description] }}
               </div>
             </div>
           </div>
