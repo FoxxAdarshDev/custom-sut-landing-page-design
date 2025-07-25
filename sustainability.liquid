@@ -1229,6 +1229,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-bottom: 0;
 }
 
 .change-bg-image {
@@ -1237,9 +1240,12 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .change-overlay {
@@ -1405,7 +1411,10 @@
 /* Section 4: Statistics */
 .sustainability-stats-section {
   background: white;
-  padding: 80px 20px;
+  padding: 120px 20px 80px 20px;
+  margin-top: 0;
+  position: relative;
+  z-index: 3;
 }
 
 .stats-wrapper {
@@ -1600,6 +1609,20 @@
     font-size: 1.8rem;
   }
 
+  .sustainability-change-section {
+    min-height: 500px;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+  }
+
+  .change-bg-image {
+    background-attachment: scroll;
+  }
+
+  .sustainability-stats-section {
+    padding: 100px 20px 60px 20px;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1627,9 +1650,18 @@
     height: 300px;
   }
 
-  .sustainability-change-section,
+  .sustainability-change-section {
+    min-height: 400px;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+  }
+
   .sustainability-commitment-section {
     min-height: 300px;
+  }
+
+  .sustainability-stats-section {
+    padding: 80px 20px 60px 20px;
   }
 
   .approach-heading {
