@@ -1,4 +1,182 @@
 
+{% schema %}
+{
+  "name": "Sustainability Section",
+  "class": "sustainability-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section 1 - Our Approach"
+    },
+    {
+      "type": "image_picker",
+      "id": "approach_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "approach_heading",
+      "label": "Heading",
+      "default": "OUR APPROACH"
+    },
+    {
+      "type": "header",
+      "content": "Section 2 - Main Content"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Ensuring you can process life-saving drugs without sacrificing your sustainability goals."
+    },
+    {
+      "type": "text",
+      "id": "contact_button_text",
+      "label": "Contact Button Text",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "url",
+      "id": "contact_button_url",
+      "label": "Contact Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_image",
+      "label": "Certification Badge Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_validity",
+      "label": "Certification Validity Text",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "header",
+      "content": "Section 3 - The Change Starts Now"
+    },
+    {
+      "type": "image_picker",
+      "id": "change_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "change_heading_line1",
+      "label": "Heading Line 1",
+      "default": "THE CHANGE STARTS NOW"
+    },
+    {
+      "type": "text",
+      "id": "change_heading_line2",
+      "label": "Heading Line 2",
+      "default": "WITH US"
+    },
+    {
+      "type": "textarea",
+      "id": "change_description",
+      "label": "Description",
+      "default": "Carolina Components Group is here to support your sustainability goals without sacrificing product quality, lead times, or customer service. Explore our components in sustainable alternative materials today."
+    },
+    {
+      "type": "text",
+      "id": "change_button_text",
+      "label": "Button Text",
+      "default": "SUSTAINABLE ALTERNATIVES"
+    },
+    {
+      "type": "url",
+      "id": "change_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Section 4 - Statistics"
+    },
+    {
+      "type": "text",
+      "id": "stats_heading",
+      "label": "Statistics Heading",
+      "default": "Always Moving Forward"
+    },
+    {
+      "type": "text",
+      "id": "stat1_percentage",
+      "label": "Statistic 1 Percentage",
+      "default": "10%"
+    },
+    {
+      "type": "text",
+      "id": "stat1_title",
+      "label": "Statistic 1 Title",
+      "default": "of our components"
+    },
+    {
+      "type": "text",
+      "id": "stat1_description",
+      "label": "Statistic 1 Description",
+      "default": "are sourced from sustainable alternatives."
+    },
+    {
+      "type": "text",
+      "id": "stat2_percentage",
+      "label": "Statistic 2 Percentage",
+      "default": "38%"
+    },
+    {
+      "type": "text",
+      "id": "stat2_title",
+      "label": "Statistic 2 Title",
+      "default": "of our key suppliers"
+    },
+    {
+      "type": "text",
+      "id": "stat2_description",
+      "label": "Statistic 2 Description",
+      "default": "have completed a sustainability self-assessment to ensure we partner with the highest quality businesses, driven by sustainability initiatives."
+    },
+    {
+      "type": "header",
+      "content": "Section 5 - Commitment to Quality"
+    },
+    {
+      "type": "image_picker",
+      "id": "commitment_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "commitment_heading",
+      "label": "Heading",
+      "default": "OUR COMMITMENT TO QUALITY"
+    },
+    {
+      "type": "textarea",
+      "id": "commitment_description",
+      "label": "Description",
+      "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
+    },
+    {
+      "type": "text",
+      "id": "commitment_button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "commitment_button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sustainability Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
 <!-- Section 1: Our Approach Banner -->
 <section class="sustainability-approach-banner">
   {% if section.settings.approach_bg_image != blank %}
@@ -14,12 +192,12 @@
   {% endif %}
 </section>
 
-<!-- Section 2: Main Content -->
+<!-- Section 2: Main Content with Certification -->
 <section class="sustainability-main-content">
   <div class="main-content-wrapper">
     <div class="main-content-inner">
       <h2 class="main-heading">{{ section.settings.main_heading }}</h2>
-      
+
       {% if section.settings.contact_button_text != blank %}
         <div class="contact-button-wrapper">
           <a href="{{ section.settings.contact_button_url }}" class="contact-button">
@@ -27,7 +205,7 @@
           </a>
         </div>
       {% endif %}
-      
+
       {% if section.settings.certification_image != blank %}
         <div class="certification-wrapper">
           <img src="{{ section.settings.certification_image | img_url: '200x' }}" 
@@ -54,16 +232,16 @@
               <path d="M12 2L12 22M12 2C8 2 5 5 5 9C5 13 8 16 12 16M12 2C16 2 19 5 19 9C19 13 16 16 12 16" stroke="white" stroke-width="2"/>
             </svg>
           </div>
-          
+
           <h2 class="change-heading">
             <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
             <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
           </h2>
-          
+
           <div class="change-divider"></div>
-          
+
           <p class="change-description">{{ section.settings.change_description }}</p>
-          
+
           {% if section.settings.change_button_text != blank %}
             <a href="{{ section.settings.change_button_url }}" class="change-button">
               {{ section.settings.change_button_text }}
@@ -80,7 +258,7 @@
 <section class="sustainability-stats-section">
   <div class="stats-wrapper">
     <h2 class="stats-heading">{{ section.settings.stats_heading }}</h2>
-    
+
     <div class="stats-grid">
       <div class="stat-item">
         <div class="stat-percentage">{{ section.settings.stat1_percentage }}</div>
@@ -89,7 +267,7 @@
           <p class="stat-description">{{ section.settings.stat1_description }}</p>
         </div>
       </div>
-      
+
       <div class="stat-item">
         <div class="stat-percentage">{{ section.settings.stat2_percentage }}</div>
         <div class="stat-content">
@@ -110,7 +288,7 @@
         <div class="commitment-content">
           <h2 class="commitment-heading">{{ section.settings.commitment_heading }}</h2>
           <p class="commitment-description">{{ section.settings.commitment_description }}</p>
-          
+
           {% if section.settings.commitment_button_text != blank %}
             <a href="{{ section.settings.commitment_button_url }}" class="commitment-button">
               {{ section.settings.commitment_button_text }}
@@ -127,11 +305,10 @@
 /* Section 1: Our Approach Banner */
 .sustainability-approach-banner {
   position: relative;
-  height: 500px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .approach-bg-image {
@@ -148,13 +325,12 @@
 .approach-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(169, 169, 169, 0.7);
+  background: rgba(0, 0, 0, 0.4);
   width: 100%;
-  height: 200px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -150px;
 }
 
 .approach-content {
@@ -163,7 +339,7 @@
 
 .approach-heading {
   color: white;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
   letter-spacing: 2px;
@@ -186,7 +362,7 @@
 }
 
 .main-heading {
-  font-size: 35px;
+  font-size: 47px;
   color: #7bb3d9;
   font-weight: 300;
   line-height: 1.4;
@@ -207,7 +383,7 @@
   padding: 12px 30px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.9rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -231,7 +407,7 @@
 }
 
 .certification-validity {
-  font-size: 14px;
+  font-size: 0.85rem;
   color: #666;
   margin: 0;
 }
@@ -277,9 +453,14 @@
   margin-bottom: 30px;
 }
 
+
+.change-icon  svg {
+    width: auto!important;
+    height:auto!important
+}
 .change-heading {
   color: white;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -299,7 +480,7 @@
 
 .change-description {
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
   margin-bottom: 40px;
 }
@@ -310,7 +491,7 @@
   padding: 15px 35px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.9rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -334,7 +515,7 @@
 }
 
 .stats-heading {
-  font-size: 35px;
+  font-size: 2.2rem;
   color: #7bb3d9;
   font-weight: 300;
   margin-bottom: 60px;
@@ -353,21 +534,21 @@
 }
 
 .stat-percentage {
-  font-size: 64px;
+  font-size: 4rem;
   font-weight: 700;
   color: #1e4a66;
   margin-bottom: 20px;
 }
 
 .stat-title {
-  font-size: 18px;
+  font-size: 20px;
   color: #666;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .stat-description {
-  font-size: 15px;
+  font-size: 16px;
   color: #666;
   line-height: 1.5;
   margin: 0;
@@ -412,7 +593,7 @@
 
 .commitment-heading {
   color: white;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -421,7 +602,7 @@
 
 .commitment-description {
   color: white;
-  font-size: 19px;
+  font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 40px;
 }
@@ -433,7 +614,7 @@
   padding: 12px 30px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.9rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -447,45 +628,36 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .approach-heading {
-    font-size: 28px;
+    font-size: 1.8rem;
   }
-  
+
   .main-heading {
-    font-size: 26px;
+    font-size: 1.6rem;
   }
-  
+
   .change-heading {
-    font-size: 28px;
+    font-size: 1.8rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .stat-percentage {
-    font-size: 48px;
+    font-size: 3rem;
   }
-  
+
   .commitment-heading {
-    font-size: 28px;
+    font-size: 1.8rem;
   }
-  
+
   .commitment-description {
-    font-size: 16px;
+    font-size: 1rem;
   }
-  
+
   .stats-heading {
-    font-size: 28px;
-  }
-
-  .approach-overlay {
-    height: 150px;
-    margin-top: -100px;
-  }
-
-  .sustainability-approach-banner {
-    height: 400px;
+    font-size: 1.8rem;
   }
 }
 
@@ -495,25 +667,16 @@
   .sustainability-commitment-section {
     min-height: 300px;
   }
-  
+
   .approach-heading,
   .change-heading,
   .commitment-heading {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
-  
+
   .main-heading,
   .stats-heading {
-    font-size: 22px;
-  }
-
-  .approach-overlay {
-    height: 120px;
-    margin-top: -80px;
-  }
-
-  .sustainability-approach-banner {
-    height: 300px;
+    font-size: 1.4rem;
   }
 }
 </style>
