@@ -208,9 +208,11 @@
 
       {% if section.settings.certification_image != blank %}
         <div class="certification-wrapper">
-          <img src="{{ section.settings.certification_image | img_url: '200x' }}" 
-               alt="Sustainability Certification" 
-               class="certification-badge">
+          <div class="certification-logo-container">
+            <img src="{{ section.settings.certification_image | img_url: '300x' }}" 
+                 alt="Sustainability Certification" 
+                 class="certification-badge">
+          </div>
           {% if section.settings.certification_validity != blank %}
             <p class="certification-validity">{{ section.settings.certification_validity }}</p>
           {% endif %}
@@ -221,29 +223,37 @@
 </section>
 
 <!-- Section 3: The Change Starts Now -->
-<section class="sustainability-change-section">
+<section class="sustainability-change-section" data-animate="true">
   {% if section.settings.change_bg_image != blank %}
     <div class="change-bg-image" style="background-image: url('{{ section.settings.change_bg_image | img_url: '1920x' }}');">
   {% endif %}
       <div class="change-overlay">
         <div class="change-content">
-          <div class="change-icon">
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L12 22M12 2C8 2 5 5 5 9C5 13 8 16 12 16M12 2C16 2 19 5 19 9C19 13 16 16 12 16" stroke="white" stroke-width="2"/>
-            </svg>
+          <div class="change-icon-wrapper">
+            <div class="change-icon-border">
+              <div class="change-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L12 22M12 2C8 2 5 5 5 9C5 13 8 16 12 16M12 2C16 2 19 5 19 9C19 13 16 16 12 16" stroke="white" stroke-width="2"/>
+                  <circle cx="12" cy="9" r="2" fill="white"/>
+                  <path d="M8 16C8 18 10 20 12 20C14 20 16 18 16 16" stroke="white" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
           </div>
 
-          <h2 class="change-heading">
-            <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
-            <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
-          </h2>
+          <div class="change-heading-wrapper">
+            <h2 class="change-heading">
+              <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
+              <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
+            </h2>
+          </div>
 
           <div class="change-divider"></div>
 
           <p class="change-description">{{ section.settings.change_description }}</p>
 
           {% if section.settings.change_button_text != blank %}
-            <a href="{{ section.settings.change_button_url }}" class="change-button">
+            <a href="{{ section.settings.change_button_url }}" class="change-button animated-button">
               {{ section.settings.change_button_text }}
             </a>
           {% endif %}
@@ -401,22 +411,36 @@
   align-items: center;
 }
 
+.certification-logo-container {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 113, 185, 0.1);
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.certification-logo-container:hover {
+  transform: translateY(-5px);
+}
+
 .certification-badge {
-  max-width: 150px;
+  max-width: 200px;
   height: auto;
-  margin-bottom: 10px;
+  display: block;
 }
 
 .certification-validity {
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.9rem;
+  color: #0071b9;
   margin: 0;
+  font-weight: 600;
 }
 
 /* Section 3: The Change Starts Now */
 .sustainability-change-section {
   position: relative;
-  min-height: 500px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -436,13 +460,13 @@
 .change-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
-  min-height: 500px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
 }
 
 .change-content {
@@ -450,22 +474,56 @@
   max-width: 800px;
 }
 
-.change-icon {
-  margin-bottom: 30px;
+.change-icon-wrapper {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.2s;
 }
 
-
-.change-icon  svg {
-    width: auto!important;
-    height:auto!important
+.change-icon-border {
+  display: inline-block;
+  padding: 25px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
 }
+
+.change-icon-border:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.change-icon svg {
+  width: 80px !important;
+  height: 80px !important;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.change-heading-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
 .change-heading {
   color: white;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  border: 2px solid white;
+  padding: 20px 30px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
 }
 
 .change-line1, .change-line2 {
@@ -473,34 +531,91 @@
 }
 
 .change-divider {
-  width: 80px;
-  height: 3px;
-  background: white;
-  margin: 30px auto;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  margin: 40px auto;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.6s;
 }
 
 .change-description {
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.8s;
 }
 
 .change-button {
   background: #5bc0de;
   color: white;
-  padding: 15px 35px;
+  padding: 18px 40px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   text-transform: uppercase;
+  border-radius: 30px;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.animated-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.animated-button:hover::before {
+  left: 100%;
 }
 
 .change-button:hover {
   background: #4a9bc1;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(91, 192, 222, 0.3);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
 }
 
 /* Section 4: Statistics */
@@ -686,3 +801,51 @@
   }
 }
 </style>
+
+<script>
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        
+        // Reset animations for change section
+        if (entry.target.classList.contains('sustainability-change-section')) {
+          const elements = entry.target.querySelectorAll('.change-icon-wrapper, .change-heading-wrapper, .change-divider, .change-description, .change-button');
+          elements.forEach((el, index) => {
+            el.style.animationDelay = `${0.2 + (index * 0.2)}s`;
+            el.style.animation = 'none';
+            setTimeout(() => {
+              el.style.animation = '';
+            }, 10);
+          });
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe sections with animations
+  const animatedSections = document.querySelectorAll('[data-animate="true"]');
+  animatedSections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Add hover effects to certification logo
+  const certLogo = document.querySelector('.certification-logo-container');
+  if (certLogo) {
+    certLogo.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-8px) scale(1.05)';
+    });
+    
+    certLogo.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  }
+});
+</script>
