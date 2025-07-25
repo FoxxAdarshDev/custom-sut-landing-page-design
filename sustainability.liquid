@@ -206,18 +206,68 @@
         </div>
       {% endif %}
 
-      {% if section.settings.certification_image != blank %}
-        <div class="certification-wrapper">
-          <div class="certification-logo-container">
-            <img src="{{ section.settings.certification_image | img_url: '300x' }}" 
-                 alt="Sustainability Certification" 
-                 class="certification-badge">
-          </div>
-          {% if section.settings.certification_validity != blank %}
-            <p class="certification-validity">{{ section.settings.certification_validity }}</p>
-          {% endif %}
+      <!-- Multiple Certifications Section -->
+      <div class="certifications-grid-wrapper">
+        <div class="certifications-grid">
+          {% assign certifications = '1,2,3,4,5' | split: ',' %}
+          {% for cert_num in certifications %}
+            {% assign cert_image = 'certification_' | append: cert_num | append: '_image' %}
+            {% assign cert_validity = 'certification_' | append: cert_num | append: '_validity' %}
+            {% assign cert_title = 'certification_' | append: cert_num | append: '_title' %}
+            {% assign cert_description = 'certification_' | append: cert_num | append: '_description' %}
+            
+            {% if section.settings[cert_image] != blank %}
+              <div class="certification-card" data-cert="{{ cert_num }}">
+                <div class="certification-logo-container">
+                  <img src="{{ section.settings[cert_image] | img_url: '200x' }}" 
+                       alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                       class="certification-badge">
+                </div>
+                {% if section.settings[cert_validity] != blank %}
+                  <p class="certification-validity">{{ section.settings[cert_validity] }}</p>
+                {% endif %}
+                <button class="certification-learn-more" onclick="openCertificationModal({{ cert_num }})">
+                  Learn More
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-      {% endif %}
+      </div>
+
+      <!-- Certification Modals -->
+      {% for cert_num in certifications %}
+        {% assign cert_image = 'certification_' | append: cert_num | append: '_image' %}
+        {% assign cert_validity = 'certification_' | append: cert_num | append: '_validity' %}
+        {% assign cert_title = 'certification_' | append: cert_num | append: '_title' %}
+        {% assign cert_description = 'certification_' | append: cert_num | append: '_description' %}
+        
+        {% if section.settings[cert_image] != blank %}
+          <div id="certificationModal{{ cert_num }}" class="certification-modal">
+            <div class="certification-modal-content">
+              <div class="certification-modal-header">
+                <span class="certification-modal-close" onclick="closeCertificationModal({{ cert_num }})">&times;</span>
+              </div>
+              <div class="certification-modal-body">
+                <div class="certification-modal-logo">
+                  <img src="{{ section.settings[cert_image] | img_url: '300x' }}" 
+                       alt="{{ section.settings[cert_title] | default: 'Sustainability Certification' }}" 
+                       class="certification-modal-badge">
+                </div>
+                <div class="certification-modal-info">
+                  <h3 class="certification-modal-title">{{ section.settings[cert_title] | default: 'Sustainability Certification' }}</h3>
+                  {% if section.settings[cert_validity] != blank %}
+                    <p class="certification-modal-validity">{{ section.settings[cert_validity] }}</p>
+                  {% endif %}
+                  <div class="certification-modal-description">
+                    <p>{{ section.settings[cert_description] | default: 'Learn more about our commitment to sustainability and environmental responsibility.' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -408,36 +458,258 @@
   color: white;
 }
 
-.certification-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Multiple Certifications Grid */
+.certifications-grid-wrapper {
+  margin-top: 40px;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.certification-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 113, 185, 0.08);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.certification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0071b9, #5bc0de, #28a745);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.certification-card:hover::before {
+  transform: scaleX(1);
+}
+
+.certification-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 113, 185, 0.15);
+  border-color: rgba(0, 113, 185, 0.1);
 }
 
 .certification-logo-container {
-  background: white;
+  background: #f8f9fa;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 113, 185, 0.1);
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.certification-logo-container:hover {
-  transform: translateY(-5px);
+.certification-logo-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(0, 113, 185, 0.1) 0%, transparent 70%);
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.certification-card:hover .certification-logo-container::after {
+  width: 200px;
+  height: 200px;
 }
 
 .certification-badge {
-  max-width: 200px;
+  max-width: 120px;
   height: auto;
   display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.certification-card:hover .certification-badge {
+  transform: scale(1.1);
 }
 
 .certification-validity {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #0071b9;
-  margin: 0;
+  margin: 0 0 15px 0;
   font-weight: 600;
+  opacity: 0.8;
+}
+
+.certification-learn-more {
+  background: linear-gradient(45deg, #0071b9, #5bc0de);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-learn-more::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.certification-learn-more:hover::before {
+  left: 100%;
+}
+
+.certification-learn-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 113, 185, 0.3);
+}
+
+/* Modal Styles */
+.certification-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.certification-modal-content {
+  background-color: white;
+  margin: 5% auto;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.certification-modal.show .certification-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.certification-modal-header {
+  background: linear-gradient(135deg, #0071b9, #5bc0de);
+  padding: 20px;
+  position: relative;
+}
+
+.certification-modal-close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.certification-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.certification-modal-body {
+  padding: 40px;
+  text-align: center;
+}
+
+.certification-modal-logo {
+  margin-bottom: 30px;
+}
+
+.certification-modal-badge {
+  max-width: 200px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 113, 185, 0.2);
+}
+
+.certification-modal-title {
+  font-size: 1.8rem;
+  color: #0071b9;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.certification-modal-validity {
+  font-size: 1rem;
+  color: #5bc0de;
+  margin-bottom: 25px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: rgba(91, 192, 222, 0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.certification-modal-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  text-align: left;
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 4px solid #0071b9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Section 3: The Change Starts Now */
@@ -744,7 +1016,58 @@
   color: #0071b9;
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive for Certifications */
+@media (max-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .certification-card {
+    padding: 20px 15px;
+  }
+
+  .certification-badge {
+    max-width: 100px;
+  }
+
+  .certification-modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .certification-modal-body {
+    padding: 30px 20px;
+  }
+
+  .certification-modal-title {
+    font-size: 1.4rem;
+  }
+
+  .certification-modal-description {
+    font-size: 1rem;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .certification-learn-more {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .certification-modal-badge {
+    max-width: 150px;
+  }
+}
+
+/* Original Mobile Responsive */
 @media (max-width: 768px) {
   .sustainability-approach-banner {
     height: 350px;
@@ -822,6 +1145,52 @@
 </style>
 
 <script>
+// Certification Modal Functions
+function openCertificationModal(certNum) {
+  const modal = document.getElementById('certificationModal' + certNum);
+  if (modal) {
+    modal.style.display = 'block';
+    // Trigger animation
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeCertificationModal(certNum) {
+  const modal = document.getElementById('certificationModal' + certNum);
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  if (event.target.classList.contains('certification-modal')) {
+    const modalId = event.target.id;
+    const certNum = modalId.replace('certificationModal', '');
+    closeCertificationModal(certNum);
+  }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const openModals = document.querySelectorAll('.certification-modal.show');
+    openModals.forEach(modal => {
+      const certNum = modal.id.replace('certificationModal', '');
+      closeCertificationModal(certNum);
+    });
+  }
+});
+
 // Intersection Observer for animations
 document.addEventListener('DOMContentLoaded', function() {
   const observerOptions = {
