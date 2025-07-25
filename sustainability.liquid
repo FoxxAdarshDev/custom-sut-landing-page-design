@@ -179,15 +179,15 @@
 
 <!-- Section 1: Our Approach Banner -->
 <section class="sustainability-approach-banner">
-  {% if section.settings.sustainability_approach_bg_image != blank %}
-    <div class="approach-bg-image" style="background-image: url('{{ section.settings.sustainability_approach_bg_image | img_url: '1920x' }}');">
+  {% if section.settings.approach_bg_image != blank %}
+    <div class="approach-bg-image" style="background-image: url('{{ section.settings.approach_bg_image | img_url: '1920x' }}');">
   {% endif %}
       <div class="approach-overlay">
         <div class="approach-content">
-          <h1 class="approach-heading">{{ section.settings.sustainability_approach_heading }}</h1>
+          <h1 class="approach-heading">{{ section.settings.approach_heading }}</h1>
         </div>
       </div>
-  {% if section.settings.sustainability_approach_bg_image != blank %}
+  {% if section.settings.approach_bg_image != blank %}
     </div>
   {% endif %}
 </section>
@@ -196,25 +196,25 @@
 <section class="sustainability-main-content">
   <div class="main-content-wrapper">
     <div class="main-content-inner">
-      <h2 class="main-heading">{{ section.settings.sustainability_main_heading }}</h2>
+      <h2 class="main-heading">{{ section.settings.main_heading }}</h2>
 
-      {% if section.settings.sustainability_contact_button_text != blank %}
+      {% if section.settings.contact_button_text != blank %}
         <div class="contact-button-wrapper">
-          <a href="{{ section.settings.sustainability_contact_button_url }}" class="contact-button">
-            {{ section.settings.sustainability_contact_button_text }}
+          <a href="{{ section.settings.contact_button_url }}" class="contact-button">
+            {{ section.settings.contact_button_text }}
           </a>
         </div>
       {% endif %}
 
-      {% if section.settings.sustainability_certification_image != blank %}
+      {% if section.settings.certification_image != blank %}
         <div class="certification-wrapper">
           <div class="certification-logo-container">
-            <img src="{{ section.settings.sustainability_certification_image | img_url: '300x' }}" 
+            <img src="{{ section.settings.certification_image | img_url: '300x' }}" 
                  alt="Sustainability Certification" 
                  class="certification-badge">
           </div>
-          {% if section.settings.sustainability_certification_validity != blank %}
-            <p class="certification-validity">{{ section.settings.sustainability_certification_validity }}</p>
+          {% if section.settings.certification_validity != blank %}
+            <p class="certification-validity">{{ section.settings.certification_validity }}</p>
           {% endif %}
         </div>
       {% endif %}
@@ -224,8 +224,8 @@
 
 <!-- Section 3: The Change Starts Now -->
 <section class="sustainability-change-section" data-animate="true">
-  {% if section.settings.sustainability_change_bg_image != blank %}
-    <div class="change-bg-image" style="background-image: url('{{ section.settings.sustainability_change_bg_image | img_url: '1920x' }}');">
+  {% if section.settings.change_bg_image != blank %}
+    <div class="change-bg-image" style="background-image: url('{{ section.settings.change_bg_image | img_url: '1920x' }}');">
   {% endif %}
       <div class="change-overlay">
         <div class="change-content">
@@ -243,23 +243,23 @@
 
           <div class="change-heading-wrapper">
             <h2 class="change-heading">
-              <span class="change-line1">{{ section.settings.sustainability_change_heading_line1 }}</span>
-              <span class="change-line2">{{ section.settings.sustainability_change_heading_line2 }}</span>
+              <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
+              <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
             </h2>
           </div>
 
           <div class="change-divider"></div>
 
-          <p class="change-description">{{ section.settings.sustainability_change_description }}</p>
+          <p class="change-description">{{ section.settings.change_description }}</p>
 
-          {% if section.settings.sustainability_change_button_text != blank %}
-            <a href="{{ section.settings.sustainability_change_button_url }}" class="change-button animated-button">
-              {{ section.settings.sustainability_change_button_text }}
+          {% if section.settings.change_button_text != blank %}
+            <a href="{{ section.settings.change_button_url }}" class="change-button animated-button">
+              {{ section.settings.change_button_text }}
             </a>
           {% endif %}
         </div>
       </div>
-  {% if section.settings.sustainability_change_bg_image != blank %}
+  {% if section.settings.change_bg_image != blank %}
     </div>
   {% endif %}
 </section>
@@ -267,22 +267,22 @@
 <!-- Section 4: Statistics -->
 <section class="sustainability-stats-section">
   <div class="stats-wrapper">
-    <h2 class="stats-heading">{{ section.settings.sustainability_stats_heading }}</h2>
+    <h2 class="stats-heading">{{ section.settings.stats_heading }}</h2>
 
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-percentage">{{ section.settings.sustainability_stat1_percentage }}</div>
+        <div class="stat-percentage">{{ section.settings.stat1_percentage }}</div>
         <div class="stat-content">
-          <h3 class="stat-title">{{ section.settings.sustainability_stat1_title }}</h3>
-          <p class="stat-description">{{ section.settings.sustainability_stat1_description }}</p>
+          <h3 class="stat-title">{{ section.settings.stat1_title }}</h3>
+          <p class="stat-description">{{ section.settings.stat1_description }}</p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-percentage">{{ section.settings.sustainability_stat2_percentage }}</div>
+        <div class="stat-percentage">{{ section.settings.stat2_percentage }}</div>
         <div class="stat-content">
-          <h3 class="stat-title">{{ section.settings.sustainability_stat2_title }}</h3>
-          <p class="stat-description">{{ section.settings.sustainability_stat2_description }}</p>
+          <h3 class="stat-title">{{ section.settings.stat2_title }}</h3>
+          <p class="stat-description">{{ section.settings.stat2_description }}</p>
         </div>
       </div>
     </div>
@@ -291,22 +291,22 @@
 
 <!-- Section 5: Commitment to Quality -->
 <section class="sustainability-commitment-section">
-  {% if section.settings.sustainability_commitment_bg_image != blank %}
-    <div class="commitment-bg-image" style="background-image: url('{{ section.settings.sustainability_commitment_bg_image | img_url: '1920x' }}');">
+  {% if section.settings.commitment_bg_image != blank %}
+    <div class="commitment-bg-image" style="background-image: url('{{ section.settings.commitment_bg_image | img_url: '1920x' }}');">
   {% endif %}
       <div class="commitment-overlay">
         <div class="commitment-content">
-          <h2 class="commitment-heading">{{ section.settings.sustainability_commitment_heading }}</h2>
-          <p class="commitment-description">{{ section.settings.sustainability_commitment_description }}</p>
+          <h2 class="commitment-heading">{{ section.settings.commitment_heading }}</h2>
+          <p class="commitment-description">{{ section.settings.commitment_description }}</p>
 
-          {% if section.settings.sustainability_commitment_button_text != blank %}
-            <a href="{{ section.settings.sustainability_commitment_button_url }}" class="commitment-button">
-              {{ section.settings.sustainability_commitment_button_text }}
+          {% if section.settings.commitment_button_text != blank %}
+            <a href="{{ section.settings.commitment_button_url }}" class="commitment-button">
+              {{ section.settings.commitment_button_text }}
             </a>
           {% endif %}
         </div>
       </div>
-  {% if section.settings.sustainability_commitment_bg_image != blank %}
+  {% if section.settings.commitment_bg_image != blank %}
     </div>
   {% endif %}
 </section>
@@ -746,7 +746,7 @@
   .approach-heading {
     font-size: 1.5rem;
   }
-  
+
   .approach-overlay {
     padding: 0 20px;
     height: 70px;
@@ -814,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate-in');
-        
+
         // Reset animations for change section
         if (entry.target.classList.contains('sustainability-change-section')) {
           const elements = entry.target.querySelectorAll('.change-icon-wrapper, .change-heading-wrapper, .change-divider, .change-description, .change-button');
@@ -842,7 +842,7 @@ document.addEventListener('DOMContentLoaded', function() {
     certLogo.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-8px) scale(1.05)';
     });
-    
+
     certLogo.addEventListener('mouseleave', function() {
       this.style.transform = 'translateY(0) scale(1)';
     });
