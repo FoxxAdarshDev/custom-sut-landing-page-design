@@ -307,8 +307,8 @@
   position: relative;
   height: 300px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
 
 .approach-bg-image {
@@ -325,24 +325,25 @@
 .approach-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 113, 185, 0.8);
   width: 100%;
-  height: 100%;
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 0 40px;
 }
 
 .approach-content {
-  text-align: center;
+  text-align: left;
 }
 
 .approach-heading {
   color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   margin: 0;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -363,7 +364,7 @@
 
 .main-heading {
   font-size: 47px;
-  color: #7bb3d9;
+  color: #0071b9;
   font-weight: 300;
   line-height: 1.4;
   margin-bottom: 40px;
@@ -378,8 +379,8 @@
 
 .contact-button {
   background: transparent;
-  border: 2px solid #7bb3d9;
-  color: #7bb3d9;
+  border: 2px solid #0071b9;
+  color: #0071b9;
   padding: 12px 30px;
   text-decoration: none;
   font-weight: 600;
@@ -390,7 +391,7 @@
 }
 
 .contact-button:hover {
-  background: #7bb3d9;
+  background: #0071b9;
   color: white;
 }
 
@@ -516,7 +517,7 @@
 
 .stats-heading {
   font-size: 2.2rem;
-  color: #7bb3d9;
+  color: #0071b9;
   font-weight: 300;
   margin-bottom: 60px;
 }
@@ -536,7 +537,7 @@
 .stat-percentage {
   font-size: 4rem;
   font-weight: 700;
-  color: #1e4a66;
+  color: #0071b9;
   margin-bottom: 20px;
 }
 
@@ -577,7 +578,7 @@
 .commitment-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(30, 74, 102, 0.9);
+  background: rgba(0, 113, 185, 0.9);
   width: 100%;
   min-height: 400px;
   display: flex;
@@ -622,13 +623,18 @@
 
 .commitment-button:hover {
   background: white;
-  color: #1e4a66;
+  color: #0071b9;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .approach-heading {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+  
+  .approach-overlay {
+    padding: 0 20px;
+    height: 70px;
   }
 
   .main-heading {
