@@ -1955,6 +1955,24 @@ function openProjectModal(projectTitle) {
         clientLabelElement.innerHTML = `<strong>Client:</strong> <span id="modalClient">${project.client}</span>`;
     }
 
+    // Handle maintenance field - hide for personal projects
+    if (maintenanceElement) {
+        if (project.category === 'personal') {
+            // Hide maintenance field for personal projects
+            const maintenanceParent = maintenanceElement.closest('p');
+            if (maintenanceParent) {
+                maintenanceParent.style.display = 'none';
+            }
+        } else {
+            // Show maintenance field for other projects
+            const maintenanceParent = maintenanceElement.closest('p');
+            if (maintenanceParent) {
+                maintenanceParent.style.display = 'block';
+            }
+            maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
+        }
+    }
+
     // Handle development phase display in modal
     const modalSidebar = document.querySelector('.modal-sidebar');
     let existingDevelopmentPhase = modalSidebar.querySelector('.development-phase-display');
