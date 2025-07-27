@@ -191,6 +191,23 @@
             color: white;
         }
 
+        .development-phase-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .dark-theme .development-phase-badge {
+            background-color: #0056b3;
+            color: white;
+        }
+
         .dark-theme .metadata-label {
             color: #adb5bd;
         }
@@ -903,6 +920,7 @@ const projects = [
         lastUpdated: "22 June 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I Maintain and design few pages and overvall maintainer the website.  I develop custom features which is not live yet. Tech used:  Shopify CMS,  Shopfiy Customization, Shopify API, liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -918,6 +936,7 @@ const projects = [
         lastUpdated: "05 June 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I Maintain and managin and overvall website. Tech used:  Shopify CMS,  liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -933,6 +952,7 @@ const projects = [
         lastUpdated: "02 May 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I Maintain and managin and overvall website. Tech used:  Shopify CMS,  liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -948,6 +968,7 @@ const projects = [
         lastUpdated: "14 April 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I Maintain and managin and overvall website. Tech used:  Shopify CMS,  liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -963,6 +984,7 @@ const projects = [
         lastUpdated: "10 June 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I Maintain and managin and overvall website. I build custom section and inner section Tech used:  Shopify CMS,  Shopfify Customizaiton, liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -978,6 +1000,7 @@ const projects = [
         lastUpdated: "20 June 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based website where I design and develop this website. where I design Home page, collection paeg, product page,  Inner pages etc. I design this Intire layoout from scratch Tech used:  Shopify CMS,  SHopify API, Shopfify Customizaiton, liquid, JavaScript, HTML, Css,  Third Party Integration"
     },
     {
@@ -993,6 +1016,7 @@ const projects = [
         lastUpdated: "12 April 2025",
         maintenanceMode: "Open, Active",
         projectType: "Company",
+        developmentPhase: "Development Phase Ongoing",
         detailedDescription: "Shopify Based Punch Out website where I. where I design Home page, collection paeg, product page. I design this Intire layoout from scratch Tech used:  Shopify CMS,  SHopify API, Shopfify Customizaiton, liquid, JavaScript, HTML, Css"
     },
 
@@ -1238,6 +1262,14 @@ function initProjects() {
                             <span class="metadata-label">Project Type:</span>
                             <span class="metadata-value">${project.projectType}</span>
                         </div>
+                        ${project.developmentPhase ? `
+                        <div class="metadata-item">
+                            <span class="metadata-label">Development:</span>
+                            <span class="metadata-value">
+                                <span class="development-phase-badge">${project.developmentPhase}</span>
+                            </span>
+                        </div>
+                        ` : ''}
                     </div>
                     <div class="project-buttons">
                         <button class="project-link" onclick="openProjectModal('${project.title}')">
@@ -1279,6 +1311,20 @@ function openProjectModal(projectTitle) {
     document.getElementById('modalMaintenance').textContent = project.maintenanceMode;
     document.getElementById('modalProjectType').textContent = project.projectType;
     document.getElementById('modalDescription').textContent = project.detailedDescription;
+    
+    // Handle development phase display in modal
+    const modalSidebar = document.querySelector('.modal-sidebar');
+    let existingDevelopmentPhase = modalSidebar.querySelector('.development-phase-display');
+    if (existingDevelopmentPhase) {
+        existingDevelopmentPhase.remove();
+    }
+    
+    if (project.developmentPhase) {
+        const developmentPhaseElement = document.createElement('p');
+        developmentPhaseElement.className = 'development-phase-display';
+        developmentPhaseElement.innerHTML = `<strong>Development:</strong> <span class="development-phase-badge">${project.developmentPhase}</span>`;
+        modalSidebar.insertBefore(developmentPhaseElement, modalSidebar.querySelector('.modal-technologies'));
+    }
     document.getElementById('modalImage').src = project.image;
     document.getElementById('modalImage').alt = project.title;
     document.getElementById('modalProjectLink').href = project.url;
