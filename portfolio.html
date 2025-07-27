@@ -433,58 +433,84 @@
             background: linear-gradient(135deg, #1e7e34, #155724);
         }
 
-        /* Personal Project Filters */
+        /* Project Filters - Unified Style for Both Sections */
+        .project-filters,
         .personal-project-filters {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
+            padding: 0 20px;
         }
 
+        .project-filters .filter-btn,
         .personal-project-filters .filter-btn {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            color: #495057;
-            border: 2px solid #dee2e6;
-            padding: 12px 24px;
-            border-radius: 25px;
+            background: transparent;
+            color: #666;
+            border: none;
+            padding: 15px 25px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            position: relative;
+            border-radius: 0;
+            outline: none;
         }
 
-        .personal-project-filters .filter-btn:hover {
-            background: linear-gradient(135deg, #e9ecef, #dee2e6);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .personal-project-filters .filter-btn.active {
+        .project-filters .filter-btn:before,
+        .personal-project-filters .filter-btn:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
             background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            border-color: #004085;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
+        .project-filters .filter-btn:hover,
+        .personal-project-filters .filter-btn:hover {
+            color: #007bff;
+            background: rgba(0, 123, 255, 0.05);
+        }
+
+        .project-filters .filter-btn.active,
+        .personal-project-filters .filter-btn.active {
+            color: #007bff;
+            background: rgba(0, 123, 255, 0.1);
+        }
+
+        .project-filters .filter-btn.active:before,
+        .personal-project-filters .filter-btn.active:before {
+            width: 80%;
+        }
+
+        .dark-theme .project-filters .filter-btn,
         .dark-theme .personal-project-filters .filter-btn {
-            background: linear-gradient(135deg, #2c2c2c, #1e1e1e);
             color: #adb5bd;
-            border-color: #444;
         }
 
+        .dark-theme .project-filters .filter-btn:hover,
         .dark-theme .personal-project-filters .filter-btn:hover {
-            background: linear-gradient(135deg, #3c3c3c, #2e2e2e);
-            color: #ced4da;
+            color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
         }
 
+        .dark-theme .project-filters .filter-btn.active,
         .dark-theme .personal-project-filters .filter-btn.active {
+            color: #28a745;
+            background: rgba(40, 167, 69, 0.15);
+        }
+
+        .dark-theme .project-filters .filter-btn:before,
+        .dark-theme .personal-project-filters .filter-btn:before {
             background: linear-gradient(135deg, #28a745, #1e7e34);
-            color: white;
-            border-color: #155724;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
         }
 
         /* Footer content alignment */
@@ -930,7 +956,6 @@
                 <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
                 <button class="filter-btn" data-filter="corporate">Corporate</button>
                 <button class="filter-btn" data-filter="company">Company</button>
-
                 <button class="filter-btn" data-filter="other">Other</button>
             </div>
             <!-- Projects Grid -->
@@ -1608,6 +1633,9 @@ function initProjects() {
             e.preventDefault();
             e.stopPropagation();
             
+            // Store current scroll position
+            const currentScrollY = window.scrollY;
+            
             // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
@@ -1617,6 +1645,9 @@ function initProjects() {
 
             // Re-render projects
             renderProjects();
+            
+            // Restore scroll position to prevent jumping
+            window.scrollTo(0, currentScrollY);
         });
     });
 
@@ -1747,6 +1778,9 @@ function initPersonalProjects() {
             e.preventDefault();
             e.stopPropagation();
             
+            // Store current scroll position
+            const currentScrollY = window.scrollY;
+            
             // Update active button
             personalFilterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
@@ -1756,6 +1790,9 @@ function initPersonalProjects() {
 
             // Re-render personal projects
             renderPersonalProjects(personalProjects, personalProjectGrid, currentPersonalFilter);
+            
+            // Restore scroll position to prevent jumping
+            window.scrollTo(0, currentScrollY);
         });
     });
 }
