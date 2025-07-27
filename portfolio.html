@@ -1619,7 +1619,7 @@ const projects = [
  */
 function initProjects() {
     const projectGrid = document.querySelector('.project-grid');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterButtons = document.querySelectorAll('.project-filters .filter-btn');
 
     let currentFilter = 'all';
 
@@ -1636,7 +1636,7 @@ function initProjects() {
             // Store current scroll position
             const currentScrollY = window.scrollY;
             
-            // Update active button
+            // Update active button - only within main projects section
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
 
@@ -1781,7 +1781,7 @@ function initPersonalProjects() {
             // Store current scroll position
             const currentScrollY = window.scrollY;
             
-            // Update active button
+            // Update active button - only within personal projects section
             personalFilterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
 
