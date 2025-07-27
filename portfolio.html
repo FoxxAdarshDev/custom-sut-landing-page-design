@@ -79,6 +79,43 @@
             padding: 20px;
         }
 
+        .new-project-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 4px 16px rgba(255, 107, 107, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            }
+        }
+
+        .dark-theme .new-project-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+        }
+
         .project-image img {
             max-width: 100%;
             max-height: 100%;
@@ -755,6 +792,7 @@ const projects = [
         lastUpdated: "July 25th, 2025",
         maintenanceMode: "Active",
         projectType: "Healthcare",
+        isNew: true,
         detailedDescription: "Healthcare and Life Sciences Solutions website built with modern web technologies. This comprehensive platform provides medical and pharmaceutical services with a focus on user experience and performance. The website features server-side rendering for optimal SEO performance and uses ImageKit for efficient image delivery. Technologies used: ReactJS for dynamic user interfaces, Vite for fast development and building, NodeJS for backend services, ImageKit for image optimization and delivery, Server-Side Rendering (SSR) for better search engine visibility, and comprehensive SEO implementation for improved online presence."
     },
     {
@@ -767,9 +805,10 @@ const projects = [
         status: "Active",
         duration: "1 Month",
         client: "Niddik",
-        lastUpdated: "July 25th 2025",
+        lastUpdated: "July 25th, 2025",
         maintenanceMode: "Active",
         projectType: "Full Stack",
+        isNew: true,
         detailedDescription: "Comprehensive Full Stack job recruiting platform built with modern technologies. This 35+ page website includes a complete recruitment ecosystem with advanced features. The Admin Dashboard provides comprehensive control over job postings, candidate management, company profiles, application tracking, and real-time analytics. Recruiters can post jobs, manage applications, schedule interviews, and communicate with candidates through an integrated messaging system. The Candidate Dashboard offers a personalized experience where job seekers can create detailed profiles, upload resumes, search and filter jobs by location/skills, apply with one-click, track application status, receive real-time notifications, and access interview scheduling tools. Both dashboards feature responsive design, role-based access control (RBAC), and seamless user authentication. Technology stack: React for dynamic UI, Node.js for robust backend services, TypeScript for type safety, Vite for fast development, Drizzle ORM with PostgreSQL for database management, real-time notifications system, email integration, Tailwind CSS and Material UI for modern styling, Render for deployment, Server-Side Rendering (SSR) for SEO optimization, and Cloudinary for file management.",
         adminLink: "https://niddik.com/admin",
         candidateDashboardLink: "https://niddik.com/candidate/dashboard"
@@ -1128,8 +1167,11 @@ function initProjects() {
                 `<span class="project-tag">${tech}</span>`
             ).join('');
 
+            const newProjectBadge = project.isNew ? '<div class="new-project-badge">New Project</div>' : '';
+            
             projectCard.innerHTML = `
                 <div class="project-image">
+                    ${newProjectBadge}
                     <img src="${project.image}" alt="${project.title}">
                     <div class="project-overlay">
                         <h3>${project.title}</h3>
