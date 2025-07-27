@@ -203,6 +203,31 @@
             color: white;
         }
 
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-badge.disabled {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .status-badge.not-active {
+            background-color: #dc3545;
+            color: white;
+        }
+
         .dark-theme .development-phase-badge {
             background-color: #0056b3;
             color: white;
@@ -1230,6 +1255,11 @@ function initProjects() {
 
             const newProjectBadge = project.isNew ? '<div class="new-project-badge">New Project</div>' : '';
 
+            let statusBadgeClass = project.status.toLowerCase().replace(' ', '-');
+            if(statusBadgeClass === 'not-active'){
+                statusBadgeClass = 'disabled';
+            }
+
             projectCard.innerHTML = `
                 <div class="project-image">
                     ${newProjectBadge}
@@ -1247,6 +1277,12 @@ function initProjects() {
                         <div class="metadata-item">
                             <span class="metadata-label">Client:</span>
                             <span class="metadata-value">${project.client}</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Site Status:</span>
+                            <span class="metadata-value">
+                                <span class="status-badge ${statusBadgeClass}">${project.status}</span>
+                            </span>
                         </div>
                         <div class="metadata-item">
                             <span class="metadata-label">Last Update:</span>
@@ -1304,7 +1340,13 @@ function openProjectModal(projectTitle) {
     // Populate modal content
     document.getElementById('modalTitle').textContent = project.title;
     document.getElementById('modalStatus').textContent = project.status;
-    document.getElementById('modalStatus').className = `status-badge ${project.status.toLowerCase().replace(' ', '-')}`;
+
+    let modalStatusClass = project.status.toLowerCase().replace(' ', '-');
+    if(modalStatusClass === 'not-active'){
+        modalStatusClass = 'disabled';
+    }
+
+    document.getElementById('modalStatus').className = `status-badge ${modalStatusClass}`;
     document.getElementById('modalDuration').textContent = project.duration;
     document.getElementById('modalClient').textContent = project.client;
     document.getElementById('modalLastUpdate').textContent = project.lastUpdated;
@@ -1312,14 +1354,14 @@ function openProjectModal(projectTitle) {
     maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
     document.getElementById('modalProjectType').textContent = project.projectType;
     document.getElementById('modalDescription').textContent = project.detailedDescription;
-    
+
     // Handle development phase display in modal
     const modalSidebar = document.querySelector('.modal-sidebar');
     let existingDevelopmentPhase = modalSidebar.querySelector('.development-phase-display');
     if (existingDevelopmentPhase) {
         existingDevelopmentPhase.remove();
     }
-    
+
     if (project.developmentPhase) {
         const developmentPhaseElement = document.createElement('p');
         developmentPhaseElement.className = 'development-phase-display';
