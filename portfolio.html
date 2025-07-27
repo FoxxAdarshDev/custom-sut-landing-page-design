@@ -875,6 +875,7 @@
                 <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
                 <button class="filter-btn" data-filter="corporate">Corporate</button>
                 <button class="filter-btn" data-filter="company">Company</button>
+                <button class="filter-btn" data-filter="personal">Personal Project</button>
                 <button class="filter-btn" data-filter="other">Other</button>
             </div>
             <!-- Projects Grid -->
@@ -1060,6 +1061,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Project data
 const projects = [
+    // Personal Projects - Featured First
+    {
+        title: "CORNIFOOD",
+        description: "A healthy meal delivery website featuring a modern single-page layout with responsive design and interactive food ordering interface.",
+        image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/cronifood-logo.png?updatedAt=1753624342631",
+        url: "https://adarsh-tripathi-cornifood-project.netlify.app/",
+        category: "personal",
+        technologies: ["JavaScript", "HTML5", "CSS3", "HTML Template", "CSS Grid", "CSS Grid Layout", "CSS Flexbox", "CSS Flexbox Layout"],
+        status: "Active",
+        duration: "7 days",
+        client: "Personal Project",
+        lastUpdated: "Nov 16, 2022",
+        maintenanceMode: "Active",
+        projectType: "Personal",
+        developmentPhase: "Paused",
+        detailedDescription: "CORNIFOOD is a comprehensive healthy meal delivery website designed with a focus on user experience and modern web technologies. This single-page application showcases a clean, responsive design that adapts seamlessly across all devices. The project demonstrates advanced CSS layout techniques including CSS Grid for complex layouts and Flexbox for component alignment. Built entirely with vanilla JavaScript, HTML5, and CSS3, the website features an interactive food ordering interface, smooth animations, and optimized performance. The design emphasizes healthy eating with vibrant food imagery, intuitive navigation, and a streamlined ordering process that guides users from menu selection to checkout."
+    },
     // Priority Projects - Featured First
     {
         title: "NIDDIKKARE",
@@ -1516,7 +1534,7 @@ function initProjects() {
                     </div>
                     <div class="project-metadata">
                         <div class="metadata-item">
-                            <span class="metadata-label">${project.category === 'company' ? 'Company:' : 'Client:'}</span>
+                            <span class="metadata-label">${project.category === 'company' ? 'Company:' : project.category === 'personal' ? 'Type:' : 'Client:'}</span>
                             <span class="metadata-value">${project.client}</span>
                         </div>
                         <div class="metadata-item">
@@ -1595,7 +1613,12 @@ function openProjectModal(projectTitle) {
     const modalSidebarParagraphs = document.querySelectorAll('.modal-sidebar p');
     modalSidebarParagraphs.forEach(p => {
         if (p.innerHTML.includes('<strong>Client:</strong>')) {
-            const label = project.category === 'company' ? 'Company:' : 'Client:';
+            let label = 'Client:';
+            if (project.category === 'company') {
+                label = 'Company:';
+            } else if (project.category === 'personal') {
+                label = 'Type:';
+            }
             p.innerHTML = `<strong>${label}</strong> <span id="modalClient">${project.client}</span>`;
         }
     });
@@ -1604,6 +1627,8 @@ function openProjectModal(projectTitle) {
     const clientLabelElement = document.querySelector('.modal-sidebar p:nth-child(6)');
     if (clientLabelElement && project.category === 'company') {
         clientLabelElement.innerHTML = `<strong>Company:</strong> <span id="modalClient">${project.client}</span>`;
+    } else if (clientLabelElement && project.category === 'personal') {
+        clientLabelElement.innerHTML = `<strong>Type:</strong> <span id="modalClient">${project.client}</span>`;
     } else if (clientLabelElement) {
         clientLabelElement.innerHTML = `<strong>Client:</strong> <span id="modalClient">${project.client}</span>`;
     }
