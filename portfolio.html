@@ -1311,7 +1311,7 @@ function initProjects() {
                     </div>
                     <div class="project-metadata">
                         <div class="metadata-item">
-                            <span class="metadata-label">Client:</span>
+                            <span class="metadata-label">${project.category === 'company' ? 'Company:' : 'Client:'}</span>
                             <span class="metadata-value">${project.client}</span>
                         </div>
                         <div class="metadata-item">
@@ -1385,6 +1385,23 @@ function openProjectModal(projectTitle) {
     document.getElementById('modalStatus').className = `status-badge ${modalStatusClass}`;
     document.getElementById('modalDuration').textContent = project.duration;
     document.getElementById('modalClient').textContent = project.client;
+    
+    // Update the client/company label in modal
+    const modalSidebarParagraphs = document.querySelectorAll('.modal-sidebar p');
+    modalSidebarParagraphs.forEach(p => {
+        if (p.innerHTML.includes('<strong>Client:</strong>')) {
+            const label = project.category === 'company' ? 'Company:' : 'Client:';
+            p.innerHTML = `<strong>${label}</strong> <span id="modalClient">${project.client}</span>`;
+        }
+    });
+    
+    // Update the label in modal based on project category
+    const clientLabelElement = document.querySelector('.modal-sidebar p:nth-child(6)');
+    if (clientLabelElement && project.category === 'company') {
+        clientLabelElement.innerHTML = `<strong>Company:</strong> <span id="modalClient">${project.client}</span>`;
+    } else if (clientLabelElement) {
+        clientLabelElement.innerHTML = `<strong>Client:</strong> <span id="modalClient">${project.client}</span>`;
+    }
     document.getElementById('modalLastUpdate').textContent = project.lastUpdated;
     const maintenanceElement = document.getElementById('modalMaintenance');
     maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
