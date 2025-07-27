@@ -327,6 +327,85 @@
             background: linear-gradient(135deg, #0056b3, #003d82);
         }
 
+        /* Contact Info Icons */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #495057, #343a40);
+            color: white !important;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(73, 80, 87, 0.3);
+            flex-shrink: 0;
+        }
+
+        .info-icon i {
+            font-size: 20px;
+            color: white !important;
+        }
+
+        .info-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(73, 80, 87, 0.4);
+            background: linear-gradient(135deg, #343a40, #212529);
+        }
+
+        .dark-theme .info-icon {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .dark-theme .info-icon:hover {
+            background: linear-gradient(135deg, #0056b3, #003d82);
+            box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .info-details {
+            flex: 1;
+        }
+
+        .info-details h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .info-details p,
+        .info-details a {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .info-details a:hover {
+            color: #007bff;
+        }
+
+        .dark-theme .info-details h4 {
+            color: #ffffff;
+        }
+
+        .dark-theme .info-details p,
+        .dark-theme .info-details a {
+            color: #adb5bd;
+        }
+
+        .dark-theme .info-details a:hover {
+            color: #0d6efd;
+        }
+
         /* Footer Social Icons */
         .footer-social .social-icon {
             display: inline-flex;
@@ -352,6 +431,54 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
             background: linear-gradient(135deg, #1e7e34, #155724);
+        }
+
+        /* Footer content alignment */
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            text-align: center;
+        }
+
+        .footer-logo a {
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .footer-logo p {
+            margin-top: 8px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .footer-logo a {
+            color: #ffffff;
+        }
+
+        .dark-theme .footer-logo p {
+            color: #adb5bd;
+        }
+
+        .footer-copyright {
+            text-align: center;
+        }
+
+        .footer-copyright p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .dark-theme .footer-copyright p {
+            color: #adb5bd;
         }
 </style>
 </head>
@@ -824,7 +951,7 @@
                         </div>
                         <div class="info-details">
                             <h4>Location</h4>
-                            <p>India</p>
+                            <p>East Delhi, India 110092</p>
                         </div>
                     </div>
                     <div class="contact-social">
