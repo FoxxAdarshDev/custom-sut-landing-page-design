@@ -751,7 +751,7 @@ const projects = [
         technologies: ["ReactJS", "Vite", "NodeJS", "ImageKit", "SSR", "SEO"],
         status: "Active",
         duration: "12 Days",
-        client: "NIDDIKKARE",
+        client: "NIDDIKARE",
         lastUpdated: "July 25 2025",
         maintenanceMode: "Active",
         projectType: "Healthcare",
@@ -767,7 +767,7 @@ const projects = [
         status: "Active",
         duration: "1 Month",
         client: "Niddik",
-        lastUpdated: "June 15th",
+        lastUpdated: "July 25th 2025",
         maintenanceMode: "Active",
         projectType: "Full Stack",
         detailedDescription: "Comprehensive Full Stack job recruiting platform built with modern technologies. This 35+ page website includes a complete recruitment ecosystem with advanced features. The Admin Dashboard provides comprehensive control over job postings, candidate management, company profiles, application tracking, and real-time analytics. Recruiters can post jobs, manage applications, schedule interviews, and communicate with candidates through an integrated messaging system. The Candidate Dashboard offers a personalized experience where job seekers can create detailed profiles, upload resumes, search and filter jobs by location/skills, apply with one-click, track application status, receive real-time notifications, and access interview scheduling tools. Both dashboards feature responsive design, role-based access control (RBAC), and seamless user authentication. Technology stack: React for dynamic UI, Node.js for robust backend services, TypeScript for type safety, Vite for fast development, Drizzle ORM with PostgreSQL for database management, real-time notifications system, email integration, Tailwind CSS and Material UI for modern styling, Render for deployment, Server-Side Rendering (SSR) for SEO optimization, and Cloudinary for file management.",
@@ -1273,7 +1273,8 @@ document.addEventListener('keydown', function(e) {
             border: 1px solid #888;
             width: 80%;
             max-width: 1200px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0```text
+0,0,0,0.19);
             animation-name: animatetop;
             animation-duration: 0.4s;
             border-radius: 5px;
@@ -1430,6 +1431,28 @@ document.addEventListener('keydown', function(e) {
         }
 
         /* Ensure project buttons maintain their distinct styling */
+        .project-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .modal-sidebar .project-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .modal-sidebar .project-buttons .project-link,
+        .modal-sidebar .project-buttons .additional-link {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
         .project-buttons .project-link {
             background-color: #007bff;
             color: white;
