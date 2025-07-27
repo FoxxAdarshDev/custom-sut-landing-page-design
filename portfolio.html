@@ -1585,7 +1585,11 @@ function initProjects() {
 
     // Filter button click handler
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            // Prevent default action and scrolling
+            e.preventDefault();
+            e.stopPropagation();
+            
             // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
@@ -1720,7 +1724,11 @@ function initPersonalProjects() {
 
     // Personal project filter button click handler
     personalFilterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            // Prevent default action and scrolling
+            e.preventDefault();
+            e.stopPropagation();
+            
             // Update active button
             personalFilterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
