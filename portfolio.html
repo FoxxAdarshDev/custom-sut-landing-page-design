@@ -1720,18 +1720,41 @@ function openProjectModal(projectTitle) {
     const project = projects.find(p => p.title === projectTitle);
     const modal = document.getElementById('projectModal');
 
+    if (!project || !modal) {
+        console.error('Project or modal not found');
+        return;
+    }
+
     // Populate modal content
-    document.getElementById('modalTitle').textContent = project.title;
-    document.getElementById('modalStatus').textContent = project.status;
+    const modalTitle = document.getElementById('modalTitle');
+    const modalStatus = document.getElementById('modalStatus');
+    
+    if (modalTitle) modalTitle.textContent = project.title;
+    if (modalStatus) modalStatus.textContent = project.status;
 
     let modalStatusClass = project.status.toLowerCase().replace(' ', '-');
     if(modalStatusClass === 'not-active'){
         modalStatusClass = 'disabled';
     }
 
-    document.getElementById('modalStatus').className = `status-badge ${modalStatusClass}`;
-    document.getElementById('modalDuration').textContent = project.duration;
-    document.getElementById('modalClient').textContent = project.client;
+    if (modalStatus) modalStatus.className = `status-badge ${modalStatusClass}`;
+    
+    const modalDuration = document.getElementById('modalDuration');
+    const modalClient = document.getElementById('modalClient');
+    const modalLastUpdate = document.getElementById('modalLastUpdate');
+    const maintenanceElement = document.getElementById('modalMaintenance');
+    const modalProjectType = document.getElementById('modalProjectType');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    if (modalDuration) modalDuration.textContent = project.duration;
+    if (modalClient) modalClient.textContent = project.client;
+    if (modalLastUpdate) modalLastUpdate.textContent = project.lastUpdated;
+    if (modalProjectType) modalProjectType.textContent = project.projectType;
+    if (modalDescription) modalDescription.textContent = project.detailedDescription;
+    
+    if (maintenanceElement) {
+        maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
+    }
 
     // Update the client/company label in modal
     const modalSidebarParagraphs = document.querySelectorAll('.modal-sidebar p');
@@ -1756,11 +1779,6 @@ function openProjectModal(projectTitle) {
     } else if (clientLabelElement) {
         clientLabelElement.innerHTML = `<strong>Client:</strong> <span id="modalClient">${project.client}</span>`;
     }
-    document.getElementById('modalLastUpdate').textContent = project.lastUpdated;
-    const maintenanceElement = document.getElementById('modalMaintenance');
-    maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
-    document.getElementById('modalProjectType').textContent = project.projectType;
-    document.getElementById('modalDescription').textContent = project.detailedDescription;
 
     // Handle development phase display in modal
     const modalSidebar = document.querySelector('.modal-sidebar');
@@ -1775,15 +1793,25 @@ function openProjectModal(projectTitle) {
         developmentPhaseElement.innerHTML = `<strong>Development:</strong> <span class="development-phase-badge">${project.developmentPhase}</span>`;
         modalSidebar.insertBefore(developmentPhaseElement, modalSidebar.querySelector('.modal-technologies'));
     }
-    document.getElementById('modalImage').src = project.image;
-    document.getElementById('modalImage').alt = project.title;
-    document.getElementById('modalProjectLink').href = project.url;
+    
+    const modalImage = document.getElementById('modalImage');
+    const modalProjectLink = document.getElementById('modalProjectLink');
+    
+    if (modalImage) {
+        modalImage.src = project.image;
+        modalImage.alt = project.title;
+    }
+    if (modalProjectLink) {
+        modalProjectLink.href = project.url;
+    }
 
     // Populate technologies
     const techContainer = document.getElementById('modalTechnologies');
-    techContainer.innerHTML = project.technologies.map(tech => 
-        `<span class="tech-tag">${tech}</span>`
-    ).join('');
+    if (techContainer) {
+        techContainer.innerHTML = project.technologies.map(tech => 
+            `<span class="tech-tag">${tech}</span>`
+        ).join('');
+    }
 
     // Show additional links if they exist
     const adminLink = document.getElementById('modalAdminLink');
