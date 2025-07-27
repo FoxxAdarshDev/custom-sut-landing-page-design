@@ -1966,20 +1966,6 @@ function openProjectModal(projectTitle) {
         maintenanceElement.innerHTML = `<span class="maintenance-status ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>`;
     }
 
-    // Update the client/company label in modal
-    const modalSidebarParagraphs = document.querySelectorAll('.modal-sidebar p');
-    modalSidebarParagraphs.forEach(p => {
-        if (p.innerHTML.includes('<strong>Client:</strong>')) {
-            let label = 'Client:';
-            if (project.category === 'company') {
-                label = 'Company:';
-            } else if (project.category === 'personal') {
-                label = 'Type:';
-            }
-            p.innerHTML = `<strong>${label}</strong> <span id="modalClient">${project.client}</span>`;
-        }
-    });
-
     // Update the label in modal based on project category
     const clientLabelElement = document.querySelector('.modal-sidebar p:nth-child(6)');
     if (clientLabelElement && project.category === 'company') {
