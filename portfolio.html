@@ -650,6 +650,9 @@
                         <div id="modalTechnologies"></div>
                     </div>
                     <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn primary-btn">View Project</a>
+                    <!-- Additional Links -->
+                    <a id="modalAdminLink" href="#" target="_blank" rel="noopener noreferrer" class="btn primary-btn additional-link" style="display: none;">Admin Panel</a>
+                    <a id="modalCandidateDashboardLink" href="#" target="_blank" rel="noopener noreferrer" class="btn primary-btn additional-link" style="display: none;">Candidate Dashboard</a>
                 </div>
                 <div class="modal-main">
                     <h3>Project Description</h3>
@@ -692,7 +695,7 @@ const projects = [
     {
         title: "Niddik Recruiting & Job Portal",
         description: "Full Stack job Recruiting website with complete service showcase.",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+        image: "https://niddik.com/images/niddik_logo.png",
         url: "https://niddik.com/",
         category: "corporate",
         technologies: ["Full Stack", "Backend Developer", "Web Development", "UI/UX Design"],
@@ -702,11 +705,13 @@ const projects = [
         lastUpdated: "June 15th",
         maintenanceMode: "Active",
         projectType: "Full Stack",
-        detailedDescription: "Full Stack job Recruiting website with complete service showcase. I build full website around 35 pages website and then full admin dashboard and client dashboard with notification. Technology used: React, Nodejs, Typescript, Authentications, RBAC, Vite, Drizzle, PostgreSql, Notificatoin, Emailer, Tailwind css, Material UI, Render, SSR, Seo Management Schema, Notificatoin API, Cloudinary"
+        detailedDescription: "Full Stack job Recruiting website with complete service showcase. I build full website around 35 pages website and then full admin dashboard and client dashboard with notification. Technology used: React, Nodejs, Typescript, Authentications, RBAC, Vite, Drizzle, PostgreSql, Notificatoin, Emailer, Tailwind css, Material UI, Render, SSR, Seo Management Schema, Notificatoin API, Cloudinary",
+        adminLink: "https://niddik.com/admin",
+        candidateDashboardLink: "https://niddik.com/candidate/dashboard"
     },
     {
         title: "DoubleR Bags Corporate",
-        description: "Corporate website for a premium bag brand showcasing company information and brand story.",
+        description: "Corporate website for a premium bag brandshowcasing company information and brand story.",
         image: "https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
         url: "https://www.doublerbags.com/",
         category: "corporate",
@@ -1120,6 +1125,24 @@ function openProjectModal(projectIndex) {
         `<span class="tech-tag">${tech}</span>`
     ).join('');
 
+    // Show additional links if they exist
+    const adminLink = document.getElementById('modalAdminLink');
+    const candidateDashboardLink = document.getElementById('modalCandidateDashboardLink');
+
+    if (project.adminLink) {
+        adminLink.href = project.adminLink;
+        adminLink.style.display = 'inline-block';
+    } else {
+        adminLink.style.display = 'none';
+    }
+
+    if (project.candidateDashboardLink) {
+        candidateDashboardLink.href = project.candidateDashboardLink;
+        candidateDashboardLink.style.display = 'inline-block';
+    } else {
+        candidateDashboardLink.style.display = 'none';
+    }
+
     // Show modal
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -1269,7 +1292,7 @@ document.addEventListener('keydown', function(e) {
         .tech-tag {
             display: inline-block;
             background-color: #6c757d;
-            color: white;
+                        color: white;
             padding: 5px 10px;
             border-radius: 15px;
             margin: 0 5px 5px 0;
@@ -1341,7 +1364,23 @@ document.addEventListener('keydown', function(e) {
 
         .project-buttons .view-project-btn:hover {
             background-color: #218838 !important;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .additional-link {
+            background-color: #6c757d !important;
+            box-shadow: 0 2px 6px rgba(108, 117, 125, 0.2);
+        }
+
+        .additional-link:hover {
+            background-color: #545b62 !important;
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .status-badge {
