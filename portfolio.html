@@ -245,6 +245,114 @@
         .dark-theme .metadata-value {
             color: #ced4da;
         }
+
+        /* Domain Expertise Tags Styling */
+        .expertise-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 20px;
+            margin: 8px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .expertise-tag:hover {
+            background: linear-gradient(135deg, #0056b3, #003d82);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .dark-theme .expertise-tag {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .expertise-tag:hover {
+            background: linear-gradient(135deg, #1e7e34, #155724);
+        }
+
+        /* Experience Badge Styling */
+        .experience-badge {
+            background: rgba(0, 123, 255, 0.9) !important;
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .projects-badge {
+            background: rgba(40, 167, 69, 0.9) !important;
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Social Icons Styling */
+        .social-icons .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white !important;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .social-icons .social-icon i {
+            font-size: 20px;
+            color: white !important;
+        }
+
+        .social-icons .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(135deg, #0056b3, #003d82);
+        }
+
+        /* Footer Social Icons */
+        .footer-social .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white !important;
+            border-radius: 50%;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            text-decoration: none;
+        }
+
+        .footer-social .social-icon i {
+            font-size: 18px;
+            color: white !important;
+        }
+
+        .footer-social .social-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, #1e7e34, #155724);
+        }
 </style>
 </head>
 <body>
@@ -690,7 +798,7 @@
                 </p>
             </div>
             <div class="contact-content">
-                <div class="contact-info">
+                <div class="contact-info" style="width: 100%; text-align: center;">
                     <h3>Contact Information</h3>
                     <div class="info-item">
                         <div class="info-icon">
@@ -728,38 +836,8 @@
                     <a href="https://github.com/adarshtiwari1998?tab=repositories" class="social-icon" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                            <!--<a href="#" class="social-icon" aria-label="Twitter">-->
-                            <!--    <i class="fab fa-twitter"></i>-->
-                            <!--</a>-->
-                            <!--<a href="#" class="social-icon" aria-label="Instagram">-->
-                            <!--    <i class="fab fa-instagram"></i>-->
-                            <!--</a>-->
                         </div>
                     </div>
-                </div>
-                <div class="contact-form-container">
-                    <h3>Send Me a Message</h3>
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn primary-btn">Send Message</button>
-                    </form>
                 </div>
             </div>
         </div>
