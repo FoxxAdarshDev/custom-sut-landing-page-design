@@ -87,6 +87,50 @@
             object-fit: contain;
             transition: transform 0.3s ease;
         }
+
+        .project-metadata {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .dark-theme .project-metadata {
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+        }
+
+        .metadata-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+
+        .metadata-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .metadata-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 100px;
+        }
+
+        .metadata-value {
+            color: #6c757d;
+            text-align: right;
+            flex: 1;
+        }
+
+        .dark-theme .metadata-label {
+            color: #adb5bd;
+        }
+
+        .dark-theme .metadata-value {
+            color: #ced4da;
+        }
 </style>
 </head>
 <body>
@@ -706,9 +750,9 @@ const projects = [
         category: "corporate",
         technologies: ["ReactJS", "Vite", "NodeJS", "ImageKit", "SSR", "SEO"],
         status: "Active",
-        duration: "2 Months",
+        duration: "12 Days",
         client: "NIDDIKKARE",
-        lastUpdated: "January 2025",
+        lastUpdated: "July 25 2025",
         maintenanceMode: "Active",
         projectType: "Healthcare",
         detailedDescription: "Healthcare and Life Sciences Solutions website built with modern web technologies. This comprehensive platform provides medical and pharmaceutical services with a focus on user experience and performance. The website features server-side rendering for optimal SEO performance and uses ImageKit for efficient image delivery. Technologies used: ReactJS for dynamic user interfaces, Vite for fast development and building, NodeJS for backend services, ImageKit for image optimization and delivery, Server-Side Rendering (SSR) for better search engine visibility, and comprehensive SEO implementation for improved online presence."
@@ -1096,6 +1140,24 @@ function initProjects() {
                     <div class="project-tags">
                         ${techTags}
                     </div>
+                    <div class="project-metadata">
+                        <div class="metadata-item">
+                            <span class="metadata-label">Client:</span>
+                            <span class="metadata-value">${project.client}</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Last Update:</span>
+                            <span class="metadata-value">${project.lastUpdated}</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Maintenance:</span>
+                            <span class="metadata-value">${project.maintenanceMode}</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Project Type:</span>
+                            <span class="metadata-value">${project.projectType}</span>
+                        </div>
+                    </div>
                     <div class="project-buttons">
                         <button class="project-link" onclick="openProjectModal(${index})">
                             Learn More <i class="fas fa-arrow-right"></i>
@@ -1274,8 +1336,18 @@ document.addEventListener('keydown', function(e) {
 
         .modal-sidebar img {
             width: 100%;
+            height: 200px;
             border-radius: 5px;
             margin-bottom: 15px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .dark-theme .modal-sidebar img {
+            background-color: #2c2c2c;
+            border: 1px solid #444;
         }
 
         .modal-sidebar h2 {
