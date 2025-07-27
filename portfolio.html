@@ -388,38 +388,397 @@ document.addEventListener('keydown', function(e) {
             }
         }
     </style>
+</head>
+<body>
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="container">
+            <h2>Our Portfolio</h2>
+            <div id="project-grid" class="project-grid">
+                <!-- Projects will be rendered here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeProjectModal()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-sidebar">
+                    <img id="modal-image" src="" alt="Project Image">
+                    <h2 id="modal-title">Project Title</h2>
+                    <span id="modal-status" class="status-badge">Status</span>
+                    
+                    <p><strong>Duration:</strong> <span id="modal-development">Duration</span></p>
+                    <p><strong>Client:</strong> <span id="modal-client">Client</span></p>
+                    <p><strong>Last Update:</strong> <span id="modal-last-update">Date</span></p>
+                    <p><strong>Maintenance:</strong> <span id="modal-maintenance" class="maintenance-status">Status</span></p>
+                    <p><strong>Project Type:</strong> <span id="modal-project-type">Type</span></p>
+                    <p><strong>Development:</strong> <span id="modal-development-badge" class="development-badge">Development Status</span></p>
+                    
+                    <div class="modal-technologies">
+                        <h4>Technologies:</h4>
+                        <div id="modal-technologies">
+                            <!-- Tech tags will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="project-buttons">
+                        <a id="modal-project-link" href="" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">View Project</a>
+                    </div>
+                </div>
+                <div class="modal-main">
+                    <h3>Project Description</h3>
+                    <p id="modal-description">Project description will be shown here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .portfolio-section {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+
+        .dark-theme .portfolio-section {
+            background-color: #121212;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .dark-theme .container h2 {
+            color: #ffffff;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .dark-theme .project-card {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #ffffff;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .dark-theme .project-image {
+            background: #2c2c2c;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .dark-theme .project-title {
+            color: #ffffff;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .dark-theme .project-description {
+            color: #adb5bd;
+        }
+
+        .project-technologies {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .project-card {
+                margin: 0 10px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
     <script>
-        // Sample project data
-    const projects = [
-        {
-        title: "Creative Digital Marketing (CDM)",
-        image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/CDM-Logo-svg.svg?updatedAt=1753619821698",
-        description: "Service-based company website providing comprehensive digital solutions including video AI production, web development, graphic design, SEO, and digital marketing services. The platform showcases CDM's expertise in creative digital solutions with a focus on modern web technologies and user experience.",
-        url: "https://creativedigitalmarketing.com/",
-        category: "company",
-        technologies: ["WordPress CMS", "PHP", "UI/UX", "Plugins"],
-        status: "Active",
-        duration: "Development Phase Ongoing",
-        client: "CDM",
-        lastUpdated: "23rd June 2025",
-        maintenance: "Open, Active",
-        projectType: "Company"
-        },
-        {
-        title: "Foxx Technologies",
-        image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/cropped-Foxx-Technology-logo-186x71-v2.png?updatedAt=1753620120349",
-        description: "Service provider website specializing in comprehensive plastic solutions and manufacturing services. The platform demonstrates Foxx Technologies' capabilities in plastic engineering, product development, and industrial solutions with a professional corporate web presence.",
-        url: "https://foxxtechnologies.com/",
-        category: "company",
-        technologies: ["Web Development", "Corporate Solutions", "Industrial Design"],
-        status: "Active",
-        duration: "Development Phase Ongoing",
-        client: "Foxx Technologies",
-        lastUpdated: "11th April 2025",
-        maintenance: "Open, Active",
-        projectType: "Company"
-        },
-    ];
+        // Complete project data including existing projects
+        const projects = [
+            {
+                title: "Foxx Life Sciences",
+                description: "Leading laboratory equipment and supplies company providing innovative solutions for scientific research.",
+                image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/Foxx_Logo_Tagline_4f5d4fec-5e26-4499-821d-1cab399c8e52_2288x500.png_v=1614300014?updatedAt=1753617406701",
+                url: "https://www.foxxlifesciences.com/",
+                category: "company",
+                technologies: ["Shopify", "E-commerce", "Laboratory Equipment", "B2B"],
+                status: "Active",
+                duration: "From September 3 2023 to Present",
+                client: "Foxx Life Sciences",
+                lastUpdated: "22 June 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Lab Rat Gifts",
+                description: "Unique laboratory-themed gifts and novelty items for science enthusiasts and professionals.",
+                image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+                url: "https://labratgifts.com/",
+                category: "company",
+                technologies: ["Shopify", "E-commerce", "Gift Store", "Science Themed"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "Lab Rat Gifts",
+                lastUpdated: "05 June 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Cannabis Lab Ware",
+                description: "Specialized laboratory equipment and supplies for cannabis testing and research facilities.",
+                image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+                url: "https://cannabislabware.com/",
+                category: "company",
+                technologies: ["Shopify", "E-commerce", "Cannabis Testing", "Laboratory"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "Cannabis Lab Ware",
+                lastUpdated: "02 May 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Foxx Life Sciences India",
+                description: "Indian branch of Foxx Life Sciences providing laboratory solutions to the Indian market.",
+                image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/Foxx_Logo_Tagline_4f5d4fec-5e26-4499-821d-1cab399c8e52_2288x500.png_v=1614300014?updatedAt=1753617406701",
+                url: "https://www.foxxlifesciences.in/",
+                category: "company",
+                technologies: ["Shopify", "E-commerce", "Laboratory Equipment", "India Market"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "Foxx Life Sciences India",
+                lastUpdated: "15 May 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Foxx Bioprocess",
+                description: "Bioprocessing equipment and single-use technologies for pharmaceutical and biotechnology industries.",
+                image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d.png_v=1669752062&width=300?updatedAt=1753617876508",
+                url: "https://foxxbioprocess.com/",
+                category: "company",
+                technologies: ["Shopify", "Bioprocessing", "Pharmaceutical", "Single-Use Technology"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "Foxx Bioprocess",
+                lastUpdated: "28 April 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Creative Digital Marketing (CDM)",
+                image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/CDM-Logo-svg.svg?updatedAt=1753619821698",
+                description: "Service-based company website providing comprehensive digital solutions including video AI production, web development, graphic design, SEO, and digital marketing services. The platform showcases CDM's expertise in creative digital solutions with a focus on modern web technologies and user experience.",
+                url: "https://creativedigitalmarketing.com/",
+                category: "company",
+                technologies: ["WordPress CMS", "PHP", "UI/UX", "Plugins"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "CDM",
+                lastUpdated: "23rd June 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            },
+            {
+                title: "Foxx Technologies",
+                image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/cropped-Foxx-Technology-logo-186x71-v2.png?updatedAt=1753620120349",
+                description: "Service provider website specializing in comprehensive plastic solutions and manufacturing services. The platform demonstrates Foxx Technologies' capabilities in plastic engineering, product development, and industrial solutions with a professional corporate web presence.",
+                url: "https://foxxtechnologies.com/",
+                category: "company",
+                technologies: ["Web Development", "Corporate Solutions", "Industrial Design"],
+                status: "Active",
+                duration: "Development Phase Ongoing",
+                client: "Foxx Technologies",
+                lastUpdated: "11th April 2025",
+                maintenance: "Open, Active",
+                projectType: "Company"
+            }
+        ];
+
+        // Function to get maintenance status class
+        function getMaintenanceStatusClass(maintenance) {
+            if (!maintenance) return 'maintenance-none';
+            const status = maintenance.toLowerCase();
+            if (status.includes('open') && status.includes('active')) return 'maintenance-open';
+            if (status.includes('active')) return 'maintenance-active';
+            if (status.includes('closed')) return 'maintenance-closed';
+            return 'maintenance-none';
+        }
+
+        // Function to render projects
+        function renderProjects(filteredProjects = projects) {
+            const projectGrid = document.getElementById('project-grid');
+            if (!projectGrid) return;
+
+            projectGrid.innerHTML = '';
+
+            filteredProjects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.setAttribute('data-category', project.category);
+
+                const statusBadgeClass = project.status === 'Active' ? 'status-badge active' : 'status-badge disabled';
+                const maintenanceStatusClass = getMaintenanceStatusClass(project.maintenance);
+
+                projectCard.innerHTML = `
+                    <div class="project-image">
+                        <img src="${project.image}" alt="${project.title}" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-technologies">
+                            ${project.technologies.map(tech => `<span class="project-tag">${tech}</span>`).join('')}
+                        </div>
+                        <div class="project-meta">
+                            <span class="${statusBadgeClass}">${project.status}</span>
+                            <span class="maintenance-status ${maintenanceStatusClass}">${project.maintenance || 'None'}</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">View Project</a>
+                            <button class="project-link" onclick="openProjectModal('${project.title}')">Learn More</button>
+                        </div>
+                    </div>
+                `;
+
+                projectGrid.appendChild(projectCard);
+            });
+        }
+
+        // Function to open project modal
+        function openProjectModal(projectTitle) {
+            const project = projects.find(p => p.title === projectTitle);
+            if (!project) return;
+
+            const modal = document.getElementById('project-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalClient = document.getElementById('modal-client');
+            const modalStatus = document.getElementById('modal-status');
+            const modalLastUpdate = document.getElementById('modal-last-update');
+            const modalMaintenance = document.getElementById('modal-maintenance');
+            const modalProjectType = document.getElementById('modal-project-type');
+            const modalDevelopment = document.getElementById('modal-development');
+            const modalTechnologies = document.getElementById('modal-technologies');
+            const modalProjectLink = document.getElementById('modal-project-link');
+
+            if (modalImage) modalImage.src = project.image;
+            if (modalTitle) modalTitle.textContent = project.title;
+            if (modalDescription) modalDescription.textContent = project.description;
+            if (modalClient) modalClient.textContent = project.client;
+            if (modalStatus) {
+                modalStatus.textContent = project.status;
+                modalStatus.className = `status-badge ${project.status === 'Active' ? 'active' : 'disabled'}`;
+            }
+            if (modalLastUpdate) modalLastUpdate.textContent = project.lastUpdated;
+            if (modalMaintenance) {
+                modalMaintenance.textContent = project.maintenance || 'None';
+                modalMaintenance.className = `maintenance-status ${getMaintenanceStatusClass(project.maintenance)}`;
+            }
+            if (modalProjectType) modalProjectType.textContent = project.projectType;
+            if (modalDevelopment) modalDevelopment.textContent = project.duration;
+            if (modalTechnologies) {
+                modalTechnologies.innerHTML = project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
+            }
+            if (modalProjectLink) modalProjectLink.href = project.url;
+
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Function to close project modal
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Initialize portfolio when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProjects();
+        });
 </script>
 </body>
 </html>
