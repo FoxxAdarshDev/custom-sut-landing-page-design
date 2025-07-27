@@ -1586,7 +1586,7 @@ function initProjects() {
                         ` : ''}
                     </div>
                     <div class="project-buttons">
-                        <button class="project-link" onclick="openProjectModal('${project.title}')">
+                        <button class="project-link" onclick="openProjectModal('${project.title.replace(/'/g, "\\'")}')">
                             Learn More <i class="fas fa-arrow-right"></i>
                         </button>
                         <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">
