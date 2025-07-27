@@ -1201,7 +1201,7 @@ function initProjects() {
                         </div>
                     </div>
                     <div class="project-buttons">
-                        <button class="project-link" onclick="openProjectModal(${index})">
+                        <button class="project-link" onclick="openProjectModal('${project.title}')">
                             Learn More <i class="fas fa-arrow-right"></i>
                         </button>
                         <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">
@@ -1226,8 +1226,8 @@ function initProjects() {
 /**
  * Open project details modal
  */
-function openProjectModal(projectIndex) {
-    const project = projects[projectIndex];
+function openProjectModal(projectTitle) {
+    const project = projects.find(p => p.title === projectTitle);
     const modal = document.getElementById('projectModal');
 
     // Populate modal content
