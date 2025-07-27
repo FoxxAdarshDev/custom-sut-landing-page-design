@@ -433,6 +433,60 @@
             background: linear-gradient(135deg, #1e7e34, #155724);
         }
 
+        /* Personal Project Filters */
+        .personal-project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .personal-project-filters .filter-btn {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #495057;
+            border: 2px solid #dee2e6;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .personal-project-filters .filter-btn:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .personal-project-filters .filter-btn.active {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border-color: #004085;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .dark-theme .personal-project-filters .filter-btn {
+            background: linear-gradient(135deg, #2c2c2c, #1e1e1e);
+            color: #adb5bd;
+            border-color: #444;
+        }
+
+        .dark-theme .personal-project-filters .filter-btn:hover {
+            background: linear-gradient(135deg, #3c3c3c, #2e2e2e);
+            color: #ced4da;
+        }
+
+        .dark-theme .personal-project-filters .filter-btn.active {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            border-color: #155724;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
         /* Footer content alignment */
         .footer-content {
             display: flex;
@@ -897,6 +951,12 @@
                     My personal coding projects and experiments, showcasing creativity and technical exploration.
                 </p>
             </div>
+            <!-- Personal Project Filters -->
+            <div class="personal-project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="food">FOOD</button>
+                <button class="filter-btn" data-filter="psd-to-html">PSD TO HTML</button>
+            </div>
             <!-- Personal Projects Grid -->
             <div class="personal-project-grid project-grid">
                 <!-- Personal project items will be populated from JavaScript -->
@@ -1083,35 +1143,54 @@ const projects = [
     // Personal Projects - Featured First
     {
         title: "CORNIFOOD",
-        description: "A healthy meal delivery website featuring a modern single-page layout with responsive design and interactive food ordering interface.",
+        description: "A comprehensive healthy meal delivery platform featuring modern single-page architecture, interactive food ordering system, and responsive design optimized for all devices.",
         image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/cronifood-logo.png?updatedAt=1753624342631",
         url: "https://adarsh-tripathi-cornifood-project.netlify.app/",
         category: "personal",
+        subCategory: "food",
         technologies: ["JavaScript", "HTML5", "CSS3", "HTML Template", "CSS Grid", "CSS Grid Layout", "CSS Flexbox", "CSS Flexbox Layout"],
         status: "Active",
         duration: "7 days",
         client: "Personal Project",
         lastUpdated: "Nov 16, 2022",
         maintenanceMode: "Active",
-        projectType: "Personal",
+        projectType: "FOOD",
         developmentPhase: "Paused",
-        detailedDescription: "CORNIFOOD is a comprehensive healthy meal delivery website designed with a focus on user experience and modern web technologies. This single-page application showcases a clean, responsive design that adapts seamlessly across all devices. The project demonstrates advanced CSS layout techniques including CSS Grid for complex layouts and Flexbox for component alignment. Built entirely with vanilla JavaScript, HTML5, and CSS3, the website features an interactive food ordering interface, smooth animations, and optimized performance. The design emphasizes healthy eating with vibrant food imagery, intuitive navigation, and a streamlined ordering process that guides users from menu selection to checkout."
+        detailedDescription: "CORNIFOOD is a comprehensive healthy meal delivery website designed with a focus on user experience and modern web technologies. This single-page application showcases a clean, responsive design that adapts seamlessly across all devices. The project demonstrates advanced CSS layout techniques including CSS Grid for complex layouts and Flexbox for component alignment. Built entirely with vanilla JavaScript, HTML5, and CSS3, the website features an interactive food ordering interface, smooth animations, and optimized performance. The design emphasizes healthy eating with vibrant food imagery, intuitive navigation, and a streamlined ordering process that guides users from menu selection to checkout. The platform includes features like menu categorization, cart functionality, order tracking, and mobile-optimized interface for enhanced user engagement."
     },
     {
         title: "Blockchain Data",
-        description: "Curated Data Intelligence website layout with multiple pages. PSD TO html css and js conversion.",
+        description: "Advanced data intelligence platform featuring multi-page architecture with comprehensive blockchain analytics, cryptocurrency insights, and interactive data visualizations.",
         image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/blockchain-data-logo.png?updatedAt=1753627652888",
         url: "https://psd-to-html-blockchaindata-adarsh.netlify.app/",
         category: "personal",
+        subCategory: "psd-to-html",
         technologies: ["PSD TO HTML", "CSS3", "HTML Template", "CSS Grid", "CSS Grid Layout", "CSS Flexbox", "CSS Flexbox Layout"],
         status: "Active",
         duration: "12 days",
         client: "Personal Project",
         lastUpdated: "Aug 4, 2021",
         maintenanceMode: "Active",
-        projectType: "Personal",
+        projectType: "PSD TO HTML",
         developmentPhase: "Paused",
-        detailedDescription: "Blockchain Data is a comprehensive data intelligence website featuring a multi-page layout designed to showcase blockchain analytics and cryptocurrency data insights. This project involved converting detailed PSD designs into fully functional HTML, CSS, and JavaScript code with pixel-perfect accuracy. The website demonstrates advanced front-end development skills including responsive design implementation using CSS Grid for complex data layouts and CSS Flexbox for flexible component alignment. The project showcases expertise in PSD to HTML conversion, ensuring cross-browser compatibility and optimal performance across all devices. The design incorporates modern web standards, semantic HTML structure, and optimized CSS architecture for maintainable and scalable code. Key features include interactive data visualizations, responsive navigation systems, and clean typography that enhances the user experience for data-driven content presentation."
+        detailedDescription: "Blockchain Data is a comprehensive data intelligence website featuring a multi-page layout designed to showcase blockchain analytics and cryptocurrency data insights. This project involved converting detailed PSD designs into fully functional HTML, CSS, and JavaScript code with pixel-perfect accuracy. The website demonstrates advanced front-end development skills including responsive design implementation using CSS Grid for complex data layouts and CSS Flexbox for flexible component alignment. The project showcases expertise in PSD to HTML conversion, ensuring cross-browser compatibility and optimal performance across all devices. The design incorporates modern web standards, semantic HTML structure, and optimized CSS architecture for maintainable and scalable code. Key features include interactive data visualizations, responsive navigation systems, clean typography, and advanced chart implementations that enhance the user experience for data-driven content presentation."
+    },
+    {
+        title: "Enterium Data",
+        description: "Efficient energy management platform featuring streamlined 3-4 page architecture with optimized performance, clean design patterns, and responsive layout implementation.",
+        image: "https://ik.imagekit.io/YTVideoAutomation/itweblens-portfolio-projects-assets/etherium-data-logo.png?updatedAt=1753629382809",
+        url: "https://psd-to-html-enteriumdata-adarsh.netlify.app/",
+        category: "personal",
+        subCategory: "psd-to-html",
+        technologies: ["PSD TO HTML", "CSS3", "HTML Template", "CSS Grid", "CSS Grid Layout", "CSS Flexbox", "CSS Flexbox Layout"],
+        status: "Active",
+        duration: "4 days",
+        client: "Personal Project",
+        lastUpdated: "Aug 3, 2021",
+        maintenanceMode: "Active",
+        projectType: "PSD TO HTML",
+        developmentPhase: "Paused",
+        detailedDescription: "Enterium Data is an energy-efficient web platform designed with minimal resource consumption in mind, featuring a streamlined 3-4 page layout that prioritizes performance and user experience. This project demonstrates expertise in PSD to HTML conversion with a focus on optimization and clean code architecture. The website showcases advanced CSS Grid and Flexbox implementations for responsive layouts that adapt seamlessly across all devices. Built with modern web standards, the platform emphasizes fast loading times, minimal bandwidth usage, and efficient code structure. Key features include optimized image handling, streamlined navigation, responsive design patterns, and clean typography that ensures excellent readability and user engagement while maintaining minimal energy consumption for both servers and client devices."
     },
     // Priority Projects - Featured First
     {
@@ -1629,23 +1708,46 @@ function initProjects() {
  */
 function initPersonalProjects() {
     const personalProjectGrid = document.querySelector('.personal-project-grid');
+    const personalFilterButtons = document.querySelectorAll('.personal-project-filters .filter-btn');
+
+    let currentPersonalFilter = 'all';
 
     // Get only personal projects
     const personalProjects = projects.filter(project => project.category === 'personal');
 
-    // Render personal projects
-    renderPersonalProjects(personalProjects, personalProjectGrid);
+    // Initial render
+    renderPersonalProjects(personalProjects, personalProjectGrid, currentPersonalFilter);
+
+    // Personal project filter button click handler
+    personalFilterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active button
+            personalFilterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            // Update filter
+            currentPersonalFilter = this.getAttribute('data-filter');
+
+            // Re-render personal projects
+            renderPersonalProjects(personalProjects, personalProjectGrid, currentPersonalFilter);
+        });
+    });
 }
 
 /**
  * Render personal projects
  */
-function renderPersonalProjects(personalProjects, grid) {
+function renderPersonalProjects(personalProjects, grid, filter = 'all') {
     // Clear grid
     grid.innerHTML = '';
 
-    // Render each personal project
-    personalProjects.forEach((project, index) => {
+    // Filter personal projects based on subCategory
+    let filteredPersonalProjects = filter === 'all' 
+        ? personalProjects 
+        : personalProjects.filter(project => project.subCategory === filter);
+
+    // Render each filtered personal project
+    filteredPersonalProjects.forEach((project, index) => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card fade-in';
 
