@@ -161,6 +161,36 @@
             flex: 1;
         }
 
+        .maintenance-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .maintenance-open {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .maintenance-closed {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .maintenance-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .maintenance-none {
+            background-color: #6c757d;
+            color: white;
+        }
+
         .dark-theme .metadata-label {
             color: #adb5bd;
         }
@@ -1193,7 +1223,9 @@ function initProjects() {
                         </div>
                         <div class="metadata-item">
                             <span class="metadata-label">Maintenance:</span>
-                            <span class="metadata-value">${project.maintenanceMode}</span>
+                            <span class="metadata-value">
+                                <span class="maintenance-badge ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>
+                            </span>
                         </div>
                         <div class="metadata-item">
                             <span class="metadata-label">Project Type:</span>
@@ -1271,6 +1303,23 @@ function openProjectModal(projectTitle) {
     // Show modal
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Get maintenance badge CSS class based on status
+ */
+function getMaintenanceBadgeClass(maintenanceMode) {
+    const status = maintenanceMode.toLowerCase();
+    
+    if (status.includes('open') || status.includes('active')) {
+        return 'maintenance-open';
+    } else if (status.includes('closed')) {
+        return 'maintenance-closed';
+    } else if (status.includes('none')) {
+        return 'maintenance-none';
+    } else {
+        return 'maintenance-none';
+    }
 }
 
 /**
