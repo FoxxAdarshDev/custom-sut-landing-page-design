@@ -517,6 +517,7 @@
                         <li><a href="#skills" class="nav-link">Skills</a></li>
                         <li><a href="#services" class="nav-link">Services</a></li>
                         <li><a href="#projects" class="nav-link">Projects</a></li>
+                        <li><a href="#personal-projects" class="nav-link">Personal Projects</a></li>
                         <!--<li><a href="#testimonials" class="nav-link">Testimonials</a></li>-->
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
@@ -875,7 +876,7 @@
                 <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
                 <button class="filter-btn" data-filter="corporate">Corporate</button>
                 <button class="filter-btn" data-filter="company">Company</button>
-                <button class="filter-btn" data-filter="personal">Personal Project</button>
+                
                 <button class="filter-btn" data-filter="other">Other</button>
             </div>
             <!-- Projects Grid -->
@@ -883,6 +884,23 @@
                 <!-- Project items will be populated from JavaScript -->
             </div>
 
+        </div>
+    </section>
+
+    <!-- Personal Projects Section -->
+    <section id="personal-projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Personal Projects</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    My personal coding projects and experiments, showcasing creativity and technical exploration.
+                </p>
+            </div>
+            <!-- Personal Projects Grid -->
+            <div class="personal-project-grid">
+                <!-- Personal project items will be populated from JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -1057,6 +1075,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize projects functionality
     initProjects();
+    initPersonalProjects();
 });
 
 // Project data
@@ -1485,16 +1504,16 @@ function initProjects() {
     });
 
     /**
-     * Render projects based on current filter - show all projects
+     * Render projects based on current filter - show all projects except personal
      */
     function renderProjects() {
         // Clear project grid
         projectGrid.innerHTML = '';
 
-        // Filter projects
+        // Filter projects - exclude personal projects from main section
         let filteredProjects = currentFilter === 'all'
-            ? projects
-            : projects.filter(project => project.category === currentFilter);
+            ? projects.filter(project => project.category !== 'personal')
+            : projects.filter(project => project.category === currentFilter && project.category !== 'personal');
 
         // If "All" filter is selected, move "Company" projects to the end
         if (currentFilter === 'all') {
@@ -1587,6 +1606,111 @@ function initProjects() {
             });
         }, 100);
     }
+}
+
+/**
+ * Initialize personal projects functionality
+ */
+function initPersonalProjects() {
+    const personalProjectGrid = document.querySelector('.personal-project-grid');
+    
+    // Get only personal projects
+    const personalProjects = projects.filter(project => project.category === 'personal');
+    
+    // Render personal projects
+    renderPersonalProjects(personalProjects, personalProjectGrid);
+}
+
+/**
+ * Render personal projects
+ */
+function renderPersonalProjects(personalProjects, grid) {
+    // Clear grid
+    grid.innerHTML = '';
+    
+    // Render each personal project
+    personalProjects.forEach((project, index) => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'project-card fade-in';
+
+        const techTags = project.technologies.map(tech =>
+            `<span class="project-tag">${tech}</span>`
+        ).join('');
+
+        const newProjectBadge = project.isNew ? '<div class="new-project-badge">New Project</div>' : '';
+
+        let statusBadgeClass = project.status.toLowerCase().replace(' ', '-');
+        if(statusBadgeClass === 'not-active'){
+            statusBadgeClass = 'disabled';
+        }
+
+        projectCard.innerHTML = `
+            <div class="project-image">
+                ${newProjectBadge}
+                <img src="${project.image}" alt="${project.title}">
+                <div class="project-overlay">
+                    <h3>${project.title}</h3>
+                </div>
+            </div>
+            <div class="project-content">
+                <p class="project-description">${project.description}</p>
+                <div class="project-tags">
+                    ${techTags}
+                </div>
+                <div class="project-metadata">
+                    <div class="metadata-item">
+                        <span class="metadata-label">Type:</span>
+                        <span class="metadata-value">${project.client}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Site Status:</span>
+                        <span class="metadata-value">
+                            <span class="status-badge ${statusBadgeClass}">${project.status}</span>
+                        </span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Last Update:</span>
+                        <span class="metadata-value">${project.lastUpdated}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Maintenance:</span>
+                        <span class="metadata-value">
+                            <span class="maintenance-badge ${getMaintenanceBadgeClass(project.maintenanceMode)}">${project.maintenanceMode}</span>
+                        </span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Project Type:</span>
+                        <span class="metadata-value">${project.projectType}</span>
+                    </div>
+                    ${project.developmentPhase ? `
+                    <div class="metadata-item">
+                        <span class="metadata-label">Development:</span>
+                        <span class="metadata-value">
+                            <span class="development-phase-badge">${project.developmentPhase}</span>
+                        </span>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="project-buttons">
+                    <button class="project-link" onclick="openProjectModal('${project.title}')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">
+                        View Project <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        `;
+
+        grid.appendChild(projectCard);
+    });
+
+    // Trigger animation for newly added elements
+    setTimeout(() => {
+        document.querySelectorAll('.personal-project-grid .project-card.fade-in').forEach(card => {
+            card.classList.add('active');
+        });
+    }, 100);
 }
 
 /**
