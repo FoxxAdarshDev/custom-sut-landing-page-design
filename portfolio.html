@@ -876,7 +876,7 @@
                 <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
                 <button class="filter-btn" data-filter="corporate">Corporate</button>
                 <button class="filter-btn" data-filter="company">Company</button>
-                
+
                 <button class="filter-btn" data-filter="other">Other</button>
             </div>
             <!-- Projects Grid -->
@@ -1473,7 +1473,7 @@ const projects = [
         projectType: "Ecommerce",
         detailedDescription: "Premium quality kids western wear for girls or casual wear for girls kids website. This Shopify-based e-commerce platform specializes in children's fashion, offering a curated collection of western and casual wear designed specifically for young girls. The website features an intuitive shopping experience with carefully organized product categories, detailed product pages, and a user-friendly interface that makes it easy for parents to find the perfect outfits for their children. Tech used: Shopify CMS, Shopify API, Shopify Customization, Liquid templating, JavaScript, HTML, CSS for creating an engaging and responsive online shopping experience."
     },
-    
+
 ];
 
 /**
@@ -1613,10 +1613,10 @@ function initProjects() {
  */
 function initPersonalProjects() {
     const personalProjectGrid = document.querySelector('.personal-project-grid');
-    
+
     // Get only personal projects
     const personalProjects = projects.filter(project => project.category === 'personal');
-    
+
     // Render personal projects
     renderPersonalProjects(personalProjects, personalProjectGrid);
 }
@@ -1627,7 +1627,7 @@ function initPersonalProjects() {
 function renderPersonalProjects(personalProjects, grid) {
     // Clear grid
     grid.innerHTML = '';
-    
+
     // Render each personal project
     personalProjects.forEach((project, index) => {
         const projectCard = document.createElement('div');
@@ -1692,7 +1692,7 @@ function renderPersonalProjects(personalProjects, grid) {
                     ` : ''}
                 </div>
                 <div class="project-buttons">
-                    <button class="project-link" onclick="openProjectModal('${project.title}')">
+                    <button class="project-link" onclick="openProjectModal('${project.title.replace(/'/g, "\\'")}')">
                         Learn More <i class="fas fa-arrow-right"></i>
                     </button>
                     <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link view-project-btn">
@@ -1732,7 +1732,7 @@ function openProjectModal(projectTitle) {
     document.getElementById('modalStatus').className = `status-badge ${modalStatusClass}`;
     document.getElementById('modalDuration').textContent = project.duration;
     document.getElementById('modalClient').textContent = project.client;
-    
+
     // Update the client/company label in modal
     const modalSidebarParagraphs = document.querySelectorAll('.modal-sidebar p');
     modalSidebarParagraphs.forEach(p => {
@@ -1746,7 +1746,7 @@ function openProjectModal(projectTitle) {
             p.innerHTML = `<strong>${label}</strong> <span id="modalClient">${project.client}</span>`;
         }
     });
-    
+
     // Update the label in modal based on project category
     const clientLabelElement = document.querySelector('.modal-sidebar p:nth-child(6)');
     if (clientLabelElement && project.category === 'company') {
