@@ -498,7 +498,7 @@
 <!-- Our Story in Numbers Section -->
 <section class="story-numbers-section" data-section-id="{{ section.id }}" style="{% if section.settings.background_image != blank %}background-image: url('{{ section.settings.background_image | img_url: '1920x' }}'); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}">
   <div class="story-overlay" style="background-color: {{ section.settings.overlay_color | default: '#0071b9' }}; opacity: {{ section.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};"></div>
-  
+
   <div class="story-content">
     <div class="story-header">
       <h2 class="story-title">{{ section.settings.section_title | default: 'OUR STORY IN NUMBERS' }}</h2>
@@ -517,7 +517,7 @@
         {% assign number_key = 'stat' | append: stat_num | append: '_number' %}
         {% assign title_key = 'stat' | append: stat_num | append: '_title' %}
         {% assign desc_key = 'stat' | append: stat_num | append: '_description' %}
-        
+
         {% assign is_enabled = section.settings[enable_key] %}
         {% assign icon_type = section.settings[icon_type_key] %}
         {% assign svg_code = section.settings[svg_key] %}
@@ -525,7 +525,7 @@
         {% assign stat_number = section.settings[number_key] %}
         {% assign stat_title = section.settings[title_key] %}
         {% assign stat_desc = section.settings[desc_key] %}
-        
+
         {% if is_enabled and stat_number != blank %}
           <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 100 }}">
             <div class="stat-icon-wrapper">
@@ -538,19 +538,19 @@
                   {{ svg_code }}
                 </div>
               {% endif %}
-              
+
               <div class="stat-number-container">
                 <div class="stat-number" data-target="{{ stat_number }}">{{ stat_number }}</div>
               </div>
             </div>
-            
+
             <div class="stat-content">
               <h3 class="stat-title">{{ stat_title }}</h3>
               {% if stat_desc != blank %}
                 <p class="stat-description">{{ stat_desc }}</p>
               {% endif %}
             </div>
-            
+
             <div class="stat-glow"></div>
             <div class="stat-pulse"></div>
           </div>
@@ -558,7 +558,7 @@
       {% endfor %}
     </div>
   </div>
-  
+
   <!-- Floating Elements -->
   <div class="floating-elements">
     <div class="floating-element element-1"></div>
@@ -569,10 +569,6 @@
 </section>
 
 <style>
-/* Global overflow fix */
-body {
-  overflow-x: hidden;
-}
 
 /* Story Numbers Section */
 .story-numbers-section {
@@ -581,7 +577,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 0;
+  /* padding: 120px 0; */
   overflow: hidden;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   background-attachment: fixed;
@@ -922,25 +918,25 @@ body {
     padding: 100px 20px;
     min-height: auto;
   }
-  
+
   .story-title {
     font-size: 48px;
     letter-spacing: 2px;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
+
   .stat-item {
     padding: 25px 20px;
   }
-  
+
   .stat-number {
     font-size: 32px;
   }
-  
+
   .stat-title {
     font-size: 16px;
   }
@@ -950,57 +946,57 @@ body {
   .story-numbers-section {
     padding: 80px 0;
   }
-  
+
   .story-content {
     padding: 0 15px;
   }
-  
+
   .story-title {
     font-size: 36px;
     letter-spacing: 1px;
   }
-  
+
   .story-description {
     font-size: 18px;
   }
-  
+
   .story-header {
     margin-bottom: 60px;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
-  
+
   .stat-item {
     padding: 20px 15px;
     border-radius: 16px;
   }
-  
+
   .stat-icon {
     width: 50px;
     height: 50px;
   }
-  
+
   .stat-icon.svg-icon svg,
   .stat-icon.image-icon img {
     width: 25px;
     height: 25px;
   }
-  
+
   .stat-number {
     font-size: 28px;
   }
-  
+
   .stat-title {
     font-size: 14px;
   }
-  
+
   .stat-description {
     font-size: 12px;
   }
-  
+
   .story-numbers-section {
     background-attachment: scroll;
     min-height: auto;
@@ -1012,32 +1008,32 @@ body {
   .story-numbers-section {
     padding: 60px 0;
   }
-  
+
   .story-content {
     padding: 0 15px;
   }
-  
+
   .story-title {
     font-size: 28px;
   }
-  
+
   .story-description {
     font-size: 16px;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .stat-item {
     padding: 25px 15px;
   }
-  
+
   .stat-number {
     font-size: 32px;
   }
-  
+
   .stat-title {
     font-size: 16px;
   }
@@ -1050,7 +1046,7 @@ body {
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease forwards;
   }
-  
+
   .stat-item:nth-child(1) { animation-delay: 0.1s; }
   .stat-item:nth-child(2) { animation-delay: 0.2s; }
   .stat-item:nth-child(3) { animation-delay: 0.3s; }
@@ -1059,7 +1055,7 @@ body {
   .stat-item:nth-child(6) { animation-delay: 0.6s; }
   .stat-item:nth-child(7) { animation-delay: 0.7s; }
   .stat-item:nth-child(8) { animation-delay: 0.8s; }
-  
+
   @keyframes fadeInUp {
     to {
       opacity: 1;
@@ -1074,11 +1070,11 @@ body {
     background: white !important;
     color: black !important;
   }
-  
+
   .story-overlay {
     display: none;
   }
-  
+
   .floating-elements {
     display: none;
   }
@@ -1117,7 +1113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const target = element.getAttribute('data-target');
     const cleanTarget = target.replace(/[^\d.-]/g, '');
     const numericTarget = parseFloat(cleanTarget);
-    
+
     if (isNaN(numericTarget)) {
       element.textContent = target;
       return;
@@ -1127,21 +1123,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const step = numericTarget / (duration / 16);
     let current = 0;
     const suffix = target.replace(/[\d.-]/g, '');
-    
+
     const timer = setInterval(() => {
       current += step;
       if (current >= numericTarget) {
         current = numericTarget;
         clearInterval(timer);
       }
-      
+
       let displayValue;
       if (numericTarget >= 1000) {
         displayValue = Math.floor(current).toLocaleString();
       } else {
         displayValue = Math.floor(current);
       }
-      
+
       element.textContent = displayValue + suffix;
     }, 16);
   }
@@ -1152,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     item.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-12px) scale(1.02)';
     });
-    
+
     item.addEventListener('mouseleave', function() {
       this.style.transform = 'translateY(0) scale(1)';
     });
@@ -1163,7 +1159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrolled = window.pageYOffset;
     const section = document.querySelector('.story-numbers-section');
     const bgImage = section?.querySelector('.story-bg-image');
-    
+
     if (bgImage && window.innerWidth > 768) {
       const rate = scrolled * -0.5;
       bgImage.style.transform = `translateY(${rate}px)`;
@@ -1176,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (section) {
       const rect = section.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      
+
       if (inView) {
         section.classList.add('in-view');
       }
@@ -1188,24 +1184,24 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   // Add click effect
   const statItems = document.querySelectorAll('.stat-item');
-  
+
   statItems.forEach(item => {
     item.addEventListener('click', function(e) {
       // Create ripple effect
       const ripple = document.createElement('div');
       ripple.classList.add('ripple-effect');
-      
+
       const rect = this.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
-      
+
       ripple.style.width = ripple.style.height = size + 'px';
       ripple.style.left = x + 'px';
       ripple.style.top = y + 'px';
-      
+
       this.appendChild(ripple);
-      
+
       setTimeout(() => {
         ripple.remove();
       }, 600);
@@ -1264,11 +1260,11 @@ document.addEventListener('DOMContentLoaded', function() {
   .stat-item {
     border: 2px solid #000;
   }
-  
+
   .stat-title {
     color: #000;
   }
-  
+
   .stat-description {
     color: #333;
   }
