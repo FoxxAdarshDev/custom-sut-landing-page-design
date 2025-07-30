@@ -1,0 +1,1280 @@
+
+{% schema %}
+{
+  "name": "Our Story in Numbers",
+  "class": "story-numbers-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#0071b9"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "OUR STORY IN NUMBERS"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "Discover the achievements and milestones that define our journey"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat1_enable",
+      "label": "Enable Statistic 1",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat1_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat1_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat1_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat1_number",
+      "label": "Number/Value",
+      "default": "5"
+    },
+    {
+      "type": "text",
+      "id": "stat1_title",
+      "label": "Title",
+      "default": "Locations in the World"
+    },
+    {
+      "type": "textarea",
+      "id": "stat1_description",
+      "label": "Description",
+      "default": "State-of-the-art facilities strategically located across the globe"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat2_enable",
+      "label": "Enable Statistic 2",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat2_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat2_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat2_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat2_number",
+      "label": "Number/Value",
+      "default": "200,000"
+    },
+    {
+      "type": "text",
+      "id": "stat2_title",
+      "label": "Title",
+      "default": "Square Feet"
+    },
+    {
+      "type": "textarea",
+      "id": "stat2_description",
+      "label": "Description",
+      "default": "Manufacturing and laboratory space for innovation"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat3_enable",
+      "label": "Enable Statistic 3",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat3_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat3_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A3.98 3.98 0 0 0 16.2 6.2c-.8-.8-2.07-.8-2.87 0A3.98 3.98 0 0 0 9.54 8.37L7 16h2.5v6h11zM12.5 11.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat3_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat3_number",
+      "label": "Number/Value",
+      "default": "250+"
+    },
+    {
+      "type": "text",
+      "id": "stat3_title",
+      "label": "Title",
+      "default": "Employees"
+    },
+    {
+      "type": "textarea",
+      "id": "stat3_description",
+      "label": "Description",
+      "default": "Dedicated professionals driving innovation forward"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat4_enable",
+      "label": "Enable Statistic 4",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat4_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat4_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V1h-2v1H7V1H5v1H3.5C2.67 2 2 2.67 2 3.5v1C2 5.33 2.67 6 3.5 6H4v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h.5c.83 0 1.5-.67 1.5-1.5v-1C22 2.67 21.33 2 20.5 2z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat4_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat4_number",
+      "label": "Number/Value",
+      "default": "35+"
+    },
+    {
+      "type": "text",
+      "id": "stat4_title",
+      "label": "Title",
+      "default": "Patents"
+    },
+    {
+      "type": "textarea",
+      "id": "stat4_description",
+      "label": "Description",
+      "default": "Innovative solutions protected by intellectual property"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat5_enable",
+      "label": "Enable Statistic 5",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat5_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat5_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat5_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat5_number",
+      "label": "Number/Value",
+      "default": "6000+"
+    },
+    {
+      "type": "text",
+      "id": "stat5_title",
+      "label": "Title",
+      "default": "SKUs"
+    },
+    {
+      "type": "textarea",
+      "id": "stat5_description",
+      "label": "Description",
+      "default": "Comprehensive product portfolio for every need"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat6_enable",
+      "label": "Enable Statistic 6",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat6_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat6_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 6H5V5h14v4zm0 4H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2zm0 6H5v-4h14v4z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat6_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat6_number",
+      "label": "Number/Value",
+      "default": "7"
+    },
+    {
+      "type": "text",
+      "id": "stat6_title",
+      "label": "Title",
+      "default": "Class 7 Cleanrooms"
+    },
+    {
+      "type": "textarea",
+      "id": "stat6_description",
+      "label": "Description",
+      "default": "Controlled environments for precision manufacturing"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat7_enable",
+      "label": "Enable Statistic 7",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat7_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat7_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat7_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat7_number",
+      "label": "Number/Value",
+      "default": "17+"
+    },
+    {
+      "type": "text",
+      "id": "stat7_title",
+      "label": "Title",
+      "default": "Years in Single-Use Technology"
+    },
+    {
+      "type": "textarea",
+      "id": "stat7_description",
+      "label": "Description",
+      "default": "Leading expertise in single-use bioprocessing solutions"
+    },
+    {
+      "type": "header",
+      "content": "Statistic 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat8_enable",
+      "label": "Enable Statistic 8",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "stat8_icon_type",
+      "label": "Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "stat8_svg_code",
+      "label": "SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "stat8_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "stat8_number",
+      "label": "Number/Value",
+      "default": "15+"
+    },
+    {
+      "type": "text",
+      "id": "stat8_title",
+      "label": "Title",
+      "default": "Years of ISO 13485"
+    },
+    {
+      "type": "textarea",
+      "id": "stat8_description",
+      "label": "Description",
+      "default": "Certified quality management for medical devices"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story in Numbers",
+      "category": "About"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Our Story in Numbers Section -->
+<section class="story-numbers-section" data-section-id="{{ section.id }}">
+  {% if section.settings.background_image != blank %}
+    <div class="story-bg-image" style="background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');">
+  {% endif %}
+    <div class="story-overlay" style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    
+    <div class="story-content">
+      <div class="story-header">
+        <h2 class="story-title">{{ section.settings.section_title | default: 'OUR STORY IN NUMBERS' }}</h2>
+        {% if section.settings.section_description != blank %}
+          <p class="story-description">{{ section.settings.section_description }}</p>
+        {% endif %}
+      </div>
+
+      <div class="stats-grid">
+        {% assign stats = '1,2,3,4,5,6,7,8' | split: ',' %}
+        {% for stat_num in stats %}
+          {% assign enable_key = 'stat' | append: stat_num | append: '_enable' %}
+          {% assign icon_type_key = 'stat' | append: stat_num | append: '_icon_type' %}
+          {% assign svg_key = 'stat' | append: stat_num | append: '_svg_code' %}
+          {% assign image_key = 'stat' | append: stat_num | append: '_image' %}
+          {% assign number_key = 'stat' | append: stat_num | append: '_number' %}
+          {% assign title_key = 'stat' | append: stat_num | append: '_title' %}
+          {% assign desc_key = 'stat' | append: stat_num | append: '_description' %}
+          
+          {% assign is_enabled = section.settings[enable_key] %}
+          {% assign icon_type = section.settings[icon_type_key] %}
+          {% assign svg_code = section.settings[svg_key] %}
+          {% assign stat_image = section.settings[image_key] %}
+          {% assign stat_number = section.settings[number_key] %}
+          {% assign stat_title = section.settings[title_key] %}
+          {% assign stat_desc = section.settings[desc_key] %}
+          
+          {% if is_enabled and stat_number != blank %}
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 100 }}">
+              <div class="stat-icon-wrapper">
+                {% if icon_type == 'image' and stat_image != blank %}
+                  <div class="stat-icon image-icon">
+                    <img src="{{ stat_image | img_url: '80x80' }}" alt="{{ stat_title }}" loading="lazy">
+                  </div>
+                {% elsif svg_code != blank %}
+                  <div class="stat-icon svg-icon">
+                    {{ svg_code }}
+                  </div>
+                {% endif %}
+                
+                <div class="stat-number-container">
+                  <div class="stat-number" data-target="{{ stat_number }}">{{ stat_number }}</div>
+                </div>
+              </div>
+              
+              <div class="stat-content">
+                <h3 class="stat-title">{{ stat_title }}</h3>
+                {% if stat_desc != blank %}
+                  <p class="stat-description">{{ stat_desc }}</p>
+                {% endif %}
+              </div>
+              
+              <div class="stat-glow"></div>
+              <div class="stat-pulse"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    
+  {% if section.settings.background_image != blank %}
+    </div>
+  {% endif %}
+  
+  <!-- Floating Elements -->
+  <div class="floating-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+    <div class="floating-element element-4"></div>
+  </div>
+</section>
+
+<style>
+/* Global overflow fix */
+body {
+  overflow-x: hidden;
+}
+
+/* Story Numbers Section */
+.story-numbers-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.story-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.story-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.story-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Header Styling */
+.story-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.story-title {
+  font-size: 64px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: inline-block;
+}
+
+.story-title::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  border-radius: 2px;
+}
+
+.story-title::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  border-radius: 1px;
+}
+
+.story-description {
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Stat Item */
+.stat-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 113, 185, 0.1);
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #0071b9, #005a91);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  border-radius: 24px 24px 0 0;
+}
+
+.stat-item:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-item:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: #0071b9;
+  box-shadow: 0 20px 60px rgba(0, 113, 185, 0.25);
+}
+
+/* Icon Wrapper */
+.stat-icon-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icon Styling */
+.stat-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0071b9, #005a91);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 113, 185, 0.3);
+}
+
+.stat-icon.svg-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.stat-icon.image-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 35px rgba(0, 113, 185, 0.4);
+}
+
+.stat-item:hover .stat-icon svg,
+.stat-item:hover .stat-icon img {
+  transform: scale(1.1);
+}
+
+/* Number Container */
+.stat-number-container {
+  position: relative;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 900;
+  color: #0071b9;
+  margin-bottom: 0;
+  text-shadow: 0 2px 10px rgba(0, 113, 185, 0.2);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.05);
+  color: #005a91;
+}
+
+/* Content */
+.stat-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.stat-item:hover .stat-title {
+  color: #0071b9;
+}
+
+.stat-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.stat-item:hover .stat-description {
+  color: #555;
+}
+
+/* Glow Effect */
+.stat-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 113, 185, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.stat-item:hover .stat-glow {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Pulse Effect */
+.stat-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #0071b9;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-element.element-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+
+.floating-element.element-2 {
+  top: 40%;
+  right: 15%;
+  animation-delay: 2s;
+  animation-duration: 10s;
+}
+
+.floating-element.element-3 {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 4s;
+  animation-duration: 7s;
+}
+
+.floating-element.element-4 {
+  bottom: 20%;
+  right: 25%;
+  animation-delay: 1s;
+  animation-duration: 9s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-15px);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-25px) translateX(5px);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .story-numbers-section {
+    padding: 100px 20px;
+    min-height: auto;
+  }
+  
+  .story-title {
+    font-size: 48px;
+    letter-spacing: 2px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  
+  .stat-item {
+    padding: 35px 25px;
+  }
+  
+  .stat-number {
+    font-size: 42px;
+  }
+  
+  .stat-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-numbers-section {
+    padding: 80px 15px;
+  }
+  
+  .story-title {
+    font-size: 36px;
+    letter-spacing: 1px;
+  }
+  
+  .story-description {
+    font-size: 18px;
+  }
+  
+  .story-header {
+    margin-bottom: 60px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+  
+  .stat-item {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+  
+  .stat-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .stat-icon.svg-icon svg,
+  .stat-icon.image-icon img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .stat-number {
+    font-size: 36px;
+  }
+  
+  .stat-title {
+    font-size: 18px;
+  }
+  
+  .stat-description {
+    font-size: 15px;
+  }
+  
+  .story-bg-image {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-numbers-section {
+    padding: 60px 15px;
+  }
+  
+  .story-title {
+    font-size: 28px;
+  }
+  
+  .story-description {
+    font-size: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stat-item {
+    padding: 25px 15px;
+  }
+  
+  .stat-number {
+    font-size: 32px;
+  }
+  
+  .stat-title {
+    font-size: 16px;
+  }
+}
+
+/* Animation on Scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .stat-item {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  .stat-item:nth-child(1) { animation-delay: 0.1s; }
+  .stat-item:nth-child(2) { animation-delay: 0.2s; }
+  .stat-item:nth-child(3) { animation-delay: 0.3s; }
+  .stat-item:nth-child(4) { animation-delay: 0.4s; }
+  .stat-item:nth-child(5) { animation-delay: 0.5s; }
+  .stat-item:nth-child(6) { animation-delay: 0.6s; }
+  .stat-item:nth-child(7) { animation-delay: 0.7s; }
+  .stat-item:nth-child(8) { animation-delay: 0.8s; }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Print Styles */
+@media print {
+  .story-numbers-section {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .story-overlay {
+    display: none;
+  }
+  
+  .floating-elements {
+    display: none;
+  }
+}
+</style>
+
+<script>
+// Number Counter Animation
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const numberElements = entry.target.querySelectorAll('.stat-number');
+        numberElements.forEach(numberElement => {
+          if (!numberElement.classList.contains('counted')) {
+            animateNumber(numberElement);
+            numberElement.classList.add('counted');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  // Observe the section
+  const section = document.querySelector('.story-numbers-section');
+  if (section) {
+    observer.observe(section);
+  }
+
+  function animateNumber(element) {
+    const target = element.getAttribute('data-target');
+    const cleanTarget = target.replace(/[^\d.-]/g, '');
+    const numericTarget = parseFloat(cleanTarget);
+    
+    if (isNaN(numericTarget)) {
+      element.textContent = target;
+      return;
+    }
+
+    const duration = 2000;
+    const step = numericTarget / (duration / 16);
+    let current = 0;
+    const suffix = target.replace(/[\d.-]/g, '');
+    
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= numericTarget) {
+        current = numericTarget;
+        clearInterval(timer);
+      }
+      
+      let displayValue;
+      if (numericTarget >= 1000) {
+        displayValue = Math.floor(current).toLocaleString();
+      } else {
+        displayValue = Math.floor(current);
+      }
+      
+      element.textContent = displayValue + suffix;
+    }, 16);
+  }
+
+  // Add hover sound effect (optional)
+  const statItems = document.querySelectorAll('.stat-item');
+  statItems.forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-12px) scale(1.02)';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+
+  // Parallax effect for background
+  window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const section = document.querySelector('.story-numbers-section');
+    const bgImage = section?.querySelector('.story-bg-image');
+    
+    if (bgImage && window.innerWidth > 768) {
+      const rate = scrolled * -0.5;
+      bgImage.style.transform = `translateY(${rate}px)`;
+    }
+  });
+
+  // Add dynamic glow on scroll
+  window.addEventListener('scroll', function() {
+    const section = document.querySelector('.story-numbers-section');
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (inView) {
+        section.classList.add('in-view');
+      }
+    }
+  });
+});
+
+// Enhanced interactivity
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click effect
+  const statItems = document.querySelectorAll('.stat-item');
+  
+  statItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      // Create ripple effect
+      const ripple = document.createElement('div');
+      ripple.classList.add('ripple-effect');
+      
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  });
+});
+</script>
+
+<style>
+/* Ripple Effect */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 113, 185, 0.3);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Enhanced hover states */
+.stat-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.stat-item:active {
+  transform: translateY(-8px) scale(0.98);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .stat-item,
+  .stat-icon,
+  .stat-number,
+  .floating-element {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Focus states for accessibility */
+.stat-item:focus {
+  outline: 3px solid #0071b9;
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .stat-item {
+    border: 2px solid #000;
+  }
+  
+  .stat-title {
+    color: #000;
+  }
+  
+  .stat-description {
+    color: #333;
+  }
+}
+</style>
