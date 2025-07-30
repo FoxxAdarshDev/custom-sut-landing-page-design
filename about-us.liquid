@@ -496,75 +496,68 @@
 {% endschema %}
 
 <!-- Our Story in Numbers Section -->
-<section class="story-numbers-section" data-section-id="{{ section.id }}">
-  {% if section.settings.background_image != blank %}
-    <div class="story-bg-image" style="background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');">
-  {% endif %}
-    <div class="story-overlay" style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-    
-    <div class="story-content">
-      <div class="story-header">
-        <h2 class="story-title">{{ section.settings.section_title | default: 'OUR STORY IN NUMBERS' }}</h2>
-        {% if section.settings.section_description != blank %}
-          <p class="story-description">{{ section.settings.section_description }}</p>
-        {% endif %}
-      </div>
+<section class="story-numbers-section" data-section-id="{{ section.id }}" style="{% if section.settings.background_image != blank %}background-image: url('{{ section.settings.background_image | img_url: '1920x' }}'); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}">
+  <div class="story-overlay" style="background-color: {{ section.settings.overlay_color | default: '#0071b9' }}; opacity: {{ section.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};"></div>
+  
+  <div class="story-content">
+    <div class="story-header">
+      <h2 class="story-title">{{ section.settings.section_title | default: 'OUR STORY IN NUMBERS' }}</h2>
+      {% if section.settings.section_description != blank %}
+        <p class="story-description">{{ section.settings.section_description }}</p>
+      {% endif %}
+    </div>
 
-      <div class="stats-grid">
-        {% assign stats = '1,2,3,4,5,6,7,8' | split: ',' %}
-        {% for stat_num in stats %}
-          {% assign enable_key = 'stat' | append: stat_num | append: '_enable' %}
-          {% assign icon_type_key = 'stat' | append: stat_num | append: '_icon_type' %}
-          {% assign svg_key = 'stat' | append: stat_num | append: '_svg_code' %}
-          {% assign image_key = 'stat' | append: stat_num | append: '_image' %}
-          {% assign number_key = 'stat' | append: stat_num | append: '_number' %}
-          {% assign title_key = 'story_stat' | append: stat_num | append: '_title' %}
-          {% assign desc_key = 'story_stat' | append: stat_num | append: '_description' %}
-          
-          {% assign is_enabled = section.settings[enable_key] %}
-          {% assign icon_type = section.settings[icon_type_key] %}
-          {% assign svg_code = section.settings[svg_key] %}
-          {% assign stat_image = section.settings[image_key] %}
-          {% assign stat_number = section.settings[number_key] %}
-          {% assign stat_title = section.settings[title_key] %}
-          {% assign stat_desc = section.settings[desc_key] %}
-          
-          {% if is_enabled and stat_number != blank %}
-            <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 100 }}">
-              <div class="stat-icon-wrapper">
-                {% if icon_type == 'image' and stat_image != blank %}
-                  <div class="stat-icon image-icon">
-                    <img src="{{ stat_image | img_url: '80x80' }}" alt="{{ stat_title }}" loading="lazy">
-                  </div>
-                {% elsif svg_code != blank %}
-                  <div class="stat-icon svg-icon">
-                    {{ svg_code }}
-                  </div>
-                {% endif %}
-                
-                <div class="stat-number-container">
-                  <div class="stat-number" data-target="{{ stat_number }}">{{ stat_number }}</div>
+    <div class="stats-grid">
+      {% assign stats = '1,2,3,4,5,6,7,8' | split: ',' %}
+      {% for stat_num in stats %}
+        {% assign enable_key = 'stat' | append: stat_num | append: '_enable' %}
+        {% assign icon_type_key = 'stat' | append: stat_num | append: '_icon_type' %}
+        {% assign svg_key = 'stat' | append: stat_num | append: '_svg_code' %}
+        {% assign image_key = 'stat' | append: stat_num | append: '_image' %}
+        {% assign number_key = 'stat' | append: stat_num | append: '_number' %}
+        {% assign title_key = 'stat' | append: stat_num | append: '_title' %}
+        {% assign desc_key = 'stat' | append: stat_num | append: '_description' %}
+        
+        {% assign is_enabled = section.settings[enable_key] %}
+        {% assign icon_type = section.settings[icon_type_key] %}
+        {% assign svg_code = section.settings[svg_key] %}
+        {% assign stat_image = section.settings[image_key] %}
+        {% assign stat_number = section.settings[number_key] %}
+        {% assign stat_title = section.settings[title_key] %}
+        {% assign stat_desc = section.settings[desc_key] %}
+        
+        {% if is_enabled and stat_number != blank %}
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 100 }}">
+            <div class="stat-icon-wrapper">
+              {% if icon_type == 'image' and stat_image != blank %}
+                <div class="stat-icon image-icon">
+                  <img src="{{ stat_image | img_url: '80x80' }}" alt="{{ stat_title }}" loading="lazy">
                 </div>
-              </div>
+              {% elsif svg_code != blank %}
+                <div class="stat-icon svg-icon">
+                  {{ svg_code }}
+                </div>
+              {% endif %}
               
-              <div class="stat-content">
-                <h3 class="stat-title">{{ stat_title }}</h3>
-                {% if stat_desc != blank %}
-                  <p class="stat-description">{{ stat_desc }}</p>
-                {% endif %}
+              <div class="stat-number-container">
+                <div class="stat-number" data-target="{{ stat_number }}">{{ stat_number }}</div>
               </div>
-              
-              <div class="stat-glow"></div>
-              <div class="stat-pulse"></div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+            
+            <div class="stat-content">
+              <h3 class="stat-title">{{ stat_title }}</h3>
+              {% if stat_desc != blank %}
+                <p class="stat-description">{{ stat_desc }}</p>
+              {% endif %}
+            </div>
+            
+            <div class="stat-glow"></div>
+            <div class="stat-pulse"></div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-    
-  {% if section.settings.background_image != blank %}
-    </div>
-  {% endif %}
+  </div>
   
   <!-- Floating Elements -->
   <div class="floating-elements">
@@ -591,19 +584,6 @@ body {
   padding: 120px 20px;
   overflow: hidden;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.story-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
@@ -1011,8 +991,10 @@ body {
     font-size: 15px;
   }
   
-  .story-bg-image {
+  .story-numbers-section {
     background-attachment: scroll;
+    min-height: auto;
+    padding: 80px 15px;
   }
 }
 
