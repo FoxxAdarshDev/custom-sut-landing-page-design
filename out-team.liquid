@@ -112,9 +112,14 @@
           "label": "Twitter URL"
         },
         {
-          "type": "url",
+          "type": "email",
           "id": "email",
           "label": "Email Address"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone Number"
         },
         {
           "type": "url",
@@ -243,6 +248,14 @@
                   </a>
                 {% endif %}
 
+                {% if block.settings.phone != blank %}
+                  <a href="tel:{{ block.settings.phone }}" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                  </a>
+                {% endif %}
+
                 {% if block.settings.website_url != blank %}
                   <a href="{{ block.settings.website_url }}" target="_blank" rel="noopener" class="social-link">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -263,6 +276,27 @@
               <div class="member-content">
                 <h3 class="member-name">{{ block.settings.member_name | default: 'Team Member' }}</h3>
                 <p class="member-position">{{ block.settings.member_position | default: 'Position' }}</p>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                  {% if block.settings.email != blank %}
+                    <div class="contact-item">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="contact-icon">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                      </svg>
+                      <span>{{ block.settings.email }}</span>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.phone != blank %}
+                    <div class="contact-item">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="contact-icon">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                      </svg>
+                      <span>{{ block.settings.phone }}</span>
+                    </div>
+                  {% endif %}
+                </div>
 
                 {% if block.settings.member_bio != blank %}
                   <div class="member-bio">
@@ -382,13 +416,14 @@
 /* Card Shape Background */
 .card-shape {
   position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 150px;
-  height: 150px;
-  opacity: 0.1;
-  color: #F2B8C6;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  opacity: 0.3;
+  color: #0071b9;
   pointer-events: none;
+  z-index: 1;
 }
 
 .shape-svg {
@@ -399,13 +434,13 @@
 /* Member Image Container */
 .member-image-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   margin: 0 auto 20px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #f8f9fa;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 4px solid #f8f9fa;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   z-index: 2;
 }
 
@@ -501,6 +536,36 @@
   z-index: 2;
 }
 
+/* Contact Info */
+.contact-info {
+  margin: 15px 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.leader-card:hover .contact-info {
+  opacity: 1;
+  max-height: 60px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+.contact-icon {
+  width: 14px;
+  height: 14px;
+  color: #0071b9;
+  flex-shrink: 0;
+}
+
 .member-name {
   font-size: 22px;
   font-weight: 700;
@@ -582,8 +647,8 @@
   }
 
   .member-image-container {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     margin-bottom: 15px;
   }
 
@@ -615,8 +680,8 @@
   }
 
   .member-image-container {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
   }
 
   .member-name {
