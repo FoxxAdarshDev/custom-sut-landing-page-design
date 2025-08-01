@@ -127,7 +127,7 @@
            --padding-top: {{ section.settings.padding_top | default: 120 }}px;
            --padding-bottom: {{ section.settings.padding_bottom | default: 120 }}px;
          ">
-  
+
   <!-- Background Image -->
   <div class="culture-background">
     {% if section.settings.culture_background_image != blank %}
@@ -139,14 +139,14 @@
       <div class="culture-bg-gradient"></div>
     {% endif %}
   </div>
-  
+
   <!-- Overlay -->
   <div class="culture-overlay"></div>
-  
+
   <!-- Content Container -->
   <div class="culture-content-container">
     <div class="culture-inner-content">
-      
+
       <!-- Section Header -->
       <div class="culture-header">
         {% if section.settings.culture_section_title != blank %}
@@ -154,13 +154,13 @@
             <span class="culture-title-line">{{ section.settings.culture_section_title }}</span>
           </h2>
         {% endif %}
-        
+
         {% if section.settings.culture_section_description != blank %}
           <div class="culture-description">
             <p>{{ section.settings.culture_section_description }}</p>
           </div>
         {% endif %}
-        
+
         <!-- CTA Button -->
         {% if section.settings.show_cta_button and section.settings.cta_button_text != blank %}
           <div class="culture-cta-wrapper">
@@ -176,17 +176,17 @@
           </div>
         {% endif %}
       </div>
-      
+
     </div>
   </div>
-  
+
   <!-- Decorative Elements -->
   <div class="culture-decorative-elements">
     <div class="floating-element element-1"></div>
     <div class="floating-element element-2"></div>
     <div class="floating-element element-3"></div>
   </div>
-  
+
 </section>
 
 <style>
@@ -458,35 +458,35 @@
   .culture-content-container {
     padding: 0 30px;
   }
-  
+
   .culture-main-title {
     font-size: clamp(2.5rem, 6vw, 4rem);
     margin-bottom: 25px;
   }
-  
+
   .culture-description p {
     font-size: clamp(1rem, 2vw, 1.2rem);
   }
-  
+
   .culture-cta-button {
     padding: 15px 35px;
     font-size: 1rem;
   }
-  
+
   .floating-element {
     opacity: 0.6;
   }
-  
+
   .element-1 {
     width: 80px;
     height: 80px;
   }
-  
+
   .element-2 {
     width: 60px;
     height: 60px;
   }
-  
+
   .element-3 {
     width: 40px;
     height: 40px;
@@ -498,30 +498,30 @@
     min-height: 50vh;
     padding: 60px 0;
   }
-  
+
   .culture-content-container {
     padding: 0 20px;
   }
-  
+
   .culture-main-title {
     font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 20px;
   }
-  
+
   .culture-description {
     margin: 30px 0 40px 0;
   }
-  
+
   .culture-cta-wrapper {
     margin-top: 40px;
   }
-  
+
   .culture-cta-button {
     padding: 12px 30px;
     font-size: 0.95rem;
     gap: 12px;
   }
-  
+
   .floating-element {
     display: none;
   }
@@ -531,17 +531,17 @@
   .culture-banner-section {
     min-height: 45vh;
   }
-  
+
   .culture-main-title {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     letter-spacing: 1px;
   }
-  
+
   .culture-description p {
     font-size: 1rem;
     line-height: 1.6;
   }
-  
+
   .culture-cta-button {
     padding: 10px 25px;
     font-size: 0.9rem;
@@ -559,7 +559,7 @@
     animation: none;
     transition: none;
   }
-  
+
   .culture-cta-button::before {
     display: none;
   }
@@ -570,12 +570,12 @@
   .culture-overlay {
     opacity: 0.9;
   }
-  
+
   .culture-main-title,
   .culture-description p {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
-  
+
   .culture-cta-button {
     border-width: 3px;
   }
@@ -590,12 +590,12 @@
     color: black !important;
     page-break-inside: avoid;
   }
-  
+
   .culture-overlay,
   .culture-decorative-elements {
     display: none;
   }
-  
+
   .culture-bg-image {
     opacity: 0.1;
   }
