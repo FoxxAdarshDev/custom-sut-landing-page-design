@@ -8433,7 +8433,12 @@
         "type": "textarea",
         "id": "culture_section_description",
         "label": "Section Description",
-        "default": "The time you waste worrying is the enemy of your success"
+        "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
+      },
+      {
+        "type": "image_picker",
+        "id": "culture_image",
+        "label": "Culture Image"
       },
       {
         "type": "color",
@@ -8449,183 +8454,44 @@
       },
       {
         "type": "header",
-        "content": "Culture Item 1"
+        "content": "Call to Action"
       },
       {
         "type": "checkbox",
-        "id": "culture1_enable",
-        "label": "Enable Culture Item 1",
+        "id": "show_cta_button",
+        "label": "Show CTA Button",
         "default": true
       },
       {
         "type": "text",
-        "id": "culture1_title",
-        "label": "Title",
-        "default": "Coaching Services"
-      },
-      {
-        "type": "textarea",
-        "id": "culture1_description",
-        "label": "Description",
-        "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-      },
-      {
-        "type": "select",
-        "id": "culture1_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "culture1_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "culture1_image",
-        "label": "Icon Image"
+        "id": "cta_button_text",
+        "label": "CTA Button Text",
+        "default": "Learn More"
       },
       {
         "type": "url",
-        "id": "culture1_link",
-        "label": "Link URL"
+        "id": "cta_button_url",
+        "label": "CTA Button URL"
       },
       {
-        "type": "text",
-        "id": "culture1_button_text",
-        "label": "Button Text",
-        "default": "LEARN MORE"
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
       },
       {
-        "type": "header",
-        "content": "Culture Item 2"
-      },
-      {
-        "type": "checkbox",
-        "id": "culture2_enable",
-        "label": "Enable Culture Item 2",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "culture2_title",
-        "label": "Title",
-        "default": "Online Courses"
-      },
-      {
-        "type": "textarea",
-        "id": "culture2_description",
-        "label": "Description",
-        "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-      },
-      {
-        "type": "select",
-        "id": "culture2_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "culture2_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "culture2_image",
-        "label": "Icon Image"
-      },
-      {
-        "type": "url",
-        "id": "culture2_link",
-        "label": "Link URL"
-      },
-      {
-        "type": "text",
-        "id": "culture2_button_text",
-        "label": "Button Text",
-        "default": "LEARN MORE"
-      },
-      {
-        "type": "header",
-        "content": "Culture Item 3"
-      },
-      {
-        "type": "checkbox",
-        "id": "culture3_enable",
-        "label": "Enable Culture Item 3",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "culture3_title",
-        "label": "Title",
-        "default": "Consultation Services"
-      },
-      {
-        "type": "textarea",
-        "id": "culture3_description",
-        "label": "Description",
-        "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-      },
-      {
-        "type": "select",
-        "id": "culture3_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "culture3_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A3.98 3.98 0 0 0 16.2 6.2c-.8-.8-2.07-.8-2.87 0A3.98 3.98 0 0 0 9.54 8.37L7 16h2.5v6h11z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "culture3_image",
-        "label": "Icon Image"
-      },
-      {
-        "type": "url",
-        "id": "culture3_link",
-        "label": "Link URL"
-      },
-      {
-        "type": "text",
-        "id": "culture3_button_text",
-        "label": "Button Text",
-        "default": "LEARN MORE"
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
       }
     ]
   },
