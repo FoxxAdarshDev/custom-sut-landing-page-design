@@ -1,4 +1,3 @@
-
 {% schema %}
 {
   "name": "Four Pillars",
@@ -28,8 +27,8 @@
     {
       "type": "color",
       "id": "overlay_color",
-      "label": "Brand Color Overlay",
-      "default": "#0071b9"
+      "label": "Overlay Color",
+      "default": "#ffffff"
     },
     {
       "type": "range",
@@ -39,7 +38,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 85
+      "default": 95
     },
     {
       "type": "color",
@@ -57,13 +56,13 @@
           "type": "text",
           "id": "title",
           "label": "Pillar Title",
-          "default": "Engineering"
+          "default": "Innovation"
         },
         {
           "type": "textarea",
           "id": "description",
           "label": "Pillar Description",
-          "default": "At Foxx Bioprocessing, engineering is the starting point of every solution."
+          "default": "We constantly push the boundaries of what's possible in bioprocessing technology."
         },
         {
           "type": "select",
@@ -85,7 +84,7 @@
           "type": "textarea",
           "id": "svg_code",
           "label": "SVG Code",
-          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.43 1.1a1 1 0 0 1 .6 1.8L19 3.9l1.03 1a1 1 0 0 1-.6 1.8H17.4l-.5 1.5h2.5a1 1 0 0 1 0 2h-3l-.5 1.5H18a1 1 0 0 1 0 2h-2.1l-1.5 4.6a1 1 0 0 1-1.9 0L11 13.7 9.5 18.3a1 1 0 0 1-1.9 0L6.1 14H4a1 1 0 0 1 0-2h1.9l-.5-1.5H3a1 1 0 0 1 0-2h2.4l-.5-1.5H2.6a1 1 0 0 1-.6-1.8L3 3.9 1.97 2.9a1 1 0 0 1 .6-1.8H4.6l.5-1.5a1 1 0 0 1 1.9 0L8.5 4.6 10 0a1 1 0 0 1 1.9 0L13.5 4.6 15 0a1 1 0 0 1 1.9 0L18.4 4.6l.5-1.5h2.49z'/></svg>"
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'/></svg>"
         },
         {
           "type": "image_picker",
@@ -108,33 +107,33 @@
         {
           "type": "pillar",
           "settings": {
-            "title": "Engineering",
-            "description": "At Foxx Bioprocessing, engineering is the starting point of every solution. Our team works closely with customer requirements to ensure technical accuracy, fit, and compliance. We design, prototype fast, build clean, and document every step.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>"
+            "title": "Innovation",
+            "description": "We constantly push the boundaries of what's possible in bioprocessing technology.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
             "title": "Quality",
-            "description": "Quality is our operating principle. Every product is built under certified cleanroom conditions with full traceability and validation. Backed by 15+ years of ISO 13485 Certification, we follow regulated manufacturing workflows and test to specification. If it doesn't meet the mark, it doesn't leave our facility.",
+            "description": "Our commitment to excellence ensures every product meets the highest standards.",
             "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
-            "title": "Customer Service",
-            "description": "From first upload to final shipment, our team is available to review your designs, troubleshoot challenges, and support documentation needs. We respond fast, stay transparent, and deliver what we commit. Your timeline and specs are our priorities, with delivery in as fast as 48 hours**.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4z'/></svg>"
+            "title": "Sustainability",
+            "description": "Environmental responsibility is at the core of our manufacturing processes.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.66c.03-.08.06-.17.09-.25C6.84 17.25 9.5 14 12 14c2.5 0 5.16 3.25 5.25 5.09.03.08.06.17.09.25l.95 2.66 1.89-.66C18.1 16.17 16 10 7 8z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
-            "title": "Family-owned Company",
-            "description": "We are a family-owned company. All resources stay within the business and are reinvested into capability, systems, and teams. Decision-making stays close to the work, enabling stability and accountability to build better.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4z'/></svg>"
+            "title": "Customer Focus",
+            "description": "Every solution is tailored to meet our customers' unique requirements.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
           }
         }
       ]
@@ -148,10 +147,10 @@
   {% if section.settings.background_image %}
     style="background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');"
   {% endif %}>
-  
+
   <div class="foxx-pillars-overlay" 
-    style="background-color: {{ section.settings.overlay_color | default: '#0071b9' }}; opacity: {{ section.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};"></div>
-  
+    style="background-color: {{ section.settings.overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.overlay_opacity | default: 95 | divided_by: 100.0 }};"></div>
+
   <div class="foxx-pillars-container">
     <div class="foxx-section-header">
       <h2 class="foxx-section-title">{{ section.settings.section_title | default: 'Our Four Pillars' }}</h2>
@@ -165,8 +164,8 @@
       {% for block in section.blocks %}
         {% if block.type == 'pillar' %}
           <div class="foxx-pillar-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
-            <div class="foxx-pillar-number">{{ forloop.index }}</div>
-            
+            <div class="foxx-pillar-number" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};">{{ forloop.index }}</div>
+
             <div class="foxx-pillar-icon-wrapper">
               {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
                 <div class="foxx-pillar-icon foxx-image-icon">
@@ -186,8 +185,6 @@
               <div class="foxx-pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};"></div>
               <p class="foxx-pillar-description">{{ block.settings.description }}</p>
             </div>
-
-            <div class="foxx-pillar-glow" style="background: radial-gradient(circle, {% if block.settings.custom_color != blank %}{{ block.settings.custom_color | color_modify: 'alpha', 0.1 }}{% else %}{{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }}{% endif %} 0%, transparent 70%);"></div>
           </div>
         {% endif %}
       {% endfor %}
@@ -196,7 +193,7 @@
 </section>
 
 <style>
-/* Foxx Four Pillars Section - Fixed Styling */
+/* Foxx Four Pillars Section */
 .foxx-four-pillars-section {
   padding: 100px 0;
   position: relative;
@@ -204,8 +201,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
 }
@@ -234,32 +230,29 @@
 }
 
 .foxx-section-title {
-  font-size: 52px;
-  font-weight: 800;
-  color: #ffffff;
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
   margin-bottom: 25px;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
 }
 
 .foxx-section-description {
-  font-size: 22px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  color: #666;
   margin-bottom: 35px;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: 1.6;
 }
 
 .foxx-title-underline {
-  width: 100px;
-  height: 5px;
+  width: 80px;
+  height: 4px;
   margin: 0 auto;
-  border-radius: 3px;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
 }
 
 /* Pillars Grid */
@@ -270,99 +263,82 @@
   align-items: stretch;
 }
 
-/* Pillar Cards - FIXED */
+/* Pillar Cards */
 .foxx-pillar-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  padding: 50px 35px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 25px;
   text-align: center;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  min-height: 400px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .foxx-pillar-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  box-shadow: 0 35px 70px rgba(0, 113, 185, 0.25);
-  background: rgba(255, 255, 255, 1);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 113, 185, 0.15);
 }
 
-/* Pillar Number - FIXED */
+/* Pillar Number */
 .foxx-pillar-number {
   position: absolute;
   top: -15px;
-  right: 25px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--accent-color, #0071b9), #005a91);
+  right: 20px;
+  width: 40px;
+  height: 40px;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: 800;
-  box-shadow: 0 5px 15px rgba(0, 113, 185, 0.4);
-  transition: all 0.3s ease;
-  border: 3px solid rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(0, 113, 185, 0.3);
   z-index: 10;
 }
 
-.foxx-pillar-card:hover .foxx-pillar-number {
-  transform: scale(1.15) rotate(10deg);
-  box-shadow: 0 8px 25px rgba(0, 113, 185, 0.6);
-}
-
-/* Pillar Icon - FIXED */
+/* Pillar Icon */
 .foxx-pillar-icon-wrapper {
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
-  position: relative;
 }
 
 .foxx-pillar-icon {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
+  background: rgba(0, 113, 185, 0.1);
   border-radius: 50%;
-  transition: all 0.5s ease;
-  position: relative;
-  border: 3px solid rgba(0, 113, 185, 0.2);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(0, 113, 185, 0.2);
 }
 
 .foxx-pillar-icon.foxx-svg-icon svg {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.4s ease;
+  width: 40px;
+  height: 40px;
 }
 
 .foxx-pillar-icon.foxx-image-icon img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  transition: transform 0.4s ease;
 }
 
 .foxx-pillar-card:hover .foxx-pillar-icon {
-  transform: scale(1.15) rotate(8deg);
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.2), rgba(0, 113, 185, 0.3));
+  transform: scale(1.1);
+  background: rgba(0, 113, 185, 0.2);
 }
 
-/* Pillar Content - FIXED */
+/* Pillar Content */
 .foxx-pillar-content {
-  position: relative;
-  z-index: 2;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -370,50 +346,27 @@
 }
 
 .foxx-pillar-title {
-  font-size: 26px;
-  font-weight: 800;
-  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  transition: all 0.3s ease;
-  line-height: 1.2;
-  /* FIXED: Ensure text is always visible */
-  color: #333 !important;
-}
-
-.foxx-pillar-card:hover .foxx-pillar-title {
-  color: #0071b9 !important;
+  letter-spacing: 1px;
+  color: #333;
 }
 
 .foxx-pillar-divider {
-  width: 60px;
-  height: 4px;
-  margin: 0 auto 25px;
+  width: 50px;
+  height: 3px;
+  margin: 0 auto 20px;
   border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.foxx-pillar-card:hover .foxx-pillar-divider {
-  width: 80px;
 }
 
 .foxx-pillar-description {
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
   margin: 0;
-  transition: color 0.3s ease;
   text-align: left;
-  /* FIXED: Ensure text is always visible */
-  color: #555 !important;
-}
-
-.foxx-pillar-card:hover .foxx-pillar-description {
-  color: #333 !important;
-}
-
-/* Remove problematic glow effect */
-.foxx-pillar-glow {
-  display: none;
 }
 
 /* Responsive Design */
@@ -422,16 +375,15 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
-  
+
   .foxx-section-title {
-    font-size: 44px;
+    font-size: 40px;
   }
 }
 
 @media (max-width: 768px) {
   .foxx-four-pillars-section {
     padding: 80px 0;
-    background-attachment: scroll;
   }
 
   .foxx-pillars-container {
@@ -439,8 +391,8 @@
   }
 
   .foxx-section-title {
-    font-size: 36px;
-    letter-spacing: 2px;
+    font-size: 32px;
+    letter-spacing: 1px;
   }
 
   .foxx-section-description {
@@ -449,53 +401,23 @@
 
   .foxx-pillars-grid {
     grid-template-columns: 1fr;
-    gap: 25px;
-  }
-
-  .foxx-pillar-card {
-    padding: 40px 25px;
-    min-height: 350px;
-  }
-
-  .foxx-pillar-icon {
-    width: 70px;
-    height: 70px;
-  }
-
-  .foxx-pillar-icon.foxx-svg-icon svg,
-  .foxx-pillar-icon.foxx-image-icon img {
-    width: 35px;
-    height: 35px;
-  }
-
-  .foxx-pillar-title {
-    font-size: 22px;
-  }
-
-  .foxx-pillar-description {
-    font-size: 15px;
-  }
-
-  .foxx-pillar-number {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    top: -10px;
-    right: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .foxx-section-title {
-    font-size: 28px;
-  }
-
-  .foxx-section-description {
-    font-size: 16px;
+    gap: 20px;
   }
 
   .foxx-pillar-card {
     padding: 35px 20px;
+    min-height: 300px;
+  }
+
+  .foxx-pillar-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .foxx-pillar-icon.foxx-svg-icon svg,
+  .foxx-pillar-icon.foxx-image-icon img {
+    width: 30px;
+    height: 30px;
   }
 
   .foxx-pillar-title {
@@ -505,9 +427,17 @@
   .foxx-pillar-description {
     font-size: 14px;
   }
+
+  .foxx-pillar-number {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    top: -12px;
+    right: 15px;
+  }
 }
 
-/* Animation on Scroll */
+/* Animation */
 @media (prefers-reduced-motion: no-preference) {
   .foxx-pillar-card {
     opacity: 0;
@@ -525,34 +455,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .foxx-pillar-card,
-  .foxx-pillar-icon {
-    animation: none;
-    transition: none;
-  }
-}
-
-.foxx-pillar-card:focus {
-  outline: 3px solid #ffffff;
-  outline-offset: 5px;
-}
-
-/* Print Styles */
-@media print {
-  .foxx-four-pillars-section {
-    background: white !important;
-    color: black !important;
-  }
-
-  .foxx-pillars-overlay,
-  .foxx-pillar-glow,
-  .foxx-pillar-number {
-    display: none;
   }
 }
 </style>
