@@ -1,0 +1,764 @@
+<div id="contact-us-custom-page" style="width:100%; padding:20px; margin:0 auto;display:block;">
+ <style>
+
+   #contact-us-custom-page .card {
+    width: 480px;
+    border: 1px solid #c3c3c3;
+    border-radius: 0px;
+    background-color: white;
+    overflow: visible; /* Allow content to be visible outside the card if necessary */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 10px; /* Add padding inside the card */
+    box-sizing: border-box; /* Ensure padding is included in the card's dimensions */
+}
+
+  #contact-us-custom-page .title {
+    padding: 10px;
+    color: #0071b9;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom:0px;
+    line-height: normal;
+    padding-bottom: 0px !important;
+    padding-left: 10px;
+    margin-bottom: 0px;
+    margin-top:0px;
+
+}
+
+  #contact-us-custom-page .inner-card-title svg {
+    width:28px!important;
+    height:28px!important;
+    fill: #0071b9!important;
+    stroke:#0071b9!important;
+}
+  #contact-us-custom-page .inner-card-title {
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+    padding-right:10px;
+}
+
+  #contact-us-custom-page .content {
+    display: flex;
+    padding: 10px;
+}
+
+  #contact-us-custom-page img.team-member-image {
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+    border-radius: 10px;
+    border:1px solid #cccccc;
+    margin-right: 10px;
+    margin-top:0px!important
+}
+
+  #contact-us-custom-page .details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Add spacing between child elements */
+    flex-wrap: wrap; /* Ensure content wraps properly */
+    word-break: break-word; /* Handle long words gracefully */
+    overflow: visible; /* Prevent content from being hidden */
+    margin: 0;
+}
+
+  #contact-us-custom-page .page-content.rte p {
+    font-size:16px!important
+}
+  #contact-us-custom-page .details p {
+    display: flex; /* Align text and link in a row */
+    align-items: center; /* Vertically align */
+    gap: 5px; /* Add spacing between E: and the link */
+    margin: 0; /* Remove margin */
+    line-height: 1.2; /* Adjust line spacing */
+    white-space: normal; /* Allow wrapping to the next line */
+    word-wrap: break-word; /* Ensure long words break to fit the container */
+}
+
+  #contact-us-custom-page .details p:last-child {
+    font-size:12px
+}
+
+  #contact-us-custom-page .details a {
+    text-decoration: none; /* Remove underline */
+    color: #0071b9; /* Link color */
+    word-wrap: break-word; /* Break long email addresses if necessary */
+    overflow-wrap: break-word; /* Ensure proper breaking of long words */
+}
+
+
+  #contact-us-custom-page .details p:first-child {
+    font-weight: bold;
+}
+
+
+/* .details p:nth-child(3) {
+    color: #0071b9;
+} */
+
+
+  #contact-us-custom-page .team_member_card_main_2column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* Align cards to the left */
+  max-width: 100%; /* Allow the container to adapt to screen size */
+  margin: 0 auto; /* Center the cards within the available space */
+  padding: 0 10px; /* Add padding to ensure cards don't touch the edges */
+  padding-left:0px;
+}
+
+  #contact-us-custom-page .team_member_card_main_2column > .card {
+  flex: 1 1 30%; /* Adjust to fit approximately three cards per row */
+  box-sizing: border-box; /* Include padding in width calculation */
+  max-width: 33.3%; /* Limit max width to maintain layout consistency */
+  min-width: 280px; /* Ensure cards don't become too small on medium screens */
+}
+
+@media (max-width: 1024px) {
+   #contact-us-custom-page .team_member_card_main_2column > .card {
+    flex: 1 1 45%; /* Two cards per row on tablets */
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+    #contact-us-custom-page .team_member_card_main_2column > .card {
+    flex: 1 1 100%; /* One card per row on smaller screens */
+    max-width: 100%; /* Make sure the width is 100% for small screens */
+  }
+}
+
+
+
+         #contact-us-custom-page .contact_us_bottom {
+          display:grid;
+         grid-template-columns: 1fr 1fr;
+          margin-top:40px;
+        }
+      @media screen and (max-width:767px) {
+          /* .team_member_card_main_2column {
+  display:grid;
+  grid-template-columns: 1fr;
+
+} */
+
+         #contact-us-custom-page .contact_us_bottom {
+          display:grid;
+         grid-template-columns: 1fr;
+        margin-top:20px
+        }
+      }
+
+       #contact-us-custom-page .timestamp_last_updated {
+        display:flex; flex-wrap:wrap;justify-content:space-between;align-items:center
+      }
+    </style>
+
+<article class="site-page">
+    <header class="page-masthead timestamp_last_updated">
+      <h1 class="page-title">
+        {{ page.title }}     
+        <span id="updated-time">{{ page.updated_at | date: "%Y-%m-%d %H:%M:%S" }}</span>
+      </h1>
+      {% comment %} {% if page.metafields.custom.last_updated %}
+        {% assign last_updated = page.metafields.custom.last_updated | date: "%d %B %Y, %H:%M" %}
+        <p>Last updated on: <strong>{{ last_updated }}</strong></p>
+      {% else %}
+        <p>This page has not been updated yet.</p>
+      {% endif %} {% endcomment %}
+
+    </header>
+    <div class="page-content rte">
+        {{ page.content }}
+        <p><span>One of the pillars of importance at Foxx Life Sciences is our commitment to Customer Service. Someone is available to take your call Monday through Friday (except on Holidays) from 8:30AM-5:00PM EST at </span><b>(603) 890-FOXX (3699)</b><span>. For general product inquiries, or stock availability, please email&nbsp;</span><a data-linkindex="0" data-auth="NotApplicable" href="mailto:sales@foxxlifesciences.com" target="_blank">sales@foxxlifesciences.com</a><span>. To follow up on the status of an existing order, or to place a purchase order, please email </span><a data-linkindex="1" data-auth="NotApplicable" href="mailto:PO@foxxlifesciences.com" target="_blank">PO@foxxlifesciences.com</a><span>.</span></p>
+        <h2>Executive Management</h2>
+        <div class="team_member_card_main_2column">
+         <!-- Thomas F. Taylor  -->
+         <div class="card">
+            <div class="inner-card-title">
+            <h3 class="title">Thomas F. Taylor</h3>
+            <a href="https://www.linkedin.com/in/thomasfoxxtaylor/?source=website"
+              target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Thomas F. Taylor"
+            ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/thomas-taylor-Founder_Chairman_CEO-Foxx_Life_Sciences.png?v=1742824491" alt="Thomas F. Taylor | Founder, Chairman & CEO" class="team-member-image">
+                <div class="details">
+                    <p>Founder, Chairman & CEO</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 617 320-1138">+1- (617) 320-1138</a> </p>
+                    <p>E: <a href="mailto:thomas.taylor@foxxlifesciences.com">thomas.taylor@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+
+        <!-- Rick Schwartz  -->
+        <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Rick Schwartz</h3>
+                <a href="https://www.linkedin.com/in/rick-schwartz-aa16515/?source=website"
+                 target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Rick Schwartz"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Rick_Schwartz_Rick_Schwartz-President-Foxx_Life_Sciences.png?v=1742824696" alt="Rick Schwartz | President, Foxx Life Sciences | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>President</p>
+                    <p>Foxx Life Sciences</p>
+                     <p>P: <a href="tel:+610-547-7607">+610-547-7607</a> </p>
+                    <p>E: <a href="mailto:rick.schwartz@foxxlifesciences.com">rick.schwartz@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+          <!-- David Alves  -->
+          <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">David Alves, PMP</h3>
+                <a href="https://www.linkedin.com/in/djalvesma/?source=website"
+                 target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for David Alves, PMP"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/david-alves-PMP-foxx-life-sciences.png?v=1732883277" alt="David Alves, PMP | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>Vice President of Information Technology</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                    <p>E: <a href="mailto:david.alves@foxxlifesciences.com">david.alves@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+         <!--  -->
+         <!-- Eknath Kulkarni  -->
+             <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Eknath Kulkarni</h3>
+                    <a href="https://www.linkedin.com/in/eknath-kulkarni-21719829/?source=website" 
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Eknath Kulkarni"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Eknath_Kulkarni_Director_of_Product_Management_Foxx_Life_Sciences.png?v=1742825080" alt="Eknath Kulkarni | Director of Product Management | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Co-Founder and President</p>
+                        <p>Foxx Life Sciences APAC</p>
+                        <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                        <p>D: <a href="tel:+1 860 938-4505">+1-860 938-4505</a> </p>
+                        <p>E: <a href="mailto:eknath.kulkarni@foxxlifesciences.com">eknath.kulkarni@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div>
+             <!--  -->
+              <!-- James McGuffick  -->
+             {% comment %} <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">James McGuffick</h3>
+                    <a href="https://www.linkedin.com/in/james-mcguffick-0a935830/?source=website"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for James McGuffick"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/james-mcguffick-foxx-life-sciens-team-member.png?v=1732892902" alt="James McGuffick | Senior Global Product Analyst | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Senior Global Product Analyst</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                        <p>E: <a href="mailto:james.mcguffick@foxxlifesciences.com">james.mcguffick@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+      </div>
+         <h2>Sales</h2>
+         <p>For direct account customers, or if you are interested in opening a direct account with Foxx Life Sciences, please reach out to one of the Sales Representatives that covers the geographic territory your company is in.</p>
+         <div class="team_member_card_main_2column">
+        <!--Alice Molteni Taylor -->
+        <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Alice Molteni Taylor</h3>
+                <a href="https://www.linkedin.com/in/alice-molteni-taylor-b8942661/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Alice Molteni Taylor"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Alice_Molteni_Taylor-_VP_of_Bioprocess_Sales_-_America_Europe_Foxx_Life_Sciences.png?v=1742825018" alt="A.J. Schmelzer | VP of Bioprocess Sales - America & Europe | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>VP of Bioprocess Sales - America & Europe</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 608 228-2800">+1-(608) 228-2800</a> </p>
+                    <p>E: <a href="mailto:alice.moltenitaylor@foxxlifesciences.com">alice.moltenitaylor@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <!--Diane Magada -->
+        {% comment %} <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Diane Magada</h3>
+                <a href="https://www.linkedin.com/in/diane-magada-3414971a9/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Diane Magada"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/diane-foxx-life-sciences-team-member-pic.png?v=1732962313" alt="Diane Magada | SVP of Sales and Marketing - Lab Division | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>SVP of Sales and Marketing - Lab Division</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                    <p>D: <a href="tel:+1 508 944-0822">+1 508-944-0822</a> </p>
+                    <p>E: <a href="mailto:diane.magada@foxxlifesciences.com">diane.magada@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Scott Holt</h3>
+                <a href="https://www.linkedin.com/in/scott-holt-5294b84/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Diane Magada"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Scott_Holt.jpg?v=1739991049" alt="Scott Holt | Vice President - Laboratory Sales | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>Vice President - Laboratory Sales</p>
+                    <p>Foxx Life Sciences</p>
+                    {% comment %} <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                    <p>D: <a href="tel:+1 508 944-0822">+1 508-944-0822</a> </p> {% endcomment %}
+                    <p>E: <a href="mailto:scott.holt@foxxlifesciences.com">scott.holt@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+          <!---->
+           <!--Derek Pendlebury -->
+           {% comment %} <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Derek Pendlebury</h3>
+                <a href="https://www.linkedin.com/in/derek-pendlebury-407b797/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Derek Pendlebury"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Derek_Pendlebury_Snr._V.P._Bioprocess_Group_Foxx_Life_Sciences.png?v=1742825315" alt="Derek Pendlebury | Snr. V.P. Bioprocess Group | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>Snr. V.P. Bioprocess Group</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 603 890-3699">+1-(603) 890-3699</a> </p>
+                    <p>E: <a href="mailto:derek.pendlebury@foxxlifesciences.com">derek.pendlebury@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+          <!---->
+          <!--Peter Costa -->
+          <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Peter Costa</h3>
+                <a href="https://www.linkedin.com/in/petercostajr/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Peter Costa"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/peter-costa-foxx-life-sciences-team-member-pic.png?v=1732963431" alt="Peter Costa | Director of Corporate Accounts | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    <p>Director of Corporate Accounts</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 6038903699">+1 (603) 890-3699</a> EXT: 104</p>
+                    <p>D: <a href="tel:+1 6036600467">+1 (603) 660-0467</a> </p>
+                    <p>E: <a href="mailto:peter.costa@foxxlifesciences.com">peter.costa@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+          <!---->
+           <!--Yvette Kowalczyk -->
+           {% comment %} <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Yvette Kowalczyk</h3>
+                <a href="https://www.linkedin.com/in/yvette-kowalczyk-6766b0120/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Yvette Kowalczyk"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/yvette-foxx-life-sciences-team-member-pic.png?v=1732973639" alt="Yvette Kowalczyk | Director of Inside Sales and Corporate Accounts | Foxx Life Sciences" class="team-member-image">
+                <div class="details">
+                    {% comment %} <p>Director of Inside Sales and Corporate Accounts</p> {% endcomment %}
+                    <p>Area Territory Manager - North East, East Coast (Laboratory)</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+1 6038903699">+1 (603) 890-3699</a> EXT: 119</p>
+                    <p>D: <a href="tel:+1 6037314444">+1 (603) 731-4444</a> </p>
+                    <p>E: <a href="mailto:yvette.kowalczyk@foxxlifesciences.com">yvette.kowalczyk@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+          <!---->
+             <!--Sayali Atole -->
+             {% comment %} <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Sayali Atole</h3>
+                    <a href="https://www.linkedin.com/in/sayali-atole-2b7334153/?source=website"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Sayali Atole"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/sayali-foxx-life-sciences-team-member-pic.png?v=1732974100" alt="Sayali Atole | Business Development Manager | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Business Development Manager</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:+15512561846">+1 551-256-1846</a> </p>
+                        <p>E: <a href="mailto:sayali.atole@foxxlifesciences.com">sayali.atole@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+              <!---->
+                   <!--Matthew Uhlman -->
+                   <div class="card">
+                    <div class="inner-card-title">
+                        <h3 class="title">Matthew Uhlman</h3>
+                        <a href="https://www.linkedin.com/in/matthew-uhlman/?source=website"
+                        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Matthew Uhlman"
+                        ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        </div>
+                    <div class="content">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/matt-foxx-life-sciences-team-member-pic.png?v=1732974413" alt="Matthew Uhlman | East Coast Lab Territory Manager | Foxx Life Sciences" class="team-member-image">
+                        <div class="details">
+                            {% comment %} <p>East Coast Lab Territory Manager</p> {% endcomment %}
+                            <p>Area Territory Manager - East Coast (Laboratory)</p>
+                            <p>Foxx Life Sciences</p>
+                            <p>P: <a href="tel:+18573523779">+1-857-352-3779</a> </p>
+                            <p>E: <a href="mailto:matthew.uhlman@foxxlifesciences.com">matthew.uhlman@foxxlifesciences.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                  <!---->
+                   <!--Lindsey Leborgne -->
+                   <div class="card">
+                    <div class="inner-card-title">
+                        <h3 class="title">Lindsey Leborgne</h3>
+                        <a href="https://www.linkedin.com/in/lindseyleborgne/?source=website"
+                        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Lindsey Leborgne"
+                        ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        </div>
+                    <div class="content">
+                        <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Lindsey-Leborgne-foxx-life-sciences-team-member-pic.jpg?v=1732974776" alt="Lindsey Leborgne | Area Territory Manager - Mid Atlantic (Bioprocess) | Foxx Life Sciences" class="team-member-image">
+                        <div class="details">
+                            <p>Area Territory Manager - Mid Atlantic (Bioprocess)</p>
+                            <p>Foxx Life Sciences</p>
+                            <p>P: <a href="tel:6038608027">(603) 860-8027</a></p>
+                            <p>E: <a href="mailto:lindsey.leborgne@foxxlifesciences.com">lindsey.leborgne@foxxlifesciences.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                  <!---->
+           <!-- A.J. Schmelzer  -->
+           <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">A.J. Schmelzer</h3>
+                <a href="https://www.linkedin.com/in/aj-schmelzer/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for A.J. Schmelzer"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/A.J._Schmelzer-team-member.jpg?v=1732881750" alt="A.J. Schmelzer | Territory Sales Manager West Coast (Laboratory) | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Area Territory Manager - West Coast (Laboratory)</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:6082282800">(608) 228-2800</a> </p>
+                    <p>E: <a href="mailto:Andrew.Schmelzer@foxxlifesciences.com">andrew.schmelzer@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+             <!-- -->
+             <!-- Akansha Kumari  -->
+             <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Akansha Kumari</h3>
+                    <a href="https://www.linkedin.com/in/akansha-singh-ab874319b/?source=website"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Akansha Kumari"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Akanksha_Kumari_Inside_Sales_Lab_Account_Manager_Foxx_Life_Sciences.jpg?v=1742840888" alt="Akanksha Kumari | Inside Sales Lab Account Manager | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Inside Sales Manager –  West Coast (Laboratory)</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:(603) 824-6127">(603) 824-6127</a></p>
+                        <p>E: <a href="mailto:akansha.kumari@foxxlifesciences.com">akansha.kumari@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div>
+              <!-- -->
+                <!-- -->
+             <!-- Sudha Malipeddi  -->
+             <!-- <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Sudha Malipeddi</h3>
+                    <a href="https://www.linkedin.com/in/sudha-malipeddi-3157bb108/?source=website"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Sudha Malipeddi"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Sudha_Malipeddi_Northwest_Bioprocess_Sales_Manager_Foxx_Life_Sciennces.jpg?v=1742840246" alt="Sudha Malipeddi | Area Territory Manager (Bioprocess) | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Area Territory Manager - West Coast (Bioprocess)</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:(603)-890-3699">(603)-890-3699</a></p>
+                        <p>P<a href="tel:(408)-705-0014">(408)-705-0014</a></p>
+                        <p>E: <a href="mailto:sudha.malipeddi@foxxlifesciences.com">sudha.malipeddi@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div> -->
+              <!-- -->
+             <!-- -->
+             <!-- Sudha Malipeddi  -->
+             {% comment %} <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Trent Roesch</h3>
+                    <a href="#"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Trent Roesch"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/foxxlifesciences-contact-us-laboratory-sales-us-sales-team-member-trent-avatar.png?v=1743522201" alt="Trent Roesch | Area Territory Manager - Central, Mid West Coast - Bioprocess & Lab Division | Foxx Life Sciences" class="team-member-image">
+                    <div class="details">
+                        <p>Area Territory Manager - Central, Mid West (Laboratory & Bioprocess)</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:(317)-775-8577">(317)-775-8577</a></p>
+                        <p>E: <a href="mailto:trent.roesch@foxxlifesciences.com">trent.roesch@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+              <!-- -->
+        </div>
+        <h2>Product & Marketing</h2>
+        <div class="team_member_card_main_2column">  
+        <!-- Andy Davies -->
+        <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Andy Davies</h3>
+                <a href="https://www.linkedin.com/in/andy-davies-210455b/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Dwayne Theon Lobo"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Andy_Davies_Vice_President_Laboratory_Product_Marketing_Foxx_Life_Sciences.png?v=1742825243" alt="Andy Davies | Vice President, Laboratory Product & Marketing | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Vice President, Laboratory Product & Marketing</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel: +44 (0) 7714800219">+44 (0) 7714800219</a> </p>
+                    <p>E: <a href="mailto:andy.davies@foxxlifesciences.com">andy.davies@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+         <!-- Chris Tubertini -->
+         {% comment %} <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Chris Tubertini</h3>
+                <a href="https://www.linkedin.com/in/chris-tubertini-b385b621/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Dwayne Theon Lobo"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/chris-foxx-life-sciences-team.jpg?v=1739991218" alt="Chris Tubertini | Vice President, Bioprocess Product & Marketing | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Vice President, Bioprocess Product & Marketing</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:(603) 890-3699  ">(603) 890-3699  </a></p>
+                    <p>D: <a href="tel:(835) 247-4944">(835) 247-4944</a> </p>
+                    <p>E: <a href="mailto:chris.tubertini@foxxlifesciences.com">chris.tubertini@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- -->
+        <!-- Dwayne Theon Lobo  -->
+           <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Dwayne Theon Lobo</h3>
+                <a href="https://www.linkedin.com/in/dwayne-theon-lobo-919216138/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Dwayne Theon Lobo"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/dwayne-foxx-life-sciences-team-member-pic.png?v=1732975286" alt="Dwayne Theon Lobo | Product Manager | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Product Manager</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:6073380377">1+ (607) 338-0377</a> </p>
+                    <p>E: <a href="mailto:dwayne.lobo@foxxlifesciences.com">dwayne.lobo@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+        <!-- Gaurav Sharda  -->
+        <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Gaurav Sharda</h3>
+                <a href="https://www.linkedin.com/in/gaurav-sharda-997189162/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Gaurav Sharda"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Gaurav_Sharda_Marketing_Manager_Foxx_Life_Sciences.png?v=1742825383" alt="Gaurav Sharda | Marketing Manager | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Marketing Manager</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:+91 9818 2924 05">+91 9818 2924 05</a> </p>
+                    <p>E: <a href="mailto:gaurav.sharda@foxxlifesciences.com">gaurav.sharda@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+         <!-- -->
+            <!-- Saurabh Joshi  -->
+            <div class="card">
+                <div class="inner-card-title">
+                    <h3 class="title">Saurabh Joshi</h3>
+                    <a href="https://www.linkedin.com/in/saurabh-joshi-9430618b/?source=website"
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Saurabh Joshi"
+                    ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    </div>
+                <div class="content">
+                    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Saurabj_Joshi_product_manager_laboratory_Foxx_Life_Sciences.jpg?v=1742839872" alt="Saurabh Joshi | Product Manager(Laboratory) | Foxx Life Sciennces" class="team-member-image">
+                    <div class="details">
+                        <p>Product Manager (Laboratory)</p>
+                        <p>Foxx Life Sciences</p>
+                        <p>P: <a href="tel:+91-7985475137">+91-7985475137</a> </p>
+                        <p>E: <a href="mailto:saurabh.joshi@foxxlifesciences.com">saurabh.joshi@foxxlifesciences.com</a></p>
+                    </div>
+                </div>
+            </div>
+             <!-- -->
+        </div>
+        <!-- -->
+        <h2>Quality</h2>
+        <div class="team_member_card_main_2column">  
+        <!-- Syed Rehan A. Rizvi  -->
+           <div class="card">
+            <div class="inner-card-title">
+                <h3 class="title">Syed Rehan A. Rizvi</h3>
+                <a href="https://www.linkedin.com/in/syedrehanrizvi/?source=website"
+                target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile for Syed Rehan A. Rizvi"
+                ><svg xmlns="http://www.w3.org/2000/svg" fill="#0077B5" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                </div>
+            <div class="content">
+                <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/syed-rizvi-foxx-life-sciences-team-member-pic-v2.jpg?v=1732976088" alt="Syed Rehan A. Rizvi | Product Manager | Foxx Life Sciennces" class="team-member-image">
+                <div class="details">
+                    <p>Senior Vice President - Global Quality & Regulatory Compliance</p>
+                    <p>Foxx Life Sciences</p>
+                    <p>P: <a href="tel:6038903699">(603) 890-3699</a> </p>
+                    <p>E: <a href="mailto:syed.rizvi@foxxlifesciences.com">syed.rizvi@foxxlifesciences.com</a></p>
+                </div>
+            </div>
+        </div>
+        </div>
+                 
+
+
+ 
+
+            <!-- -->
+        <!-- Home Address and mailing -->
+        <table width="100%;" style="margin-top:10px">
+            <tbody>
+            <tr>
+            <td>
+            <div style="text-align: left;"><strong>(Plant 1) Primary Mailing Address</strong><span>:</span></div>
+            <div style="text-align: left;"><span>Foxx Life Sciences</span><br>
+            <a href="https://maps.google.com/maps?ll=42.910641,-71.425573&z=16&t=m&hl=en&gl=US&mapclient=embed&q=12%20N%20Wentworth%20Ave%20Londonderry%2C%20NH%2003053"
+            target="_blank" rel="noopener noreferrer" aria-label="Primary Mailing Address">  
+             <span>12 N. Wentworth Ave.</span><br> <span>Londonderry, NH 03053</span><br> <span>U.S.A.</span>
+             </a>
+             </div>
+            </td>
+            <td style="text-align: left;">
+            <div><strong>(Plant 2) Secondary&nbsp;Mailing Address</strong><span>:</span></div>
+            <div><span>Foxx Life Sciences</span><br>
+            <a href="https://maps.google.com/maps?ll=42.7639,-71.242038&z=16&t=m&hl=en-US&gl=US&mapclient=embed&q=6%20Delaware%20Dr%20Salem%2C%20NH%2003079"
+              target="_blank" rel="noopener noreferrer" aria-label="Seconday Mailing Address"
+            >  
+            <span>6 Delaware Dr, Salem, NH 03079.</span><br><span>U.S.A.</span></a>
+            </div>
+            </td>
+              <!-- 3rd Location -->
+            <td style="text-align: left;">
+            <div><strong>(Plant 3) Third&nbsp;Mailing Address</strong><span>:</span></div>
+            <div><span>Foxx Life Sciences APAC First Location</span><br>
+            <a href="https://www.google.com/maps/place/Foxx+Life+Sciences/@17.634853,78.532917,16z/data=!4m6!3m5!1s0x3bcb8718b38979c3:0xe7c5166972344653!8m2!3d17.6348525!4d78.5329168!16s%2Fg%2F11fs86y9h9?hl=en&entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener noreferrer" aria-label="Seconday Mailing Address"
+            >  
+            <span>Pudur Village Rd, Medchal, Secunderabad, Telangana 501401</span><br><span>India</span></a>
+            </div>
+            </td> 
+            <!-- 4th -->
+              <td style="text-align: left;">
+            <div><strong>(Plant 4) Fourth&nbsp;Mailing Address</strong><span>:</span></div>
+            <div><span>Foxx Life Sciences APAC 2nd Location</span><br>
+            <a href="https://www.google.com/maps/place/Foxx+Life+Sciences-+Plant+4/@17.62959,78.523172,18z/data=!4m6!3m5!1s0x3bcb87f3c3459f15:0x379a651407aef8a!8m2!3d17.6295898!4d78.5231718!16s%2Fg%2F11w_tygy2r?hl=en&entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener noreferrer" aria-label="Seconday Mailing Address"
+            >  
+            <span>619, Medchal - Ghanpur - Shamirpet Rd, Pudur, Hyderabad, Telangana 501401</span><br><span>India</span></a>
+            </div>
+            </td> 
+            <!-- 5th -->
+            <td style="text-align: left;">
+            <div><strong>(Plant 5) Fifth&nbsp;Mailing Address</strong><span>:</span></div>
+            <div><span>Foxx Life Sciences APAC Third Location</span><br>
+            <a href="https://www.google.com/maps/place/Foxx+Life+Sciences/@17.634853,78.532917,16z/data=!4m6!3m5!1s0x3bcb8718b38979c3:0xe7c5166972344653!8m2!3d17.6348525!4d78.5329168!16s%2Fg%2F11fs86y9h9?hl=en&entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener noreferrer" aria-label="Seconday Mailing Address"
+            >  
+            <span>Pudur Village Rd, Medchal, Secunderabad, Telangana 501401</span><br><span>India</span></a>
+            </div>
+            </td> 
+            </tr>
+            </tbody>
+            </table>
+            <div style="text-align: left; margin-top:10px">
+            <table width="100%">
+            <tbody>
+            <tr>
+            <td><strong><span>Phone Number:</span></strong><br><span><strong>Customer Service</strong>:&nbsp;(603) 890-FOXX (3699)</span></td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            <table width="100%">
+            <tbody>
+            <tr>
+            <td>
+
+            <div style="text-align: left;"><strong>Company Email&nbsp;Addresses<span>:</span></strong></div>
+            <div style="text-align: left;"></div>
+            <div style="text-align: left;"><strong>Accounts Receivable<span>: </span><a href="mailto:AR@foxxlifesciences.com" target="_blank">AR@foxxlifesciences.com</a></strong></div>
+            <div style="text-align: left;"><strong>Customer Service: <a href="mailto:CustomerService@foxxlifesciences.com" target="_blank">CustomerService@foxxlifesciences.com</a></strong></div>
+            <div style="text-align: left;"></div>
+            <div style="text-align: left;"><strong>CoC Documentation<span>: </span><a href="mailto:CoC@foxxlifesciences.com" target="_blank">CoC@foxxlifesciences.com</a></strong></div>
+            <div style="text-align: left;"></div>
+            <div style="text-align: left;"><strong>Purchase Order<span>: </span><a href="mailto:PO@foxxlifesciences.com" target="_blank">PO@foxxlifesciences.com</a></strong></div>
+            <div style="text-align: left;"></div>
+            <div style="text-align: left;"><strong>Sales<span>:&nbsp;</span><a href="mailto:sales@foxxlifesciences.com" target="_blank">sales@foxxlifesciences.com</a></strong></div>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+    </div>
+    {% if page.metafields.custom.last_updated %}
+        {% assign last_updated = page.metafields.custom.last_updated | date: "%d %B %Y, %H:%M" %}
+        <p>Last updated on: <strong>{{ last_updated }}</strong></p>
+      {% else %}
+        {% comment %} <p>This page has not been updated yet.</p> {% endcomment %}
+      {% endif %}
+
+
+    </article>
+  <div style="margin: 0px auto; text-align: center;" class="pxFormGenerator" id="RjDULihiF2PR6_kpBKgyYQ">
+<meta charset="UTF-8">
+<span></span>
+</div> <div class="powr-map" id="77020628_1678294286"></div>
+    </div>
+    </div>
+
+</div>
