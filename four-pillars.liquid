@@ -144,9 +144,7 @@
 
 <!-- Four Pillars Section -->
 <section class="foxx-four-pillars-section" data-section-id="{{ section.id }}" 
-  {% if section.settings.background_image %}
-    style="background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');"
-  {% endif %}>
+  style="--accent-color: {{ section.settings.accent_color | default: '#0071b9' }};{% if section.settings.background_image %} background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');{% endif %}">
 
   <div class="foxx-pillars-overlay" 
     style="background-color: {{ section.settings.overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.overlay_opacity | default: 95 | divided_by: 100.0 }};"></div>
@@ -176,7 +174,7 @@
       {% for block in section.blocks %}
         {% if block.type == 'pillar' %}
           <div class="foxx-pillar-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
-            <div class="foxx-pillar-number" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};">{{ forloop.index }}</div>
+            <div class="foxx-pillar-number">{{ forloop.index }}</div>
 
             <div class="foxx-pillar-icon-wrapper">
               {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
@@ -184,17 +182,17 @@
                   <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
                 </div>
               {% elsif block.settings.svg_code != blank %}
-                <div class="foxx-pillar-icon foxx-svg-icon" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+                <div class="foxx-pillar-icon foxx-svg-icon">
                   {{ block.settings.svg_code }}
                 </div>
               {% endif %}
             </div>
 
             <div class="foxx-pillar-content">
-              <h3 class="foxx-pillar-title" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+              <h3 class="foxx-pillar-title">
                 {{ block.settings.title }}
               </h3>
-              <div class="foxx-pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};"></div>
+              <div class="foxx-pillar-divider"></div>
               <p class="foxx-pillar-description">{{ block.settings.description }}</p>
             </div>
           </div>
@@ -292,6 +290,20 @@
   justify-content: space-between;
 }
 
+/* Odd cards (1st, 3rd) - Filled with primary color */
+.foxx-pillar-card:nth-child(odd) {
+  background: var(--accent-color, #0071b9);
+  color: #ffffff;
+  border: 1px solid var(--accent-color, #0071b9);
+}
+
+/* Even cards (2nd, 4th) - White background */
+.foxx-pillar-card:nth-child(even) {
+  background: #ffffff;
+  color: #333;
+  border: 1px solid #f0f0f0;
+}
+
 .foxx-pillar-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 50px rgba(0, 113, 185, 0.15);
@@ -311,8 +323,21 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 700;
-  box-shadow: 0 5px 15px rgba(0, 113, 185, 0.3);
   z-index: 10;
+}
+
+/* Number styling for odd cards */
+.foxx-pillar-card:nth-child(odd) .foxx-pillar-number {
+  background-color: #ffffff;
+  color: var(--accent-color, #0071b9);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Number styling for even cards */
+.foxx-pillar-card:nth-child(even) .foxx-pillar-number {
+  background-color: var(--accent-color, #0071b9);
+  color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 113, 185, 0.3);
 }
 
 /* Pillar Icon */
@@ -328,10 +353,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 113, 185, 0.1);
   border-radius: 50%;
   transition: all 0.3s ease;
+}
+
+/* Icon styling for odd cards */
+.foxx-pillar-card:nth-child(odd) .foxx-pillar-icon {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Icon styling for even cards */
+.foxx-pillar-card:nth-child(even) .foxx-pillar-icon {
+  background: rgba(0, 113, 185, 0.1);
   border: 2px solid rgba(0, 113, 185, 0.2);
+  color: var(--accent-color, #0071b9);
 }
 
 .foxx-pillar-icon.foxx-svg-icon svg {
@@ -347,6 +384,13 @@
 
 .foxx-pillar-card:hover .foxx-pillar-icon {
   transform: scale(1.1);
+}
+
+.foxx-pillar-card:nth-child(odd):hover .foxx-pillar-icon {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.foxx-pillar-card:nth-child(even):hover .foxx-pillar-icon {
   background: rgba(0, 113, 185, 0.2);
 }
 
@@ -364,7 +408,16 @@
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #333;
+  line-height: 1.3;
+}
+
+/* Title color based on card type */
+.foxx-pillar-card:nth-child(odd) .foxx-pillar-title {
+  color: #ffffff;
+}
+
+.foxx-pillar-card:nth-child(even) .foxx-pillar-title {
+  color: var(--accent-color, #0071b9);
 }
 
 .foxx-pillar-divider {
@@ -374,12 +427,29 @@
   border-radius: 2px;
 }
 
+/* Divider color based on card type */
+.foxx-pillar-card:nth-child(odd) .foxx-pillar-divider {
+  background-color: #ffffff;
+}
+
+.foxx-pillar-card:nth-child(even) .foxx-pillar-divider {
+  background-color: var(--accent-color, #0071b9);
+}
+
 .foxx-pillar-description {
   font-size: 15px;
-  line-height: 1.6;
-  color: #666;
+  line-height: 1.7;
   margin: 0;
   text-align: left;
+}
+
+/* Description color based on card type */
+.foxx-pillar-card:nth-child(odd) .foxx-pillar-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.foxx-pillar-card:nth-child(even) .foxx-pillar-description {
+  color: #666;
 }
 
 /* Responsive Design */
