@@ -1,3 +1,4 @@
+
 {% schema %}
 {
   "name": "Mission & Vision",
@@ -5,210 +6,181 @@
   "settings": [
     {
       "type": "header",
-      "content": "Section Settings"
+      "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show Section",
+      "default": true
     },
     {
       "type": "text",
-      "id": "mission_section_title",
+      "id": "section_title",
       "label": "Section Title",
       "default": "Our Mission & Vision"
     },
     {
       "type": "color",
-      "id": "mission_background_color",
+      "id": "background_color",
       "label": "Background Color",
       "default": "#f8f9fa"
     },
     {
       "type": "color",
-      "id": "mission_accent_color",
+      "id": "accent_color",
       "label": "Accent Color",
       "default": "#0071b9"
     },
     {
-      "type": "header",
-      "content": "Mission Settings"
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
     },
     {
-      "type": "checkbox",
-      "id": "show_mission",
-      "label": "Show Mission",
-      "default": true
-    },
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px", 
+      "default": 60
+    }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "mission_title",
-      "label": "Mission Title",
-      "default": "Mission"
-    },
-    {
-      "type": "textarea",
-      "id": "mission_content",
-      "label": "Mission Content",
-      "default": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems."
-    },
-    {
-      "type": "select",
-      "id": "mission_icon_type",
-      "label": "Mission Icon Type",
-      "default": "svg",
-      "options": [
+      "type": "mission_vision_card",
+      "name": "Mission/Vision Card",
+      "settings": [
         {
-          "value": "svg",
-          "label": "SVG Icon"
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "Mission"
         },
         {
-          "value": "image",
-          "label": "Custom Image"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "id": "mission_svg_code",
-      "label": "Mission SVG Code",
-      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
-    },
-    {
-      "type": "image_picker",
-      "id": "mission_image",
-      "label": "Mission Icon Image"
-    },
-    {
-      "type": "header",
-      "content": "Vision Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vision",
-      "label": "Show Vision",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "vision_title",
-      "label": "Vision Title",
-      "default": "Vision"
-    },
-    {
-      "type": "textarea",
-      "id": "vision_content",
-      "label": "Vision Content",
-      "default": "To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow."
-    },
-    {
-      "type": "select",
-      "id": "vision_icon_type",
-      "label": "Vision Icon Type",
-      "default": "svg",
-      "options": [
-        {
-          "value": "svg",
-          "label": "SVG Icon"
+          "type": "textarea",
+          "id": "content",
+          "label": "Card Content",
+          "default": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards."
         },
         {
-          "value": "image",
-          "label": "Custom Image"
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image"
         }
       ]
-    },
-    {
-      "type": "textarea",
-      "id": "vision_svg_code",
-      "label": "Vision SVG Code",
-      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
-    },
-    {
-      "type": "image_picker",
-      "id": "vision_image",
-      "label": "Vision Icon Image"
     }
   ],
   "presets": [
     {
       "name": "Mission & Vision",
-      "category": "About"
+      "category": "About",
+      "blocks": [
+        {
+          "type": "mission_vision_card",
+          "settings": {
+            "title": "Mission",
+            "content": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.",
+            "icon_type": "svg",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+          }
+        },
+        {
+          "type": "mission_vision_card",
+          "settings": {
+            "title": "Vision",
+            "content": "To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow.",
+            "icon_type": "svg",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
 
+{% if section.settings.show_section %}
 <!-- Mission & Vision Section -->
-<section class="mission-vision-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.mission_background_color | default: '#f8f9fa' }};">
+<section class="mission-vision-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }}; padding: {{ section.settings.padding_top | default: 60 }}px 0 {{ section.settings.padding_bottom | default: 60 }}px 0;">
   <div class="mission-vision-container">
-    {% if section.settings.mission_section_title != blank %}
+    {% if section.settings.section_title != blank %}
       <div class="section-header">
-        <h2 class="section-title">{{ section.settings.mission_section_title }}</h2>
-        <div class="title-underline" style="background-color: {{ section.settings.mission_accent_color | default: '#0071b9' }};"></div>
+        <h2 class="section-title">{{ section.settings.section_title }}</h2>
+        <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
       </div>
     {% endif %}
 
-    <div class="mission-vision-grid">
-      {% if section.settings.show_mission %}
-        <div class="mission-vision-card mission-card" data-aos="fade-right">
+    <div class="mission-vision-grid" style="grid-template-columns: repeat({{ section.blocks.size | at_most: 4 }}, 1fr);">
+      {% for block in section.blocks %}
+        <div class="mission-vision-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
           <div class="card-icon-wrapper">
-            {% if section.settings.mission_icon_type == 'image' and section.settings.mission_image != blank %}
+            {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
               <div class="card-icon image-icon">
-                <img src="{{ section.settings.mission_image | img_url: '80x80' }}" alt="{{ section.settings.mission_title }}" loading="lazy">
+                <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
               </div>
-            {% elsif section.settings.mission_svg_code != blank %}
-              <div class="card-icon svg-icon" style="color: {{ section.settings.mission_accent_color | default: '#0071b9' }};">
-                {{ section.settings.mission_svg_code }}
+            {% elsif block.settings.svg_code != blank %}
+              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                {{ block.settings.svg_code }}
               </div>
             {% endif %}
           </div>
 
           <div class="card-content">
-            <h3 class="card-title" style="color: {{ section.settings.mission_accent_color | default: '#0071b9' }};">
-              {{ section.settings.mission_title | default: 'Mission' }}
+            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              {{ block.settings.title | default: 'Title' }}
             </h3>
-            <div class="card-divider" style="background-color: {{ section.settings.mission_accent_color | default: '#0071b9' }};"></div>
-            <p class="card-description">{{ section.settings.mission_content }}</p>
+            <div class="card-divider" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+            <p class="card-description">{{ block.settings.content }}</p>
           </div>
 
-          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.mission_accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
+          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
         </div>
-      {% endif %}
-
-      {% if section.settings.show_vision %}
-        <div class="mission-vision-card vision-card" data-aos="fade-left">
-          <div class="card-icon-wrapper">
-            {% if section.settings.vision_icon_type == 'image' and section.settings.vision_image != blank %}
-              <div class="card-icon image-icon">
-                <img src="{{ section.settings.vision_image | img_url: '80x80' }}" alt="{{ section.settings.vision_title }}" loading="lazy">
-              </div>
-            {% elsif section.settings.vision_svg_code != blank %}
-              <div class="card-icon svg-icon" style="color: {{ section.settings.mission_accent_color | default: '#0071b9' }};">
-                {{ section.settings.vision_svg_code }}
-              </div>
-            {% endif %}
-          </div>
-
-          <div class="card-content">
-            <h3 class="card-title" style="color: {{ section.settings.mission_accent_color | default: '#0071b9' }};">
-              {{ section.settings.vision_title | default: 'Vision' }}
-            </h3>
-            <div class="card-divider" style="background-color: {{ section.settings.mission_accent_color | default: '#0071b9' }};"></div>
-            <p class="card-description">{{ section.settings.vision_content }}</p>
-          </div>
-
-          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.mission_accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
-        </div>
-      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
+{% endif %}
 
 <style>
 /* Mission & Vision Section */
 .mission-vision-section {
-  padding: 80px 0;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .mission-vision-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -239,9 +211,9 @@
 /* Mission Vision Grid */
 .mission-vision-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 40px;
   align-items: stretch;
+  max-width: 100%;
 }
 
 /* Mission Vision Cards */
@@ -406,10 +378,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .mission-vision-section {
-    padding: 60px 0;
-  }
-
   .mission-vision-container {
     padding: 0 15px;
   }
@@ -420,7 +388,7 @@
   }
 
   .mission-vision-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 30px;
   }
 
@@ -468,14 +436,6 @@
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease forwards;
-  }
-
-  .mission-card {
-    animation-delay: 0.2s;
-  }
-
-  .vision-card {
-    animation-delay: 0.4s;
   }
 
   @keyframes fadeInUp {

@@ -6528,6 +6528,255 @@
     ]
   },
   {
+    "name": "Mission & Vision",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_mission_vision_section",
+        "label": "Show Mission & Vision Section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mission_vision_section_title",
+        "label": "Section Title",
+        "default": "Our Mission & Vision"
+      },
+      {
+        "type": "color",
+        "id": "mission_vision_background_color",
+        "label": "Background Color",
+        "default": "#f8f9fa"
+      },
+      {
+        "type": "color",
+        "id": "mission_vision_accent_color",
+        "label": "Accent Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "mission_vision_padding_top",
+        "label": "Top Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "mission_vision_padding_bottom",
+        "label": "Bottom Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px", 
+        "default": 60
+      },
+      {
+        "type": "header",
+        "content": "Card 1 Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_card_1",
+        "label": "Show Card 1",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "card_1_title",
+        "label": "Card 1 Title",
+        "default": "Mission"
+      },
+      {
+        "type": "textarea",
+        "id": "card_1_content",
+        "label": "Card 1 Content",
+        "default": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards."
+      },
+      {
+        "type": "select",
+        "id": "card_1_icon_type",
+        "label": "Card 1 Icon Type",
+        "default": "svg",
+        "options": [
+          {
+            "value": "svg",
+            "label": "SVG Icon"
+          },
+          {
+            "value": "image",
+            "label": "Custom Image"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "card_1_svg_code",
+        "label": "Card 1 SVG Code",
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+      },
+      {
+        "type": "image_picker",
+        "id": "card_1_image",
+        "label": "Card 1 Icon Image"
+      },
+      {
+        "type": "header",
+        "content": "Card 2 Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_card_2",
+        "label": "Show Card 2",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "card_2_title",
+        "label": "Card 2 Title",
+        "default": "Vision"
+      },
+      {
+        "type": "textarea",
+        "id": "card_2_content",
+        "label": "Card 2 Content",
+        "default": "To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance."
+      },
+      {
+        "type": "select",
+        "id": "card_2_icon_type",
+        "label": "Card 2 Icon Type",
+        "default": "svg",
+        "options": [
+          {
+            "value": "svg",
+            "label": "SVG Icon"
+          },
+          {
+            "value": "image",
+            "label": "Custom Image"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "card_2_svg_code",
+        "label": "Card 2 SVG Code",
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
+      },
+      {
+        "type": "image_picker",
+        "id": "card_2_image",
+        "label": "Card 2 Icon Image"
+      },
+      {
+        "type": "header",
+        "content": "Card 3 Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_card_3",
+        "label": "Show Card 3",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "card_3_title",
+        "label": "Card 3 Title",
+        "default": "Values"
+      },
+      {
+        "type": "textarea",
+        "id": "card_3_content",
+        "label": "Card 3 Content",
+        "default": "Our core values drive everything we do in delivering excellence to our customers."
+      },
+      {
+        "type": "select",
+        "id": "card_3_icon_type",
+        "label": "Card 3 Icon Type",
+        "default": "svg",
+        "options": [
+          {
+            "value": "svg",
+            "label": "SVG Icon"
+          },
+          {
+            "value": "image",
+            "label": "Custom Image"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "card_3_svg_code",
+        "label": "Card 3 SVG Code",
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>"
+      },
+      {
+        "type": "image_picker",
+        "id": "card_3_image",
+        "label": "Card 3 Icon Image"
+      },
+      {
+        "type": "header",
+        "content": "Card 4 Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_card_4",
+        "label": "Show Card 4",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "card_4_title",
+        "label": "Card 4 Title",
+        "default": "Innovation"
+      },
+      {
+        "type": "textarea",
+        "id": "card_4_content",
+        "label": "Card 4 Content",
+        "default": "We continuously innovate to provide cutting-edge solutions for our industry."
+      },
+      {
+        "type": "select",
+        "id": "card_4_icon_type",
+        "label": "Card 4 Icon Type",
+        "default": "svg",
+        "options": [
+          {
+            "value": "svg",
+            "label": "SVG Icon"
+          },
+          {
+            "value": "image",
+            "label": "Custom Image"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "card_4_svg_code",
+        "label": "Card 4 SVG Code",
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 11H7v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9h-2v2h-2V9h-2v2H9v2z'/><path d='M13.5 2c-.28 0-.5.22-.5.5V3h-2v-.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5V3H8.5c-.28 0-.5.22-.5.5s.22.5.5.5H10v1H8.5c-.28 0-.5.22-.5.5s.22.5.5.5H10v1H8.5c-.28 0-.5.22-.5.5s.22.5.5.5h7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14V6h1.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14V4h1.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14v-.5c0-.28-.22-.5-.5-.5z'/></svg>"
+      },
+      {
+        "type": "image_picker",
+        "id": "card_4_image",
+        "label": "Card 4 Icon Image"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.gdpr_popup.name",
     "settings": [
       {
