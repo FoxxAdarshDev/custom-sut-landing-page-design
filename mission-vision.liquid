@@ -146,31 +146,61 @@
     {% endif %}
 
     <div class="mission-vision-grid">
-      {% for block in section.blocks %}
-        <div class="professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
+            <div class="card-background-effect"></div>
+            
+            <div class="card-header">
+              <div class="icon-container">
+                {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
+                  <div class="card-icon">
+                    <img src="{{ block.settings.image | img_url: '60x60' }}" alt="{{ block.settings.title }}" loading="lazy">
+                  </div>
+                {% elsif block.settings.svg_code != blank %}
+                  <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                    {{ block.settings.svg_code }}
+                  </div>
+                {% endif %}
+                <div class="icon-glow"></div>
+              </div>
+              
+              <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                {{ block.settings.title | default: 'Title' }}
+              </h3>
+            </div>
+
+            <div class="card-content">
+              <p class="card-description">{{ block.settings.content }}</p>
+            </div>
+
+            <div class="card-footer">
+              <div class="progress-indicator">
+                <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Default Mission Card -->
+        <div class="professional-card" data-aos="fade-up" data-aos-delay="0">
           <div class="card-background-effect"></div>
           
           <div class="card-header">
             <div class="icon-container">
-              {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
-                <div class="card-icon">
-                  <img src="{{ block.settings.image | img_url: '60x60' }}" alt="{{ block.settings.title }}" loading="lazy">
-                </div>
-              {% elsif block.settings.svg_code != blank %}
-                <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
-                  {{ block.settings.svg_code }}
-                </div>
-              {% endif %}
+              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                <svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='3'/><path d='m12 1l9 16H3l9-16zm0 2.828L6.172 16h11.656L12 3.828z'/></svg>
+              </div>
               <div class="icon-glow"></div>
             </div>
             
             <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
-              {{ block.settings.title | default: 'Title' }}
+              Mission
             </h3>
           </div>
 
           <div class="card-content">
-            <p class="card-description">{{ block.settings.content }}</p>
+            <p class="card-description">To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.</p>
           </div>
 
           <div class="card-footer">
@@ -179,7 +209,35 @@
             </div>
           </div>
         </div>
-      {% endfor %}
+
+        <!-- Default Vision Card -->
+        <div class="professional-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-background-effect"></div>
+          
+          <div class="card-header">
+            <div class="icon-container">
+              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                <svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>
+              </div>
+              <div class="icon-glow"></div>
+            </div>
+            
+            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              Vision
+            </h3>
+          </div>
+
+          <div class="card-content">
+            <p class="card-description">To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow.</p>
+          </div>
+
+          <div class="card-footer">
+            <div class="progress-indicator">
+              <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
