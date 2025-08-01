@@ -102,16 +102,7 @@
       "label": "Success Message",
       "default": "Thank you for your message! We'll get back to you soon."
     },
-    {
-      "type": "header",
-      "content": "Services"
-    },
-    {
-      "type": "text",
-      "id": "services_title",
-      "label": "Services Title",
-      "default": "Our Services"
-    }
+    
   ],
   "blocks": [
     {
@@ -152,52 +143,7 @@
           "label": "Local Email (optional)"
         }
       ]
-    },
-    {
-      "type": "service",
-      "name": "Service",
-      "settings": [
-        {
-          "type": "text",
-          "id": "service_name",
-          "label": "Service Name",
-          "default": "Plastic Design"
-        },
-        {
-          "type": "textarea",
-          "id": "service_description",
-          "label": "Service Description",
-          "default": "Custom plastic design solutions for bioprocess applications"
-        },
-        {
-          "type": "select",
-          "id": "icon_type",
-          "label": "Icon Type",
-          "default": "svg",
-          "options": [
-            {
-              "value": "svg",
-              "label": "SVG Icon"
-            },
-            {
-              "value": "image",
-              "label": "Custom Image"
-            }
-          ]
-        },
-        {
-          "type": "textarea",
-          "id": "svg_code",
-          "label": "SVG Code",
-          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Service Image"
-        }
-      ]
-    }
+    
   ],
   "presets": [
     {
@@ -221,39 +167,7 @@
             "address": "6 Delaware Dr, Salem, NH 03079\nU.S.A.",
             "maps_url": "https://maps.google.com/maps?ll=42.7639,-71.242038&z=16&t=m&hl=en-US&gl=US&mapclient=embed&q=6%20Delaware%20Dr%20Salem%2C%20NH%2003079"
           }
-        },
-        {
-          "type": "service",
-          "settings": {
-            "service_name": "Plastic Design",
-            "service_description": "Custom plastic design solutions for bioprocess applications",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z'/></svg>"
-          }
-        },
-        {
-          "type": "service",
-          "settings": {
-            "service_name": "Prototyping",
-            "service_description": "Rapid prototyping services for product development",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M22,21H2V3H4V19H6V17H10V19H12V16H16V19H18V17H22V21M16,8A2,2 0 0,0 18,6V4H16V6A2,2 0 0,0 14,8H16M10,8A2,2 0 0,0 12,6V4H10V6A2,2 0 0,0 8,8H10M16,14A2,2 0 0,0 18,12V10H16V12A2,2 0 0,0 14,14H16M10,14A2,2 0 0,0 12,12V10H10V12A2,2 0 0,0 8,14H10Z'/></svg>"
-          }
-        },
-        {
-          "type": "service",
-          "settings": {
-            "service_name": "Plastic Machining",
-            "service_description": "Precision plastic machining for custom components",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M21.71,8.71C22.1,8.32 22.1,7.68 21.71,7.29L16.71,2.29C16.32,1.9 15.68,1.9 15.29,2.29L9,8.59L15.41,15L21.71,8.71M3,17.25L9.56,10.68L13.31,14.43L6.75,21C5.96,21.79 5.96,23.04 6.75,23.83C7.54,24.62 8.79,24.62 9.58,23.83L10.61,22.8L11.36,23.54C11.75,23.93 12.39,23.93 12.78,23.54C13.17,23.15 13.17,22.51 12.78,22.12L12,21.34L17.34,16L12.78,11.44L3,21.22V17.25Z'/></svg>"
-          }
-        },
-        {
-          "type": "service",
-          "settings": {
-            "service_name": "Clean Room Assemblies",
-            "service_description": "Sterile assembly in certified cleanroom environments",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z'/></svg>"
-          }
-        }
+        
       ]
     }
   ]
@@ -387,41 +301,7 @@
 
       <!-- Right Column - Services & Form -->
       <div class="cu-right-panel">
-        <!-- Services Section (Top of right column) -->
-        {% assign service_blocks = section.blocks | where: 'type', 'service' %}
-        {% if service_blocks.size > 0 %}
-          <div class="cu-services-wrapper">
-            <h3 class="cu-section-heading">
-              <span class="cu-heading-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
-                </svg>
-              </span>
-              {{ section.settings.services_title | default: 'Our Services' }}
-            </h3>
-            <div class="cu-services-grid">
-              {% for block in service_blocks %}
-                <div class="cu-service-item" {{ block.shopify_attributes }}>
-                  <div class="cu-service-icon">
-                    {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
-                      <img src="{{ block.settings.image | img_url: '60x60' }}" alt="{{ block.settings.service_name }}" loading="lazy">
-                    {% elsif block.settings.svg_code != blank %}
-                      {{ block.settings.svg_code }}
-                    {% else %}
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
-                      </svg>
-                    {% endif %}
-                  </div>
-                  <div class="cu-service-content">
-                    <h4 class="cu-service-title">{{ block.settings.service_name }}</h4>
-                    <p class="cu-service-description">{{ block.settings.service_description }}</p>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
+        
 
         <!-- Contact Form -->
         <div class="cu-form-wrapper">
@@ -507,11 +387,6 @@
                 <label for="ContactFormService" class="cu-form-label">Service Interested In</label>
                 <select id="ContactFormService" name="contact[service]" class="cu-form-select">
                   <option value="">Select a service...</option>
-                  {% for block in section.blocks %}
-                    {% if block.type == 'service' %}
-                      <option value="{{ block.settings.service_name }}">{{ block.settings.service_name }}</option>
-                    {% endif %}
-                  {% endfor %}
                   <option value="General Inquiry">General Inquiry</option>
                   <option value="Custom Quote">Custom Quote</option>
                   <option value="Technical Support">Technical Support</option>
@@ -854,89 +729,6 @@
   gap: 50px;
 }
 
-/* Services Grid */
-.cu-services-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.cu-service-item {
-  background: white;
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0, 113, 185, 0.08);
-  border: 1px solid rgba(0, 113, 185, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.cu-service-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #0071b9, #005a91);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.cu-service-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0, 113, 185, 0.15);
-}
-
-.cu-service-item:hover::before {
-  transform: scaleX(1);
-}
-
-.cu-service-icon {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0071b9;
-  margin-bottom: 15px;
-  transition: all 0.3s ease;
-}
-
-.cu-service-item:hover .cu-service-icon {
-  background: linear-gradient(135deg, #0071b9, #005a91);
-  color: white;
-  transform: scale(1.1);
-}
-
-.cu-service-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.cu-service-icon img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.cu-service-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #0071b9;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-
-.cu-service-description {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.5;
-}
-
 /* Form Styles */
 .cu-form-wrapper {
   background: white;
@@ -1136,10 +928,6 @@
     gap: 50px;
   }
   
-  .cu-services-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .cu-main-title {
     font-size: 2.5rem;
   }
@@ -1155,7 +943,6 @@
   }
   
   .cu-form-wrapper,
-  .cu-service-item,
   .cu-location-item {
     padding: 25px 20px;
   }
@@ -1178,14 +965,6 @@
 }
 
 @media (max-width: 480px) {
-  .cu-services-grid {
-    gap: 15px;
-  }
-  
-  .cu-service-item {
-    padding: 20px;
-  }
-  
   .cu-main-title {
     font-size: 1.8rem;
   }
