@@ -1,4 +1,3 @@
-
 {% schema %}
 {
   "name": "Our Story in Numbers",
@@ -1008,7 +1007,7 @@
   }
 
   .stat-title {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .stat-description {
@@ -1053,7 +1052,7 @@
   }
 
   .stat-title {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -1151,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let displayValue;
       if (numericTarget >= 1000) {
-        displayValue = Math.floor(current).toLocaleString();
+        displayValue = Math.floor(current).toLocaleString('en-US');
       } else {
         displayValue = Math.floor(current);
       }
