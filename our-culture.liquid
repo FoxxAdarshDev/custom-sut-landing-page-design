@@ -10,53 +10,27 @@
     },
     {
       "type": "text",
-      "id": "section_title",
+      "id": "culture_section_title",
       "label": "Section Title",
       "default": "Our Culture"
     },
     {
       "type": "textarea",
-      "id": "section_description",
+      "id": "culture_section_description",
       "label": "Section Description",
       "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
     },
     {
-      "type": "image_picker",
-      "id": "culture_image",
-      "label": "Culture Image"
-    },
-    {
       "type": "color",
-      "id": "background_color",
+      "id": "culture_background_color",
       "label": "Background Color",
       "default": "#ffffff"
     },
     {
       "type": "color",
-      "id": "accent_color",
+      "id": "culture_accent_color",
       "label": "Accent Color",
       "default": "#0071b9"
-    },
-    {
-      "type": "header",
-      "content": "Call to Action"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_cta_button",
-      "label": "Show CTA Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "cta_button_text",
-      "label": "CTA Button Text",
-      "default": "Learn More"
-    },
-    {
-      "type": "url",
-      "id": "cta_button_url",
-      "label": "CTA Button URL"
     },
     {
       "type": "range",
@@ -79,69 +53,138 @@
       "default": 80
     }
   ],
+  "blocks": [
+    {
+      "type": "culture_item",
+      "name": "Culture Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Item Title",
+          "default": "Our Culture"
+        },
+        {
+          "type": "textarea",
+          "id": "item_description",
+          "label": "Item Description",
+          "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first."
+        },
+        {
+          "type": "image_picker",
+          "id": "culture_image",
+          "label": "Culture Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_cta_button",
+          "label": "Show CTA Button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "cta_button_text",
+          "label": "CTA Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "cta_button_url",
+          "label": "CTA Button URL"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Our Culture",
-      "category": "About"
+      "category": "About",
+      "blocks": [
+        {
+          "type": "culture_item"
+        }
+      ]
     }
   ]
 }
 {% endschema %}
 
 <!-- Our Culture Section -->
-<section class="oc-culture-modern-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
+<section class="oc-culture-modern-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.culture_background_color | default: '#ffffff' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
   <div class="oc-culture-container">
-    <div class="oc-culture-layout">
-      <!-- Image Section with Polygon -->
-      <div class="oc-culture-image-section">
-        <div class="oc-culture-image-wrapper">
-          {% if section.settings.culture_image != blank %}
-            <img src="{{ section.settings.culture_image | img_url: '800x600' }}" alt="{{ section.settings.section_title }}" class="oc-culture-image" loading="lazy">
-          {% else %}
-            <!-- Default placeholder image -->
-            <div class="oc-culture-placeholder">
-              <svg viewBox="0 0 400 300" class="oc-placeholder-svg">
-                <rect width="400" height="300" fill="#f0f0f0"/>
-                <text x="200" y="150" text-anchor="middle" fill="#999" font-size="16">Culture Image</text>
-              </svg>
-            </div>
-          {% endif %}
-        </div>
-
-        <!-- Polygon Shape -->
-        <div class="oc-culture-polygon" style="background: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+    {% if section.settings.culture_section_title != blank %}
+      <div class="oc-section-header">
+        <h2 class="oc-section-title" style="color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
+          {{ section.settings.culture_section_title }}
+        </h2>
+        {% if section.settings.culture_section_description != blank %}
+          <p class="oc-section-description">
+            {{ section.settings.culture_section_description }}
+          </p>
+        {% endif %}
       </div>
+    {% endif %}
 
-      <!-- Content Section -->
-      <div class="oc-culture-content-section">
-        <div class="oc-culture-content">
-          {% if section.settings.section_title != blank %}
-            <h2 class="oc-culture-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
-              {{ section.settings.section_title }}
-            </h2>
-          {% endif %}
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'culture_item' %}
+          <div class="oc-culture-layout" {{ block.shopify_attributes }}>
+            <!-- Image Section with Polygon -->
+            <div class="oc-culture-image-section">
+              <div class="oc-culture-image-wrapper">
+                {% if block.settings.culture_image != blank %}
+                  <img src="{{ block.settings.culture_image | img_url: '800x600' }}" alt="{{ block.settings.item_title }}" class="oc-culture-image" loading="lazy">
+                {% else %}
+                  <!-- Default placeholder image -->
+                  <div class="oc-culture-placeholder">
+                    <svg viewBox="0 0 400 300" class="oc-placeholder-svg">
+                      <rect width="400" height="300" fill="#f0f0f0"/>
+                      <text x="200" y="150" text-anchor="middle" fill="#999" font-size="16">Culture Image</text>
+                    </svg>
+                  </div>
+                {% endif %}
+              </div>
 
-          {% if section.settings.section_description != blank %}
-            <p class="oc-culture-description">
-              {{ section.settings.section_description }}
-            </p>
-          {% endif %}
-
-          {% if section.settings.show_cta_button and section.settings.cta_button_text != blank %}
-            <div class="oc-culture-cta">
-              <a href="{{ section.settings.cta_button_url | default: '#' }}" class="oc-culture-button" style="border-color: {{ section.settings.accent_color | default: '#0071b9' }}; color: {{ section.settings.accent_color | default: '#0071b9' }};">
-                <span class="oc-button-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                  </svg>
-                </span>
-                {{ section.settings.cta_button_text }}
-              </a>
+              <!-- Polygon Shape with Image -->
+              <div class="oc-culture-polygon" style="background: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
+                {% if block.settings.culture_image != blank %}
+                  <div class="oc-polygon-image" style="background-image: url('{{ block.settings.culture_image | img_url: '400x400' }}');"></div>
+                {% endif %}
+              </div>
             </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+
+            <!-- Content Section -->
+            <div class="oc-culture-content-section">
+              <div class="oc-culture-content">
+                {% if block.settings.item_title != blank %}
+                  <h3 class="oc-culture-title" style="color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
+                    {{ block.settings.item_title }}
+                  </h3>
+                {% endif %}
+
+                {% if block.settings.item_description != blank %}
+                  <p class="oc-culture-description">
+                    {{ block.settings.item_description }}
+                  </p>
+                {% endif %}
+
+                {% if block.settings.show_cta_button and block.settings.cta_button_text != blank %}
+                  <div class="oc-culture-cta">
+                    <a href="{{ block.settings.cta_button_url | default: '#' }}" class="oc-culture-button" style="border-color: {{ section.settings.culture_accent_color | default: '#0071b9' }}; color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
+                      <span class="oc-button-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                      </span>
+                      {{ block.settings.cta_button_text }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
   </div>
 </section>
 
@@ -159,6 +202,27 @@
   padding: 0 20px;
 }
 
+/* Section Header */
+.oc-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.oc-section-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.oc-section-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* Culture Layout */
 .oc-culture-layout {
   display: grid;
@@ -166,6 +230,11 @@
   align-items: center;
   gap: 0;
   min-height: 500px;
+  margin-bottom: 80px;
+}
+
+.oc-culture-layout:last-child {
+  margin-bottom: 0;
 }
 
 /* Image Section */
@@ -211,7 +280,7 @@
   height: 100%;
 }
 
-/* Polygon Shape */
+/* Polygon Shape with Image */
 .oc-culture-polygon {
   position: absolute;
   right: -50px;
@@ -222,6 +291,19 @@
   clip-path: polygon(0 0, 60% 0, 100% 50%, 60% 100%, 0 100%);
   z-index: 3;
   transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.oc-polygon-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
 }
 
 .oc-culture-image-section:hover .oc-culture-polygon {
@@ -350,6 +432,10 @@
     display: none;
   }
 
+  .oc-section-title {
+    font-size: 36px;
+  }
+
   .oc-culture-title {
     font-size: 36px;
   }
@@ -372,6 +458,10 @@
     padding: 30px 15px;
   }
 
+  .oc-section-title {
+    font-size: 28px;
+  }
+
   .oc-culture-title {
     font-size: 28px;
   }
@@ -388,6 +478,10 @@
 }
 
 @media (max-width: 480px) {
+  .oc-section-title {
+    font-size: 24px;
+  }
+
   .oc-culture-title {
     font-size: 24px;
   }
