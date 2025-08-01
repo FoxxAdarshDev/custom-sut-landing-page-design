@@ -32,8 +32,8 @@
     {
       "type": "color",
       "id": "culture_overlay_color",
-      "label": "Overlay Color", 
-      "default": "#000000"
+      "label": "Overlay Color",
+      "default": "#0071b9"
     },
     {
       "type": "range",
@@ -43,11 +43,11 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 60
+      "default": 85
     },
     {
       "type": "header",
-      "content": "Typography Settings"
+      "content": "Color Settings"
     },
     {
       "type": "color",
@@ -59,7 +59,7 @@
       "type": "color",
       "id": "culture_accent_color",
       "label": "Accent Color",
-      "default": "#007aff"
+      "default": "#0071b9"
     },
     {
       "type": "header",
@@ -94,7 +94,7 @@
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 100
+      "default": 120
     },
     {
       "type": "range",
@@ -104,7 +104,7 @@
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 100
+      "default": 120
     }
   ],
   "presets": [
@@ -116,58 +116,61 @@
 }
 {% endschema %}
 
-<!-- Our Culture Section - Apple-inspired Design -->
-<section class="culture-hero-section" 
+<!-- Our Culture Banner Section -->
+<section class="culture-banner-section" 
          data-section-id="{{ section.id }}" 
          style="
-           --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#000000' }};
-           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 60 | divided_by: 100.0 }};
+           --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#0071b9' }};
+           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 85 }};
            --culture-text-color: {{ section.settings.culture_text_color | default: '#ffffff' }};
-           --culture-accent-color: {{ section.settings.culture_accent_color | default: '#007aff' }};
-           --section-padding-top: {{ section.settings.padding_top | default: 100 }}px;
-           --section-padding-bottom: {{ section.settings.padding_bottom | default: 100 }}px;
+           --culture-accent-color: {{ section.settings.culture_accent_color | default: '#00a8ff' }};
+           --padding-top: {{ section.settings.padding_top | default: 120 }}px;
+           --padding-bottom: {{ section.settings.padding_bottom | default: 120 }}px;
          ">
 
-  <!-- Background Layer -->
-  <div class="culture-background-layer">
+  <!-- Background Image with Overlay -->
+  <div class="culture-background">
     {% if section.settings.culture_background_image != blank %}
-      <div class="culture-background-image">
-        <img src="{{ section.settings.culture_background_image | img_url: '2400x1350' }}" 
-             alt="Our Culture Background" 
-             loading="lazy">
-      </div>
-      <div class="culture-background-overlay"></div>
+      <img src="{{ section.settings.culture_background_image | img_url: '1920x1080' }}" 
+           alt="Our Culture Background" 
+           class="culture-bg-image">
+      <!-- Overlay - Always applied with background image -->
+      <div class="culture-overlay"></div>
     {% else %}
-      <div class="culture-background-gradient"></div>
+      <!-- Default gradient background if no image -->
+      <div class="culture-bg-gradient"></div>
     {% endif %}
   </div>
 
   <!-- Content Container -->
-  <div class="culture-content-wrapper">
-    <div class="culture-content-container">
-      
-      <!-- Main Content -->
-      <div class="culture-content">
+  <div class="culture-content-container">
+    <div class="culture-inner-content">
+
+      <!-- Section Header -->
+      <div class="culture-header">
         {% if section.settings.culture_section_title != blank %}
-          <h1 class="culture-headline">
-            {{ section.settings.culture_section_title }}
-          </h1>
+          <h2 class="culture-main-title">
+            <span class="culture-title-line">{{ section.settings.culture_section_title }}</span>
+          </h2>
         {% endif %}
 
         {% if section.settings.culture_section_description != blank %}
-          <div class="culture-subheading">
+          <div class="culture-description">
             <p>{{ section.settings.culture_section_description }}</p>
           </div>
         {% endif %}
 
+        <!-- CTA Button -->
         {% if section.settings.show_cta_button and section.settings.cta_button_text != blank %}
-          <div class="culture-cta-section">
+          <div class="culture-cta-wrapper">
             <a href="{{ section.settings.cta_button_url | default: '#' }}" 
                class="culture-cta-button">
-              {{ section.settings.cta_button_text }}
-              <svg class="cta-arrow" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-              </svg>
+              <span class="cta-text">{{ section.settings.cta_button_text }}</span>
+              <span class="cta-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                </svg>
+              </span>
             </a>
           </div>
         {% endif %}
@@ -176,23 +179,29 @@
     </div>
   </div>
 
+  <!-- Decorative Elements -->
+  <div class="culture-decorative-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+  </div>
+
 </section>
 
 <style>
-/* Apple-inspired Culture Hero Section */
-.culture-hero-section {
+/* Our Culture Banner Section - Modern Overlay Design */
+.culture-banner-section {
   position: relative;
-  min-height: 70vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: var(--section-padding-top) 0 var(--section-padding-bottom) 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: var(--padding-top) 0 var(--padding-bottom) 0;
 }
 
-/* Background Layer */
-.culture-background-layer {
+/* Background Image */
+.culture-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -201,150 +210,114 @@
   z-index: 1;
 }
 
-.culture-background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+.culture-bg-image {
   width: 100%;
   height: 100%;
-}
-
-.culture-background-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.8s ease;
 }
 
-.culture-background-overlay {
+.culture-bg-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0071b9 0%, #005a91 50%, #003d63 100%);
+}
+
+/* Overlay - Always applied when background image exists */
+.culture-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(1px);
+  background-color: var(--culture-overlay-color, #0071b9);
+  opacity: calc(var(--culture-overlay-opacity) / 100);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.culture-background-gradient {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, 
-    var(--culture-overlay-color) 0%, 
-    rgba(0, 0, 0, 0.8) 50%, 
-    rgba(0, 0, 0, 0.9) 100%);
-}
-
-/* Content Wrapper */
-.culture-content-wrapper {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Content Container */
 .culture-content-container {
-  max-width: 980px;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
+}
+
+.culture-inner-content {
   text-align: center;
-}
-
-/* Content Styles */
-.culture-content {
   color: var(--culture-text-color);
 }
 
-.culture-headline {
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin: 0 0 1.5rem 0;
-  color: var(--culture-text-color);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.2s forwards;
+/* Header Styles */
+.culture-header {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.culture-subheading {
-  margin: 0 0 3rem 0;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.4s forwards;
+.culture-main-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  color: var(--culture-text-color, #ffffff);
 }
 
-.culture-subheading p {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+.culture-title-line {
+  position: relative;
+  display: inline-block;
+  color: var(--culture-text-color, #ffffff);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.culture-title-line::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--culture-accent-color, #ffffff);
+  border-radius: 2px;
+  animation: titleUnderline 2s ease-out forwards;
+}
+
+@keyframes titleUnderline {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 1;
+  }
+}
+
+/* Description */
+.culture-description {
+  margin: 40px 0 50px 0;
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.culture-description p {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
   font-weight: 400;
-  line-height: 1.4;
-  color: var(--culture-text-color);
-  opacity: 0.9;
   margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  color: var(--culture-text-color, #ffffff);
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* CTA Section */
-.culture-cta-section {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.6s forwards;
-}
-
-.culture-cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 32px;
-  background-color: var(--culture-accent-color);
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.culture-cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.culture-cta-button:hover::before {
-  left: 100%;
-}
-
-.culture-cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
-}
-
-.cta-arrow {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.culture-cta-button:hover .cta-arrow {
-  transform: translateX(4px);
-}
-
-/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -356,95 +329,275 @@
   }
 }
 
+/* CTA Button */
+.culture-cta-wrapper {
+  margin-top: 50px;
+  opacity: 0;
+  animation: fadeInUp 1s ease 1s forwards;
+}
+
+.culture-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, var(--culture-accent-color) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 2px solid var(--culture-accent-color);
+  border-radius: 50px;
+  color: var(--culture-text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.culture-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.culture-cta-button:hover::before {
+  left: 100%;
+}
+
+.culture-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--culture-text-color);
+}
+
+.cta-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-icon {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.culture-cta-button:hover .cta-icon {
+  transform: translateX(5px);
+}
+
+/* Decorative Floating Elements */
+.culture-decorative-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.element-1 {
+  width: 120px;
+  height: 120px;
+  top: 15%;
+  right: 10%;
+  animation: float1 6s ease-in-out infinite;
+}
+
+.element-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 8%;
+  animation: float2 8s ease-in-out infinite;
+}
+
+.element-3 {
+  width: 60px;
+  height: 60px;
+  top: 60%;
+  right: 15%;
+  animation: float3 7s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  50% { transform: translateX(25px) rotate(-180deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-20px) translateX(15px); }
+  66% { transform: translateY(10px) translateX(-10px); }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .culture-hero-section {
-    min-height: 60vh;
-  }
-  
   .culture-content-container {
-    padding: 0 40px;
+    padding: 0 30px;
+  }
+
+  .culture-main-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 25px;
+  }
+
+  .culture-description p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .culture-cta-button {
+    padding: 15px 35px;
+    font-size: 1rem;
+  }
+
+  .floating-element {
+    opacity: 0.6;
+  }
+
+  .element-1 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .element-2 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .element-3 {
+    width: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .culture-hero-section {
-    min-height: 55vh;
+  .culture-banner-section {
+    min-height: 50vh;
     padding: 60px 0;
   }
-  
+
   .culture-content-container {
     padding: 0 20px;
   }
-  
-  .culture-headline {
-    margin-bottom: 1rem;
+
+  .culture-main-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 20px;
   }
-  
-  .culture-subheading {
-    margin-bottom: 2rem;
+
+  .culture-description {
+    margin: 30px 0 40px 0;
   }
-  
+
+  .culture-cta-wrapper {
+    margin-top: 40px;
+  }
+
   .culture-cta-button {
-    padding: 14px 28px;
-    font-size: 1rem;
+    padding: 12px 30px;
+    font-size: 0.95rem;
+    gap: 12px;
+  }
+
+  .floating-element {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .culture-hero-section {
-    min-height: 50vh;
+  .culture-banner-section {
+    min-height: 45vh;
   }
-  
-  .culture-headline {
-    font-size: clamp(2.5rem, 8vw, 4rem);
+
+  .culture-main-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: 1px;
   }
-  
-  .culture-subheading p {
-    font-size: clamp(1.1rem, 4vw, 1.4rem);
+
+  .culture-description p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
-  
+
   .culture-cta-button {
-    padding: 12px 24px;
-    font-size: 0.95rem;
+    padding: 10px 25px;
+    font-size: 0.9rem;
   }
 }
 
-/* Accessibility */
+/* Accessibility & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .culture-headline,
-  .culture-subheading,
-  .culture-cta-section,
-  .culture-background-image img,
-  .culture-cta-button {
+  .culture-bg-image,
+  .culture-overlay,
+  .culture-main-title,
+  .culture-description,
+  .culture-cta-wrapper,
+  .floating-element {
     animation: none;
     transition: none;
   }
-  
-  .culture-headline,
-  .culture-subheading,
-  .culture-cta-section {
-    opacity: 1;
-    transform: none;
+
+  .culture-cta-button::before {
+    display: none;
   }
 }
 
-/* High Contrast Support */
+/* High Contrast Mode */
 @media (prefers-contrast: high) {
-  .culture-background-overlay {
-    opacity: 0.8;
+  .culture-overlay {
+    opacity: 0.9;
   }
-  
+
+  .culture-main-title,
+  .culture-description p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
   .culture-cta-button {
-    border: 2px solid currentColor;
+    border-width: 3px;
   }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .culture-hero-section {
-    --culture-text-color: #ffffff;
-    --culture-accent-color: #0a84ff;
+/* Print Styles */
+@media print {
+  .culture-banner-section {
+    min-height: auto;
+    padding: 20px 0;
+    background: white !important;
+    color: black !important;
+    page-break-inside: avoid;
+  }
+
+  .culture-overlay,
+  .culture-decorative-elements {
+    display: none;
+  }
+
+  .culture-bg-image {
+    opacity: 0.1;
   }
 }
 </style>
