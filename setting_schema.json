@@ -8187,21 +8187,45 @@
         "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
       },
       {
+        "type": "header",
+        "content": "Background & Overlay Settings"
+      },
+      {
         "type": "image_picker",
-        "id": "culture_image",
-        "label": "Culture Image"
+        "id": "culture_background_image",
+        "label": "Background Banner Image"
       },
       {
         "type": "color",
-        "id": "culture_background_color",
-        "label": "Background Color",
+        "id": "culture_overlay_color",
+        "label": "Overlay Color", 
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "culture_overlay_opacity",
+        "label": "Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 60
+      },
+      {
+        "type": "header",
+        "content": "Typography Settings"
+      },
+      {
+        "type": "color",
+        "id": "culture_text_color",
+        "label": "Text Color",
         "default": "#ffffff"
       },
       {
         "type": "color",
         "id": "culture_accent_color",
         "label": "Accent Color",
-        "default": "#0071b9"
+        "default": "#007aff"
       },
       {
         "type": "header",
@@ -8225,6 +8249,10 @@
         "label": "CTA Button URL"
       },
       {
+        "type": "header",
+        "content": "Section Spacing"
+      },
+      {
         "type": "range",
         "id": "padding_top",
         "label": "Top Padding",
@@ -8232,7 +8260,7 @@
         "max": 200,
         "step": 10,
         "unit": "px",
-        "default": 80
+        "default": 100
       },
       {
         "type": "range",
@@ -8242,7 +8270,7 @@
         "max": 200,
         "step": 10,
         "unit": "px",
-        "default": 80
+        "default": 100
       }
     ]
   },
