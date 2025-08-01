@@ -60,28 +60,6 @@
     },
     {
       "type": "header",
-      "content": "Contact Information"
-    },
-    {
-      "type": "text",
-      "id": "main_phone",
-      "label": "Main Phone Number",
-      "default": "(603) 890-FOXX (3699)"
-    },
-    {
-      "type": "text",
-      "id": "main_email",
-      "label": "Main Email",
-      "default": "sales@foxxlifesciences.com"
-    },
-    {
-      "type": "text",
-      "id": "support_email",
-      "label": "Support Email",
-      "default": "support@foxxlifesciences.com"
-    },
-    {
-      "type": "header",
       "content": "Contact Form Settings"
     },
     {
@@ -142,6 +120,51 @@
           "label": "Local Email (optional)"
         }
       ]
+    },
+    {
+      "type": "contact_info",
+      "name": "Contact Information",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Contact Title",
+          "default": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "contact_value",
+          "label": "Contact Value",
+          "default": "(603) 890-FOXX (3699)"
+        },
+        {
+          "type": "select",
+          "id": "contact_type",
+          "label": "Contact Type",
+          "default": "phone",
+          "options": [
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_icon",
+          "label": "Custom SVG Icon",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z'/></svg>",
+          "info": "Only used when Contact Type is set to 'Custom'"
+        }
+      ]
     }
   ],
   "presets": [
@@ -162,9 +185,33 @@
           "type": "location",
           "settings": {
             "plant_name": "Plant 2 - Secondary Mailing Address",
-            "company_name": "Foxx Life Sciences",
+            "company_name": "Foxx Life Sciences",  
             "address": "6 Delaware Dr, Salem, NH 03079\nU.S.A.",
             "maps_url": "https://maps.google.com/maps?ll=42.7639,-71.242038&z=16&t=m&hl=en-US&gl=US&mapclient=embed&q=6%20Delaware%20Dr%20Salem%2C%20NH%2003079"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Phone",
+            "contact_value": "(603) 890-FOXX (3699)",
+            "contact_type": "phone"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Sales",
+            "contact_value": "sales@foxxlifesciences.com",
+            "contact_type": "email"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Support",
+            "contact_value": "support@foxxlifesciences.com",
+            "contact_type": "email"
           }
         }
       ]
@@ -175,25 +222,20 @@
 
 {% if section.settings.show_section %}
 <!-- Contact Us Section -->
-<section class="cu-modern-contact-us" data-section-id="{{ section.id }}" style="background: {{ section.settings.background_color | default: '#f8f9fa' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0; width: 100vw; margin-left: calc(-50vw + 50%);">
+<section class="cu-modern-contact-us" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0; width: 100vw; margin-left: calc(-50vw + 50%);">
   <div class="cu-container">
-    <!-- Section Header -->
+    <!-- Section Header (Same style as Mission Vision) -->
     {% if section.settings.section_title != blank %}
-      <div class="cu-header">
-        <div class="cu-header-decoration">
-          <div class="cu-decoration-dots">
-            <span></span><span></span><span></span>
-          </div>
+      <div class="cu-section-header">
+        <div class="cu-title-decoration">
+          <span class="cu-decoration-line"></span>
+          <span class="cu-decoration-diamond"></span>
+          <span class="cu-decoration-line"></span>
         </div>
-        <h2 class="cu-main-title">{{ section.settings.section_title }}</h2>
+        <h2 class="cu-section-title">{{ section.settings.section_title }}</h2>
         {% if section.settings.section_description != blank %}
-          <p class="cu-main-subtitle">{{ section.settings.section_description }}</p>
+          <p class="cu-section-subtitle">{{ section.settings.section_description }}</p>
         {% endif %}
-        <div class="cu-header-wave">
-          <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,10 Q25,0 50,10 T100,10" stroke="{{ section.settings.accent_color | default: '#0071b9' }}" stroke-width="2" fill="none"/>
-          </svg>
-        </div>
       </div>
     {% endif %}
 
@@ -202,18 +244,19 @@
       <!-- Left Column - Locations & Contact Info -->
       <div class="cu-left-panel">
         <!-- Locations Section -->
-        <div class="cu-locations-wrapper">
-          <h3 class="cu-section-heading">
-            <span class="cu-heading-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12,2C15.31,2 18,4.66 18,7.95C18,12.41 12,19 12,19S6,12.41 6,7.95C6,4.66 8.69,2 12,2M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6Z"/>
-              </svg>
-            </span>
-            Our Locations
-          </h3>
-          <div class="cu-locations-container">
-            {% for block in section.blocks %}
-              {% if block.type == 'location' %}
+        {% assign location_blocks = section.blocks | where: 'type', 'location' %}
+        {% if location_blocks.size > 0 %}
+          <div class="cu-locations-wrapper">
+            <h3 class="cu-section-heading">
+              <span class="cu-heading-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,2C15.31,2 18,4.66 18,7.95C18,12.41 12,19 12,19S6,12.41 6,7.95C6,4.66 8.69,2 12,2M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6Z"/>
+                </svg>
+              </span>
+              Our Locations
+            </h3>
+            <div class="cu-locations-container">
+              {% for block in location_blocks %}
                 <div class="cu-location-item" {{ block.shopify_attributes }}>
                   <div class="cu-location-header">
                     <h4 class="cu-location-name">{{ block.settings.plant_name }}</h4>
@@ -243,65 +286,65 @@
                     {% endif %}
                   </div>
                 </div>
-              {% endif %}
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
+        {% endif %}
 
         <!-- Contact Information -->
-        <div class="cu-contact-info-wrapper">
-          <h3 class="cu-section-heading">
-            <span class="cu-heading-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6A2,2 0 0,0 20,4M20,18H4V8L12,13L20,8V18M20,6L12,11L4,6H20Z"/>
-              </svg>
-            </span>
-            Contact Information
-          </h3>
-          <div class="cu-contact-methods">
-            <div class="cu-contact-card">
-              <div class="cu-contact-card-icon phone">
+        {% assign contact_blocks = section.blocks | where: 'type', 'contact_info' %}
+        {% if contact_blocks.size > 0 %}
+          <div class="cu-contact-info-wrapper">
+            <h3 class="cu-section-heading">
+              <span class="cu-heading-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6.62,10.79C1.44,2.83 3.76,5.14 6.59,6.59L2.2,2.2C.27,.27 .67,.36 1.02,.24C1.12,.37 2.33,.57 3.57,.57C.55,0 1,.45 1,1V4C0,.55 .45,1 1,1C9.39,1 17,7.61 17,17C0,.55 .45,1 1,1H16.5C.55,0 1,.45 1,1C0,1.25 .2,2.45 .57,3.57C.11,.35 .03,.74 .25,1.02L2.2,2.2Z"/>
+                  <path d="M20,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6A2,2 0 0,0 20,4M20,18H4V8L12,13L20,8V18M20,6L12,11L4,6H20Z"/>
                 </svg>
-              </div>
-              <div class="cu-contact-card-content">
-                <strong>Phone</strong>
-                <a href="tel:{{ section.settings.main_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}">{{ section.settings.main_phone }}</a>
-              </div>
-            </div>
-            
-            <div class="cu-contact-card">
-              <div class="cu-contact-card-icon sales">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
-                </svg>
-              </div>
-              <div class="cu-contact-card-content">
-                <strong>Sales</strong>
-                <a href="mailto:{{ section.settings.main_email }}">{{ section.settings.main_email }}</a>
-              </div>
-            </div>
-            
-            <div class="cu-contact-card">
-              <div class="cu-contact-card-icon support">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"/>
-                </svg>
-              </div>
-              <div class="cu-contact-card-content">
-                <strong>Support</strong>
-                <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a>
-              </div>
+              </span>
+              Contact Information
+            </h3>
+            <div class="cu-contact-methods">
+              {% for block in contact_blocks %}
+                <div class="cu-contact-card" {{ block.shopify_attributes }}>
+                  <div class="cu-contact-card-icon 
+                    {% if block.settings.contact_type == 'phone' %}phone
+                    {% elsif block.settings.contact_type == 'email' %}sales
+                    {% else %}support{% endif %}">
+                    {% if block.settings.contact_type == 'phone' %}
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/>
+                      </svg>
+                    {% elsif block.settings.contact_type == 'email' %}
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                      </svg>
+                    {% elsif block.settings.contact_type == 'custom' and block.settings.svg_icon != blank %}
+                      {{ block.settings.svg_icon }}
+                    {% else %}
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"/>
+                      </svg>
+                    {% endif %}
+                  </div>
+                  <div class="cu-contact-card-content">
+                    <strong>{{ block.settings.title }}</strong>
+                    {% if block.settings.contact_type == 'phone' %}
+                      <a href="tel:{{ block.settings.contact_value | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}">{{ block.settings.contact_value }}</a>
+                    {% elsif block.settings.contact_type == 'email' %}
+                      <a href="mailto:{{ block.settings.contact_value }}">{{ block.settings.contact_value }}</a>
+                    {% else %}
+                      <span>{{ block.settings.contact_value }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
-        </div>
+        {% endif %}
       </div>
 
-      <!-- Right Column - Services & Form -->
+      <!-- Right Column - Contact Form -->
       <div class="cu-right-panel">
-        
-
         <!-- Contact Form -->
         <div class="cu-form-wrapper">
           <h3 class="cu-section-heading">
@@ -450,75 +493,82 @@
   z-index: 2;
 }
 
-/* Header Styles */
-.cu-header {
+/* Enhanced Section Header (Same as Mission Vision) */
+.cu-section-header {
   text-align: center;
   margin-bottom: 80px;
   position: relative;
 }
 
-.cu-header-decoration {
-  margin-bottom: 20px;
-}
-
-.cu-decoration-dots {
+.cu-title-decoration {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
   margin-bottom: 20px;
+  gap: 15px;
 }
 
-.cu-decoration-dots span {
-  width: 8px;
-  height: 8px;
+.cu-decoration-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
+}
+
+.cu-decoration-diamond {
+  width: 12px;
+  height: 12px;
   background: #0071b9;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
+  transform: rotate(45deg);
+  border-radius: 2px;
 }
 
-.cu-decoration-dots span:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.cu-decoration-dots span:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-}
-
-.cu-main-title {
-  font-size: 3.5rem;
+.cu-section-title {
+  font-size: 48px;
   font-weight: 800;
-  background: linear-gradient(135deg, #0071b9, #005a91);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #0071b9;
   margin-bottom: 20px;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 8px rgba(0, 113, 185, 0.3);
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
 }
 
-.cu-main-subtitle {
-  font-size: 1.25rem;
+.cu-section-title::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
+  border-radius: 2px;
+}
+
+.cu-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;  
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 185, 0.5), transparent);
+  border-radius: 1px;
+}
+
+.cu-section-subtitle {
+  font-size: 20px;
   color: rgba(0, 113, 185, 0.8);
-  max-width: 600px;
-  margin: 0 auto 30px;
   line-height: 1.6;
-  font-weight: 300;
-}
-
-.cu-header-wave {
-  width: 200px;
-  height: 20px;
+  max-width: 600px;
   margin: 0 auto;
-}
-
-.cu-header-wave svg {
-  width: 100%;
-  height: 100%;
+  font-weight: 300;
+  text-shadow: 0 1px 4px rgba(0, 113, 185, 0.2);
+  letter-spacing: 1px;
+  font-style: italic;
 }
 
 /* Layout Grid */
@@ -529,9 +579,9 @@
   align-items: start;
 }
 
-/* Section Headings */
+/* Section Headings - Increased font size */
 .cu-section-heading {
-  font-size: 1.5rem;
+  font-size: 24px; /* Increased from 1.5rem */
   font-weight: 700;
   color: #0071b9;
   margin-bottom: 30px;
@@ -542,8 +592,8 @@
 }
 
 .cu-heading-icon {
-  width: 24px;
-  height: 24px;
+  width: 32px; /* Increased from 24px */
+  height: 32px; /* Increased from 24px */
   background: linear-gradient(135deg, #0071b9, #005a91);
   border-radius: 50%;
   display: flex;
@@ -554,8 +604,8 @@
 }
 
 .cu-heading-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 18px; /* Increased from 14px */
+  height: 18px; /* Increased from 14px */
 }
 
 /* Left Panel Styles */
@@ -565,7 +615,7 @@
   gap: 50px;
 }
 
-/* Locations */
+/* Locations - Increased font sizes */
 .cu-locations-container {
   display: flex;
   flex-direction: column;
@@ -609,14 +659,14 @@
 }
 
 .cu-location-name {
-  font-size: 1.1rem;
+  font-size: 18px; /* Increased from 1.1rem */
   font-weight: 700;
   color: #0071b9;
   margin-bottom: 5px;
 }
 
 .cu-location-company {
-  font-size: 0.95rem;
+  font-size: 16px; /* Increased from 0.95rem */
   color: #666;
   font-weight: 500;
 }
@@ -627,6 +677,7 @@
   margin-bottom: 12px;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-size: 16px; /* Added explicit font size */
 }
 
 .cu-location-address:hover {
@@ -638,7 +689,7 @@
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  font-size: 0.9rem;
+  font-size: 15px; /* Increased from 0.9rem */
 }
 
 .cu-contact-method a {
@@ -651,7 +702,7 @@
   color: #005a91;
 }
 
-/* Contact Methods */
+/* Contact Methods - Increased font sizes */
 .cu-contact-methods {
   display: flex;
   flex-direction: column;
@@ -676,8 +727,8 @@
 }
 
 .cu-contact-card-icon {
-  width: 40px;
-  height: 40px;
+  width: 50px; /* Increased from 40px */
+  height: 50px; /* Increased from 40px */
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -699,8 +750,8 @@
 }
 
 .cu-contact-card-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 26px; /* Increased from 20px */
+  height: 26px; /* Increased from 20px */
 }
 
 .cu-contact-card-content strong {
@@ -708,12 +759,14 @@
   font-weight: 600;
   color: #333;
   margin-bottom: 2px;
+  font-size: 16px; /* Added explicit font size */
 }
 
-.cu-contact-card-content a {
+.cu-contact-card-content a,
+.cu-contact-card-content span {
   color: #0071b9;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 15px; /* Increased from 0.9rem */
   transition: color 0.3s ease;
 }
 
@@ -728,7 +781,7 @@
   gap: 50px;
 }
 
-/* Form Styles */
+/* Form Styles - Increased font sizes */
 .cu-form-wrapper {
   background: white;
   border-radius: 20px;
@@ -760,6 +813,7 @@
   color: #666;
   margin-bottom: 30px;
   line-height: 1.6;
+  font-size: 16px; /* Added explicit font size */
 }
 
 .cu-form-grid {
@@ -779,7 +833,7 @@
 }
 
 .cu-form-label {
-  font-size: 0.9rem;
+  font-size: 15px; /* Increased from 0.9rem */
   font-weight: 600;
   color: #333;
   margin-bottom: 8px;
@@ -795,7 +849,7 @@
   padding: 14px 16px;
   border: 2px solid rgba(0, 113, 185, 0.2);
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 16px; /* Increased from 1rem */
   transition: all 0.3s ease;
   background: rgba(248, 249, 250, 0.5);
   font-family: inherit;
@@ -824,7 +878,7 @@
   border: none;
   padding: 0;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 16px; /* Added explicit font size */
   font-weight: 600;
   cursor: pointer;
   width: 100%;
@@ -863,8 +917,8 @@
 }
 
 .cu-button-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 20px; /* Increased from 18px */
+  height: 20px; /* Increased from 18px */
   transition: transform 0.3s ease;
 }
 
@@ -881,6 +935,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  font-size: 16px; /* Added explicit font size */
 }
 
 .cu-success-notification {
@@ -904,8 +959,8 @@
 
 .cu-success-notification svg,
 .cu-error-notification svg {
-  width: 20px;
-  height: 20px;
+  width: 22px; /* Increased from 20px */
+  height: 22px; /* Increased from 20px */
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -916,8 +971,8 @@
     gap: 60px;
   }
   
-  .cu-main-title {
-    font-size: 3rem;
+  .cu-section-title {
+    font-size: 42px;
   }
 }
 
@@ -927,8 +982,8 @@
     gap: 50px;
   }
   
-  .cu-main-title {
-    font-size: 2.5rem;
+  .cu-section-title {
+    font-size: 36px;
   }
   
   .cu-container {
@@ -946,12 +1001,16 @@
     padding: 25px 20px;
   }
   
-  .cu-main-title {
-    font-size: 2rem;
+  .cu-section-title {
+    font-size: 28px;
   }
   
-  .cu-main-subtitle {
-    font-size: 1.1rem;
+  .cu-section-subtitle {
+    font-size: 18px;
+  }
+  
+  .cu-section-heading {
+    font-size: 20px;
   }
   
   .cu-contact-methods {
@@ -964,12 +1023,20 @@
 }
 
 @media (max-width: 480px) {
-  .cu-main-title {
-    font-size: 1.8rem;
+  .cu-section-title {
+    font-size: 24px;
   }
   
   .cu-section-heading {
-    font-size: 1.3rem;
+    font-size: 18px;
+  }
+  
+  .cu-decoration-line {
+    width: 40px;
+  }
+
+  .cu-title-decoration {
+    gap: 10px;
   }
 }
 </style>
