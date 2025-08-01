@@ -1996,16 +1996,25 @@ body {
 @media (max-width: 768px) {
   .certifications-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 0 15px;
+    gap: 15px;
+    padding: 0 10px;
   }
 
   .certification-card {
-    padding: 20px 15px;
+    padding: 15px 10px;
   }
 
   .certification-badge {
-    max-width: 100px;
+    max-width: 80px;
+  }
+
+  .certification-validity {
+    font-size: 14px;
+  }
+
+  .certification-learn-more {
+    padding: 8px 15px;
+    font-size: 12px;
   }
 
   .certification-modal-content {
@@ -2014,121 +2023,87 @@ body {
   }
 
   .certification-modal-body {
-    padding: 30px 20px;
+    padding: 20px 15px;
   }
 
   .certification-modal-title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .certification-modal-description {
-    font-size: 1rem;
-    padding: 20px;
+    font-size: 0.9rem;
+    padding: 15px;
   }
 }
 
 @media (max-width: 480px) {
   .certifications-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .certification-card {
+    padding: 12px 8px;
+  }
+
+  .certification-badge {
+    max-width: 70px;
+  }
+
+  .certification-validity {
+    font-size: 12px;
+    margin-bottom: 10px;
   }
 
   .certification-learn-more {
-    padding: 8px 16px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 11px;
   }
 
   .certification-modal-badge {
-    max-width: 150px;
+    max-width: 120px;
+  }
+
+  .certification-modal-body {
+    padding: 15px 10px;
   }
 }
 
-/* Original Mobile Responsive */
+/* Mobile Responsive - Tablet */
 @media (max-width: 768px) {
-  .sustainability-approach-banner {
-    height: 350px;
-  }
-
-  .approach-heading {
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-  }
-
-  .approach-description {
-    font-size: 1.1rem;
-    line-height: 1.4;
-  }
-
-  .approach-overlay {
-    padding: 30px 20px;
-  }
-
-  .main-heading {
-    font-size: 1.6rem;
-  }
-
-  .change-heading {
-    font-size: 1.8rem;
-  }
-
-  .sustainability-change-section {
-    min-height: 80vh;
-    margin-left: calc(-50vw + 50%);
-    width: 100vw;
-  }
-
-  .change-overlay {
-    min-height: 80vh;
-    padding: 60px 20px;
-  }
-
-  .change-bg-image {
-    background-attachment: scroll;
-  }
-
-  .sustainability-stats-section {
-    padding: 100px 20px 60px 20px;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .stat-percentage {
-    font-size: 3rem;
-  }
-
-  .commitment-heading {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    line-height: 1.2;
-  }
-
-  .commitment-description {
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    line-height: 1.4;
-  }
-
-  .sustainability-commitment-section {
-    min-height: 400px;
-  }
-
-  .commitment-overlay {
-    min-height: 400px;
-    padding: 60px 20px;
-  }
-
-  .stats-heading {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 480px) {
   .sustainability-approach-banner {
     height: 300px;
   }
 
+  .approach-heading {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .approach-description {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .approach-overlay {
+    padding: 25px 15px;
+  }
+
+  .main-heading {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 30px;
+  }
+
+  .contact-button {
+    padding: 10px 25px;
+    font-size: 0.8rem;
+  }
+
+  /* Section 3 - Change Section Mobile Fixes */
   .sustainability-change-section {
     min-height: 70vh;
     width: 100%;
@@ -2136,53 +2111,250 @@ body {
 
   .change-overlay {
     min-height: 70vh;
-    padding: 40px 20px;
-  }
-
-  .sustainability-commitment-section {
-    min-height: 350px;
-  }
-
-  .commitment-overlay {
-    min-height: 350px;
     padding: 40px 15px;
   }
 
-  .sustainability-stats-section {
-    padding: 80px 20px 60px 20px;
+  .change-bg-image {
+    background-attachment: scroll;
   }
 
-  .approach-heading {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
+  .change-icon svg {
+    width: 50px !important;
+    height: 50px !important;
   }
 
-  .approach-description {
-    font-size: 1rem;
-    line-height: 1.3;
-  }
-
-  .approach-overlay {
-    padding: 20px 15px;
+  .change-icon-border {
+    padding: 15px;
   }
 
   .change-heading {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    line-height: 1.2;
   }
 
-  .commitment-heading {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    line-height: 1.1;
+  .change-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    padding: 0 10px;
   }
 
-  .commitment-description {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
+  .change-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
+  .change-divider {
+    width: 80px;
+    margin: 25px auto;
+  }
+
+  /* Section 4 - Statistics Mobile Fixes */
+  .sustainability-stats-section {
+    padding: 60px 15px 40px 15px;
+  }
+
+  .stats-heading {
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 100%;
+  }
+
+  .stat-percentage {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .stat-title {
+    font-size: 16px;
+    margin-bottom: 8px;
     line-height: 1.3;
   }
 
-  .main-heading,
+  .stat-description {
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+
+  /* Section 5 - Commitment Mobile Fixes */
+  .sustainability-commitment-section {
+    min-height: 300px;
+  }
+
+  .commitment-overlay {
+    min-height: 300px;
+    padding: 40px 15px;
+  }
+
+  .commitment-heading {
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .commitment-description {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 25px;
+  }
+
+  .commitment-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Responsive - Phone */
+@media (max-width: 480px) {
+  .sustainability-approach-banner {
+    height: 250px;
+  }
+
+  .approach-heading {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .approach-description {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .approach-overlay {
+    padding: 20px 10px;
+  }
+
+  .main-heading {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    padding: 0 5px;
+  }
+
+  .contact-button {
+    padding: 8px 20px;
+    font-size: 0.75rem;
+  }
+
+  .contact-button-wrapper {
+    margin-bottom: 40px;
+  }
+
+  /* Section 3 - Change Section Phone Fixes */
+  .sustainability-change-section {
+    min-height: 60vh;
+  }
+
+  .change-overlay {
+    min-height: 60vh;
+    padding: 30px 10px;
+  }
+
+  .change-icon svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .change-icon-border {
+    padding: 12px;
+  }
+
+  .change-icon-wrapper {
+    margin-bottom: 25px;
+  }
+
+  .change-heading {
+    font-size: 1.1rem;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    line-height: 1.1;
+  }
+
+  .change-description {
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    padding: 0 5px;
+  }
+
+  .change-button {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+
+  .change-divider {
+    width: 60px;
+    height: 3px;
+    margin: 20px auto;
+  }
+
+  /* Section 4 - Statistics Phone Fixes */
+  .sustainability-stats-section {
+    padding: 50px 10px 30px 10px;
+  }
+
   .stats-heading {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    line-height: 1.1;
+  }
+
+  .stats-grid {
+    gap: 25px;
+  }
+
+  .stat-percentage {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .stat-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .stat-description {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 0 5px;
+  }
+
+  /* Section 5 - Commitment Phone Fixes */
+  .sustainability-commitment-section {
+    min-height: 250px;
+  }
+
+  .commitment-overlay {
+    min-height: 250px;
+    padding: 30px 10px;
+  }
+
+  .commitment-heading {
     font-size: 1.4rem;
+    line-height: 1;
+    margin-bottom: 15px;
+  }
+
+  .commitment-description {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .commitment-button {
+    padding: 10px 20px;
+    font-size: 0.8rem;
   }
 }
 </style>
