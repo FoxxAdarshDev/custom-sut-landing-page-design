@@ -111,7 +111,7 @@
             "title": "Mission",
             "content": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.",
             "icon_type": "svg",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='3'/><path d='m12 1l9 16H3l9-16zm0 2.828L6.172 16h11.656L12 3.828z'/></svg>"
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='10' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='6' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='2'/></svg>"
           }
         },
         {
@@ -131,7 +131,7 @@
 
 {% if section.settings.show_section %}
 <!-- Mission & Vision Section -->
-<section class="professional-mission-vision" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
+<section class="professional-mission-vision" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0; width: 100vw; margin-left: calc(-50vw + 50%);">
   <div class="mission-vision-container">
     {% if section.settings.section_title != blank %}
       <div class="section-header">
@@ -189,7 +189,7 @@
           <div class="card-header">
             <div class="icon-container">
               <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
-                <svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='3'/><path d='m12 1l9 16H3l9-16zm0 2.828L6.172 16h11.656L12 3.828z'/></svg>
+                <svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='10' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='6' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='2'/></svg>
               </div>
               <div class="icon-glow"></div>
             </div>
@@ -270,6 +270,10 @@
   z-index: 2;
 }
 
+.professional-mission-vision {
+  margin: 0 !important;
+}
+
 /* Enhanced Section Header */
 .section-header {
   text-align: center;
@@ -300,14 +304,14 @@
 }
 
 .section-title {
-  font-size: 42px;
-  font-weight: 700;
+  font-size: 64px;
+  font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   position: relative;
-  line-height: 50px;
+  line-height: 70px;
 }
 
 .section-subtitle {
@@ -511,9 +515,9 @@
   }
 
   .section-title {
-    font-size: 28px;
+    font-size: 48px;
     letter-spacing: 2px;
-    line-height: 34px;
+    line-height: 54px;
   }
 
   .section-subtitle {
@@ -562,8 +566,8 @@
 
 @media (max-width: 480px) {
   .section-title {
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 36px;
+    line-height: 42px;
   }
 
   .professional-card {
