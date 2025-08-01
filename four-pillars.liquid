@@ -188,7 +188,8 @@
               {% endif %}
               
               <!-- Overlay -->
-              <div class="fp-unique-card-overlay" style="background-color: {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', {{ section.settings.card_overlay_opacity | default: 70 | divided_by: 100.0 }} }};"></div>
+              {% assign overlay_opacity = section.settings.card_overlay_opacity | default: 70 | divided_by: 100.0 %}
+              <div class="fp-unique-card-overlay" style="background-color: {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity }};"></div>
               
               <!-- Card Content -->
               <div class="fp-unique-card-content">
