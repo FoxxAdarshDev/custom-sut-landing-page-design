@@ -145,11 +145,20 @@
                 {% endif %}
               </div>
 
-              <!-- Polygon Shape with Image -->
-              <div class="oc-culture-polygon" style="background: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
-                {% if block.settings.culture_image != blank %}
-                  <div class="oc-polygon-image" style="background-image: url('{{ block.settings.culture_image | img_url: '400x400' }}');"></div>
-                {% endif %}
+              <!-- Polygon SVG Shape -->
+              <div class="oc-culture-polygon">
+                <svg viewBox="0 0 200 300" class="oc-polygon-svg">
+                  <defs>
+                    {% if block.settings.culture_image != blank %}
+                      <pattern id="polygon-pattern-{{ block.id }}" patternUnits="objectBoundingBox" width="100%" height="100%">
+                        <image href="{{ block.settings.culture_image | img_url: '400x600' }}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"/>
+                      </pattern>
+                    {% endif %}
+                  </defs>
+                  <polygon points="0,0 120,0 200,150 120,300 0,300" 
+                           fill="{% if block.settings.culture_image != blank %}url(#polygon-pattern-{{ block.id }}){% else %}{{ section.settings.culture_accent_color | default: '#0071b9' }}{% endif %}" 
+                           opacity="0.9"/>
+                </svg>
               </div>
             </div>
 
@@ -253,12 +262,16 @@
   border-radius: 20px 0 0 20px;
   overflow: hidden;
   z-index: 2;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .oc-culture-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
@@ -280,7 +293,7 @@
   height: 100%;
 }
 
-/* Polygon Shape with Image */
+/* Polygon SVG Shape */
 .oc-culture-polygon {
   position: absolute;
   right: -50px;
@@ -288,22 +301,13 @@
   transform: translateY(-50%);
   width: 100px;
   height: 300px;
-  clip-path: polygon(0 0, 60% 0, 100% 50%, 60% 100%, 0 100%);
   z-index: 3;
   transition: all 0.3s ease;
-  overflow: hidden;
 }
 
-.oc-polygon-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+.oc-polygon-svg {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.9;
 }
 
 .oc-culture-image-section:hover .oc-culture-polygon {
