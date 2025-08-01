@@ -1148,12 +1148,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(timer);
       }
 
-      let displayValue;
-      if (numericTarget >= 1000) {
-        displayValue = Math.floor(current).toLocaleString('en-US');
-      } else {
-        displayValue = Math.floor(current);
-      }
+      let displayValue = Math.floor(current);
 
       element.textContent = displayValue + suffix;
     }, 16);
