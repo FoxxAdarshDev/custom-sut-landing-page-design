@@ -1,4 +1,3 @@
-
 {% schema %}
 {
   "name": "Mission & Vision",
@@ -150,7 +149,7 @@
         {% for block in section.blocks %}
           <div class="professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
             <div class="card-background-effect"></div>
-            
+
             <div class="card-header">
               <div class="icon-container">
                 {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
@@ -164,7 +163,7 @@
                 {% endif %}
                 <div class="icon-glow"></div>
               </div>
-              
+
               <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
                 {{ block.settings.title | default: 'Title' }}
               </h3>
@@ -185,7 +184,7 @@
         <!-- Default Mission Card -->
         <div class="professional-card" data-aos="fade-up" data-aos-delay="0">
           <div class="card-background-effect"></div>
-          
+
           <div class="card-header">
             <div class="icon-container">
               <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
@@ -193,7 +192,7 @@
               </div>
               <div class="icon-glow"></div>
             </div>
-            
+
             <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
               Mission
             </h3>
@@ -213,7 +212,7 @@
         <!-- Default Vision Card -->
         <div class="professional-card" data-aos="fade-up" data-aos-delay="200">
           <div class="card-background-effect"></div>
-          
+
           <div class="card-header">
             <div class="icon-container">
               <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
@@ -221,7 +220,7 @@
               </div>
               <div class="icon-glow"></div>
             </div>
-            
+
             <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
               Vision
             </h3>
