@@ -833,8 +833,7 @@
   pointer-events: none;
 }
 
-.stat-item:hover .stat-glow {
-  transform: translate(-50%, -50%) scale(1.2);
+.stat-item:hover .stat-glow {  transform: translate(-50%, -50%) scale(1.2);
 }
 
 /* Pulse Effect */
@@ -1149,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       let displayValue;
-      if (numericTarget >= 1000) {
+      if (numericTarget >= 100000) {
         displayValue = Math.floor(current).toLocaleString('en-US');
       } else {
         displayValue = Math.floor(current);
