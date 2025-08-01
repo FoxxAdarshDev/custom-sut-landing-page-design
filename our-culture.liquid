@@ -1,162 +1,48 @@
-
-{% schema %}
-{
-  "name": "Our Culture",
-  "class": "our-culture-section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Section Settings"
-    },
-    {
-      "type": "text",
-      "id": "culture_section_title",
-      "label": "Section Title",
-      "default": "Our Culture"
-    },
-    {
-      "type": "textarea",
-      "id": "culture_section_description",
-      "label": "Section Description",
-      "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
-    },
-    {
-      "type": "header",
-      "content": "Background & Overlay Settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "culture_background_image",
-      "label": "Background Banner Image"
-    },
-    {
-      "type": "color",
-      "id": "culture_overlay_color",
-      "label": "Overlay Color",
-      "default": "#0071b9"
-    },
-    {
-      "type": "range",
-      "id": "culture_overlay_opacity",
-      "label": "Overlay Opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 85
-    },
-    {
-      "type": "header",
-      "content": "Color Settings"
-    },
-    {
-      "type": "color",
-      "id": "culture_text_color",
-      "label": "Text Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "culture_accent_color",
-      "label": "Accent Color",
-      "default": "#0071b9"
-    },
-    {
-      "type": "header",
-      "content": "Call to Action"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_cta_button",
-      "label": "Show CTA Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "cta_button_text",
-      "label": "CTA Button Text",
-      "default": "Learn More"
-    },
-    {
-      "type": "url",
-      "id": "cta_button_url",
-      "label": "CTA Button URL"
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top Padding",
-      "min": 0,
-      "max": 200,
-      "step": 10,
-      "unit": "px",
-      "default": 120
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom Padding",
-      "min": 0,
-      "max": 200,
-      "step": 10,
-      "unit": "px",
-      "default": 120
-    }
-  ],
-  "presets": [
-    {
-      "name": "Our Culture",
-      "category": "About"
-    }
-  ]
-}
-{% endschema %}
+{% comment %}
+  Our Culture Banner Section with hardcoded styles
+{% endcomment %}
 
 <!-- Our Culture Banner Section -->
-<section class="culture-banner-section" 
-         data-section-id="{{ section.id }}" 
-         style="
-           --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#0071b9' }};
-           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 85 }};
-           --culture-text-color: {{ section.settings.culture_text_color | default: '#ffffff' }};
-           --culture-accent-color: {{ section.settings.culture_accent_color | default: '#00a8ff' }};
-           --padding-top: {{ section.settings.padding_top | default: 120 }}px;
-           --padding-bottom: {{ section.settings.padding_bottom | default: 120 }}px;
-         ">
-
+<section class="culture-banner-section" data-section-id="{{ section.id }}">
   <!-- Background Image with Overlay -->
   <div class="culture-background">
     {% if section.settings.culture_background_image != blank %}
       <img src="{{ section.settings.culture_background_image | img_url: '1920x1080' }}" 
            alt="Our Culture Background" 
            class="culture-bg-image">
-      <!-- Overlay - Always applied with background image -->
-      <div class="culture-overlay"></div>
     {% else %}
-      <!-- Default gradient background if no image -->
-      <div class="culture-bg-gradient"></div>
+      <!-- Default background image if none selected -->
+      <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/MicrosoftTeams-image_3_7d8659cc-d3c1-46d4-9a5b-658a2ba0cc1c.jpg?v=1710427248" 
+           alt="Our Culture Background" 
+           class="culture-bg-image">
     {% endif %}
+
+    <!-- Always show overlay -->
+    <div class="culture-overlay"></div>
   </div>
 
   <!-- Content Container -->
   <div class="culture-content-container">
     <div class="culture-inner-content">
-
       <!-- Section Header -->
       <div class="culture-header">
-        {% if section.settings.culture_section_title != blank %}
-          <h2 class="culture-main-title">
-            <span class="culture-title-line">{{ section.settings.culture_section_title }}</span>
-          </h2>
-        {% endif %}
+        <h2 class="culture-main-title">
+          <span class="culture-title-line">
+            {% if section.settings.culture_section_title != blank %}
+              {{ section.settings.culture_section_title }}
+            {% else %}
+              Our Culture
+            {% endif %}
+          </span>
+        </h2>
 
         {% if section.settings.culture_section_description != blank %}
           <div class="culture-description">
             <p>{{ section.settings.culture_section_description }}</p>
+          </div>
+        {% else %}
+          <div class="culture-description">
+            <p>As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team.</p>
           </div>
         {% endif %}
 
@@ -175,7 +61,6 @@
           </div>
         {% endif %}
       </div>
-
     </div>
   </div>
 
@@ -185,11 +70,10 @@
     <div class="floating-element element-2"></div>
     <div class="floating-element element-3"></div>
   </div>
-
 </section>
 
 <style>
-/* Our Culture Banner Section - Modern Overlay Design */
+/* Our Culture Banner Section - Hardcoded Styles */
 .culture-banner-section {
   position: relative;
   min-height: 60vh;
@@ -197,7 +81,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: var(--padding-top) 0 var(--padding-bottom) 0;
+  padding: 120px 0;
 }
 
 /* Background Image */
@@ -218,21 +102,15 @@
   transition: transform 0.8s ease;
 }
 
-.culture-bg-gradient {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0071b9 0%, #005a91 50%, #003d63 100%);
-}
-
-/* Overlay - Always applied when background image exists */
+/* Overlay - Always applied with 55% opacity */
 .culture-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--culture-overlay-color, #0071b9);
-  opacity: calc(var(--culture-overlay-opacity) / 100);
+  background-color: #0071b9;
+  opacity: 0.55;
   z-index: 2;
   pointer-events: none;
 }
@@ -249,7 +127,7 @@
 
 .culture-inner-content {
   text-align: center;
-  color: var(--culture-text-color);
+  color: #ffffff;
 }
 
 /* Header Styles */
@@ -266,13 +144,13 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative;
-  color: var(--culture-text-color, #ffffff);
+  color: #ffffff;
 }
 
 .culture-title-line {
   position: relative;
   display: inline-block;
-  color: var(--culture-text-color, #ffffff);
+  color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -284,7 +162,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: var(--culture-accent-color, #ffffff);
+  background: #ffffff;
   border-radius: 2px;
   animation: titleUnderline 2s ease-out forwards;
 }
@@ -313,7 +191,7 @@
   font-weight: 400;
   margin: 0;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-  color: var(--culture-text-color, #ffffff);
+  color: #ffffff;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -341,10 +219,10 @@
   align-items: center;
   gap: 15px;
   padding: 18px 40px;
-  background: linear-gradient(135deg, var(--culture-accent-color) 0%, rgba(255, 255, 255, 0.1) 100%);
-  border: 2px solid var(--culture-accent-color);
+  background: linear-gradient(135deg, #0071b9 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 2px solid #ffffff;
   border-radius: 50px;
-  color: var(--culture-text-color);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -375,7 +253,7 @@
 .culture-cta-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  border-color: var(--culture-text-color);
+  border-color: #ffffff;
 }
 
 .cta-text {
@@ -602,5 +480,63 @@
 }
 </style>
 
-
-</style>
+{% schema %}
+{
+  "name": "Our Culture",
+  "class": "our-culture-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "culture_section_title",
+      "label": "Section Title",
+      "default": "Our Culture"
+    },
+    {
+      "type": "textarea",
+      "id": "culture_section_description",
+      "label": "Section Description",
+      "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "culture_background_image",
+      "label": "Background Banner Image"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_button",
+      "label": "Show CTA Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Culture",
+      "category": "About"
+    }
+  ]
+}
+{% endschema %}
