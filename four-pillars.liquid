@@ -23,14 +23,44 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background Color",
+      "label": "Section Background Color",
       "default": "#f8f9fa"
     },
     {
       "type": "color",
       "id": "accent_color",
-      "label": "Accent Color",
+      "label": "Primary/Accent Color",
       "default": "#0071b9"
+    },
+    {
+      "type": "range",
+      "id": "card_overlay_opacity",
+      "label": "Card Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
     }
   ],
   "blocks": [
@@ -42,13 +72,19 @@
           "type": "text",
           "id": "title",
           "label": "Pillar Title",
-          "default": "Innovation"
+          "default": "Engineering"
         },
         {
           "type": "textarea",
           "id": "description",
           "label": "Pillar Description",
-          "default": "We constantly push the boundaries of what's possible in bioprocessing technology."
+          "default": "At Foxx Bioprocessing, engineering is the starting point of every solution. Our team works closely with customer requirements to ensure technical accuracy, fit, and compliance."
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image",
+          "info": "Recommended: 400x300px or larger"
         },
         {
           "type": "select",
@@ -70,17 +106,12 @@
           "type": "textarea",
           "id": "svg_code",
           "label": "SVG Code",
-          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V1h-2v1H7V1H5v1H3.5C2.67 2 2 2.67 2 3.5v1C2 5.33 2.67 6 3.5 6H4v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h.5c.83 0 1.5-.67 1.5-1.5v-1C22 2.67 21.33 2 20.5 2z'/></svg>"
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z'/></svg>"
         },
         {
           "type": "image_picker",
-          "id": "image",
+          "id": "icon_image",
           "label": "Icon Image"
-        },
-        {
-          "type": "color",
-          "id": "custom_color",
-          "label": "Custom Pillar Color (optional)"
         }
       ]
     }
@@ -93,33 +124,33 @@
         {
           "type": "pillar",
           "settings": {
-            "title": "Innovation",
-            "description": "We constantly push the boundaries of what's possible in bioprocessing technology.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'/></svg>"
+            "title": "Engineering",
+            "description": "At Foxx Bioprocessing, engineering is the starting point of every solution. Our team works closely with customer requirements to ensure technical accuracy, fit, and compliance. We design, prototype fast, build clean, and document every step.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
             "title": "Quality",
-            "description": "Our commitment to excellence ensures every product meets the highest standards.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/></svg>"
+            "description": "Quality is our operating principle. Every product is built under certified cleanroom conditions with full traceability and validation. Backed by 15+ years of ISO 13485 Certification, we follow regulated manufacturing workflows and test to specification.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
-            "title": "Sustainability",
-            "description": "Environmental responsibility is at the core of our manufacturing processes.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.66c.03-.08.06-.17.09-.25C6.84 17.25 9.5 14 12 14c2.5 0 5.16 3.25 5.25 5.09.03.08.06.17.09.25l.95 2.66 1.89-.66C18.1 16.17 16 10 7 8z'/></svg>"
+            "title": "Customer Service",
+            "description": "From first upload to final shipment, our team is available to review your designs, troubleshoot challenges, and support documentation needs. We respond fast, stay transparent, and deliver what we commit.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.99 2.99 0 0 0 17.09 7H16c-.8 0-1.54.37-2 1l-3 4v6h2v7h3v-7h4zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2 16v-7h2v-6l-3-4c-.46-.63-1.2-1-2-1H3.91A2.99 2.99 0 0 0 1.08 6.37L-1.46 14H1v6h2v7h4.5z'/></svg>"
           }
         },
         {
           "type": "pillar",
           "settings": {
-            "title": "Customer Focus",
-            "description": "Every solution is tailored to meet our customers' unique requirements.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
+            "title": "Family-owned Company",
+            "description": "We are a family-owned company. All resources stay within the business and are reinvested into capability, systems, and teams. Decision-making stays close to the work, enabling stability and accountability to build better.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58A2.01 2.01 0 0 0 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85A6.95 6.95 0 0 0 20 14c-.39 0-.76.04-1.13.1.4.68.63 1.46.63 2.29V18H24v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z'/></svg>"
           }
         }
       ]
@@ -129,261 +160,241 @@
 {% endschema %}
 
 <!-- Four Pillars Section -->
-<section class="four-pillars-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.pillars_background_color | default: '#f8f9fa' }};">
-  <div class="pillars-container">
-    <div class="section-header">
-      <h2 class="section-title">{{ section.settings.pillars_section_title | default: 'Our Four Pillars' }}</h2>
-      {% if section.settings.pillars_section_description != blank %}
-        <p class="section-description">{{ section.settings.pillars_section_description }}</p>
-      {% endif %}
-      <div class="title-underline" style="background-color: {{ section.settings.pillars_accent_color | default: '#0071b9' }};"></div>
-    </div>
-
-    <div class="pillars-grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'pillar' %}
-          <div class="pillar-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
-            <div class="pillar-icon-wrapper">
-              {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
-                <div class="pillar-icon image-icon">
-                  <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
-                </div>
-              {% elsif block.settings.svg_code != blank %}
-                <div class="pillar-icon svg-icon" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};">
-                  {{ block.settings.svg_code }}
-                </div>
-              {% endif %}
-            </div>
-
-            <div class="pillar-content">
-              <h3 class="pillar-title" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};">
-                {{ block.settings.title }}
-              </h3>
-              <div class="pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};"></div>
-              <p class="pillar-description">{{ block.settings.description }}</p>
-            </div>
-
-            <div class="pillar-glow" style="background: radial-gradient(circle, {% if block.settings.custom_color != blank %}{{ block.settings.custom_color | color_modify: 'alpha', 0.1 }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }}{% endif %} 0%, transparent 70%);"></div>
-            
-            <div class="pillar-number">{{ forloop.index }}</div>
-          </div>
+<section class="fp-unique-four-pillars-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
+  <div class="fp-unique-container">
+    {% if section.settings.section_title != blank or section.settings.section_description != blank %}
+      <div class="fp-unique-section-header">
+        {% if section.settings.section_title != blank %}
+          <h2 class="fp-unique-section-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+            {{ section.settings.section_title }}
+          </h2>
         {% endif %}
+        {% if section.settings.section_description != blank %}
+          <p class="fp-unique-section-description">
+            {{ section.settings.section_description }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="fp-unique-pillars-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'pillar' %}
+            <div class="fp-unique-pillar-card" {{ block.shopify_attributes }}>
+              <!-- Background Image -->
+              {% if block.settings.background_image != blank %}
+                <div class="fp-unique-card-background" style="background-image: url('{{ block.settings.background_image | img_url: '600x400' }}');"></div>
+              {% endif %}
+              
+              <!-- Overlay -->
+              <div class="fp-unique-card-overlay" style="background-color: {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', {{ section.settings.card_overlay_opacity | default: 70 | divided_by: 100.0 }} }};"></div>
+              
+              <!-- Card Content -->
+              <div class="fp-unique-card-content">
+                <!-- Icon -->
+                {% if block.settings.icon_type == 'image' and block.settings.icon_image != blank %}
+                  <div class="fp-unique-pillar-icon">
+                    <img src="{{ block.settings.icon_image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
+                  </div>
+                {% elsif block.settings.svg_code != blank %}
+                  <div class="fp-unique-pillar-icon fp-unique-svg-icon">
+                    {{ block.settings.svg_code }}
+                  </div>
+                {% endif %}
+
+                <!-- Title -->
+                {% if block.settings.title != blank %}
+                  <h3 class="fp-unique-pillar-title">
+                    {{ block.settings.title }}
+                  </h3>
+                {% endif %}
+
+                <!-- Description -->
+                {% if block.settings.description != blank %}
+                  <p class="fp-unique-pillar-description">
+                    {{ block.settings.description }}
+                  </p>
+                {% endif %}
+
+                <!-- Number Badge -->
+                <div class="fp-unique-pillar-number">{{ forloop.index }}</div>
+              </div>
+            </div>
+        {% endcase %}
       {% endfor %}
     </div>
   </div>
 </section>
 
 <style>
-/* Four Pillars Section */
-.four-pillars-section {
-  padding: 80px 0;
+/* Four Pillars Section - Unique CSS */
+.fp-unique-four-pillars-section {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
-.pillars-container {
+.fp-unique-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* Section Header */
-.section-header {
+.fp-unique-section-header {
   text-align: center;
   margin-bottom: 60px;
 }
 
-.section-title {
-  font-size: 48px;
+.fp-unique-section-title {
+  font-size: 42px;
   font-weight: 700;
-  color: #2c3e50;
   margin-bottom: 20px;
+  line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-.section-description {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.fp-unique-section-description {
+  font-size: 18px;
   line-height: 1.6;
-}
-
-.title-underline {
-  width: 80px;
-  height: 4px;
+  color: #666;
+  max-width: 700px;
   margin: 0 auto;
-  border-radius: 2px;
 }
 
 /* Pillars Grid */
-.pillars-grid {
+.fp-unique-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   align-items: stretch;
 }
 
 /* Pillar Cards */
-.pillar-card {
-  background: white;
+.fp-unique-pillar-card {
+  position: relative;
+  height: 400px;
   border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 2px solid transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.pillar-card::before {
-  content: '';
+.fp-unique-pillar-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.25);
+}
+
+/* Background Image */
+.fp-unique-card-background {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, transparent 30%, var(--accent-color, #0071b9) 50%, transparent 70%);
-  background-size: 200% 200%;
-  border-radius: 22px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: borderFlow 3s linear infinite;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.4s ease;
 }
 
-@keyframes borderFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.pillar-card:hover::before {
-  opacity: 1;
-}
-
-.pillar-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.2);
-}
-
-/* Pillar Icon */
-.pillar-icon-wrapper {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-.pillar-icon {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
-  border-radius: 50%;
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.pillar-icon::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(45deg, var(--accent-color, #0071b9), transparent, var(--accent-color, #0071b9));
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  animation: iconGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes iconGlow {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
-}
-
-.pillar-card:hover .pillar-icon::before {
-  opacity: 1;
-}
-
-.pillar-icon.svg-icon svg {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-}
-
-.pillar-icon.image-icon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.pillar-card:hover .pillar-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.pillar-card:hover .pillar-icon svg,
-.pillar-card:hover .pillar-icon img {
+.fp-unique-pillar-card:hover .fp-unique-card-background {
   transform: scale(1.1);
 }
 
-/* Pillar Content */
-.pillar-content {
-  position: relative;
+/* Overlay */
+.fp-unique-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
+  transition: opacity 0.3s ease;
 }
 
-.pillar-title {
+.fp-unique-pillar-card:hover .fp-unique-card-overlay {
+  opacity: 0.8;
+}
+
+/* Card Content */
+.fp-unique-card-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+/* Pillar Icon */
+.fp-unique-pillar-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.fp-unique-pillar-card:hover .fp-unique-pillar-icon {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.fp-unique-pillar-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.fp-unique-svg-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
+}
+
+/* Pillar Title */
+.fp-unique-pillar-title {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.pillar-divider {
-  width: 50px;
-  height: 3px;
-  margin: 0 auto 20px;
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-.pillar-card:hover .pillar-divider {
-  width: 70px;
-}
-
-.pillar-description {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.8;
+/* Pillar Description */
+.fp-unique-pillar-description {
+  font-size: 14px;
+  line-height: 1.6;
   margin: 0;
-  transition: color 0.3s ease;
-}
-
-.pillar-card:hover .pillar-description {
-  color: #444;
+  flex-grow: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
 }
 
 /* Pillar Number */
-.pillar-number {
+.fp-unique-pillar-number {
   position: absolute;
   top: 20px;
   right: 20px;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--accent-color, #0071b9), var(--accent-color, #005a91));
+  background: rgba(255, 255, 255, 0.25);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -391,92 +402,102 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 700;
-  opacity: 0.8;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
 
-.pillar-card:hover .pillar-number {
-  opacity: 1;
+.fp-unique-pillar-card:hover .fp-unique-pillar-number {
   transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.4);
 }
 
-/* Pillar Glow Effect */
-.pillar-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.4s ease;
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: 1;
+/* Default Background for Cards without Images */
+.fp-unique-pillar-card:not(:has(.fp-unique-card-background)) {
+  background: linear-gradient(135deg, #0071b9, #005a91);
 }
 
-.pillar-card:hover .pillar-glow {
-  transform: translate(-50%, -50%) scale(1.2);
+.fp-unique-pillar-card:not(:has(.fp-unique-card-background)):nth-child(2) {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
+.fp-unique-pillar-card:not(:has(.fp-unique-card-background)):nth-child(3) {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.fp-unique-pillar-card:not(:has(.fp-unique-card-background)):nth-child(4) {
+  background: linear-gradient(135deg, #ffc107, #e0a800);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .pillars-grid {
+  .fp-unique-pillars-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
 
-  .pillar-card {
-    padding: 35px 25px;
+  .fp-unique-pillar-card {
+    height: 350px;
+  }
+
+  .fp-unique-card-content {
+    padding: 30px 25px;
   }
 }
 
 @media (max-width: 768px) {
-  .four-pillars-section {
+  .fp-unique-four-pillars-section {
     padding: 60px 0;
   }
 
-  .pillars-container {
+  .fp-unique-container {
     padding: 0 15px;
   }
 
-  .section-title {
+  .fp-unique-section-title {
     font-size: 32px;
     letter-spacing: 1px;
   }
 
-  .section-description {
-    font-size: 18px;
+  .fp-unique-section-description {
+    font-size: 16px;
   }
 
-  .pillars-grid {
+  .fp-unique-pillars-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 
-  .pillar-card {
-    padding: 30px 20px;
+  .fp-unique-pillar-card {
+    height: 320px;
   }
 
-  .pillar-icon {
+  .fp-unique-card-content {
+    padding: 25px 20px;
+  }
+
+  .fp-unique-pillar-icon {
     width: 60px;
     height: 60px;
+    margin-bottom: 20px;
   }
 
-  .pillar-icon.svg-icon svg,
-  .pillar-icon.image-icon img {
+  .fp-unique-pillar-icon img,
+  .fp-unique-svg-icon svg {
     width: 30px;
     height: 30px;
   }
 
-  .pillar-title {
-    font-size: 20px;
+  .fp-unique-pillar-title {
+    font-size: 18px;
+    margin-bottom: 15px;
   }
 
-  .pillar-description {
-    font-size: 14px;
+  .fp-unique-pillar-description {
+    font-size: 13px;
   }
 
-  .pillar-number {
+  .fp-unique-pillar-number {
     width: 35px;
     height: 35px;
     font-size: 16px;
@@ -484,42 +505,50 @@
 }
 
 @media (max-width: 480px) {
-  .section-title {
+  .fp-unique-section-title {
     font-size: 24px;
   }
 
-  .section-description {
-    font-size: 16px;
+  .fp-unique-section-description {
+    font-size: 14px;
   }
 
-  .pillars-grid {
+  .fp-unique-pillars-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .pillar-card {
-    padding: 25px 15px;
+  .fp-unique-pillar-card {
+    height: 280px;
   }
 
-  .pillar-title {
-    font-size: 18px;
+  .fp-unique-card-content {
+    padding: 20px 15px;
+  }
+
+  .fp-unique-pillar-title {
+    font-size: 16px;
+  }
+
+  .fp-unique-pillar-description {
+    font-size: 12px;
   }
 }
 
 /* Animation on Scroll */
 @media (prefers-reduced-motion: no-preference) {
-  .pillar-card {
+  .fp-unique-pillar-card {
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 0.8s ease forwards;
+    animation: fp-unique-fadeInUp 0.8s ease forwards;
   }
 
-  .pillar-card:nth-child(1) { animation-delay: 0.2s; }
-  .pillar-card:nth-child(2) { animation-delay: 0.4s; }
-  .pillar-card:nth-child(3) { animation-delay: 0.6s; }
-  .pillar-card:nth-child(4) { animation-delay: 0.8s; }
+  .fp-unique-pillar-card:nth-child(1) { animation-delay: 0.2s; }
+  .fp-unique-pillar-card:nth-child(2) { animation-delay: 0.4s; }
+  .fp-unique-pillar-card:nth-child(3) { animation-delay: 0.6s; }
+  .fp-unique-pillar-card:nth-child(4) { animation-delay: 0.8s; }
 
-  @keyframes fadeInUp {
+  @keyframes fp-unique-fadeInUp {
     to {
       opacity: 1;
       transform: translateY(0);
@@ -529,28 +558,33 @@
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .pillar-card,
-  .pillar-icon {
+  .fp-unique-pillar-card,
+  .fp-unique-card-background,
+  .fp-unique-pillar-icon {
     animation: none;
     transition: none;
   }
 }
 
-.pillar-card:focus {
+.fp-unique-pillar-card:focus {
   outline: 3px solid #0071b9;
   outline-offset: 4px;
 }
 
 /* Print Styles */
 @media print {
-  .four-pillars-section {
+  .fp-unique-four-pillars-section {
     background: white !important;
     color: black !important;
   }
   
-  .pillar-glow,
-  .pillar-number {
+  .fp-unique-card-overlay,
+  .fp-unique-pillar-number {
     display: none;
+  }
+  
+  .fp-unique-card-content {
+    color: black !important;
   }
 }
 </style>
