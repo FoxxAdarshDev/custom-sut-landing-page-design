@@ -1,0 +1,556 @@
+
+{% schema %}
+{
+  "name": "Four Pillars",
+  "class": "four-pillars-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Our Four Pillars"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "The foundational principles that guide our organization"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#0071b9"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Title",
+          "default": "Innovation"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Pillar Description",
+          "default": "We constantly push the boundaries of what's possible in bioprocessing technology."
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V1h-2v1H7V1H5v1H3.5C2.67 2 2 2.67 2 3.5v1C2 5.33 2.67 6 3.5 6H4v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h.5c.83 0 1.5-.67 1.5-1.5v-1C22 2.67 21.33 2 20.5 2z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "color",
+          "id": "custom_color",
+          "label": "Custom Pillar Color (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Four Pillars",
+      "category": "About",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Innovation",
+            "description": "We constantly push the boundaries of what's possible in bioprocessing technology.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Quality",
+            "description": "Our commitment to excellence ensures every product meets the highest standards.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Sustainability",
+            "description": "Environmental responsibility is at the core of our manufacturing processes.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.66c.03-.08.06-.17.09-.25C6.84 17.25 9.5 14 12 14c2.5 0 5.16 3.25 5.25 5.09.03.08.06.17.09.25l.95 2.66 1.89-.66C18.1 16.17 16 10 7 8z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Customer Focus",
+            "description": "Every solution is tailored to meet our customers' unique requirements.",
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Four Pillars Section -->
+<section class="four-pillars-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }};">
+  <div class="pillars-container">
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.section_title | default: 'Our Four Pillars' }}</h2>
+      {% if section.settings.section_description != blank %}
+        <p class="section-description">{{ section.settings.section_description }}</p>
+      {% endif %}
+      <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+    </div>
+
+    <div class="pillars-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'pillar' %}
+          <div class="pillar-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
+            <div class="pillar-icon-wrapper">
+              {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
+                <div class="pillar-icon image-icon">
+                  <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
+                </div>
+              {% elsif block.settings.svg_code != blank %}
+                <div class="pillar-icon svg-icon" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+                  {{ block.settings.svg_code }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="pillar-content">
+              <h3 class="pillar-title" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+                {{ block.settings.title }}
+              </h3>
+              <div class="pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};"></div>
+              <p class="pillar-description">{{ block.settings.description }}</p>
+            </div>
+
+            <div class="pillar-glow" style="background: radial-gradient(circle, {% if block.settings.custom_color != blank %}{{ block.settings.custom_color | color_modify: 'alpha', 0.1 }}{% else %}{{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }}{% endif %} 0%, transparent 70%);"></div>
+            
+            <div class="pillar-number">{{ forloop.index }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Four Pillars Section */
+.four-pillars-section {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillars-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-description {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Pillars Grid */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* Pillar Cards */
+.pillar-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent 30%, var(--accent-color, #0071b9) 50%, transparent 70%);
+  background-size: 200% 200%;
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: borderFlow 3s linear infinite;
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.pillar-card:hover::before {
+  opacity: 1;
+}
+
+.pillar-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.2);
+}
+
+/* Pillar Icon */
+.pillar-icon-wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.pillar-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.pillar-icon::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, var(--accent-color, #0071b9), transparent, var(--accent-color, #0071b9));
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: iconGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlow {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+.pillar-card:hover .pillar-icon::before {
+  opacity: 1;
+}
+
+.pillar-icon.svg-icon svg {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.pillar-icon.image-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.pillar-card:hover .pillar-icon svg,
+.pillar-card:hover .pillar-icon img {
+  transform: scale(1.1);
+}
+
+/* Pillar Content */
+.pillar-content {
+  position: relative;
+  z-index: 2;
+}
+
+.pillar-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.pillar-divider {
+  width: 50px;
+  height: 3px;
+  margin: 0 auto 20px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.pillar-card:hover .pillar-divider {
+  width: 70px;
+}
+
+.pillar-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.pillar-card:hover .pillar-description {
+  color: #444;
+}
+
+/* Pillar Number */
+.pillar-number {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent-color, #0071b9), var(--accent-color, #005a91));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.pillar-card:hover .pillar-number {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Pillar Glow Effect */
+.pillar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pillar-card:hover .pillar-glow {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .pillar-card {
+    padding: 35px 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .four-pillars-section {
+    padding: 60px 0;
+  }
+
+  .pillars-container {
+    padding: 0 15px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+
+  .section-description {
+    font-size: 18px;
+  }
+
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pillar-card {
+    padding: 30px 20px;
+  }
+
+  .pillar-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .pillar-icon.svg-icon svg,
+  .pillar-icon.image-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .pillar-title {
+    font-size: 20px;
+  }
+
+  .pillar-description {
+    font-size: 14px;
+  }
+
+  .pillar-number {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pillar-card {
+    padding: 25px 15px;
+  }
+
+  .pillar-title {
+    font-size: 18px;
+  }
+}
+
+/* Animation on Scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .pillar-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .pillar-card:nth-child(1) { animation-delay: 0.2s; }
+  .pillar-card:nth-child(2) { animation-delay: 0.4s; }
+  .pillar-card:nth-child(3) { animation-delay: 0.6s; }
+  .pillar-card:nth-child(4) { animation-delay: 0.8s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .pillar-card,
+  .pillar-icon {
+    animation: none;
+    transition: none;
+  }
+}
+
+.pillar-card:focus {
+  outline: 3px solid #0071b9;
+  outline-offset: 4px;
+}
+
+/* Print Styles */
+@media print {
+  .four-pillars-section {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .pillar-glow,
+  .pillar-number {
+    display: none;
+  }
+}
+</style>

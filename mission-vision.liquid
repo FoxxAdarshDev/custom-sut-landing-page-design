@@ -1,0 +1,503 @@
+
+{% schema %}
+{
+  "name": "Mission & Vision",
+  "class": "mission-vision-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Our Mission & Vision"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#0071b9"
+    },
+    {
+      "type": "header",
+      "content": "Mission Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mission",
+      "label": "Show Mission",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "mission_title",
+      "label": "Mission Title",
+      "default": "Mission"
+    },
+    {
+      "type": "textarea",
+      "id": "mission_content",
+      "label": "Mission Content",
+      "default": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems."
+    },
+    {
+      "type": "select",
+      "id": "mission_icon_type",
+      "label": "Mission Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "mission_svg_code",
+      "label": "Mission SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "mission_image",
+      "label": "Mission Icon Image"
+    },
+    {
+      "type": "header",
+      "content": "Vision Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vision",
+      "label": "Show Vision",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "vision_title",
+      "label": "Vision Title",
+      "default": "Vision"
+    },
+    {
+      "type": "textarea",
+      "id": "vision_content",
+      "label": "Vision Content",
+      "default": "To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow."
+    },
+    {
+      "type": "select",
+      "id": "vision_icon_type",
+      "label": "Vision Icon Type",
+      "default": "svg",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG Icon"
+        },
+        {
+          "value": "image",
+          "label": "Custom Image"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "vision_svg_code",
+      "label": "Vision SVG Code",
+      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "vision_image",
+      "label": "Vision Icon Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mission & Vision",
+      "category": "About"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Mission & Vision Section -->
+<section class="mission-vision-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }};">
+  <div class="mission-vision-container">
+    {% if section.settings.section_title != blank %}
+      <div class="section-header">
+        <h2 class="section-title">{{ section.settings.section_title }}</h2>
+        <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+      </div>
+    {% endif %}
+
+    <div class="mission-vision-grid">
+      {% if section.settings.show_mission %}
+        <div class="mission-vision-card mission-card" data-aos="fade-right">
+          <div class="card-icon-wrapper">
+            {% if section.settings.mission_icon_type == 'image' and section.settings.mission_image != blank %}
+              <div class="card-icon image-icon">
+                <img src="{{ section.settings.mission_image | img_url: '80x80' }}" alt="{{ section.settings.mission_title }}" loading="lazy">
+              </div>
+            {% elsif section.settings.mission_svg_code != blank %}
+              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                {{ section.settings.mission_svg_code }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="card-content">
+            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              {{ section.settings.mission_title | default: 'Mission' }}
+            </h3>
+            <div class="card-divider" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+            <p class="card-description">{{ section.settings.mission_content }}</p>
+          </div>
+
+          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_vision %}
+        <div class="mission-vision-card vision-card" data-aos="fade-left">
+          <div class="card-icon-wrapper">
+            {% if section.settings.vision_icon_type == 'image' and section.settings.vision_image != blank %}
+              <div class="card-icon image-icon">
+                <img src="{{ section.settings.vision_image | img_url: '80x80' }}" alt="{{ section.settings.vision_title }}" loading="lazy">
+              </div>
+            {% elsif section.settings.vision_svg_code != blank %}
+              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                {{ section.settings.vision_svg_code }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="card-content">
+            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              {{ section.settings.vision_title | default: 'Vision' }}
+            </h3>
+            <div class="card-divider" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+            <p class="card-description">{{ section.settings.vision_content }}</p>
+          </div>
+
+          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Mission & Vision Section */
+.mission-vision-section {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-vision-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Mission Vision Grid */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* Mission Vision Cards */
+.mission-vision-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+.mission-vision-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent 30%, var(--accent-color, #0071b9) 50%, transparent 70%);
+  background-size: 200% 200%;
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: borderFlow 3s linear infinite;
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.mission-vision-card:hover::before {
+  opacity: 1;
+}
+
+.mission-vision-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.2);
+}
+
+/* Card Icon */
+.card-icon-wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.card-icon::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #0071b9, #005a91, #0071b9);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mission-vision-card:hover .card-icon::before {
+  opacity: 1;
+}
+
+.card-icon.svg-icon svg {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.card-icon.image-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.mission-vision-card:hover .card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.mission-vision-card:hover .card-icon svg,
+.mission-vision-card:hover .card-icon img {
+  transform: scale(1.1);
+}
+
+/* Card Content */
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.card-divider {
+  width: 60px;
+  height: 3px;
+  margin: 0 auto 25px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.mission-vision-card:hover .card-divider {
+  width: 80px;
+}
+
+.card-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.mission-vision-card:hover .card-description {
+  color: #444;
+}
+
+/* Card Glow Effect */
+.card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mission-vision-card:hover .card-glow {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mission-vision-section {
+    padding: 60px 0;
+  }
+
+  .mission-vision-container {
+    padding: 0 15px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .mission-vision-card {
+    padding: 30px 20px;
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .card-icon.svg-icon svg,
+  .card-icon.image-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .card-description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 24px;
+  }
+
+  .mission-vision-card {
+    padding: 25px 15px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+}
+
+/* Animation on Scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .mission-vision-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .mission-card {
+    animation-delay: 0.2s;
+  }
+
+  .vision-card {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .mission-vision-card,
+  .card-icon {
+    animation: none;
+    transition: none;
+  }
+}
+
+.mission-vision-card:focus {
+  outline: 3px solid #0071b9;
+  outline-offset: 4px;
+}
+</style>
