@@ -126,7 +126,7 @@
           "settings": {
             "title": "Customer Service",
             "description": "From first upload to final shipment, our team is available to review your designs, troubleshoot challenges, and support documentation needs. We respond fast, stay transparent, and deliver what we commit. Your timeline and specs are our priorities, with delivery in as fast as 48 hours**.",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4zM7.89 15c.1-.26.15-.53.15-.8 0-.27-.05-.54-.15-.8L10 12.65l2.11.75c-.1.26-.15.53-.15.8 0 .27.05.54.15.8H7.89z'/></svg>"
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4z'/></svg>"
           }
         },
         {
@@ -196,7 +196,7 @@
 </section>
 
 <style>
-/* Foxx Four Pillars Section - Unique Styling */
+/* Foxx Four Pillars Section - Fixed Styling */
 .foxx-four-pillars-section {
   padding: 100px 0;
   position: relative;
@@ -270,7 +270,7 @@
   align-items: stretch;
 }
 
-/* Pillar Cards */
+/* Pillar Cards - FIXED */
 .foxx-pillar-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -278,52 +278,30 @@
   padding: 50px 35px;
   text-align: center;
   position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border: 3px solid rgba(255, 255, 255, 0.2);
-}
-
-.foxx-pillar-card::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(45deg, transparent 20%, var(--accent-color, #0071b9) 50%, transparent 80%);
-  background-size: 300% 300%;
-  border-radius: 28px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  animation: foxxBorderFlow 4s linear infinite;
-}
-
-@keyframes foxxBorderFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.foxx-pillar-card:hover::before {
-  opacity: 1;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .foxx-pillar-card:hover {
-  transform: translateY(-20px) scale(1.03);
+  transform: translateY(-15px) scale(1.02);
   box-shadow: 0 35px 70px rgba(0, 113, 185, 0.25);
   background: rgba(255, 255, 255, 1);
 }
 
-/* Pillar Number */
+/* Pillar Number - FIXED */
 .foxx-pillar-number {
   position: absolute;
   top: -15px;
   right: 25px;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--accent-color, #0071b9), var(--accent-color, #005a91));
+  background: linear-gradient(135deg, var(--accent-color, #0071b9), #005a91);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -334,6 +312,7 @@
   box-shadow: 0 5px 15px rgba(0, 113, 185, 0.4);
   transition: all 0.3s ease;
   border: 3px solid rgba(255, 255, 255, 0.9);
+  z-index: 10;
 }
 
 .foxx-pillar-card:hover .foxx-pillar-number {
@@ -341,7 +320,7 @@
   box-shadow: 0 8px 25px rgba(0, 113, 185, 0.6);
 }
 
-/* Pillar Icon */
+/* Pillar Icon - FIXED */
 .foxx-pillar-icon-wrapper {
   margin-bottom: 35px;
   display: flex;
@@ -362,30 +341,6 @@
   border: 3px solid rgba(0, 113, 185, 0.2);
 }
 
-.foxx-pillar-icon::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(45deg, var(--accent-color, #0071b9), transparent, var(--accent-color, #0071b9));
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: foxxIconPulse 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes foxxIconPulse {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
-}
-
-.foxx-pillar-card:hover .foxx-pillar-icon::before {
-  opacity: 1;
-}
-
 .foxx-pillar-icon.foxx-svg-icon svg {
   width: 50px;
   height: 50px;
@@ -404,15 +359,14 @@
   background: linear-gradient(135deg, rgba(0, 113, 185, 0.2), rgba(0, 113, 185, 0.3));
 }
 
-.foxx-pillar-card:hover .foxx-pillar-icon svg,
-.foxx-pillar-card:hover .foxx-pillar-icon img {
-  transform: scale(1.1) rotate(-8deg);
-}
-
-/* Pillar Content */
+/* Pillar Content - FIXED */
 .foxx-pillar-content {
   position: relative;
   z-index: 2;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .foxx-pillar-title {
@@ -423,6 +377,12 @@
   letter-spacing: 1.5px;
   transition: all 0.3s ease;
   line-height: 1.2;
+  /* FIXED: Ensure text is always visible */
+  color: #333 !important;
+}
+
+.foxx-pillar-card:hover .foxx-pillar-title {
+  color: #0071b9 !important;
 }
 
 .foxx-pillar-divider {
@@ -439,33 +399,21 @@
 
 .foxx-pillar-description {
   font-size: 16px;
-  color: #555;
   line-height: 1.8;
   margin: 0;
   transition: color 0.3s ease;
   text-align: left;
+  /* FIXED: Ensure text is always visible */
+  color: #555 !important;
 }
 
 .foxx-pillar-card:hover .foxx-pillar-description {
-  color: #333;
+  color: #333 !important;
 }
 
-/* Pillar Glow Effect */
+/* Remove problematic glow effect */
 .foxx-pillar-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120%;
-  height: 120%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.5s ease;
-  border-radius: 25px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.foxx-pillar-card:hover .foxx-pillar-glow {
-  transform: translate(-50%, -50%) scale(1.3);
+  display: none;
 }
 
 /* Responsive Design */
@@ -506,6 +454,7 @@
 
   .foxx-pillar-card {
     padding: 40px 25px;
+    min-height: 350px;
   }
 
   .foxx-pillar-icon {
