@@ -73,6 +73,12 @@
           "default": "Chief Executive Officer"
         },
         {
+          "type": "text",
+          "id": "member_company",
+          "label": "Company",
+          "default": "Cooling Company"
+        },
+        {
           "type": "textarea",
           "id": "member_bio",
           "label": "Bio/Description"
@@ -139,6 +145,7 @@
           "settings": {
             "member_name": "John Cooling",
             "member_position": "President & CEO",
+            "member_company": "Cooling Company",
             "member_category": "executive"
           }
         },
@@ -147,6 +154,7 @@
           "settings": {
             "member_name": "Kevin Cooling",
             "member_position": "VP of Manufacturing",
+            "member_company": "Cooling Company",
             "member_category": "executive"
           }
         },
@@ -155,6 +163,7 @@
           "settings": {
             "member_name": "Jeff Meade",
             "member_position": "Senior VP of Sales",
+            "member_company": "Cooling Company",
             "member_category": "executive"
           }
         }
@@ -276,6 +285,7 @@
               <div class="member-content">
                 <h3 class="member-name">{{ block.settings.member_name | default: 'Team Member' }}</h3>
                 <p class="member-position">{{ block.settings.member_position | default: 'Position' }}</p>
+                <p class="member-company">{{ block.settings.member_company | default: 'Company' }}</p>
 
                 <!-- Contact Info -->
                 <div class="contact-info">
@@ -333,6 +343,7 @@
         <div class="modal-member-info">
           <h3 id="modalMemberName"></h3>
           <p id="modalMemberPosition"></p>
+          <p id="modalMemberCompany" style="display: none;"></p>
           <div class="modal-contact-info">
             <div id="modalMemberEmail" class="modal-contact-item" style="display: none;">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -634,15 +645,23 @@
 .member-name {
   font-size: 22px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #0071b9;
   margin-bottom: 5px;
 }
 
 .member-position {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   margin-bottom: 15px;
   font-weight: 500;
+}
+
+.member-company {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .member-bio {
@@ -849,18 +868,26 @@
 }
 
 .modal-member-info h3 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 8px;
-}
+    font-size: 28px;
+    font-weight: 700;
+    color: #0071b9;
+    margin-bottom: 8px;
+  }
 
-.modal-member-info > p {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 25px;
-  font-weight: 500;
-}
+  .modal-member-info > p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+  #modalMemberCompany {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-style: italic;
+  }
 
 .modal-contact-info {
   margin-bottom: 25px;
@@ -948,16 +975,16 @@
   .modal-content {
     padding: 15px 20px 30px;
   }
-  
+
   .modal-member-image img {
     width: 150px;
     height: 150px;
   }
-  
+
   .modal-member-info h3 {
     font-size: 24px;
   }
-  
+
   .modal-member-info > p {
     font-size: 14px;
   }
@@ -1041,28 +1068,30 @@ document.addEventListener('DOMContentLoaded', function() {
 function openTeamModal(card) {
   const modal = document.getElementById('teamMemberModal');
   const modalContainer = modal.querySelector('.modal-container');
-  
+
   // Get member data from card
   const memberImage = card.querySelector('.member-image');
   const memberName = card.querySelector('.member-name').textContent;
   const memberPosition = card.querySelector('.member-position').textContent;
+    const memberCompany = card.querySelector('.member-company').textContent;
   const memberBio = card.querySelector('.member-bio p');
-  
+
   // Get contact info
   const emailElement = card.querySelector('.contact-info .contact-item:has(path[d*="M20 4H4"])');
   const phoneElement = card.querySelector('.contact-info .contact-item:has(path[d*="M6.62"])');
-  
+
   // Get social links
   const linkedinLink = card.querySelector('.social-links a[href*="linkedin"]');
   const twitterLink = card.querySelector('.social-links a[href*="twitter"]');
   const websiteLink = card.querySelector('.social-links a:not([href*="linkedin"]):not([href*="twitter"]):not([href*="mailto"]):not([href*="tel"])');
-  
+
   // Populate modal
   document.getElementById('modalMemberImage').src = memberImage ? memberImage.src : '';
   document.getElementById('modalMemberImage').alt = memberName;
   document.getElementById('modalMemberName').textContent = memberName;
   document.getElementById('modalMemberPosition').textContent = memberPosition;
-  
+    document.getElementById('modalMemberCompany').textContent = memberCompany;
+
   // Handle email
   const modalEmail = document.getElementById('modalMemberEmail');
   if (emailElement) {
@@ -1071,7 +1100,7 @@ function openTeamModal(card) {
   } else {
     modalEmail.style.display = 'none';
   }
-  
+
   // Handle phone
   const modalPhone = document.getElementById('modalMemberPhone');
   if (phoneElement) {
@@ -1080,7 +1109,7 @@ function openTeamModal(card) {
   } else {
     modalPhone.style.display = 'none';
   }
-  
+
   // Handle social links
   const modalLinkedIn = document.getElementById('modalLinkedIn');
   if (linkedinLink) {
@@ -1089,7 +1118,7 @@ function openTeamModal(card) {
   } else {
     modalLinkedIn.style.display = 'none';
   }
-  
+
   const modalTwitter = document.getElementById('modalTwitter');
   if (twitterLink) {
     modalTwitter.href = twitterLink.href;
@@ -1097,7 +1126,7 @@ function openTeamModal(card) {
   } else {
     modalTwitter.style.display = 'none';
   }
-  
+
   const modalWebsite = document.getElementById('modalWebsite');
   if (websiteLink) {
     modalWebsite.href = websiteLink.href;
@@ -1105,7 +1134,7 @@ function openTeamModal(card) {
   } else {
     modalWebsite.style.display = 'none';
   }
-  
+
   // Handle bio
   const modalBio = document.getElementById('modalMemberBio');
   if (memberBio && memberBio.textContent.trim()) {
@@ -1114,11 +1143,11 @@ function openTeamModal(card) {
   } else {
     modalBio.style.display = 'none';
   }
-  
+ document.getElementById('modalMemberCompany').style.display = 'block';
   // Show modal with animation
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
-  
+
   // Trigger slide up animation
   setTimeout(() => {
     modalContainer.classList.add('active');
@@ -1128,10 +1157,10 @@ function openTeamModal(card) {
 function closeTeamModal() {
   const modal = document.getElementById('teamMemberModal');
   const modalContainer = modal.querySelector('.modal-container');
-  
+
   // Slide down animation
   modalContainer.classList.remove('active');
-  
+
   // Hide modal after animation
   setTimeout(() => {
     modal.style.display = 'none';
