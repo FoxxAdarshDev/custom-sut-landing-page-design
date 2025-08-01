@@ -45,7 +45,31 @@
       "id": "accent_color",
       "label": "Accent Color",
       "default": "#0071b9"
-    }
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "pillars_padding_top",
+        "label": "Top Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "pillars_padding_bottom",
+        "label": "Bottom Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 100
+      }
   ],
   "blocks": [
     {
@@ -144,7 +168,7 @@
 
 <!-- Four Pillars Section -->
 <section class="foxx-four-pillars-section" data-section-id="{{ section.id }}" 
-  style="--accent-color: {{ section.settings.accent_color | default: '#0071b9' }};{% if section.settings.background_image %} background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');{% endif %}">
+  style="--accent-color: {{ section.settings.accent_color | default: '#0071b9' }}; padding-top: {{ section.settings.pillars_padding_top | default: 100 }}px; padding-bottom: {{ section.settings.pillars_padding_bottom | default: 100 }}px;{% if section.settings.background_image %} background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');{% endif %}">
 
   {% assign overlay_opacity_decimal = section.settings.overlay_opacity | default: 95 | divided_by: 100.0 %}
   <div class="foxx-pillars-overlay" 
@@ -163,7 +187,7 @@
       {% else %}
         {% assign title_color = '#ffffff' %}
       {% endif %}
-      
+
       <div class="foxx-title-decoration">
         <span class="foxx-decoration-line"></span>
         <span class="foxx-decoration-diamond"></span>
@@ -210,7 +234,6 @@
 <style>
 /* Foxx Four Pillars Section */
 .foxx-four-pillars-section {
-  padding: 100px 0;
   position: relative;
   overflow: hidden;
   background-size: cover;
@@ -232,9 +255,9 @@
 }
 
 .foxx-pillars-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
   position: relative;
   z-index: 2;
 }
@@ -269,7 +292,7 @@
 }
 
 .foxx-section-title {
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 800;
   color: #0071b9;
   margin-bottom: 20px;
@@ -320,7 +343,7 @@
 /* Pillars Grid */
 .foxx-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 30px;
   align-items: stretch;
 }
@@ -329,7 +352,7 @@
 .foxx-pillar-card {
   background: #ffffff;
   border-radius: 20px;
-  padding: 40px 25px;
+  padding: 15px 20px;
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
@@ -346,6 +369,7 @@
   background: var(--accent-color, #0071b9);
   color: #ffffff;
   border: 1px solid var(--accent-color, #0071b9);
+  border-radius: 20px;
 }
 
 /* Even cards (2nd, 4th) - White background */
@@ -376,6 +400,7 @@
 /* Pillar Number */
 .foxx-pillar-number {
   position: absolute;
+  display:none!important;
   top: -15px;
   right: 20px;
   width: 40px;
@@ -530,7 +555,7 @@
 
 @media (max-width: 768px) {
   .foxx-four-pillars-section {
-    padding: 80px 0;
+    /* Padding controlled by section settings */
   }
 
   .foxx-pillars-container {
