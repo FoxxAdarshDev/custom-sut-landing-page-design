@@ -578,14 +578,15 @@
 
 .cu-contact-methods-top {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   max-width: 100%;
+  justify-content: center;
 }
 
 .cu-contact-card-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
   background: white;
   padding: 20px 25px;
@@ -594,6 +595,8 @@
   border: 1px solid rgba(0, 113, 185, 0.1);
   transition: all 0.3s ease;
   min-width: 0;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .cu-contact-card-top:hover {
@@ -604,23 +607,29 @@
 .cu-contact-card-top .cu-contact-card-content {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .cu-contact-card-top .cu-contact-card-content strong {
   display: block;
   font-weight: 600;
   color: #333;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   font-size: 16px;
+  line-height: 1.3;
 }
 
 .cu-contact-card-top .cu-contact-card-content a,
 .cu-contact-card-top .cu-contact-card-content span {
   color: #0071b9;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
   transition: color 0.3s ease;
-  word-break: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  display: block;
+  hyphens: auto;
 }
 
 .cu-contact-card-top .cu-contact-card-content a:hover {
@@ -671,36 +680,33 @@
   gap: 50px;
 }
 
-/* Locations - Responsive 2-card layout */
+/* Locations - Responsive layout */
 .cu-locations-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  max-width: 100%;
 }
 
-/* Ensure minimum 2 columns on larger screens, prevent single card rows */
+/* Ensure proper sizing on different screens */
 @media (min-width: 768px) {
   .cu-locations-container {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    max-width: 800px;
+    margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
   .cu-locations-container {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
   }
 }
 
 @media (min-width: 1200px) {
   .cu-locations-container {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  }
-}
-
-/* For very large screens, ensure we don't get single column */
-@media (min-width: 1400px) {
-  .cu-locations-container {
-    grid-template-columns: repeat(2, 1fr);
+    max-width: 1000px;
   }
 }
 
@@ -755,11 +761,14 @@
 
 .cu-location-address {
   color: #555;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 12px;
   text-decoration: none;
   transition: color 0.3s ease;
-  font-size: 16px; /* Added explicit font size */
+  font-size: 15px;
+  display: block;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .cu-location-address:hover {
@@ -768,20 +777,29 @@
 
 .cu-contact-method {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   margin-top: 8px;
-  font-size: 15px; /* Increased from 0.9rem */
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .cu-contact-method a {
   color: #0071b9;
   text-decoration: none;
   transition: color 0.3s ease;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  flex: 1;
 }
 
 .cu-contact-method a:hover {
   color: #005a91;
+}
+
+.cu-contact-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* Contact Methods - Increased font sizes */
@@ -1074,21 +1092,28 @@
   
   .cu-locations-container {
     grid-template-columns: 1fr;
+    max-width: 100%;
   }
   
   .cu-contact-methods-top {
     grid-template-columns: 1fr;
     gap: 15px;
   }
+  
+  .cu-contact-card-top {
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 969px) and (max-width: 1199px) {
   .cu-locations-container {
     grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
   }
   
   .cu-contact-methods-top {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
@@ -1147,13 +1172,30 @@
   
   .cu-contact-methods-top {
     gap: 12px;
+    grid-template-columns: 1fr;
   }
   
   .cu-contact-card-top {
     padding: 15px;
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
+    flex-direction: row;
+    text-align: left;
+    gap: 12px;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .cu-contact-card-top .cu-contact-card-content a,
+  .cu-contact-card-top .cu-contact-card-content span {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  
+  .cu-locations-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .cu-location-item {
+    padding: 20px 15px;
   }
 }
 </style>
