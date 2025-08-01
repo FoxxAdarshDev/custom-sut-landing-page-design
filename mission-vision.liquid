@@ -303,22 +303,51 @@
 }
 
 .section-title {
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 800;
-  color: #1a1a1a;
-  margin-bottom: 15px;
+  color: #0071b9;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 4px;
+  text-shadow: 0 2px 8px rgba(0, 113, 185, 0.3);
   position: relative;
-  line-height: 70px;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
+  border-radius: 2px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 185, 0.5), transparent);
+  border-radius: 1px;
 }
 
 .section-subtitle {
-  font-size: 18px;
-  color: #666;
+  font-size: 20px;
+  color: rgba(0, 113, 185, 0.8);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
   font-weight: 300;
+  text-shadow: 0 1px 4px rgba(0, 113, 185, 0.2);
   letter-spacing: 1px;
-  margin: 0;
   font-style: italic;
 }
 
@@ -514,13 +543,22 @@
   }
 
   .section-title {
-    font-size: 48px;
+    font-size: 36px;
     letter-spacing: 2px;
-    line-height: 54px;
+    line-height: 1.2;
+  }
+
+  .section-title::before {
+    width: 80px;
+    height: 3px;
+  }
+
+  .section-title::after {
+    width: 150px;
   }
 
   .section-subtitle {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .mission-vision-grid {
@@ -565,8 +603,22 @@
 
 @media (max-width: 480px) {
   .section-title {
-    font-size: 36px;
-    line-height: 42px;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: 2px;
+  }
+
+  .section-title::before {
+    width: 60px;
+    height: 2px;
+  }
+
+  .section-title::after {
+    width: 120px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
   }
 
   .professional-card {
