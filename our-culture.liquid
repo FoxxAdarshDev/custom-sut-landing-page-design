@@ -121,7 +121,7 @@
          data-section-id="{{ section.id }}" 
          style="
            --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#0071b9' }};
-           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 85 }}%;
+           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 85 }};
            --culture-text-color: {{ section.settings.culture_text_color | default: '#ffffff' }};
            --culture-accent-color: {{ section.settings.culture_accent_color | default: '#00a8ff' }};
            --padding-top: {{ section.settings.padding_top | default: 120 }}px;
@@ -135,7 +135,7 @@
            alt="Our Culture Background" 
            class="culture-bg-image">
       <!-- Overlay - Always applied with background image -->
-      <div class="culture-overlay" style="opacity: {{ section.settings.culture_overlay_opacity | default: 85 | divided_by: 100.0 }};"></div>
+      <div class="culture-overlay"></div>
     {% else %}
       <!-- Default gradient background if no image -->
       <div class="culture-bg-gradient"></div>
@@ -232,7 +232,7 @@
   width: 100%;
   height: 100%;
   background-color: var(--culture-overlay-color, #0071b9);
-  opacity: calc(var(--culture-overlay-opacity, 85) / 100);
+  opacity: calc(var(--culture-overlay-opacity) / 100);
   z-index: 2;
   pointer-events: none;
 }
