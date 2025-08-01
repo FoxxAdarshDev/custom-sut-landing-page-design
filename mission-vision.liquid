@@ -40,7 +40,7 @@
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 60
+      "default": 80
     },
     {
       "type": "range",
@@ -50,7 +50,7 @@
       "max": 200,
       "step": 10,
       "unit": "px", 
-      "default": 60
+      "default": 80
     }
   ],
   "blocks": [
@@ -111,7 +111,7 @@
             "title": "Mission",
             "content": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.",
             "icon_type": "svg",
-            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z'/></svg>"
           }
         },
         {
@@ -131,39 +131,53 @@
 
 {% if section.settings.show_section %}
 <!-- Mission & Vision Section -->
-<section class="mission-vision-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }}; padding: {{ section.settings.padding_top | default: 60 }}px 0 {{ section.settings.padding_bottom | default: 60 }}px 0;">
+<section class="professional-mission-vision" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
   <div class="mission-vision-container">
     {% if section.settings.section_title != blank %}
       <div class="section-header">
+        <div class="title-decoration">
+          <span class="decoration-line"></span>
+          <span class="decoration-diamond"></span>
+          <span class="decoration-line"></span>
+        </div>
         <h2 class="section-title">{{ section.settings.section_title }}</h2>
-        <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+        <p class="section-subtitle">Driving Innovation in Bioprocess Solutions</p>
       </div>
     {% endif %}
 
-    <div class="mission-vision-grid" style="grid-template-columns: repeat({{ section.blocks.size | at_most: 4 }}, 1fr);">
+    <div class="mission-vision-grid">
       {% for block in section.blocks %}
-        <div class="mission-vision-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
-          <div class="card-icon-wrapper">
-            {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
-              <div class="card-icon image-icon">
-                <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
-              </div>
-            {% elsif block.settings.svg_code != blank %}
-              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
-                {{ block.settings.svg_code }}
-              </div>
-            {% endif %}
-          </div>
-
-          <div class="card-content">
+        <div class="professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
+          <div class="card-background-effect"></div>
+          
+          <div class="card-header">
+            <div class="icon-container">
+              {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
+                <div class="card-icon">
+                  <img src="{{ block.settings.image | img_url: '60x60' }}" alt="{{ block.settings.title }}" loading="lazy">
+                </div>
+              {% elsif block.settings.svg_code != blank %}
+                <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                  {{ block.settings.svg_code }}
+                </div>
+              {% endif %}
+              <div class="icon-glow"></div>
+            </div>
+            
             <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
               {{ block.settings.title | default: 'Title' }}
             </h3>
-            <div class="card-divider" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+          </div>
+
+          <div class="card-content">
             <p class="card-description">{{ block.settings.content }}</p>
           </div>
 
-          <div class="card-glow" style="background: radial-gradient(circle, {{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }} 0%, transparent 70%);"></div>
+          <div class="card-footer">
+            <div class="progress-indicator">
+              <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+            </div>
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -172,208 +186,264 @@
 {% endif %}
 
 <style>
-/* Mission & Vision Section */
-.mission-vision-section {
+/* Professional Mission & Vision Section */
+.professional-mission-vision {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
+.professional-mission-vision::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230071b9' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
 .mission-vision-container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Section Header */
+/* Enhanced Section Header */
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  margin-bottom: 80px;
   position: relative;
 }
 
-.title-underline {
-  width: 80px;
-  height: 4px;
-  margin: 0 auto;
+.title-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.decoration-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
+}
+
+.decoration-diamond {
+  width: 12px;
+  height: 12px;
+  background: #0071b9;
+  transform: rotate(45deg);
   border-radius: 2px;
 }
 
-/* Mission Vision Grid */
-.mission-vision-grid {
-  display: grid;
-  gap: 40px;
-  align-items: stretch;
-  max-width: 100%;
+.section-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  line-height: 1.2;
 }
 
-/* Mission Vision Cards */
-.mission-vision-card {
+.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Professional Grid */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* Professional Cards */
+.professional-card {
   background: white;
-  border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
+  border-radius: 24px;
+  padding: 45px 35px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 2px solid transparent;
-}
-
-.mission-vision-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, transparent 30%, var(--accent-color, #0071b9) 50%, transparent 70%);
-  background-size: 200% 200%;
-  border-radius: 22px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: borderFlow 3s linear infinite;
-}
-
-@keyframes borderFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.mission-vision-card:hover::before {
-  opacity: 1;
-}
-
-.mission-vision-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.2);
-}
-
-/* Card Icon */
-.card-icon-wrapper {
-  margin-bottom: 30px;
+  box-shadow: 0 20px 60px rgba(0, 113, 185, 0.08);
+  border: 1px solid rgba(0, 113, 185, 0.1);
+  min-height: 380px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.card-background-effect {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 113, 185, 0.02) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.professional-card:hover .card-background-effect {
+  transform: scale(1);
+}
+
+.professional-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0, 113, 185, 0.15);
+  border-color: rgba(0, 113, 185, 0.2);
+}
+
+/* Card Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
 }
 
 .card-icon {
   width: 80px;
   height: 80px;
+  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
-  border-radius: 50%;
-  transition: all 0.4s ease;
   position: relative;
+  z-index: 2;
+  transition: all 0.4s ease;
+  border: 3px solid rgba(0, 113, 185, 0.1);
 }
 
-.card-icon::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(45deg, #0071b9, #005a91, #0071b9);
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.mission-vision-card:hover .card-icon::before {
-  opacity: 1;
-}
-
-.card-icon.svg-icon svg {
+.card-icon svg {
   width: 40px;
   height: 40px;
   transition: transform 0.3s ease;
 }
 
-.card-icon.image-icon img {
+.card-icon img {
   width: 40px;
   height: 40px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
-.mission-vision-card:hover .card-icon {
-  transform: scale(1.1) rotate(5deg);
+.icon-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #0071b9, #005a91);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  filter: blur(15px);
 }
 
-.mission-vision-card:hover .card-icon svg,
-.mission-vision-card:hover .card-icon img {
+.professional-card:hover .icon-glow {
+  opacity: 0.3;
+}
+
+.professional-card:hover .card-icon {
   transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(0, 113, 185, 0.2), rgba(0, 113, 185, 0.3));
+  border-color: rgba(0, 113, 185, 0.3);
 }
 
-/* Card Content */
-.card-content {
-  position: relative;
-  z-index: 2;
+.professional-card:hover .card-icon svg,
+.professional-card:hover .card-icon img {
+  transform: scale(1.1);
 }
 
 .card-title {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  letter-spacing: 2px;
+  position: relative;
 }
 
-.card-divider {
-  width: 60px;
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
   height: 3px;
-  margin: 0 auto 25px;
+  background: linear-gradient(90deg, #0071b9, #005a91);
   border-radius: 2px;
   transition: width 0.3s ease;
 }
 
-.mission-vision-card:hover .card-divider {
-  width: 80px;
+.professional-card:hover .card-title::after {
+  width: 60px;
+}
+
+/* Card Content */
+.card-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .card-description {
   font-size: 16px;
-  color: #666;
+  color: #555;
   line-height: 1.8;
   margin: 0;
+  text-align: center;
+  font-weight: 400;
   transition: color 0.3s ease;
 }
 
-.mission-vision-card:hover .card-description {
-  color: #444;
+.professional-card:hover .card-description {
+  color: #333;
 }
 
-/* Card Glow Effect */
-.card-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+/* Card Footer */
+.card-footer {
+  margin-top: 30px;
+}
+
+.progress-indicator {
   width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.4s ease;
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: 1;
+  height: 4px;
+  background: rgba(0, 113, 185, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.mission-vision-card:hover .card-glow {
-  transform: translate(-50%, -50%) scale(1.2);
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  transition: width 2s ease;
+}
+
+.professional-card:hover .progress-bar {
+  width: 100%;
 }
 
 /* Responsive Design */
@@ -383,36 +453,50 @@
   }
 
   .section-title {
-    font-size: 32px;
-    letter-spacing: 1px;
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
   }
 
   .mission-vision-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
     gap: 30px;
   }
 
-  .mission-vision-card {
-    padding: 30px 20px;
+  .professional-card {
+    padding: 35px 25px;
+    min-height: 320px;
   }
 
   .card-icon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
   }
 
-  .card-icon.svg-icon svg,
-  .card-icon.image-icon img {
-    width: 30px;
-    height: 30px;
+  .card-icon svg,
+  .card-icon img {
+    width: 35px;
+    height: 35px;
   }
 
   .card-title {
     font-size: 24px;
+    letter-spacing: 1px;
   }
 
   .card-description {
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  .decoration-line {
+    width: 40px;
+  }
+
+  .title-decoration {
+    gap: 10px;
   }
 }
 
@@ -421,21 +505,33 @@
     font-size: 24px;
   }
 
-  .mission-vision-card {
-    padding: 25px 15px;
+  .professional-card {
+    padding: 30px 20px;
   }
 
   .card-title {
-    font-size: 20px;
+    font-size: 22px;
+  }
+
+  .card-description {
+    font-size: 14px;
   }
 }
 
 /* Animation on Scroll */
 @media (prefers-reduced-motion: no-preference) {
-  .mission-vision-card {
+  .professional-card {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .professional-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .professional-card:nth-child(3) {
+    animation-delay: 0.4s;
   }
 
   @keyframes fadeInUp {
@@ -448,15 +544,34 @@
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .mission-vision-card,
-  .card-icon {
+  .professional-card,
+  .card-icon,
+  .progress-bar {
     animation: none;
     transition: none;
   }
 }
 
-.mission-vision-card:focus {
+.professional-card:focus-within {
   outline: 3px solid #0071b9;
   outline-offset: 4px;
+}
+
+/* Enhanced Professional Touch */
+.professional-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0071b9, #005a91, #0071b9);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 </style>
