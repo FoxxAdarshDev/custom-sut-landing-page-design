@@ -130,109 +130,109 @@
 
 {% if section.settings.show_section %}
 <!-- Mission & Vision Section -->
-<section class="professional-mission-vision" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0; width: 100vw; margin-left: calc(-50vw + 50%);">
-  <div class="mission-vision-container">
+<section class="mv-professional-mission-vision" data-section-id="{{ section.id }}" style="background: linear-gradient(135deg, {{ section.settings.background_color | default: '#f8f9fa' }} 0%, rgba(0, 113, 185, 0.05) 100%); padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0; width: 100vw; margin-left: calc(-50vw + 50%);">
+  <div class="mv-mission-vision-container">
     {% if section.settings.section_title != blank %}
-      <div class="section-header">
-        <div class="title-decoration">
-          <span class="decoration-line"></span>
-          <span class="decoration-diamond"></span>
-          <span class="decoration-line"></span>
+      <div class="mv-section-header">
+        <div class="mv-title-decoration">
+          <span class="mv-decoration-line"></span>
+          <span class="mv-decoration-diamond"></span>
+          <span class="mv-decoration-line"></span>
         </div>
-        <h2 class="section-title">{{ section.settings.section_title }}</h2>
-        <p class="section-subtitle">Driving Innovation in Bioprocess Solutions</p>
+        <h2 class="mv-section-title">{{ section.settings.section_title }}</h2>
+        <p class="mv-section-subtitle">Driving Innovation in Bioprocess Solutions</p>
       </div>
     {% endif %}
 
-    <div class="mission-vision-grid">
+    <div class="mv-mission-vision-grid">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          <div class="professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
-            <div class="card-background-effect"></div>
+          <div class="mv-professional-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}" {{ block.shopify_attributes }}>
+            <div class="mv-card-background-effect"></div>
 
-            <div class="card-header">
-              <div class="icon-container">
+            <div class="mv-card-header">
+              <div class="mv-icon-container">
                 {% if block.settings.icon_type == 'image' and block.settings.image != blank %}
-                  <div class="card-icon">
+                  <div class="mv-card-icon">
                     <img src="{{ block.settings.image | img_url: '60x60' }}" alt="{{ block.settings.title }}" loading="lazy">
                   </div>
                 {% elsif block.settings.svg_code != blank %}
-                  <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                  <div class="mv-card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
                     {{ block.settings.svg_code }}
                   </div>
                 {% endif %}
-                <div class="icon-glow"></div>
+                <div class="mv-icon-glow"></div>
               </div>
 
-              <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              <h3 class="mv-card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
                 {{ block.settings.title | default: 'Title' }}
               </h3>
             </div>
 
-            <div class="card-content">
-              <p class="card-description">{{ block.settings.content }}</p>
+            <div class="mv-card-content">
+              <p class="mv-card-description">{{ block.settings.content }}</p>
             </div>
 
-            <div class="card-footer">
-              <div class="progress-indicator">
-                <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+            <div class="mv-card-footer">
+              <div class="mv-progress-indicator">
+                <div class="mv-progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
               </div>
             </div>
           </div>
         {% endfor %}
       {% else %}
         <!-- Default Mission Card -->
-        <div class="professional-card" data-aos="fade-up" data-aos-delay="0">
-          <div class="card-background-effect"></div>
+        <div class="mv-professional-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="mv-card-background-effect"></div>
 
-          <div class="card-header">
-            <div class="icon-container">
-              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+          <div class="mv-card-header">
+            <div class="mv-icon-container">
+              <div class="mv-card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
                 <svg viewBox='0 0 24 24' fill='currentColor'><circle cx='12' cy='12' r='10' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='6' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='2'/></svg>
               </div>
-              <div class="icon-glow"></div>
+              <div class="mv-icon-glow"></div>
             </div>
 
-            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+            <h3 class="mv-card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
               Mission
             </h3>
           </div>
 
-          <div class="card-content">
-            <p class="card-description">To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.</p>
+          <div class="mv-card-content">
+            <p class="mv-card-description">To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards. We focus on sustainable, sterile, and scalable manufacturing that adapts to user-defined designs across SUT, filtration, fluid transfer, and storage systems.</p>
           </div>
 
-          <div class="card-footer">
-            <div class="progress-indicator">
-              <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+          <div class="mv-card-footer">
+            <div class="mv-progress-indicator">
+              <div class="mv-progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
             </div>
           </div>
         </div>
 
         <!-- Default Vision Card -->
-        <div class="professional-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-background-effect"></div>
+        <div class="mv-professional-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="mv-card-background-effect"></div>
 
-          <div class="card-header">
-            <div class="icon-container">
-              <div class="card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+          <div class="mv-card-header">
+            <div class="mv-icon-container">
+              <div class="mv-card-icon svg-icon" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
                 <svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>
               </div>
-              <div class="icon-glow"></div>
+              <div class="mv-icon-glow"></div>
             </div>
 
-            <h3 class="card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+            <h3 class="mv-card-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
               Vision
             </h3>
           </div>
 
-          <div class="card-content">
-            <p class="card-description">To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow.</p>
+          <div class="mv-card-content">
+            <p class="mv-card-description">To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance into one seamless digital-to-physical workflow.</p>
           </div>
 
-          <div class="card-footer">
-            <div class="progress-indicator">
-              <div class="progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
+          <div class="mv-card-footer">
+            <div class="mv-progress-indicator">
+              <div class="mv-progress-bar" style="background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_lighten: 20 }});"></div>
             </div>
           </div>
         </div>
@@ -243,14 +243,14 @@
 {% endif %}
 
 <style>
-/* Professional Mission & Vision Section */
-.professional-mission-vision {
+/* Mission Vision Section - Unique CSS Classes */
+.mv-professional-mission-vision {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
-.professional-mission-vision::before {
+.mv-professional-mission-vision::before {
   content: '';
   position: absolute;
   top: 0;
@@ -261,7 +261,7 @@
   pointer-events: none;
 }
 
-.mission-vision-container {
+.mv-mission-vision-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -269,18 +269,18 @@
   z-index: 2;
 }
 
-.professional-mission-vision {
+.mv-professional-mission-vision {
   margin: 0 !important;
 }
 
 /* Enhanced Section Header */
-.section-header {
+.mv-section-header {
   text-align: center;
   margin-bottom: 80px;
   position: relative;
 }
 
-.title-decoration {
+.mv-title-decoration {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -288,13 +288,13 @@
   gap: 15px;
 }
 
-.decoration-line {
+.mv-decoration-line {
   width: 60px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #0071b9, transparent);
 }
 
-.decoration-diamond {
+.mv-decoration-diamond {
   width: 12px;
   height: 12px;
   background: #0071b9;
@@ -302,7 +302,7 @@
   border-radius: 2px;
 }
 
-.section-title {
+.mv-section-title {
   font-size: 48px;
   font-weight: 800;
   color: #0071b9;
@@ -315,7 +315,7 @@
   line-height: 1.2;
 }
 
-.section-title::before {
+.mv-section-title::before {
   content: '';
   position: absolute;
   bottom: -10px;
@@ -327,7 +327,7 @@
   border-radius: 2px;
 }
 
-.section-title::after {
+.mv-section-title::after {
   content: '';
   position: absolute;
   bottom: -20px;
@@ -339,7 +339,7 @@
   border-radius: 1px;
 }
 
-.section-subtitle {
+.mv-section-subtitle {
   font-size: 20px;
   color: rgba(0, 113, 185, 0.8);
   line-height: 1.6;
@@ -351,16 +351,16 @@
   font-style: italic;
 }
 
-/* Professional Grid */
-.mission-vision-grid {
+/* Mission Vision Grid */
+.mv-mission-vision-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 40px;
   align-items: stretch;
 }
 
-/* Professional Cards */
-.professional-card {
+/* Mission Vision Cards */
+.mv-professional-card {
   background: white;
   border-radius: 24px;
   padding: 45px 35px;
@@ -374,7 +374,7 @@
   flex-direction: column;
 }
 
-.card-background-effect {
+.mv-card-background-effect {
   position: absolute;
   top: -50%;
   right: -50%;
@@ -386,30 +386,30 @@
   pointer-events: none;
 }
 
-.professional-card:hover .card-background-effect {
+.mv-professional-card:hover .mv-card-background-effect {
   transform: scale(1);
 }
 
-.professional-card:hover {
+.mv-professional-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 30px 80px rgba(0, 113, 185, 0.15);
   border-color: rgba(0, 113, 185, 0.2);
 }
 
-/* Card Header */
-.card-header {
+/* Mission Vision Card Header */
+.mv-card-header {
   text-align: center;
   margin-bottom: 30px;
   position: relative;
 }
 
-.icon-container {
+.mv-icon-container {
   position: relative;
   display: inline-block;
   margin-bottom: 25px;
 }
 
-.card-icon {
+.mv-card-icon {
   width: 80px;
   height: 80px;
   background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
@@ -423,20 +423,20 @@
   border: 3px solid rgba(0, 113, 185, 0.1);
 }
 
-.card-icon svg {
+.mv-card-icon svg {
   width: 40px;
   height: 40px;
   transition: transform 0.3s ease;
 }
 
-.card-icon img {
+.mv-card-icon img {
   width: 40px;
   height: 40px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
-.icon-glow {
+.mv-icon-glow {
   position: absolute;
   top: -10px;
   left: -10px;
@@ -450,22 +450,22 @@
   filter: blur(15px);
 }
 
-.professional-card:hover .icon-glow {
+.mv-professional-card:hover .mv-icon-glow {
   opacity: 0.3;
 }
 
-.professional-card:hover .card-icon {
+.mv-professional-card:hover .mv-card-icon {
   transform: scale(1.1);
   background: linear-gradient(135deg, rgba(0, 113, 185, 0.2), rgba(0, 113, 185, 0.3));
   border-color: rgba(0, 113, 185, 0.3);
 }
 
-.professional-card:hover .card-icon svg,
-.professional-card:hover .card-icon img {
+.mv-professional-card:hover .mv-card-icon svg,
+.mv-professional-card:hover .mv-card-icon img {
   transform: scale(1.1);
 }
 
-.card-title {
+.mv-card-title {
   font-size: 28px;
   font-weight: 700;
   margin: 0;
@@ -474,7 +474,7 @@
   position: relative;
 }
 
-.card-title::after {
+.mv-card-title::after {
   content: '';
   position: absolute;
   bottom: -8px;
@@ -487,18 +487,18 @@
   transition: width 0.3s ease;
 }
 
-.professional-card:hover .card-title::after {
+.mv-professional-card:hover .mv-card-title::after {
   width: 60px;
 }
 
-/* Card Content */
-.card-content {
+/* Mission Vision Card Content */
+.mv-card-content {
   flex: 1;
   display: flex;
   align-items: center;
 }
 
-.card-description {
+.mv-card-description {
   font-size: 16px;
   color: #555;
   line-height: 28px;
@@ -508,16 +508,16 @@
   transition: color 0.3s ease;
 }
 
-.professional-card:hover .card-description {
+.mv-professional-card:hover .mv-card-description {
   color: #333;
 }
 
-/* Card Footer */
-.card-footer {
+/* Mission Vision Card Footer */
+.mv-card-footer {
   margin-top: 30px;
 }
 
-.progress-indicator {
+.mv-progress-indicator {
   width: 100%;
   height: 4px;
   background: rgba(0, 113, 185, 0.1);
@@ -525,133 +525,133 @@
   overflow: hidden;
 }
 
-.progress-bar {
+.mv-progress-bar {
   height: 100%;
   width: 0%;
   border-radius: 2px;
   transition: width 2s ease;
 }
 
-.professional-card:hover .progress-bar {
+.mv-professional-card:hover .mv-progress-bar {
   width: 100%;
 }
 
-/* Responsive Design */
+/* Mission Vision Responsive Design */
 @media (max-width: 768px) {
-  .mission-vision-container {
+  .mv-mission-vision-container {
     padding: 0 15px;
   }
 
-  .section-title {
+  .mv-section-title {
     font-size: 36px;
     letter-spacing: 2px;
     line-height: 1.2;
   }
 
-  .section-title::before {
+  .mv-section-title::before {
     width: 80px;
     height: 3px;
   }
 
-  .section-title::after {
+  .mv-section-title::after {
     width: 150px;
   }
 
-  .section-subtitle {
+  .mv-section-subtitle {
     font-size: 18px;
   }
 
-  .mission-vision-grid {
+  .mv-mission-vision-grid {
     grid-template-columns: 1fr;
     gap: 30px;
   }
 
-  .professional-card {
+  .mv-professional-card {
     padding: 35px 25px;
     min-height: 320px;
   }
 
-  .card-icon {
+  .mv-card-icon {
     width: 70px;
     height: 70px;
   }
 
-  .card-icon svg,
-  .card-icon img {
+  .mv-card-icon svg,
+  .mv-card-icon img {
     width: 35px;
     height: 35px;
   }
 
-  .card-title {
+  .mv-card-title {
     font-size: 24px;
     letter-spacing: 1px;
   }
 
-  .card-description {
+  .mv-card-description {
     font-size: 15px;
     line-height: 24px;
   }
 
-  .decoration-line {
+  .mv-decoration-line {
     width: 40px;
   }
 
-  .title-decoration {
+  .mv-title-decoration {
     gap: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .section-title {
+  .mv-section-title {
     font-size: 28px;
     line-height: 1.2;
     letter-spacing: 2px;
   }
 
-  .section-title::before {
+  .mv-section-title::before {
     width: 60px;
     height: 2px;
   }
 
-  .section-title::after {
+  .mv-section-title::after {
     width: 120px;
   }
 
-  .section-subtitle {
+  .mv-section-subtitle {
     font-size: 16px;
   }
 
-  .professional-card {
+  .mv-professional-card {
     padding: 30px 20px;
   }
 
-  .card-title {
+  .mv-card-title {
     font-size: 22px;
   }
 
-  .card-description {
+  .mv-card-description {
     font-size: 14px;
     line-height: 22px;
   }
 }
 
-/* Animation on Scroll */
+/* Mission Vision Animation on Scroll */
 @media (prefers-reduced-motion: no-preference) {
-  .professional-card {
+  .mv-professional-card {
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 0.8s ease forwards;
+    animation: mvFadeInUp 0.8s ease forwards;
   }
 
-  .professional-card:nth-child(2) {
+  .mv-professional-card:nth-child(2) {
     animation-delay: 0.2s;
   }
 
-  .professional-card:nth-child(3) {
+  .mv-professional-card:nth-child(3) {
     animation-delay: 0.4s;
   }
 
-  @keyframes fadeInUp {
+  @keyframes mvFadeInUp {
     to {
       opacity: 1;
       transform: translateY(0);
@@ -659,23 +659,23 @@
   }
 }
 
-/* Accessibility */
+/* Mission Vision Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .professional-card,
-  .card-icon,
-  .progress-bar {
+  .mv-professional-card,
+  .mv-card-icon,
+  .mv-progress-bar {
     animation: none;
     transition: none;
   }
 }
 
-.professional-card:focus-within {
+.mv-professional-card:focus-within {
   outline: 3px solid #0071b9;
   outline-offset: 4px;
 }
 
-/* Enhanced Professional Touch */
-.professional-card::before {
+/* Enhanced Mission Vision Professional Touch */
+.mv-professional-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -684,10 +684,10 @@
   height: 4px;
   background: linear-gradient(90deg, #0071b9, #005a91, #0071b9);
   background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
+  animation: mvShimmer 3s ease-in-out infinite;
 }
 
-@keyframes shimmer {
+@keyframes mvShimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
