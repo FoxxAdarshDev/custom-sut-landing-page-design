@@ -21,16 +21,70 @@
       "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
     },
     {
+      "type": "header",
+      "content": "Background & Overlay Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "culture_background_image",
+      "label": "Background Banner Image"
+    },
+    {
       "type": "color",
-      "id": "culture_background_color",
-      "label": "Background Color",
+      "id": "culture_overlay_color",
+      "label": "Overlay Color",
+      "default": "#0071b9"
+    },
+    {
+      "type": "range",
+      "id": "culture_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "culture_text_color",
+      "label": "Text Color",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "culture_accent_color",
       "label": "Accent Color",
-      "default": "#0071b9"
+      "default": "#00a8ff"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_button",
+      "label": "Show CTA Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
     },
     {
       "type": "range",
@@ -40,7 +94,7 @@
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -50,488 +104,500 @@
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 80
-    }
-  ],
-  "blocks": [
-    {
-      "type": "culture_item",
-      "name": "Culture Item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "item_title",
-          "label": "Item Title",
-          "default": "Our Culture"
-        },
-        {
-          "type": "textarea",
-          "id": "item_description",
-          "label": "Item Description",
-          "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first."
-        },
-        {
-          "type": "image_picker",
-          "id": "culture_image",
-          "label": "Culture Image"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_cta_button",
-          "label": "Show CTA Button",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "cta_button_text",
-          "label": "CTA Button Text",
-          "default": "Learn More"
-        },
-        {
-          "type": "url",
-          "id": "cta_button_url",
-          "label": "CTA Button URL"
-        }
-      ]
+      "default": 120
     }
   ],
   "presets": [
     {
       "name": "Our Culture",
-      "category": "About",
-      "blocks": [
-        {
-          "type": "culture_item"
-        }
-      ]
+      "category": "About"
     }
   ]
 }
 {% endschema %}
 
-<!-- Our Culture Section -->
-<section class="oc-culture-modern-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.culture_background_color | default: '#ffffff' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
-  <div class="oc-culture-container">
-    {% if section.settings.culture_section_title != blank %}
-      <div class="oc-section-header">
-        <h2 class="oc-section-title" style="color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
-          {{ section.settings.culture_section_title }}
-        </h2>
+<!-- Our Culture Banner Section -->
+<section class="culture-banner-section" 
+         data-section-id="{{ section.id }}" 
+         style="
+           --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#0071b9' }};
+           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 85 }}%;
+           --culture-text-color: {{ section.settings.culture_text_color | default: '#ffffff' }};
+           --culture-accent-color: {{ section.settings.culture_accent_color | default: '#00a8ff' }};
+           --padding-top: {{ section.settings.padding_top | default: 120 }}px;
+           --padding-bottom: {{ section.settings.padding_bottom | default: 120 }}px;
+         ">
+  
+  <!-- Background Image -->
+  <div class="culture-background">
+    {% if section.settings.culture_background_image != blank %}
+      <img src="{{ section.settings.culture_background_image | img_url: '1920x1080' }}" 
+           alt="Our Culture Background" 
+           class="culture-bg-image">
+    {% else %}
+      <!-- Default gradient background if no image -->
+      <div class="culture-bg-gradient"></div>
+    {% endif %}
+  </div>
+  
+  <!-- Overlay -->
+  <div class="culture-overlay"></div>
+  
+  <!-- Content Container -->
+  <div class="culture-content-container">
+    <div class="culture-inner-content">
+      
+      <!-- Section Header -->
+      <div class="culture-header">
+        {% if section.settings.culture_section_title != blank %}
+          <h2 class="culture-main-title">
+            <span class="culture-title-line">{{ section.settings.culture_section_title }}</span>
+          </h2>
+        {% endif %}
+        
         {% if section.settings.culture_section_description != blank %}
-          <p class="oc-section-description">
-            {{ section.settings.culture_section_description }}
-          </p>
+          <div class="culture-description">
+            <p>{{ section.settings.culture_section_description }}</p>
+          </div>
+        {% endif %}
+        
+        <!-- CTA Button -->
+        {% if section.settings.show_cta_button and section.settings.cta_button_text != blank %}
+          <div class="culture-cta-wrapper">
+            <a href="{{ section.settings.cta_button_url | default: '#' }}" 
+               class="culture-cta-button">
+              <span class="cta-text">{{ section.settings.cta_button_text }}</span>
+              <span class="cta-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                </svg>
+              </span>
+            </a>
+          </div>
         {% endif %}
       </div>
-    {% endif %}
-
-    {% for block in section.blocks %}
-      {% case block.type %}
-        {% when 'culture_item' %}
-          <div class="oc-culture-layout" {{ block.shopify_attributes }}>
-            <!-- Image Section with Polygon Clip -->
-            <div class="oc-culture-image-section">
-              <div class="oc-culture-image-wrapper">
-                {% if block.settings.culture_image != blank %}
-                  <img src="{{ block.settings.culture_image | img_url: '800x600' }}" alt="{{ block.settings.item_title }}" class="oc-culture-image" loading="lazy">
-                {% else %}
-                  <!-- Default placeholder image -->
-                  <div class="oc-culture-placeholder">
-                    <svg viewBox="0 0 400 300" class="oc-placeholder-svg">
-                      <rect width="400" height="300" fill="#f0f0f0"/>
-                      <text x="200" y="150" text-anchor="middle" fill="#999" font-size="16">Culture Image</text>
-                    </svg>
-                  </div>
-                {% endif %}
-              </div>
-            </div>
-
-            <!-- Content Section -->
-            <div class="oc-culture-content-section">
-              <div class="oc-culture-content">
-                {% if block.settings.item_title != blank %}
-                  <h3 class="oc-culture-title" style="color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
-                    {{ block.settings.item_title }}
-                  </h3>
-                {% endif %}
-
-                {% if block.settings.item_description != blank %}
-                  <p class="oc-culture-description">
-                    {{ block.settings.item_description }}
-                  </p>
-                {% endif %}
-
-                {% if block.settings.show_cta_button and block.settings.cta_button_text != blank %}
-                  <div class="oc-culture-cta">
-                    <a href="{{ block.settings.cta_button_url | default: '#' }}" class="oc-culture-button" style="border-color: {{ section.settings.culture_accent_color | default: '#0071b9' }}; color: {{ section.settings.culture_accent_color | default: '#0071b9' }};">
-                      <span class="oc-button-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                        </svg>
-                      </span>
-                      {{ block.settings.cta_button_text }}
-                    </a>
-                  </div>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-      {% endcase %}
-    {% endfor %}
+      
+    </div>
   </div>
+  
+  <!-- Decorative Elements -->
+  <div class="culture-decorative-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+  </div>
+  
 </section>
 
 <style>
-/* Our Culture Modern Section - Unique CSS Classes */
-.oc-culture-modern-section {
+/* Our Culture Banner Section - Modern Overlay Design */
+.culture-banner-section {
   position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  width: 100%;
+  padding: var(--padding-top) 0 var(--padding-bottom) 0;
 }
 
-.oc-culture-container {
+/* Background Image */
+.culture-background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.culture-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s ease;
+}
+
+.culture-bg-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0071b9 0%, #005a91 50%, #003d63 100%);
+}
+
+/* Overlay */
+.culture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--culture-overlay-color);
+  opacity: calc(var(--culture-overlay-opacity) / 100);
+  z-index: 2;
+  transition: opacity 0.6s ease;
+}
+
+/* Content Container */
+.culture-content-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
 }
 
-/* Section Header */
-.oc-section-header {
+.culture-inner-content {
   text-align: center;
-  margin-bottom: 60px;
+  color: var(--culture-text-color);
 }
 
-.oc-section-title {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.oc-section-description {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #666;
-  max-width: 800px;
+/* Header Styles */
+.culture-header {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Culture Layout */
-.oc-culture-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 0;
-  min-height: 500px;
-  margin-bottom: 80px;
-}
-
-.oc-culture-layout:last-child {
-  margin-bottom: 0;
-}
-
-/* Image Section */
-.oc-culture-image-section {
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  display: flex;
-  align-items: center;
-}
-
-.oc-culture-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  z-index: 2;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
-}
-
-.oc-culture-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.oc-culture-image:hover {
-  transform: scale(1.05);
-}
-
-.oc-culture-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8f9fa;
-}
-
-.oc-placeholder-svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Polygon clip-path creates the arrow shape */
-
-/* Content Section */
-.oc-culture-content-section {
-  padding: 60px 40px 60px 80px;
-  position: relative;
-}
-
-.oc-culture-content {
-  max-width: 500px;
-}
-
-.oc-culture-title {
-  font-size: 42px;
-  font-weight: 700;
+.culture-main-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 800;
   margin-bottom: 30px;
-  line-height: 1.2;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   position: relative;
 }
 
-.oc-culture-title::after {
+.culture-title-line {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, var(--culture-text-color) 0%, var(--culture-accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.culture-title-line::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
   height: 4px;
-  background: #0071b9;
+  background: linear-gradient(90deg, var(--culture-accent-color), transparent);
   border-radius: 2px;
+  animation: titleUnderline 2s ease-out forwards;
 }
 
-.oc-culture-description {
-  font-size: 16px;
+@keyframes titleUnderline {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 1;
+  }
+}
+
+/* Description */
+.culture-description {
+  margin: 40px 0 50px 0;
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.culture-description p {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
   line-height: 1.8;
-  color: #666;
-  margin-bottom: 40px;
-  font-weight: 400;
+  font-weight: 300;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* CTA Button */
-.oc-culture-cta {
-  margin-top: 30px;
+.culture-cta-wrapper {
+  margin-top: 50px;
+  opacity: 0;
+  animation: fadeInUp 1s ease 1s forwards;
 }
 
-.oc-culture-button {
+.culture-cta-button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 15px 30px;
-  border: 2px solid;
+  gap: 15px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, var(--culture-accent-color) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 2px solid var(--culture-accent-color);
   border-radius: 50px;
+  color: var(--culture-text-color);
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  background: transparent;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.oc-button-icon {
-  display: flex;
-  align-items: center;
-  transition: transform 0.3s ease;
-}
-
-.oc-button-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.oc-culture-button::before {
+.culture-cta-button::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: #0071b9;
-  transition: left 0.3s ease;
-  z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
 }
 
-.oc-culture-button:hover::before {
+.culture-cta-button:hover::before {
+  left: 100%;
+}
+
+.culture-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--culture-text-color);
+}
+
+.cta-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-icon {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.culture-cta-button:hover .cta-icon {
+  transform: translateX(5px);
+}
+
+/* Decorative Floating Elements */
+.culture-decorative-elements {
+  position: absolute;
+  top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
 }
 
-.oc-culture-button:hover {
-  color: white !important;
-  border-color: #0071b9;
-  transform: translateX(5px);
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
 }
 
-.oc-culture-button:hover .oc-button-icon {
-  transform: translateX(5px);
+.element-1 {
+  width: 120px;
+  height: 120px;
+  top: 15%;
+  right: 10%;
+  animation: float1 6s ease-in-out infinite;
+}
+
+.element-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 8%;
+  animation: float2 8s ease-in-out infinite;
+}
+
+.element-3 {
+  width: 60px;
+  height: 60px;
+  top: 60%;
+  right: 15%;
+  animation: float3 7s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  50% { transform: translateX(25px) rotate(-180deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-20px) translateX(15px); }
+  66% { transform: translateY(10px) translateX(-10px); }
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .oc-culture-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .culture-content-container {
+    padding: 0 30px;
   }
-
-  .oc-culture-image-section {
-    min-height: 400px;
-    order: 1;
+  
+  .culture-main-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 25px;
   }
-
-  .oc-culture-content-section {
-    padding: 40px 20px;
-    order: 2;
+  
+  .culture-description p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
   }
-
-  .oc-culture-image-wrapper {
-    clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
-    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.12));
+  
+  .culture-cta-button {
+    padding: 15px 35px;
+    font-size: 1rem;
   }
-
-  .oc-section-title {
-    font-size: 36px;
+  
+  .floating-element {
+    opacity: 0.6;
   }
-
-  .oc-culture-title {
-    font-size: 36px;
+  
+  .element-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .element-2 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .element-3 {
+    width: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .oc-culture-container {
+  .culture-banner-section {
+    min-height: 50vh;
+    padding: 60px 0;
+  }
+  
+  .culture-content-container {
     padding: 0 20px;
   }
-
-  .oc-culture-image-section {
-    min-height: 300px;
+  
+  .culture-main-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 20px;
   }
-
-  .oc-culture-image-wrapper {
-    height: 300px;
+  
+  .culture-description {
+    margin: 30px 0 40px 0;
   }
-
-  .oc-culture-content-section {
-    padding: 30px 15px;
+  
+  .culture-cta-wrapper {
+    margin-top: 40px;
   }
-
-  .oc-section-title {
-    font-size: 28px;
+  
+  .culture-cta-button {
+    padding: 12px 30px;
+    font-size: 0.95rem;
+    gap: 12px;
   }
-
-  .oc-culture-title {
-    font-size: 28px;
-  }
-
-  .oc-culture-description {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .oc-culture-button {
-    padding: 12px 25px;
-    font-size: 13px;
+  
+  .floating-element {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .oc-section-title {
-    font-size: 24px;
+  .culture-banner-section {
+    min-height: 45vh;
   }
-
-  .oc-culture-title {
-    font-size: 24px;
+  
+  .culture-main-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: 1px;
   }
-
-  .oc-culture-description {
-    font-size: 14px;
+  
+  .culture-description p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
-
-  .oc-culture-button {
-    padding: 10px 20px;
-    font-size: 12px;
-  }
-}
-
-/* Animation on Scroll */
-@media (prefers-reduced-motion: no-preference) {
-  .oc-culture-image-wrapper {
-    opacity: 0;
-    transform: translateX(-50px);
-    animation: ocSlideInLeft 0.8s ease forwards;
-  }
-
-  .oc-culture-content {
-    opacity: 0;
-    transform: translateX(50px);
-    animation: ocSlideInRight 0.8s ease forwards;
-    animation-delay: 0.2s;
-  }
-
-  @keyframes ocSlideInLeft {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes ocSlideInRight {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  
+  .culture-cta-button {
+    padding: 10px 25px;
+    font-size: 0.9rem;
   }
 }
 
-/* Accessibility */
+/* Accessibility & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .oc-culture-image,
-  .oc-culture-polygon,
-  .oc-culture-button,
-  .oc-culture-image-wrapper,
-  .oc-culture-content {
+  .culture-bg-image,
+  .culture-overlay,
+  .culture-main-title,
+  .culture-description,
+  .culture-cta-wrapper,
+  .floating-element {
     animation: none;
     transition: none;
   }
+  
+  .culture-cta-button::before {
+    display: none;
+  }
 }
 
-.oc-culture-button:focus {
-  outline: 3px solid #0071b9;
-  outline-offset: 4px;
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .culture-overlay {
+    opacity: 0.9;
+  }
+  
+  .culture-main-title,
+  .culture-description p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  
+  .culture-cta-button {
+    border-width: 3px;
+  }
 }
 
-/* Enhanced Visual Effects */
-.oc-culture-content-section::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: 40px;
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(45deg, #0071b9, #005a91);
-  border-radius: 50%;
-  opacity: 0.1;
-}
-
-.oc-culture-content-section::after {
-  content: '';
-  position: absolute;
-  bottom: 20px;
-  right: 40px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(45deg, #0071b9, #005a91);
-  border-radius: 50%;
-  opacity: 0.05;
+/* Print Styles */
+@media print {
+  .culture-banner-section {
+    min-height: auto;
+    padding: 20px 0;
+    background: white !important;
+    color: black !important;
+    page-break-inside: avoid;
+  }
+  
+  .culture-overlay,
+  .culture-decorative-elements {
+    display: none;
+  }
+  
+  .culture-bg-image {
+    opacity: 0.1;
+  }
 }
 </style>
