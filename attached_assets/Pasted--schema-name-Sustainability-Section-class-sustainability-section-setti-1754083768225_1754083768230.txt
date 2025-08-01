@@ -1,0 +1,2303 @@
+{% schema %}
+{
+  "name": "Sustainability Section",
+  "class": "sustainability-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section 1 - Our Approach"
+    },
+    {
+      "type": "image_picker",
+      "id": "approach_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "approach_heading",
+      "label": "Heading",
+      "default": "OUR APPROACH"
+    },
+    {
+      "type": "textarea",
+      "id": "approach_description",
+      "label": "Description",
+      "default": "Our new headquarters opened in April 2023 with 60,000 square feet of World-Class."
+    },
+    {
+      "type": "header",
+      "content": "Section 2 - Main Content"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Ensuring you can process life-saving drugs without sacrificing your sustainability goals."
+    },
+    {
+      "type": "text",
+      "id": "contact_button_text",
+      "label": "Contact Button Text",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "url",
+      "id": "contact_button_url",
+      "label": "Contact Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Certification 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_1_image",
+      "label": "Certification 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_1_title",
+      "label": "Certification 1 Title",
+      "default": "ISO 9001 Certified"
+    },
+    {
+      "type": "text",
+      "id": "certification_1_validity",
+      "label": "Certification 1 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_1_description",
+      "label": "Certification 1 Description",
+      "default": "ISO 9001 certification demonstrates our commitment to quality management systems and continuous improvement in manufacturing processes."
+    },
+    {
+        "type": "url",
+        "id": "certification_1_url",
+        "label": "Certification 1 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_1_url_target",
+        "label": "Certification 1 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_1_modal_button_text",
+        "label": "Certification 1 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_1_modal_button_url",
+        "label": "Certification 1 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_1_modal_button_url_target",
+        "label": "Certification 1 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_2_image",
+      "label": "Certification 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_2_title",
+      "label": "Certification 2 Title",
+      "default": "ISO 14001 Environmental"
+    },
+    {
+      "type": "text",
+      "id": "certification_2_validity",
+      "label": "Certification 2 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_2_description",
+      "label": "Certification 2 Description",
+      "default": "ISO 14001 certification ensures our environmental management system meets international standards for sustainability and environmental responsibility."
+    },
+    {
+        "type": "url",
+        "id": "certification_2_url",
+        "label": "Certification 2 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_2_url_target",
+        "label": "Certification 2 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_2_modal_button_text",
+        "label": "Certification 2 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_2_modal_button_url",
+        "label": "Certification 2 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_2_modal_button_url_target",
+        "label": "Certification 2 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_3_image",
+      "label": "Certification 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_3_title",
+      "label": "Certification 3 Title",
+      "default": "FDA Registered"
+    },
+    {
+      "type": "text",
+      "id": "certification_3_validity",
+      "label": "Certification 3 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_3_description",
+      "label": "Certification 3 Description",
+      "default": "FDA registration ensures our manufacturing facility and processes comply with Food and Drug Administration regulations for pharmaceutical and medical device manufacturing."
+    },
+    {
+        "type": "url",
+        "id": "certification_3_url",
+        "label": "Certification 3 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_3_url_target",
+        "label": "Certification 3 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_3_modal_button_text",
+        "label": "Certification 3 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_3_modal_button_url",
+        "label": "Certification 3 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_3_modal_button_url_target",
+        "label": "Certification 3 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_4_image",
+      "label": "Certification 4 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_4_title",
+      "label": "Certification 4 Title",
+      "default": "GMP Certified"
+    },
+    {
+      "type": "text",
+      "id": "certification_4_validity",
+      "label": "Certification 4 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_4_description",
+      "label": "Certification 4 Description",
+      "default": "Good Manufacturing Practices (GMP) certification validates our adherence to quality standards in pharmaceutical and life sciences manufacturing."
+    },
+    {
+        "type": "url",
+        "id": "certification_4_url",
+        "label": "Certification 4 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_4_url_target",
+        "label": "Certification 4 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_4_modal_button_text",
+        "label": "Certification 4 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_4_modal_button_url",
+        "label": "Certification 4 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_4_modal_button_url_target",
+        "label": "Certification 4 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_5_image",
+      "label": "Certification 5 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_5_title",
+      "label": "Certification 5 Title",
+      "default": "Carbon Neutral"
+    },
+    {
+      "type": "text",
+      "id": "certification_5_validity",
+      "label": "Certification 5 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_5_description",
+      "label": "Certification 5 Description",
+      "default": "Carbon Neutral certification demonstrates our commitment to offsetting our carbon footprint and achieving net-zero emissions in our operations."
+    },
+    {
+        "type": "url",
+        "id": "certification_5_url",
+        "label": "Certification 5 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_5_url_target",
+        "label": "Certification 5 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_5_modal_button_text",
+        "label": "Certification 5 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_5_modal_button_url",
+        "label": "Certification 5 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_5_modal_button_url_target",
+        "label": "Certification 5 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_6_image",
+      "label": "Certification 6 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_6_title",
+      "label": "Certification 6 Title",
+      "default": "LEED Certified"
+    },
+    {
+      "type": "text",
+      "id": "certification_6_validity",
+      "label": "Certification 6 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_6_description",
+      "label": "Certification 6 Description",
+      "default": "LEED certification demonstrates our commitment to sustainable building practices and environmental design in our facilities."
+    },
+    {
+        "type": "url",
+        "id": "certification_6_url",
+        "label": "Certification 6 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_6_url_target",
+        "label": "Certification 6 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_6_modal_button_text",
+        "label": "Certification 6 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_6_modal_button_url",
+        "label": "Certification 6 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_6_modal_button_url_target",
+        "label": "Certification 6 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_7_image",
+      "label": "Certification 7 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_7_title",
+      "label": "Certification 7 Title",
+      "default": "Energy Star Certified"
+    },
+    {
+      "type": "text",
+      "id": "certification_7_validity",
+      "label": "Certification 7 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_7_description",
+      "label": "Certification 7 Description",
+      "default": "Energy Star certification validates our commitment to energy efficiency and reduced environmental impact in our operations."
+    },
+    {
+        "type": "url",
+        "id": "certification_7_url",
+        "label": "Certification 7 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_7_url_target",
+        "label": "Certification 7 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_7_modal_button_text",
+        "label": "Certification 7 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_7_modal_button_url",
+        "label": "Certification 7 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_7_modal_button_url_target",
+        "label": "Certification 7 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_8_image",
+      "label": "Certification 8 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_8_title",
+      "label": "Certification 8 Title",
+      "default": "B Corp Certified"
+    },
+    {
+      "type": "text",
+      "id": "certification_8_validity",
+      "label": "Certification 8 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_8_description",
+      "label": "Certification 8 Description",
+      "default": "B Corp certification recognizes our commitment to balancing profit with purpose and meeting high standards for social and environmental performance."
+    },
+    {
+        "type": "url",
+        "id": "certification_8_url",
+        "label": "Certification 8 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_8_url_target",
+        "label": "Certification 8 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_8_modal_button_text",
+        "label": "Certification 8 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_8_modal_button_url",
+        "label": "Certification 8 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_8_modal_button_url_target",
+        "label": "Certification 8 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_9_image",
+      "label": "Certification 9 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_9_title",
+      "label": "Certification 9 Title",
+      "default": "OHSAS 18001"
+    },
+    {
+      "type": "text",
+      "id": "certification_9_validity",
+      "label": "Certification 9 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_9_description",
+      "label": "Certification 9 Description",
+      "default": "OHSAS 18001 certification ensures our occupational health and safety management system meets international standards for workplace safety."
+    },
+    {
+        "type": "url",
+        "id": "certification_9_url",
+        "label": "Certification 9 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_9_url_target",
+        "label": "Certification 9 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_9_modal_button_text",
+        "label": "Certification 9 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_9_modal_button_url",
+        "label": "Certification 9 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_9_modal_button_url_target",
+        "label": "Certification 9 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Certification 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "certification_10_image",
+      "label": "Certification 10 Image"
+    },
+    {
+      "type": "text",
+      "id": "certification_10_title",
+      "label": "Certification 10 Title",
+      "default": "RoHS Compliant"
+    },
+    {
+      "type": "text",
+      "id": "certification_10_validity",
+      "label": "Certification 10 Validity",
+      "default": "valid through December 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "certification_10_description",
+      "label": "Certification 10 Description",
+      "default": "RoHS compliance ensures our products are free from restricted hazardous substances and meet European environmental standards."
+    },
+    {
+        "type": "url",
+        "id": "certification_10_url",
+        "label": "Certification 10 URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_10_url_target",
+        "label": "Certification 10 URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "certification_10_modal_button_text",
+        "label": "Certification 10 Modal Button Text",
+        "default": "Learn More"
+    },
+    {
+        "type": "url",
+        "id": "certification_10_modal_button_url",
+        "label": "Certification 10 Modal Button URL"
+    },
+    {
+        "type": "select",
+        "id": "certification_10_modal_button_url_target",
+        "label": "Certification 10 Modal Button URL Target",
+        "default": "_blank",
+        "options": [
+          {
+            "value": "_blank",
+            "label": "New tab"
+          },
+          {
+            "value": "_self",
+            "label": "Same frame"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Section 3 - The Change Starts Now"
+    },
+    {
+      "type": "image_picker",
+      "id": "change_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "change_heading_line1",
+      "label": "Heading Line 1",
+      "default": "THE CHANGE STARTS NOW"
+    },
+    {
+      "type": "text",
+      "id": "change_heading_line2",
+      "label": "Heading Line 2",
+      "default": "WITH US"
+    },
+    {
+      "type": "textarea",
+      "id": "change_description",
+      "label": "Description",
+      "default": "Carolina Components Group is here to support your sustainability goals without sacrificing product quality, lead times, or customer service. Explore our components in sustainable alternative materials today."
+    },
+    {
+      "type": "text",
+      "id": "change_button_text",
+      "label": "Button Text",
+      "default": "SUSTAINABLE ALTERNATIVES"
+    },
+    {
+      "type": "url",
+      "id": "change_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Section 4 - Statistics"
+    },
+    {
+      "type": "text",
+      "id": "stats_heading",
+      "label": "Statistics Heading",
+      "default": "Always Moving Forward"
+    },
+    {
+      "type": "text",
+      "id": "stat1_percentage",
+      "label": "Statistic 1 Percentage",
+      "default": "10%"
+    },
+    {
+      "type": "text",
+      "id": "stat1_title",
+      "label": "Statistic 1 Title",
+      "default": "of our components"
+    },
+    {
+      "type": "text",
+      "id": "stat1_description",
+      "label": "Statistic 1 Description",
+      "default": "are sourced from sustainable alternatives."
+    },
+    {
+      "type": "text",
+      "id": "stat2_percentage",
+      "label": "Statistic 2 Percentage",
+      "default": "38%"
+    },
+    {
+      "type": "text",
+      "id": "stat2_title",
+      "label": "Statistic 2 Title",
+      "default": "of our key suppliers"
+    },
+    {
+      "type": "text",
+      "id": "stat2_description",
+      "label": "Statistic 2 Description",
+      "default": "have completed a sustainability self-assessment to ensure we partner with the highest quality businesses, driven by sustainability initiatives."
+    },
+    {
+      "type": "header",
+      "content": "Section 5 - Commitment to Quality"
+    },
+    {
+      "type": "image_picker",
+      "id": "commitment_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "commitment_heading",
+      "label": "Heading",
+      "default": "OUR COMMITMENT TO QUALITY"
+    },
+    {
+      "type": "textarea",
+      "id": "commitment_description",
+      "label": "Description",
+      "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
+    },
+    {
+      "type": "text",
+      "id": "commitment_button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "commitment_button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sustainability Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Section 1: Our Approach Banner -->
+<section class="sustainability-approach-banner">
+  {% if section.settings.approach_bg_image != blank %}
+    <div class="approach-bg-image" style="background-image: url('{{ section.settings.approach_bg_image | img_url: '1920x' }}');">
+  {% endif %}
+      <div class="approach-overlay">
+        <div class="approach-content">
+          <h1 class="approach-heading">{{ section.settings.approach_heading }}</h1>
+          {% if section.settings.approach_description != blank %}
+            <p class="approach-description">{{ section.settings.approach_description }}</p>
+          {% endif %}
+        </div>
+      </div>
+  {% if section.settings.approach_bg_image != blank %}
+    </div>
+  {% endif %}
+</section>
+
+<!-- Section 2: Main Content with Certification -->
+<section class="sustainability-main-content">
+  <div class="main-content-wrapper">
+    <div class="main-content-inner">
+      <h2 class="main-heading">{{ section.settings.main_heading }}</h2>
+
+      {% if section.settings.contact_button_text != blank %}
+        <div class="contact-button-wrapper">
+          <a href="{{ section.settings.contact_button_url }}" class="contact-button">
+            {{ section.settings.contact_button_text }}
+          </a>
+        </div>
+      {% endif %}
+
+      <!-- Multiple Certifications Section -->
+      <div class="certifications-grid-wrapper">
+        <div class="certifications-grid">
+          {% assign certifications = '1,2,3,4,5,6,7,8,9,10' | split: ',' %}
+          {% for cert_num in certifications %}
+            {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
+            {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
+            {% assign cert_title_key = 'certification_' | append: cert_num | append: '_title' %}
+            {% assign cert_description_key = 'certification_' | append: cert_num | append: '_description' %}
+            {% assign cert_url_key = 'certification_' | append: cert_num | append: '_url' %}
+            {% assign cert_url_target_key = 'certification_' | append: cert_num | append: '_url_target' %}
+
+            {% assign cert_image = section.settings[cert_image_key] %}
+            {% assign cert_validity = section.settings[cert_validity_key] %}
+            {% assign cert_title = section.settings[cert_title_key] %}
+            {% assign cert_description = section.settings[cert_description_key] %}
+            {% assign cert_url = section.settings[cert_url_key] %}
+            {% assign cert_url_target = section.settings[cert_url_target_key] %}
+
+            {% if cert_image != blank %}
+              <div class="certification-card" data-cert="{{ cert_num }}">
+                <div class="certification-logo-container">
+                  {% if cert_url != blank %}
+                    <a href="{{ cert_url }}" target="{{ cert_url_target }}" class="certification-logo-link">
+                  {% endif %}
+                    <img src="{{ cert_image | img_url: '200x' }}" 
+                         alt="{{ cert_title | default: 'Sustainability Certification' }}" 
+                         class="certification-badge">
+                  {% if cert_url != blank %}
+                    </a>
+                  {% endif %}
+                </div>
+                {% if cert_validity != blank %}
+                  <p class="certification-validity">{{ cert_validity }}</p>
+                {% endif %}
+                <button class="certification-learn-more" onclick="openCertificationModal({{ cert_num }})">
+                  Learn More
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Certification Modals -->
+      {% assign certifications = '1,2,3,4,5,6,7,8,9,10' | split: ',' %}
+      {% for cert_num in certifications %}
+        {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
+        {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
+        {% assign cert_title_key = 'certification_' | append: cert_num | append: '_title' %}
+        {% assign cert_description_key = 'certification_' | append: cert_num | append: '_description' %}
+        {% assign cert_url_key = 'certification_' | append: cert_num | append: '_url' %}
+        {% assign cert_url_target_key = 'certification_' | append: cert_num | append: '_url_target' %}
+        {% assign cert_modal_button_text_key = 'certification_' | append: cert_num | append: '_modal_button_text' %}
+        {% assign cert_modal_button_url_key = 'certification_' | append: cert_num | append: '_modal_button_url' %}
+        {% assign cert_modal_button_url_target_key = 'certification_' | append: cert_num | append: '_modal_button_url_target' %}
+
+        {% assign cert_image = section.settings[cert_image_key] %}
+        {% assign cert_validity = section.settings[cert_validity_key] %}
+        {% assign cert_title = section.settings[cert_title_key] %}
+        {% assign cert_description = section.settings[cert_description_key] %}
+        {% assign cert_url = section.settings[cert_url_key] %}
+        {% assign cert_url_target = section.settings[cert_url_target_key] %}
+        {% assign cert_modal_button_text = section.settings[cert_modal_button_text_key] %}
+        {% assign cert_modal_button_url = section.settings[cert_modal_button_url_key] %}
+        {% assign cert_modal_button_url_target = section.settings[cert_modal_button_url_target_key] %}
+
+        {% if cert_image != blank %}
+          <div id="certificationModal{{ cert_num }}" class="certification-modal">
+            <div class="certification-modal-content">
+              <div class="certification-modal-header">
+                <span class="certification-modal-close" onclick="closeCertificationModal({{ cert_num }})">&times;</span>
+              </div>
+              <div class="certification-modal-body">
+                <div class="certification-modal-logo">
+                  {% if cert_url != blank %}
+                    <a href="{{ cert_url }}" target="{{ cert_url_target }}" class="certification-modal-logo-link">
+                  {% endif %}
+                    <img src="{{ cert_image | img_url: '300x' }}" 
+                         alt="{{ cert_title | default: 'Sustainability Certification' }}" 
+                         class="certification-modal-badge">
+                  {% if cert_url != blank %}
+                    </a>
+                  {% endif %}
+                </div>
+                <div class="certification-modal-info">
+                  <h3 class="certification-modal-title">{{ cert_title | default: 'Sustainability Certification' }}</h3>
+                  {% if cert_validity != blank %}
+                    <p class="certification-modal-validity">{{ cert_validity }}</p>
+                  {% endif %}
+                  <div class="certification-modal-description">
+                    <p>{{ cert_description | default: 'Learn more about our commitment to sustainability and environmental responsibility.' }}</p>
+                  </div>
+                </div>
+              </div>
+              {% if cert_modal_button_url != blank %}
+                <div class="certification-modal-actions">
+                  <a href="{{ cert_modal_button_url }}" target="{{ cert_modal_button_url_target }}" class="certification-modal-link-button">
+                    {{ cert_modal_button_text | default: 'Learn More' }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: The Change Starts Now -->
+<section class="sustainability-change-section" data-animate="true">
+  {% if section.settings.change_bg_image != blank %}
+    <div class="change-bg-image" style="background-image: url('{{ section.settings.change_bg_image | img_url: '1920x' }}');">
+  {% endif %}
+      <div class="change-overlay">
+        <div class="change-content">
+          <div class="change-icon-wrapper">
+            <div class="change-icon-border">
+              <div class="change-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2"/>
+                  <path d="M12 2C12 2 8 6 8 12C8 16 10 18 12 18C14 18 16 16 16 12C16 6 12 2 12 2Z" fill="white" stroke="white" stroke-width="1"/>
+                  <path d="M12 2C12 2 9 3 7 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M12 2C12 2 15 3 17 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M12 8C12 8 10 9 9 11" stroke="white" stroke-width="1" stroke-linecap="round"/>
+                  <path d="M12 8C12 8 14 9 15 11" stroke="white" stroke-width="1" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="change-heading-wrapper">
+            <h2 class="change-heading">
+              <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
+              <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
+            </h2>
+          </div>
+
+          <div class="change-divider"></div>
+
+          <p class="change-description">{{ section.settings.change_description }}</p>
+
+          {% if section.settings.change_button_text != blank %}
+            <a href="{{ section.settings.change_button_url }}" class="change-button animated-button">
+              {{ section.settings.change_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+  {% if section.settings.change_bg_image != blank %}
+    </div>
+  {% endif %}
+</section>
+
+<!-- Section 4: Statistics -->
+<section class="sustainability-stats-section">
+  <div class="stats-wrapper">
+    <h2 class="stats-heading">{{ section.settings.stats_heading }}</h2>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-percentage">{{ section.settings.stat1_percentage }}</div>
+        <div class="stat-content">
+          <h3 class="stat-title">{{ section.settings.stat1_title }}</h3>
+          <p class="stat-description">{{ section.settings.stat1_description }}</p>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-percentage">{{ section.settings.stat2_percentage }}</div>
+        <div class="stat-content">
+          <h3 class="stat-title">{{ section.settings.stat2_title }}</h3>
+          <p class="stat-description">{{ section.settings.stat2_description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Commitment to Quality -->
+<section class="sustainability-commitment-section">
+  {% if section.settings.commitment_bg_image != blank %}
+    <div class="commitment-bg-image" style="background-image: url('{{ section.settings.commitment_bg_image | img_url: '1920x' }}');">
+  {% endif %}
+      <div class="commitment-overlay">
+        <div class="commitment-content">
+          <h2 class="commitment-heading">{{ section.settings.commitment_heading }}</h2>
+          <p class="commitment-description">{{ section.settings.commitment_description }}</p>
+
+          {% if section.settings.commitment_button_text != blank %}
+            <a href="{{ section.settings.commitment_button_url }}" class="commitment-button">
+              {{ section.settings.commitment_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+  {% if section.settings.commitment_bg_image != blank %}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+/* Global overflow fix */
+body {
+  overflow-x: hidden;
+}
+
+/* Section 1: Our Approach Banner */
+.sustainability-approach-banner {
+  position: relative;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.approach-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.approach-overlay {
+  position: relative;
+  z-index: 2;
+  /* background: rgba(0, 113, 185, 0.8); */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 60px;
+}
+
+.approach-content {
+  text-align: center;
+  max-width: 800px;
+}
+
+.approach-heading {
+  color: white;
+  font-size: 6rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+}
+
+.approach-description {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  opacity: 0.95;
+}
+
+/* Section 2: Main Content */
+.sustainability-main-content {
+  background: #f8f9fa;
+  padding: 80px 20px;
+}
+
+.main-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-content-inner {
+  text-align: center;
+}
+
+.main-heading {
+  font-size: 47px;
+  color: #0071b9;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-button-wrapper {
+  margin-bottom: 60px;
+}
+
+.contact-button {
+  background: transparent;
+  border: 2px solid #0071b9;
+  color: #0071b9;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.contact-button:hover {
+  background: #0071b9;
+  color: white;
+}
+
+/* Multiple Certifications Grid */
+.certifications-grid-wrapper {
+  margin-top: 40px;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.certification-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.4s ease;  position: relative;
+  overflow: hidden;
+  border: 2px solid #0071b9;
+}
+
+.certification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #0071b9;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.certification-card:hover::before {
+  transform: scaleX(1);
+}
+
+.certification-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #0071b9;
+}
+
+.certification-logo-container {
+  /* background: #f8f9fa; */
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-logo-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(0, 113, 185, 0.1) 0%, transparent 70%);
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.certification-card:hover .certification-logo-container::after {
+  width: 200px;
+  height: 200px;
+}
+
+.certification-badge {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.certification-card:hover .certification-badge {
+  transform: scale(1.1);
+}
+
+.certification-validity {
+  font-size: 18px;
+  color: #0071b9;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.certification-learn-more {
+  background: #0071b9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-learn-more::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.certification-learn-more:hover::before {
+  left: 100%;
+}
+
+.certification-learn-more:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 113, 185, 0.8);
+}
+
+/* Certification Logo Links */
+.certification-logo-link {
+  display: block;
+  text-decoration: none;
+}
+
+.certification-logo-link:hover .certification-badge {
+  transform: scale(1.1);
+}
+
+.certification-modal-logo-link {
+  display: block;
+  text-decoration: none;
+}
+
+.certification-modal-logo-link:hover .certification-modal-badge {
+  transform: scale(1.05);
+}
+
+/* Certification Modal Actions */
+.certification-modal-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.certification-modal-link-button {
+  background: #0071b9;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 25px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #0071b9;
+}
+
+.certification-modal-link-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.certification-modal-link-button:hover::before {
+  left: 100%;
+}
+
+.certification-modal-link-button:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 113, 185, 0.8);
+  box-shadow: 0 5px 15px rgba(0, 113, 185, 0.3);
+}
+
+/* Certification Modals */
+.certification-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.certification-modal-content {
+  background-color: white;
+  margin: 5% auto;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  overflow: hidden;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 3px solid #0071b9;
+}
+
+.certification-modal.show .certification-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.certification-modal-header {
+  background: #0071b9;
+  padding: 20px;
+  position: relative;
+}
+
+.certification-modal-close {
+  color: white;
+  float: right;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  line-height: 1;
+}
+
+.certification-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+  border-color: white;
+}
+
+.certification-modal-body {
+  padding: 40px;
+  text-align: center;
+}
+
+.certification-modal-logo {
+  margin-bottom: 30px;
+}
+
+.certification-modal-badge {
+  max-width: 200px;
+  height: auto;
+  border-radius: 15px;
+}
+
+.certification-modal-title {
+  font-size: 1.8rem;
+  color: #0071b9;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.certification-modal-validity {
+  font-size: 1rem;
+  color: #0071b9;
+  margin-bottom: 25px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: rgba(0, 113, 185, 0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.certification-modal-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  text-align: left;
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 4px solid #0071b9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Section 3: The Change Starts Now */
+.sustainability-change-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.change-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.change-overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.change-content {
+  text-align: center;
+  max-width: 800px;
+}
+
+.change-icon-wrapper {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.change-icon-border {
+  display: inline-block;
+  padding: 25px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.change-icon-border:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.change-icon svg {
+  width: 80px !important;
+  height: 80px !important;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.change-heading-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.change-heading {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid white;
+  padding: 20px 30px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.change-line1, .change-line2 {
+  display: block;
+}
+
+.change-divider {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  margin: 40px auto;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.change-description {
+  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.change-button {
+  background: #0071b9;
+  color: white;
+  padding: 18px 40px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 30px;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.animated-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.animated-button:hover::before {
+  left: 100%;
+}
+
+.change-button:hover {
+  background: #0071b9;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 113, 185, 0.3);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+}
+
+/* Section 4: Statistics */
+.sustainability-stats-section {
+  background: white;
+  padding: 120px 20px 120px 20px;
+  margin-top: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.stats-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stats-heading {
+  font-size: 47px;
+  color: #0071b9;
+  font-weight: 300;
+  margin-bottom: 60px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-percentage {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #0071b9;
+  margin-bottom: 20px;
+}
+
+.stat-title {
+  font-size: 22px;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.stat-description {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Section 5: Commitment to Quality */
+.sustainability-commitment-section {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.commitment-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.commitment-overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.commitment-content {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.commitment-heading {
+  color: white;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.commitment-description {
+  color: white;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  line-height: 1.4;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.commitment-button {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 15px 35px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.commitment-button:hover {
+  background: white;
+  color: #0071b9;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive for Certifications */
+@media (max-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .certification-card {
+    padding: 20px 15px;
+  }
+
+  .certification-badge {
+    max-width: 100px;
+  }
+
+  .certification-modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .certification-modal-body {
+    padding: 30px 20px;
+  }
+
+  .certification-modal-title {
+    font-size: 1.4rem;
+  }
+
+  .certification-modal-description {
+    font-size: 1rem;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .certification-learn-more {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .certification-modal-badge {
+    max-width: 150px;
+  }
+}
+
+/* Original Mobile Responsive */
+@media (max-width: 768px) {
+  .sustainability-approach-banner {
+    height: 350px;
+  }
+
+  .approach-heading {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+
+  .approach-description {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .approach-overlay {
+    padding: 30px 20px;
+  }
+
+  .main-heading {
+    font-size: 1.6rem;
+  }
+
+  .change-heading {
+    font-size: 1.8rem;
+  }
+
+  .sustainability-change-section {
+    min-height: 80vh;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+  }
+
+  .change-overlay {
+    min-height: 80vh;
+    padding: 60px 20px;
+  }
+
+  .change-bg-image {
+    background-attachment: scroll;
+  }
+
+  .sustainability-stats-section {
+    padding: 100px 20px 60px 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .stat-percentage {
+    font-size: 3rem;
+  }
+
+  .commitment-heading {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .commitment-description {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.4;
+  }
+
+  .sustainability-commitment-section {
+    min-height: 400px;
+  }
+
+  .commitment-overlay {
+    min-height: 400px;
+    padding: 60px 20px;
+  }
+
+  .stats-heading {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sustainability-approach-banner {
+    height: 300px;
+  }
+
+  .sustainability-change-section {
+    min-height: 70vh;
+    width: 100%;
+  }
+
+  .change-overlay {
+    min-height: 70vh;
+    padding: 40px 20px;
+  }
+
+  .sustainability-commitment-section {
+    min-height: 350px;
+  }
+
+  .commitment-overlay {
+    min-height: 350px;
+    padding: 40px 15px;
+  }
+
+  .sustainability-stats-section {
+    padding: 80px 20px 60px 20px;
+  }
+
+  .approach-heading {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .approach-description {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .approach-overlay {
+    padding: 20px 15px;
+  }
+
+  .change-heading {
+    font-size: 1.5rem;
+  }
+
+  .commitment-heading {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.1;
+  }
+
+  .commitment-description {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.3;
+  }
+
+  .main-heading,
+  .stats-heading {
+    font-size: 1.4rem;
+  }
+}
+</style>
+
+<script>
+// Certification Modal Functions
+function openCertificationModal(certNum) {
+  const modal = document.getElementById('certificationModal' + certNum);
+  if (modal) {
+    modal.style.display = 'block';
+    // Trigger animation
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeCertificationModal(certNum) {
+  const modal = document.getElementById('certificationModal' + certNum);
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  if (event.target.classList.contains('certification-modal')) {
+    const modalId = event.target.id;
+    const certNum = modalId.replace('certificationModal', '');
+    closeCertificationModal(certNum);
+  }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const openModals = document.querySelectorAll('.certification-modal.show');
+    openModals.forEach(modal => {
+      const certNum = modal.id.replace('certificationModal', '');
+      closeCertificationModal(certNum);
+    });
+  }
+});
+
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+
+        // Reset animations for change section
+        if (entry.target.classList.contains('sustainability-change-section')) {
+          const elements = entry.target.querySelectorAll('.change-icon-wrapper, .change-heading-wrapper, .change-divider, .change-description, .change-button');
+          elements.forEach((el, index) => {
+            if (el) {
+              el.style.animationDelay = `${0.2 + (index * 0.2)}s`;
+              el.style.animation = 'none';
+              setTimeout(() => {
+                if (el) {
+                  el.style.animation = '';
+                }
+              }, 10);
+            }
+          });
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe sections with animations
+  const animatedSections = document.querySelectorAll('[data-animate="true"]');
+  if (animatedSections.length > 0) {
+    animatedSections.forEach(section => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+  }
+
+  // Add hover effects to certification logo
+  const certLogos = document.querySelectorAll('.certification-logo-container');
+  certLogos.forEach(certLogo => {
+    if (certLogo) {
+      certLogo.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.05)';
+      });
+
+      certLogo.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    }
+  });
+
+  // Remove any undefined function calls
+  // Check if elements exist before adding event listeners
+  const selectElements = document.querySelectorAll('select');
+  selectElements.forEach(select => {
+    if (select) {
+      select.addEventListener('change', function() {
+        // Handle select change if needed
+      });
+    }
+  });
+});
+</script>
