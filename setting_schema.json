@@ -6528,255 +6528,6 @@
     ]
   },
   {
-    "name": "Mission & Vision",
-    "settings": [
-      {
-        "type": "header",
-        "content": "General Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_mission_vision_section",
-        "label": "Show Mission & Vision Section",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "mission_vision_section_title",
-        "label": "Section Title",
-        "default": "Our Mission & Vision"
-      },
-      {
-        "type": "color",
-        "id": "mission_vision_background_color",
-        "label": "Background Color",
-        "default": "#f8f9fa"
-      },
-      {
-        "type": "color",
-        "id": "mission_vision_accent_color",
-        "label": "Accent Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "range",
-        "id": "mission_vision_padding_top",
-        "label": "Top Padding",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px",
-        "default": 60
-      },
-      {
-        "type": "range",
-        "id": "mission_vision_padding_bottom",
-        "label": "Bottom Padding",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px", 
-        "default": 60
-      },
-      {
-        "type": "header",
-        "content": "Card 1 Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_card_1",
-        "label": "Show Card 1",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "card_1_title",
-        "label": "Card 1 Title",
-        "default": "Mission"
-      },
-      {
-        "type": "textarea",
-        "id": "card_1_content",
-        "label": "Card 1 Content",
-        "default": "To enable researchers, biotech labs, and bioprocess professionals to receive custom components that meet global quality standards."
-      },
-      {
-        "type": "select",
-        "id": "card_1_icon_type",
-        "label": "Card 1 Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "card_1_svg_code",
-        "label": "Card 1 SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "card_1_image",
-        "label": "Card 1 Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Card 2 Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_card_2",
-        "label": "Show Card 2",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "card_2_title",
-        "label": "Card 2 Title",
-        "default": "Vision"
-      },
-      {
-        "type": "textarea",
-        "id": "card_2_content",
-        "label": "Card 2 Content",
-        "default": "To become the global benchmark for custom & made-to-order bioprocessing solutions by combining technical design, cleanroom assembly, and regulatory assurance."
-      },
-      {
-        "type": "select",
-        "id": "card_2_icon_type",
-        "label": "Card 2 Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "card_2_svg_code",
-        "label": "Card 2 SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "card_2_image",
-        "label": "Card 2 Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Card 3 Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_card_3",
-        "label": "Show Card 3",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "card_3_title",
-        "label": "Card 3 Title",
-        "default": "Values"
-      },
-      {
-        "type": "textarea",
-        "id": "card_3_content",
-        "label": "Card 3 Content",
-        "default": "Our core values drive everything we do in delivering excellence to our customers."
-      },
-      {
-        "type": "select",
-        "id": "card_3_icon_type",
-        "label": "Card 3 Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "card_3_svg_code",
-        "label": "Card 3 SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "card_3_image",
-        "label": "Card 3 Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Card 4 Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_card_4",
-        "label": "Show Card 4",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "card_4_title",
-        "label": "Card 4 Title",
-        "default": "Innovation"
-      },
-      {
-        "type": "textarea",
-        "id": "card_4_content",
-        "label": "Card 4 Content",
-        "default": "We continuously innovate to provide cutting-edge solutions for our industry."
-      },
-      {
-        "type": "select",
-        "id": "card_4_icon_type",
-        "label": "Card 4 Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "card_4_svg_code",
-        "label": "Card 4 SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 11H7v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9h-2v2h-2V9h-2v2H9v2z'/><path d='M13.5 2c-.28 0-.5.22-.5.5V3h-2v-.5c0-.28-.22-.5-.5-.5s-.5.22-.5.5V3H8.5c-.28 0-.5.22-.5.5s.22.5.5.5H10v1H8.5c-.28 0-.5.22-.5.5s.22.5.5.5H10v1H8.5c-.28 0-.5.22-.5.5s.22.5.5.5h7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14V6h1.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14V4h1.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H14v-.5c0-.28-.22-.5-.5-.5z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "card_4_image",
-        "label": "Card 4 Icon Image"
-      }
-    ]
-  },
-  {
     "name": "t:settings_schema.gdpr_popup.name",
     "settings": [
       {
@@ -7210,226 +6961,6 @@
             "label": "t:settings_schema.notify_me.settings.general.options__3"
           }
         ]
-      }
-    ]
-  },
-  {
-    "name": "Four Pillars",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Section Settings"
-      },
-      {
-        "type": "text",
-        "id": "pillars_section_title",
-        "label": "Section Title",
-        "default": "Our Four Pillars"
-      },
-      {
-        "type": "textarea",
-        "id": "pillars_section_description",
-        "label": "Section Description",
-        "default": "The foundational principles that guide our organization"
-      },
-      {
-        "type": "image_picker",
-        "id": "pillars_background_image",
-        "label": "Background Image"
-      },
-      {
-        "type": "color",
-        "id": "pillars_overlay_color",
-        "label": "Brand Color Overlay",
-        "default": "#0071b9"
-      },
-      {
-        "type": "range",
-        "id": "pillars_overlay_opacity",
-        "label": "Overlay Opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "default": 85
-      },
-      {
-        "type": "color",
-        "id": "pillars_accent_color",
-        "label": "Accent Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "header",
-        "content": "Pillar 1 - Engineering"
-      },
-      {
-        "type": "text",
-        "id": "pillar1_title",
-        "label": "Title",
-        "default": "Engineering"
-      },
-      {
-        "type": "textarea",
-        "id": "pillar1_description",
-        "label": "Description",
-        "default": "At Foxx Bioprocessing, engineering is the starting point of every solution. Our team works closely with customer requirements to ensure technical accuracy, fit, and compliance. We design, prototype fast, build clean, and document every step."
-      },
-      {
-        "type": "select",
-        "id": "pillar1_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "pillar1_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "pillar1_image",
-        "label": "Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Pillar 2 - Quality"
-      },
-      {
-        "type": "text",
-        "id": "pillar2_title",
-        "label": "Title",
-        "default": "Quality"
-      },
-      {
-        "type": "textarea",
-        "id": "pillar2_description",
-        "label": "Description",
-        "default": "Quality is our operating principle. Every product is built under certified cleanroom conditions with full traceability and validation. Backed by 15+ years of ISO 13485 Certification, we follow regulated manufacturing workflows and test to specification. If it doesn't meet the mark, it doesn't leave our facility."
-      },
-      {
-        "type": "select",
-        "id": "pillar2_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "pillar2_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "pillar2_image",
-        "label": "Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Pillar 3 - Customer Service"
-      },
-      {
-        "type": "text",
-        "id": "pillar3_title",
-        "label": "Title",
-        "default": "Customer Service"
-      },
-      {
-        "type": "textarea",
-        "id": "pillar3_description",
-        "label": "Description",
-        "default": "From first upload to final shipment, our team is available to review your designs, troubleshoot challenges, and support documentation needs. We respond fast, stay transparent, and deliver what we commit. Your timeline and specs are our priorities, with delivery in as fast as 48 hours**."
-      },
-      {
-        "type": "select",
-        "id": "pillar3_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "pillar3_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "pillar3_image",
-        "label": "Icon Image"
-      },
-      {
-        "type": "header",
-        "content": "Pillar 4 - Family-owned Company"
-      },
-      {
-        "type": "text",
-        "id": "pillar4_title",
-        "label": "Title",
-        "default": "Family-owned Company"
-      },
-      {
-        "type": "textarea",
-        "id": "pillar4_description",
-        "label": "Description",
-        "default": "We are a family-owned company. All resources stay within the business and are reinvested into capability, systems, and teams. Decision-making stays close to the work, enabling stability and accountability to build better."
-      },
-      {
-        "type": "select",
-        "id": "pillar4_icon_type",
-        "label": "Icon Type",
-        "default": "svg",
-        "options": [
-          {
-            "value": "svg",
-            "label": "SVG Icon"
-          },
-          {
-            "value": "image",
-            "label": "Custom Image"
-          }
-        ]
-      },
-      {
-        "type": "textarea",
-        "id": "pillar4_svg_code",
-        "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.37-.89-1.27-1.37-2.2-1.37-.49 0-.97.14-1.38.42L12 9.64 7.62 7.42c-.41-.28-.89-.42-1.38-.42-.93 0-1.83.48-2.2 1.37L1.5 16H4v6h4v-6h2v6h4z'/></svg>"
-      },
-      {
-        "type": "image_picker",
-        "id": "pillar4_image",
-        "label": "Icon Image"
       }
     ]
   },
@@ -8511,7 +8042,7 @@
       }
     ]
   },
-    {
+  {
     "name": "About - Mission & Vision",
     "settings": [
       {
@@ -8578,7 +8109,7 @@
         "type": "textarea",
         "id": "mission_svg_code",
         "label": "Mission SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -8627,7 +8158,7 @@
         "type": "textarea",
         "id": "vision_svg_code",
         "label": "Vision SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -8782,7 +8313,7 @@
         "type": "textarea",
         "id": "pillar1_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -8825,7 +8356,7 @@
         "type": "textarea",
         "id": "pillar2_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -8868,7 +8399,7 @@
         "type": "textarea",
         "id": "pillar3_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.66c.03-.08.06-.17.09-.25C6.84 17.25 9.5 14 12 14c2.5 0 5.16 3.25 5.25 5.09.03.08.06.17.09.25l.95 2.66 1.89-.66C18.1 16.17 16 10 7 8z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.66c.03-.08.06-.17.09-.25C6.84 17.25 9.5 14 12 14c2.5 0 5.16 3.25 5.25 5.09.03.08.06.17.09.25l.95 2.66 1.89-.66C18.1 16.17 16 10 7 8z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -8911,7 +8442,7 @@
         "type": "textarea",
         "id": "pillar4_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -9004,6 +8535,225 @@
         "type": "url",
         "id": "team_member_2_linkedin",
         "label": "Member 2 LinkedIn"
+      }
+    ]
+  },
+  {
+    "name": "Testing & Validation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Testing & Validation Page Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_testing_validation_page",
+        "label": "Enable Testing & Validation Page",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "testing_validation_page_title",
+        "label": "Page Title",
+        "default": "Testing & Validation Services"
+      },
+      {
+        "type": "textarea",
+        "id": "testing_validation_meta_description",
+        "label": "Meta Description",
+        "default": "Comprehensive testing and validation services for single-use bioprocess components. USP compliance, integrity testing, E&L studies, and more."
+      },
+      {
+        "type": "color",
+        "id": "testing_validation_primary_color",
+        "label": "Primary Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "testing_validation_secondary_color",
+        "label": "Secondary Color",
+        "default": "#005a91"
+      },
+      {
+        "type": "header",
+        "content": "Testing Services Content"
+      },
+      {
+        "type": "text",
+        "id": "testing_main_title",
+        "label": "Main Testing Title",
+        "default": "What types of testing and validation do we offer?"
+      },
+      {
+        "type": "richtext",
+        "id": "testing_main_content",
+        "label": "Main Testing Content",
+        "default": "<p>We provide integrity testing for all SUT components. This primarily comprises of two tests: <strong>Pressure Decay Test<\/strong> and <strong>Pull Test<\/strong>. Most SUT components can be categorized into Flexible, semi-rigid and rigid components.<\/p><p>Pressure Decay tests primarily validate the structural integrity of an individual component as well as the seal integrity of container closures and of assemblies as a whole. Pull test primarily evaluates the integrity of the tubing connections.<\/p><p>Since leakage of the media is the ultimate failure of any SUT component or assembly, these two are used to assess the leak dynamics of the components.<\/p>"
+      },
+      {
+        "type": "text",
+        "id": "additional_services_title",
+        "label": "Additional Services Title",
+        "default": "Comprehensive Testing Portfolio"
+      },
+      {
+        "type": "richtext",
+        "id": "additional_services_content",
+        "label": "Additional Services Content",
+        "default": "<p>In addition to integrity testing, we provide:<\/p><ul><li><strong>Freeze-thaw testing<\/strong> - Components are subjected to extreme temperatures (up to -86°C). Post freeze-thaw integrity tests assess the effect of temperature stress.<\/li><li><strong>Flow testing<\/strong> - Primary integrity test for filters and assemblies requiring specific output flowrates.<\/li><li><strong>Extractables &amp; Leachable (E&amp;L) studies<\/strong><\/li><li><strong>Particulate testing<\/strong><\/li><li><strong>Sterility assurance &amp; validation<\/strong><\/li><li><strong>Endotoxin\/bioburden testing<\/strong><\/li><li><strong>Gamma irradiation compatibility<\/strong><\/li><li><strong>Accelerated aging\/stability testing<\/strong><\/li><\/ul>"
+      },
+      {
+        "type": "header",
+        "content": "Compliance Standards Content"
+      },
+      {
+        "type": "text",
+        "id": "compliance_standards_title",
+        "label": "Compliance Standards Title",
+        "default": "Industry Standards & Regulatory Compliance"
+      },
+      {
+        "type": "textarea",
+        "id": "compliance_standards_intro",
+        "label": "Compliance Standards Introduction",
+        "default": "We comply with all major industry standards and regulatory guidelines to ensure the highest quality and safety of our products."
+      },
+      {
+        "type": "header",
+        "content": "Logo Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "usp_87_88_logo",
+        "label": "USP <87>, <88> Class-VI Testing Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "usp_788_logo",
+        "label": "USP <788> Particulates Testing Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "iso_11137_logo",
+        "label": "ISO 11137 Gamma Sterilization Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "iso_13485_logo",
+        "label": "ISO 13485 Quality Management Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "usp_85_logo",
+        "label": "USP <85> Bacterial Endotoxins Logo"
+      },
+      {
+        "type": "header",
+        "content": "Testing Service Icons"
+      },
+      {
+        "type": "image_picker",
+        "id": "integrity_testing_icon",
+        "label": "Integrity Testing Icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "freeze_thaw_testing_icon",
+        "label": "Freeze-Thaw Testing Icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "flow_testing_icon",
+        "label": "Flow Testing Icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "el_studies_icon",
+        "label": "E&L Studies Icon"
+      },
+      {
+        "type": "header",
+        "content": "Additional Certification Logos"
+      },
+      {
+        "type": "image_picker",
+        "id": "certification_logo_1",
+        "label": "Additional Certification Logo 1"
+      },
+      {
+        "type": "text",
+        "id": "certification_name_1",
+        "label": "Certification Name 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "certification_logo_2",
+        "label": "Additional Certification Logo 2"
+      },
+      {
+        "type": "text",
+        "id": "certification_name_2",
+        "label": "Certification Name 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "certification_logo_3",
+        "label": "Additional Certification Logo 3"
+      },
+      {
+        "type": "text",
+        "id": "certification_name_3",
+        "label": "Certification Name 3"
+      },
+      {
+        "type": "header",
+        "content": "Call to Action Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_testing_cta",
+        "label": "Show Call to Action Section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "testing_cta_title",
+        "label": "CTA Title",
+        "default": "Need Custom Testing Solutions?"
+      },
+      {
+        "type": "textarea",
+        "id": "testing_cta_description",
+        "label": "CTA Description",
+        "default": "Contact our testing experts to discuss your specific validation requirements and ensure your components meet the highest industry standards."
+      },
+      {
+        "type": "text",
+        "id": "testing_cta_button_text",
+        "label": "CTA Button Text",
+        "default": "Get Testing Quote"
+      },
+      {
+        "type": "url",
+        "id": "testing_cta_button_link",
+        "label": "CTA Button Link"
+      },
+      {
+        "type": "header",
+        "content": "Contact Information"
+      },
+      {
+        "type": "text",
+        "id": "testing_contact_email",
+        "label": "Testing Department Email",
+        "default": "testing@foxxlifesciences.com"
+      },
+      {
+        "type": "text",
+        "id": "testing_contact_phone",
+        "label": "Testing Department Phone",
+        "default": "+1 (xxx) xxx-xxxx"
       }
     ]
   },
