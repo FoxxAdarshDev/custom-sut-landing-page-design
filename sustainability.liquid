@@ -621,7 +621,7 @@
       <!-- Multiple Certifications Section -->
       <div class="certifications-grid-wrapper">
         <div class="certifications-grid">
-          {% assign certifications = '1,2,3,4,5' | split: ',' %}
+          {% assign certifications = '1,2,3,4,5,6,7,8,9,10' | split: ',' %}
           {% for cert_num in certifications %}
             {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
             {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
@@ -663,7 +663,7 @@
       </div>
 
       <!-- Certification Modals -->
-      {% assign certifications = '1,2,3,4,5' | split: ',' %}
+      {% assign certifications = '1,2,3,4,5,6,7,8,9,10' | split: ',' %}
       {% for cert_num in certifications %}
         {% assign cert_image_key = 'certification_' | append: cert_num | append: '_image' %}
         {% assign cert_validity_key = 'certification_' | append: cert_num | append: '_validity' %}
