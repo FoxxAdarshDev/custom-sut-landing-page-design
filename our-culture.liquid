@@ -223,14 +223,14 @@
 {% endschema %}
 
 <!-- Our Culture Section -->
-<section class="our-culture-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#ffffff' }};">
+<section class="our-culture-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.culture_background_color | default: '#ffffff' }};">
   <div class="culture-container">
     <div class="section-header">
-      <h2 class="section-title">{{ section.settings.section_title | default: 'Our Culture' }}</h2>
-      {% if section.settings.section_description != blank %}
-        <p class="section-description">{{ section.settings.section_description }}</p>
+      <h2 class="section-title">{{ section.settings.culture_section_title | default: 'Our Culture' }}</h2>
+      {% if section.settings.culture_section_description != blank %}
+        <p class="section-description">{{ section.settings.culture_section_description }}</p>
       {% endif %}
-      <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+      <div class="title-underline" style="background-color: {{ section.settings.culture_accent_color | default: '#0071b9' }};"></div>
     </div>
 
     <div class="culture-grid">
@@ -262,14 +262,14 @@
                   <img src="{{ item_image | img_url: '60x60' }}" alt="{{ item_title }}" loading="lazy">
                 </div>
               {% elsif svg_code != blank %}
-                <div class="card-icon svg-icon" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+                <div class="card-icon svg-icon" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.culture_accent_color | default: '#0071b9' }}{% endif %};">
                   {{ svg_code }}
                 </div>
               {% endif %}
             </div>
 
             <div class="card-content">
-              <h3 class="card-title" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+              <h3 class="card-title" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.culture_accent_color | default: '#0071b9' }}{% endif %};">
                 {{ item_title }}
               </h3>
               <p class="card-description" style="color: {% if item_num == '2' %}rgba(255,255,255,0.9){% else %}#666{% endif %};">
@@ -277,14 +277,14 @@
               </p>
               {% if item_link != blank and button_text != blank %}
                 <a href="{{ item_link }}" class="card-button {% if item_num == '2' %}featured-button{% endif %}" 
-                   style="{% if item_num != '2' %}border-color: {{ section.settings.accent_color | default: '#0071b9' }}; color: {{ section.settings.accent_color | default: '#0071b9' }};{% endif %}">
+                   style="{% if item_num != '2' %}border-color: {{ section.settings.culture_accent_color | default: '#0071b9' }}; color: {{ section.settings.culture_accent_color | default: '#0071b9' }};{% endif %}">
                   {{ button_text }}
                 </a>
               {% endif %}
             </div>
 
             {% if item_num == '2' %}
-              <div class="featured-background" style="background: linear-gradient(135deg, {{ section.settings.accent_color | default: '#0071b9' }}, {{ section.settings.accent_color | default: '#0071b9' | color_darken: 20 }});"></div>
+              <div class="featured-background" style="background: linear-gradient(135deg, {{ section.settings.culture_accent_color | default: '#0071b9' }}, {{ section.settings.culture_accent_color | default: '#0071b9' | color_darken: 20 }});"></div>
             {% endif %}
             
             <div class="card-glow"></div>

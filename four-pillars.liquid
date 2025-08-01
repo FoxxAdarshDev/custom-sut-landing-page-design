@@ -129,14 +129,14 @@
 {% endschema %}
 
 <!-- Four Pillars Section -->
-<section class="four-pillars-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#f8f9fa' }};">
+<section class="four-pillars-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.pillars_background_color | default: '#f8f9fa' }};">
   <div class="pillars-container">
     <div class="section-header">
-      <h2 class="section-title">{{ section.settings.section_title | default: 'Our Four Pillars' }}</h2>
-      {% if section.settings.section_description != blank %}
-        <p class="section-description">{{ section.settings.section_description }}</p>
+      <h2 class="section-title">{{ section.settings.pillars_section_title | default: 'Our Four Pillars' }}</h2>
+      {% if section.settings.pillars_section_description != blank %}
+        <p class="section-description">{{ section.settings.pillars_section_description }}</p>
       {% endif %}
-      <div class="title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+      <div class="title-underline" style="background-color: {{ section.settings.pillars_accent_color | default: '#0071b9' }};"></div>
     </div>
 
     <div class="pillars-grid">
@@ -149,21 +149,21 @@
                   <img src="{{ block.settings.image | img_url: '80x80' }}" alt="{{ block.settings.title }}" loading="lazy">
                 </div>
               {% elsif block.settings.svg_code != blank %}
-                <div class="pillar-icon svg-icon" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+                <div class="pillar-icon svg-icon" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};">
                   {{ block.settings.svg_code }}
                 </div>
               {% endif %}
             </div>
 
             <div class="pillar-content">
-              <h3 class="pillar-title" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};">
+              <h3 class="pillar-title" style="color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};">
                 {{ block.settings.title }}
               </h3>
-              <div class="pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.accent_color | default: '#0071b9' }}{% endif %};"></div>
+              <div class="pillar-divider" style="background-color: {% if block.settings.custom_color != blank %}{{ block.settings.custom_color }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' }}{% endif %};"></div>
               <p class="pillar-description">{{ block.settings.description }}</p>
             </div>
 
-            <div class="pillar-glow" style="background: radial-gradient(circle, {% if block.settings.custom_color != blank %}{{ block.settings.custom_color | color_modify: 'alpha', 0.1 }}{% else %}{{ section.settings.accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }}{% endif %} 0%, transparent 70%);"></div>
+            <div class="pillar-glow" style="background: radial-gradient(circle, {% if block.settings.custom_color != blank %}{{ block.settings.custom_color | color_modify: 'alpha', 0.1 }}{% else %}{{ section.settings.pillars_accent_color | default: '#0071b9' | color_modify: 'alpha', 0.1 }}{% endif %} 0%, transparent 70%);"></div>
             
             <div class="pillar-number">{{ forloop.index }}</div>
           </div>
