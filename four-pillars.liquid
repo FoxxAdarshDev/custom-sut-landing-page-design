@@ -146,28 +146,33 @@
 <section class="foxx-four-pillars-section" data-section-id="{{ section.id }}" 
   style="--accent-color: {{ section.settings.accent_color | default: '#0071b9' }};{% if section.settings.background_image %} background-image: url('{{ section.settings.background_image | img_url: '1920x' }}');{% endif %}">
 
+  {% assign overlay_opacity_decimal = section.settings.overlay_opacity | default: 95 | divided_by: 100.0 %}
   <div class="foxx-pillars-overlay" 
-    style="background-color: {{ section.settings.overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.overlay_opacity | default: 95 | divided_by: 100.0 }};"></div>
+    style="background-color: {{ section.settings.overlay_color | default: '#ffffff' }}; opacity: {{ overlay_opacity_decimal }};"></div>
 
   <div class="foxx-pillars-container">
     <div class="foxx-section-header">
-      {% assign overlay_opacity_decimal = section.settings.overlay_opacity | default: 95 | divided_by: 100.0 %}
       {% assign overlay_color = section.settings.overlay_color | default: '#ffffff' %}
-      {% assign title_color = '#333333' %}
+      {% assign title_color = '#0071b9' %}
       {% if overlay_color contains '#ffffff' or overlay_color contains '#fff' or overlay_color contains 'white' %}
         {% if overlay_opacity_decimal > 0.7 %}
-          {% assign title_color = '#333333' %}
+          {% assign title_color = '#0071b9' %}
         {% else %}
           {% assign title_color = '#ffffff' %}
         {% endif %}
       {% else %}
         {% assign title_color = '#ffffff' %}
       {% endif %}
+      
+      <div class="foxx-title-decoration">
+        <span class="foxx-decoration-line"></span>
+        <span class="foxx-decoration-diamond"></span>
+        <span class="foxx-decoration-line"></span>
+      </div>
       <h2 class="foxx-section-title" style="color: {{ title_color }};">{{ section.settings.section_title | default: 'Our Four Pillars' }}</h2>
       {% if section.settings.section_description != blank %}
-        <p class="foxx-section-description" style="color: {{ title_color }};">{{ section.settings.section_description }}</p>
+        <p class="foxx-section-subtitle" style="color: {{ title_color | color_lighten: 20 }};">{{ section.settings.section_description }}</p>
       {% endif %}
-      <div class="foxx-title-underline" style="background-color: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
     </div>
 
     <div class="foxx-pillars-grid">
@@ -238,32 +243,78 @@
 .foxx-section-header {
   text-align: center;
   margin-bottom: 80px;
+  position: relative;
+}
+
+.foxx-title-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.foxx-decoration-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
+}
+
+.foxx-decoration-diamond {
+  width: 12px;
+  height: 12px;
+  background: #0071b9;
+  transform: rotate(45deg);
+  border-radius: 2px;
 }
 
 .foxx-section-title {
   font-size: 48px;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 25px;
+  font-weight: 800;
+  color: #0071b9;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 8px rgba(0, 113, 185, 0.3);
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
 }
 
-.foxx-section-description {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 35px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.foxx-title-underline {
-  width: 80px;
+.foxx-section-title::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
   height: 4px;
-  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, #0071b9, transparent);
   border-radius: 2px;
+}
+
+.foxx-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 185, 0.5), transparent);
+  border-radius: 1px;
+}
+
+.foxx-section-subtitle {
+  font-size: 20px;
+  color: rgba(0, 113, 185, 0.8);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 0 1px 4px rgba(0, 113, 185, 0.2);
+  letter-spacing: 1px;
+  font-style: italic;
 }
 
 /* Pillars Grid */
@@ -302,6 +353,19 @@
   background: #ffffff;
   color: #333;
   border: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.foxx-pillar-card:nth-child(even)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0071b9, #005a91, #0071b9);
+  background-size: 200% 100%;
+  animation: foxxShimmer 3s ease-in-out infinite;
 }
 
 .foxx-pillar-card:hover {
@@ -474,12 +538,30 @@
   }
 
   .foxx-section-title {
-    font-size: 32px;
-    letter-spacing: 1px;
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 1.2;
   }
 
-  .foxx-section-description {
+  .foxx-section-title::before {
+    width: 80px;
+    height: 3px;
+  }
+
+  .foxx-section-title::after {
+    width: 150px;
+  }
+
+  .foxx-section-subtitle {
     font-size: 18px;
+  }
+
+  .foxx-decoration-line {
+    width: 40px;
+  }
+
+  .foxx-title-decoration {
+    gap: 10px;
   }
 
   .foxx-pillars-grid {
@@ -538,6 +620,11 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes foxxShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 </style>
