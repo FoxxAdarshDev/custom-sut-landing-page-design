@@ -238,31 +238,6 @@
   pointer-events: none;
 }
 
-/* Hardcoded overlay backup - ensures overlay is always present with background image */
-.culture-background .culture-bg-image + .culture-overlay {
-  background-color: #0071b9;
-  opacity: 0.85;
-}
-
-/* Additional hardcoded overlay for better text readability */
-.culture-banner-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 113, 185, 0.75);
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.culture-banner-section.has-bg-image::after {
-  opacity: 1;
-}
-
 /* Content Container */
 .culture-content-container {
   position: relative;
@@ -292,14 +267,14 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative;
-  color: #0071b9;
+  color: var(--culture-text-color, #ffffff);
 }
 
 .culture-title-line {
   position: relative;
   display: inline-block;
-  color: #0071b9;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--culture-text-color, #ffffff);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .culture-title-line::after {
@@ -310,7 +285,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: #0071b9;
+  background: var(--culture-accent-color, #ffffff);
   border-radius: 2px;
   animation: titleUnderline 2s ease-out forwards;
 }
@@ -334,12 +309,14 @@
 }
 
 .culture-description p {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
   font-weight: 400;
   margin: 0;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  color: var(--culture-text-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  color: var(--culture-text-color, #ffffff);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @keyframes fadeInUp {
@@ -626,14 +603,5 @@
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const cultureSection = document.querySelector('.culture-banner-section');
-  const backgroundImage = document.querySelector('.culture-bg-image');
-  
-  if (cultureSection && backgroundImage) {
-    cultureSection.classList.add('has-bg-image');
-  }
-});
-</script>
+
 </style>
