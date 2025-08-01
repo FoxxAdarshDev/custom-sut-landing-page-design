@@ -121,7 +121,7 @@
          data-section-id="{{ section.id }}" 
          style="
            --culture-overlay-color: {{ section.settings.culture_overlay_color | default: '#000000' }};
-           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 60 }}%;
+           --culture-overlay-opacity: {{ section.settings.culture_overlay_opacity | default: 60 | divided_by: 100.0 }};
            --culture-text-color: {{ section.settings.culture_text_color | default: '#ffffff' }};
            --culture-accent-color: {{ section.settings.culture_accent_color | default: '#007aff' }};
            --section-padding-top: {{ section.settings.padding_top | default: 100 }}px;
@@ -224,7 +224,7 @@
   width: 100%;
   height: 100%;
   background-color: var(--culture-overlay-color);
-  opacity: calc(var(--culture-overlay-opacity) / 100);
+  opacity: var(--culture-overlay-opacity);
   backdrop-filter: blur(1px);
 }
 
