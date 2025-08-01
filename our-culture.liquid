@@ -1,4 +1,3 @@
-
 {% schema %}
 {
   "name": "Our Culture",
@@ -18,7 +17,12 @@
       "type": "textarea",
       "id": "section_description",
       "label": "Section Description",
-      "default": "The time you waste worrying is the enemy of your success"
+      "default": "As one of New Hampshire's fastest growing family-owned business we are known in the industry to put our employees first. Our diverse and global team covers a wide range of backgrounds, languages, and expertise, including engineers, scientists, product managers, and a top notch customer service team."
+    },
+    {
+      "type": "image_picker",
+      "id": "culture_image",
+      "label": "Culture Image"
     },
     {
       "type": "color",
@@ -34,183 +38,44 @@
     },
     {
       "type": "header",
-      "content": "Culture Item 1"
+      "content": "Call to Action"
     },
     {
       "type": "checkbox",
-      "id": "culture1_enable",
-      "label": "Enable Culture Item 1",
+      "id": "show_cta_button",
+      "label": "Show CTA Button",
       "default": true
     },
     {
       "type": "text",
-      "id": "culture1_title",
-      "label": "Title",
-      "default": "Coaching Services"
-    },
-    {
-      "type": "textarea",
-      "id": "culture1_description",
-      "label": "Description",
-      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-    },
-    {
-      "type": "select",
-      "id": "culture1_icon_type",
-      "label": "Icon Type",
-      "default": "svg",
-      "options": [
-        {
-          "value": "svg",
-          "label": "SVG Icon"
-        },
-        {
-          "value": "image",
-          "label": "Custom Image"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "id": "culture1_svg_code",
-      "label": "SVG Code",
-      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
-    },
-    {
-      "type": "image_picker",
-      "id": "culture1_image",
-      "label": "Icon Image"
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Learn More"
     },
     {
       "type": "url",
-      "id": "culture1_link",
-      "label": "Link URL"
+      "id": "cta_button_url",
+      "label": "CTA Button URL"
     },
     {
-      "type": "text",
-      "id": "culture1_button_text",
-      "label": "Button Text",
-      "default": "LEARN MORE"
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
     },
     {
-      "type": "header",
-      "content": "Culture Item 2"
-    },
-    {
-      "type": "checkbox",
-      "id": "culture2_enable",
-      "label": "Enable Culture Item 2",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "culture2_title",
-      "label": "Title",
-      "default": "Online Courses"
-    },
-    {
-      "type": "textarea",
-      "id": "culture2_description",
-      "label": "Description",
-      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-    },
-    {
-      "type": "select",
-      "id": "culture2_icon_type",
-      "label": "Icon Type",
-      "default": "svg",
-      "options": [
-        {
-          "value": "svg",
-          "label": "SVG Icon"
-        },
-        {
-          "value": "image",
-          "label": "Custom Image"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "id": "culture2_svg_code",
-      "label": "SVG Code",
-      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/></svg>"
-    },
-    {
-      "type": "image_picker",
-      "id": "culture2_image",
-      "label": "Icon Image"
-    },
-    {
-      "type": "url",
-      "id": "culture2_link",
-      "label": "Link URL"
-    },
-    {
-      "type": "text",
-      "id": "culture2_button_text",
-      "label": "Button Text",
-      "default": "LEARN MORE"
-    },
-    {
-      "type": "header",
-      "content": "Culture Item 3"
-    },
-    {
-      "type": "checkbox",
-      "id": "culture3_enable",
-      "label": "Enable Culture Item 3",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "culture3_title",
-      "label": "Title",
-      "default": "Consultation Services"
-    },
-    {
-      "type": "textarea",
-      "id": "culture3_description",
-      "label": "Description",
-      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-    },
-    {
-      "type": "select",
-      "id": "culture3_icon_type",
-      "label": "Icon Type",
-      "default": "svg",
-      "options": [
-        {
-          "value": "svg",
-          "label": "SVG Icon"
-        },
-        {
-          "value": "image",
-          "label": "Custom Image"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "id": "culture3_svg_code",
-      "label": "SVG Code",
-      "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A3.98 3.98 0 0 0 16.2 6.2c-.8-.8-2.07-.8-2.87 0A3.98 3.98 0 0 0 9.54 8.37L7 16h2.5v6h11z'/></svg>"
-    },
-    {
-      "type": "image_picker",
-      "id": "culture3_image",
-      "label": "Icon Image"
-    },
-    {
-      "type": "url",
-      "id": "culture3_link",
-      "label": "Link URL"
-    },
-    {
-      "type": "text",
-      "id": "culture3_button_text",
-      "label": "Button Text",
-      "default": "LEARN MORE"
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
     }
   ],
   "presets": [
@@ -223,241 +88,192 @@
 {% endschema %}
 
 <!-- Our Culture Section -->
-<section class="our-culture-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.culture_background_color | default: '#ffffff' }};">
-  <div class="culture-container">
-    <div class="section-header">
-      <h2 class="section-title">{{ section.settings.culture_section_title | default: 'Our Culture' }}</h2>
-      {% if section.settings.culture_section_description != blank %}
-        <p class="section-description">{{ section.settings.culture_section_description }}</p>
-      {% endif %}
-      <div class="title-underline" style="background-color: {{ section.settings.culture_accent_color | default: '#0071b9' }};"></div>
-    </div>
-
-    <div class="culture-grid">
-      {% assign culture_items = '1,2,3' | split: ',' %}
-      {% for item_num in culture_items %}
-        {% assign enable_key = 'culture' | append: item_num | append: '_enable' %}
-        {% assign title_key = 'culture' | append: item_num | append: '_title' %}
-        {% assign desc_key = 'culture' | append: item_num | append: '_description' %}
-        {% assign icon_type_key = 'culture' | append: item_num | append: '_icon_type' %}
-        {% assign svg_key = 'culture' | append: item_num | append: '_svg_code' %}
-        {% assign image_key = 'culture' | append: item_num | append: '_image' %}
-        {% assign link_key = 'culture' | append: item_num | append: '_link' %}
-        {% assign button_key = 'culture' | append: item_num | append: '_button_text' %}
-
-        {% assign is_enabled = section.settings[enable_key] %}
-        {% assign item_title = section.settings[title_key] %}
-        {% assign item_desc = section.settings[desc_key] %}
-        {% assign icon_type = section.settings[icon_type_key] %}
-        {% assign svg_code = section.settings[svg_key] %}
-        {% assign item_image = section.settings[image_key] %}
-        {% assign item_link = section.settings[link_key] %}
-        {% assign button_text = section.settings[button_key] %}
-
-        {% if is_enabled and item_title != blank %}
-          <div class="culture-card {% if item_num == '2' %}featured-card{% endif %}" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 200 }}">
-            <div class="card-icon-wrapper">
-              {% if icon_type == 'image' and item_image != blank %}
-                <div class="card-icon image-icon">
-                  <img src="{{ item_image | img_url: '60x60' }}" alt="{{ item_title }}" loading="lazy">
-                </div>
-              {% elsif svg_code != blank %}
-                <div class="card-icon svg-icon" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.culture_accent_color | default: '#0071b9' }}{% endif %};">
-                  {{ svg_code }}
-                </div>
-              {% endif %}
+<section class="oc-culture-modern-section" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding: {{ section.settings.padding_top | default: 80 }}px 0 {{ section.settings.padding_bottom | default: 80 }}px 0;">
+  <div class="oc-culture-container">
+    <div class="oc-culture-layout">
+      <!-- Image Section with Polygon -->
+      <div class="oc-culture-image-section">
+        <div class="oc-culture-image-wrapper">
+          {% if section.settings.culture_image != blank %}
+            <img src="{{ section.settings.culture_image | img_url: '800x600' }}" alt="{{ section.settings.section_title }}" class="oc-culture-image" loading="lazy">
+          {% else %}
+            <!-- Default placeholder image -->
+            <div class="oc-culture-placeholder">
+              <svg viewBox="0 0 400 300" class="oc-placeholder-svg">
+                <rect width="400" height="300" fill="#f0f0f0"/>
+                <text x="200" y="150" text-anchor="middle" fill="#999" font-size="16">Culture Image</text>
+              </svg>
             </div>
+          {% endif %}
+        </div>
 
-            <div class="card-content">
-              <h3 class="card-title" style="color: {% if item_num == '2' %}#ffffff{% else %}{{ section.settings.culture_accent_color | default: '#0071b9' }}{% endif %};">
-                {{ item_title }}
-              </h3>
-              <p class="card-description" style="color: {% if item_num == '2' %}rgba(255,255,255,0.9){% else %}#666{% endif %};">
-                {{ item_desc }}
-              </p>
-              {% if item_link != blank and button_text != blank %}
-                <a href="{{ item_link }}" class="card-button {% if item_num == '2' %}featured-button{% endif %}" 
-                   style="{% if item_num != '2' %}border-color: {{ section.settings.culture_accent_color | default: '#0071b9' }}; color: {{ section.settings.culture_accent_color | default: '#0071b9' }};{% endif %}">
-                  {{ button_text }}
-                </a>
-              {% endif %}
+        <!-- Polygon Shape -->
+        <div class="oc-culture-polygon" style="background: {{ section.settings.accent_color | default: '#0071b9' }};"></div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="oc-culture-content-section">
+        <div class="oc-culture-content">
+          {% if section.settings.section_title != blank %}
+            <h2 class="oc-culture-title" style="color: {{ section.settings.accent_color | default: '#0071b9' }};">
+              {{ section.settings.section_title }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.section_description != blank %}
+            <p class="oc-culture-description">
+              {{ section.settings.section_description }}
+            </p>
+          {% endif %}
+
+          {% if section.settings.show_cta_button and section.settings.cta_button_text != blank %}
+            <div class="oc-culture-cta">
+              <a href="{{ section.settings.cta_button_url | default: '#' }}" class="oc-culture-button" style="border-color: {{ section.settings.accent_color | default: '#0071b9' }}; color: {{ section.settings.accent_color | default: '#0071b9' }};">
+                <span class="oc-button-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                  </svg>
+                </span>
+                {{ section.settings.cta_button_text }}
+              </a>
             </div>
-
-            {% if item_num == '2' %}
-              <div class="featured-background" style="background: linear-gradient(135deg, {{ section.settings.culture_accent_color | default: '#0071b9' }}, {{ section.settings.culture_accent_color | default: '#0071b9' | color_darken: 20 }});"></div>
-            {% endif %}
-            
-            <div class="card-glow"></div>
-          </div>
-        {% endif %}
-      {% endfor %}
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-/* Our Culture Section */
-.our-culture-section {
-  padding: 80px 0;
+/* Our Culture Modern Section - Unique CSS Classes */
+.oc-culture-modern-section {
   position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
-.culture-container {
+.oc-culture-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Section Header */
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.section-description {
-  font-size: 24px;
-  color: #666;
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.title-underline {
-  width: 80px;
-  height: 4px;
-  margin: 0 auto;
-  border-radius: 2px;
-}
-
-/* Culture Grid */
-.culture-grid {
+/* Culture Layout */
+.oc-culture-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  align-items: stretch;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0;
+  min-height: 500px;
 }
 
-/* Culture Cards */
-.culture-card {
-  background: white;
-  border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
+/* Image Section */
+.oc-culture-image-section {
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
-}
-
-.culture-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0, 113, 185, 0.15);
-  border-color: var(--accent-color, #0071b9);
-}
-
-/* Featured Card (Middle one) */
-.featured-card {
-  position: relative;
-  z-index: 2;
-  border: none;
-}
-
-.featured-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  border-radius: 20px;
-}
-
-.featured-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  box-shadow: 0 25px 60px rgba(0, 113, 185, 0.3);
-}
-
-/* Card Icon */
-.card-icon-wrapper {
-  margin-bottom: 30px;
+  height: 100%;
+  min-height: 500px;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
-.card-icon {
-  width: 80px;
-  height: 80px;
+.oc-culture-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: 20px 0 0 20px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.oc-culture-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.oc-culture-image:hover {
+  transform: scale(1.05);
+}
+
+.oc-culture-placeholder {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 113, 185, 0.2));
-  border-radius: 50%;
-  transition: all 0.4s ease;
+  background: #f8f9fa;
+}
+
+.oc-placeholder-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Polygon Shape */
+.oc-culture-polygon {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 300px;
+  clip-path: polygon(0 0, 60% 0, 100% 50%, 60% 100%, 0 100%);
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.oc-culture-image-section:hover .oc-culture-polygon {
+  transform: translateY(-50%) translateX(10px);
+}
+
+/* Content Section */
+.oc-culture-content-section {
+  padding: 60px 40px 60px 80px;
   position: relative;
 }
 
-.featured-card .card-icon {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
+.oc-culture-content {
+  max-width: 500px;
 }
 
-.card-icon.svg-icon svg {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-}
-
-.card-icon.image-icon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.culture-card:hover .card-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.culture-card:hover .card-icon svg,
-.culture-card:hover .card-icon img {
-  transform: scale(1.1);
-}
-
-/* Card Content */
-.card-content {
-  position: relative;
-  z-index: 2;
-}
-
-.card-title {
-  font-size: 24px;
+.oc-culture-title {
+  font-size: 42px;
   font-weight: 700;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  position: relative;
 }
 
-.card-description {
+.oc-culture-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #0071b9;
+  border-radius: 2px;
+}
+
+.oc-culture-description {
   font-size: 16px;
   line-height: 1.8;
-  margin-bottom: 30px;
+  color: #666;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 
-.card-button {
-  display: inline-block;
-  padding: 12px 30px;
+/* CTA Button */
+.oc-culture-cta {
+  margin-top: 30px;
+}
+
+.oc-culture-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
   border: 2px solid;
   border-radius: 50px;
   text-decoration: none;
@@ -468,173 +284,192 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  background: transparent;
 }
 
-.card-button::before {
+.oc-button-icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.oc-button-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.oc-culture-button::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: var(--accent-color, #0071b9);
+  background: #0071b9;
   transition: left 0.3s ease;
   z-index: -1;
 }
 
-.card-button:hover::before {
+.oc-culture-button:hover::before {
   left: 0;
 }
 
-.card-button:hover {
+.oc-culture-button:hover {
   color: white !important;
-  border-color: var(--accent-color, #0071b9);
+  border-color: #0071b9;
+  transform: translateX(5px);
 }
 
-.featured-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: white !important;
-  border-color: white !important;
-  backdrop-filter: blur(10px);
-}
-
-.featured-button::before {
-  background: white;
-}
-
-.featured-button:hover {
-  color: var(--accent-color, #0071b9) !important;
-  background: white;
-}
-
-/* Card Glow Effect */
-.card-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0, 113, 185, 0.1) 0%, transparent 70%);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.4s ease;
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.culture-card:hover .card-glow {
-  transform: translate(-50%, -50%) scale(1.2);
+.oc-culture-button:hover .oc-button-icon {
+  transform: translateX(5px);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .culture-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+  .oc-culture-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .culture-card {
-    padding: 35px 25px;
+  .oc-culture-image-section {
+    min-height: 400px;
+    order: 1;
+  }
+
+  .oc-culture-content-section {
+    padding: 40px 20px;
+    order: 2;
+  }
+
+  .oc-culture-image-wrapper {
+    border-radius: 20px;
+  }
+
+  .oc-culture-polygon {
+    display: none;
+  }
+
+  .oc-culture-title {
+    font-size: 36px;
   }
 }
 
 @media (max-width: 768px) {
-  .our-culture-section {
-    padding: 60px 0;
-  }
-
-  .culture-container {
+  .oc-culture-container {
     padding: 0 15px;
   }
 
-  .section-title {
-    font-size: 32px;
-    letter-spacing: 1px;
+  .oc-culture-image-section {
+    min-height: 300px;
   }
 
-  .section-description {
-    font-size: 18px;
+  .oc-culture-image-wrapper {
+    height: 300px;
   }
 
-  .culture-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+  .oc-culture-content-section {
+    padding: 30px 15px;
   }
 
-  .culture-card {
-    padding: 30px 20px;
+  .oc-culture-title {
+    font-size: 28px;
   }
 
-  .card-icon {
-    width: 60px;
-    height: 60px;
+  .oc-culture-description {
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  .card-icon.svg-icon svg,
-  .card-icon.image-icon img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .card-title {
-    font-size: 20px;
-  }
-
-  .card-description {
-    font-size: 14px;
+  .oc-culture-button {
+    padding: 12px 25px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .section-title {
+  .oc-culture-title {
     font-size: 24px;
   }
 
-  .section-description {
-    font-size: 16px;
+  .oc-culture-description {
+    font-size: 14px;
   }
 
-  .culture-card {
-    padding: 25px 15px;
-  }
-
-  .card-title {
-    font-size: 18px;
+  .oc-culture-button {
+    padding: 10px 20px;
+    font-size: 12px;
   }
 }
 
 /* Animation on Scroll */
 @media (prefers-reduced-motion: no-preference) {
-  .culture-card {
+  .oc-culture-image-wrapper {
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s ease forwards;
+    transform: translateX(-50px);
+    animation: ocSlideInLeft 0.8s ease forwards;
   }
 
-  .culture-card:nth-child(1) { animation-delay: 0.2s; }
-  .culture-card:nth-child(2) { animation-delay: 0.4s; }
-  .culture-card:nth-child(3) { animation-delay: 0.6s; }
+  .oc-culture-content {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: ocSlideInRight 0.8s ease forwards;
+    animation-delay: 0.2s;
+  }
 
-  @keyframes fadeInUp {
+  @keyframes ocSlideInLeft {
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ocSlideInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .culture-card,
-  .card-icon,
-  .card-button {
+  .oc-culture-image,
+  .oc-culture-polygon,
+  .oc-culture-button,
+  .oc-culture-image-wrapper,
+  .oc-culture-content {
     animation: none;
     transition: none;
   }
 }
 
-.culture-card:focus {
+.oc-culture-button:focus {
   outline: 3px solid #0071b9;
   outline-offset: 4px;
+}
+
+/* Enhanced Visual Effects */
+.oc-culture-content-section::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #0071b9, #005a91);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.oc-culture-content-section::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, #0071b9, #005a91);
+  border-radius: 50%;
+  opacity: 0.05;
 }
 </style>
