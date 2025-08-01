@@ -1138,7 +1138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const duration = 2000;
     const step = numericTarget / (duration / 16);
     let current = 0;
-    const suffix = target.replace(/[\d.-]/g, '');
+    const suffix = target.replace(/[\d.,\s-]/g, '');
 
     const timer = setInterval(() => {
       current += step;
