@@ -784,15 +784,64 @@
   margin-bottom: 40px;
 }
 
-.cleanroom-image-content-description ul {
+/* Custom List Styling */
+.cleanroom-image-content-description ul,
+.cleanroom-welcome-description ul,
+.cleanroom-iso7-description ul,
+.cleanroom-quality-description ul,
+.cleanroom-banner-description ul,
+.cleanroom-hero-description ul,
+.cleanroom-classifications-description ul,
+.cleanroom-video-description ul {
   margin: 20px 0;
-  padding-left: 30px;
+  padding-left: 0;
+  list-style: none;
 }
 
-.cleanroom-image-content-description li {
-  margin-bottom: 10px;
+.cleanroom-image-content-description li,
+.cleanroom-welcome-description li,
+.cleanroom-iso7-description li,
+.cleanroom-quality-description li,
+.cleanroom-banner-description li,
+.cleanroom-hero-description li,
+.cleanroom-classifications-description li,
+.cleanroom-video-description li {
+  margin-bottom: 15px;
   font-size: 20px;
   line-height: 1.6;
+  position: relative;
+  padding-left: 35px;
+}
+
+.cleanroom-image-content-description li:before,
+.cleanroom-welcome-description li:before,
+.cleanroom-iso7-description li:before,
+.cleanroom-quality-description li:before,
+.cleanroom-banner-description li:before,
+.cleanroom-hero-description li:before,
+.cleanroom-classifications-description li:before,
+.cleanroom-video-description li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #0071b9, #005a91);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 113, 185, 0.3);
+}
+
+.cleanroom-image-content-description li:hover:before,
+.cleanroom-welcome-description li:hover:before,
+.cleanroom-iso7-description li:hover:before,
+.cleanroom-quality-description li:hover:before,
+.cleanroom-banner-description li:hover:before,
+.cleanroom-hero-description li:hover:before,
+.cleanroom-classifications-description li:hover:before,
+.cleanroom-video-description li:hover:before {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(0, 113, 185, 0.5);
 }
 
 .cleanroom-image-content-actions {
@@ -2571,7 +2620,7 @@
       <section class="cleanroom-hero-section" {{ block.shopify_attributes }} style="margin-top: {{ block.settings.hero_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.hero_margin_bottom | default: 0 }}px;">
         {% if block.settings.hero_content_display == 'image_only' %}
           {% if block.settings.hero_image %}
-            <div class="cleanroom-hero-image-container" style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+            <div class="cleanroom-hero-image-container" style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px; padding-left: {{ block.settings.hero_padding_left | default: 20 }}px; padding-right: {{ block.settings.hero_padding_right | default: 20 }}px;">
               <div class="cleanroom-container">
                 <img src="{{ block.settings.hero_image | img_url: '1200x' }}" alt="{{ block.settings.hero_title }}" class="cleanroom-hero-image">
               </div>
@@ -2583,10 +2632,10 @@
           {% else %}
             <div class="cleanroom-hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);">
           {% endif %}
-              <div class="cleanroom-hero-overlay" style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+              <div class="cleanroom-hero-overlay" style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px; padding-left: {{ block.settings.hero_padding_left | default: 20 }}px; padding-right: {{ block.settings.hero_padding_right | default: 20 }}px;">
                 <div class="cleanroom-hero-content cleanroom-container">
                   <h1 class="cleanroom-hero-title">{{ block.settings.hero_title }}</h1>
-                  <p class="cleanroom-hero-description">{{ block.settings.hero_description }}</p>
+                  <div class="cleanroom-hero-description">{{ block.settings.hero_description }}</div>
                   {% if block.settings.hero_button_text and block.settings.hero_button_url %}
                     <a href="{{ block.settings.hero_button_url }}" class="cleanroom-btn cleanroom-btn-primary cleanroom-hero-btn">
                       {{ block.settings.hero_button_text }}
@@ -2605,11 +2654,11 @@
           <div class="cleanroom-banner-background" style="background-image: url('{{ block.settings.banner_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.banner_content_display == 'full_content' %}
-              <div class="cleanroom-banner-overlay" style="background-color: {{ block.settings.banner_overlay_color | default: settings.banner_default_overlay_color | default: '#000000' }}{{ block.settings.banner_overlay_opacity | default: settings.banner_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.banner_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.banner_padding_bottom | default: 80 }}px;">
+              <div class="cleanroom-banner-overlay" style="background-color: {{ block.settings.banner_overlay_color | default: settings.banner_default_overlay_color | default: '#000000' }}{{ block.settings.banner_overlay_opacity | default: settings.banner_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.banner_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.banner_padding_bottom | default: 80 }}px; padding-left: {{ block.settings.banner_padding_left | default: 20 }}px; padding-right: {{ block.settings.banner_padding_right | default: 20 }}px;">
                 <div class="cleanroom-container">
                   <div class="cleanroom-banner-content" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-banner-title" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_title }}</h2>
-                    <p class="cleanroom-banner-description" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_description }}</p>
+                    <div class="cleanroom-banner-description" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_description }}</div>
                     {% if block.settings.banner_button_text and block.settings.banner_button_url %}
                       <a href="{{ block.settings.banner_button_url }}" class="cleanroom-btn cleanroom-btn-primary cleanroom-banner-btn" style="background-color: {{ block.settings.banner_button_bg_color | default: settings.banner_default_button_bg_color | default: '#0071b9' }}; color: {{ block.settings.banner_button_text_color | default: settings.banner_default_button_text_color | default: '#FFFFFF' }}; border-color: {{ block.settings.banner_button_bg_color | default: settings.banner_default_button_bg_color | default: '#0071b9' }};">
                         {{ block.settings.banner_button_text }}
@@ -2625,11 +2674,11 @@
       </section>
 
     {% when 'welcome_section' %}
-      <section class="cleanroom-welcome-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.welcome_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.welcome_padding_bottom | default: 100 }}px; margin-top: {{ block.settings.welcome_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.welcome_margin_bottom | default: 0 }}px;">
+      <section class="cleanroom-welcome-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.welcome_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.welcome_padding_bottom | default: 100 }}px; padding-left: {{ block.settings.welcome_padding_left | default: 20 }}px; padding-right: {{ block.settings.welcome_padding_right | default: 20 }}px; margin-top: {{ block.settings.welcome_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.welcome_margin_bottom | default: 0 }}px;">
         <div class="cleanroom-container">
           <div class="cleanroom-welcome-header">
             <h2 class="cleanroom-welcome-title">{{ block.settings.welcome_title }}</h2>
-            <p class="cleanroom-welcome-description">{{ block.settings.welcome_description }}</p>
+            <div class="cleanroom-welcome-description">{{ block.settings.welcome_description }}</div>
           </div>
 
           <div class="cleanroom-welcome-content">
@@ -2663,7 +2712,7 @@
             </div>
 
             <div class="cleanroom-welcome-text">
-              <p class="cleanroom-video-description">{{ block.settings.welcome_video_text }}</p>
+              <div class="cleanroom-video-description">{{ block.settings.welcome_video_text }}</div>
 
               <div class="cleanroom-welcome-actions">
                 {% if block.settings.watch_video_url != blank %}
@@ -2691,12 +2740,12 @@
           <div class="cleanroom-iso7-background" style="background-image: url('{{ settings.iso7_default_bg_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.iso7_content_display == 'full_content' %}
-              <div class="cleanroom-iso7-overlay" style="background-color: {{ block.settings.iso7_overlay_color | default: settings.iso7_default_overlay_color | default: '#0071b9' }}{{ block.settings.iso7_overlay_opacity | default: settings.iso7_default_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.iso7_padding_top | default: 120 }}px; padding-bottom: {{ block.settings.iso7_padding_bottom | default: 120 }}px;">
+              <div class="cleanroom-iso7-overlay" style="background-color: {{ block.settings.iso7_overlay_color | default: settings.iso7_default_overlay_color | default: '#0071b9' }}{{ block.settings.iso7_overlay_opacity | default: settings.iso7_default_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.iso7_padding_top | default: 120 }}px; padding-bottom: {{ block.settings.iso7_padding_bottom | default: 120 }}px; padding-left: {{ block.settings.iso7_padding_left | default: 20 }}px; padding-right: {{ block.settings.iso7_padding_right | default: 20 }}px;">
                 <div class="cleanroom-container">
                   <div class="cleanroom-iso7-content" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-iso7-title" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_title | default: settings.iso7_default_title }}</h2>
                     <h3 class="cleanroom-iso7-subtitle" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_subtitle | default: settings.iso7_default_subtitle }}</h3>
-                    <p class="cleanroom-iso7-description" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_default_description }}</p>
+                    <div class="cleanroom-iso7-description" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_default_description }}</div>
 
                     <div class="cleanroom-iso-zones">
                       {% for zone_block in section.blocks %}
@@ -2751,11 +2800,11 @@
       </section>
 
     {% when 'classifications_section' %}
-      <section class="cleanroom-classifications-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.classifications_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.classifications_padding_bottom | default: 100 }}px; margin-top: {{ block.settings.classifications_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.classifications_margin_bottom | default: 0 }}px;">
+      <section class="cleanroom-classifications-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.classifications_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.classifications_padding_bottom | default: 100 }}px; padding-left: {{ block.settings.classifications_padding_left | default: 20 }}px; padding-right: {{ block.settings.classifications_padding_right | default: 20 }}px; margin-top: {{ block.settings.classifications_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.classifications_margin_bottom | default: 0 }}px;">
         <div class="cleanroom-container">
           <div class="cleanroom-classifications-header">
             <h2 class="cleanroom-classifications-title">{{ block.settings.classifications_title }}</h2>
-            <p class="cleanroom-classifications-description">{{ block.settings.classifications_description }}</p>
+            <div class="cleanroom-classifications-description">{{ block.settings.classifications_description }}</div>
 
             {% if block.settings.classifications_button_url != blank %}
               <a href="{{ block.settings.classifications_button_url }}" class="cleanroom-btn cleanroom-btn-primary cleanroom-classifications-btn">
@@ -2902,11 +2951,11 @@
           <div class="cleanroom-quality-background" style="background-image: url('{{ settings.quality_default_bg_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.quality_content_display == 'full_content' %}
-              <div class="cleanroom-quality-overlay" style="background-color: {{ block.settings.quality_overlay_color | default: settings.quality_default_overlay_color | default: '#000000' }}{{ block.settings.quality_overlay_opacity | default: settings.quality_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.quality_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.quality_padding_bottom | default: 80 }}px;">
+              <div class="cleanroom-quality-overlay" style="background-color: {{ block.settings.quality_overlay_color | default: settings.quality_default_overlay_color | default: '#000000' }}{{ block.settings.quality_overlay_opacity | default: settings.quality_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.quality_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.quality_padding_bottom | default: 80 }}px; padding-left: {{ block.settings.quality_padding_left | default: 20 }}px; padding-right: {{ block.settings.quality_padding_right | default: 20 }}px;">
                 <div class="cleanroom-container">
                   <div class="cleanroom-quality-content" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-quality-title" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_title | default: settings.quality_default_title }}</h2>
-                    <p class="cleanroom-quality-description" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_default_description }}</p>
+                    <div class="cleanroom-quality-description" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_default_description }}</div>
 
                     {% if block.settings.quality_video_file != blank %}
                       <div class="cleanroom-quality-video-embed">
