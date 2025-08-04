@@ -1,0 +1,26 @@
+<script> 
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the image container
+        var imageContainers = document.querySelectorAll('#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover');
+
+        // Check if any image containers are found
+        console.log("Number of image containers found: ", imageContainers.length);
+
+        // Loop through each image container
+        imageContainers.forEach(function(container) {
+            // Create the sale label element
+            var saleLabel = document.createElement('div');
+            saleLabel.className = 'sale-label';
+            saleLabel.textContent = 'World First Custom SUT Library';
+
+            // Append the sale label to the image container
+            container.appendChild(saleLabel);
+        });
+    });
+
+
+    </script>
+
+    <style> #block-a2681802-bbf7-416e-92bf-b004893a4002 
+      .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container{position:relative}.sale-label{border-radius:0 0 10px 0;position:absolute!important;top:0!important;left:0!important;background-color:#00833e;color:#fff;padding:5px 10px;font-size:14px;font-weight:700;z-index:10}</style>
