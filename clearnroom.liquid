@@ -1427,7 +1427,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -1437,7 +1437,7 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  min-height: 100%;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1500,6 +1500,7 @@
   max-width: 800px;
   position: relative;
   z-index: 5;
+  width: 100%;
 }
 
 .cleanroom-iso7-video-embed .cleanroom-embedded-video {
@@ -1507,6 +1508,8 @@
   max-width: 100%;
   height: auto;
   min-height: 400px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .cleanroom-iso7-btn {
@@ -1841,6 +1844,18 @@
   .cleanroom-iso-zones {
     flex-direction: column;
     align-items: center;
+  }
+
+  .cleanroom-iso7-section {
+    min-height: 400px;
+  }
+
+  .cleanroom-iso7-overlay {
+    min-height: 400px;
+  }
+
+  .cleanroom-iso7-video-embed .cleanroom-embedded-video {
+    min-height: 250px;
   }
 
   .cleanroom-classifications-title {
