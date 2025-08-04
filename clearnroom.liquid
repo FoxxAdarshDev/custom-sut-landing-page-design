@@ -422,7 +422,7 @@
 {% if settings.show_hero_banner %}
 <section class="cleanroom-hero-banner">
   {% if settings.hero_banner_image %}
-    <div class="hero-banner-background" style="background-image: url('{{ settings.hero_banner_image | image_url: width: 1920 }}');"></div>
+    <div class="hero-banner-background" style="background-image: url('{{ settings.hero_banner_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
   {% endif %}
   <div class="hero-banner-overlay">
     <div class="container">
@@ -449,7 +449,7 @@
       <section class="cleanroom-hero-section" {{ block.shopify_attributes }}>
         <div class="hero-image-container">
           {% if block.settings.hero_image %}
-            <div class="hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');"></div>
+            <div class="hero-background" style="background-image: url('{{ block.settings.hero_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
           {% else %}
             <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
           {% endif %}
@@ -473,7 +473,7 @@
     {% when 'banner_section' %}
       <section class="cleanroom-banner-section{% if block.settings.banner_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.banner_image %}
-          <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | img_url: '1920x' }}');"></div>
+          <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
         {% endif %}
         {% if block.settings.banner_content_display == 'full_content' %}
           <div class="banner-overlay">
@@ -504,7 +504,7 @@
             <div class="welcome-media">
               {% if block.settings.welcome_image != blank %}
                 <div class="welcome-video-container">
-                  <img src="{{ block.settings.welcome_image | img_url: '800x' }}" 
+                  <img src="{{ block.settings.welcome_image | image_url: width: 800 }}" 
                        alt="Cleanroom Facility" 
                        class="welcome-image">
                   <div class="video-overlay">
@@ -554,7 +554,7 @@
     {% when 'iso7_class' %}
       <section class="cleanroom-iso7-section{% if block.settings.iso7_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.iso7_bg_image != blank %}
-          <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | img_url: '1920x' }}');"></div>
+          <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
         {% endif %}
         {% if block.settings.iso7_content_display == 'full_content' %}
           <div class="iso7-overlay">
@@ -612,7 +612,7 @@
             {% for grid_block in section.blocks %}
               {% if grid_block.type == 'grid_image' and grid_block.settings.grid_image != blank %}
                 <div class="grid-item" {{ grid_block.shopify_attributes }}>
-                  <img src="{{ grid_block.settings.grid_image | img_url: '600x' }}" alt="{{ grid_block.settings.grid_title }}" class="grid-image">
+                  <img src="{{ grid_block.settings.grid_image | image_url: width: 600 }}" alt="{{ grid_block.settings.grid_title }}" class="grid-image">
                   <div class="grid-overlay">
                     <div class="grid-content">
                       <h4>{{ grid_block.settings.grid_title }}</h4>
@@ -629,7 +629,7 @@
     {% when 'quality_commit' %}
       <section class="cleanroom-quality-section{% if block.settings.quality_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.quality_bg_image != blank %}
-          <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | img_url: '1920x' }}');"></div>
+          <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
         {% endif %}
         {% if block.settings.quality_content_display == 'full_content' %}
           <div class="quality-overlay">
