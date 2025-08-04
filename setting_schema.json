@@ -4477,32 +4477,34 @@
     ]
   },
   {
-    "name": "Cleanroom",
+    "name": "Services - Cleanroom",
     "settings": [
       {
         "type": "header",
-        "content": "Hero Slider Configuration"
+        "content": "Hero Image Configuration"
       },
       {
         "type": "checkbox",
-        "id": "enable_cleanroom_slider",
-        "label": "Enable Hero Slider",
+        "id": "enable_cleanroom_hero",
+        "label": "Enable Hero Section",
         "default": true
       },
       {
-        "type": "range",
-        "id": "cleanroom_slider_speed",
-        "label": "Autoplay Speed (seconds)",
-        "min": 3,
-        "max": 10,
-        "step": 1,
-        "default": 5
+        "type": "image_picker",
+        "id": "cleanroom_hero_image",
+        "label": "Hero Background Image"
       },
       {
-        "type": "checkbox",
-        "id": "cleanroom_slider_autoplay",
-        "label": "Enable Autoplay",
-        "default": true
+        "type": "text",
+        "id": "cleanroom_hero_title",
+        "label": "Hero Title",
+        "default": "World Class Cleanroom"
+      },
+      {
+        "type": "textarea",
+        "id": "cleanroom_hero_description",
+        "label": "Hero Description",
+        "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
       },
       {
         "type": "header",

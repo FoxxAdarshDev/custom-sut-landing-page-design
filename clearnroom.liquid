@@ -6,91 +6,41 @@
   "settings": [
     {
       "type": "header",
-      "content": "Hero Slider Section"
+      "content": "Hero Image Section"
     },
     {
       "type": "checkbox",
-      "id": "enable_hero_slider",
-      "label": "Enable Hero Slider",
+      "id": "enable_hero_section",
+      "label": "Enable Hero Section",
       "default": true
-    },
-    {
-      "type": "range",
-      "id": "slider_autoplay_speed",
-      "label": "Autoplay Speed (seconds)",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "checkbox",
-      "id": "slider_autoplay",
-      "label": "Enable Autoplay",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Slide 1"
     },
     {
       "type": "image_picker",
-      "id": "slide_1_image",
-      "label": "Slide 1 Image"
+      "id": "hero_image",
+      "label": "Hero Image"
     },
     {
       "type": "text",
-      "id": "slide_1_title",
-      "label": "Slide 1 Title",
+      "id": "hero_title",
+      "label": "Hero Title",
       "default": "World Class Cleanroom"
     },
     {
       "type": "textarea",
-      "id": "slide_1_description",
-      "label": "Slide 1 Description",
+      "id": "hero_description",
+      "label": "Hero Description",
       "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
     },
     {
-      "type": "header",
-      "content": "Slide 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "slide_2_image",
-      "label": "Slide 2 Image"
-    },
-    {
       "type": "text",
-      "id": "slide_2_title",
-      "label": "Slide 2 Title",
-      "default": "ISO 7 Certified"
+      "id": "hero_button_text",
+      "label": "Hero Button Text",
+      "default": "Learn More"
     },
     {
-      "type": "textarea",
-      "id": "slide_2_description",
-      "label": "Slide 2 Description",
-      "default": "Certified cleanroom environment meeting the highest industry standards"
-    },
-    {
-      "type": "header",
-      "content": "Slide 3"
-    },
-    {
-      "type": "image_picker",
-      "id": "slide_3_image",
-      "label": "Slide 3 Image"
-    },
-    {
-      "type": "text",
-      "id": "slide_3_title",
-      "label": "Slide 3 Title",
-      "default": "Quality Manufacturing"
-    },
-    {
-      "type": "textarea",
-      "id": "slide_3_description",
-      "label": "Slide 3 Description",
-      "default": "Precision manufacturing in controlled environments"
+      "type": "url",
+      "id": "hero_button_url",
+      "label": "Hero Button URL"
     },
     {
       "type": "header",
@@ -279,66 +229,31 @@
   "presets": [
     {
       "name": "Cleanroom Section",
-      "category": "Custom"
+      "category": "Services"
     }
   ]
 }
 {% endschema %}
 
-<!-- Hero Slider Section -->
-{% if section.settings.enable_hero_slider %}
-<section class="cleanroom-hero-slider">
-  <div class="hero-slider-container">
-    <div class="hero-slide active" data-slide="1">
-      {% if section.settings.slide_1_image %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_1_image | image_url: width: 1920 }}');"></div>
-      {% else %}
-        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
-      {% endif %}
-      <div class="slide-overlay">
-        <div class="slide-content container">
-          <h1 class="slide-title">{{ section.settings.slide_1_title }}</h1>
-          <p class="slide-description">{{ section.settings.slide_1_description }}</p>
-        </div>
+<!-- Hero Image Section -->
+{% if section.settings.enable_hero_section %}
+<section class="cleanroom-hero-section">
+  <div class="hero-image-container">
+    {% if section.settings.hero_image %}
+      <div class="hero-background" style="background-image: url('{{ section.settings.hero_image | image_url: width: 1920 }}');"></div>
+    {% else %}
+      <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
+    {% endif %}
+    <div class="hero-overlay">
+      <div class="hero-content container">
+        <h1 class="hero-title">{{ section.settings.hero_title }}</h1>
+        <p class="hero-description">{{ section.settings.hero_description }}</p>
+        {% if section.settings.hero_button_text and section.settings.hero_button_url %}
+          <a href="{{ section.settings.hero_button_url }}" class="btn btn-primary hero-btn">
+            {{ section.settings.hero_button_text }}
+          </a>
+        {% endif %}
       </div>
-      <div class="slide-navigation">
-        <button class="nav-arrow nav-prev" onclick="changeSlide(-1)">‹</button>
-        <button class="nav-arrow nav-next" onclick="changeSlide(1)">›</button>
-      </div>
-    </div>
-
-    <div class="hero-slide" data-slide="2">
-      {% if section.settings.slide_2_image %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_2_image | image_url: width: 1920 }}');"></div>
-      {% else %}
-        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
-      {% endif %}
-      <div class="slide-overlay">
-        <div class="slide-content container">
-          <h1 class="slide-title">{{ section.settings.slide_2_title }}</h1>
-          <p class="slide-description">{{ section.settings.slide_2_description }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-slide" data-slide="3">
-      {% if section.settings.slide_3_image %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_3_image | image_url: width: 1920 }}');"></div>
-      {% else %}
-        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
-      {% endif %}
-      <div class="slide-overlay">
-        <div class="slide-content container">
-          <h1 class="slide-title">{{ section.settings.slide_3_title }}</h1>
-          <p class="slide-description">{{ section.settings.slide_3_description }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-indicators">
-      <span class="indicator active" onclick="goToSlide(1)"></span>
-      <span class="indicator" onclick="goToSlide(2)"></span>
-      <span class="indicator" onclick="goToSlide(3)"></span>
     </div>
   </div>
 </section>
@@ -544,34 +459,20 @@
   color: white;
 }
 
-/* Hero Slider Styles */
-.cleanroom-hero-slider {
+/* Hero Image Styles */
+.cleanroom-hero-section {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
 
-.hero-slider-container {
+.hero-image-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.hero-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.hero-slide.active {
-  opacity: 1;
-}
-
-.slide-background {
+.hero-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -582,7 +483,7 @@
   background-repeat: no-repeat;
 }
 
-.slide-overlay {
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -594,13 +495,13 @@
   justify-content: center;
 }
 
-.slide-content {
+.hero-content {
   text-align: center;
   color: white;
   max-width: 800px;
 }
 
-.slide-title {
+.hero-title {
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 20px;
@@ -609,68 +510,28 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.slide-description {
+.hero-description {
   font-size: 1.6rem;
   line-height: 1.6;
-  margin: 0;
+  margin-bottom: 30px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.slide-navigation {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-.nav-arrow {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  pointer-events: all;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: white;
-  transform: scale(1.1);
-}
-
-.slide-indicators {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
-}
-
-.indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.indicator.active {
+.hero-btn {
   background: white;
-  transform: scale(1.2);
+  color: #0071b9;
+  border: 2px solid white;
+  padding: 15px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-btn:hover {
+  background: transparent;
+  color: white;
+  border-color: white;
 }
 
 /* Welcome Section */
@@ -1011,11 +872,11 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .slide-title {
+  .hero-title {
     font-size: 2.5rem;
   }
 
-  .slide-description {
+  .hero-description {
     font-size: 1.1rem;
   }
 
@@ -1074,15 +935,15 @@
 }
 
 @media (max-width: 480px) {
-  .cleanroom-hero-slider {
+  .cleanroom-hero-section {
     height: 70vh;
   }
 
-  .slide-title {
+  .hero-title {
     font-size: 1.8rem;
   }
 
-  .slide-description {
+  .hero-description {
     font-size: 1rem;
   }
 
@@ -1105,118 +966,9 @@
 </style>
 
 <script>
-let currentSlide = 1;
-const totalSlides = 3;
-let slideInterval;
-
-// Initialize slider
-document.addEventListener('DOMContentLoaded', function() {
-  {% if section.settings.slider_autoplay %}
-    startAutoplay();
-  {% endif %}
-});
-
-function changeSlide(direction) {
-  const slides = document.querySelectorAll('.hero-slide');
-  const indicators = document.querySelectorAll('.indicator');
-  
-  // Remove active class from current slide
-  slides[currentSlide - 1].classList.remove('active');
-  indicators[currentSlide - 1].classList.remove('active');
-  
-  // Update current slide
-  currentSlide += direction;
-  
-  if (currentSlide > totalSlides) {
-    currentSlide = 1;
-  }
-  if (currentSlide < 1) {
-    currentSlide = totalSlides;
-  }
-  
-  // Add active class to new slide
-  slides[currentSlide - 1].classList.add('active');
-  indicators[currentSlide - 1].classList.add('active');
-  
-  // Restart autoplay
-  {% if section.settings.slider_autoplay %}
-    stopAutoplay();
-    startAutoplay();
-  {% endif %}
-}
-
-function goToSlide(slideNumber) {
-  const slides = document.querySelectorAll('.hero-slide');
-  const indicators = document.querySelectorAll('.indicator');
-  
-  // Remove active class from current slide
-  slides[currentSlide - 1].classList.remove('active');
-  indicators[currentSlide - 1].classList.remove('active');
-  
-  // Set new slide
-  currentSlide = slideNumber;
-  
-  // Add active class to new slide
-  slides[currentSlide - 1].classList.add('active');
-  indicators[currentSlide - 1].classList.add('active');
-  
-  // Restart autoplay
-  {% if section.settings.slider_autoplay %}
-    stopAutoplay();
-    startAutoplay();
-  {% endif %}
-}
-
-function startAutoplay() {
-  slideInterval = setInterval(() => {
-    changeSlide(1);
-  }, {{ section.settings.slider_autoplay_speed }}000);
-}
-
-function stopAutoplay() {
-  if (slideInterval) {
-    clearInterval(slideInterval);
-  }
-}
-
 function playVideo() {
   {% if section.settings.watch_video_url != blank %}
     window.open('{{ section.settings.watch_video_url }}', '_blank');
   {% endif %}
-}
-
-// Pause autoplay on hover
-document.addEventListener('DOMContentLoaded', function() {
-  const slider = document.querySelector('.cleanroom-hero-slider');
-  if (slider) {
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', () => {
-      {% if section.settings.slider_autoplay %}
-        startAutoplay();
-      {% endif %}
-    });
-  }
-});
-
-// Touch/swipe support for mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', function(event) {
-  touchStartX = event.changedTouches[0].screenX;
-});
-
-document.addEventListener('touchend', function(event) {
-  touchEndX = event.changedTouches[0].screenX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  if (touchEndX < touchStartX - 50) {
-    changeSlide(1); // Swipe left, next slide
-  }
-  if (touchEndX > touchStartX + 50) {
-    changeSlide(-1); // Swipe right, previous slide
-  }
 }
 </script>
