@@ -259,6 +259,28 @@
 </section>
 {% endif %}
 
+<!-- Hero Banner Section -->
+{% if section.settings.show_hero_banner %}
+<section class="cleanroom-hero-banner">
+  {% if section.settings.hero_banner_image %}
+    <div class="hero-banner-background" style="background-image: url('{{ section.settings.hero_banner_image | image_url: width: 1920 }}');"></div>
+  {% endif %}
+  <div class="hero-banner-overlay">
+    <div class="container">
+      <div class="hero-banner-content">
+        <h2 class="hero-banner-title">{{ section.settings.hero_banner_title }}</h2>
+        <p class="hero-banner-description">{{ section.settings.hero_banner_description }}</p>
+        {% if section.settings.hero_banner_button_text and section.settings.hero_banner_button_url %}
+          <a href="{{ section.settings.hero_banner_button_url }}" class="btn btn-primary hero-banner-btn">
+            {{ section.settings.hero_banner_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- Welcome Section -->
 <section class="cleanroom-welcome-section">
   <div class="container">
@@ -464,6 +486,77 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
+}
+
+/* Hero Banner Styles */
+.cleanroom-hero-banner {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-banner-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-banner-overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 113, 185, 0.8);
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.hero-banner-content {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+}
+
+.hero-banner-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-banner-description {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.hero-banner-btn {
+  background: white;
+  color: #0071b9;
+  border: 2px solid white;
+  padding: 15px 35px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-banner-btn:hover {
+  background: transparent;
+  color: white;
+  border-color: white;
 }
 
 .hero-image-container {
@@ -903,6 +996,19 @@
     font-size: 1.1rem;
   }
 
+  .hero-banner-title {
+    font-size: 2rem;
+  }
+
+  .hero-banner-description {
+    font-size: 1.1rem;
+  }
+
+  .hero-banner-overlay {
+    min-height: 300px;
+    padding: 40px 15px;
+  }
+
   .welcome-content {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -995,6 +1101,24 @@
 
   .hero-description {
     font-size: 1rem;
+  }
+
+  .hero-banner-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-banner-description {
+    font-size: 1rem;
+  }
+
+  .hero-banner-overlay {
+    min-height: 250px;
+    padding: 30px 10px;
+  }
+
+  .hero-banner-btn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
   }
 
   .welcome-title {
