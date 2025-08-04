@@ -109,10 +109,6 @@
       },
       {
         "type": "header",
-        "content": "t:sections.header.settings.header_layout.content"
-      },
-      {
-        "type": "header",
         "content": "t:sections.header.settings.collections_layout.layout"
       },
       {
@@ -562,7 +558,7 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.typography.settings.type_navigation_font.title"
+        "content": "t:settings_schema.typography.settings.type_navigation_font.title_menu_lv1"
       },
       {
         "type": "paragraph",
@@ -1096,7 +1092,7 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.typography.settings.type_product_item_font.title"
+        "content": "t:settings_schema.typography.settings.type_product_item_font.product_title"
       },
       {
         "type": "paragraph",
@@ -4495,13 +4491,33 @@
       },
       {
         "type": "range",
-        "id": "cleanroom_section_padding_bottom", 
+        "id": "cleanroom_section_padding_bottom",
         "label": "Section Padding Bottom",
         "min": 0,
         "max": 200,
         "step": 10,
         "unit": "px",
         "default": 80
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_left",
+        "label": "Section Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_right",
+        "label": "Section Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
       },
       {
         "type": "range",
@@ -4516,7 +4532,7 @@
       {
         "type": "range",
         "id": "cleanroom_section_margin_bottom",
-        "label": "Section Margin Bottom", 
+        "label": "Section Margin Bottom",
         "min": 0,
         "max": 100,
         "step": 5,
@@ -5840,7 +5856,7 @@
           },
           {
             "value": "Nauru",
-            "label": "Nauru"
+            "label":"Nauru"
           },
           {
             "value": "Nepal",
@@ -7045,6 +7061,7 @@
         "type": "checkbox",
         "id": "show_newsletter_popup",
         "label": "t:settings_schema.newsletter_popup.settings.general.label__1",
+        "info": "t:settings_schema.newsletter_popup.settings.general.info",
         "default": true
       },
       {
@@ -8691,7 +8708,7 @@
         "type": "textarea",
         "id": "stat2_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'\/><\/svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 9H9v7h2v-7zm4 0h-2v7h2v-7zm-8 7H7v-7h2v7zm4 0h-2v-7h2v7z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -10041,7 +10058,7 @@
         "type": "color",
         "id": "product_wishlist_bg",
         "label": "t:settings_schema.colors.settings.colors_name.background_color",
-        "default": "#ffffff"
+        "default": "#FFFFFF"
       },
       {
         "type": "color",
