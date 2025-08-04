@@ -290,8 +290,10 @@
 <section class="cleanroom-hero-slider">
   <div class="hero-slider-container">
     <div class="hero-slide active" data-slide="1">
-      {% if section.settings.slide_1_image != blank %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_1_image | img_url: '1920x' }}');"></div>
+      {% if section.settings.slide_1_image %}
+        <div class="slide-background" style="background-image: url('{{ section.settings.slide_1_image | image_url: width: 1920 }}');"></div>
+      {% else %}
+        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
       {% endif %}
       <div class="slide-overlay">
         <div class="slide-content container">
@@ -306,8 +308,10 @@
     </div>
 
     <div class="hero-slide" data-slide="2">
-      {% if section.settings.slide_2_image != blank %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_2_image | img_url: '1920x' }}');"></div>
+      {% if section.settings.slide_2_image %}
+        <div class="slide-background" style="background-image: url('{{ section.settings.slide_2_image | image_url: width: 1920 }}');"></div>
+      {% else %}
+        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
       {% endif %}
       <div class="slide-overlay">
         <div class="slide-content container">
@@ -318,8 +322,10 @@
     </div>
 
     <div class="hero-slide" data-slide="3">
-      {% if section.settings.slide_3_image != blank %}
-        <div class="slide-background" style="background-image: url('{{ section.settings.slide_3_image | img_url: '1920x' }}');"></div>
+      {% if section.settings.slide_3_image %}
+        <div class="slide-background" style="background-image: url('{{ section.settings.slide_3_image | image_url: width: 1920 }}');"></div>
+      {% else %}
+        <div class="slide-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
       {% endif %}
       <div class="slide-overlay">
         <div class="slide-content container">
