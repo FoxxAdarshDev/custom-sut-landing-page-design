@@ -70,8 +70,10 @@
     font-size: 14px;
     font-weight: 700;
     z-index: 10;
-    max-width: 200px;
-    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: visible;
+    width: auto;
+    min-width: fit-content;
     line-height: 1.2;
 }
 
@@ -80,7 +82,7 @@
     .sale-label {
         font-size: 12px;
         padding: 4px 8px;
-        max-width: 150px;
+        white-space: nowrap;
     }
 }
 
@@ -88,7 +90,7 @@
     .sale-label {
         font-size: 10px;
         padding: 3px 6px;
-        max-width: 120px;
+        white-space: nowrap;
     }
 }
 
