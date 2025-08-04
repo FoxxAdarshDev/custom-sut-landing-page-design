@@ -231,6 +231,64 @@
           "step": 1,
           "default": 14,
           "unit": "px"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button_label",
+          "label": "Show Button Label/Badge",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label_text",
+          "label": "Label Text",
+          "default": "New"
+        },
+        {
+          "type": "color",
+          "id": "button_label_bg_color",
+          "label": "Label Background Color",
+          "default": "#ff4444"
+        },
+        {
+          "type": "color",
+          "id": "button_label_text_color",
+          "label": "Label Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "button_label_position",
+          "label": "Label Position",
+          "options": [
+            {
+              "value": "top-right",
+              "label": "Top Right"
+            },
+            {
+              "value": "top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom Right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom Left"
+            }
+          ],
+          "default": "top-right"
+        },
+        {
+          "type": "range",
+          "id": "button_label_font_size",
+          "label": "Label Font Size",
+          "min": 8,
+          "max": 20,
+          "step": 1,
+          "default": 10,
+          "unit": "px"
         }
       ]
     }
@@ -283,7 +341,7 @@
           {% for block in section.blocks %}
             {% if block.settings.button_text != blank %}
               <a href="{{ block.settings.button_url | default: '#' }}" 
-                 class="logo_header_section_button" 
+                 class="logo_header_section_button{% if block.settings.show_button_label %} has-label{% endif %}" 
                  style="background-color: {{ block.settings.button_bg_color | default: '#0071b9' }}; 
                         color: {{ block.settings.button_text_color | default: '#ffffff' }}; 
                         border-color: {{ block.settings.button_border_color | default: '#0071b9' }}; 
@@ -292,6 +350,14 @@
                         font-size: {{ block.settings.button_font_size_desktop }}px;"
                  {{ block.shopify_attributes }}>
                 {{ block.settings.button_text }}
+                {% if block.settings.show_button_label and block.settings.button_label_text != blank %}
+                  <span class="button-label button-label--{{ block.settings.button_label_position | default: 'top-right' }}"
+                        style="background-color: {{ block.settings.button_label_bg_color | default: '#ff4444' }};
+                               color: {{ block.settings.button_label_text_color | default: '#ffffff' }};
+                               font-size: {{ block.settings.button_label_font_size | default: 10 }}px;">
+                    {{ block.settings.button_label_text }}
+                  </span>
+                {% endif %}
               </a>
             {% endif %}
           {% endfor %}
@@ -402,9 +468,57 @@
   border-radius: 5px;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-width: 140px;
   text-align: center;
+}
+
+/* Button Label/Badge Styles */
+.button-label {
+  position: absolute;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  animation: labelPulse 2s ease-in-out infinite;
+}
+
+/* Label Position Variants */
+.button-label--top-right {
+  top: -8px;
+  right: -8px;
+}
+
+.button-label--top-left {
+  top: -8px;
+  left: -8px;
+}
+
+.button-label--bottom-right {
+  bottom: -8px;
+  right: -8px;
+}
+
+.button-label--bottom-left {
+  bottom: -8px;
+  left: -8px;
+}
+
+/* Label Animation */
+@keyframes labelPulse {
+  0%, 100% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1);
+  }
 }
 
 .logo_header_section_button:hover {
@@ -493,6 +607,31 @@
     max-width: 180px;
   }
 
+  .button-label {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+
+  .button-label--top-right,
+  .button-label--bottom-right {
+    right: -6px;
+  }
+
+  .button-label--top-left,
+  .button-label--bottom-left {
+    left: -6px;
+  }
+
+  .button-label--top-right,
+  .button-label--top-left {
+    top: -6px;
+  }
+
+  .button-label--bottom-right,
+  .button-label--bottom-left {
+    bottom: -6px;
+  }
+
   .logo_header_section_logo_container {
     margin: -40px auto 30px;
   }
@@ -535,6 +674,11 @@
     min-width: 100px;
     flex: 1 1 100%;
     max-width: none;
+  }
+
+  .button-label {
+    font-size: 7px;
+    padding: 1px 3px;
   }
 
   .logo_header_section_button_row {
