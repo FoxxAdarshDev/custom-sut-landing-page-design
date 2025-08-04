@@ -334,7 +334,16 @@
 .cleanroom-iso7-section {
   position: relative;
   overflow: hidden;
-  min-height: 110vh
+  min-height: 600px;
+  transition: min-height 0.5s ease;
+}
+
+.cleanroom-iso7-section.has-video {
+  min-height: 1000px;
+}
+
+.cleanroom-iso7-section.video-loaded {
+  min-height: auto;
 }
 
 .cleanroom-iso7-section.cleanroom-fixed-scroll .cleanroom-iso7-background {
@@ -346,7 +355,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -360,26 +369,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 80px 0;
 }
 
 .cleanroom-iso7-content {
   text-align: center;
+  color: white;
 }
 
 .cleanroom-iso7-title {
-  font-size: 3.5rem;
+  font-size: 56px;
   font-weight: 700;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  color: white;
 }
 
 .cleanroom-iso7-subtitle {
-  font-size: 2.3rem;
+  font-size: 36px;
   font-weight: 400;
   margin-bottom: 40px;
   text-transform: uppercase;
   opacity: 0.9;
+  color: white;
 }
 
 .cleanroom-iso7-description {
@@ -389,6 +402,7 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  color: white;
 }
 
 .cleanroom-iso-zones {
@@ -404,13 +418,20 @@
   padding: 20px 30px;
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cleanroom-zone-info:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .cleanroom-zone-text {
-  font-size: 1.3rem;
+  font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: white;
 }
 
 .cleanroom-iso7-video-embed {
@@ -425,8 +446,14 @@
 .cleanroom-iso7-video-embed .cleanroom-embedded-video {
   width: 100%;
   max-width: 100%;
-  height: auto;
-  min-height: 400px;
+  height: 450px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.cleanroom-iso7-video-embed iframe {
+  width: 100%;
+  height: 450px;
   border-radius: 15px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
@@ -753,11 +780,11 @@
   }
 
   .cleanroom-iso7-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-iso7-subtitle {
-    font-size: 1.3rem;
+    font-size: 20px;
   }
 
   .cleanroom-iso-zones {
@@ -860,7 +887,7 @@
   }
 
   .cleanroom-iso7-title {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .cleanroom-classifications-title {
@@ -1882,10 +1909,31 @@
 
                     {% if block.settings.iso7_video_file != blank %}
                       <div class="cleanroom-iso7-video-embed">
-                        <video controls preload="metadata" class="cleanroom-embedded-video">
-                          <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
-                          Your browser does not support the video tag.
-                        </video>
+                        {% if block.settings.iso7_video_file contains 'youtube.com' or block.settings.iso7_video_file contains 'youtu.be' %}
+                          {% assign video_id = '' %}
+                          {% if block.settings.iso7_video_file contains 'youtube.com/watch?v=' %}
+                            {% assign video_id = block.settings.iso7_video_file | split: 'v=' | last | split: '&' | first %}
+                          {% elsif block.settings.iso7_video_file contains 'youtu.be/' %}
+                            {% assign video_id = block.settings.iso7_video_file | split: 'youtu.be/' | last | split: '?' | first %}
+                          {% endif %}
+                          {% if video_id != blank %}
+                            <iframe src="https://www.youtube.com/embed/{{ video_id }}?rel=0&showinfo=0" 
+                                    frameborder="0" 
+                                    allowfullscreen
+                                    class="cleanroom-embedded-video">
+                            </iframe>
+                          {% else %}
+                            <video controls preload="metadata" class="cleanroom-embedded-video">
+                              <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
+                              Your browser does not support the video tag.
+                            </video>
+                          {% endif %}
+                        {% else %}
+                          <video controls preload="metadata" class="cleanroom-embedded-video">
+                            <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                        {% endif %}
                       </div>
                     {% endif %}
 
@@ -2014,6 +2062,65 @@ function closeCleanroomVideoPopup() {
   modal.style.display = 'none';
   document.body.style.overflow = 'auto';
 }
+
+// Dynamic height adjustment for ISO 7 section
+function adjustISO7SectionHeight() {
+  var iso7Sections = document.querySelectorAll('.cleanroom-iso7-section');
+  
+  iso7Sections.forEach(function(section) {
+    var videoEmbed = section.querySelector('.cleanroom-iso7-video-embed');
+    var video = section.querySelector('video');
+    var iframe = section.querySelector('iframe');
+    
+    if (videoEmbed && (video || iframe)) {
+      section.classList.add('has-video');
+      
+      // Function to adjust height based on content
+      function adjustHeight() {
+        var content = section.querySelector('.cleanroom-iso7-content');
+        if (content) {
+          var contentHeight = content.offsetHeight;
+          var minHeight = contentHeight + 160; // Add padding
+          section.style.minHeight = minHeight + 'px';
+          section.classList.add('video-loaded');
+        }
+      }
+      
+      // Handle video element
+      if (video) {
+        video.addEventListener('loadedmetadata', adjustHeight);
+        video.addEventListener('canplay', adjustHeight);
+        
+        // Fallback timeout
+        setTimeout(adjustHeight, 1000);
+      }
+      
+      // Handle iframe element
+      if (iframe) {
+        iframe.addEventListener('load', function() {
+          setTimeout(adjustHeight, 500);
+        });
+        
+        // Fallback timeout for iframe
+        setTimeout(adjustHeight, 2000);
+      }
+      
+      // Initial adjustment
+      setTimeout(adjustHeight, 100);
+      
+      // Window resize adjustment
+      window.addEventListener('resize', function() {
+        setTimeout(adjustHeight, 100);
+      });
+    }
+  });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', adjustISO7SectionHeight);
+
+// Re-run when images/videos load
+window.addEventListener('load', adjustISO7SectionHeight);
 
 // Close popup with Escape key
 document.addEventListener('keydown', function(e) {
