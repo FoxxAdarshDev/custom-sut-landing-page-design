@@ -97,6 +97,7 @@
 .cleanroom-hero-title {
   font-size: 64px;
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -105,7 +106,7 @@
 
 .cleanroom-hero-description {
   font-size: 26px;
-  line-height: 1.6;
+  line-height: 1.4;
   margin-bottom: 30px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
@@ -169,6 +170,7 @@
 .cleanroom-hero-banner-title {
   font-size: 48px;
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -219,7 +221,7 @@
 .cleanroom-banner-title {
   font-size: 56px;
   font-weight: 700;
-  line-height:1.2;
+  line-height: 1.1;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -227,7 +229,7 @@
 
 .cleanroom-banner-description {
   font-size: 22px;
-  line-height: 1.6;
+  line-height: 1.4;
   margin-bottom: 40px;
 }
 
@@ -245,6 +247,7 @@
   font-size: 56px;
   color: #0071b9;
   font-weight: 300;
+  line-height: 1.1;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -253,7 +256,7 @@
 .cleanroom-welcome-description {
   font-size: 20px;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.4;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -385,6 +388,7 @@
 .cleanroom-iso7-title {
   font-size: 56px;
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -394,6 +398,7 @@
 .cleanroom-iso7-subtitle {
   font-size: 36px;
   font-weight: 400;
+  line-height: 1.1;
   margin-bottom: 40px;
   text-transform: uppercase;
   opacity: 0.9;
@@ -401,8 +406,8 @@
 }
 
 .cleanroom-iso7-description {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.4;
   margin-bottom: 50px;
   max-width: 800px;
   margin-left: auto;
@@ -489,6 +494,7 @@
   font-size: 56px;
   color: #0071b9;
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -497,7 +503,7 @@
 .cleanroom-classifications-description {
   font-size: 22px;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.4;
   max-width: 800px;
   margin: 0 auto 40px auto;
 }
@@ -608,17 +614,17 @@
 
 .cleanroom-quality-title {
   color: white;
-  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-size: 56px;
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  line-height: 1.2;
 }
 
 .cleanroom-quality-description {
   color: white;
-  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-size: 24px;
   line-height: 1.4;
   margin-bottom: 40px;
   max-width: 800px;
@@ -704,11 +710,12 @@
   grid-template-columns: 1fr;
   text-align: center;
   justify-items: center;
+  max-width: 100%;
 }
 
 .cleanroom-image-content-center-wrapper {
-  max-width: 900px;
   width: 100%;
+  max-width: 100%;
 }
 
 .cleanroom-text-center {
@@ -726,6 +733,18 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
+.cleanroom-image-content-container.cleanroom-center-layout .cleanroom-image-content-image-wrapper {
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
 .cleanroom-image-content-image {
   width: 100%;
   height: auto;
@@ -736,10 +755,16 @@
   padding: 20px 0;
 }
 
+.cleanroom-image-content-container.cleanroom-center-layout .cleanroom-image-content-text {
+  max-width: 900px;
+  margin: 60px auto 0;
+  padding: 0 20px;
+}
+
 .cleanroom-image-content-title {
   font-size: 48px;
   color: #0071b9;
-  line-height: 1.2;
+  line-height: 1.1;
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -747,9 +772,9 @@
 }
 
 .cleanroom-image-content-description {
-  font-size: 18px;
+  font-size: 20px;
   color: #666;
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 40px;
 }
 
@@ -760,7 +785,7 @@
 
 .cleanroom-image-content-description li {
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -794,32 +819,44 @@
 
   .cleanroom-image-content-title {
     font-size: 32px;
+    line-height: 1.1;
   }
 
   .cleanroom-image-content-description {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .cleanroom-image-content-description li {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .cleanroom-image-content-actions {
     justify-content: center;
   }
+
+  .cleanroom-image-content-container.cleanroom-center-layout .cleanroom-image-content-text {
+    margin: 40px auto 0;
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 480px) {
   .cleanroom-image-content-title {
-    font-size: 24px;
+    font-size: 28px;
+    line-height: 1.1;
   }
 
   .cleanroom-image-content-description {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .cleanroom-image-content-description li {
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  .cleanroom-image-content-container.cleanroom-center-layout .cleanroom-image-content-text {
+    margin: 30px auto 0;
+    padding: 0 15px;
   }
 }
 
@@ -2527,15 +2564,15 @@
               <div class="cleanroom-image-content-center-wrapper">
                 {% if block.settings.content_image != blank %}
                   <div class="cleanroom-image-content-image-wrapper">
-                    <img src="{{ block.settings.content_image | image_url: width: 800 }}" 
+                    <img src="{{ block.settings.content_image | image_url: width: 1920 }}" 
                          alt="{{ block.settings.content_title }}" 
                          class="cleanroom-image-content-image">
                   </div>
                 {% endif %}
 
                 <div class="cleanroom-image-content-text cleanroom-text-center">
-                  <h3 class="cleanroom-image-content-title" style="font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 1.5rem;">{{ block.settings.content_title }}</h3>
-                  <div class="cleanroom-image-content-description" style="font-size: clamp(1rem, 2vw, 1.125rem); line-height: 1.6; margin-bottom: 2rem;">
+                  <h3 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h3>
+                  <div class="cleanroom-image-content-description">
                     {{ block.settings.content_description }}
                   </div>
 
