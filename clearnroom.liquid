@@ -87,6 +87,52 @@
           "default": "full_content"
         },
         {
+          "type": "header",
+          "content": "Overlay Settings"
+        },
+        {
+          "type": "color",
+          "id": "banner_overlay_color",
+          "label": "Overlay Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "banner_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 60
+        },
+        {
+          "type": "header",
+          "content": "Text & Button Colors"
+        },
+        {
+          "type": "color",
+          "id": "banner_text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "banner_button_bg_color",
+          "label": "Button Background Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "color",
+          "id": "banner_button_text_color",
+          "label": "Button Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
           "type": "text",
           "id": "banner_title",
           "label": "Banner Title",
@@ -204,6 +250,52 @@
             }
           ],
           "default": "full_content"
+        },
+        {
+          "type": "header",
+          "content": "Overlay Settings"
+        },
+        {
+          "type": "color",
+          "id": "iso7_overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "iso7_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 90
+        },
+        {
+          "type": "header",
+          "content": "Text & Button Colors"
+        },
+        {
+          "type": "color",
+          "id": "iso7_text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "iso7_button_bg_color",
+          "label": "Button Background Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "iso7_button_text_color",
+          "label": "Button Text Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "header",
+          "content": "Content"
         },
         {
           "type": "text",
@@ -336,6 +428,52 @@
             }
           ],
           "default": "full_content"
+        },
+        {
+          "type": "header",
+          "content": "Overlay Settings"
+        },
+        {
+          "type": "color",
+          "id": "quality_overlay_color",
+          "label": "Overlay Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "quality_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 60
+        },
+        {
+          "type": "header",
+          "content": "Text & Button Colors"
+        },
+        {
+          "type": "color",
+          "id": "quality_text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "quality_button_bg_color",
+          "label": "Button Background Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "quality_button_text_color",
+          "label": "Button Text Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "header",
+          "content": "Content"
         },
         {
           "type": "text",
@@ -478,13 +616,13 @@
           <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.banner_content_display == 'full_content' %}
-              <div class="banner-overlay" style="background-color: {{ settings.banner_default_overlay_color | default: '#000000' }}{{ settings.banner_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+              <div class="banner-overlay" style="background-color: {{ block.settings.banner_overlay_color | default: settings.banner_default_overlay_color | default: '#000000' }}{{ block.settings.banner_overlay_opacity | default: settings.banner_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }};">
                 <div class="container">
-                  <div class="banner-content" style="color: {{ settings.banner_default_text_color | default: '#FFFFFF' }};">
-                    <h2 class="banner-title" style="color: {{ settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_title }}</h2>
-                    <p class="banner-description" style="color: {{ settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_description }}</p>
+                  <div class="banner-content" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">
+                    <h2 class="banner-title" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_title }}</h2>
+                    <p class="banner-description" style="color: {{ block.settings.banner_text_color | default: settings.banner_default_text_color | default: '#FFFFFF' }};">{{ block.settings.banner_description }}</p>
                     {% if block.settings.banner_button_text and block.settings.banner_button_url %}
-                      <a href="{{ block.settings.banner_button_url }}" class="btn btn-primary banner-btn" style="background-color: {{ settings.banner_default_button_bg_color | default: '#0071b9' }}; color: {{ settings.banner_default_button_text_color | default: '#FFFFFF' }}; border-color: {{ settings.banner_default_button_bg_color | default: '#0071b9' }};">
+                      <a href="{{ block.settings.banner_button_url }}" class="btn btn-primary banner-btn" style="background-color: {{ block.settings.banner_button_bg_color | default: settings.banner_default_button_bg_color | default: '#0071b9' }}; color: {{ block.settings.banner_button_text_color | default: settings.banner_default_button_text_color | default: '#FFFFFF' }}; border-color: {{ block.settings.banner_button_bg_color | default: settings.banner_default_button_bg_color | default: '#0071b9' }};">
                         {{ block.settings.banner_button_text }}
                       </a>
                     {% endif %}
@@ -564,12 +702,12 @@
           <div class="iso7-background" style="background-image: url('{{ settings.iso7_default_bg_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.iso7_content_display == 'full_content' %}
-              <div class="iso7-overlay" style="background-color: {{ settings.iso7_default_overlay_color | default: '#0071b9' }}{{ settings.iso7_default_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+              <div class="iso7-overlay" style="background-color: {{ block.settings.iso7_overlay_color | default: settings.iso7_default_overlay_color | default: '#0071b9' }}{{ block.settings.iso7_overlay_opacity | default: settings.iso7_default_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }};">
                 <div class="container">
-                  <div class="iso7-content" style="color: {{ settings.iso7_default_text_color | default: '#FFFFFF' }};">
-                    <h2 class="iso7-title" style="color: {{ settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_title | default: settings.iso7_default_title }}</h2>
-                    <h3 class="iso7-subtitle" style="color: {{ settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_subtitle | default: settings.iso7_default_subtitle }}</h3>
-                    <p class="iso7-description" style="color: {{ settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_default_description }}</p>
+                  <div class="iso7-content" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">
+                    <h2 class="iso7-title" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_title | default: settings.iso7_default_title }}</h2>
+                    <h3 class="iso7-subtitle" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_subtitle | default: settings.iso7_default_subtitle }}</h3>
+                    <p class="iso7-description" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_default_description }}</p>
                     
                     <div class="iso-zones">
                       {% for zone_block in section.blocks %}
@@ -591,7 +729,7 @@
                     {% endif %}
 
                     {% if block.settings.iso7_button_url != blank %}
-                      <a href="{{ block.settings.iso7_button_url }}" class="btn btn-primary iso7-btn">
+                      <a href="{{ block.settings.iso7_button_url }}" class="btn btn-primary iso7-btn" style="background-color: {{ block.settings.iso7_button_bg_color | default: '#FFFFFF' }}; color: {{ block.settings.iso7_button_text_color | default: '#0071b9' }}; border-color: {{ block.settings.iso7_button_bg_color | default: '#FFFFFF' }};">
                         {{ block.settings.iso7_button_text }}
                       </a>
                     {% endif %}
@@ -644,11 +782,11 @@
           <div class="quality-background" style="background-image: url('{{ settings.quality_default_bg_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.quality_content_display == 'full_content' %}
-              <div class="quality-overlay" style="background-color: {{ settings.quality_default_overlay_color | default: '#000000' }}{{ settings.quality_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+              <div class="quality-overlay" style="background-color: {{ block.settings.quality_overlay_color | default: settings.quality_default_overlay_color | default: '#000000' }}{{ block.settings.quality_overlay_opacity | default: settings.quality_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }};">
                 <div class="container">
-                  <div class="quality-content" style="color: {{ settings.quality_default_text_color | default: '#FFFFFF' }};">
-                    <h2 class="quality-title" style="color: {{ settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_title | default: settings.quality_default_title }}</h2>
-                    <p class="quality-description" style="color: {{ settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_default_description }}</p>
+                  <div class="quality-content" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">
+                    <h2 class="quality-title" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_title | default: settings.quality_default_title }}</h2>
+                    <p class="quality-description" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_default_description }}</p>
 
                     {% if block.settings.quality_video_file != blank %}
                       <div class="quality-video-embed">
@@ -660,7 +798,7 @@
                     {% endif %}
 
                     {% if block.settings.quality_button_text != blank %}
-                      <a href="{{ block.settings.quality_button_url }}" class="quality-button">
+                      <a href="{{ block.settings.quality_button_url }}" class="quality-button" style="background-color: {{ block.settings.quality_button_bg_color | default: '#FFFFFF' }}; color: {{ block.settings.quality_button_text_color | default: '#0071b9' }}; border-color: {{ block.settings.quality_button_bg_color | default: '#FFFFFF' }};">
                         {{ block.settings.quality_button_text }}
                       </a>
                     {% endif %}
