@@ -456,12 +456,21 @@
   width: 100%;
 }
 
+.cleanroom-iso7-video-embed {
+  position: relative;
+  z-index: 999;
+  background: transparent;
+}
+
 .cleanroom-iso7-video-embed .cleanroom-embedded-video {
   width: 100%;
   max-width: 100%;
   height: 450px;
   border-radius: 15px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1000;
+  background: #000;
 }
 
 .cleanroom-iso7-video-embed iframe {
@@ -469,6 +478,9 @@
   height: 450px;
   border-radius: 15px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1000;
+  background: #000;
 }
 
 .cleanroom-iso7-btn {
@@ -2894,19 +2906,20 @@
                             {% assign video_id = block.settings.iso7_video_file | split: 'youtu.be/' | last | split: '?' | first %}
                           {% endif %}
                           {% if video_id != blank %}
-                            <iframe src="https://www.youtube.com/embed/{{ video_id }}?rel=0&showinfo=0" 
+                            {% assign start_time = block.settings.iso7_video_start_time | default: 0 %}
+                            <iframe src="https://www.youtube.com/embed/{{ video_id }}?rel=0&showinfo=0&start={{ start_time }}" 
                                     frameborder="0" 
                                     allowfullscreen
                                     class="cleanroom-embedded-video">
                             </iframe>
                           {% else %}
-                            <video controls preload="metadata" class="cleanroom-embedded-video">
+                            <video controls preload="metadata" class="cleanroom-embedded-video" data-start-time="{{ block.settings.iso7_video_start_time | default: 0 }}">
                               <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                           {% endif %}
                         {% else %}
-                          <video controls preload="metadata" class="cleanroom-embedded-video">
+                          <video controls preload="metadata" class="cleanroom-embedded-video" data-start-time="{{ block.settings.iso7_video_start_time | default: 0 }}">
                             <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
                             Your browser does not support the video tag.
                           </video>
@@ -3209,10 +3222,38 @@ function adjustISO7SectionHeight() {
 }
 
 // Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', adjustISO7SectionHeight);
+document.addEventListener('DOMContentLoaded', function() {
+  adjustISO7SectionHeight();
+  initializeVideoStartTimes();
+});
 
 // Re-run when images/videos load
-window.addEventListener('load', adjustISO7SectionHeight);
+window.addEventListener('load', function() {
+  adjustISO7SectionHeight();
+  initializeVideoStartTimes();
+});
+
+// Function to handle video start times
+function initializeVideoStartTimes() {
+  var videos = document.querySelectorAll('.cleanroom-embedded-video[data-start-time]');
+  
+  videos.forEach(function(video) {
+    var startTime = parseInt(video.getAttribute('data-start-time')) || 0;
+    
+    if (startTime > 0) {
+      video.addEventListener('loadedmetadata', function() {
+        video.currentTime = startTime;
+      });
+      
+      // Also set current time when video can play
+      video.addEventListener('canplay', function() {
+        if (video.currentTime === 0) {
+          video.currentTime = startTime;
+        }
+      });
+    }
+  });
+}
 
 // Close popup with Escape key
 document.addEventListener('keydown', function(e) {

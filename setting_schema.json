@@ -4705,6 +4705,23 @@
         "default": 20
       },
       {
+        "type": "text",
+        "id": "iso7_video_file",
+        "label": "ISO 7 Video File (MP4 URL)",
+        "info": "Enter direct URL to MP4 file for embedded video"
+      },
+      {
+        "type": "range",
+        "id": "iso7_video_start_time",
+        "label": "Video Start Time (seconds)",
+        "min": 0,
+        "max": 300,
+        "step": 1,
+        "unit": "s",
+        "default": 0,
+        "info": "Set the start time for the video in seconds"
+      },
+      {
         "type": "header",
         "content": "Quality Commitment Settings"
       },
@@ -5913,8 +5930,7 @@
           {
             "value": "Malaysia",
             "label": "Malaysia"
-          },
-          {
+          },{
             "value": "Maldives",
             "label": "Maldives"
           },
