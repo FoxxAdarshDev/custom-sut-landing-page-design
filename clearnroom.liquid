@@ -1390,7 +1390,7 @@
     background-attachment: scroll !important;
   }
 
-  /* Video Popup Mobile Fixes */
+  /* VideoPopup Mobile Fixes */
   .cleanroom-video-popup-content {
     width: 95%;
     max-width: 95%;
@@ -2237,6 +2237,16 @@
           "info": "Enter direct URL to MP4 file for embedded video"
         },
         {
+          "type": "range",
+          "id": "iso7_video_start_time",
+          "label": "Video Start Time (seconds)",
+          "min": 0,
+          "max": 600,
+          "step": 1,
+          "unit": "s",
+          "default": 0
+        },
+        {
           "type": "checkbox",
           "id": "iso7_fixed_scroll",
           "label": "Fixed Scroll Background",
@@ -2499,6 +2509,16 @@
           "id": "content_video_file",
           "label": "Video File (MP4 URL)",
           "info": "Enter direct URL to MP4 file for embedded video"
+        },
+        {
+          "type": "range",
+          "id": "content_video_start_time",
+          "label": "Video Start Time (seconds)",
+          "min": 0,
+          "max": 600,
+          "step": 1,
+          "unit": "s",
+          "default": 0
         }
       ]
     },
@@ -2994,7 +3014,7 @@
 
                   {% if block.settings.content_video_file != blank %}
                     <div class="cleanroom-image-content-video-embed">
-                      <video controls preload="metadata" class="cleanroom-embedded-video">
+                      <video controls preload="metadata" class="cleanroom-embedded-video" data-start-time="{{ block.settings.content_video_start_time | default: 0 }}">
                         <source src="{{ block.settings.content_video_file }}" type="video/mp4">
                         Your browser does not support the video tag.
                       </video>
@@ -3020,7 +3040,7 @@
 
                 {% if block.settings.content_video_file != blank %}
                   <div class="cleanroom-image-content-video-embed">
-                    <video controls preload="metadata" class="cleanroom-embedded-video">
+                    <video controls preload="metadata" class="cleanroom-embedded-video" data-start-time="{{ block.settings.content_video_start_time | default: 0 }}">
                       <source src="{{ block.settings.content_video_file }}" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
@@ -3063,7 +3083,7 @@
 
                 {% if block.settings.content_video_file != blank %}
                   <div class="cleanroom-image-content-video-embed">
-                    <video controls preload="metadata" class="cleanroom-embedded-video">
+                    <video controls preload="metadata" class="cleanroom-embedded-video" data-start-time="{{ block.settings.content_video_start_time | default: 0 }}">
                       <source src="{{ block.settings.content_video_file }}" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
@@ -3221,30 +3241,18 @@ function adjustISO7SectionHeight() {
   });
 }
 
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-  adjustISO7SectionHeight();
-  initializeVideoStartTimes();
-});
-
-// Re-run when images/videos load
-window.addEventListener('load', function() {
-  adjustISO7SectionHeight();
-  initializeVideoStartTimes();
-});
-
 // Function to handle video start times
 function initializeVideoStartTimes() {
   var videos = document.querySelectorAll('.cleanroom-embedded-video[data-start-time]');
-  
+
   videos.forEach(function(video) {
     var startTime = parseInt(video.getAttribute('data-start-time')) || 0;
-    
+
     if (startTime > 0) {
       video.addEventListener('loadedmetadata', function() {
         video.currentTime = startTime;
       });
-      
+
       // Also set current time when video can play
       video.addEventListener('canplay', function() {
         if (video.currentTime === 0) {
@@ -3254,6 +3262,13 @@ function initializeVideoStartTimes() {
     }
   });
 }
+
+// Initialize on DOM ready and also re-run when images/videos load
+document.addEventListener('DOMContentLoaded', adjustISO7SectionHeight);
+window.addEventListener('load', function() {
+  adjustISO7SectionHeight();
+  initializeVideoStartTimes();
+});
 
 // Close popup with Escape key
 document.addEventListener('keydown', function(e) {
