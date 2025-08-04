@@ -687,18 +687,19 @@
 }
 
 .cleanroom-image-content-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .cleanroom-image-content-container.cleanroom-reverse-layout {
-  direction: rtl;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .cleanroom-image-content-container.cleanroom-reverse-layout > * {
-  direction: ltr;
+  width: 100%;
 }
 
 .cleanroom-image-content-image-wrapper {
@@ -706,6 +707,8 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  max-width: 100%;
 }
 
 .cleanroom-image-content-image {
@@ -715,7 +718,9 @@
 }
 
 .cleanroom-image-content-text {
-  padding: 20px 0;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .cleanroom-image-content-title {
@@ -768,6 +773,10 @@
 
 /* Mobile responsive for image-content */
 @media (max-width: 768px) {
+    .cleanroom-image-content-image-wrapper {
+      margin-bottom: 30px;
+    }
+
     .cleanroom-image-content-description {
       font-size: 16px;
       line-height: 1.7;
@@ -2469,76 +2478,40 @@
     {% when 'image_content_section' %}
       <section class="cleanroom-image-content-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.content_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.content_padding_bottom | default: 100 }}px; margin-top: {{ block.settings.content_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.content_margin_bottom | default: 0 }}px;">
         <div class="cleanroom-container">
-          <div class="cleanroom-image-content-container{% if block.settings.content_layout == 'image_right' %} cleanroom-reverse-layout{% endif %}">
-            {% if block.settings.content_layout == 'image_right' %}
-              <!-- Content First -->
-              <div class="cleanroom-image-content-text">
-                <h2 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h2>
-                <div class="cleanroom-image-content-description">
-                  {{ block.settings.content_description | newline_to_br }}
-                </div>
-
-                {% if block.settings.content_video_file != blank %}
-                  <div class="cleanroom-image-content-video-embed">
-                    <video controls preload="metadata" class="cleanroom-embedded-video">
-                      <source src="{{ block.settings.content_video_file }}" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                {% endif %}
-
-                {% if block.settings.content_button_text != blank and block.settings.content_button_url != blank %}
-                  <div class="cleanroom-image-content-actions">
-                    <a href="{{ block.settings.content_button_url }}" class="cleanroom-btn cleanroom-btn-primary">
-                      {{ block.settings.content_button_text }}
-                    </a>
-                  </div>
-                {% endif %}
-              </div>
-
-              <!-- Image Second -->
-              {% if block.settings.content_image != blank %}
-                <div class="cleanroom-image-content-image-wrapper">
-                  <img src="{{ block.settings.content_image | image_url: width: 800 }}" 
-                       alt="{{ block.settings.content_title }}" 
-                       class="cleanroom-image-content-image">
-                </div>
-              {% endif %}
-            {% else %}
-              <!-- Image First -->
-              {% if block.settings.content_image != blank %}
-                <div class="cleanroom-image-content-image-wrapper">
-                  <img src="{{ block.settings.content_image | image_url: width: 800 }}" 
-                       alt="{{ block.settings.content_title }}" 
-                       class="cleanroom-image-content-image">
-                </div>
-              {% endif %}
-
-              <!-- Content Second -->
-              <div class="cleanroom-image-content-text">
-                <h2 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h2>
-                <div class="cleanroom-image-content-description">
-                  {{ block.settings.content_description | newline_to_br }}
-                </div>
-
-                {% if block.settings.content_video_file != blank %}
-                  <div class="cleanroom-image-content-video-embed">
-                    <video controls preload="metadata" class="cleanroom-embedded-video">
-                      <source src="{{ block.settings.content_video_file }}" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                {% endif %}
-
-                {% if block.settings.content_button_text != blank and block.settings.content_button_url != blank %}
-                  <div class="cleanroom-image-content-actions">
-                    <a href="{{ block.settings.content_button_url }}" class="cleanroom-btn cleanroom-btn-primary">
-                      {{ block.settings.content_button_text }}
-                    </a>
-                  </div>
-                {% endif %}
+          <div class="cleanroom-image-content-container">
+            <!-- Image First -->
+            {% if block.settings.content_image != blank %}
+              <div class="cleanroom-image-content-image-wrapper">
+                <img src="{{ block.settings.content_image | image_url: width: 1200 }}" 
+                     alt="{{ block.settings.content_title }}" 
+                     class="cleanroom-image-content-image">
               </div>
             {% endif %}
+
+            <!-- Content Below Image -->
+            <div class="cleanroom-image-content-text">
+              <h2 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h2>
+              <div class="cleanroom-image-content-description">
+                {{ block.settings.content_description | newline_to_br }}
+              </div>
+
+              {% if block.settings.content_video_file != blank %}
+                <div class="cleanroom-image-content-video-embed">
+                  <video controls preload="metadata" class="cleanroom-embedded-video">
+                    <source src="{{ block.settings.content_video_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% endif %}
+
+              {% if block.settings.content_button_text != blank and block.settings.content_button_url != blank %}
+                <div class="cleanroom-image-content-actions">
+                  <a href="{{ block.settings.content_button_url }}" class="cleanroom-btn cleanroom-btn-primary">
+                    {{ block.settings.content_button_text }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
           </div>
         </div>
       </section>
