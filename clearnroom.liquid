@@ -148,8 +148,8 @@
       ]
     },
     {
-      "type": "iso7_section",
-      "name": "ISO 7 Classification Section",
+      "type": "iso7_class",
+      "name": "ISO 7 Classification",
       "settings": [
         {
           "type": "image_picker",
@@ -264,8 +264,8 @@
       ]
     },
     {
-      "type": "quality_section",
-      "name": "Quality Commitment Section",
+      "type": "quality_commit",
+      "name": "Quality Commitment",
       "settings": [
         {
           "type": "image_picker",
@@ -325,7 +325,7 @@
           "type": "welcome_section"
         },
         {
-          "type": "iso7_section"
+          "type": "iso7_class"
         },
         {
           "type": "iso_zone"
@@ -346,7 +346,7 @@
           "type": "grid_image"
         },
         {
-          "type": "quality_section"
+          "type": "quality_commit"
         }
       ]
     }
@@ -483,7 +483,7 @@
         </div>
       </section>
 
-    {% when 'iso7_section' %}
+    {% when 'iso7_class' %}
       <section class="cleanroom-iso7-section{% if block.settings.iso7_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.iso7_bg_image != blank %}
           <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | img_url: '1920x' }}');"></div>
@@ -556,7 +556,7 @@
         </div>
       </section>
 
-    {% when 'quality_section' %}
+    {% when 'quality_commit' %}
       <section class="cleanroom-quality-section{% if block.settings.quality_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.quality_bg_image != blank %}
           <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | img_url: '1920x' }}');"></div>
