@@ -3,261 +3,356 @@
 {
   "name": "Cleanroom Section",
   "class": "cleanroom-section",
-  "settings": [
+  "blocks": [
     {
-      "type": "header",
-      "content": "Hero Image Section"
+      "type": "hero_section",
+      "name": "Hero Section",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_hero_section",
+          "label": "Enable Hero Section",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Hero Image"
+        },
+        {
+          "type": "text",
+          "id": "hero_title",
+          "label": "Hero Title",
+          "default": "World Class Cleanroom"
+        },
+        {
+          "type": "textarea",
+          "id": "hero_description",
+          "label": "Hero Description",
+          "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
+        },
+        {
+          "type": "text",
+          "id": "hero_button_text",
+          "label": "Hero Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "hero_button_url",
+          "label": "Hero Button URL"
+        }
+      ]
     },
     {
-      "type": "checkbox",
-      "id": "enable_hero_section",
-      "label": "Enable Hero Section",
-      "default": true
+      "type": "banner_section",
+      "name": "Banner Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner Background Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_title",
+          "label": "Banner Title",
+          "default": "World Class Clean Room manufacturing"
+        },
+        {
+          "type": "textarea",
+          "id": "banner_description",
+          "label": "Banner Description",
+          "default": "Foxx Life Sciences has 3 DEM certified Clean rooms with full assembly lines between three locations (Londonderry, NH, Salem, NH, and Hyderabad, India)."
+        },
+        {
+          "type": "text",
+          "id": "banner_button_text",
+          "label": "Banner Button Text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "banner_button_url",
+          "label": "Banner Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "banner_fixed_scroll",
+          "label": "Fixed Scroll Background",
+          "default": true
+        }
+      ]
     },
     {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Image"
+      "type": "welcome_section",
+      "name": "Welcome Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "welcome_title",
+          "label": "Welcome Title",
+          "default": "DEDICATED SINGLE-USE MANUFACTURING"
+        },
+        {
+          "type": "textarea",
+          "id": "welcome_description",
+          "label": "Welcome Description",
+          "default": "Conveniently located in Londonderry, USA, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications."
+        },
+        {
+          "type": "image_picker",
+          "id": "welcome_image",
+          "label": "Welcome Section Image"
+        },
+        {
+          "type": "textarea",
+          "id": "welcome_video_text",
+          "label": "Welcome Video Text",
+          "default": "ISO Class 7 (10K) Cleanroom, perfect for custom assemblies at any volume! Complete documentation of the entire production process. Batch Records • 5O • Finished Goods Records Ability to source any materials required by the customer's ISO 13485 12 years in a row"
+        },
+        {
+          "type": "text",
+          "id": "watch_video_text",
+          "label": "Watch Video Button Text",
+          "default": "WATCH VIDEO"
+        },
+        {
+          "type": "url",
+          "id": "watch_video_url",
+          "label": "Watch Video URL"
+        },
+        {
+          "type": "text",
+          "id": "request_quote_text",
+          "label": "Request Quote Button Text",
+          "default": "REQUEST A QUOTE"
+        },
+        {
+          "type": "url",
+          "id": "request_quote_url",
+          "label": "Request Quote URL"
+        },
+        {
+          "type": "text",
+          "id": "welcome_video_file",
+          "label": "Welcome Video File (MP4 URL)",
+          "info": "Enter direct URL to MP4 file for embedded video"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_video_popup",
+          "label": "Show Video in Popup",
+          "default": true
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "hero_title",
-      "label": "Hero Title",
-      "default": "World Class Cleanroom"
+      "type": "iso7_section",
+      "name": "ISO 7 Classification Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "iso7_bg_image",
+          "label": "ISO 7 Background Image"
+        },
+        {
+          "type": "text",
+          "id": "iso7_title",
+          "label": "ISO 7 Title",
+          "default": "ISO 7 CLASSIFICATION"
+        },
+        {
+          "type": "text",
+          "id": "iso7_subtitle",
+          "label": "ISO 7 Subtitle",
+          "default": "SINGLE-USE MANUFACTURING SUITES"
+        },
+        {
+          "type": "textarea",
+          "id": "iso7_description",
+          "label": "ISO 7 Description",
+          "default": "This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below."
+        },
+        {
+          "type": "text",
+          "id": "iso7_button_text",
+          "label": "ISO 7 Button Text",
+          "default": "REQUEST A QUOTE"
+        },
+        {
+          "type": "url",
+          "id": "iso7_button_url",
+          "label": "ISO 7 Button URL"
+        },
+        {
+          "type": "text",
+          "id": "iso7_video_file",
+          "label": "ISO 7 Video File (MP4 URL)",
+          "info": "Enter direct URL to MP4 file for embedded video"
+        },
+        {
+          "type": "checkbox",
+          "id": "iso7_fixed_scroll",
+          "label": "Fixed Scroll Background",
+          "default": true
+        }
+      ]
     },
     {
-      "type": "textarea",
-      "id": "hero_description",
-      "label": "Hero Description",
-      "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
+      "type": "iso_zone",
+      "name": "ISO Zone Info",
+      "settings": [
+        {
+          "type": "text",
+          "id": "zone_text",
+          "label": "Zone Text",
+          "default": "ISO 7 zone | 30-60 air changes per hour"
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "hero_button_text",
-      "label": "Hero Button Text",
-      "default": "Learn More"
+      "type": "classifications_section",
+      "name": "Classifications Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "classifications_title",
+          "label": "Classifications Title",
+          "default": "CLEANROOM CLASSIFICATIONS"
+        },
+        {
+          "type": "textarea",
+          "id": "classifications_description",
+          "label": "Classifications Description",
+          "default": "Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air."
+        },
+        {
+          "type": "text",
+          "id": "classifications_button_text",
+          "label": "Classifications Button Text",
+          "default": "LEARN MORE"
+        },
+        {
+          "type": "url",
+          "id": "classifications_button_url",
+          "label": "Classifications Button URL"
+        }
+      ]
     },
     {
-      "type": "url",
-      "id": "hero_button_url",
-      "label": "Hero Button URL"
+      "type": "grid_image",
+      "name": "Grid Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "grid_image",
+          "label": "Grid Image"
+        },
+        {
+          "type": "text",
+          "id": "grid_title",
+          "label": "Grid Title",
+          "default": "Advanced Equipment"
+        },
+        {
+          "type": "text",
+          "id": "grid_description",
+          "label": "Grid Description",
+          "default": "State-of-the-art cleanroom technology"
+        }
+      ]
     },
     {
-      "type": "header",
-      "content": "Welcome Section"
-    },
-    {
-      "type": "text",
-      "id": "welcome_title",
-      "label": "Welcome Title",
-      "default": "WELCOME TO WORLD CLASS"
-    },
-    {
-      "type": "text",
-      "id": "welcome_subtitle",
-      "label": "Welcome Subtitle",
-      "default": "DEDICATED SINGLE-USE MANUFACTURING"
-    },
-    {
-      "type": "textarea",
-      "id": "welcome_description",
-      "label": "Welcome Description",
-      "default": "Conveniently located in Durham, NC, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications."
-    },
-    {
-      "type": "image_picker",
-      "id": "welcome_image",
-      "label": "Welcome Section Image"
-    },
-    {
-      "type": "text",
-      "id": "welcome_video_text",
-      "label": "Welcome Video Text",
-      "default": "We have made a conscious decision to input unprecedented flexibility into our process so that we can say 'yes' more often and work with speed and agility to meet the demands of our customers. With over 200 years of industry experience, we have the technical expertise combined with the cleanroom assembly capability to provide our customers with unprecedented levels of service and a commitment to quality."
-    },
-    {
-      "type": "text",
-      "id": "watch_video_text",
-      "label": "Watch Video Button Text",
-      "default": "WATCH VIDEO"
-    },
-    {
-      "type": "url",
-      "id": "watch_video_url",
-      "label": "Watch Video URL"
-    },
-    {
-      "type": "text",
-      "id": "request_quote_text",
-      "label": "Request Quote Button Text",
-      "default": "REQUEST A QUOTE"
-    },
-    {
-      "type": "url",
-      "id": "request_quote_url",
-      "label": "Request Quote URL"
-    },
-    {
-      "type": "header",
-      "content": "ISO 7 Classification Section"
-    },
-    {
-      "type": "image_picker",
-      "id": "iso7_bg_image",
-      "label": "ISO 7 Background Image"
-    },
-    {
-      "type": "text",
-      "id": "iso7_title",
-      "label": "ISO 7 Title",
-      "default": "ISO 7 CLASSIFICATION"
-    },
-    {
-      "type": "text",
-      "id": "iso7_subtitle",
-      "label": "ISO 7 Subtitle",
-      "default": "SINGLE-USE MANUFACTURING SUITES"
-    },
-    {
-      "type": "textarea",
-      "id": "iso7_description",
-      "label": "ISO 7 Description",
-      "default": "This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below."
-    },
-    {
-      "type": "text",
-      "id": "iso7_zone_info",
-      "label": "ISO 7 Zone Info",
-      "default": "ISO 7 zone | 30-60 air changes per hour"
-    },
-    {
-      "type": "text",
-      "id": "iso8_zone_info",
-      "label": "ISO 8 Zone Info",
-      "default": "ISO 8 zone | 15-25 air changes per hour (ante-room)"
-    },
-    {
-      "type": "text",
-      "id": "iso7_button_text",
-      "label": "ISO 7 Button Text",
-      "default": "REQUEST A QUOTE"
-    },
-    {
-      "type": "url",
-      "id": "iso7_button_url",
-      "label": "ISO 7 Button URL"
-    },
-    {
-      "type": "header",
-      "content": "Classifications Section"
-    },
-    {
-      "type": "text",
-      "id": "classifications_title",
-      "label": "Classifications Title",
-      "default": "CLEANROOM CLASSIFICATIONS"
-    },
-    {
-      "type": "textarea",
-      "id": "classifications_description",
-      "label": "Classifications Description",
-      "default": "Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air."
-    },
-    {
-      "type": "text",
-      "id": "classifications_button_text",
-      "label": "Classifications Button Text",
-      "default": "LEARN MORE"
-    },
-    {
-      "type": "url",
-      "id": "classifications_button_url",
-      "label": "Classifications Button URL"
-    },
-    {
-      "type": "header",
-      "content": "Image Grid Section"
-    },
-    {
-      "type": "image_picker",
-      "id": "grid_image_1",
-      "label": "Grid Image 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "grid_image_2",
-      "label": "Grid Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "grid_image_3",
-      "label": "Grid Image 3"
-    },
-    {
-      "type": "header",
-      "content": "Quality Commitment Section"
-    },
-    {
-      "type": "image_picker",
-      "id": "quality_bg_image",
-      "label": "Quality Background Image"
-    },
-    {
-      "type": "text",
-      "id": "quality_title",
-      "label": "Quality Title",
-      "default": "OUR COMMITMENT TO QUALITY"
-    },
-    {
-      "type": "textarea",
-      "id": "quality_description",
-      "label": "Quality Description",
-      "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
-    },
-    {
-      "type": "text",
-      "id": "quality_button_text",
-      "label": "Quality Button Text",
-      "default": "LEARN MORE"
-    },
-    {
-      "type": "url",
-      "id": "quality_button_url",
-      "label": "Quality Button URL"
+      "type": "quality_section",
+      "name": "Quality Commitment Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "quality_bg_image",
+          "label": "Quality Background Image"
+        },
+        {
+          "type": "text",
+          "id": "quality_title",
+          "label": "Quality Title",
+          "default": "OUR COMMITMENT TO QUALITY"
+        },
+        {
+          "type": "textarea",
+          "id": "quality_description",
+          "label": "Quality Description",
+          "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
+        },
+        {
+          "type": "text",
+          "id": "quality_button_text",
+          "label": "Quality Button Text",
+          "default": "LEARN MORE"
+        },
+        {
+          "type": "url",
+          "id": "quality_button_url",
+          "label": "Quality Button URL"
+        },
+        {
+          "type": "text",
+          "id": "quality_video_file",
+          "label": "Quality Video File (MP4 URL)",
+          "info": "Enter direct URL to MP4 file for embedded video"
+        },
+        {
+          "type": "checkbox",
+          "id": "quality_fixed_scroll",
+          "label": "Fixed Scroll Background",
+          "default": true
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Cleanroom Section",
-      "category": "Services"
+      "category": "Services",
+      "blocks": [
+        {
+          "type": "hero_section"
+        },
+        {
+          "type": "banner_section"
+        },
+        {
+          "type": "welcome_section"
+        },
+        {
+          "type": "iso7_section"
+        },
+        {
+          "type": "iso_zone"
+        },
+        {
+          "type": "iso_zone"
+        },
+        {
+          "type": "classifications_section"
+        },
+        {
+          "type": "grid_image"
+        },
+        {
+          "type": "grid_image"
+        },
+        {
+          "type": "grid_image"
+        },
+        {
+          "type": "quality_section"
+        }
+      ]
     }
   ]
 }
 {% endschema %}
-
-<!-- Hero Image Section -->
-{% if section.settings.enable_hero_section %}
-<section class="cleanroom-hero-section">
-  <div class="hero-image-container">
-    {% if section.settings.hero_image %}
-      <div class="hero-background" style="background-image: url('{{ section.settings.hero_image | image_url: width: 1920 }}');"></div>
-    {% else %}
-      <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
-    {% endif %}
-    <div class="hero-overlay">
-      <div class="hero-content container">
-        <h1 class="hero-title">{{ section.settings.hero_title }}</h1>
-        <p class="hero-description">{{ section.settings.hero_description }}</p>
-        {% if section.settings.hero_button_text and section.settings.hero_button_url %}
-          <a href="{{ section.settings.hero_button_url }}" class="btn btn-primary hero-btn">
-            {{ section.settings.hero_button_text }}
-          </a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</section>
-{% endif %}
 
 <!-- Hero Banner Section -->
 {% if settings.show_hero_banner %}
@@ -281,160 +376,229 @@
 </section>
 {% endif %}
 
-<!-- Welcome Section -->
-<section class="cleanroom-welcome-section">
-  <div class="container">
-    <div class="welcome-header">
-      <h2 class="welcome-title">{{ section.settings.welcome_title }}</h2>
-      <h3 class="welcome-subtitle">{{ section.settings.welcome_subtitle }}</h3>
-      <p class="welcome-description">{{ section.settings.welcome_description }}</p>
-    </div>
-
-    <div class="welcome-content">
-      <div class="welcome-media">
-        {% if section.settings.welcome_image != blank %}
-          <div class="welcome-video-container">
-            <img src="{{ section.settings.welcome_image | img_url: '800x' }}" 
-                 alt="Cleanroom Facility" 
-                 class="welcome-image">
-            <div class="video-overlay">
-              <button class="play-button" onclick="playVideo()">
-                <svg width="60" height="60" viewBox="0 0 60 60">
-                  <circle cx="30" cy="30" r="28" fill="rgba(255,255,255,0.9)" stroke="#0071b9" stroke-width="2"/>
-                  <polygon points="24,18 24,42 42,30" fill="#0071b9"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        {% endif %}
-      </div>
-
-      <div class="welcome-text">
-        <p class="video-description">{{ section.settings.welcome_video_text }}</p>
-        
-        <div class="welcome-actions">
-          {% if section.settings.watch_video_url != blank %}
-            <a href="{{ section.settings.watch_video_url }}" class="btn btn-primary watch-video-btn">
-              {{ section.settings.watch_video_text }}
-            </a>
+<!-- Dynamic Blocks Content -->
+{% for block in section.blocks %}
+  {% case block.type %}
+    
+    {% when 'hero_section' %}
+      {% if block.settings.enable_hero_section %}
+      <section class="cleanroom-hero-section" {{ block.shopify_attributes }}>
+        <div class="hero-image-container">
+          {% if block.settings.hero_image %}
+            <div class="hero-background" style="background-image: url('{{ block.settings.hero_image | image_url: width: 1920 }}');"></div>
+          {% else %}
+            <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
           {% endif %}
-          
-          {% if section.settings.request_quote_url != blank %}
-            <a href="{{ section.settings.request_quote_url }}" class="btn btn-secondary quote-btn">
-              {{ section.settings.request_quote_text }}
-            </a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ISO 7 Classification Section -->
-<section class="cleanroom-iso7-section">
-  {% if section.settings.iso7_bg_image != blank %}
-    <div class="iso7-background" style="background-image: url('{{ section.settings.iso7_bg_image | img_url: '1920x' }}');"></div>
-  {% endif %}
-  <div class="iso7-overlay">
-    <div class="container">
-      <div class="iso7-content">
-        <h2 class="iso7-title">{{ section.settings.iso7_title }}</h2>
-        <h3 class="iso7-subtitle">{{ section.settings.iso7_subtitle }}</h3>
-        <p class="iso7-description">{{ section.settings.iso7_description }}</p>
-        
-        <div class="iso-zones">
-          <div class="zone-info">
-            <span class="zone-text">{{ section.settings.iso7_zone_info }}</span>
-          </div>
-          <div class="zone-info">
-            <span class="zone-text">{{ section.settings.iso8_zone_info }}</span>
+          <div class="hero-overlay">
+            <div class="hero-content container">
+              <h1 class="hero-title">{{ block.settings.hero_title }}</h1>
+              <p class="hero-description">{{ block.settings.hero_description }}</p>
+              {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                <a href="{{ block.settings.hero_button_url }}" class="btn btn-primary hero-btn">
+                  {{ block.settings.hero_button_text }}
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
+      </section>
+      {% endif %}
 
-        {% if section.settings.iso7_button_url != blank %}
-          <a href="{{ section.settings.iso7_button_url }}" class="btn btn-primary iso7-btn">
-            {{ section.settings.iso7_button_text }}
-          </a>
+    {% when 'banner_section' %}
+      <section class="cleanroom-banner-section{% if block.settings.banner_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.banner_image %}
+          <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | image_url: width: 1920 }}');"></div>
         {% endif %}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Classifications Section -->
-<section class="cleanroom-classifications-section">
-  <div class="container">
-    <div class="classifications-header">
-      <h2 class="classifications-title">{{ section.settings.classifications_title }}</h2>
-      <p class="classifications-description">{{ section.settings.classifications_description }}</p>
-      
-      {% if section.settings.classifications_button_url != blank %}
-        <a href="{{ section.settings.classifications_button_url }}" class="btn btn-primary classifications-btn">
-          {{ section.settings.classifications_button_text }}
-        </a>
-      {% endif %}
-    </div>
-
-    <div class="classifications-grid">
-      {% if section.settings.grid_image_1 != blank %}
-        <div class="grid-item item-1">
-          <img src="{{ section.settings.grid_image_1 | img_url: '600x' }}" alt="Cleanroom Classification 1" class="grid-image">
-          <div class="grid-overlay">
-            <div class="grid-content">
-              <h4>Advanced Equipment</h4>
-              <p>State-of-the-art cleanroom technology</p>
+        <div class="banner-overlay">
+          <div class="container">
+            <div class="banner-content">
+              <h2 class="banner-title">{{ block.settings.banner_title }}</h2>
+              <p class="banner-description">{{ block.settings.banner_description }}</p>
+              {% if block.settings.banner_button_text and block.settings.banner_button_url %}
+                <a href="{{ block.settings.banner_button_url }}" class="btn btn-primary banner-btn">
+                  {{ block.settings.banner_button_text }}
+                </a>
+              {% endif %}
             </div>
           </div>
         </div>
-      {% endif %}
+      </section>
 
-      {% if section.settings.grid_image_2 != blank %}
-        <div class="grid-item item-2">
-          <img src="{{ section.settings.grid_image_2 | img_url: '600x' }}" alt="Cleanroom Classification 2" class="grid-image">
-          <div class="grid-overlay">
-            <div class="grid-content">
-              <h4>Quality Control</h4>
-              <p>Precision monitoring and control systems</p>
+    {% when 'welcome_section' %}
+      <section class="cleanroom-welcome-section" {{ block.shopify_attributes }}>
+        <div class="container">
+          <div class="welcome-header">
+            <h2 class="welcome-title">{{ block.settings.welcome_title }}</h2>
+            <p class="welcome-description">{{ block.settings.welcome_description }}</p>
+          </div>
+
+          <div class="welcome-content">
+            <div class="welcome-media">
+              {% if block.settings.welcome_image != blank %}
+                <div class="welcome-video-container">
+                  <img src="{{ block.settings.welcome_image | img_url: '800x' }}" 
+                       alt="Cleanroom Facility" 
+                       class="welcome-image">
+                  <div class="video-overlay">
+                    {% if block.settings.watch_video_url != blank %}
+                      <button class="play-button" onclick="{% if block.settings.show_video_popup %}openVideoPopup('{{ block.settings.watch_video_url }}'){% else %}window.open('{{ block.settings.watch_video_url }}', '_blank'){% endif %}">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="28" fill="rgba(255,255,255,0.9)" stroke="#0071b9" stroke-width="2"/>
+                          <polygon points="24,18 24,42 42,30" fill="#0071b9"/>
+                        </svg>
+                      </button>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.settings.welcome_video_file != blank %}
+                <div class="welcome-video-embed">
+                  <video controls preload="metadata" class="embedded-video">
+                    <source src="{{ block.settings.welcome_video_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="welcome-text">
+              <p class="video-description">{{ block.settings.welcome_video_text }}</p>
+              
+              <div class="welcome-actions">
+                {% if block.settings.watch_video_url != blank %}
+                  <a href="javascript:void(0)" onclick="{% if block.settings.show_video_popup %}openVideoPopup('{{ block.settings.watch_video_url }}'){% else %}window.open('{{ block.settings.watch_video_url }}', '_blank'){% endif %}" class="btn btn-primary watch-video-btn">
+                    {{ block.settings.watch_video_text }}
+                  </a>
+                {% endif %}
+                
+                {% if block.settings.request_quote_url != blank %}
+                  <a href="{{ block.settings.request_quote_url }}" class="btn btn-secondary quote-btn">
+                    {{ block.settings.request_quote_text }}
+                  </a>
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
-      {% endif %}
+      </section>
 
-      {% if section.settings.grid_image_3 != blank %}
-        <div class="grid-item item-3">
-          <img src="{{ section.settings.grid_image_3 | img_url: '600x' }}" alt="Cleanroom Classification 3" class="grid-image">
-          <div class="grid-overlay">
-            <div class="grid-content">
-              <h4>Manufacturing Excellence</h4>
-              <p>World-class production capabilities</p>
-            </div>
-          </div>
-        </div>
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- Quality Commitment Section -->
-<section class="cleanroom-quality-section">
-  {% if section.settings.quality_bg_image != blank %}
-    <div class="quality-background" style="background-image: url('{{ section.settings.quality_bg_image | img_url: '1920x' }}');"></div>
-  {% endif %}
-  <div class="quality-overlay">
-    <div class="container">
-      <div class="quality-content">
-        <h2 class="quality-title">{{ section.settings.quality_title }}</h2>
-        <p class="quality-description">{{ section.settings.quality_description }}</p>
-
-        {% if section.settings.quality_button_text != blank %}
-          <a href="{{ section.settings.quality_button_url }}" class="quality-button">
-            {{ section.settings.quality_button_text }}
-          </a>
+    {% when 'iso7_section' %}
+      <section class="cleanroom-iso7-section{% if block.settings.iso7_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.iso7_bg_image != blank %}
+          <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | img_url: '1920x' }}');"></div>
         {% endif %}
-      </div>
+        <div class="iso7-overlay">
+          <div class="container">
+            <div class="iso7-content">
+              <h2 class="iso7-title">{{ block.settings.iso7_title }}</h2>
+              <h3 class="iso7-subtitle">{{ block.settings.iso7_subtitle }}</h3>
+              <p class="iso7-description">{{ block.settings.iso7_description }}</p>
+              
+              <div class="iso-zones">
+                {% for zone_block in section.blocks %}
+                  {% if zone_block.type == 'iso_zone' %}
+                    <div class="zone-info" {{ zone_block.shopify_attributes }}>
+                      <span class="zone-text">{{ zone_block.settings.zone_text }}</span>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              {% if block.settings.iso7_video_file != blank %}
+                <div class="iso7-video-embed">
+                  <video controls preload="metadata" class="embedded-video">
+                    <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% endif %}
+
+              {% if block.settings.iso7_button_url != blank %}
+                <a href="{{ block.settings.iso7_button_url }}" class="btn btn-primary iso7-btn">
+                  {{ block.settings.iso7_button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+    {% when 'classifications_section' %}
+      <section class="cleanroom-classifications-section" {{ block.shopify_attributes }}>
+        <div class="container">
+          <div class="classifications-header">
+            <h2 class="classifications-title">{{ block.settings.classifications_title }}</h2>
+            <p class="classifications-description">{{ block.settings.classifications_description }}</p>
+            
+            {% if block.settings.classifications_button_url != blank %}
+              <a href="{{ block.settings.classifications_button_url }}" class="btn btn-primary classifications-btn">
+                {{ block.settings.classifications_button_text }}
+              </a>
+            {% endif %}
+          </div>
+
+          <div class="classifications-grid">
+            {% for grid_block in section.blocks %}
+              {% if grid_block.type == 'grid_image' and grid_block.settings.grid_image != blank %}
+                <div class="grid-item" {{ grid_block.shopify_attributes }}>
+                  <img src="{{ grid_block.settings.grid_image | img_url: '600x' }}" alt="{{ grid_block.settings.grid_title }}" class="grid-image">
+                  <div class="grid-overlay">
+                    <div class="grid-content">
+                      <h4>{{ grid_block.settings.grid_title }}</h4>
+                      <p>{{ grid_block.settings.grid_description }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+    {% when 'quality_section' %}
+      <section class="cleanroom-quality-section{% if block.settings.quality_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.quality_bg_image != blank %}
+          <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | img_url: '1920x' }}');"></div>
+        {% endif %}
+        <div class="quality-overlay">
+          <div class="container">
+            <div class="quality-content">
+              <h2 class="quality-title">{{ block.settings.quality_title }}</h2>
+              <p class="quality-description">{{ block.settings.quality_description }}</p>
+
+              {% if block.settings.quality_video_file != blank %}
+                <div class="quality-video-embed">
+                  <video controls preload="metadata" class="embedded-video">
+                    <source src="{{ block.settings.quality_video_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% endif %}
+
+              {% if block.settings.quality_button_text != blank %}
+                <a href="{{ block.settings.quality_button_url }}" class="quality-button">
+                  {{ block.settings.quality_button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+  {% endcase %}
+{% endfor %}
+
+<!-- Video Popup Modal -->
+<div id="videoPopupModal" class="video-popup-modal" style="display: none;">
+  <div class="video-popup-overlay" onclick="closeVideoPopup()"></div>
+  <div class="video-popup-content">
+    <button class="video-popup-close" onclick="closeVideoPopup()">&times;</button>
+    <div class="video-popup-wrapper">
+      <iframe id="videoPopupFrame" src="" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
-</section>
+</div>
 
 <style>
 /* Global Styles */
@@ -486,79 +650,6 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
-}
-
-/* Hero Banner Styles */
-.cleanroom-hero-banner {
-  position: relative;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
-}
-
-.hero-banner-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
-}
-
-.hero-banner-overlay {
-  position: relative;
-  z-index: 3;
-  background: rgba(0, 113, 185, 0.8);
-  width: 100%;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px;
-}
-
-.hero-banner-content {
-  text-align: center;
-  color: white;
-  max-width: 800px;
-}
-
-.hero-banner-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.hero-banner-description {
-  font-size: 1.3rem;
-  line-height: 1.6;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
-.hero-banner-btn {
-  background: white;
-  color: #0071b9;
-  border: 2px solid white;
-  padding: 15px 35px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.hero-banner-btn:hover {
-  background: transparent;
-  color: white;
-  border-color: white;
 }
 
 .hero-image-container {
@@ -631,6 +722,114 @@
   border-color: white;
 }
 
+/* Hero Banner Styles */
+.cleanroom-hero-banner {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.hero-banner-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.hero-banner-overlay {
+  position: relative;
+  z-index: 3;
+  background: rgba(0, 113, 185, 0.8);
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.hero-banner-content {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+}
+
+.hero-banner-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Banner Section Styles */
+.cleanroom-banner-section {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cleanroom-banner-section.fixed-scroll .banner-background {
+  background-attachment: fixed;
+}
+
+.banner-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.banner-overlay {
+  position: relative;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.banner-content {
+  text-align: center;
+  color: white;
+  max-width: 900px;
+}
+
+.banner-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.banner-description {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
 /* Welcome Section */
 .cleanroom-welcome-section {
   padding: 100px 0;
@@ -646,17 +845,9 @@
   font-size: 3.5rem;
   color: #0071b9;
   font-weight: 300;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.welcome-subtitle {
-  font-size: 2.5rem;
-  color: #666;
-  font-weight: 600;
   margin-bottom: 30px;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .welcome-description {
@@ -716,6 +907,19 @@
   transform: scale(1.1);
 }
 
+.welcome-video-embed {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.embedded-video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
 .video-description {
   font-size: 1.3rem;
   color: #666;
@@ -737,6 +941,10 @@
   min-height: 600px;
 }
 
+.cleanroom-iso7-section.fixed-scroll .iso7-background {
+  background-attachment: fixed;
+}
+
 .iso7-background {
   position: absolute;
   top: 0;
@@ -745,7 +953,6 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   z-index: 1;
 }
 
@@ -810,6 +1017,11 @@
   letter-spacing: 1px;
 }
 
+.iso7-video-embed {
+  margin: 40px 0;
+  text-align: center;
+}
+
 .iso7-btn {
   background: white;
   color: #0071b9;
@@ -852,7 +1064,7 @@
 
 .classifications-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-top: 60px;
 }
@@ -920,6 +1132,10 @@
   overflow: hidden;
 }
 
+.cleanroom-quality-section.fixed-scroll .quality-background {
+  background-attachment: fixed;
+}
+
 .quality-background {
   position: absolute;
   top: 0;
@@ -972,6 +1188,11 @@
   margin-right: auto;
 }
 
+.quality-video-embed {
+  margin: 40px 0;
+  text-align: center;
+}
+
 .quality-button {
   background: transparent;
   border: 2px solid white;
@@ -1011,6 +1232,65 @@
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
+/* Video Popup Modal */
+.video-popup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.video-popup-content {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-popup-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.video-popup-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-popup-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero-title {
@@ -1021,16 +1301,8 @@
     font-size: 1.1rem;
   }
 
-  /* Fix mobile background attachment issues */
-  .iso7-background {
-    background-attachment: scroll !important;
-  }
-
-  .hero-background,
-  .hero-banner-background,
-  .quality-background {
-    background-attachment: scroll;
-    background-size: cover;
+  .banner-title {
+    font-size: 2rem;
   }
 
   .hero-banner-title {
@@ -1046,6 +1318,11 @@
     padding: 40px 15px;
   }
 
+  .banner-overlay {
+    min-height: 300px;
+    padding: 40px 15px;
+  }
+
   .welcome-content {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1053,10 +1330,6 @@
 
   .welcome-title {
     font-size: 2rem;
-  }
-
-  .welcome-subtitle {
-    font-size: 1.5rem;
   }
 
   .welcome-actions {
@@ -1089,7 +1362,6 @@
     font-size: 2.5rem;
   }
 
-  /* Quality Section Mobile Fixes */
   .cleanroom-quality-section {
     min-height: 300px;
   }
@@ -1116,14 +1388,11 @@
     font-size: 0.9rem;
   }
 
-  .nav-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-
-  .slide-navigation {
-    padding: 0 20px;
+  /* Fix mobile background attachment issues */
+  .cleanroom-banner-section.fixed-scroll .banner-background,
+  .cleanroom-iso7-section.fixed-scroll .iso7-background,
+  .cleanroom-quality-section.fixed-scroll .quality-background {
+    background-attachment: scroll !important;
   }
 }
 
@@ -1140,20 +1409,20 @@
     font-size: 1rem;
   }
 
-  .hero-banner-title {
+  .hero-banner-title, .banner-title {
     font-size: 1.5rem;
   }
 
-  .hero-banner-description {
+  .hero-banner-description, .banner-description {
     font-size: 1rem;
   }
 
-  .hero-banner-overlay {
+  .hero-banner-overlay, .banner-overlay {
     min-height: 250px;
     padding: 30px 10px;
   }
 
-  .hero-banner-btn {
+  .hero-banner-btn, .banner-btn {
     padding: 12px 25px;
     font-size: 0.9rem;
   }
@@ -1174,7 +1443,6 @@
     font-size: 2rem;
   }
 
-  /* Quality Section Phone Fixes */
   .cleanroom-quality-section {
     min-height: 250px;
   }
@@ -1204,9 +1472,41 @@
 </style>
 
 <script>
-function playVideo() {
-  {% if section.settings.watch_video_url != blank %}
-    window.open('{{ section.settings.watch_video_url }}', '_blank');
-  {% endif %}
+function openVideoPopup(videoUrl) {
+  var modal = document.getElementById('videoPopupModal');
+  var iframe = document.getElementById('videoPopupFrame');
+  
+  // Convert regular YouTube URL to embed URL if needed
+  if (videoUrl.includes('youtube.com/watch?v=')) {
+    var videoId = videoUrl.split('v=')[1];
+    var ampersandPosition = videoId.indexOf('&');
+    if (ampersandPosition !== -1) {
+      videoId = videoId.substring(0, ampersandPosition);
+    }
+    videoUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+  } else if (videoUrl.includes('youtu.be/')) {
+    var videoId = videoUrl.split('youtu.be/')[1];
+    videoUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+  }
+  
+  iframe.src = videoUrl;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
+
+function closeVideoPopup() {
+  var modal = document.getElementById('videoPopupModal');
+  var iframe = document.getElementById('videoPopupFrame');
+  
+  iframe.src = '';
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeVideoPopup();
+  }
+});
 </script>

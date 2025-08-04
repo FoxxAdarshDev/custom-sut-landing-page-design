@@ -4481,30 +4481,47 @@
     "settings": [
       {
         "type": "header",
-        "content": "Hero Image Configuration"
+        "content": "Global Hero Banner Settings"
       },
       {
         "type": "checkbox",
-        "id": "enable_cleanroom_hero",
-        "label": "Enable Hero Section",
+        "id": "show_hero_banner",
+        "label": "Show Hero Banner Above All Sections",
         "default": true
       },
       {
         "type": "image_picker",
-        "id": "cleanroom_hero_image",
-        "label": "Hero Background Image"
+        "id": "hero_banner_image",
+        "label": "Hero Banner Background Image"
       },
       {
         "type": "text",
-        "id": "cleanroom_hero_title",
-        "label": "Hero Title",
-        "default": "World Class Cleanroom"
+        "id": "hero_banner_title",
+        "label": "Hero Banner Title",
+        "default": "World Class Clean Room manufacturing"
       },
       {
         "type": "textarea",
-        "id": "cleanroom_hero_description",
-        "label": "Hero Description",
-        "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
+        "id": "hero_banner_description",
+        "label": "Hero Banner Description",
+        "default": "Foxx Life Sciences has 3 DEM certified Clean rooms with full assembly lines between three locations (Londonderry, NH, Salem, NH, and Hyderabad, India). We provide low cost, rapid assemblies for custom projects while maintaining a sterile environment. Find out more about all of our capabilities and opportunities that we can offer you!"
+      },
+      {
+        "type": "text",
+        "id": "hero_banner_button_text",
+        "label": "Hero Banner Button Text",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "url",
+        "id": "hero_banner_button_url",
+        "label": "Hero Banner Button URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "hero_banner_fixed_scroll",
+        "label": "Hero Banner Fixed Scroll Background",
+        "default": true
       },
       {
         "type": "header",
@@ -4530,101 +4547,32 @@
       },
       {
         "type": "header",
-        "content": "Section Visibility"
+        "content": "Video Settings"
       },
       {
         "type": "checkbox",
-        "id": "show_cleanroom_welcome",
-        "label": "Show Welcome Section",
-        "default": true
+        "id": "enable_video_popups",
+        "label": "Enable Video Popups",
+        "default": true,
+        "info": "When enabled, video buttons will open in popups instead of new tabs"
       },
       {
         "type": "checkbox",
-        "id": "show_cleanroom_iso7",
-        "label": "Show ISO 7 Section",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "show_cleanroom_classifications",
-        "label": "Show Classifications Section",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "show_cleanroom_quality",
-        "label": "Show Quality Section",
-        "default": true
+        "id": "enable_video_embeds",
+        "label": "Enable Embedded Videos",
+        "default": true,
+        "info": "Show embedded MP4 videos directly in sections"
       },
       {
         "type": "header",
-        "content": "Hero Banner Settings"
+        "content": "Background Effects"
       },
       {
         "type": "checkbox",
-        "id": "show_hero_banner",
-        "label": "Show Banner Behind Hero",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "hero_banner_image",
-        "label": "Hero Banner Background Image"
-      },
-      {
-        "type": "text",
-        "id": "hero_banner_title",
-        "label": "Banner Title",
-        "default": "Quality Assurance"
-      },
-      {
-        "type": "textarea",
-        "id": "hero_banner_description",
-        "label": "Banner Description",
-        "default": "Ensuring excellence in every process"
-      },
-      {
-        "type": "text",
-        "id": "hero_banner_button_text",
-        "label": "Banner Button Text",
-        "default": "Learn More"
-      },
-      {
-        "type": "url",
-        "id": "hero_banner_button_url",
-        "label": "Banner Button URL"
-      },
-      {
-        "type": "header",
-        "content": "Quality Commitment Section"
-      },
-      {
-        "type": "image_picker",
-        "id": "cleanroom_quality_bg_image",
-        "label": "Quality Background Image"
-      },
-      {
-        "type": "text",
-        "id": "cleanroom_quality_title",
-        "label": "Quality Title",
-        "default": "OUR COMMITMENT TO QUALITY"
-      },
-      {
-        "type": "textarea",
-        "id": "cleanroom_quality_description",
-        "label": "Quality Description",
-        "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
-      },
-      {
-        "type": "text",
-        "id": "cleanroom_quality_button_text",
-        "label": "Quality Button Text",
-        "default": "LEARN MORE"
-      },
-      {
-        "type": "url",
-        "id": "cleanroom_quality_button_url",
-        "label": "Quality Button URL"
+        "id": "enable_fixed_scroll_backgrounds",
+        "label": "Enable Fixed Scroll Backgrounds",
+        "default": true,
+        "info": "Enable parallax/fixed scroll effect for background images"
       },
       {
         "type": "header",
@@ -4655,6 +4603,23 @@
             "label": "Fast"
           }
         ]
+      },
+      {
+        "type": "header",
+        "content": "Mobile Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_fixed_scroll_mobile",
+        "label": "Disable Fixed Scroll on Mobile",
+        "default": true,
+        "info": "Improves performance on mobile devices"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_videos_mobile",
+        "label": "Show Videos on Mobile",
+        "default": true
       }
     ]
   },
