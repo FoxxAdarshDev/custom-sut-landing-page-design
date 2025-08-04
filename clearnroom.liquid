@@ -260,19 +260,19 @@
 {% endif %}
 
 <!-- Hero Banner Section -->
-{% if section.settings.show_hero_banner %}
+{% if settings.show_hero_banner %}
 <section class="cleanroom-hero-banner">
-  {% if section.settings.hero_banner_image %}
-    <div class="hero-banner-background" style="background-image: url('{{ section.settings.hero_banner_image | image_url: width: 1920 }}');"></div>
+  {% if settings.hero_banner_image %}
+    <div class="hero-banner-background" style="background-image: url('{{ settings.hero_banner_image | image_url: width: 1920 }}');"></div>
   {% endif %}
   <div class="hero-banner-overlay">
     <div class="container">
       <div class="hero-banner-content">
-        <h2 class="hero-banner-title">{{ section.settings.hero_banner_title }}</h2>
-        <p class="hero-banner-description">{{ section.settings.hero_banner_description }}</p>
-        {% if section.settings.hero_banner_button_text and section.settings.hero_banner_button_url %}
-          <a href="{{ section.settings.hero_banner_button_url }}" class="btn btn-primary hero-banner-btn">
-            {{ section.settings.hero_banner_button_text }}
+        <h2 class="hero-banner-title">{{ settings.hero_banner_title }}</h2>
+        <p class="hero-banner-description">{{ settings.hero_banner_description }}</p>
+        {% if settings.hero_banner_button_text and settings.hero_banner_button_url %}
+          <a href="{{ settings.hero_banner_button_url }}" class="btn btn-primary hero-banner-btn">
+            {{ settings.hero_banner_button_text }}
           </a>
         {% endif %}
       </div>
@@ -426,8 +426,8 @@
         <h2 class="quality-title">{{ section.settings.quality_title }}</h2>
         <p class="quality-description">{{ section.settings.quality_description }}</p>
 
-        {% if section.settings.quality_button_url != blank %}
-          <a href="{{ section.settings.quality_button_url }}" class="btn btn-primary quality-btn">
+        {% if section.settings.quality_button_text != blank %}
+          <a href="{{ section.settings.quality_button_url }}" class="quality-button">
             {{ section.settings.quality_button_text }}
           </a>
         {% endif %}
@@ -972,7 +972,7 @@
   margin-right: auto;
 }
 
-.quality-btn {
+.quality-button {
   background: transparent;
   border: 2px solid white;
   color: white;
@@ -985,12 +985,30 @@
   text-transform: uppercase;
   border-radius: 5px;
   display: inline-block;
+  position: relative;
+  overflow: hidden;
 }
 
-.quality-btn:hover {
+.quality-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.quality-button:hover::before {
+  left: 100%;
+}
+
+.quality-button:hover {
   background: white;
   color: #0071b9;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
 /* Mobile Responsive */
@@ -1005,7 +1023,7 @@
 
   /* Fix mobile background attachment issues */
   .iso7-background {
-    background-attachment: scroll;
+    background-attachment: scroll !important;
   }
 
   .hero-background,
@@ -1093,7 +1111,7 @@
     margin-bottom: 25px;
   }
 
-  .quality-btn {
+  .quality-button {
     padding: 12px 25px;
     font-size: 0.9rem;
   }
@@ -1178,7 +1196,7 @@
     margin-bottom: 20px;
   }
 
-  .quality-btn {
+  .quality-button {
     padding: 10px 20px;
     font-size: 0.8rem;
   }
