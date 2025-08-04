@@ -1742,10 +1742,11 @@
           "default": "World Class Cleanroom"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "hero_description",
-          "label": "Hero Description",
-          "default": "State-of-the-art cleanroom facilities for pharmaceutical manufacturing"
+          "label": "Hero Description (Rich Text Editor)",
+          "default": "<p>State-of-the-art cleanroom facilities for pharmaceutical manufacturing</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -1902,10 +1903,11 @@
           "default": "World Class Clean Room manufacturing"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "banner_description",
-          "label": "Banner Description",
-          "default": "Foxx Life Sciences has 3 DEM certified Clean rooms with full assembly lines between three locations (Londonderry, NH, Salem, NH, and Hyderabad, India)."
+          "label": "Banner Description (Rich Text Editor)",
+          "default": "<p>Foxx Life Sciences has 3 DEM certified Clean rooms with full assembly lines between three locations (Londonderry, NH, Salem, NH, and Hyderabad, India).</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -1997,10 +1999,11 @@
           "default": "DEDICATED SINGLE-USE MANUFACTURING"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "welcome_description",
-          "label": "Welcome Description",
-          "default": "Conveniently located in Londonderry, USA, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications."
+          "label": "Welcome Description (Rich Text Editor)",
+          "default": "<p>Conveniently located in Londonderry, USA, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications.</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "image_picker",
@@ -2008,10 +2011,11 @@
           "label": "Welcome Section Image"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "welcome_video_text",
-          "label": "Welcome Video Text",
-          "default": "ISO Class 7 (10K) Cleanroom, perfect for custom assemblies at any volume! Complete documentation of the entire production process. Batch Records • 5O • Finished Goods Records Ability to source any materials required by the customer's ISO 13485 12 years in a row"
+          "label": "Welcome Video Text (Rich Text Editor)",
+          "default": "<p>ISO Class 7 (10K) Cleanroom, perfect for custom assemblies at any volume! Complete documentation of the entire production process.</p><ul><li>Batch Records</li><li>5O</li><li>Finished Goods Records</li><li>Ability to source any materials required by the customer's ISO 13485 12 years in a row</li></ul>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -2197,10 +2201,11 @@
           "default": "SINGLE-USE MANUFACTURING SUITES"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "iso7_description",
-          "label": "ISO 7 Description",
-          "default": "This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below."
+          "label": "ISO 7 Description (Rich Text Editor)",
+          "default": "<p>This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below.</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -2310,10 +2315,11 @@
           "default": "CLEANROOM CLASSIFICATIONS"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "classifications_description",
-          "label": "Classifications Description",
-          "default": "Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air."
+          "label": "Classifications Description (Rich Text Editor)",
+          "default": "<p>Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air.</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -2626,10 +2632,11 @@
           "default": "OUR COMMITMENT TO QUALITY"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "quality_description",
-          "label": "Quality Description",
-          "default": "Our customers can be assured that the products that they receive meet their stringent quality standards."
+          "label": "Quality Description (Rich Text Editor)",
+          "default": "<p>Our customers can be assured that the products that they receive meet their stringent quality standards.</p>",
+          "info": "Use the rich text editor to format content, add lists, bold text, etc."
         },
         {
           "type": "text",
@@ -2865,7 +2872,7 @@
                   <div class="cleanroom-iso7-content" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-iso7-title" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_title | default: settings.iso7_default_title }}</h2>
                     <h3 class="cleanroom-iso7-subtitle" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_subtitle | default: settings.iso7_default_subtitle }}</h3>
-                    <div class="cleanroom-iso7-description" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_default_description }}</div>
+                    <div class="cleanroom-iso7-description" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_description | default: settings.iso7_description }}</div>
 
                     <div class="cleanroom-iso-zones">
                       {% for zone_block in section.blocks %}
@@ -3075,7 +3082,7 @@
                 <div class="cleanroom-container">
                   <div class="cleanroom-quality-content" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-quality-title" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_title | default: settings.quality_default_title }}</h2>
-                    <div class="cleanroom-quality-description" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_default_description }}</div>
+                    <div class="cleanroom-quality-description" style="color: {{ block.settings.quality_text_color | default: settings.quality_default_text_color | default: '#FFFFFF' }};">{{ block.settings.quality_description | default: settings.quality_description }}</div>
 
                     {% if block.settings.quality_video_file != blank %}
                       <div class="cleanroom-quality-video-embed">
