@@ -4696,36 +4696,52 @@
       {
         "type": "color",
         "id": "banner_default_overlay_color",
-        "label": "Default Banner Overlay Color",
-        "default": "#000000"
+        "label": "Banner Overlay Color",
+        "default": "#000000",
+        "info": "Choose the overlay color for all banner sections"
       },
       {
         "type": "range",
         "id": "banner_default_overlay_opacity",
-        "label": "Default Banner Overlay Opacity",
+        "label": "Banner Overlay Opacity",
         "min": 0,
         "max": 100,
         "step": 5,
         "unit": "%",
-        "default": 60
+        "default": 60,
+        "info": "Set opacity for banner overlays (0 = transparent, 100 = opaque)"
       },
       {
         "type": "color",
         "id": "banner_default_text_color",
-        "label": "Default Banner Text Color",
-        "default": "#FFFFFF"
+        "label": "Banner Text Color",
+        "default": "#FFFFFF",
+        "info": "Default text color for banner content"
       },
       {
         "type": "color",
         "id": "banner_default_button_bg_color",
-        "label": "Default Banner Button Background Color",
-        "default": "#0071b9"
+        "label": "Banner Button Background",
+        "default": "#0071b9",
+        "info": "Background color for banner buttons"
       },
       {
         "type": "color",
         "id": "banner_default_button_text_color",
-        "label": "Default Banner Button Text Color",
-        "default": "#FFFFFF"
+        "label": "Banner Button Text",
+        "default": "#FFFFFF",
+        "info": "Text color for banner buttons"
+      },
+      {
+        "type": "header",
+        "content": "Background Image Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_background_overlay_options",
+        "label": "Enable Background Overlay Options",
+        "default": true,
+        "info": "When enabled, all background image blocks will have overlay color and opacity options"
       },
       {
         "type": "header",
