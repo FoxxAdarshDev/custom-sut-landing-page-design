@@ -315,7 +315,8 @@
       {% if section.settings.heading_text %}
         <h1 class="logo_header_section_heading" 
             style="color: {{ section.settings.heading_color | default: '#0071b9' }}; 
-                   font-size: {{ section.settings.heading_font_size_desktop | default: 56 }}px;">
+                   --desktop-font-size: {{ section.settings.heading_font_size_desktop | default: 56 }}px;
+                   --mobile-font-size: {{ section.settings.heading_font_size_mobile | default: 32 }}px;">
           {{ section.settings.heading_text }}
         </h1>
       {% endif %}
@@ -422,7 +423,7 @@
   letter-spacing: 1px;
   max-width: 100%;
   word-wrap: break-word;
-  font-size: clamp(28px, 5vw, 56px);
+  font-size: var(--desktop-font-size, 56px);
 }
 
 .logo_header_section_sub_heading {
@@ -607,7 +608,7 @@
   }
 
   .logo_header_section_heading {
-    font-size: {{ section.settings.heading_font_size_mobile | default: 32 }}px;
+    font-size: var(--mobile-font-size, 32px) !important;
     line-height: 1.1;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
