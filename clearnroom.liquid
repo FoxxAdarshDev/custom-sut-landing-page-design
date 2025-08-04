@@ -1,4 +1,3 @@
-
 <style>
 /* Scoped Global Styles */
 .cleanroom-container {
@@ -1072,7 +1071,7 @@
     min-height: 250px;
   }
 
-  .cleanroom-classifications-title {
+  .cleanroom-classificationstitle {
     font-size: 24px;
     line-height: 0.9;
     letter-spacing: 0.5px;
@@ -2217,6 +2216,9 @@
 }
 {% endschema %}
 
+<!-- Main Container Wrapper -->
+<div class="cleanroom-main-container">
+
 <!-- Hero Banner Section -->
 {% if settings.show_hero_banner %}
 <section class="cleanroom-hero-banner" style="margin-top: {{ settings.cleanroom_section_margin_top | default: 0 }}px; margin-bottom: {{ settings.cleanroom_section_margin_bottom | default: 0 }}px;">
@@ -2577,6 +2579,9 @@
   {% endcase %}
 {% endfor %}
 
+</div>
+<!-- End Main Container Wrapper -->
+
 <!-- Video Popup Modal -->
 <div id="cleanroomVideoPopupModal" class="cleanroom-video-popup-modal" style="display: none;">
   <div class="cleanroom-video-popup-overlay" onclick="closeCleanroomVideoPopup()"></div>
@@ -2624,15 +2629,15 @@ function closeCleanroomVideoPopup() {
 // Dynamic height adjustment for ISO 7 section
 function adjustISO7SectionHeight() {
   var iso7Sections = document.querySelectorAll('.cleanroom-iso7-section');
-  
+
   iso7Sections.forEach(function(section) {
     var videoEmbed = section.querySelector('.cleanroom-iso7-video-embed');
     var video = section.querySelector('video');
     var iframe = section.querySelector('iframe');
-    
+
     if (videoEmbed && (video || iframe)) {
       section.classList.add('has-video');
-      
+
       // Function to adjust height based on content
       function adjustHeight() {
         var content = section.querySelector('.cleanroom-iso7-content');
@@ -2643,29 +2648,29 @@ function adjustISO7SectionHeight() {
           section.classList.add('video-loaded');
         }
       }
-      
+
       // Handle video element
       if (video) {
         video.addEventListener('loadedmetadata', adjustHeight);
         video.addEventListener('canplay', adjustHeight);
-        
+
         // Fallback timeout
         setTimeout(adjustHeight, 1000);
       }
-      
+
       // Handle iframe element
       if (iframe) {
         iframe.addEventListener('load', function() {
           setTimeout(adjustHeight, 500);
         });
-        
+
         // Fallback timeout for iframe
         setTimeout(adjustHeight, 2000);
       }
-      
+
       // Initial adjustment
       setTimeout(adjustHeight, 100);
-      
+
       // Window resize adjustment
       window.addEventListener('resize', function() {
         setTimeout(adjustHeight, 100);
