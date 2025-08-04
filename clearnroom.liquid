@@ -1415,7 +1415,8 @@
 .cleanroom-iso7-section {
   position: relative;
   overflow: hidden;
-  min-height: 600px;
+  min-height: auto;
+  height: auto;
 }
 
 .cleanroom-iso7-section.cleanroom-fixed-scroll .cleanroom-iso7-background {
@@ -1427,7 +1428,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -1437,14 +1438,31 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: auto;
+  height: auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .cleanroom-iso7-content {
   text-align: center;
+  position: relative;
+  z-index: 4;
+}
+
+/* Specific iframe styling for video embeds */
+.cleanroom-iso7-video-embed iframe,
+.cleanroom-quality-video-embed iframe,
+.cleanroom-welcome-video-embed iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  background: #000;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .cleanroom-iso7-title {
@@ -1501,15 +1519,20 @@
   position: relative;
   z-index: 5;
   width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .cleanroom-iso7-video-embed .cleanroom-embedded-video {
   width: 100%;
   max-width: 100%;
-  height: auto;
-  min-height: 400px;
+  height: 450px;
   border-radius: 15px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  display: block;
+  border: none;
+  outline: none;
 }
 
 .cleanroom-iso7-btn {
@@ -1854,8 +1877,13 @@
     min-height: 400px;
   }
 
+  .cleanroom-iso7-video-embed {
+    padding: 15px;
+    margin: 30px auto;
+  }
+
   .cleanroom-iso7-video-embed .cleanroom-embedded-video {
-    min-height: 250px;
+    height: 250px;
   }
 
   .cleanroom-classifications-title {
