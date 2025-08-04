@@ -422,21 +422,24 @@
 {% if settings.show_hero_banner %}
 <section class="cleanroom-hero-banner">
   {% if settings.hero_banner_image %}
-    <div class="hero-banner-background" style="background-image: url('{{ settings.hero_banner_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+    <div class="hero-banner-background" style="background-image: url('{{ settings.hero_banner_image | img_url: '1920x' }}');">
   {% endif %}
-  <div class="hero-banner-overlay">
-    <div class="container">
-      <div class="hero-banner-content">
-        <h2 class="hero-banner-title">{{ settings.hero_banner_title }}</h2>
-        <p class="hero-banner-description">{{ settings.hero_banner_description }}</p>
-        {% if settings.hero_banner_button_text and settings.hero_banner_button_url %}
-          <a href="{{ settings.hero_banner_button_url }}" class="btn btn-primary hero-banner-btn">
-            {{ settings.hero_banner_button_text }}
-          </a>
-        {% endif %}
+      <div class="hero-banner-overlay">
+        <div class="container">
+          <div class="hero-banner-content">
+            <h2 class="hero-banner-title">{{ settings.hero_banner_title }}</h2>
+            <p class="hero-banner-description">{{ settings.hero_banner_description }}</p>
+            {% if settings.hero_banner_button_text and settings.hero_banner_button_url %}
+              <a href="{{ settings.hero_banner_button_url }}" class="btn btn-primary hero-banner-btn">
+                {{ settings.hero_banner_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
       </div>
+  {% if settings.hero_banner_image %}
     </div>
-  </div>
+  {% endif %}
 </section>
 {% endif %}
 
@@ -447,47 +450,49 @@
     {% when 'hero_section' %}
       {% if block.settings.enable_hero_section %}
       <section class="cleanroom-hero-section" {{ block.shopify_attributes }}>
-        <div class="hero-image-container">
-          {% if block.settings.hero_image %}
-            <div class="hero-background" style="background-image: url('{{ block.settings.hero_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
-          {% else %}
-            <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);"></div>
-          {% endif %}
-          {% if block.settings.hero_content_display == 'full_content' %}
-            <div class="hero-overlay">
-              <div class="hero-content container">
-                <h1 class="hero-title">{{ block.settings.hero_title }}</h1>
-                <p class="hero-description">{{ block.settings.hero_description }}</p>
-                {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                  <a href="{{ block.settings.hero_button_url }}" class="btn btn-primary hero-btn">
-                    {{ block.settings.hero_button_text }}
-                  </a>
-                {% endif %}
+        {% if block.settings.hero_image %}
+          <div class="hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
+        {% else %}
+          <div class="hero-background" style="background: linear-gradient(135deg, #0071b9 0%, #005a91 100%);">
+        {% endif %}
+            {% if block.settings.hero_content_display == 'full_content' %}
+              <div class="hero-overlay">
+                <div class="hero-content container">
+                  <h1 class="hero-title">{{ block.settings.hero_title }}</h1>
+                  <p class="hero-description">{{ block.settings.hero_description }}</p>
+                  {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                    <a href="{{ block.settings.hero_button_url }}" class="btn btn-primary hero-btn">
+                      {{ block.settings.hero_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
               </div>
-            </div>
-          {% endif %}
-        </div>
+            {% endif %}
+          </div>
       </section>
       {% endif %}
 
     {% when 'banner_section' %}
       <section class="cleanroom-banner-section{% if block.settings.banner_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.banner_image %}
-          <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+          <div class="banner-background" style="background-image: url('{{ block.settings.banner_image | img_url: '1920x' }}');">
         {% endif %}
-        {% if block.settings.banner_content_display == 'full_content' %}
-          <div class="banner-overlay">
-            <div class="container">
-              <div class="banner-content">
-                <h2 class="banner-title">{{ block.settings.banner_title }}</h2>
-                <p class="banner-description">{{ block.settings.banner_description }}</p>
-                {% if block.settings.banner_button_text and block.settings.banner_button_url %}
-                  <a href="{{ block.settings.banner_button_url }}" class="btn btn-primary banner-btn">
-                    {{ block.settings.banner_button_text }}
-                  </a>
-                {% endif %}
+            {% if block.settings.banner_content_display == 'full_content' %}
+              <div class="banner-overlay">
+                <div class="container">
+                  <div class="banner-content">
+                    <h2 class="banner-title">{{ block.settings.banner_title }}</h2>
+                    <p class="banner-description">{{ block.settings.banner_description }}</p>
+                    {% if block.settings.banner_button_text and block.settings.banner_button_url %}
+                      <a href="{{ block.settings.banner_button_url }}" class="btn btn-primary banner-btn">
+                        {{ block.settings.banner_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
               </div>
-            </div>
+            {% endif %}
+        {% if block.settings.banner_image %}
           </div>
         {% endif %}
       </section>
@@ -554,42 +559,45 @@
     {% when 'iso7_class' %}
       <section class="cleanroom-iso7-section{% if block.settings.iso7_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.iso7_bg_image != blank %}
-          <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+          <div class="iso7-background" style="background-image: url('{{ block.settings.iso7_bg_image | img_url: '1920x' }}');">
         {% endif %}
-        {% if block.settings.iso7_content_display == 'full_content' %}
-          <div class="iso7-overlay">
-            <div class="container">
-              <div class="iso7-content">
-                <h2 class="iso7-title">{{ block.settings.iso7_title }}</h2>
-                <h3 class="iso7-subtitle">{{ block.settings.iso7_subtitle }}</h3>
-                <p class="iso7-description">{{ block.settings.iso7_description }}</p>
-                
-                <div class="iso-zones">
-                  {% for zone_block in section.blocks %}
-                    {% if zone_block.type == 'iso_zone' %}
-                      <div class="zone-info" {{ zone_block.shopify_attributes }}>
-                        <span class="zone-text">{{ zone_block.settings.zone_text }}</span>
+            {% if block.settings.iso7_content_display == 'full_content' %}
+              <div class="iso7-overlay">
+                <div class="container">
+                  <div class="iso7-content">
+                    <h2 class="iso7-title">{{ block.settings.iso7_title }}</h2>
+                    <h3 class="iso7-subtitle">{{ block.settings.iso7_subtitle }}</h3>
+                    <p class="iso7-description">{{ block.settings.iso7_description }}</p>
+                    
+                    <div class="iso-zones">
+                      {% for zone_block in section.blocks %}
+                        {% if zone_block.type == 'iso_zone' %}
+                          <div class="zone-info" {{ zone_block.shopify_attributes }}>
+                            <span class="zone-text">{{ zone_block.settings.zone_text }}</span>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    {% if block.settings.iso7_video_file != blank %}
+                      <div class="iso7-video-embed">
+                        <video controls preload="metadata" class="embedded-video">
+                          <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
                       </div>
                     {% endif %}
-                  {% endfor %}
-                </div>
 
-                {% if block.settings.iso7_video_file != blank %}
-                  <div class="iso7-video-embed">
-                    <video controls preload="metadata" class="embedded-video">
-                      <source src="{{ block.settings.iso7_video_file }}" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
+                    {% if block.settings.iso7_button_url != blank %}
+                      <a href="{{ block.settings.iso7_button_url }}" class="btn btn-primary iso7-btn">
+                        {{ block.settings.iso7_button_text }}
+                      </a>
+                    {% endif %}
                   </div>
-                {% endif %}
-
-                {% if block.settings.iso7_button_url != blank %}
-                  <a href="{{ block.settings.iso7_button_url }}" class="btn btn-primary iso7-btn">
-                    {{ block.settings.iso7_button_text }}
-                  </a>
-                {% endif %}
+                </div>
               </div>
-            </div>
+            {% endif %}
+        {% if block.settings.iso7_bg_image != blank %}
           </div>
         {% endif %}
       </section>
@@ -629,31 +637,34 @@
     {% when 'quality_commit' %}
       <section class="cleanroom-quality-section{% if block.settings.quality_fixed_scroll %} fixed-scroll{% endif %}" {{ block.shopify_attributes }}>
         {% if block.settings.quality_bg_image != blank %}
-          <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | image_url: width: 1920 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+          <div class="quality-background" style="background-image: url('{{ block.settings.quality_bg_image | img_url: '1920x' }}');">
         {% endif %}
-        {% if block.settings.quality_content_display == 'full_content' %}
-          <div class="quality-overlay">
-            <div class="container">
-              <div class="quality-content">
-                <h2 class="quality-title">{{ block.settings.quality_title }}</h2>
-                <p class="quality-description">{{ block.settings.quality_description }}</p>
+            {% if block.settings.quality_content_display == 'full_content' %}
+              <div class="quality-overlay">
+                <div class="container">
+                  <div class="quality-content">
+                    <h2 class="quality-title">{{ block.settings.quality_title }}</h2>
+                    <p class="quality-description">{{ block.settings.quality_description }}</p>
 
-                {% if block.settings.quality_video_file != blank %}
-                  <div class="quality-video-embed">
-                    <video controls preload="metadata" class="embedded-video">
-                      <source src="{{ block.settings.quality_video_file }}" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
+                    {% if block.settings.quality_video_file != blank %}
+                      <div class="quality-video-embed">
+                        <video controls preload="metadata" class="embedded-video">
+                          <source src="{{ block.settings.quality_video_file }}" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.quality_button_text != blank %}
+                      <a href="{{ block.settings.quality_button_url }}" class="quality-button">
+                        {{ block.settings.quality_button_text }}
+                      </a>
+                    {% endif %}
                   </div>
-                {% endif %}
-
-                {% if block.settings.quality_button_text != blank %}
-                  <a href="{{ block.settings.quality_button_url }}" class="quality-button">
-                    {{ block.settings.quality_button_text }}
-                  </a>
-                {% endif %}
+                </div>
               </div>
-            </div>
+            {% endif %}
+        {% if block.settings.quality_bg_image != blank %}
           </div>
         {% endif %}
       </section>
