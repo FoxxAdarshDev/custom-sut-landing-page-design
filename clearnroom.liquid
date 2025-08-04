@@ -91,7 +91,7 @@
 }
 
 .cleanroom-hero-title {
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 700;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -100,7 +100,7 @@
 }
 
 .cleanroom-hero-description {
-  font-size: 1.6rem;
+  font-size: 26px;
   line-height: 1.6;
   margin-bottom: 30px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -111,7 +111,7 @@
   color: #0071b9;
   border: 2px solid white;
   padding: 15px 40px;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -163,7 +163,7 @@
 }
 
 .cleanroom-hero-banner-title {
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 700;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -213,7 +213,7 @@
 }
 
 .cleanroom-banner-title {
-  font-size: 3.5rem;
+  font-size: 56px;
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -221,7 +221,7 @@
 }
 
 .cleanroom-banner-description {
-  font-size: 1.4rem;
+  font-size: 22px;
   line-height: 1.6;
   margin-bottom: 40px;
 }
@@ -237,7 +237,7 @@
 }
 
 .cleanroom-welcome-title {
-  font-size: 3.5rem;
+  font-size: 56px;
   color: #0071b9;
   font-weight: 300;
   margin-bottom: 30px;
@@ -481,7 +481,7 @@
 }
 
 .cleanroom-classifications-title {
-  font-size: 3.5rem;
+  font-size: 56px;
   color: #0071b9;
   font-weight: 700;
   margin-bottom: 30px;
@@ -490,7 +490,7 @@
 }
 
 .cleanroom-classifications-description {
-  font-size: 1.4rem;
+  font-size: 22px;
   color: #666;
   line-height: 1.6;
   max-width: 800px;
@@ -545,13 +545,13 @@
 }
 
 .cleanroom-grid-content h4 {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .cleanroom-grid-content p {
-  font-size: 1.2rem;
+  font-size: 19px;
   opacity: 0.9;
   margin: 0;
 }
@@ -643,7 +643,7 @@
   padding: 15px 35px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 16px;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -673,6 +673,129 @@
   color: #0071b9;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Image Content Section */
+.cleanroom-image-content-section {
+  background: white;
+}
+
+.cleanroom-image-content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.cleanroom-image-content-container.cleanroom-reverse-layout {
+  direction: rtl;
+}
+
+.cleanroom-image-content-container.cleanroom-reverse-layout > * {
+  direction: ltr;
+}
+
+.cleanroom-image-content-image-wrapper {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.cleanroom-image-content-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cleanroom-image-content-text {
+  padding: 20px 0;
+}
+
+.cleanroom-image-content-title {
+  font-size: 48px;
+  color: #0071b9;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cleanroom-image-content-description {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.cleanroom-image-content-description ul {
+  margin: 20px 0;
+  padding-left: 30px;
+}
+
+.cleanroom-image-content-description li {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.cleanroom-image-content-actions {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cleanroom-image-content-video-embed {
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.cleanroom-image-content-video-embed .cleanroom-embedded-video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 300px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsive for image-content */
+@media (max-width: 768px) {
+  .cleanroom-image-content-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .cleanroom-image-content-title {
+    font-size: 32px;
+  }
+
+  .cleanroom-image-content-description {
+    font-size: 16px;
+  }
+
+  .cleanroom-image-content-description li {
+    font-size: 16px;
+  }
+
+  .cleanroom-image-content-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cleanroom-image-content-title {
+    font-size: 24px;
+  }
+
+  .cleanroom-image-content-description {
+    font-size: 14px;
+  }
+
+  .cleanroom-image-content-description li {
+    font-size: 14px;
+  }
 }
 
 /* Video Popup Modal */
@@ -737,23 +860,23 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .cleanroom-hero-title {
-    font-size: 2.5rem;
+    font-size: 40px;
   }
 
   .cleanroom-hero-description {
-    font-size: 1.1rem;
+    font-size: 18px;
   }
 
   .cleanroom-banner-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-hero-banner-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-hero-banner-description {
-    font-size: 1.1rem;
+    font-size: 18px;
   }
 
   .cleanroom-hero-banner-overlay {
@@ -772,7 +895,7 @@
   }
 
   .cleanroom-welcome-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-welcome-actions {
@@ -805,7 +928,7 @@
   }
 
   .cleanroom-classifications-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-classifications-grid {
@@ -814,7 +937,7 @@
   }
 
   .cleanroom-quality-title {
-    font-size: 2.5rem;
+    font-size: 40px;
   }
 
   .cleanroom-quality-section {
@@ -827,20 +950,20 @@
   }
 
   .cleanroom-quality-title {
-    font-size: 1.8rem;
+    font-size: 29px;
     line-height: 1.1;
     margin-bottom: 20px;
   }
 
   .cleanroom-quality-description {
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.3;
     margin-bottom: 25px;
   }
 
   .cleanroom-quality-button {
     padding: 12px 25px;
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   /* Fix mobile background attachment issues */
@@ -857,19 +980,19 @@
   }
 
   .cleanroom-hero-title {
-    font-size: 1.8rem;
+    font-size: 29px;
   }
 
   .cleanroom-hero-description {
-    font-size: 1rem;
+    font-size: 16px;
   }
 
   .cleanroom-hero-banner-title, .cleanroom-banner-title {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .cleanroom-hero-banner-description, .cleanroom-banner-description {
-    font-size: 1rem;
+    font-size: 16px;
   }
 
   .cleanroom-hero-banner-overlay, .cleanroom-banner-overlay {
@@ -879,11 +1002,11 @@
 
   .cleanroom-hero-banner-btn, .cleanroom-banner-btn {
     padding: 12px 25px;
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   .cleanroom-welcome-title {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .cleanroom-iso7-title {
@@ -891,11 +1014,11 @@
   }
 
   .cleanroom-classifications-title {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .cleanroom-quality-title {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .cleanroom-quality-section {
@@ -908,20 +1031,20 @@
   }
 
   .cleanroom-quality-title {
-    font-size: 1.4rem;
+    font-size: 22px;
     line-height: 1;
     margin-bottom: 15px;
   }
 
   .cleanroom-quality-description {
-    font-size: 0.9rem;
+    font-size: 14px;
     line-height: 1.2;
     margin-bottom: 20px;
   }
 
   .cleanroom-quality-button {
     padding: 10px 20px;
-    font-size: 0.8rem;
+    font-size: 13px;
   }
 }
 </style>
@@ -1541,6 +1664,111 @@
       ]
     },
     {
+      "type": "image_content_section",
+      "name": "Image Content Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "content_image",
+          "label": "Content Image"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Settings"
+        },
+        {
+          "type": "range",
+          "id": "content_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "content_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "content_margin_top",
+          "label": "Margin Top",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "content_margin_bottom",
+          "label": "Margin Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "content_title",
+          "label": "Content Title",
+          "default": "Our Advanced Technology"
+        },
+        {
+          "type": "textarea",
+          "id": "content_description",
+          "label": "Content Description (HTML Supported)",
+          "default": "Our state-of-the-art facilities include:\n<ul>\n<li>ISO 7 and ISO 8 cleanroom classifications</li>\n<li>Advanced air filtration systems</li>\n<li>Full documentation and traceability</li>\n<li>Quality assurance protocols</li>\n</ul>",
+          "info": "You can use HTML tags like <ul>, <li>, <p>, <strong>, etc."
+        },
+        {
+          "type": "text",
+          "id": "content_button_text",
+          "label": "CTA Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "content_button_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "content_video_file",
+          "label": "Video File (MP4 URL)",
+          "info": "Enter direct URL to MP4 file for embedded video"
+        },
+        {
+          "type": "select",
+          "id": "content_layout",
+          "label": "Layout",
+          "default": "image_left",
+          "options": [
+            {
+              "value": "image_left",
+              "label": "Image Left, Content Right"
+            },
+            {
+              "value": "image_right",
+              "label": "Image Right, Content Left"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "type": "quality_commit",
       "name": "Quality Commitment",
       "settings": [
@@ -1726,6 +1954,9 @@
         },
         {
           "type": "grid_image"
+        },
+        {
+          "type": "image_content_section"
         },
         {
           "type": "quality_commit"
@@ -1977,6 +2208,83 @@
                 </div>
               {% endif %}
             {% endfor %}
+          </div>
+        </div>
+      </section>
+
+    {% when 'image_content_section' %}
+      <section class="cleanroom-image-content-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.content_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.content_padding_bottom | default: 100 }}px; margin-top: {{ block.settings.content_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.content_margin_bottom | default: 0 }}px;">
+        <div class="cleanroom-container">
+          <div class="cleanroom-image-content-container{% if block.settings.content_layout == 'image_right' %} cleanroom-reverse-layout{% endif %}">
+            {% if block.settings.content_layout == 'image_right' %}
+              <!-- Content First -->
+              <div class="cleanroom-image-content-text">
+                <h2 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h2>
+                <div class="cleanroom-image-content-description">
+                  {{ block.settings.content_description | newline_to_br }}
+                </div>
+
+                {% if block.settings.content_video_file != blank %}
+                  <div class="cleanroom-image-content-video-embed">
+                    <video controls preload="metadata" class="cleanroom-embedded-video">
+                      <source src="{{ block.settings.content_video_file }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.content_button_text != blank and block.settings.content_button_url != blank %}
+                  <div class="cleanroom-image-content-actions">
+                    <a href="{{ block.settings.content_button_url }}" class="cleanroom-btn cleanroom-btn-primary">
+                      {{ block.settings.content_button_text }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Image Second -->
+              {% if block.settings.content_image != blank %}
+                <div class="cleanroom-image-content-image-wrapper">
+                  <img src="{{ block.settings.content_image | image_url: width: 800 }}" 
+                       alt="{{ block.settings.content_title }}" 
+                       class="cleanroom-image-content-image">
+                </div>
+              {% endif %}
+            {% else %}
+              <!-- Image First -->
+              {% if block.settings.content_image != blank %}
+                <div class="cleanroom-image-content-image-wrapper">
+                  <img src="{{ block.settings.content_image | image_url: width: 800 }}" 
+                       alt="{{ block.settings.content_title }}" 
+                       class="cleanroom-image-content-image">
+                </div>
+              {% endif %}
+
+              <!-- Content Second -->
+              <div class="cleanroom-image-content-text">
+                <h2 class="cleanroom-image-content-title">{{ block.settings.content_title }}</h2>
+                <div class="cleanroom-image-content-description">
+                  {{ block.settings.content_description | newline_to_br }}
+                </div>
+
+                {% if block.settings.content_video_file != blank %}
+                  <div class="cleanroom-image-content-video-embed">
+                    <video controls preload="metadata" class="cleanroom-embedded-video">
+                      <source src="{{ block.settings.content_video_file }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.content_button_text != blank and block.settings.content_button_url != blank %}
+                  <div class="cleanroom-image-content-actions">
+                    <a href="{{ block.settings.content_button_url }}" class="cleanroom-btn cleanroom-btn-primary">
+                      {{ block.settings.content_button_text }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         </div>
       </section>
