@@ -473,6 +473,15 @@
   background: #000;
 }
 
+/* Ensure video container has proper stacking */
+.cleanroom-iso7-video-embed {
+  position: relative;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  padding: 10px;
+}
+
 .cleanroom-iso7-video-embed iframe {
   width: 100%;
   height: 450px;
@@ -2901,7 +2910,7 @@
           <div class="cleanroom-iso7-background" style="background-image: url('{{ settings.iso7_default_bg_image | img_url: '1920x' }}');">
         {% endif %}
             {% if block.settings.iso7_content_display == 'full_content' %}
-              <div class="cleanroom-iso7-overlay" style="background-color: {{ block.settings.iso7_overlay_color | default: settings.iso7_default_overlay_color | default: '#0071b9' }}{{ block.settings.iso7_overlay_opacity | default: settings.iso7_default_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.iso7_padding_top | default: 120 }}px; padding-bottom: {{ block.settings.iso7_padding_bottom | default: 120 }}px; padding-left: {{ block.settings.iso7_padding_left | default: 20 }}px; padding-right: {{ block.settings.iso7_padding_right | default: 20 }}px;">
+              <div class="cleanroom-iso7-overlay" style="background-color: {{ block.settings.iso7_overlay_color | default: settings.iso7_default_overlay_color | default: '#0071b9' }}{{ block.settings.iso7_overlay_opacity | default: settings.iso7_default_overlay_opacity | default: 60 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.iso7_padding_top | default: 120 }}px; padding-bottom: {{ block.settings.iso7_padding_bottom | default: 120 }}px; padding-left: {{ block.settings.iso7_padding_left | default: 20 }}px; padding-right: {{ block.settings.iso7_padding_right | default: 20 }}px;">
                 <div class="cleanroom-container">
                   <div class="cleanroom-iso7-content" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">
                     <h2 class="cleanroom-iso7-title" style="color: {{ block.settings.iso7_text_color | default: settings.iso7_default_text_color | default: '#FFFFFF' }};">{{ block.settings.iso7_title | default: settings.iso7_default_title }}</h2>
@@ -3251,26 +3260,53 @@ function initializeVideoStartTimes() {
     var startTime = parseInt(video.getAttribute('data-start-time')) || 0;
 
     if (startTime > 0) {
+      // Set start time immediately if video is ready
+      if (video.readyState >= 1) {
+        video.currentTime = startTime;
+      }
+
       video.addEventListener('loadedmetadata', function() {
         video.currentTime = startTime;
       });
 
-      // Also set current time when video can play
       video.addEventListener('canplay', function() {
-        if (video.currentTime === 0) {
+        video.currentTime = startTime;
+      });
+
+      // Also set on loadstart for immediate effect
+      video.addEventListener('loadstart', function() {
+        setTimeout(() => {
+          if (video.readyState >= 1) {
+            video.currentTime = startTime;
+          }
+        }, 100);
+      });
+
+      // Force set after a delay for stubborn videos
+      setTimeout(() => {
+        if (video.readyState >= 1) {
           video.currentTime = startTime;
         }
-      });
+      }, 500);
     }
   });
 }
 
 // Initialize on DOM ready and also re-run when images/videos load
-document.addEventListener('DOMContentLoaded', adjustISO7SectionHeight);
+document.addEventListener('DOMContentLoaded', function() {
+  adjustISO7SectionHeight();
+  initializeVideoStartTimes(); // Initialize immediately on DOM ready
+});
+
 window.addEventListener('load', function() {
   adjustISO7SectionHeight();
   initializeVideoStartTimes();
 });
+
+// Also initialize when videos are added dynamically
+setTimeout(function() {
+  initializeVideoStartTimes();
+}, 1000);
 
 // Close popup with Escape key
 document.addEventListener('keydown', function(e) {
