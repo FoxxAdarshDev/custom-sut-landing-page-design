@@ -483,6 +483,8 @@
 /* Classifications Section */
 .cleanroom-classifications-section {
   background: white;
+  position: relative;
+  z-index: 1;
 }
 
 .cleanroom-classifications-header {
@@ -576,6 +578,7 @@
   justify-content: center;
   width: 100%;
   overflow: hidden;
+  z-index: 10;
 }
 
 .cleanroom-quality-section.cleanroom-fixed-scroll .cleanroom-quality-background {
@@ -1015,6 +1018,7 @@
 @media (max-width: 768px) {
   .cleanroom-main-container {
     padding: 0 10px;
+    overflow-x: hidden;
   }
 
   /* Hero Section Mobile Fixes */
@@ -1272,11 +1276,19 @@
 
   .cleanroom-quality-section {
     min-height: auto;
+    display: block !important;
+    z-index: 15;
   }
 
   .cleanroom-quality-overlay {
     min-height: auto;
     padding: 30px 15px;
+    display: block !important;
+  }
+
+  .cleanroom-quality-background {
+    position: relative !important;
+    min-height: 400px;
   }
 
   .cleanroom-quality-description {
@@ -1328,6 +1340,7 @@
 @media (max-width: 480px) {
   .cleanroom-main-container {
     padding: 0 5px;
+    overflow-x: hidden;
   }
 
   /* Hero Section Extra Small Mobile */
@@ -1525,11 +1538,19 @@
 
   .cleanroom-quality-section {
     min-height: auto;
+    display: block !important;
+    z-index: 20;
   }
 
   .cleanroom-quality-overlay {
     min-height: auto;
     padding: 25px 10px;
+    display: block !important;
+  }
+
+  .cleanroom-quality-background {
+    position: relative !important;
+    min-height: 350px;
   }
 
   .cleanroom-quality-description {
