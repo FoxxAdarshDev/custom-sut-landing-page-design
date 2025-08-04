@@ -813,7 +813,11 @@
 /* Quality Section */
 .cleanroom-quality-section {
   position: relative;
-  padding: 120px 0;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -821,38 +825,47 @@
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .quality-overlay {
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100%;
-  padding: 120px 0;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
 }
 
 .quality-content {
   text-align: center;
-  color: white;
+  max-width: 900px;
+  width: 100%;
 }
 
 .quality-title {
-  font-size: 4rem;
+  color: white;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
   font-weight: 700;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  line-height: 1.2;
 }
 
 .quality-description {
-  font-size: 1.6rem;
-  line-height: 1.6;
+  color: white;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  line-height: 1.4;
   margin-bottom: 40px;
   max-width: 800px;
   margin-left: auto;
@@ -861,13 +874,23 @@
 
 .quality-btn {
   background: transparent;
-  color: white;
   border: 2px solid white;
+  color: white;
+  padding: 15px 35px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 .quality-btn:hover {
   background: white;
   color: #0071b9;
+  transform: translateY(-2px);
 }
 
 /* Mobile Responsive */
@@ -923,6 +946,33 @@
     font-size: 2.5rem;
   }
 
+  /* Quality Section Mobile Fixes */
+  .cleanroom-quality-section {
+    min-height: 300px;
+  }
+
+  .quality-overlay {
+    min-height: 300px;
+    padding: 40px 15px;
+  }
+
+  .quality-title {
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .quality-description {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 25px;
+  }
+
+  .quality-btn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
   .nav-arrow {
     width: 40px;
     height: 40px;
@@ -961,6 +1011,33 @@
 
   .quality-title {
     font-size: 2rem;
+  }
+
+  /* Quality Section Phone Fixes */
+  .cleanroom-quality-section {
+    min-height: 250px;
+  }
+
+  .quality-overlay {
+    min-height: 250px;
+    padding: 30px 10px;
+  }
+
+  .quality-title {
+    font-size: 1.4rem;
+    line-height: 1;
+    margin-bottom: 15px;
+  }
+
+  .quality-description {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .quality-btn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
   }
 }
 </style>
