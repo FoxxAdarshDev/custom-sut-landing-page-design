@@ -109,6 +109,10 @@
       },
       {
         "type": "header",
+        "content": "t:sections.header.settings.header_layout.content"
+      },
+      {
+        "type": "header",
         "content": "t:sections.header.settings.collections_layout.layout"
       },
       {
@@ -558,7 +562,7 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.typography.settings.type_navigation_font.title_menu_lv1"
+        "content": "t:settings_schema.typography.settings.type_navigation_font.title"
       },
       {
         "type": "paragraph",
@@ -1092,7 +1096,7 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.typography.settings.type_product_item_font.product_title"
+        "content": "t:settings_schema.typography.settings.type_product_item_font.title"
       },
       {
         "type": "paragraph",
@@ -4473,594 +4477,6 @@
     ]
   },
   {
-    "name": "Cleanroom Services",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Global Hero Banner Settings"
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_padding_top",
-        "label": "Section Padding Top",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px",
-        "default": 80
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_padding_bottom",
-        "label": "Section Padding Bottom",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px",
-        "default": 80
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_padding_left",
-        "label": "Section Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_padding_right",
-        "label": "Section Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_margin_top",
-        "label": "Section Margin Top",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "cleanroom_section_margin_bottom",
-        "label": "Section Margin Bottom",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 0
-      },
-      {
-        "type": "checkbox",
-        "id": "show_hero_banner",
-        "label": "Show Hero Banner Above All Sections",
-        "default": true
-      },
-      {
-        "type": "image_picker",
-        "id": "hero_banner_image",
-        "label": "Hero Banner Background Image"
-      },
-      {
-        "type": "color",
-        "id": "hero_banner_overlay_color",
-        "label": "Hero Banner Overlay Color",
-        "default": "#000000"
-      },
-      {
-        "type": "range",
-        "id": "hero_banner_overlay_opacity",
-        "label": "Hero Banner Overlay Opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "default": 60
-      },
-      {
-        "type": "color",
-        "id": "hero_banner_text_color",
-        "label": "Hero Banner Text Color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "text",
-        "id": "hero_banner_title",
-        "label": "Hero Banner Title",
-        "default": "World Class Clean Room manufacturing"
-      },
-      {
-        "type": "richtext",
-        "id": "hero_description",
-        "label": "Hero Description (Rich Text Editor)",
-        "default": "<p>State-of-the-art cleanroom facilities for pharmaceutical manufacturing</p>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "range",
-        "id": "hero_padding_left",
-        "label": "Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "hero_padding_right",
-        "label": "Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "text",
-        "id": "hero_banner_button_text",
-        "label": "Hero Banner Button Text",
-        "default": "SHOP NOW"
-      },
-      {
-        "type": "url",
-        "id": "hero_banner_button_url",
-        "label": "Hero Banner Button URL"
-      },
-      {
-        "type": "color",
-        "id": "hero_banner_button_bg_color",
-        "label": "Hero Banner Button Background Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "color",
-        "id": "hero_banner_button_text_color",
-        "label": "Hero Banner Button Text Color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "checkbox",
-        "id": "hero_banner_fixed_scroll",
-        "label": "Hero Banner Fixed Scroll Background",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "ISO 7 Classification Settings"
-      },
-      {
-        "type": "image_picker",
-        "id": "iso7_default_bg_image",
-        "label": "Default ISO 7 Background Image"
-      },
-      {
-        "type": "color",
-        "id": "iso7_default_overlay_color",
-        "label": "Default ISO 7 Overlay Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "range",
-        "id": "iso7_default_overlay_opacity",
-        "label": "Default ISO 7 Overlay Opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "default": 90
-      },
-      {
-        "type": "color",
-        "id": "iso7_default_text_color",
-        "label": "Default ISO 7 Text Color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "text",
-        "id": "iso7_default_title",
-        "label": "Default ISO 7 Title",
-        "default": "ISO 7 CLASSIFICATION"
-      },
-      {
-        "type": "text",
-        "id": "iso7_default_subtitle",
-        "label": "Default ISO 7 Subtitle",
-        "default": "SINGLE-USE MANUFACTURING SUITES"
-      },
-      {
-        "type": "richtext",
-        "id": "iso7_description",
-        "label": "ISO 7 Description (Rich Text Editor)",
-        "default": "<p>This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below.</p>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "range",
-        "id": "iso7_padding_left",
-        "label": "Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "iso7_padding_right",
-        "label": "Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "text",
-        "id": "iso7_video_file",
-        "label": "ISO 7 Video File (MP4 URL)",
-        "info": "Enter direct URL to MP4 file for embedded video"
-      },
-      {
-        "type": "range",
-        "id": "iso7_video_start_time",
-        "label": "Video Start Time (seconds)",
-        "min": 0,
-        "max": 300,
-        "step": 1,
-        "unit": "s",
-        "default": 0,
-        "info": "Set the start time for the video in seconds"
-      },
-      {
-        "type": "header",
-        "content": "Quality Commitment Settings"
-      },
-      {
-        "type": "image_picker",
-        "id": "quality_default_bg_image",
-        "label": "Default Quality Background Image"
-      },
-      {
-        "type": "color",
-        "id": "quality_default_overlay_color",
-        "label": "Default Quality Overlay Color",
-        "default": "#000000"
-      },
-      {
-        "type": "range",
-        "id": "quality_default_overlay_opacity",
-        "label": "Default Quality Overlay Opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "default": 60
-      },
-      {
-        "type": "color",
-        "id": "quality_default_text_color",
-        "label": "Default Quality Text Color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "text",
-        "id": "quality_default_title",
-        "label": "Default Quality Title",
-        "default": "OUR COMMITMENT TO QUALITY"
-      },
-      {
-        "type": "richtext",
-        "id": "quality_description",
-        "label": "Quality Description (Rich Text Editor)",
-        "default": "<p>Our customers can be assured that the products that they receive meet their stringent quality standards.</p>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "range",
-        "id": "quality_padding_left",
-        "label": "Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "quality_padding_right",
-        "label": "Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "header",
-        "content": "Cleanroom Colors & Styling"
-      },
-      {
-        "type": "color",
-        "id": "cleanroom_primary_color",
-        "label": "Primary Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "color",
-        "id": "cleanroom_secondary_color",
-        "label": "Secondary Color",
-        "default": "#666666"
-      },
-      {
-        "type": "color",
-        "id": "cleanroom_background_color",
-        "label": "Background Color",
-        "default": "#f8f9fa"
-      },
-      {
-        "type": "header",
-        "content": "Video Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_video_popups",
-        "label": "Enable Video Popups",
-        "default": true,
-        "info": "When enabled, video buttons will open in popups instead of new tabs"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_video_embeds",
-        "label": "Enable Embedded Videos",
-        "default": true,
-        "info": "Show embedded MP4 videos directly in sections"
-      },
-      {
-        "type": "header",
-        "content": "Banner Section Overlay Settings"
-      },
-      {
-        "type": "color",
-        "id": "banner_default_overlay_color",
-        "label": "Banner Overlay Color",
-        "default": "#000000",
-        "info": "Choose the overlay color for all banner sections"
-      },
-      {
-        "type": "range",
-        "id": "banner_default_overlay_opacity",
-        "label": "Banner Overlay Opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "default": 60,
-        "info": "Set opacity for banner overlays (0 = transparent, 100 = opaque)"
-      },
-      {
-        "type": "color",
-        "id": "banner_default_text_color",
-        "label": "Banner Text Color",
-        "default": "#FFFFFF",
-        "info": "Default text color for banner content"
-      },
-      {
-        "type": "color",
-        "id": "banner_default_button_bg_color",
-        "label": "Banner Button Background",
-        "default": "#0071b9",
-        "info": "Background color for banner buttons"
-      },
-      {
-        "type": "color",
-        "id": "banner_default_button_text_color",
-        "label": "Banner Button Text",
-        "default": "#FFFFFF",
-        "info": "Text color for banner buttons"
-      },
-      {
-        "type": "header",
-        "content": "Background Image Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_background_overlay_options",
-        "label": "Enable Background Overlay Options",
-        "default": true,
-        "info": "When enabled, all background image blocks will have overlay color and opacity options"
-      },
-      {
-        "type": "header",
-        "content": "Background Effects"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_fixed_scroll_backgrounds",
-        "label": "Enable Fixed Scroll Backgrounds",
-        "default": true,
-        "info": "Enable parallax/fixed scroll effect for background images"
-      },
-      {
-        "type": "header",
-        "content": "Image Content Section Settings"
-      },
-      {
-        "type": "color",
-        "id": "image_content_background_color",
-        "label": "Image Content Background Color",
-        "default": "#ffffff"
-      },
-      {
-        "type": "color",
-        "id": "image_content_title_color",
-        "label": "Image Content Title Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "color",
-        "id": "image_content_text_color",
-        "label": "Image Content Text Color",
-        "default": "#666666"
-      },
-      {
-        "type": "color",
-        "id": "image_content_button_bg_color",
-        "label": "Image Content Button Background",
-        "default": "#0071b9"
-      },
-      {
-        "type": "color",
-        "id": "image_content_button_text_color",
-        "label": "Image Content Button Text",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "range",
-        "id": "image_content_title_font_size",
-        "label": "Image Content Title Font Size",
-        "min": 24,
-        "max": 72,
-        "step": 2,
-        "unit": "px",
-        "default": 48
-      },
-      {
-        "type": "range",
-        "id": "image_content_text_font_size",
-        "label": "Image Content Text Font Size",
-        "min": 14,
-        "max": 24,
-        "step": 1,
-        "unit": "px",
-        "default": 18
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_image_content_animations",
-        "label": "Enable Image Content Animations",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Animation Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_cleanroom_animations",
-        "label": "Enable Animations",
-        "default": true
-      },
-      {
-        "type": "select",
-        "id": "cleanroom_animation_speed",
-        "label": "Animation Speed",
-        "default": "normal",
-        "options": [
-          {
-            "value": "slow",
-            "label": "Slow"
-          },
-          {
-            "value": "normal",
-            "label": "Normal"
-          },
-          {
-            "value": "fast",
-            "label": "Fast"
-          }
-        ]
-      },
-      {
-        "type": "header",
-        "content": "Mobile Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "disable_fixed_scroll_mobile",
-        "label": "Disable Fixed Scroll on Mobile",
-        "default": true,
-        "info": "Improves performance on mobile devices"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_videos_mobile",
-        "label": "Show Videos on Mobile",
-        "default": true
-      },
-      {
-        "type": "richtext",
-        "id": "welcome_description",
-        "label": "Welcome Description (Rich Text Editor)",
-        "default": "<p>Conveniently located in Londonderry, USA, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications.</p>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "range",
-        "id": "welcome_padding_left",
-        "label": "Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "welcome_padding_right",
-        "label": "Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "richtext",
-        "id": "welcome_video_text",
-        "label": "Welcome Video Text (Rich Text Editor)",
-        "default": "<p>ISO Class 7 (10K) Cleanroom, perfect for custom assemblies at any volume! Complete documentation of the entire production process.</p><ul><li>Batch Records</li><li>5O</li><li>Finished Goods Records</li><li>Ability to source any materials required by the customer's ISO 13485 12 years in a row</li></ul>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "richtext",
-        "id": "classifications_description",
-        "label": "Classifications Description (Rich Text Editor)",
-        "default": "<p>Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air.</p>",
-        "info": "Use the rich text editor to format content, add lists, bold text, etc."
-      },
-      {
-        "type": "range",
-        "id": "classifications_padding_left",
-        "label": "Padding Left",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      },
-      {
-        "type": "range",
-        "id": "classifications_padding_right",
-        "label": "Padding Right",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "px",
-        "default": 20
-      }
-    ]
-  },
-  {
     "name": "t:settings_schema.quick_search.name",
     "settings": [
       {
@@ -5781,7 +5197,7 @@
           },
           {
             "value": "Holy See (Vatican City State)",
-            "label": ""Holy See (Vatican City State)"
+            "label": "Holy See (Vatican City State)"
           },
           {
             "value": "Honduras",
@@ -5930,7 +5346,8 @@
           {
             "value": "Malaysia",
             "label": "Malaysia"
-          },{
+          },
+          {
             "value": "Maldives",
             "label": "Maldives"
           },
@@ -7201,7 +6618,6 @@
         "type": "checkbox",
         "id": "show_newsletter_popup",
         "label": "t:settings_schema.newsletter_popup.settings.general.label__1",
-        "info": "t:settings_schema.newsletter_popup.settings.general.info",
         "default": true
       },
       {
@@ -7233,7 +6649,7 @@
       {
         "type": "image_picker",
         "id": "newsletter_popup_image",
-        "label": "t:sections.quick_view.settings.header__2.content"
+        "label": "t:settings_schema.quick_view.settings.header__2.content"
       },
       {
         "type": "url",
@@ -7545,170 +6961,6 @@
             "label": "t:settings_schema.notify_me.settings.general.options__3"
           }
         ]
-      }
-    ]
-  },
-  {
-    "name": "Contact Us",
-    "settings": [
-      {
-        "type": "header",
-        "content": "General Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_contact_section",
-        "label": "Show Contact Section",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "contact_section_title",
-        "label": "Section Title",
-        "default": "Contact Us"
-      },
-      {
-        "type": "textarea",
-        "id": "contact_section_description",
-        "label": "Section Description",
-        "default": "Get in touch with our team for all your bioprocess needs"
-      },
-      {
-        "type": "color",
-        "id": "contact_background_color",
-        "label": "Background Color",
-        "default": "#f8f9fa"
-      },
-      {
-        "type": "color",
-        "id": "contact_accent_color",
-        "label": "Accent Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "header",
-        "content": "Contact Information"
-      },
-      {
-        "type": "text",
-        "id": "contact_main_phone",
-        "label": "Main Phone Number",
-        "default": "(603) 890-FOXX (3699)"
-      },
-      {
-        "type": "text",
-        "id": "contact_main_email",
-        "label": "Main Email",
-        "default": "sales@foxxlifesciences.com"
-      },
-      {
-        "type": "text",
-        "id": "contact_support_email",
-        "label": "Support Email",
-        "default": "support@foxxlifesciences.com"
-      },
-      {
-        "type": "header",
-        "content": "Contact Form Settings"
-      },
-      {
-        "type": "text",
-        "id": "contact_form_title",
-        "label": "Form Title",
-        "default": "Send us a Message"
-      },
-      {
-        "type": "textarea",
-        "id": "contact_form_description",
-        "label": "Form Description",
-        "default": "Fill out the form below and we'll get back to you as soon as possible."
-      },
-      {
-        "type": "text",
-        "id": "contact_success_message",
-        "label": "Success Message",
-        "default": "Thank you for your message! We'll get back to you soon."
-      }
-    ]
-  },
-  {
-    "name": "Contact Us",
-    "settings": [
-      {
-        "type": "header",
-        "content": "General Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_contact_section",
-        "label": "Show Contact Section",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "contact_section_title",
-        "label": "Section Title",
-        "default": "Contact Us"
-      },
-      {
-        "type": "textarea",
-        "id": "contact_section_description",
-        "label": "Section Description",
-        "default": "Get in touch with our team for all your bioprocess needs"
-      },
-      {
-        "type": "color",
-        "id": "contact_background_color",
-        "label": "Background Color",
-        "default": "#f8f9fa"
-      },
-      {
-        "type": "color",
-        "id": "contact_accent_color",
-        "label": "Accent Color",
-        "default": "#0071b9"
-      },
-      {
-        "type": "range",
-        "id": "contact_padding_top",
-        "label": "Top Padding",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px",
-        "default": 80
-      },
-      {
-        "type": "range",
-        "id": "contact_padding_bottom",
-        "label": "Bottom Padding",
-        "min": 0,
-        "max": 200,
-        "step": 10,
-        "unit": "px",
-        "default": 80
-      },
-      {
-        "type": "header",
-        "content": "Contact Form Settings"
-      },
-      {
-        "type": "text",
-        "id": "contact_form_title",
-        "label": "Form Title",
-        "default": "Send us a Message"
-      },
-      {
-        "type": "textarea",
-        "id": "contact_form_description",
-        "label": "Form Description",
-        "default": "Fill out the form below and we'll get back to you as soon as possible."
-      },
-      {
-        "type": "text",
-        "id": "contact_success_message",
-        "label": "Success Message",
-        "default": "Thank you for your message! We'll get back to you soon."
       }
     ]
   },
@@ -8135,10 +7387,6 @@
           {
             "value": "_self",
             "label": "Open in same tab"
-          },
-          {
-            "value": "none",
-            "label": "None"
           }
         ]
       },
@@ -8728,7 +7976,32 @@
     "settings": [
       {
         "type": "header",
-        "content": "Section Settings"
+        "content": "Background Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "story_background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "story_overlay_color",
+        "label": "Overlay Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "story_overlay_opacity",
+        "label": "Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 85
+      },
+      {
+        "type": "header",
+        "content": "Section Heading"
       },
       {
         "type": "text",
@@ -8827,7 +8100,7 @@
         "type": "textarea",
         "id": "stat2_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 9H9v7h2v-7zm4 0h-2v7h2v-7zm-8 7H7v-7h2v7zm4 0h-2v-7h2v7z'\/><\/svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -9102,7 +8375,7 @@
         "type": "textarea",
         "id": "stat7_svg_code",
         "label": "SVG Code",
-        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2 9.91 6.26 5.61 7.11 8.55 10 9.23 14.14 12 12.16 14.77 14.14 15.45 10 18.39 7.11 14.39 6.26 12 2z'\/><\/svg>"
+        "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'\/><\/svg>"
       },
       {
         "type": "image_picker",
@@ -9759,7 +9032,7 @@
         "type": "richtext",
         "id": "testing_main_content",
         "label": "Main Testing Content",
-        "default": "<p>We provide integrity testing for all SUT components. This primarily comprises of two tests: <strong>Pressure Decay Test</strong> and <strong>Pull Test</strong>. Most SUT components can be categorized into Flexible, semi-rigid and rigid components.</p><p>Pressure Decay tests primarily validate the structural integrity of an individual component as well as the seal integrity of container closures and of assemblies as a whole. Pull test primarily evaluates the integrity of the tubing connections.</p><p>Since leakage of the media is the ultimate failure of any SUT component or assembly, these two are used to assess the leak dynamics of the components.</p>"
+        "default": "<p>We provide integrity testing for all SUT components. This primarily comprises of two tests: <strong>Pressure Decay Test<\/strong> and <strong>Pull Test<\/strong>. Most SUT components can be categorized into Flexible, semi-rigid and rigid components.<\/p><p>Pressure Decay tests primarily validate the structural integrity of an individual component as well as the seal integrity of container closures and of assemblies as a whole. Pull test primarily evaluates the integrity of the tubing connections.<\/p><p>Since leakage of the media is the ultimate failure of any SUT component or assembly, these two are used to assess the leak dynamics of the components.<\/p>"
       },
       {
         "type": "text",
@@ -9771,7 +9044,7 @@
         "type": "richtext",
         "id": "additional_services_content",
         "label": "Additional Services Content",
-        "default": "<p>In addition to integrity testing, we provide:</p><ul><li><strong>Freeze-thaw testing</strong> - Components are subjected to extreme temperatures (up to -86°C). Post freeze-thaw integrity tests assess the effect of temperature stress.</li><li><strong>Flow testing</strong> - Primary integrity test for filters and assemblies requiring specific output flowrates.</li><li><strong>Extractables &amp; Leachable (E&amp;L) studies</strong></li><li><strong>Particulate testing</strong></li><li><strong>Sterility assurance &amp; validation</strong></li><li><strong>Endotoxin/bioburden testing</strong></li><li><strong>Gamma irradiation compatibility</strong></li><li><strong>Accelerated aging/stability testing</strong></li></ul>"
+        "default": "<p>In addition to integrity testing, we provide:<\/p><ul><li><strong>Freeze-thaw testing<\/strong> - Components are subjected to extreme temperatures (up to -86°C). Post freeze-thaw integrity tests assess the effect of temperature stress.<\/li><li><strong>Flow testing<\/strong> - Primary integrity test for filters and assemblies requiring specific output flowrates.<\/li><li><strong>Extractables &amp; Leachable (E&amp;L) studies<\/strong><\/li><li><strong>Particulate testing<\/strong><\/li><li><strong>Sterility assurance &amp; validation<\/strong><\/li><li><strong>Endotoxin\/bioburden testing<\/strong><\/li><li><strong>Gamma irradiation compatibility<\/strong><\/li><li><strong>Accelerated aging\/stability testing<\/strong><\/li><\/ul>"
       },
       {
         "type": "header",
@@ -9924,6 +9197,675 @@
         "id": "testing_contact_phone",
         "label": "Testing Department Phone",
         "default": "+1 (xxx) xxx-xxxx"
+      }
+    ]
+  },
+  {
+    "name": "Contact Us",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_contact_section",
+        "label": "Show Contact Section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "contact_section_title",
+        "label": "Section Title",
+        "default": "Contact Us"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_section_description",
+        "label": "Section Description",
+        "default": "Get in touch with our team for all your bioprocess needs"
+      },
+      {
+        "type": "color",
+        "id": "contact_background_color",
+        "label": "Background Color",
+        "default": "#f8f9fa"
+      },
+      {
+        "type": "color",
+        "id": "contact_accent_color",
+        "label": "Accent Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "contact_padding_top",
+        "label": "Top Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "contact_padding_bottom",
+        "label": "Bottom Padding",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "header",
+        "content": "Contact Form Settings"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_title",
+        "label": "Form Title",
+        "default": "Send us a Message"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_form_description",
+        "label": "Form Description",
+        "default": "Fill out the form below and we'll get back to you as soon as possible."
+      },
+      {
+        "type": "text",
+        "id": "contact_success_message",
+        "label": "Success Message",
+        "default": "Thank you for your message! We'll get back to you soon."
+      }
+    ]
+  },
+  {
+    "name": "Cleanroom Services",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Global Hero Banner Settings"
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_top",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_left",
+        "label": "Section Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_padding_right",
+        "label": "Section Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_margin_top",
+        "label": "Section Margin Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "cleanroom_section_margin_bottom",
+        "label": "Section Margin Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "show_hero_banner",
+        "label": "Show Hero Banner Above All Sections",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_banner_image",
+        "label": "Hero Banner Background Image"
+      },
+      {
+        "type": "color",
+        "id": "hero_banner_overlay_color",
+        "label": "Hero Banner Overlay Color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "hero_banner_overlay_opacity",
+        "label": "Hero Banner Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 60
+      },
+      {
+        "type": "color",
+        "id": "hero_banner_text_color",
+        "label": "Hero Banner Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "text",
+        "id": "hero_banner_title",
+        "label": "Hero Banner Title",
+        "default": "World Class Clean Room manufacturing"
+      },
+      {
+        "type": "richtext",
+        "id": "hero_description",
+        "label": "Hero Description (Rich Text Editor)",
+        "default": "<p>State-of-the-art cleanroom facilities for pharmaceutical manufacturing</p>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "range",
+        "id": "hero_padding_left",
+        "label": "Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "hero_padding_right",
+        "label": "Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "text",
+        "id": "hero_banner_button_text",
+        "label": "Hero Banner Button Text",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "url",
+        "id": "hero_banner_button_url",
+        "label": "Hero Banner Button URL"
+      },
+      {
+        "type": "color",
+        "id": "hero_banner_button_bg_color",
+        "label": "Hero Banner Button Background Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "hero_banner_button_text_color",
+        "label": "Hero Banner Button Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "checkbox",
+        "id": "hero_banner_fixed_scroll",
+        "label": "Hero Banner Fixed Scroll Background",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "ISO 7 Classification Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "iso7_default_bg_image",
+        "label": "Default ISO 7 Background Image"
+      },
+      {
+        "type": "color",
+        "id": "iso7_default_overlay_color",
+        "label": "Default ISO 7 Overlay Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "iso7_default_overlay_opacity",
+        "label": "Default ISO 7 Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 90
+      },
+      {
+        "type": "color",
+        "id": "iso7_default_text_color",
+        "label": "Default ISO 7 Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "text",
+        "id": "iso7_default_title",
+        "label": "Default ISO 7 Title",
+        "default": "ISO 7 CLASSIFICATION"
+      },
+      {
+        "type": "text",
+        "id": "iso7_default_subtitle",
+        "label": "Default ISO 7 Subtitle",
+        "default": "SINGLE-USE MANUFACTURING SUITES"
+      },
+      {
+        "type": "richtext",
+        "id": "iso7_description",
+        "label": "ISO 7 Description (Rich Text Editor)",
+        "default": "<p>This is one of the most common classes of cleanrooms. With an ISO 8 airlock/gowning room prior to entering the ISO 7 room, the air changes per hour will vary in both rooms as described below.</p>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "range",
+        "id": "iso7_padding_left",
+        "label": "Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "iso7_padding_right",
+        "label": "Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "text",
+        "id": "iso7_video_file",
+        "label": "ISO 7 Video File (MP4 URL)",
+        "info": "Enter direct URL to MP4 file for embedded video"
+      },
+      {
+        "type": "range",
+        "id": "iso7_video_start_time",
+        "label": "Video Start Time (seconds)",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "s",
+        "default": 0,
+        "info": "Set the start time for the video in seconds"
+      },
+      {
+        "type": "header",
+        "content": "Quality Commitment Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "quality_default_bg_image",
+        "label": "Default Quality Background Image"
+      },
+      {
+        "type": "color",
+        "id": "quality_default_overlay_color",
+        "label": "Default Quality Overlay Color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "quality_default_overlay_opacity",
+        "label": "Default Quality Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 60
+      },
+      {
+        "type": "color",
+        "id": "quality_default_text_color",
+        "label": "Default Quality Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "text",
+        "id": "quality_default_title",
+        "label": "Default Quality Title",
+        "default": "OUR COMMITMENT TO QUALITY"
+      },
+      {
+        "type": "richtext",
+        "id": "quality_description",
+        "label": "Quality Description (Rich Text Editor)",
+        "default": "<p>Our customers can be assured that the products that they receive meet their stringent quality standards.</p>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "range",
+        "id": "quality_padding_left",
+        "label": "Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "quality_padding_right",
+        "label": "Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Cleanroom Colors & Styling"
+      },
+      {
+        "type": "color",
+        "id": "cleanroom_primary_color",
+        "label": "Primary Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "cleanroom_secondary_color",
+        "label": "Secondary Color",
+        "default": "#666666"
+      },
+      {
+        "type": "color",
+        "id": "cleanroom_background_color",
+        "label": "Background Color",
+        "default": "#f8f9fa"
+      },
+      {
+        "type": "header",
+        "content": "Video Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_video_popups",
+        "label": "Enable Video Popups",
+        "default": true,
+        "info": "When enabled, video buttons will open in popups instead of new tabs"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_video_embeds",
+        "label": "Enable Embedded Videos",
+        "default": true,
+        "info": "Show embedded MP4 videos directly in sections"
+      },
+      {
+        "type": "header",
+        "content": "Banner Section Overlay Settings"
+      },
+      {
+        "type": "color",
+        "id": "banner_default_overlay_color",
+        "label": "Banner Overlay Color",
+        "default": "#000000",
+        "info": "Choose the overlay color for all banner sections"
+      },
+      {
+        "type": "range",
+        "id": "banner_default_overlay_opacity",
+        "label": "Banner Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 60,
+        "info": "Set opacity for banner overlays (0 = transparent, 100 = opaque)"
+      },
+      {
+        "type": "color",
+        "id": "banner_default_text_color",
+        "label": "Banner Text Color",
+        "default": "#FFFFFF",
+        "info": "Default text color for banner content"
+      },
+      {
+        "type": "color",
+        "id": "banner_default_button_bg_color",
+        "label": "Banner Button Background",
+        "default": "#0071b9",
+        "info": "Background color for banner buttons"
+      },
+      {
+        "type": "color",
+        "id": "banner_default_button_text_color",
+        "label": "Banner Button Text",
+        "default": "#FFFFFF",
+        "info": "Text color for banner buttons"
+      },
+      {
+        "type": "header",
+        "content": "Background Image Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_background_overlay_options",
+        "label": "Enable Background Overlay Options",
+        "default": true,
+        "info": "When enabled, all background image blocks will have overlay color and opacity options"
+      },
+      {
+        "type": "header",
+        "content": "Background Effects"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_fixed_scroll_backgrounds",
+        "label": "Enable Fixed Scroll Backgrounds",
+        "default": true,
+        "info": "Enable parallax/fixed scroll effect for background images"
+      },
+      {
+        "type": "header",
+        "content": "Image Content Section Settings"
+      },
+      {
+        "type": "color",
+        "id": "image_content_background_color",
+        "label": "Image Content Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "image_content_title_color",
+        "label": "Image Content Title Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "image_content_text_color",
+        "label": "Image Content Text Color",
+        "default": "#666666"
+      },
+      {
+        "type": "color",
+        "id": "image_content_button_bg_color",
+        "label": "Image Content Button Background",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "image_content_button_text_color",
+        "label": "Image Content Button Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "range",
+        "id": "image_content_title_font_size",
+        "label": "Image Content Title Font Size",
+        "min": 24,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "image_content_text_font_size",
+        "label": "Image Content Text Font Size",
+        "min": 14,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 18
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_image_content_animations",
+        "label": "Enable Image Content Animations",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Animation Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cleanroom_animations",
+        "label": "Enable Animations",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "cleanroom_animation_speed",
+        "label": "Animation Speed",
+        "default": "normal",
+        "options": [
+          {
+            "value": "slow",
+            "label": "Slow"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "fast",
+            "label": "Fast"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Mobile Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_fixed_scroll_mobile",
+        "label": "Disable Fixed Scroll on Mobile",
+        "default": true,
+        "info": "Improves performance on mobile devices"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_videos_mobile",
+        "label": "Show Videos on Mobile",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "welcome_description",
+        "label": "Welcome Description (Rich Text Editor)",
+        "default": "<p>Conveniently located in Londonderry, USA, our brand new 21,000 square foot facility is complete with a 5,200 square foot, state-of-the-art cleanroom split into ISO 7 and 8 classifications.</p>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "range",
+        "id": "welcome_padding_left",
+        "label": "Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "welcome_padding_right",
+        "label": "Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "richtext",
+        "id": "welcome_video_text",
+        "label": "Welcome Video Text (Rich Text Editor)",
+        "default": "<p>ISO Class 7 (10K) Cleanroom, perfect for custom assemblies at any volume! Complete documentation of the entire production process.</p><ul><li>Batch Records</li><li>5O</li><li>Finished Goods Records</li><li>Ability to source any materials required by the customer's ISO 13485 12 years in a row</li></ul>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "richtext",
+        "id": "classifications_description",
+        "label": "Classifications Description (Rich Text Editor)",
+        "default": "<p>Cleanrooms are classified according to the cleanliness level of the air inside them. The cleanroom class is the level of cleanliness the room complies with, according to the quantity and size of particles per volume of air.</p>",
+        "info": "Use the rich text editor to format content, add lists, bold text, etc."
+      },
+      {
+        "type": "range",
+        "id": "classifications_padding_left",
+        "label": "Padding Left",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "classifications_padding_right",
+        "label": "Padding Right",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
       }
     ]
   },
@@ -10177,7 +10119,7 @@
         "type": "color",
         "id": "product_wishlist_bg",
         "label": "t:settings_schema.colors.settings.colors_name.background_color",
-        "default": "#FFFFFF"
+        "default": "#ffffff"
       },
       {
         "type": "color",
