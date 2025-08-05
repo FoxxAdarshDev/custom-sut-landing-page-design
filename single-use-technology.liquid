@@ -1,3 +1,4 @@
+
 <style>
   .sut-main-container {
     max-width: 100%;
@@ -55,7 +56,6 @@
   .sut-hero-section {
     position: relative;
     min-height: 60vh;
-    background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,13 +64,14 @@
 
   .sut-hero-image-container {
     text-align: center;
-    background: #f8f9fa;
+    width: 100%;
   }
 
   .sut-hero-image {
     max-width: 100%;
     height: auto;
     display: block;
+    width: 100%;
   }
 
   .sut-hero-background {
@@ -104,7 +105,6 @@
   }
 
   .sut-hero-title {
-    font-size: 56px;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 25px;
@@ -114,10 +114,22 @@
   }
 
   .sut-hero-description {
-    font-size: 20px;
     line-height: 1.6;
     margin-bottom: 30px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .sut-hero-button {
+    display: inline-block;
+    padding: 18px 40px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   /* Strategy Section */
@@ -206,8 +218,6 @@
   /* Stats Section */
   .sut-stats-section {
     position: relative;
-    background: linear-gradient(135deg, #0071b9 0%, #003366 100%);
-    color: white;
     overflow: hidden;
   }
 
@@ -241,40 +251,32 @@
   }
 
   .sut-stats-title {
-    font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: white;
   }
 
   .sut-stats-description {
-    font-size: 18px;
     line-height: 1.6;
-    color: white;
     opacity: 0.9;
     max-width: 800px;
     margin: 0 auto;
   }
 
   .sut-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 40px;
-    text-align: center;
+    flex-wrap: wrap;
   }
 
   .sut-stat-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-
-  .sut-stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
   }
 
   .sut-stat-icon {
@@ -292,27 +294,22 @@
   .sut-stat-icon svg {
     width: 32px;
     height: 32px;
-    fill: white;
+    fill: currentColor;
   }
 
   .sut-stat-number {
-    font-size: 48px;
     font-weight: 700;
     margin-bottom: 10px;
-    color: #00a86b;
     line-height: 1.2;
   }
 
   .sut-stat-label {
-    font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: white;
   }
 
   .sut-stat-description {
     font-size: 14px;
-    color: white;
     opacity: 0.8;
     line-height: 1.4;
   }
@@ -339,74 +336,118 @@
     color: #666;
     line-height: 1.6;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
   }
 
   .sut-category-tabs {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
-    gap: 10px;
+    margin-bottom: 50px;
+    gap: 0;
+    border-radius: 50px;
+    background: #e9ecef;
+    padding: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
   }
 
   .sut-tab-button {
-    padding: 15px 30px;
-    background: #e9ecef;
-    color: #333;
+    padding: 15px 40px;
+    background: transparent;
+    color: #666;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
   }
 
   .sut-tab-button.active {
     background: #0071b9;
     color: white;
+    box-shadow: 0 4px 15px rgba(0, 113, 185, 0.3);
+  }
+
+  .sut-tab-button:hover:not(.active) {
+    background: rgba(0, 113, 185, 0.1);
+    color: #0071b9;
   }
 
   .sut-categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     margin-top: 40px;
   }
 
   .sut-category-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
     cursor: pointer;
+    border: 1px solid #f0f0f0;
+    position: relative;
   }
 
   .sut-category-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   }
 
   .sut-category-image {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .sut-category-card:hover .sut-category-image {
+    transform: scale(1.05);
   }
 
   .sut-category-content {
-    padding: 25px;
+    padding: 30px;
+    position: relative;
   }
 
   .sut-category-name {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     color: #333;
     margin-bottom: 15px;
+    line-height: 1.3;
   }
 
   .sut-category-desc {
     font-size: 16px;
     color: #666;
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+  }
+
+  .sut-category-button {
+    background: #0071b9;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  .sut-category-button:hover {
+    background: #005a94;
+    transform: translateY(-2px);
   }
 
   /* Sustainability Section */
@@ -553,14 +594,6 @@
 
   /* Mobile Responsive */
   @media (max-width: 768px) {
-    .sut-hero-title {
-      font-size: 32px;
-    }
-
-    .sut-hero-description {
-      font-size: 16px;
-    }
-
     .sut-strategy-container,
     .sut-video-container,
     .sut-sustainability-container {
@@ -579,13 +612,24 @@
     }
 
     .sut-stats-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      flex-direction: column;
+      gap: 30px;
     }
 
     .sut-category-tabs {
       flex-direction: column;
-      align-items: center;
+      background: transparent;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .sut-tab-button {
+      border-radius: 8px;
+      background: #e9ecef;
+    }
+
+    .sut-tab-button.active {
+      border-radius: 8px;
     }
 
     .sut-features-grid {
@@ -594,10 +638,6 @@
   }
 
   @media (max-width: 480px) {
-    .sut-hero-title {
-      font-size: 24px;
-    }
-
     .sut-categories-title,
     .sut-features-title,
     .sut-cta-title {
@@ -669,6 +709,12 @@
         },
         {
           "type": "color",
+          "id": "hero_background_color",
+          "label": "Background Color (when no image)",
+          "default": "#0071b9"
+        },
+        {
+          "type": "color",
           "id": "hero_overlay_color",
           "label": "Overlay Color",
           "default": "#003366"
@@ -690,10 +736,80 @@
           "default": "Single-use systems"
         },
         {
+          "type": "range",
+          "id": "hero_title_size_desktop",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "hero_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "hero_title_line_height",
+          "label": "Title Line Height",
+          "min": 1.0,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.1
+        },
+        {
+          "type": "color",
+          "id": "hero_title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
           "type": "richtext",
           "id": "hero_description",
           "label": "Hero Description",
           "default": "<p>How to make bioprocessing faster, more efficient, and economical</p>"
+        },
+        {
+          "type": "range",
+          "id": "hero_description_size_desktop",
+          "label": "Description Font Size (Desktop)",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "hero_description_size_mobile",
+          "label": "Description Font Size (Mobile)",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "hero_description_line_height",
+          "label": "Description Line Height",
+          "min": 1.2,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.6
+        },
+        {
+          "type": "color",
+          "id": "hero_description_color",
+          "label": "Description Color",
+          "default": "#ffffff"
         },
         {
           "type": "text",
@@ -705,6 +821,24 @@
           "type": "url",
           "id": "hero_button_url",
           "label": "Hero Button URL"
+        },
+        {
+          "type": "color",
+          "id": "hero_button_bg_color",
+          "label": "Button Background Color",
+          "default": "#00a86b"
+        },
+        {
+          "type": "color",
+          "id": "hero_button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "hero_button_hover_bg_color",
+          "label": "Button Hover Background Color",
+          "default": "#009d63"
         }
       ]
     },
@@ -853,6 +987,28 @@
       "name": "Stats",
       "settings": [
         {
+          "type": "select",
+          "id": "stats_background_type",
+          "label": "Background Type",
+          "options": [
+            {
+              "value": "color",
+              "label": "Solid Color"
+            },
+            {
+              "value": "image",
+              "label": "Background Image"
+            }
+          ],
+          "default": "color"
+        },
+        {
+          "type": "color",
+          "id": "stats_background_color",
+          "label": "Background Color",
+          "default": "#0071b9"
+        },
+        {
           "type": "image_picker",
           "id": "stats_background_image",
           "label": "Stats Background Image"
@@ -900,10 +1056,74 @@
           "default": "Foxx Today"
         },
         {
+          "type": "range",
+          "id": "stats_title_size",
+          "label": "Title Font Size",
+          "min": 24,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "stats_title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
           "type": "richtext",
           "id": "stats_description",
           "label": "Stats Description",
           "default": "<p>For more than two decades, we have been a leading global manufacturer of single-use bioprocess consumables.</p>"
+        },
+        {
+          "type": "range",
+          "id": "stats_description_size",
+          "label": "Description Font Size",
+          "min": 14,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "color",
+          "id": "stats_description_color",
+          "label": "Description Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "stats_number_size",
+          "label": "Number Font Size",
+          "min": 24,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "stats_number_color",
+          "label": "Number Color",
+          "default": "#00a86b"
+        },
+        {
+          "type": "range",
+          "id": "stats_label_size",
+          "label": "Label Font Size",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "color",
+          "id": "stats_label_color",
+          "label": "Label Color",
+          "default": "#ffffff"
         }
       ]
     },
@@ -1331,22 +1551,41 @@
           "type": "categories"
         },
         {
-          "type": "category_tab"
+          "type": "category_tab",
+          "settings": {
+            "tab_name": "Accumax",
+            "tab_active": true
+          }
         },
         {
-          "type": "category_tab"
+          "type": "category_tab",
+          "settings": {
+            "tab_name": "Neuation"
+          }
         },
         {
-          "type": "category_tab"
+          "type": "product_category",
+          "settings": {
+            "category_tab": "Accumax",
+            "category_name": "FAB Pipette",
+            "category_description": "With unmatched precision and accuracy, it offers ergonomic pipetting ensuring consistent results"
+          }
         },
         {
-          "type": "product_category"
+          "type": "product_category",
+          "settings": {
+            "category_tab": "Accumax",
+            "category_name": "GreenMAX Tip Racks",
+            "category_description": "They work seamlessly with single channel and multi-channel pipettes, making loading and unloading tips a breeze."
+          }
         },
         {
-          "type": "product_category"
-        },
-        {
-          "type": "product_category"
+          "type": "product_category",
+          "settings": {
+            "category_tab": "Accumax",
+            "category_name": "Reagent Bottles",
+            "category_description": "Crafted with top-quality materials, they are excellent storage containers for powder and liquid samples"
+          }
         },
         {
           "type": "sustainability"
@@ -1388,46 +1627,62 @@
         <section class="sut-hero-section" {{ block.shopify_attributes }}>
           {% if block.settings.hero_content_display == 'image_only' %}
             {% if block.settings.hero_image %}
-            <div class="sut-hero-image-container" style="padding-top: {{ block.settings.hero_padding_top | default: 0 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 0 }}px;">
-              <div class="sut-container">
-                <img src="{{ block.settings.hero_image | img_url: '1200x' }}" alt="{{ block.settings.hero_title }}" class="sut-hero-image">
+              <div class="sut-hero-image-container" style="padding-top: {{ block.settings.hero_padding_top | default: 0 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 0 }}px;">
+                <img src="{{ block.settings.hero_image | img_url: '1920x' }}" alt="{{ block.settings.hero_title }}" class="sut-hero-image">
               </div>
-            </div>
-          {% endif %}
-        {% else %}
-          {% if block.settings.hero_image %}
-            <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
-              <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+            {% endif %}
+          {% else %}
+            {% if block.settings.hero_image %}
+              <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');"></div>
+              <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}; opacity: {{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
                 <div class="sut-container">
                   <div class="sut-hero-content">
-                    <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
-                    <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
+                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; line-height: {{ block.settings.hero_title_line_height | default: 1.1 }}; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
+                      {{ block.settings.hero_title }}
+                    </h1>
+                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; line-height: {{ block.settings.hero_description_line_height | default: 1.6 }}; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
+                      {{ block.settings.hero_description }}
+                    </div>
                     {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                      <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};" onmouseover="this.style.background='{{ block.settings.hero_button_hover_bg_color | default: '#009d63' }}'" onmouseout="this.style.background='{{ block.settings.hero_button_bg_color | default: '#00a86b' }}'">
                         {{ block.settings.hero_button_text }}
                       </a>
                     {% endif %}
                   </div>
                 </div>
               </div>
-            </div>
-          {% else %}
-            <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%); padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
-              <div class="sut-container">
-                <div class="sut-hero-content">
-                  <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
-                  <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
-                  {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                    <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
-                      {{ block.settings.hero_button_text }}
-                    </a>
-                  {% endif %}
+            {% else %}
+              <div class="sut-hero-background" style="background: {{ block.settings.hero_background_color | default: '#0071b9' }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+                <div class="sut-container">
+                  <div class="sut-hero-content">
+                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; line-height: {{ block.settings.hero_title_line_height | default: 1.1 }}; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
+                      {{ block.settings.hero_title }}
+                    </h1>
+                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; line-height: {{ block.settings.hero_description_line_height | default: 1.6 }}; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
+                      {{ block.settings.hero_description }}
+                    </div>
+                    {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};" onmouseover="this.style.background='{{ block.settings.hero_button_hover_bg_color | default: '#009d63' }}'" onmouseout="this.style.background='{{ block.settings.hero_button_bg_color | default: '#00a86b' }}'">
+                        {{ block.settings.hero_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endif %}
           {% endif %}
-        {% endif %}
         </section>
+        
+        <style>
+          @media (max-width: 768px) {
+            .sut-hero-title {
+              font-size: {{ block.settings.hero_title_size_mobile | default: 32 }}px !important;
+            }
+            .sut-hero-description {
+              font-size: {{ block.settings.hero_description_size_mobile | default: 16 }}px !important;
+            }
+          }
+        </style>
         {% endif %}
 
       {% when 'strategy' %}
@@ -1526,61 +1781,67 @@
 
       {% when 'stats' %}
         <section class="sut-stats-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.stats_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.stats_padding_bottom | default: 80 }}px;">
-          {% if block.settings.stats_background_image %}
+          {% if block.settings.stats_background_type == 'image' and block.settings.stats_background_image %}
             <div class="sut-stats-background" style="background-image: url('{{ block.settings.stats_background_image | img_url: '1920x' }}');"></div>
+            <div class="sut-stats-overlay" style="background-color: {{ block.settings.stats_overlay_color | default: '#0071b9' }}; opacity: {{ block.settings.stats_overlay_opacity | default: 90 | divided_by: 100.0 }};">
+          {% else %}
+            <div style="background-color: {{ block.settings.stats_background_color | default: '#0071b9' }};">
           {% endif %}
-          <div class="sut-stats-overlay" style="background-color: {{ block.settings.stats_overlay_color | default: '#0071b9' }}{{ block.settings.stats_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }};">
-            <div class="sut-container">
-              <div class="sut-stats-content">
-                {% if block.settings.stats_title or block.settings.stats_description %}
-                  <div class="sut-stats-header">
-                    {% if block.settings.stats_title %}
-                      <h2 class="sut-stats-title">{{ block.settings.stats_title }}</h2>
-                    {% endif %}
-                    {% if block.settings.stats_description %}
-                      <div class="sut-stats-description">{{ block.settings.stats_description }}</div>
-                    {% endif %}
-                  </div>
-                {% endif %}
+              <div class="sut-container">
+                <div class="sut-stats-content">
+                  {% if block.settings.stats_title or block.settings.stats_description %}
+                    <div class="sut-stats-header">
+                      {% if block.settings.stats_title %}
+                        <h2 class="sut-stats-title" style="font-size: {{ block.settings.stats_title_size | default: 48 }}px; color: {{ block.settings.stats_title_color | default: '#ffffff' }};">{{ block.settings.stats_title }}</h2>
+                      {% endif %}
+                      {% if block.settings.stats_description %}
+                        <div class="sut-stats-description" style="font-size: {{ block.settings.stats_description_size | default: 18 }}px; color: {{ block.settings.stats_description_color | default: '#ffffff' }};">{{ block.settings.stats_description }}</div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
 
-                <div class="sut-stats-grid">
-                  {% for stat_block in section.blocks %}
-                    {% if stat_block.type == 'stat_item' %}
-                      <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
-                        <div class="sut-stat-icon">
-                          {% case stat_block.settings.stat_icon_type %}
-                            {% when 'location' %}
-                              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                            {% when 'building' %}
-                              <svg viewBox="0 0 24 24"><path d="M12,2L13.09,8.26L22,9L14.74,15.74L16.18,22.5L12,19.77L7.82,22.5L9.26,15.74L2,9L10.91,8.26L12,2M12,2L12,19.77L16.18,22.5L14.74,15.74L22,9L13.09,8.26L12,2V2Z"/></svg>
-                            {% when 'users' %}
-                              <svg viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17.5c-.83 0-1.54.5-1.85 1.22l-1.92 5.78H12v-2c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h2.73l1.73-5.19c.08-.23.29-.39.54-.39h1.54l1.9 5.58H16v6c0 .55.45 1 1 1s1-.45 1-1z"/></svg>
-                            {% when 'certificate' %}
-                              <svg viewBox="0 0 24 24"><path d="M9,10H7V8H9V10M13,10H11V8H13V10M17,10H15V8H17V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/></svg>
-                            {% when 'clipboard' %}
-                              <svg viewBox="0 0 24 24"><path d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3Z"/></svg>
-                            {% when 'shield' %}
-                              <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/></svg>
-                            {% when 'star' %}
-                              <svg viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z"/></svg>
-                            {% when 'heart' %}
-                              <svg viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
-                            {% else %}
-                              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                          {% endcase %}
+                  <div class="sut-stats-grid">
+                    {% for stat_block in section.blocks %}
+                      {% if stat_block.type == 'stat_item' %}
+                        <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
+                          <div class="sut-stat-icon" style="color: {{ block.settings.stats_label_color | default: '#ffffff' }};">
+                            {% case stat_block.settings.stat_icon_type %}
+                              {% when 'location' %}
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                              {% when 'building' %}
+                                <svg viewBox="0 0 24 24"><path d="M12,2L13.09,8.26L22,9L14.74,15.74L16.18,22.5L12,19.77L7.82,22.5L9.26,15.74L2,9L10.91,8.26L12,2M12,2L12,19.77L16.18,22.5L14.74,15.74L22,9L13.09,8.26L12,2V2Z"/></svg>
+                              {% when 'users' %}
+                                <svg viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17.5c-.83 0-1.54.5-1.85 1.22l-1.92 5.78H12v-2c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h2.73l1.73-5.19c.08-.23.29-.39.54-.39h1.54l1.9 5.58H16v6c0 .55.45 1 1 1s1-.45 1-1z"/></svg>
+                              {% when 'certificate' %}
+                                <svg viewBox="0 0 24 24"><path d="M9,10H7V8H9V10M13,10H11V8H13V10M17,10H15V8H17V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/></svg>
+                              {% when 'clipboard' %}
+                                <svg viewBox="0 0 24 24"><path d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3Z"/></svg>
+                              {% when 'shield' %}
+                                <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/></svg>
+                              {% when 'star' %}
+                                <svg viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z"/></svg>
+                              {% when 'heart' %}
+                                <svg viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
+                              {% else %}
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            {% endcase %}
+                          </div>
+                          <div class="sut-stat-number" style="font-size: {{ block.settings.stats_number_size | default: 48 }}px; color: {{ block.settings.stats_number_color | default: '#00a86b' }};">{{ stat_block.settings.stat_number }}</div>
+                          <div class="sut-stat-label" style="font-size: {{ block.settings.stats_label_size | default: 18 }}px; color: {{ block.settings.stats_label_color | default: '#ffffff' }};">{{ stat_block.settings.stat_label }}</div>
+                          {% if stat_block.settings.stat_description %}
+                            <div class="sut-stat-description" style="color: {{ block.settings.stats_label_color | default: '#ffffff' }};">{{ stat_block.settings.stat_description }}</div>
+                          {% endif %}
                         </div>
-                        <div class="sut-stat-number">{{ stat_block.settings.stat_number }}</div>
-                        <div class="sut-stat-label">{{ stat_block.settings.stat_label }}</div>
-                        {% if stat_block.settings.stat_description %}
-                          <div class="sut-stat-description">{{ stat_block.settings.stat_description }}</div>
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                  {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
+          {% if block.settings.stats_background_type == 'image' and block.settings.stats_background_image %}
             </div>
-          </div>
+          {% else %}
+            </div>
+          {% endif %}
         </section>
 
       {% when 'categories' %}
@@ -1623,7 +1884,7 @@
                             <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
                             <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
                             {% if category_block.settings.category_url %}
-                              <a href="{{ category_block.settings.category_url }}" class="sut-btn sut-btn-secondary">
+                              <a href="{{ category_block.settings.category_url }}" class="sut-category-button">
                                 Know More
                               </a>
                             {% endif %}
