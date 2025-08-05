@@ -63,6 +63,17 @@
     overflow: hidden;
   }
 
+  .sut-hero-image-container {
+    text-align: center;
+    background: #f8f9fa;
+  }
+
+  .sut-hero-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .sut-hero-background {
     position: absolute;
     top: 0;
@@ -195,25 +206,94 @@
 
   /* Stats Section */
   .sut-stats-section {
+    position: relative;
     background: linear-gradient(135deg, #0071b9 0%, #003366 100%);
     color: white;
+    overflow: hidden;
+  }
+
+  .sut-stats-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+
+  .sut-stats-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sut-stats-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .sut-stats-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sut-stats-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .sut-stats-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: white;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .sut-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 40px;
     text-align: center;
   }
 
   .sut-stat-item {
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .sut-stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
   }
 
   .sut-stat-icon {
-    font-size: 48px;
-    margin-bottom: 15px;
-    opacity: 0.9;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .sut-stat-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
   }
 
   .sut-stat-number {
@@ -221,12 +301,21 @@
     font-weight: 700;
     margin-bottom: 10px;
     color: #00a86b;
+    line-height: 1.2;
   }
 
   .sut-stat-label {
-    font-size: 16px;
-    font-weight: 500;
-    opacity: 0.9;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .sut-stat-description {
+    font-size: 14px;
+    color: white;
+    opacity: 0.8;
+    line-height: 1.4;
   }
 
   /* Product Categories Section */
@@ -544,6 +633,22 @@
           "label": "Hero Background Image"
         },
         {
+          "type": "radio",
+          "id": "hero_content_display",
+          "label": "Content Display",
+          "options": [
+            {
+              "value": "full_content",
+              "label": "Show All Content"
+            },
+            {
+              "value": "image_only",
+              "label": "Image Only"
+            }
+          ],
+          "default": "full_content"
+        },
+        {
           "type": "range",
           "id": "hero_padding_top",
           "label": "Padding Top",
@@ -749,6 +854,27 @@
       "name": "Stats",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "stats_background_image",
+          "label": "Stats Background Image"
+        },
+        {
+          "type": "color",
+          "id": "stats_overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "stats_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 90
+        },
+        {
           "type": "range",
           "id": "stats_padding_top",
           "label": "Padding Top",
@@ -787,10 +913,44 @@
       "name": "Stat Item",
       "settings": [
         {
-          "type": "text",
-          "id": "stat_icon",
-          "label": "Stat Icon (Unicode/Emoji)",
-          "default": "🌍"
+          "type": "select",
+          "id": "stat_icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "location",
+              "label": "Location Pin"
+            },
+            {
+              "value": "building",
+              "label": "Building"
+            },
+            {
+              "value": "users",
+              "label": "Users/Employees"
+            },
+            {
+              "value": "certificate",
+              "label": "Certificate/Patent"
+            },
+            {
+              "value": "clipboard",
+              "label": "Clipboard/SKUs"
+            },
+            {
+              "value": "shield",
+              "label": "Shield/Quality"
+            },
+            {
+              "value": "star",
+              "label": "Star/Excellence"
+            },
+            {
+              "value": "heart",
+              "label": "Heart/Care"
+            }
+          ],
+          "default": "location"
         },
         {
           "type": "text",
@@ -803,6 +963,12 @@
           "id": "stat_label",
           "label": "Stat Label",
           "default": "Countries"
+        },
+        {
+          "type": "text",
+          "id": "stat_description",
+          "label": "Stat Description",
+          "default": "Worldwide presence across multiple continents"
         }
       ]
     },
@@ -1091,13 +1257,76 @@
           "type": "stats"
         },
         {
-          "type": "stat_item"
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "location",
+            "stat_number": "5",
+            "stat_label": "Worldwide Locations",
+            "stat_description": "State-of-the-art facilities strategically located across the globe"
+          }
         },
         {
-          "type": "stat_item"
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "building",
+            "stat_number": "200,000",
+            "stat_label": "Square Feet",
+            "stat_description": "Manufacturing and laboratory space for innovation"
+          }
         },
         {
-          "type": "stat_item"
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "users",
+            "stat_number": "250+",
+            "stat_label": "Employees",
+            "stat_description": "Driving innovation forward"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "certificate",
+            "stat_number": "35+",
+            "stat_label": "Patents",
+            "stat_description": "Innovative solutions protected by intellectual property"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "clipboard",
+            "stat_number": "6,000+",
+            "stat_label": "SKUs",
+            "stat_description": "Comprehensive product portfolio for every need"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "shield",
+            "stat_number": "7",
+            "stat_label": "Class 7 Cleanrooms",
+            "stat_description": "Controlled environment for precision manufacturing"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "star",
+            "stat_number": "17+",
+            "stat_label": "Years in Single-Use Technology",
+            "stat_description": "Leading expertise in single-use bioprocessing solutions"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "stat_icon_type": "heart",
+            "stat_number": "15+",
+            "stat_label": "Years of ISO 13485",
+            "stat_description": "Certified quality management for medical devices"
+          }
         },
         {
           "type": "categories"
@@ -1158,25 +1387,35 @@
       {% when 'hero_section' %}
         {% if block.settings.enable_hero_section %}
         <section class="sut-hero-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
-          {% if block.settings.hero_image %}
-            <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
-          {% else %}
-            <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);">
-          {% endif %}
-              <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+          {% if block.settings.hero_content_display == 'image_only' %}
+            {% if block.settings.hero_image %}
+              <div class="sut-hero-image-container">
                 <div class="sut-container">
-                  <div class="sut-hero-content">
-                    <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
-                    <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
-                    {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                      <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
-                        {{ block.settings.hero_button_text }}
-                      </a>
-                    {% endif %}
+                  <img src="{{ block.settings.hero_image | img_url: '1200x' }}" alt="{{ block.settings.hero_title }}" class="sut-hero-image">
+                </div>
+              </div>
+            {% endif %}
+          {% else %}
+            {% if block.settings.hero_image %}
+              <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
+            {% else %}
+              <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);">
+            {% endif %}
+                <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+                  <div class="sut-container">
+                    <div class="sut-hero-content">
+                      <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
+                      <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
+                      {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                        <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
+                          {{ block.settings.hero_button_text }}
+                        </a>
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+          {% endif %}
         </section>
         {% endif %}
 
@@ -1276,23 +1515,59 @@
 
       {% when 'stats' %}
         <section class="sut-stats-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.stats_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.stats_padding_bottom | default: 80 }}px;">
-          <div class="sut-container">
-            {% if block.settings.stats_title %}
-              <h2 class="sut-cta-title" style="margin-bottom: 20px;">{{ block.settings.stats_title }}</h2>
-            {% endif %}
-            {% if block.settings.stats_description %}
-              <div class="sut-cta-description" style="margin-bottom: 40px;">{{ block.settings.stats_description }}</div>
-            {% endif %}
-            <div class="sut-stats-grid">
-              {% for stat_block in section.blocks %}
-                {% if stat_block.type == 'stat_item' %}
-                  <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
-                    <div class="sut-stat-icon">{{ stat_block.settings.stat_icon }}</div>
-                    <div class="sut-stat-number">{{ stat_block.settings.stat_number }}</div>
-                    <div class="sut-stat-label">{{ stat_block.settings.stat_label }}</div>
+          {% if block.settings.stats_background_image %}
+            <div class="sut-stats-background" style="background-image: url('{{ block.settings.stats_background_image | img_url: '1920x' }}');"></div>
+          {% endif %}
+          <div class="sut-stats-overlay" style="background-color: {{ block.settings.stats_overlay_color | default: '#0071b9' }}{{ block.settings.stats_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+            <div class="sut-container">
+              <div class="sut-stats-content">
+                {% if block.settings.stats_title or block.settings.stats_description %}
+                  <div class="sut-stats-header">
+                    {% if block.settings.stats_title %}
+                      <h2 class="sut-stats-title">{{ block.settings.stats_title }}</h2>
+                    {% endif %}
+                    {% if block.settings.stats_description %}
+                      <div class="sut-stats-description">{{ block.settings.stats_description }}</div>
+                    {% endif %}
                   </div>
                 {% endif %}
-              {% endfor %}
+                
+                <div class="sut-stats-grid">
+                  {% for stat_block in section.blocks %}
+                    {% if stat_block.type == 'stat_item' %}
+                      <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
+                        <div class="sut-stat-icon">
+                          {% case stat_block.settings.stat_icon_type %}
+                            {% when 'location' %}
+                              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            {% when 'building' %}
+                              <svg viewBox="0 0 24 24"><path d="M12,2L13.09,8.26L22,9L14.74,15.74L16.18,22.5L12,19.77L7.82,22.5L9.26,15.74L2,9L10.91,8.26L12,2M12,2L12,19.77L16.18,22.5L14.74,15.74L22,9L13.09,8.26L12,2V2Z"/></svg>
+                            {% when 'users' %}
+                              <svg viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17.5c-.83 0-1.54.5-1.85 1.22l-1.92 5.78H12v-2c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h2.73l1.73-5.19c.08-.23.29-.39.54-.39h1.54l1.9 5.58H16v6c0 .55.45 1 1 1s1-.45 1-1z"/></svg>
+                            {% when 'certificate' %}
+                              <svg viewBox="0 0 24 24"><path d="M9,10H7V8H9V10M13,10H11V8H13V10M17,10H15V8H17V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/></svg>
+                            {% when 'clipboard' %}
+                              <svg viewBox="0 0 24 24"><path d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3Z"/></svg>
+                            {% when 'shield' %}
+                              <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/></svg>
+                            {% when 'star' %}
+                              <svg viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z"/></svg>
+                            {% when 'heart' %}
+                              <svg viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
+                            {% else %}
+                              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                          {% endcase %}
+                        </div>
+                        <div class="sut-stat-number">{{ stat_block.settings.stat_number }}</div>
+                        <div class="sut-stat-label">{{ stat_block.settings.stat_label }}</div>
+                        {% if stat_block.settings.stat_description %}
+                          <div class="sut-stat-description">{{ stat_block.settings.stat_description }}</div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           </div>
         </section>
