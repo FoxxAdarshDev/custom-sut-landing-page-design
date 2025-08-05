@@ -1,0 +1,1459 @@
+
+<style>
+  .sut-main-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Global Styles */
+  .sut-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .sut-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .sut-btn-primary {
+    background: #0071b9;
+    color: white;
+    border: 2px solid #0071b9;
+  }
+
+  .sut-btn-primary:hover {
+    background: rgba(0, 113, 185, 0.8);
+    transform: translateY(-2px);
+  }
+
+  .sut-btn-secondary {
+    background: transparent;
+    color: #0071b9;
+    border: 2px solid #0071b9;
+  }
+
+  .sut-btn-secondary:hover {
+    background: #0071b9;
+    color: white;
+  }
+
+  /* Hero Section */
+  .sut-hero-section {
+    position: relative;
+    min-height: 60vh;
+    background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .sut-hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+
+  .sut-hero-overlay {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sut-hero-content {
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .sut-hero-title {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .sut-hero-description {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Strategy Section */
+  .sut-strategy-section {
+    background: #f8f9fa;
+  }
+
+  .sut-strategy-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .sut-strategy-text {
+    padding: 20px 0;
+  }
+
+  .sut-strategy-title {
+    font-size: 42px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
+
+  .sut-strategy-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .sut-strategy-image {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Video Content Section */
+  .sut-video-content-section {
+    background: white;
+  }
+
+  .sut-video-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .sut-video-wrapper {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .sut-video-embed {
+    width: 100%;
+    min-height: 300px;
+    border: none;
+    border-radius: 15px;
+  }
+
+  .sut-video-text {
+    padding: 20px 0;
+  }
+
+  .sut-video-title {
+    font-size: 42px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
+
+  .sut-video-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  /* Stats Section */
+  .sut-stats-section {
+    background: linear-gradient(135deg, #0071b9 0%, #003366 100%);
+    color: white;
+  }
+
+  .sut-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+  }
+
+  .sut-stat-item {
+    padding: 20px;
+  }
+
+  .sut-stat-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+  }
+
+  .sut-stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #00a86b;
+  }
+
+  .sut-stat-label {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* Product Categories Section */
+  .sut-categories-section {
+    background: #f8f9fa;
+  }
+
+  .sut-categories-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sut-categories-title {
+    font-size: 48px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sut-categories-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .sut-category-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 10px;
+  }
+
+  .sut-tab-button {
+    padding: 15px 30px;
+    background: #e9ecef;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sut-tab-button.active {
+    background: #0071b9;
+    color: white;
+  }
+
+  .sut-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .sut-category-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .sut-category-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .sut-category-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .sut-category-content {
+    padding: 25px;
+  }
+
+  .sut-category-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .sut-category-desc {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* Sustainability Section */
+  .sut-sustainability-section {
+    background: white;
+  }
+
+  .sut-sustainability-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .sut-sustainability-text {
+    padding: 20px 0;
+  }
+
+  .sut-sustainability-title {
+    font-size: 42px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
+
+  .sut-sustainability-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .sut-sustainability-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .sut-sustainability-logo {
+    height: 80px;
+    width: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+
+  .sut-sustainability-logo:hover {
+    filter: grayscale(0%);
+  }
+
+  /* Features Section */
+  .sut-features-section {
+    background: #f8f9fa;
+  }
+
+  .sut-features-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sut-features-title {
+    font-size: 48px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sut-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+  }
+
+  .sut-feature-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .sut-feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .sut-feature-icon {
+    font-size: 48px;
+    color: #0071b9;
+    margin-bottom: 20px;
+  }
+
+  .sut-feature-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .sut-feature-desc {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* CTA Section */
+  .sut-cta-section {
+    background: linear-gradient(135deg, #003366 0%, #0071b9 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .sut-cta-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sut-cta-description {
+    font-size: 20px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+
+  .sut-cta-button {
+    background: #00a86b;
+    color: white;
+    padding: 18px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sut-cta-button:hover {
+    background: #009d63;
+    transform: translateY(-2px);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .sut-hero-title {
+      font-size: 32px;
+    }
+
+    .sut-hero-description {
+      font-size: 16px;
+    }
+
+    .sut-strategy-container,
+    .sut-video-container,
+    .sut-sustainability-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .sut-strategy-title,
+    .sut-video-title,
+    .sut-sustainability-title {
+      font-size: 28px;
+    }
+
+    .sut-categories-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sut-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .sut-category-tabs {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sut-features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sut-hero-title {
+      font-size: 24px;
+    }
+
+    .sut-categories-title,
+    .sut-features-title,
+    .sut-cta-title {
+      font-size: 28px;
+    }
+
+    .sut-stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Single Use Technology",
+  "tag": "section",
+  "class": "sut-section main-sut",
+  "blocks": [
+    {
+      "type": "hero_section",
+      "name": "Hero Section",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_hero_section",
+          "label": "Enable Hero Section",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Hero Background Image"
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "color",
+          "id": "hero_overlay_color",
+          "label": "Overlay Color",
+          "default": "#003366"
+        },
+        {
+          "type": "range",
+          "id": "hero_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "hero_title",
+          "label": "Hero Title",
+          "default": "Single-use systems"
+        },
+        {
+          "type": "richtext",
+          "id": "hero_description",
+          "label": "Hero Description",
+          "default": "<p>How to make bioprocessing faster, more efficient, and economical</p>"
+        },
+        {
+          "type": "text",
+          "id": "hero_button_text",
+          "label": "Hero Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "hero_button_url",
+          "label": "Hero Button URL"
+        }
+      ]
+    },
+    {
+      "type": "strategy_section",
+      "name": "Strategy Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "strategy_image",
+          "label": "Strategy Image"
+        },
+        {
+          "type": "range",
+          "id": "strategy_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "strategy_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "strategy_layout",
+          "label": "Layout",
+          "default": "image_right",
+          "options": [
+            {
+              "value": "image_left",
+              "label": "Image Left, Content Right"
+            },
+            {
+              "value": "image_right",
+              "label": "Image Right, Content Left"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "strategy_title",
+          "label": "Strategy Title",
+          "default": "Strategize for success with our single-use systems"
+        },
+        {
+          "type": "richtext",
+          "id": "strategy_description",
+          "label": "Strategy Description",
+          "default": "<p>From an individual unit operation to an entire manufacturing workflow, single-use technologies have become a mainstream approach for boosting productivity.</p>"
+        },
+        {
+          "type": "text",
+          "id": "strategy_button_text",
+          "label": "Strategy Button Text",
+          "default": "Discover single-use biomanufacturing journey"
+        },
+        {
+          "type": "url",
+          "id": "strategy_button_url",
+          "label": "Strategy Button URL"
+        }
+      ]
+    },
+    {
+      "type": "video_content_section",
+      "name": "Video Content Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL or Embed Code"
+        },
+        {
+          "type": "range",
+          "id": "video_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "video_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "video_layout",
+          "label": "Layout",
+          "default": "video_left",
+          "options": [
+            {
+              "value": "video_left",
+              "label": "Video Left, Content Right"
+            },
+            {
+              "value": "video_right",
+              "label": "Video Right, Content Left"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "video_title",
+          "label": "Video Title",
+          "default": "Careful design prioritizes product safety"
+        },
+        {
+          "type": "richtext",
+          "id": "video_description",
+          "label": "Video Description",
+          "default": "<p>We design our products to minimize the risk of leachables impacting drug safety and efficacy.</p>"
+        },
+        {
+          "type": "text",
+          "id": "video_button_text",
+          "label": "Video Button Text",
+          "default": "Learn about regulatory support"
+        },
+        {
+          "type": "url",
+          "id": "video_button_url",
+          "label": "Video Button URL"
+        }
+      ]
+    },
+    {
+      "type": "stats_section",
+      "name": "Stats Section",
+      "settings": [
+        {
+          "type": "range",
+          "id": "stats_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "stats_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "stats_title",
+          "label": "Stats Section Title",
+          "default": "Foxx Today"
+        },
+        {
+          "type": "richtext",
+          "id": "stats_description",
+          "label": "Stats Description",
+          "default": "<p>For more than two decades, we have been a leading global manufacturer of single-use bioprocess consumables.</p>"
+        }
+      ]
+    },
+    {
+      "type": "stat_item",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_icon",
+          "label": "Stat Icon (Unicode/Emoji)",
+          "default": "🌍"
+        },
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat Number",
+          "default": "50+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat Label",
+          "default": "Countries"
+        }
+      ]
+    },
+    {
+      "type": "categories_section",
+      "name": "Product Categories Section",
+      "settings": [
+        {
+          "type": "range",
+          "id": "categories_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "categories_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "categories_title",
+          "label": "Categories Title",
+          "default": "Product Categories"
+        },
+        {
+          "type": "richtext",
+          "id": "categories_description",
+          "label": "Categories Description",
+          "default": "<p>Explore our comprehensive range of single-use bioprocess solutions designed for efficiency and reliability.</p>"
+        }
+      ]
+    },
+    {
+      "type": "category_tab",
+      "name": "Category Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "Tab Name",
+          "default": "SUT Products"
+        },
+        {
+          "type": "checkbox",
+          "id": "tab_active",
+          "label": "Set as Active Tab",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "product_category",
+      "name": "Product Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_tab",
+          "label": "Category Tab (must match tab name)",
+          "default": "SUT Products"
+        },
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Bottles"
+        },
+        {
+          "type": "text",
+          "id": "category_description",
+          "label": "Category Description",
+          "default": "High-quality single-use bottles for bioprocessing applications"
+        },
+        {
+          "type": "url",
+          "id": "category_url",
+          "label": "Category URL"
+        }
+      ]
+    },
+    {
+      "type": "sustainability_section",
+      "name": "Sustainability Section",
+      "settings": [
+        {
+          "type": "range",
+          "id": "sustainability_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "sustainability_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "sustainability_title",
+          "label": "Sustainability Title",
+          "default": "Sustainability"
+        },
+        {
+          "type": "richtext",
+          "id": "sustainability_description",
+          "label": "Sustainability Description",
+          "default": "<p>Foxx Life Sciences are committed to environmental conservation and sustainability.</p>"
+        },
+        {
+          "type": "text",
+          "id": "sustainability_button_text",
+          "label": "Button Text",
+          "default": "Read More"
+        },
+        {
+          "type": "url",
+          "id": "sustainability_button_url",
+          "label": "Button URL"
+        }
+      ]
+    },
+    {
+      "type": "sustainability_logo",
+      "name": "Sustainability Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "logo_alt",
+          "label": "Logo Alt Text",
+          "default": "Sustainability Partner"
+        }
+      ]
+    },
+    {
+      "type": "features_section",
+      "name": "Features Section",
+      "settings": [
+        {
+          "type": "range",
+          "id": "features_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "features_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "features_title",
+          "label": "Features Title",
+          "default": "Our Key Features"
+        },
+        {
+          "type": "richtext",
+          "id": "features_description",
+          "label": "Features Description",
+          "default": "<p>Advanced capabilities that set us apart in single-use technology.</p>"
+        }
+      ]
+    },
+    {
+      "type": "feature_item",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_icon",
+          "label": "Feature Icon (Unicode/Emoji)",
+          "default": "🔬"
+        },
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name",
+          "default": "Superior Quality Control"
+        },
+        {
+          "type": "text",
+          "id": "feature_description",
+          "label": "Feature Description",
+          "default": "Rigorous testing and quality assurance for every product"
+        }
+      ]
+    },
+    {
+      "type": "cta_section",
+      "name": "Call to Action Section",
+      "settings": [
+        {
+          "type": "range",
+          "id": "cta_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "cta_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "cta_title",
+          "label": "CTA Title",
+          "default": "Ready to Transform Your Bioprocessing?"
+        },
+        {
+          "type": "text",
+          "id": "cta_description",
+          "label": "CTA Description",
+          "default": "Discover our comprehensive range of single-use solutions"
+        },
+        {
+          "type": "text",
+          "id": "cta_button_text",
+          "label": "CTA Button Text",
+          "default": "Get Started"
+        },
+        {
+          "type": "url",
+          "id": "cta_button_url",
+          "label": "CTA Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Single Use Technology",
+      "blocks": [
+        {
+          "type": "hero_section"
+        },
+        {
+          "type": "strategy_section"
+        },
+        {
+          "type": "video_content_section"
+        },
+        {
+          "type": "stats_section"
+        },
+        {
+          "type": "stat_item"
+        },
+        {
+          "type": "stat_item"
+        },
+        {
+          "type": "stat_item"
+        },
+        {
+          "type": "categories_section"
+        },
+        {
+          "type": "category_tab"
+        },
+        {
+          "type": "category_tab"
+        },
+        {
+          "type": "category_tab"
+        },
+        {
+          "type": "product_category"
+        },
+        {
+          "type": "product_category"
+        },
+        {
+          "type": "product_category"
+        },
+        {
+          "type": "sustainability_section"
+        },
+        {
+          "type": "sustainability_logo"
+        },
+        {
+          "type": "sustainability_logo"
+        },
+        {
+          "type": "features_section"
+        },
+        {
+          "type": "feature_item"
+        },
+        {
+          "type": "feature_item"
+        },
+        {
+          "type": "feature_item"
+        },
+        {
+          "type": "cta_section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="sut-main-container">
+  <!-- Dynamic Blocks Content -->
+  {% for block in section.blocks %}
+    {% case block.type %}
+
+      {% when 'hero_section' %}
+        {% if block.settings.enable_hero_section %}
+        <section class="sut-hero-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+          {% if block.settings.hero_image %}
+            <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
+          {% else %}
+            <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);">
+          {% endif %}
+              <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }};">
+                <div class="sut-container">
+                  <div class="sut-hero-content">
+                    <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
+                    <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
+                    {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
+                        {{ block.settings.hero_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+        {% endif %}
+
+      {% when 'strategy_section' %}
+        <section class="sut-strategy-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.strategy_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.strategy_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            <div class="sut-strategy-container{% if block.settings.strategy_layout == 'image_left' %} sut-reverse-layout{% endif %}">
+              {% if block.settings.strategy_layout == 'image_right' %}
+                <!-- Content First -->
+                <div class="sut-strategy-text">
+                  <h2 class="sut-strategy-title">{{ block.settings.strategy_title }}</h2>
+                  <div class="sut-strategy-description">{{ block.settings.strategy_description }}</div>
+                  {% if block.settings.strategy_button_text and block.settings.strategy_button_url %}
+                    <a href="{{ block.settings.strategy_button_url }}" class="sut-btn sut-btn-secondary">
+                      {{ block.settings.strategy_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+                <!-- Image Second -->
+                {% if block.settings.strategy_image %}
+                  <div class="sut-strategy-image-wrapper">
+                    <img src="{{ block.settings.strategy_image | img_url: '800x' }}" alt="{{ block.settings.strategy_title }}" class="sut-strategy-image">
+                  </div>
+                {% endif %}
+              {% else %}
+                <!-- Image First -->
+                {% if block.settings.strategy_image %}
+                  <div class="sut-strategy-image-wrapper">
+                    <img src="{{ block.settings.strategy_image | img_url: '800x' }}" alt="{{ block.settings.strategy_title }}" class="sut-strategy-image">
+                  </div>
+                {% endif %}
+                <!-- Content Second -->
+                <div class="sut-strategy-text">
+                  <h2 class="sut-strategy-title">{{ block.settings.strategy_title }}</h2>
+                  <div class="sut-strategy-description">{{ block.settings.strategy_description }}</div>
+                  {% if block.settings.strategy_button_text and block.settings.strategy_button_url %}
+                    <a href="{{ block.settings.strategy_button_url }}" class="sut-btn sut-btn-secondary">
+                      {{ block.settings.strategy_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+      {% when 'video_content_section' %}
+        <section class="sut-video-content-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.video_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.video_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            <div class="sut-video-container{% if block.settings.video_layout == 'video_right' %} sut-reverse-layout{% endif %}">
+              {% if block.settings.video_layout == 'video_right' %}
+                <!-- Content First -->
+                <div class="sut-video-text">
+                  <h2 class="sut-video-title">{{ block.settings.video_title }}</h2>
+                  <div class="sut-video-description">{{ block.settings.video_description }}</div>
+                  {% if block.settings.video_button_text and block.settings.video_button_url %}
+                    <a href="{{ block.settings.video_button_url }}" class="sut-btn sut-btn-primary">
+                      {{ block.settings.video_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+                <!-- Video Second -->
+                {% if block.settings.video_url %}
+                  <div class="sut-video-wrapper">
+                    {% if block.settings.video_url contains 'iframe' %}
+                      {{ block.settings.video_url }}
+                    {% else %}
+                      <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% else %}
+                <!-- Video First -->
+                {% if block.settings.video_url %}
+                  <div class="sut-video-wrapper">
+                    {% if block.settings.video_url contains 'iframe' %}
+                      {{ block.settings.video_url }}
+                    {% else %}
+                      <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                <!-- Content Second -->
+                <div class="sut-video-text">
+                  <h2 class="sut-video-title">{{ block.settings.video_title }}</h2>
+                  <div class="sut-video-description">{{ block.settings.video_description }}</div>
+                  {% if block.settings.video_button_text and block.settings.video_button_url %}
+                    <a href="{{ block.settings.video_button_url }}" class="sut-btn sut-btn-primary">
+                      {{ block.settings.video_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+      {% when 'stats_section' %}
+        <section class="sut-stats-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.stats_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.stats_padding_bottom | default: 80 }}px;">
+          <div class="sut-container">
+            {% if block.settings.stats_title %}
+              <h2 class="sut-cta-title" style="margin-bottom: 20px;">{{ block.settings.stats_title }}</h2>
+            {% endif %}
+            {% if block.settings.stats_description %}
+              <div class="sut-cta-description" style="margin-bottom: 40px;">{{ block.settings.stats_description }}</div>
+            {% endif %}
+            <div class="sut-stats-grid">
+              {% for stat_block in section.blocks %}
+                {% if stat_block.type == 'stat_item' %}
+                  <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
+                    <div class="sut-stat-icon">{{ stat_block.settings.stat_icon }}</div>
+                    <div class="sut-stat-number">{{ stat_block.settings.stat_number }}</div>
+                    <div class="sut-stat-label">{{ stat_block.settings.stat_label }}</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+      {% when 'categories_section' %}
+        <section class="sut-categories-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.categories_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.categories_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            <div class="sut-categories-header">
+              <h2 class="sut-categories-title">{{ block.settings.categories_title }}</h2>
+              <div class="sut-categories-description">{{ block.settings.categories_description }}</div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="sut-category-tabs">
+              {% for tab_block in section.blocks %}
+                {% if tab_block.type == 'category_tab' %}
+                  <button class="sut-tab-button{% if tab_block.settings.tab_active %} active{% endif %}" 
+                          onclick="switchSUTTab('{{ tab_block.settings.tab_name | handleize }}')" 
+                          {{ tab_block.shopify_attributes }}>
+                    {{ tab_block.settings.tab_name }}
+                  </button>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <!-- Category Content -->
+            {% for tab_block in section.blocks %}
+              {% if tab_block.type == 'category_tab' %}
+                <div id="sut-tab-{{ tab_block.settings.tab_name | handleize }}" 
+                     class="sut-tab-content{% if tab_block.settings.tab_active %} active{% endif %}" 
+                     style="display: {% if tab_block.settings.tab_active %}block{% else %}none{% endif %};">
+                  <div class="sut-categories-grid">
+                    {% for category_block in section.blocks %}
+                      {% if category_block.type == 'product_category' and category_block.settings.category_tab == tab_block.settings.tab_name %}
+                        <div class="sut-category-card" {{ category_block.shopify_attributes }}>
+                          {% if category_block.settings.category_image %}
+                            <img src="{{ category_block.settings.category_image | img_url: '400x' }}" 
+                                 alt="{{ category_block.settings.category_name }}" 
+                                 class="sut-category-image">
+                          {% endif %}
+                          <div class="sut-category-content">
+                            <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
+                            <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
+                            {% if category_block.settings.category_url %}
+                              <a href="{{ category_block.settings.category_url }}" class="sut-btn sut-btn-secondary">
+                                Know More
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+
+      {% when 'sustainability_section' %}
+        <section class="sut-sustainability-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.sustainability_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.sustainability_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            <div class="sut-sustainability-container">
+              <div class="sut-sustainability-text">
+                <h2 class="sut-sustainability-title">{{ block.settings.sustainability_title }}</h2>
+                <div class="sut-sustainability-description">{{ block.settings.sustainability_description }}</div>
+                {% if block.settings.sustainability_button_text and block.settings.sustainability_button_url %}
+                  <a href="{{ block.settings.sustainability_button_url }}" class="sut-btn sut-btn-primary">
+                    {{ block.settings.sustainability_button_text }}
+                  </a>
+                {% endif %}
+              </div>
+              <div class="sut-sustainability-logos">
+                {% for logo_block in section.blocks %}
+                  {% if logo_block.type == 'sustainability_logo' and logo_block.settings.logo_image %}
+                    <img src="{{ logo_block.settings.logo_image | img_url: '200x' }}" 
+                         alt="{{ logo_block.settings.logo_alt }}" 
+                         class="sut-sustainability-logo" 
+                         {{ logo_block.shopify_attributes }}>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+      {% when 'features_section' %}
+        <section class="sut-features-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.features_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.features_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            <div class="sut-features-header">
+              <h2 class="sut-features-title">{{ block.settings.features_title }}</h2>
+              <div class="sut-features-description">{{ block.settings.features_description }}</div>
+            </div>
+            <div class="sut-features-grid">
+              {% for feature_block in section.blocks %}
+                {% if feature_block.type == 'feature_item' %}
+                  <div class="sut-feature-card" {{ feature_block.shopify_attributes }}>
+                    <div class="sut-feature-icon">{{ feature_block.settings.feature_icon }}</div>
+                    <h3 class="sut-feature-name">{{ feature_block.settings.feature_name }}</h3>
+                    <p class="sut-feature-desc">{{ feature_block.settings.feature_description }}</p>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+      {% when 'cta_section' %}
+        <section class="sut-cta-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.cta_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.cta_padding_bottom | default: 80 }}px;">
+          <div class="sut-container">
+            <h2 class="sut-cta-title">{{ block.settings.cta_title }}</h2>
+            <p class="sut-cta-description">{{ block.settings.cta_description }}</p>
+            {% if block.settings.cta_button_text and block.settings.cta_button_url %}
+              <a href="{{ block.settings.cta_button_url }}" class="sut-cta-button">
+                {{ block.settings.cta_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </section>
+
+    {% endcase %}
+  {% endfor %}
+</div>
+
+<script>
+function switchSUTTab(tabName) {
+  // Hide all tab contents
+  var tabContents = document.querySelectorAll('.sut-tab-content');
+  tabContents.forEach(function(content) {
+    content.style.display = 'none';
+  });
+
+  // Remove active class from all buttons
+  var tabButtons = document.querySelectorAll('.sut-tab-button');
+  tabButtons.forEach(function(button) {
+    button.classList.remove('active');
+  });
+
+  // Show selected tab content
+  var selectedTab = document.getElementById('sut-tab-' + tabName);
+  if (selectedTab) {
+    selectedTab.style.display = 'block';
+  }
+
+  // Add active class to clicked button
+  event.target.classList.add('active');
+}
+
+// Initialize tabs on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Find the first active tab or default to first tab
+  var activeTab = document.querySelector('.sut-tab-button.active');
+  if (!activeTab) {
+    var firstTab = document.querySelector('.sut-tab-button');
+    if (firstTab) {
+      firstTab.classList.add('active');
+      var firstTabContent = document.querySelector('.sut-tab-content');
+      if (firstTabContent) {
+        firstTabContent.style.display = 'block';
+      }
+    }
+  }
+});
+</script>
