@@ -1,0 +1,58 @@
+ {% when 'welcome_section' %}
+      <section class="cleanroom-welcome-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.welcome_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.welcome_padding_bottom | default: 100 }}px; padding-left: {{ block.settings.welcome_padding_left | default: 20 }}px; padding-right: {{ block.settings.welcome_padding_right | default: 20 }}px; margin-top: {{ block.settings.welcome_margin_top | default: 0 }}px; margin-bottom: {{ block.settings.welcome_margin_bottom | default: 0 }}px;">
+        <div class="cleanroom-container">
+          <div class="cleanroom-welcome-header">
+            <h2 class="cleanroom-welcome-title">{{ block.settings.welcome_title }}</h2>
+            <div class="cleanroom-welcome-description">{{ block.settings.welcome_description }}</div>
+          </div>
+
+          <div class="cleanroom-welcome-content">
+            <div class="cleanroom-welcome-media">
+              {% if block.settings.welcome_image != blank %}
+                <div class="cleanroom-welcome-video-container">
+                  <img src="{{ block.settings.welcome_image | image_url: width: 800 }}" 
+                       alt="Cleanroom Facility" 
+                       class="cleanroom-welcome-image">
+                  <div class="cleanroom-video-overlay">
+                    {% if block.settings.watch_video_url != blank %}
+                      <button class="cleanroom-play-button" onclick="{% if block.settings.show_video_popup %}openCleanroomVideoPopup('{{ block.settings.watch_video_url }}'){% else %}window.open('{{ block.settings.watch_video_url }}', '_blank'){% endif %}">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="28" fill="rgba(255,255,255,0.9)" stroke="#0071b9" stroke-width="2"/>
+                          <polygon points="24,18 24,42 42,30" fill="#0071b9"/>
+                        </svg>
+                      </button>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.settings.welcome_video_file != blank %}
+                <div class="cleanroom-welcome-video-embed">
+                  <video controls preload="metadata" class="cleanroom-embedded-video">
+                    <source src="{{ block.settings.welcome_video_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="cleanroom-welcome-text">
+              <div class="cleanroom-video-description">{{ block.settings.welcome_video_text }}</div>
+
+              <div class="cleanroom-welcome-actions">
+                {% if block.settings.watch_video_url != blank %}
+                  <a href="javascript:void(0)" onclick="{% if block.settings.show_video_popup %}openCleanroomVideoPopup('{{ block.settings.watch_video_url }}'){% else %}window.open('{{ block.settings.watch_video_url }}', '_blank'){% endif %}" class="cleanroom-btn cleanroom-btn-primary cleanroom-watch-video-btn">
+                    {{ block.settings.watch_video_text }}
+                  </a>
+                {% endif %}
+
+                {% if block.settings.request_quote_url != blank %}
+                  <a href="{{ block.settings.request_quote_url }}" class="cleanroom-btn cleanroom-btn-secondary cleanroom-quote-btn">
+                    {{ block.settings.request_quote_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
