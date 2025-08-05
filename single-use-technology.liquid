@@ -605,8 +605,8 @@
       ]
     },
     {
-      "type": "strategy_section",
-      "name": "Strategy Section",
+      "type": "strategy",
+      "name": "Strategy",
       "settings": [
         {
           "type": "image_picker",
@@ -675,8 +675,8 @@
       ]
     },
     {
-      "type": "video_content_section",
-      "name": "Video Content Section",
+      "type": "video_content",
+      "name": "Video Content",
       "settings": [
         {
           "type": "text",
@@ -745,8 +745,8 @@
       ]
     },
     {
-      "type": "stats_section",
-      "name": "Stats Section",
+      "type": "stats",
+      "name": "Stats",
       "settings": [
         {
           "type": "range",
@@ -807,8 +807,8 @@
       ]
     },
     {
-      "type": "categories_section",
-      "name": "Product Categories Section",
+      "type": "categories",
+      "name": "Product Categories",
       "settings": [
         {
           "type": "range",
@@ -897,8 +897,8 @@
       ]
     },
     {
-      "type": "sustainability_section",
-      "name": "Sustainability Section",
+      "type": "sustainability",
+      "name": "Sustainability",
       "settings": [
         {
           "type": "range",
@@ -963,8 +963,8 @@
       ]
     },
     {
-      "type": "features_section",
-      "name": "Features Section",
+      "type": "features",
+      "name": "Features",
       "settings": [
         {
           "type": "range",
@@ -1025,8 +1025,8 @@
       ]
     },
     {
-      "type": "cta_section",
-      "name": "Call to Action Section",
+      "type": "cta",
+      "name": "Call to Action",
       "settings": [
         {
           "type": "range",
@@ -1082,16 +1082,13 @@
           "type": "hero_section"
         },
         {
-          "type": "strategy_section"
+          "type": "strategy"
         },
         {
-          "type": "video_content_section"
+          "type": "video_content"
         },
         {
-          "type": "stats_section"
-        },
-        {
-          "type": "stat_item"
+          "type": "stats"
         },
         {
           "type": "stat_item"
@@ -1100,7 +1097,10 @@
           "type": "stat_item"
         },
         {
-          "type": "categories_section"
+          "type": "stat_item"
+        },
+        {
+          "type": "categories"
         },
         {
           "type": "category_tab"
@@ -1121,7 +1121,7 @@
           "type": "product_category"
         },
         {
-          "type": "sustainability_section"
+          "type": "sustainability"
         },
         {
           "type": "sustainability_logo"
@@ -1130,7 +1130,7 @@
           "type": "sustainability_logo"
         },
         {
-          "type": "features_section"
+          "type": "features"
         },
         {
           "type": "feature_item"
@@ -1142,7 +1142,7 @@
           "type": "feature_item"
         },
         {
-          "type": "cta_section"
+          "type": "cta"
         }
       ]
     }
@@ -1180,7 +1180,7 @@
         </section>
         {% endif %}
 
-      {% when 'strategy_section' %}
+      {% when 'strategy' %}
         <section class="sut-strategy-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.strategy_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.strategy_padding_bottom | default: 100 }}px;">
           <div class="sut-container">
             <div class="sut-strategy-container{% if block.settings.strategy_layout == 'image_left' %} sut-reverse-layout{% endif %}">
@@ -1223,7 +1223,7 @@
           </div>
         </section>
 
-      {% when 'video_content_section' %}
+      {% when 'video_content' %}
         <section class="sut-video-content-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.video_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.video_padding_bottom | default: 100 }}px;">
           <div class="sut-container">
             <div class="sut-video-container{% if block.settings.video_layout == 'video_right' %} sut-reverse-layout{% endif %}">
@@ -1274,7 +1274,7 @@
           </div>
         </section>
 
-      {% when 'stats_section' %}
+      {% when 'stats' %}
         <section class="sut-stats-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.stats_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.stats_padding_bottom | default: 80 }}px;">
           <div class="sut-container">
             {% if block.settings.stats_title %}
@@ -1297,7 +1297,7 @@
           </div>
         </section>
 
-      {% when 'categories_section' %}
+      {% when 'categories' %}
         <section class="sut-categories-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.categories_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.categories_padding_bottom | default: 100 }}px;">
           <div class="sut-container">
             <div class="sut-categories-header">
@@ -1352,7 +1352,7 @@
           </div>
         </section>
 
-      {% when 'sustainability_section' %}
+      {% when 'sustainability' %}
         <section class="sut-sustainability-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.sustainability_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.sustainability_padding_bottom | default: 100 }}px;">
           <div class="sut-container">
             <div class="sut-sustainability-container">
@@ -1379,7 +1379,7 @@
           </div>
         </section>
 
-      {% when 'features_section' %}
+      {% when 'features' %}
         <section class="sut-features-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.features_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.features_padding_bottom | default: 100 }}px;">
           <div class="sut-container">
             <div class="sut-features-header">
@@ -1400,7 +1400,7 @@
           </div>
         </section>
 
-      {% when 'cta_section' %}
+      {% when 'cta' %}
         <section class="sut-cta-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.cta_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.cta_padding_bottom | default: 80 }}px;">
           <div class="sut-container">
             <h2 class="sut-cta-title">{{ block.settings.cta_title }}</h2>
