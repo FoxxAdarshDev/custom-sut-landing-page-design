@@ -1,4 +1,3 @@
-
 <style>
   .sut-main-container {
     max-width: 100%;
@@ -1386,36 +1385,48 @@
 
       {% when 'hero_section' %}
         {% if block.settings.enable_hero_section %}
-        <section class="sut-hero-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+        <section class="sut-hero-section" {{ block.shopify_attributes }}>
           {% if block.settings.hero_content_display == 'image_only' %}
             {% if block.settings.hero_image %}
-              <div class="sut-hero-image-container">
-                <div class="sut-container">
-                  <img src="{{ block.settings.hero_image | img_url: '1200x' }}" alt="{{ block.settings.hero_title }}" class="sut-hero-image">
-                </div>
+            <div class="sut-hero-image-container" style="padding-top: {{ block.settings.hero_padding_top | default: 0 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 0 }}px;">
+              <div class="sut-container">
+                <img src="{{ block.settings.hero_image | img_url: '1200x' }}" alt="{{ block.settings.hero_title }}" class="sut-hero-image">
               </div>
-            {% endif %}
-          {% else %}
-            {% if block.settings.hero_image %}
-              <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
-            {% else %}
-              <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%);">
-            {% endif %}
-                <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }};">
-                  <div class="sut-container">
-                    <div class="sut-hero-content">
-                      <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
-                      <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
-                      {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                        <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
-                          {{ block.settings.hero_button_text }}
-                        </a>
-                      {% endif %}
-                    </div>
+            </div>
+          {% endif %}
+        {% else %}
+          {% if block.settings.hero_image %}
+            <div class="sut-hero-background" style="background-image: url('{{ block.settings.hero_image | img_url: '1920x' }}');">
+              <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}{{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 | prepend: '; opacity: ' }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+                <div class="sut-container">
+                  <div class="sut-hero-content">
+                    <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
+                    <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
+                    {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
+                        {{ block.settings.hero_button_text }}
+                      </a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
+            </div>
+          {% else %}
+            <div class="sut-hero-background" style="background: linear-gradient(135deg, #003366 0%, #0071b9 50%, #00a86b 100%); padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
+              <div class="sut-container">
+                <div class="sut-hero-content">
+                  <h1 class="sut-hero-title">{{ block.settings.hero_title }}</h1>
+                  <div class="sut-hero-description">{{ block.settings.hero_description }}</div>
+                  {% if block.settings.hero_button_text and block.settings.hero_button_url %}
+                    <a href="{{ block.settings.hero_button_url }}" class="sut-btn sut-btn-primary">
+                      {{ block.settings.hero_button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
           {% endif %}
+        {% endif %}
         </section>
         {% endif %}
 
@@ -1531,7 +1542,7 @@
                     {% endif %}
                   </div>
                 {% endif %}
-                
+
                 <div class="sut-stats-grid">
                   {% for stat_block in section.blocks %}
                     {% if stat_block.type == 'stat_item' %}
