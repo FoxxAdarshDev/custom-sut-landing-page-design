@@ -323,9 +323,9 @@ async function updateProductIdInSheet(rowIndex, productId) {
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId,
             range: range,
-            valueInputOption: 'RAW',
+            valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[cleanProductId]],
+                values: [[`'${cleanProductId}`]], // Prefix with single quote to force text format
             },
         });
         console.log(`Updated row ${rowIndex + 1} with clean product ID: ${cleanProductId}`);
