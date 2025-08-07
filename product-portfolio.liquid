@@ -1,0 +1,212 @@
+{% schema %}
+{
+ "name": "Product Portfolio",
+ "settings": [
+ {
+ "type": "color",
+ "id": "background_color",
+ "label": "Background Color",
+ "default": "#b3cce8"
+ },
+ {
+ "type": "range",
+ "id": "background_alpha",
+ "label": "Background Transparency",
+ "min": 0,
+ "max": 100,
+ "step": 1,
+ "unit": "%",
+ "default": 70
+ },
+ {
+ "type": "color",
+ "id": "hover_color",
+ "label": "Hover Background Color",
+ "default": "#669ad1"
+ },
+ {
+ "type": "range",
+ "id": "hover_alpha",
+ "label": "Hover Transparency",
+ "min": 0,
+ "max": 100,
+ "step": 1,
+ "unit": "%",
+ "default": 70
+ },
+ {
+ "type": "color",
+ "id": "border_color",
+ "label": "Border Color",
+ "default": "#0056b3"
+ },
+ {
+ "type": "range",
+ "id": "image_width",
+ "label": "Image Width (px)",
+ "min": 50,
+ "max": 100,
+ "step": 2,
+ "default": 100,
+ "unit": "px"
+ },
+ {
+ "type": "range",
+ "id": "image_height",
+ "label": "Image Height (px)",
+ "min": 50,
+ "max": 100,
+ "step": 2,
+ "default": 100,
+ "unit": "px"
+ }
+ ],
+ "blocks": [
+ {
+ "type": "portfolio_card",
+ "name": "Portfolio Item",
+ "settings": [
+ {
+ "type": "image_picker",
+ "id": "card_image",
+ "label": "Card Image"
+ },
+ {
+ "type": "text",
+ "id": "card_title",
+ "label": "Card Title",
+ "default": "Product Title"
+ },
+ {
+ "type": "url",
+ "id": "card_link",
+ "label": "Card Link"
+ }
+ ]
+ }
+ ],
+ "presets": [
+ {
+ "name": "Product Portfolio",
+ "category": "Custom"
+ }
+ ]
+}
+{% endschema %}
+
+
+<style>
+ .portfolio-section {
+ width: 100%;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 20px;
+ }
+
+
+ .portfolio-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+ gap: 20px;
+ justify-content: center;
+ }
+
+
+ .portfolio-card {
+ background: rgba({{ section.settings.background_color | color_extract: 'red' }}, {{ section.settings.background_color | color_extract: 'green' }}, {{ section.settings.background_color | color_extract: 'blue' }}, {{ section.settings.background_alpha | divided_by: 100.0 }});
+ border: 2px solid {{ section.settings.border_color }};
+ border-radius: 8px;
+ background-color:#ffffff!important;
+ overflow: hidden;
+ transition: all 0.3s ease;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ }
+
+
+ .portfolio-card:hover {
+ background: rgba({{ section.settings.hover_color | color_extract: 'red' }}, {{ section.settings.hover_color | color_extract: 'green' }}, {{ section.settings.hover_color | color_extract: 'blue' }}, {{ section.settings.hover_alpha | divided_by: 100.0 }});
+ transform: translateY(-5px);
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ }
+
+
+ .portfolio-image-container {
+ width: 100px;
+ height: 100px;
+ margin-top: 15px;
+ overflow: hidden;
+ }
+
+
+ .portfolio-image {
+ width: 100px;
+ height: 100px;
+ object-fit: contain;
+ display: block;
+ }
+
+
+ .portfolio-title {
+ color: #0056b3;
+ line-height: 1.6;
+ padding: 10px;
+ text-align: center;
+ font-size: 16px;
+ margin: 0;
+ width: 100%;
+ height: auto;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ display: -webkit-box;
+ -webkit-line-clamp: 3;
+ -webkit-box-orient: vertical;
+ }
+
+ .portfolio-card:hover .portfolio-title {
+    color: #0056b3;
+  }
+
+ .portfolio-link {
+ text-decoration: none;
+ display: block;
+ height: 100%;
+ }
+
+
+ @media screen and (max-width: 768px) {
+ .portfolio-grid {
+ grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+ }
+ }
+</style>
+
+
+<div class="portfolio-section">
+ <div class="portfolio-grid">
+ {% for block in section.blocks %}
+ {% if block.type == 'portfolio_card' %}
+ <a href="{{ block.settings.card_link }}" class="portfolio-link">
+ <div class="portfolio-card">
+ <div class="portfolio-image-container">
+ {% if block.settings.card_image %}
+ <img
+ src="{{ block.settings.card_image | img_url: 'master' }}"
+ alt="{{ block.settings.card_title }}"
+ class="portfolio-image"
+ width="{{ section.settings.image_width }}"
+ height="{{ section.settings.image_height }}"
+ loading="lazy"
+ >
+ {% endif %}
+ </div>
+ <h3 class="portfolio-title">{{ block.settings.card_title }}</h3>
+ </div>
+ </a>
+ {% endif %}
+ {% endfor %}
+ </div>
+</div>
