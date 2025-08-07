@@ -316,16 +316,19 @@ async function appendToMissingSKU(sku) {
 async function updateProductIdInSheet(rowIndex, productId) {
     const range = `Sheet1!B${rowIndex + 1}`; // Column B, adjust row index (+1 because sheets are 1-indexed)
     
+    // Clean the product ID to remove any unwanted characters like quotes
+    const cleanProductId = String(productId).replace(/^['"]|['"]$/g, '').trim();
+    
     try {
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId,
             range: range,
             valueInputOption: 'RAW',
             requestBody: {
-                values: [[productId]],
+                values: [[cleanProductId]],
             },
         });
-        console.log(`Updated row ${rowIndex + 1} with product ID: ${productId}`);
+        console.log(`Updated row ${rowIndex + 1} with clean product ID: ${cleanProductId}`);
     } catch (error) {
         console.error(`Error updating product ID in row ${rowIndex + 1}:`, error);
     }
