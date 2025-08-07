@@ -1,0 +1,47 @@
+  {% comment %} {% if template == 'index' %}  
+                      <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const loader = document.getElementById('loader');
+                        const loaderText = document.getElementById('loader-text');
+                        const didYouKnowImage = document.getElementById('did-you-know-image');
+                    
+                       const messages = [
+                        "We celebrate 15 years of ISO 13485 in 2025.",
+                        "We have a Class 7 Clean Room with 7 Rooms in 4 locations.",
+                        "Our products are North American designed and manufactured!",
+                        "We are committed to USP Class VI Materials.",
+                        "We follow cGMP Control for single-use manufacturing.",
+                        "We meet USP665 L&E standards.",
+                        "We have major Gamma Sterilization capabilities!",
+                        "We have Class 7 & 8 molding capabilities.",
+                        "Our products are manufactured in USA & India."
+                    ];
+
+                    
+                        // Display random message
+                        loaderText.textContent = messages[Math.floor(Math.random() * messages.length)];
+                        loaderText.style.opacity = 1;
+                        didYouKnowImage.style.display = 'block';
+                        loaderText.style.display = 'block';
+                        didYouKnowImage.style.opacity = 1;
+                    
+                        // These functions will be defined but removed after execution
+                        const hideLoader = () => {
+                            loader.style.display = 'none'; // Hide the loader
+                            // Optionally remove the loader from DOM
+                            setTimeout(() => {
+                                window.removeEventListener('load', hideLoader); // Clean up
+                            }, 100); // Allow some time before removing
+                        };
+                    
+                        // Set up the onload function
+                        window.addEventListener('load', hideLoader); // Use 'load' to ensure all elements are ready
+                    
+                        // Show loader before page unload
+                        window.addEventListener('beforeunload', function () {
+                            loader.style.display = 'flex'; // Show loader on page unload
+                        });
+                    });
+                    </script> 
+                    
+            {% endif %} {% endcomment %}
