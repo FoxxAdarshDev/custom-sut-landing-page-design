@@ -88,13 +88,15 @@ async function fetchVariantBySKU(sku) {
 async function fetchProductIdBySKU(sku) {
     const query = `
         query {
-            productVariants(first: 1, query: "sku:${sku}") {
+            productVariants(first: 5, query: "sku:${sku}") {
                 edges {
                     node {
                         id
                         sku
                         product {
                             id
+                            handle
+                            title
                         }
                     }
                 }
@@ -113,13 +115,28 @@ async function fetchProductIdBySKU(sku) {
             body: JSON.stringify({ query }),
         });
 
-        const { data } = await response.json();
+        const { data, errors } = await response.json();
+        
+        if (errors) {
+            console.error('GraphQL errors:', errors);
+            return null;
+        }
+
         const edges = data.productVariants.edges;
         if (edges.length > 0) {
-            const productId = edges[0].node.product.id;
+            // Find the exact SKU match (in case of partial matches)
+            const exactMatch = edges.find(edge => edge.node.sku === sku);
+            const targetNode = exactMatch ? exactMatch.node : edges[0].node;
+            
+            const productId = targetNode.product.id;
             // Extract numeric ID from GraphQL ID (e.g., "gid://shopify/Product/123456" -> "123456")
             const numericProductId = productId.split('/').pop();
+            
             console.log(`Found product ID ${numericProductId} for SKU: ${sku}`);
+            console.log(`Product title: ${targetNode.product.title}`);
+            console.log(`Product handle: ${targetNode.product.handle}`);
+            console.log(`Variant SKU confirmed: ${targetNode.sku}`);
+            
             return numericProductId;
         } else {
             console.log(`No product found for SKU: ${sku}`);
