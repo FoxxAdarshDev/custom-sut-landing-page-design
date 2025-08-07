@@ -130,8 +130,10 @@ async function fetchProductIdBySKU(sku) {
             
             const productId = targetNode.product.id;
             // Extract numeric ID from GraphQL ID (e.g., "gid://shopify/Product/123456" -> "123456")
-            const numericProductId = productId.split('/').pop();
+            const numericProductId = productId.replace('gid://shopify/Product/', '');
             
+            console.log(`Raw GraphQL Product ID: ${productId}`);
+            console.log(`Extracted numeric Product ID: ${numericProductId}`);
             console.log(`Found product ID ${numericProductId} for SKU: ${sku}`);
             console.log(`Product title: ${targetNode.product.title}`);
             console.log(`Product handle: ${targetNode.product.handle}`);
