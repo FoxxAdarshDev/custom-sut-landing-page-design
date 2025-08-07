@@ -86,9 +86,12 @@ async function fetchVariantBySKU(sku) {
 
 // Function to fetch product ID by variant SKU
 async function fetchProductIdBySKU(sku) {
+    // Clean the SKU input
+    const cleanSku = sku.trim();
+    
     const query = `
         query {
-            productVariants(first: 5, query: "sku:${sku}") {
+            productVariants(first: 10, query: "sku:'${cleanSku}'") {
                 edges {
                     node {
                         id
@@ -97,6 +100,7 @@ async function fetchProductIdBySKU(sku) {
                             id
                             handle
                             title
+                            status
                         }
                     }
                 }
@@ -105,7 +109,93 @@ async function fetchProductIdBySKU(sku) {
     `;
 
     try {
-        console.log(`Fetching product ID for SKU: ${sku}`);
+        console.log(`Fetching product ID for SKU: "${cleanSku}"`);
+        const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAccessToken,
+            },
+            body: JSON.stringify({ query }),
+        });
+
+        if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status}`);
+            return null;
+        }
+
+        const { data, errors } = await response.json();
+        
+        if (errors) {
+            console.error('GraphQL errors:', errors);
+            return null;
+        }
+
+        const edges = data.productVariants.edges;
+        console.log(`Found ${edges.length} variants for SKU: ${cleanSku}`);
+        
+        if (edges.length > 0) {
+            // Find the exact SKU match (case sensitive)
+            let targetNode = null;
+            for (const edge of edges) {
+                if (edge.node.sku === cleanSku) {
+                    targetNode = edge.node;
+                    break;
+                }
+            }
+            
+            // If no exact match, take the first one and log the discrepancy
+            if (!targetNode) {
+                console.warn(`No exact SKU match for "${cleanSku}". Available SKUs:`, edges.map(e => e.node.sku));
+                targetNode = edges[0].node;
+            }
+            
+            const productId = targetNode.product.id;
+            // Extract numeric ID from GraphQL ID (e.g., "gid://shopify/Product/123456" -> "123456")
+            const numericProductId = productId.split('/').pop();
+            
+            console.log(`✅ Found match:`);
+            console.log(`   Variant SKU: "${targetNode.sku}"`);
+            console.log(`   Product Title: ${targetNode.product.title}`);
+            console.log(`   Product Status: ${targetNode.product.status}`);
+            console.log(`   Raw GraphQL Product ID: ${productId}`);
+            console.log(`   Numeric Product ID: ${numericProductId}`);
+            
+            return numericProductId;
+        } else {
+            console.log(`❌ No variants found for SKU: "${cleanSku}"`);
+            // Try a broader search without quotes
+            return await fetchProductIdBySkuBroaderSearch(cleanSku);
+        }
+    } catch (error) {
+        console.error('Error fetching product ID by SKU:', error);
+        return null;
+    }
+}
+
+// Fallback function for broader SKU search
+async function fetchProductIdBySkuBroaderSearch(sku) {
+    const query = `
+        query {
+            productVariants(first: 20, query: "sku:${sku}") {
+                edges {
+                    node {
+                        id
+                        sku
+                        product {
+                            id
+                            handle
+                            title
+                            status
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
+    try {
+        console.log(`🔍 Broader search for SKU: ${sku}`);
         const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
             method: 'POST',
             headers: {
@@ -118,34 +208,25 @@ async function fetchProductIdBySKU(sku) {
         const { data, errors } = await response.json();
         
         if (errors) {
-            console.error('GraphQL errors:', errors);
+            console.error('GraphQL errors in broader search:', errors);
             return null;
         }
 
         const edges = data.productVariants.edges;
-        if (edges.length > 0) {
-            // Find the exact SKU match (in case of partial matches)
-            const exactMatch = edges.find(edge => edge.node.sku === sku);
-            const targetNode = exactMatch ? exactMatch.node : edges[0].node;
-            
-            const productId = targetNode.product.id;
-            // Extract numeric ID from GraphQL ID (e.g., "gid://shopify/Product/123456" -> "123456")
-            const numericProductId = productId.replace('gid://shopify/Product/', '');
-            
-            console.log(`Raw GraphQL Product ID: ${productId}`);
-            console.log(`Extracted numeric Product ID: ${numericProductId}`);
-            console.log(`Found product ID ${numericProductId} for SKU: ${sku}`);
-            console.log(`Product title: ${targetNode.product.title}`);
-            console.log(`Product handle: ${targetNode.product.handle}`);
-            console.log(`Variant SKU confirmed: ${targetNode.sku}`);
-            
-            return numericProductId;
-        } else {
-            console.log(`No product found for SKU: ${sku}`);
-            return null;
+        console.log(`Broader search found ${edges.length} potential matches`);
+        
+        for (const edge of edges) {
+            console.log(`   Found SKU: "${edge.node.sku}" in product: ${edge.node.product.title}`);
+            if (edge.node.sku === sku) {
+                const numericProductId = edge.node.product.id.split('/').pop();
+                console.log(`✅ Exact match found in broader search: ${numericProductId}`);
+                return numericProductId;
+            }
         }
+        
+        return null;
     } catch (error) {
-        console.error('Error fetching product ID by SKU:', error);
+        console.error('Error in broader search:', error);
         return null;
     }
 }
