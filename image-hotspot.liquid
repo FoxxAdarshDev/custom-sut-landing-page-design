@@ -667,11 +667,11 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Get all interactive hotspot sections
   const sections = document.querySelectorAll('.interactive-hotspots-wrapper');
-
+  
   sections.forEach(section => {
     const sectionId = section.dataset.sectionId;
     const cards = section.querySelectorAll('.hotspot-card');
-
+    
     if (cards.length === 0) return;
 
     let currentIndex = 0;
