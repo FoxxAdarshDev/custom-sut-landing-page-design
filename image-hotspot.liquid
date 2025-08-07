@@ -252,20 +252,6 @@
         pointer-events: none !important;
         display: block !important;
         opacity: 0.8 !important;
-        border-top: 2px dashed {{ section.settings.highlight_color }} !important;
-        background: none !important;
-      }
-
-      .connector-line::after {
-        content: '';
-        position: absolute;
-        right: -8px;
-        top: -4px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid {{ section.settings.highlight_color }};
-        border-top: 4px solid transparent;
-        border-bottom: 4px solid transparent;
       }
 
         .interactive-hotspots-wrapper {
@@ -462,8 +448,7 @@
         .connector-line {
         position: absolute !important;
         height: 2px !important;
-        border-top: 2px dashed {{ section.settings.highlight_color }} !important;
-        background: none !important;
+        background-color: {{ section.settings.highlight_color }} !important;
         transform-origin: left center !important;
         z-index: 250 !important;
         pointer-events: none !important;
@@ -471,17 +456,6 @@
         opacity: 0.8 !important;
       }
 
-      .connector-line::after {
-        content: '';
-        position: absolute;
-        right: -8px;
-        top: -4px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid {{ section.settings.highlight_color }};
-        border-top: 4px solid transparent;
-        border-bottom: 4px solid transparent;
-      }
 
         .connector-dot {
         position: absolute;
@@ -693,11 +667,11 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Get all interactive hotspot sections
   const sections = document.querySelectorAll('.interactive-hotspots-wrapper');
-
+  
   sections.forEach(section => {
     const sectionId = section.dataset.sectionId;
     const cards = section.querySelectorAll('.hotspot-card');
-
+    
     if (cards.length === 0) return;
 
     let currentIndex = 0;
