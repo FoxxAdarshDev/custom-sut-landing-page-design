@@ -84,6 +84,53 @@ async function fetchVariantBySKU(sku) {
     }
 }
 
+// Function to fetch product ID by variant SKU
+async function fetchProductIdBySKU(sku) {
+    const query = `
+        query {
+            productVariants(first: 1, query: "sku:${sku}") {
+                edges {
+                    node {
+                        id
+                        sku
+                        product {
+                            id
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
+    try {
+        console.log(`Fetching product ID for SKU: ${sku}`);
+        const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAccessToken,
+            },
+            body: JSON.stringify({ query }),
+        });
+
+        const { data } = await response.json();
+        const edges = data.productVariants.edges;
+        if (edges.length > 0) {
+            const productId = edges[0].node.product.id;
+            // Extract numeric ID from GraphQL ID (e.g., "gid://shopify/Product/123456" -> "123456")
+            const numericProductId = productId.split('/').pop();
+            console.log(`Found product ID ${numericProductId} for SKU: ${sku}`);
+            return numericProductId;
+        } else {
+            console.log(`No product found for SKU: ${sku}`);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching product ID by SKU:', error);
+        return null;
+    }
+}
+
 // Function to update a product variant in Shopify
 async function updateShopifyVariant(variantId, variantPrice, compareAtVariantPrice, retries = 3) {
     const mutation = `
@@ -165,6 +212,25 @@ async function appendToMissingSKU(sku) {
     }
 }
 
+// Function to update product ID in Google Sheet
+async function updateProductIdInSheet(rowIndex, productId) {
+    const range = `Sheet1!B${rowIndex + 1}`; // Column B, adjust row index (+1 because sheets are 1-indexed)
+    
+    try {
+        await sheets.spreadsheets.values.update({
+            spreadsheetId: spreadsheetId,
+            range: range,
+            valueInputOption: 'RAW',
+            requestBody: {
+                values: [[productId]],
+            },
+        });
+        console.log(`Updated row ${rowIndex + 1} with product ID: ${productId}`);
+    } catch (error) {
+        console.error(`Error updating product ID in row ${rowIndex + 1}:`, error);
+    }
+}
+
 // Main function to update Shopify prices from Google Sheet
 async function updatePricesFromSheet(range) {
     const rows = await readGoogleSheet(range);
@@ -213,6 +279,48 @@ async function updatePricesFromSheet(range) {
     }
 }
 
+// Main function to populate product IDs from SKUs in Google Sheet
+async function populateProductIdsFromSheet(range) {
+    const rows = await readGoogleSheet(range);
+    const [headers, ...data] = rows;
+    const skuIndex = headers.indexOf('skus') !== -1 ? headers.indexOf('skus') : 0; // Default to first column if 'skus' not found
+
+    console.log(`Found ${data.length} rows to process`);
+    console.log(`SKU column index: ${skuIndex}`);
+
+    for (let i = 0; i < data.length; i++) {
+        const row = data[i];
+        const sku = row[skuIndex];
+
+        if (!sku) {
+            console.warn(`Skipping row ${i + 2}: No SKU found`);
+            continue;
+        }
+
+        console.log(`Processing row ${i + 2}, SKU: ${sku}`);
+
+        // Check if product ID already exists in column B
+        const existingProductId = row[1]; // Column B (index 1)
+        if (existingProductId && existingProductId.trim() !== '') {
+            console.log(`Row ${i + 2} already has product ID: ${existingProductId}`);
+            continue;
+        }
+
+        const productId = await fetchProductIdBySKU(sku);
+        if (productId) {
+            await updateProductIdInSheet(i + 1, productId); // +1 because headers are at index 0
+            console.log(`Successfully updated row ${i + 2} with product ID: ${productId}`);
+        } else {
+            console.warn(`Could not find product ID for SKU: ${sku}`);
+            // Log missing SKU
+            await appendToMissingSKU(sku);
+        }
+
+        // Add delay to avoid hitting rate limits
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+}
+
 // Endpoint to trigger the price update process
 app.get('/update-prices', async (req, res) => {
     const range = 'Sheet1!A:C'; // Adjust the range as per your sheet
@@ -225,8 +333,23 @@ app.get('/update-prices', async (req, res) => {
     }
 });
 
+// Endpoint to populate product IDs from SKUs
+app.get('/populate-product-ids', async (req, res) => {
+    const range = 'Sheet1!A:B'; // Column A for SKUs, Column B for Product IDs
+    try {
+        await populateProductIdsFromSheet(range);
+        res.send('Product IDs populated successfully');
+    } catch (error) {
+        console.error('Error while populating product IDs:', error);
+        res.status(500).send('Error populating product IDs');
+    }
+});
+
 // Start the server
 const PORT = process.env.PORT || 8700;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    console.log(`Available endpoints:`);
+    console.log(`- GET /update-prices - Update Shopify prices from Google Sheet`);
+    console.log(`- GET /populate-product-ids - Populate product IDs from SKUs in Google Sheet`);
 });
