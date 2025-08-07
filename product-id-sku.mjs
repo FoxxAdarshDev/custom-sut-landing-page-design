@@ -320,14 +320,42 @@ async function updateProductIdInSheet(rowIndex, productId) {
     const cleanProductId = String(productId).replace(/^['"]|['"]$/g, '').trim();
     
     try {
+        // First update the value
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId,
             range: range,
-            valueInputOption: 'USER_ENTERED',
+            valueInputOption: 'RAW',
             requestBody: {
-                values: [[`'${cleanProductId}`]], // Prefix with single quote to force text format
+                values: [[cleanProductId]], // Store as raw text
             },
         });
+
+        // Then format the cell as text to prevent automatic number formatting
+        await sheets.spreadsheets.batchUpdate({
+            spreadsheetId: spreadsheetId,
+            requestBody: {
+                requests: [{
+                    repeatCell: {
+                        range: {
+                            sheetId: 0, // Assumes first sheet, adjust if needed
+                            startRowIndex: rowIndex,
+                            endRowIndex: rowIndex + 1,
+                            startColumnIndex: 1, // Column B (0-indexed)
+                            endColumnIndex: 2
+                        },
+                        cell: {
+                            userEnteredFormat: {
+                                numberFormat: {
+                                    type: 'TEXT'
+                                }
+                            }
+                        },
+                        fields: 'userEnteredFormat.numberFormat'
+                    }
+                }]
+            }
+        });
+
         console.log(`Updated row ${rowIndex + 1} with clean product ID: ${cleanProductId}`);
     } catch (error) {
         console.error(`Error updating product ID in row ${rowIndex + 1}:`, error);
