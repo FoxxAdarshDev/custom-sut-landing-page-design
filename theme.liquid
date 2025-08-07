@@ -1,4 +1,4 @@
-                {% capture bsscommerce_login_require_template %}{% include 'bsscommerce_login_require' %}{% endcapture %}{% unless bsscommerce_login_require_template contains "Liquid error" %}{{ bsscommerce_login_require_template }}{% endunless %}<!doctype html>
+{% capture bsscommerce_login_require_template %}{% include 'bsscommerce_login_require' %}{% endcapture %}{% unless bsscommerce_login_require_template contains "Liquid error" %}{{ bsscommerce_login_require_template }}{% endunless %}<!doctype html>
                     {%- liquid
                         if settings.list_iso_rtl != blank
                             assign locale_iso_code = request.locale.iso_code
@@ -618,7 +618,7 @@
 
 
 
-                     {% comment %} {% if request.page_type == 'index' %}
+                     {% comment %} {% if template == 'index' %}
                             <div id="loader">
                                 <img src="https://foxxbioprocess.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d_500x.png?v=1669752062" style="width:200px;height:76px" alt="loader image">
                                 <div class="loader-icon">
@@ -730,12 +730,26 @@
                                     {% endif %}
 
 
-                                     {% comment %} {% if template == 'index' %}  
+                                     
                                       <script>
                                     document.addEventListener("DOMContentLoaded", function() {
                                         const loader = document.getElementById('loader');
                                         const loaderText = document.getElementById('loader-text');
                                         const didYouKnowImage = document.getElementById('did-you-know-image');
+
+                                        // Check if loader has already been shown this session
+                                        const hasSeenLoader = sessionStorage.getItem('foxx_loader_shown');
+
+                                        // Check if this is a direct visit (not from internal navigation)
+                                        const isDirectVisit = !document.referrer || 
+                                                            !document.referrer.includes(window.location.hostname) ||
+                                                            performance.getEntriesByType('navigation')[0].type === 'reload';
+
+                                        if (hasSeenLoader && !isDirectVisit) {
+                                            // Hide loader immediately if already seen and it's internal navigation
+                                            loader.style.display = 'none';
+                                            return;
+                                        }
 
                                        const messages = [
                                         "We celebrate 15 years of ISO 13485 in 2025.",
@@ -749,7 +763,6 @@
                                         "Our products are manufactured in USA & India."
                                     ];
 
-
                                         // Display random message
                                         loaderText.textContent = messages[Math.floor(Math.random() * messages.length)];
                                         loaderText.style.opacity = 1;
@@ -757,26 +770,34 @@
                                         loaderText.style.display = 'block';
                                         didYouKnowImage.style.opacity = 1;
 
-                                        // These functions will be defined but removed after execution
+                                        // Hide loader after 3 seconds or when page loads (whichever comes first)
                                         const hideLoader = () => {
-                                            loader.style.display = 'none'; // Hide the loader
-                                            // Optionally remove the loader from DOM
+                                            loader.style.opacity = '0';
                                             setTimeout(() => {
-                                                window.removeEventListener('load', hideLoader); // Clean up
-                                            }, 100); // Allow some time before removing
+                                                loader.style.display = 'none';
+                                                // Mark that loader has been shown this session
+                                                sessionStorage.setItem('foxx_loader_shown', 'true');
+                                            }, 500); // Fade out transition
                                         };
 
-                                        // Set up the onload function
-                                        window.addEventListener('load', hideLoader); // Use 'load' to ensure all elements are ready
+                                        // Set minimum display time of 2.5 seconds
+                                        const minDisplayTime = setTimeout(hideLoader, 2500);
 
-                                        // Show loader before page unload
-                                        window.addEventListener('beforeunload', function () {
-                                            loader.style.display = 'flex'; // Show loader on page unload
+                                        // Also hide when page fully loads (if it takes longer than 2.5s)
+                                        window.addEventListener('load', () => {
+                                            clearTimeout(minDisplayTime);
+                                            setTimeout(hideLoader, 300); // Small delay to ensure content is ready
+                                        });
+
+                                        // Track internal navigation
+                                        window.addEventListener('beforeunload', function() {
+                                            // Mark that user is navigating internally
+                                            sessionStorage.setItem('foxx_internal_nav', 'true');
                                         });
                                     });
                                     </script> 
 
-                            {% endif %} {% endcomment %}
+                           
 
                         </body>
                     </html>
