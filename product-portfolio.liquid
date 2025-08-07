@@ -1,3 +1,4 @@
+
 {% schema %}
 {
  "name": "Product Portfolio",
@@ -6,59 +7,57 @@
  "type": "color",
  "id": "background_color",
  "label": "Background Color",
- "default": "#b3cce8"
- },
- {
- "type": "range",
- "id": "background_alpha",
- "label": "Background Transparency",
- "min": 0,
- "max": 100,
- "step": 1,
- "unit": "%",
- "default": 70
+ "default": "#f8f9fa"
  },
  {
  "type": "color",
- "id": "hover_color",
- "label": "Hover Background Color",
- "default": "#669ad1"
- },
- {
- "type": "range",
- "id": "hover_alpha",
- "label": "Hover Transparency",
- "min": 0,
- "max": 100,
- "step": 1,
- "unit": "%",
- "default": 70
+ "id": "card_background",
+ "label": "Card Background Color",
+ "default": "#ffffff"
  },
  {
  "type": "color",
- "id": "border_color",
- "label": "Border Color",
+ "id": "card_border_color",
+ "label": "Card Border Color",
+ "default": "#e9ecef"
+ },
+ {
+ "type": "color",
+ "id": "primary_color",
+ "label": "Primary Color",
  "default": "#0056b3"
  },
  {
- "type": "range",
- "id": "image_width",
- "label": "Image Width (px)",
- "min": 50,
- "max": 100,
- "step": 2,
- "default": 100,
- "unit": "px"
+ "type": "color",
+ "id": "text_color",
+ "label": "Text Color",
+ "default": "#333333"
+ },
+ {
+ "type": "color",
+ "id": "button_color",
+ "label": "Button Color",
+ "default": "#007bff"
  },
  {
  "type": "range",
- "id": "image_height",
- "label": "Image Height (px)",
- "min": 50,
+ "id": "card_border_radius",
+ "label": "Card Border Radius",
+ "min": 0,
+ "max": 30,
+ "step": 1,
+ "unit": "px",
+ "default": 12
+ },
+ {
+ "type": "range",
+ "id": "section_padding",
+ "label": "Section Padding",
+ "min": 20,
  "max": 100,
- "step": 2,
- "default": 100,
- "unit": "px"
+ "step": 10,
+ "unit": "px",
+ "default": 60
  }
  ],
  "blocks": [
@@ -78,9 +77,21 @@
  "default": "Product Title"
  },
  {
+ "type": "textarea",
+ "id": "card_description",
+ "label": "Card Description",
+ "default": "Brief description of the product or service"
+ },
+ {
  "type": "url",
  "id": "card_link",
  "label": "Card Link"
+ },
+ {
+ "type": "text",
+ "id": "button_text",
+ "label": "Button Text",
+ "default": "Know More"
  }
  ]
  }
@@ -94,119 +105,206 @@
 }
 {% endschema %}
 
-
 <style>
  .portfolio-section {
- width: 100%;
- max-width: 1200px;
- margin: 0 auto;
- padding: 20px;
+   background-color: {{ section.settings.background_color }};
+   padding: {{ section.settings.section_padding }}px 20px;
+   min-height: 400px;
  }
 
+ .portfolio-container {
+   max-width: 1200px;
+   margin: 0 auto;
+ }
 
  .portfolio-grid {
- display: grid;
- grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
- gap: 20px;
- justify-content: center;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 30px;
+   align-items: stretch;
  }
-
 
  .portfolio-card {
- background: rgba({{ section.settings.background_color | color_extract: 'red' }}, {{ section.settings.background_color | color_extract: 'green' }}, {{ section.settings.background_color | color_extract: 'blue' }}, {{ section.settings.background_alpha | divided_by: 100.0 }});
- border: 2px solid {{ section.settings.border_color }};
- border-radius: 8px;
- background-color:#ffffff!important;
- overflow: hidden;
- transition: all 0.3s ease;
- width: 100%;
- height: 100%;
- display: flex;
- flex-direction: column;
- align-items: center;
+   background: {{ section.settings.card_background }};
+   border: 1px solid {{ section.settings.card_border_color }};
+   border-radius: {{ section.settings.card_border_radius }}px;
+   overflow: hidden;
+   transition: all 0.3s ease;
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+   text-decoration: none;
  }
-
 
  .portfolio-card:hover {
- background: rgba({{ section.settings.hover_color | color_extract: 'red' }}, {{ section.settings.hover_color | color_extract: 'green' }}, {{ section.settings.hover_color | color_extract: 'blue' }}, {{ section.settings.hover_alpha | divided_by: 100.0 }});
- transform: translateY(-5px);
- box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   transform: translateY(-8px);
+   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+   border-color: {{ section.settings.primary_color }};
  }
-
 
  .portfolio-image-container {
- width: 100px;
- height: 100px;
- margin-top: 15px;
- overflow: hidden;
+   width: 100%;
+   height: 200px;
+   overflow: hidden;
+   position: relative;
+   background: #f8f9fa;
+   display: flex;
+   align-items: center;
+   justify-content: center;
  }
-
 
  .portfolio-image {
- width: 100px;
- height: 100px;
- object-fit: contain;
- display: block;
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   transition: transform 0.3s ease;
  }
 
+ .portfolio-card:hover .portfolio-image {
+   transform: scale(1.05);
+ }
+
+ .portfolio-content {
+   padding: 24px;
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+ }
 
  .portfolio-title {
- color: #0056b3;
- line-height: 1.6;
- padding: 10px;
- text-align: center;
- font-size: 16px;
- margin: 0;
- width: 100%;
- height: auto;
- overflow: hidden;
- text-overflow: ellipsis;
- display: -webkit-box;
- -webkit-line-clamp: 3;
- -webkit-box-orient: vertical;
+   color: {{ section.settings.text_color }};
+   font-size: 20px;
+   font-weight: 600;
+   margin: 0 0 12px 0;
+   line-height: 1.3;
+   text-align: center;
  }
 
- .portfolio-card:hover .portfolio-title {
-    color: #0056b3;
-  }
-
- .portfolio-link {
- text-decoration: none;
- display: block;
- height: 100%;
+ .portfolio-description {
+   color: #666;
+   font-size: 14px;
+   line-height: 1.5;
+   margin: 0 0 20px 0;
+   text-align: center;
+   flex-grow: 1;
  }
 
+ .portfolio-button {
+   background: {{ section.settings.button_color }};
+   color: white;
+   border: none;
+   padding: 12px 24px;
+   border-radius: 6px;
+   font-size: 14px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   text-decoration: none;
+   text-align: center;
+   margin-top: auto;
+ }
 
+ .portfolio-button:hover {
+   background: {{ section.settings.primary_color }};
+   transform: translateY(-1px);
+   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+ }
+
+ /* Tablet Styles */
+ @media screen and (max-width: 1024px) {
+   .portfolio-grid {
+     grid-template-columns: repeat(2, 1fr);
+     gap: 25px;
+   }
+   
+   .portfolio-section {
+     padding: 40px 15px;
+   }
+ }
+
+ /* Mobile Styles */
  @media screen and (max-width: 768px) {
- .portfolio-grid {
- grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+   .portfolio-grid {
+     grid-template-columns: 1fr;
+     gap: 20px;
+   }
+
+   .portfolio-section {
+     padding: 30px 15px;
+   }
+
+   .portfolio-image-container {
+     height: 180px;
+   }
+
+   .portfolio-content {
+     padding: 20px;
+   }
+
+   .portfolio-title {
+     font-size: 18px;
+   }
+
+   .portfolio-description {
+     font-size: 13px;
+   }
  }
+
+ /* Small Mobile Styles */
+ @media screen and (max-width: 480px) {
+   .portfolio-section {
+     padding: 20px 10px;
+   }
+
+   .portfolio-grid {
+     gap: 15px;
+   }
+
+   .portfolio-image-container {
+     height: 160px;
+   }
+
+   .portfolio-content {
+     padding: 16px;
+   }
+
+   .portfolio-title {
+     font-size: 16px;
+   }
  }
 </style>
 
-
 <div class="portfolio-section">
- <div class="portfolio-grid">
- {% for block in section.blocks %}
- {% if block.type == 'portfolio_card' %}
- <a href="{{ block.settings.card_link }}" class="portfolio-link">
- <div class="portfolio-card">
- <div class="portfolio-image-container">
- {% if block.settings.card_image %}
- <img
- src="{{ block.settings.card_image | img_url: 'master' }}"
- alt="{{ block.settings.card_title }}"
- class="portfolio-image"
- width="{{ section.settings.image_width }}"
- height="{{ section.settings.image_height }}"
- loading="lazy"
- >
- {% endif %}
- </div>
- <h3 class="portfolio-title">{{ block.settings.card_title }}</h3>
- </div>
- </a>
- {% endif %}
- {% endfor %}
+ <div class="portfolio-container">
+   <div class="portfolio-grid">
+     {% for block in section.blocks %}
+       {% if block.type == 'portfolio_card' %}
+         <a href="{{ block.settings.card_link }}" class="portfolio-card">
+           <div class="portfolio-image-container">
+             {% if block.settings.card_image %}
+               <img
+                 src="{{ block.settings.card_image | img_url: '400x400' }}"
+                 alt="{{ block.settings.card_title }}"
+                 class="portfolio-image"
+                 loading="lazy"
+               >
+             {% else %}
+               <div style="color: #ccc; font-size: 48px;">📦</div>
+             {% endif %}
+           </div>
+           <div class="portfolio-content">
+             <h3 class="portfolio-title">{{ block.settings.card_title }}</h3>
+             {% if block.settings.card_description %}
+               <p class="portfolio-description">{{ block.settings.card_description }}</p>
+             {% endif %}
+             <div class="portfolio-button">
+               {{ block.settings.button_text | default: 'Know More' }}
+             </div>
+           </div>
+         </a>
+       {% endif %}
+     {% endfor %}
+   </div>
  </div>
 </div>
