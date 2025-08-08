@@ -3176,7 +3176,7 @@
     line-height: 1.4;
     text-wrap:nowrap;
     margin-bottom: 8px;
-    color: var(--text-dark)!important;
+    color: var(--primary-color)!important;
   }
 
   .service-card-title {
@@ -3430,8 +3430,8 @@
   }
 
   .trust-images-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    /* grid-template-columns: repeat(4, 1fr); */
     gap: 6px;
     justify-content: center;
     align-items: center;
@@ -3495,11 +3495,11 @@
       padding: 6px !important;
       margin: 0 auto 20px !important;
     }
-    
+
     .trust-images-container {
       gap: 4px;
     }
-    
+
     .trust-image-item {
       width: 42px;
       height: 42px;
@@ -3516,11 +3516,11 @@
       padding: 5px !important;
       margin: 0 auto 18px !important;
     }
-    
+
     .trust-images-container {
       gap: 3px;
     }
-    
+
     .trust-image-item {
       width: 38px;
       height: 38px;
@@ -6506,7 +6506,7 @@
               {% if block.settings.quote_form_title != blank %}
                 <h3 class="quote-form-title">{{ block.settings.quote_form_title | default: 'Get Your Custom Quote' }}</h3>
               {% endif %}
-              
+
               {% if block.settings.quote_form_description != blank %}
                 <p class="quote-form-description">{{ block.settings.quote_form_description }}</p>
               {% endif %}
@@ -6552,7 +6552,7 @@
                 {% endif %}
 
                 <input type="hidden" name="contact[form_type]" value="plastic_machining_quote_request">
-                
+
                 <div class="quote-form-grid">
                   <div class="quote-form-group">
                     <label for="QuoteFormName" class="quote-form-label">
@@ -6623,7 +6623,7 @@
                     </div>
                   </div>
 
-                  <div class="quote-form-group">
+                  {% comment %} <div class="quote-form-group">
                     <label for="QuoteFormQuantity" class="quote-form-label">Estimated Quantity</label>
                     <select id="QuoteFormQuantity" name="contact[quantity]" class="quote-form-select">
                       <option value="">Select quantity range...</option>
@@ -6634,7 +6634,7 @@
                       <option value="501-1000">501-1000 pieces</option>
                       <option value="1000+">1000+ pieces</option>
                     </select>
-                  </div>
+                  </div> {% endcomment %}
 
                   <div class="quote-form-group">
                     <label for="QuoteFormTimeline" class="quote-form-label">Project Timeline</label>
@@ -6649,10 +6649,10 @@
                     </select>
                   </div>
 
-                  <div class="quote-form-group quote-full-width">
+                  {% comment %} <div class="quote-form-group quote-full-width">
                     <label for="QuoteFormMaterial" class="quote-form-label">Material Preferences</label>
                     <input type="text" id="QuoteFormMaterial" name="contact[material]" class="quote-form-input" placeholder="e.g., PEEK, PTFE, Polycarbonate, etc." value="{% if form.material %}{{ form.material }}{% endif %}">
-                  </div>
+                  </div> {% endcomment %}
 
                   <div class="quote-form-group quote-full-width">
                     <label for="QuoteFormSpecifications" class="quote-form-label">
