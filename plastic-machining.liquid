@@ -1608,6 +1608,17 @@
     overflow: hidden;
   }
 
+  .plastic-machining-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    z-index: 0;
+  }
+
   .hero-overlay {
     position: absolute;
     top: 0;
@@ -1615,6 +1626,8 @@
     right: 0;
     bottom: 0;
     z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 
   .hero-video-bg {
@@ -1629,7 +1642,7 @@
 
   .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     max-width: 1400px;
     width: 100%;
     padding: 0 var(--container-padding);
@@ -2332,6 +2345,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
       {% endif %}
     ">
       
@@ -2341,10 +2355,18 @@
         </video>
       {% endif %}
 
-      {% if block.settings.overlay_opacity > 0 %}
+      {% comment %} Always show overlay when opacity is greater than 0 {% endcomment %}
+      {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
+      {% if overlay_opacity > 0 %}
         <div class="hero-overlay" style="
           background-color: {{ block.settings.overlay_color | default: '#0071b9' }};
-          opacity: {{ block.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};
+          opacity: {{ overlay_opacity | divided_by: 100.0 }};
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
         "></div>
       {% endif %}
 
