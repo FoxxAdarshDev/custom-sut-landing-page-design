@@ -3633,17 +3633,80 @@
     .content-block-grid {
       display: grid;
       grid-template-columns: {% if content_block.settings.layout_type == 'single_column' %}1fr{% else %}1fr 1fr{% endif %};
-      gap: 40px;
+      gap: 60px;
       align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
     .content-block-column {
-      padding: 20px;
+      padding: 40px;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 40px rgba(0, 113, 185, 0.08);
+      border: 1px solid var(--border-color);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .content-block-column::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .content-block-column:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    .content-block-column:hover::before {
+      transform: scaleX(1);
+    }
+
+    .content-block-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .content-block-plus-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0, 113, 185, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .content-block-column:hover .content-block-plus-icon {
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .content-block-plus-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--white);
     }
 
     .content-block-title {
-      margin-bottom: 20px;
+      margin: 0;
       font-weight: 700;
+      flex: 1;
     }
 
     .content-block-title.left-title {
@@ -3658,6 +3721,11 @@
       color: {{ content_block.settings.right_title_color | default: '#0071b9' }};
     }
 
+    .content-block-content {
+      position: relative;
+      padding-left: 20px;
+    }
+
     .content-block-content.left-content {
       font-size: {{ content_block.settings.left_content_size | default: 16 }}px;
       line-height: {{ content_block.settings.left_content_line_height | default: 24 }}px;
@@ -3668,6 +3736,40 @@
       font-size: {{ content_block.settings.right_content_size | default: 16 }}px;
       line-height: {{ content_block.settings.right_content_line_height | default: 24 }}px;
       color: {{ content_block.settings.right_content_color | default: '#000000' }};
+    }
+
+    /* Enhanced Bullet Points with Dot Styling */
+    .content-block-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 20px 0;
+    }
+
+    .content-block-content ul li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 16px;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .content-block-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(0, 113, 185, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .content-block-column:hover .content-block-content ul li::before {
+      background: var(--accent-color);
+      transform: translateY(-50%) scale(1.2);
     }
 
     .content-block-icon {
@@ -3703,10 +3805,54 @@
       object-fit: cover;
     }
 
+    @media (max-width: 1024px) {
+      .content-block-grid {
+        gap: 40px;
+      }
+
+      .content-block-column {
+        padding: 30px;
+      }
+    }
+
     @media (max-width: 768px) {
       .content-block-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+        padding: 0 15px;
+      }
+
+      .content-block-header {
+        gap: 15px;
+      }
+
+      .content-block-plus-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .content-block-plus-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .content-block-column {
+        padding: 25px;
+      }
+
+      .content-block-content {
+        padding-left: 15px;
+      }
+
+      .content-block-content ul li {
+        padding-left: 35px;
+      }
+
+      .content-block-content ul li::before {
+        width: 10px;
+        height: 10px;
+        left: 8px;
+        box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
       }
     }
   {% endif %}
@@ -4049,6 +4195,17 @@
           <div class="content-block-grid">
             <!-- Left Column -->
             <div class="content-block-column">
+              <div class="content-block-header">
+                <div class="content-block-plus-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                  </svg>
+                </div>
+                {% if block.settings.left_title != blank %}
+                  <h3 class="content-block-title left-title">{{ block.settings.left_title }}</h3>
+                {% endif %}
+              </div>
+
               {% if block.settings.left_icon_type == 'svg' and block.settings.left_svg_code != blank %}
                 <div class="content-block-icon">
                   {{ block.settings.left_svg_code }}
@@ -4057,10 +4214,6 @@
                 <div class="content-block-image">
                   <img src="{{ block.settings.left_image | img_url: '400x300' }}" alt="{{ block.settings.left_title }}" loading="lazy">
                 </div>
-              {% endif %}
-
-              {% if block.settings.left_title != blank %}
-                <h3 class="content-block-title left-title">{{ block.settings.left_title }}</h3>
               {% endif %}
 
               {% if block.settings.left_content != blank %}
@@ -4073,6 +4226,17 @@
             <!-- Right Column -->
             {% if block.settings.layout_type == 'two_column' %}
               <div class="content-block-column">
+                <div class="content-block-header">
+                  <div class="content-block-plus-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                  </div>
+                  {% if block.settings.right_title != blank %}
+                    <h3 class="content-block-title right-title">{{ block.settings.right_title }}</h3>
+                  {% endif %}
+                </div>
+
                 {% if block.settings.right_icon_type == 'svg' and block.settings.right_svg_code != blank %}
                   <div class="content-block-icon">
                     {{ block.settings.right_svg_code }}
@@ -4081,10 +4245,6 @@
                   <div class="content-block-image">
                     <img src="{{ block.settings.right_image | img_url: '400x300' }}" alt="{{ block.settings.right_title }}" loading="lazy">
                   </div>
-                {% endif %}
-
-                {% if block.settings.right_title != blank %}
-                  <h3 class="content-block-title right-title">{{ block.settings.right_title }}</h3>
                 {% endif %}
 
                 {% if block.settings.right_content != blank %}
