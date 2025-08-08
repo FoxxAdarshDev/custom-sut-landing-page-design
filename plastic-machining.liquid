@@ -2459,6 +2459,11 @@
     width: 100%;
     padding: 0 var(--container-padding);
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .hero-buttons {
@@ -4369,30 +4374,30 @@
           bottom: 0;
           z-index: 1;
           pointer-events: none;
-        "></div>
+        ">
+          <div class="hero-content">
+            <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
+            <p class="hero-subtitle">{{ block.settings.hero_subtitle | default: 'Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing' }}</p>
 
-        <div class="hero-content">
-          <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
-          <p class="hero-subtitle">{{ block.settings.hero_subtitle | default: 'Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing' }}</p>
+            <div class="hero-buttons">
+              {% if block.settings.hero_cta_url != blank %}
+                <a href="{{ block.settings.hero_cta_url }}" class="hero-btn hero-btn-primary">
+                  {{ block.settings.hero_cta_text | default: 'Get Custom Quote' }}
+                </a>
+              {% endif %}
 
-          <div class="hero-buttons">
-            {% if block.settings.hero_cta_url != blank %}
-              <a href="{{ block.settings.hero_cta_url }}" class="hero-btn hero-btn-primary">
-                {{ block.settings.hero_cta_text | default: 'Get Custom Quote' }}
-              </a>
-            {% endif %}
+              {% if block.settings.hero_secondary_cta_url != blank %}
+                <a href="{{ block.settings.hero_secondary_cta_url }}" class="hero-btn hero-btn-secondary">
+                  {{ block.settings.hero_secondary_cta_text | default: 'View Capabilities' }}
+                </a>
+              {% endif %}
 
-            {% if block.settings.hero_secondary_cta_url != blank %}
-              <a href="{{ block.settings.hero_secondary_cta_url }}" class="hero-btn hero-btn-secondary">
-                {{ block.settings.hero_secondary_cta_text | default: 'View Capabilities' }}
-              </a>
-            {% endif %}
-
-            {% if block.settings.hero_tertiary_cta_url != blank %}
-              <a href="{{ block.settings.hero_tertiary_cta_url }}" class="hero-btn hero-btn-tertiary">
-                {{ block.settings.hero_tertiary_cta_text | default: 'Contact Us' }}
-              </a>
-            {% endif %}
+              {% if block.settings.hero_tertiary_cta_url != blank %}
+                <a href="{{ block.settings.hero_tertiary_cta_url }}" class="hero-btn hero-btn-tertiary">
+                  {{ block.settings.hero_tertiary_cta_text | default: 'Contact Us' }}
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
 
