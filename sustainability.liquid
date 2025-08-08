@@ -1702,11 +1702,15 @@ body {
   align-items: center;
   justify-content: center;
   padding: 80px 20px;
+  pointer-events: none;
 }
 
 .change-content {
   text-align: center;
   max-width: 800px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 3;
 }
 
 .change-icon-wrapper {
@@ -1802,6 +1806,10 @@ body {
   transform: translateY(30px);
   animation: fadeInUp 1s ease forwards;
   animation-delay: 1s;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
 }
 
 .animated-button {
