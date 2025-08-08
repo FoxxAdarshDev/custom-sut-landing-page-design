@@ -1,0 +1,2660 @@
+
+{% schema %}
+{
+  "name": "Plastic Machining Services",
+  "tag": "section",
+  "class": "plastic-machining-section main-plastic-machining",
+  "category": "Services",
+  "blocks": [
+    {
+      "type": "hero_section",
+      "name": "Hero Banner",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Background Settings"
+        },
+        {
+          "type": "select",
+          "id": "background_type",
+          "label": "Background Type",
+          "default": "image",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            },
+            {
+              "value": "color",
+              "label": "Color"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_background_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "hero_background_video",
+          "label": "Background Video URL (MP4)"
+        },
+        {
+          "type": "color",
+          "id": "hero_background_color",
+          "label": "Background Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 85
+        },
+        {
+          "type": "header",
+          "content": "Content Settings"
+        },
+        {
+          "type": "text",
+          "id": "hero_title",
+          "label": "Hero Title",
+          "default": "PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS"
+        },
+        {
+          "type": "range",
+          "id": "hero_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 64
+        },
+        {
+          "type": "range",
+          "id": "hero_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "hero_subtitle",
+          "label": "Hero Subtitle",
+          "default": "Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing"
+        },
+        {
+          "type": "range",
+          "id": "hero_subtitle_size",
+          "label": "Subtitle Font Size (Desktop)",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "hero_subtitle_size_mobile",
+          "label": "Subtitle Font Size (Mobile)",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "url",
+          "id": "hero_cta_url",
+          "label": "Primary CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "hero_cta_text",
+          "label": "Primary CTA Button Text",
+          "default": "Get Custom Quote"
+        },
+        {
+          "type": "url",
+          "id": "hero_secondary_cta_url",
+          "label": "Secondary CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "hero_secondary_cta_text",
+          "label": "Secondary CTA Button Text",
+          "default": "View Capabilities"
+        },
+        {
+          "type": "url",
+          "id": "hero_tertiary_cta_url",
+          "label": "Tertiary CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "hero_tertiary_cta_text",
+          "label": "Tertiary CTA Button Text",
+          "default": "Contact Us"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "capabilities_section",
+      "name": "Our Expertise Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "capabilities_title",
+          "label": "Section Title",
+          "default": "Our Expertise"
+        },
+        {
+          "type": "range",
+          "id": "capabilities_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "capabilities_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "capabilities_subtitle",
+          "label": "Section Subtitle",
+          "default": "Comprehensive plastic machining solutions for your most demanding applications."
+        },
+        {
+          "type": "color",
+          "id": "capabilities_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "capabilities_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "capability_item",
+      "name": "Capability Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "capability_image",
+          "label": "Capability Image"
+        },
+        {
+          "type": "text",
+          "id": "capability_title",
+          "label": "Title",
+          "default": "CNC Plastic Machining"
+        },
+        {
+          "type": "textarea",
+          "id": "capability_description",
+          "label": "Description",
+          "default": "High-precision CNC machining for complex plastic components"
+        }
+      ]
+    },
+    {
+      "type": "industries_section",
+      "name": "Industries Served",
+      "settings": [
+        {
+          "type": "text",
+          "id": "industries_title",
+          "label": "Section Title",
+          "default": "Industries We Serve"
+        },
+        {
+          "type": "range",
+          "id": "industries_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "industries_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "color",
+          "id": "industries_bg_color",
+          "label": "Background Color",
+          "default": "#f8f9fa"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "industries_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "industry_item",
+      "name": "Industry Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "industry_image",
+          "label": "Industry Image"
+        },
+        {
+          "type": "text",
+          "id": "industry_title",
+          "label": "Industry Name",
+          "default": "Bioprocessing"
+        }
+      ]
+    },
+    {
+      "type": "trusted_by_section",
+      "name": "Why Choose Us",
+      "settings": [
+        {
+          "type": "text",
+          "id": "trusted_title",
+          "label": "Section Title",
+          "default": "Trusted by Industry Leaders"
+        },
+        {
+          "type": "range",
+          "id": "trusted_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "trusted_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "trusted_subtitle",
+          "label": "Section Subtitle",
+          "default": "Experience the difference of working with a certified plastic machining partner."
+        },
+        {
+          "type": "color",
+          "id": "trusted_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "trusted_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "trust_item",
+      "name": "Trust Factor Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image",
+          "label": "Trust Factor Image"
+        },
+        {
+          "type": "text",
+          "id": "trust_title",
+          "label": "Title",
+          "default": "ISO-certified Facilities"
+        },
+        {
+          "type": "textarea",
+          "id": "trust_description",
+          "label": "Description",
+          "default": "Quality assurance through certified manufacturing processes"
+        }
+      ]
+    },
+    {
+      "type": "gallery_section",
+      "name": "Showcase Gallery",
+      "settings": [
+        {
+          "type": "text",
+          "id": "gallery_title",
+          "label": "Section Title",
+          "default": "Showcase Gallery"
+        },
+        {
+          "type": "range",
+          "id": "gallery_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "gallery_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "gallery_subtitle",
+          "label": "Section Subtitle",
+          "default": "Precision-manufactured components and custom projects"
+        },
+        {
+          "type": "color",
+          "id": "gallery_bg_color",
+          "label": "Background Color",
+          "default": "#f8f9fa"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "gallery_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "gallery_item",
+      "name": "Gallery Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content_type",
+          "label": "Content Type",
+          "default": "image",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "gallery_image",
+          "label": "Gallery Image"
+        },
+        {
+          "type": "text",
+          "id": "gallery_video_url",
+          "label": "Video URL (MP4)"
+        },
+        {
+          "type": "text",
+          "id": "gallery_title",
+          "label": "Title",
+          "default": "Custom Component"
+        },
+        {
+          "type": "textarea",
+          "id": "gallery_description",
+          "label": "Description",
+          "default": "Precision-machined plastic component"
+        }
+      ]
+    },
+    {
+      "type": "testimonial_section",
+      "name": "Client Testimonials",
+      "settings": [
+        {
+          "type": "text",
+          "id": "testimonial_title",
+          "label": "Section Title",
+          "default": "What Our Clients Say"
+        },
+        {
+          "type": "range",
+          "id": "testimonial_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "testimonial_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_quote",
+          "label": "Testimonial Quote",
+          "default": "Foxx Life Sciences' machining team delivered high-precision parts on time every time."
+        },
+        {
+          "type": "text",
+          "id": "testimonial_author",
+          "label": "Author",
+          "default": "Industry Leader"
+        },
+        {
+          "type": "color",
+          "id": "testimonial_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "testimonial_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "certifications_section",
+      "name": "Certifications",
+      "settings": [
+        {
+          "type": "text",
+          "id": "certifications_title",
+          "label": "Section Title",
+          "default": "Certifications & Compliance"
+        },
+        {
+          "type": "range",
+          "id": "certifications_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "certifications_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "color",
+          "id": "certifications_bg_color",
+          "label": "Background Color",
+          "default": "#f8f9fa"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "certifications_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "certification_item",
+      "name": "Certification Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cert_image",
+          "label": "Certification Image"
+        },
+        {
+          "type": "text",
+          "id": "cert_title",
+          "label": "Certification Title",
+          "default": "ISO 9001"
+        }
+      ]
+    },
+    {
+      "type": "facility_walkthrough",
+      "name": "Facility Walkthrough",
+      "settings": [
+        {
+          "type": "text",
+          "id": "walkthrough_title",
+          "label": "Section Title",
+          "default": "Facility Walkthrough"
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "walkthrough_subtitle",
+          "label": "Section Subtitle",
+          "default": "Take a virtual tour of our state-of-the-art plastic machining facilities."
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_bg_color",
+          "label": "Background Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 85
+        },
+        {
+          "type": "url",
+          "id": "walkthrough_cta_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "walkthrough_cta_text",
+          "label": "CTA Button Text",
+          "default": "Start Virtual Tour"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    },
+    {
+      "type": "contact_section",
+      "name": "Request Quote",
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Section Title",
+          "default": "Ready for Your Next Project?"
+        },
+        {
+          "type": "range",
+          "id": "contact_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "contact_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "textarea",
+          "id": "contact_subtitle",
+          "label": "Section Subtitle",
+          "default": "Get a custom quote for your plastic machining needs. Our experts are ready to help."
+        },
+        {
+          "type": "color",
+          "id": "contact_bg_color",
+          "label": "Background Color",
+          "default": "#f8f9fa"
+        },
+        {
+          "type": "url",
+          "id": "contact_cta_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "contact_cta_text",
+          "label": "CTA Button Text",
+          "default": "Get Custom Quote"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "contact_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Plastic Machining Services",
+      "category": "Services",
+      "blocks": [
+        {
+          "type": "hero_section"
+        },
+        {
+          "type": "capabilities_section"
+        },
+        {
+          "type": "capability_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/>",
+            "capability_title": "CNC Plastic Machining",
+            "capability_description": "High-precision CNC machining for complex plastic components"
+          }
+        },
+        {
+          "type": "capability_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/>",
+            "capability_title": "Milling & Turning",
+            "capability_description": "Advanced milling and turning operations for precise geometrics"
+          }
+        },
+        {
+          "type": "capability_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/>",
+            "capability_title": "Complex Part Manufacturing",
+            "capability_description": "Manufacturing of intricate and complex plastic components"
+          }
+        },
+        {
+          "type": "capability_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M17.65,6.35C16.2,4.9 14.21,4 12,4c-4.42,0 -7.99,3.58 -7.99,8s3.57,8 7.99,8c3.73,0 6.84,-2.55 7.73,-6h-2.08c-0.82,2.33 -3.04,4 -5.65,4 -3.31,0 -6,-2.69 -6,-6s2.69,-6 6,-6c1.66,0 3.14,0.69 4.22,1.78L13,11h7V4L17.65,6.35z'/>",
+            "capability_title": "Prototype to Production",
+            "capability_description": "From concept to full-scale manufacturing solutions"
+          }
+        },
+        {
+          "type": "industries_section"
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/>",
+            "industry_title": "Bioprocessing"
+          }
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M10.5,13A1.5,1.5 0 0,0 12,14.5A1.5,1.5 0 0,0 13.5,13A1.5,1.5 0 0,0 12,11.5A1.5,1.5 0 0,0 10.5,13M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z'/>",
+            "industry_title": "Medical Devices"
+          }
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z'/>",
+            "industry_title": "Aerospace"
+          }
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M11,7A2,2 0 0,1 13,9V17H17V19H7V17H11V9A2,2 0 0,1 11,7M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2Z'/>",
+            "industry_title": "Semiconductor"
+          }
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16Z'/>",
+            "industry_title": "Automotive"
+          }
+        },
+        {
+          "type": "industry_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M5,3H7V5H5V10A2,2 0 0,1 3,8V5C3,3.89 3.9,3 5,3M19,3A2,2 0 0,1 21,5V8A2,2 0 0,1 19,10V5H17V3H19M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,7A1,1 0 0,0 11,8A1,1 0 0,0 12,9A1,1 0 0,0 13,8A1,1 0 0,0 12,7Z'/>",
+            "industry_title": "Research Labs"
+          }
+        },
+        {
+          "type": "trusted_by_section"
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/>",
+            "trust_title": "ISO-certified Facilities",
+            "trust_description": "Quality assurance through certified manufacturing processes"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>",
+            "trust_title": "USA & India-based Manufacturing",
+            "trust_description": "Global manufacturing capabilities with local support"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/>",
+            "trust_title": "Cleanroom-Compatible Production",
+            "trust_description": "Manufacturing environment suitable for critical applications"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/>",
+            "trust_title": "In-house Design & Engineering",
+            "trust_description": "Complete design and engineering capabilities"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z'/>",
+            "trust_title": "FDA and USP Class VI",
+            "trust_description": "Compliant materials and processes"
+          }
+        },
+        {
+          "type": "gallery_section"
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "gallery_title": "Custom Component",
+            "gallery_description": "Precision-machined plastic component"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "gallery_title": "Before & After",
+            "gallery_description": "Precision machining transformation"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "content_type": "video",
+            "gallery_title": "Machining Process",
+            "gallery_description": "Live machining demonstration"
+          }
+        },
+        {
+          "type": "testimonial_section"
+        },
+        {
+          "type": "certifications_section"
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "ISO 9001"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "Cleanroom Class 7"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "USP Class VI"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "RoHS Compliant"
+          }
+        },
+        {
+          "type": "facility_walkthrough"
+        },
+        {
+          "type": "contact_section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Dynamic CSS for responsive controls -->
+<style>
+  :root {
+    --primary-color: #0071b9;
+    --secondary-color: #005a91;
+    --accent-color: #00a8e6;
+    --text-dark: #1a1a1a;
+    --text-light: #666;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --border-color: #e1e5e9;
+    --shadow-light: 0 4px 20px rgba(0, 113, 185, 0.08);
+    --shadow-medium: 0 8px 40px rgba(0, 113, 185, 0.12);
+    --shadow-heavy: 0 20px 60px rgba(0, 113, 185, 0.2);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 16px;
+    --container-padding: clamp(20px, 5vw, 80px);
+  }
+
+  .plastic-machining-section {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  .plastic-machining-section * {
+    box-sizing: border-box;
+  }
+
+  /* Dynamic padding system */
+  .section-padding {
+    padding-top: var(--section-padding-top-desktop, 120px);
+    padding-bottom: var(--section-padding-bottom-desktop, 120px);
+  }
+
+  @media (max-width: 1024px) {
+    .section-padding {
+      padding-top: var(--section-padding-top-tablet, 80px);
+      padding-bottom: var(--section-padding-bottom-tablet, 80px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-padding {
+      padding-top: var(--section-padding-top-mobile, 60px);
+      padding-bottom: var(--section-padding-bottom-mobile, 60px);
+    }
+  }
+
+  /* Hero Section Styles */
+  {% assign hero_block = section.blocks | where: "type", "hero_section" | first %}
+  {% if hero_block %}
+    .plastic-machining-hero {
+      --section-padding-top-desktop: {{ hero_block.settings.hero_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ hero_block.settings.hero_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ hero_block.settings.hero_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ hero_block.settings.hero_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ hero_block.settings.hero_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ hero_block.settings.hero_padding_bottom_mobile | default: 60 }}px;
+    }
+
+    .hero-title {
+      font-size: {{ hero_block.settings.hero_title_size | default: 64 }}px;
+      line-height: 1.1;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: {{ hero_block.settings.hero_subtitle_size | default: 20 }}px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: {{ hero_block.settings.hero_title_size_mobile | default: 32 }}px;
+      }
+      
+      .hero-subtitle {
+        font-size: {{ hero_block.settings.hero_subtitle_size_mobile | default: 16 }}px;
+      }
+    }
+  {% endif %}
+
+  .plastic-machining-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 var(--container-padding);
+    text-align: center;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 18px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-btn-primary {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #0096d4 100%);
+    color: var(--white);
+  }
+
+  .hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-btn-tertiary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  .hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  /* Section Title Styling (inspired by about-us.liquid) */
+  .section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+  }
+
+  /* Capabilities Section */
+  {% assign capabilities_block = section.blocks | where: "type", "capabilities_section" | first %}
+  {% if capabilities_block %}
+    .capabilities-section {
+      --section-padding-top-desktop: {{ capabilities_block.settings.capabilities_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ capabilities_block.settings.capabilities_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ capabilities_block.settings.capabilities_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ capabilities_block.settings.capabilities_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ capabilities_block.settings.capabilities_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ capabilities_block.settings.capabilities_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ capabilities_block.settings.capabilities_bg_color | default: '#ffffff' }};
+    }
+
+    .capabilities-title {
+      font-size: {{ capabilities_block.settings.capabilities_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .capabilities-title {
+        font-size: {{ capabilities_block.settings.capabilities_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .capability-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .capability-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+  }
+
+  .capability-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    transition: var(--transition);
+  }
+
+  .capability-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--white);
+  }
+
+  .capability-icon img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+  }
+
+  .capability-card:hover .capability-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .capability-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+  }
+
+  .capability-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin: 0;
+  }
+
+  /* Industries Section */
+  {% assign industries_block = section.blocks | where: "type", "industries_section" | first %}
+  {% if industries_block %}
+    .industries-section {
+      --section-padding-top-desktop: {{ industries_block.settings.industries_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ industries_block.settings.industries_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ industries_block.settings.industries_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ industries_block.settings.industries_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ industries_block.settings.industries_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ industries_block.settings.industries_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ industries_block.settings.industries_bg_color | default: '#f8f9fa' }};
+    }
+
+    .industries-title {
+      font-size: {{ industries_block.settings.industries_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .industries-title {
+        font-size: {{ industries_block.settings.industries_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .industry-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+  }
+
+  .industry-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-light);
+  }
+
+  .industry-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .industry-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--white);
+  }
+
+  .industry-icon img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+  }
+
+  .industry-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  /* Trusted By Section */
+  {% assign trusted_block = section.blocks | where: "type", "trusted_by_section" | first %}
+  {% if trusted_block %}
+    .trusted-section {
+      --section-padding-top-desktop: {{ trusted_block.settings.trusted_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ trusted_block.settings.trusted_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ trusted_block.settings.trusted_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ trusted_block.settings.trusted_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ trusted_block.settings.trusted_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ trusted_block.settings.trusted_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ trusted_block.settings.trusted_bg_color | default: '#ffffff' }};
+    }
+
+    .trusted-title {
+      font-size: {{ trusted_block.settings.trusted_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .trusted-title {
+        font-size: {{ trusted_block.settings.trusted_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .trust-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trust-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+  }
+
+  /* Gallery Section */
+  {% assign gallery_block = section.blocks | where: "type", "gallery_section" | first %}
+  {% if gallery_block %}
+    .gallery-section {
+      --section-padding-top-desktop: {{ gallery_block.settings.gallery_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ gallery_block.settings.gallery_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ gallery_block.settings.gallery_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ gallery_block.settings.gallery_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ gallery_block.settings.gallery_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ gallery_block.settings.gallery_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ gallery_block.settings.gallery_bg_color | default: '#f8f9fa' }};
+    }
+
+    .gallery-title {
+      font-size: {{ gallery_block.settings.gallery_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-title {
+        font-size: {{ gallery_block.settings.gallery_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .gallery-item {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .gallery-media {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .gallery-media img,
+  .gallery-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-media img,
+  .gallery-item:hover .gallery-media video {
+    transform: scale(1.05);
+  }
+
+  .gallery-content {
+    padding: 24px;
+  }
+
+  .gallery-item-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+
+  .gallery-item-description {
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 0;
+  }
+
+  /* Testimonial Section */
+  {% assign testimonial_block = section.blocks | where: "type", "testimonial_section" | first %}
+  {% if testimonial_block %}
+    .testimonial-section {
+      --section-padding-top-desktop: {{ testimonial_block.settings.testimonial_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ testimonial_block.settings.testimonial_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ testimonial_block.settings.testimonial_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ testimonial_block.settings.testimonial_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ testimonial_block.settings.testimonial_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ testimonial_block.settings.testimonial_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ testimonial_block.settings.testimonial_bg_color | default: '#ffffff' }};
+    }
+
+    .testimonial-section-title {
+      font-size: {{ testimonial_block.settings.testimonial_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .testimonial-section-title {
+        font-size: {{ testimonial_block.settings.testimonial_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .testimonial-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .testimonial-quote {
+    position: relative;
+    padding: 40px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-top: 40px;
+  }
+
+  .quote-mark {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quote-mark svg {
+    width: 24px;
+    height: 24px;
+    color: var(--white);
+  }
+
+  .quote-text {
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    font-style: italic;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .quote-author {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  /* Certifications Section */
+  {% assign certifications_block = section.blocks | where: "type", "certifications_section" | first %}
+  {% if certifications_block %}
+    .certifications-section {
+      --section-padding-top-desktop: {{ certifications_block.settings.certifications_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ certifications_block.settings.certifications_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ certifications_block.settings.certifications_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ certifications_block.settings.certifications_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ certifications_block.settings.certifications_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ certifications_block.settings.certifications_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ certifications_block.settings.certifications_bg_color | default: '#f8f9fa' }};
+    }
+
+    .certifications-section-title {
+      font-size: {{ certifications_block.settings.certifications_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .certifications-section-title {
+        font-size: {{ certifications_block.settings.certifications_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .certification-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .certification-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+  }
+
+  .certification-image {
+    margin-bottom: 24px;
+  }
+
+  .certification-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
+  .certification-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  /* Facility Walkthrough Section */
+  {% assign walkthrough_block = section.blocks | where: "type", "facility_walkthrough" | first %}
+  {% if walkthrough_block %}
+    .facility-walkthrough-section {
+      --section-padding-top-desktop: {{ walkthrough_block.settings.walkthrough_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ walkthrough_block.settings.walkthrough_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ walkthrough_block.settings.walkthrough_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ walkthrough_block.settings.walkthrough_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ walkthrough_block.settings.walkthrough_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ walkthrough_block.settings.walkthrough_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ walkthrough_block.settings.walkthrough_bg_color | default: '#0071b9' }};
+      color: var(--white);
+      position: relative;
+    }
+
+    .walkthrough-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: {{ walkthrough_block.settings.walkthrough_overlay_color | default: '#0071b9' }};
+      opacity: {{ walkthrough_block.settings.walkthrough_overlay_opacity | default: 85 | divided_by: 100.0 }};
+    }
+
+    .walkthrough-section-title {
+      font-size: {{ walkthrough_block.settings.walkthrough_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .walkthrough-section-title {
+        font-size: {{ walkthrough_block.settings.walkthrough_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .walkthrough-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .walkthrough-subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 24px 0 40px;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  .walkthrough-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: var(--white);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 18px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .walkthrough-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  /* Contact Section */
+  {% assign contact_block = section.blocks | where: "type", "contact_section" | first %}
+  {% if contact_block %}
+    .contact-section {
+      --section-padding-top-desktop: {{ contact_block.settings.contact_padding_top_desktop | default: 120 }}px;
+      --section-padding-bottom-desktop: {{ contact_block.settings.contact_padding_bottom_desktop | default: 120 }}px;
+      --section-padding-top-tablet: {{ contact_block.settings.contact_padding_top_tablet | default: 80 }}px;
+      --section-padding-bottom-tablet: {{ contact_block.settings.contact_padding_bottom_tablet | default: 80 }}px;
+      --section-padding-top-mobile: {{ contact_block.settings.contact_padding_top_mobile | default: 60 }}px;
+      --section-padding-bottom-mobile: {{ contact_block.settings.contact_padding_bottom_mobile | default: 60 }}px;
+      background-color: {{ contact_block.settings.contact_bg_color | default: '#f8f9fa' }};
+    }
+
+    .contact-section-title {
+      font-size: {{ contact_block.settings.contact_title_size | default: 48 }}px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .contact-section-title {
+        font-size: {{ contact_block.settings.contact_title_size_mobile | default: 32 }}px;
+      }
+    }
+  {% endif %}
+
+  .contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text-light);
+    font-weight: 300;
+    margin: 24px 0 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    font-size: 20px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .contact-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-btn {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+
+    .capabilities-grid,
+    .industries-grid,
+    .trust-grid,
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .certifications-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .plastic-machining-hero {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+    }
+    
+    .hero-video-bg,
+    .hero-overlay {
+      display: none !important;
+    }
+  }
+</style>
+
+<!-- Hero Section -->
+{% for block in section.blocks %}
+  {% if block.type == 'hero_section' %}
+    <section class="plastic-machining-hero section-padding" style="
+      {% if block.settings.background_type == 'color' or block.settings.background_type == blank %}
+        background-color: {{ block.settings.hero_background_color | default: '#0071b9' }};
+      {% elsif block.settings.background_type == 'image' and block.settings.hero_background_image != blank %}
+        background-image: url('{{ block.settings.hero_background_image | img_url: '1920x' }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      {% endif %}
+    ">
+      
+      {% if block.settings.background_type == 'video' and block.settings.hero_background_video != blank %}
+        <video class="hero-video-bg" autoplay muted loop playsinline>
+          <source src="{{ block.settings.hero_background_video }}" type="video/mp4">
+        </video>
+      {% endif %}
+
+      {% if block.settings.overlay_opacity > 0 %}
+        <div class="hero-overlay" style="
+          background-color: {{ block.settings.overlay_color | default: '#0071b9' }};
+          opacity: {{ block.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};
+        "></div>
+      {% endif %}
+
+      <div class="hero-content">
+        <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
+        <p class="hero-subtitle">{{ block.settings.hero_subtitle | default: 'Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing' }}</p>
+        
+        <div class="hero-buttons">
+          {% if block.settings.hero_cta_url != blank %}
+            <a href="{{ block.settings.hero_cta_url }}" class="hero-btn hero-btn-primary">
+              {{ block.settings.hero_cta_text | default: 'Get Custom Quote' }}
+            </a>
+          {% endif %}
+          
+          {% if block.settings.hero_secondary_cta_url != blank %}
+            <a href="{{ block.settings.hero_secondary_cta_url }}" class="hero-btn hero-btn-secondary">
+              {{ block.settings.hero_secondary_cta_text | default: 'View Capabilities' }}
+            </a>
+          {% endif %}
+          
+          {% if block.settings.hero_tertiary_cta_url != blank %}
+            <a href="{{ block.settings.hero_tertiary_cta_url }}" class="hero-btn hero-btn-tertiary">
+              {{ block.settings.hero_tertiary_cta_text | default: 'Contact Us' }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endfor %}
+
+<!-- Capabilities Section -->
+{% assign capabilities_section = section.blocks | where: "type", "capabilities_section" | first %}
+{% if capabilities_section %}
+  <section class="capabilities-section section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="capabilities-title section-title">{{ capabilities_section.settings.capabilities_title | default: 'Our Expertise' }}</h2>
+        {% if capabilities_section.settings.capabilities_subtitle != blank %}
+          <p class="section-subtitle">{{ capabilities_section.settings.capabilities_subtitle }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="capabilities-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'capability_item' %}
+            <div class="capability-card">
+              <div class="capability-icon">
+                {% if block.settings.icon_type == 'image' and block.settings.capability_image != blank %}
+                  <img src="{{ block.settings.capability_image | img_url: '80x80' }}" alt="{{ block.settings.capability_title }}" loading="lazy">
+                {% elsif block.settings.svg_code != blank %}
+                  {{ block.settings.svg_code }}
+                {% endif %}
+              </div>
+              <h3 class="capability-title">{{ block.settings.capability_title | default: 'CNC Plastic Machining' }}</h3>
+              <p class="capability-description">{{ block.settings.capability_description | default: 'High-precision CNC machining for complex plastic components' }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Industries Section -->
+{% assign industries_section = section.blocks | where: "type", "industries_section" | first %}
+{% if industries_section %}
+  <section class="industries-section section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="industries-title section-title">{{ industries_section.settings.industries_title | default: 'Industries We Serve' }}</h2>
+      </div>
+      
+      <div class="industries-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'industry_item' %}
+            <div class="industry-item">
+              <div class="industry-icon">
+                {% if block.settings.icon_type == 'image' and block.settings.industry_image != blank %}
+                  <img src="{{ block.settings.industry_image | img_url: '80x80' }}" alt="{{ block.settings.industry_title }}" loading="lazy">
+                {% elsif block.settings.svg_code != blank %}
+                  {{ block.settings.svg_code }}
+                {% endif %}
+              </div>
+              <h3 class="industry-title">{{ block.settings.industry_title | default: 'Bioprocessing' }}</h3>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Trusted By Section -->
+{% assign trusted_section = section.blocks | where: "type", "trusted_by_section" | first %}
+{% if trusted_section %}
+  <section class="trusted-section section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="trusted-title section-title">{{ trusted_section.settings.trusted_title | default: 'Trusted by Industry Leaders' }}</h2>
+        {% if trusted_section.settings.trusted_subtitle != blank %}
+          <p class="section-subtitle">{{ trusted_section.settings.trusted_subtitle }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="trust-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'trust_item' %}
+            <div class="trust-card">
+              <div class="capability-icon">
+                {% if block.settings.icon_type == 'image' and block.settings.trust_image != blank %}
+                  <img src="{{ block.settings.trust_image | img_url: '80x80' }}" alt="{{ block.settings.trust_title }}" loading="lazy">
+                {% elsif block.settings.svg_code != blank %}
+                  {{ block.settings.svg_code }}
+                {% endif %}
+              </div>
+              <h3 class="capability-title">{{ block.settings.trust_title | default: 'ISO-certified Facilities' }}</h3>
+              <p class="capability-description">{{ block.settings.trust_description | default: 'Quality assurance through certified manufacturing processes' }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Gallery Section -->
+{% assign gallery_section = section.blocks | where: "type", "gallery_section" | first %}
+{% if gallery_section %}
+  <section class="gallery-section section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="gallery-title section-title">{{ gallery_section.settings.gallery_title | default: 'Showcase Gallery' }}</h2>
+        {% if gallery_section.settings.gallery_subtitle != blank %}
+          <p class="section-subtitle">{{ gallery_section.settings.gallery_subtitle }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="gallery-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'gallery_item' %}
+            <div class="gallery-item">
+              <div class="gallery-media">
+                {% if block.settings.content_type == 'video' and block.settings.gallery_video_url != blank %}
+                  <video controls muted loop>
+                    <source src="{{ block.settings.gallery_video_url }}" type="video/mp4">
+                  </video>
+                {% elsif block.settings.gallery_image != blank %}
+                  <img src="{{ block.settings.gallery_image | img_url: '600x400' }}" alt="{{ block.settings.gallery_title }}" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="gallery-content">
+                <h3 class="gallery-item-title">{{ block.settings.gallery_title | default: 'Custom Component' }}</h3>
+                <p class="gallery-item-description">{{ block.settings.gallery_description | default: 'Precision-machined plastic component' }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Testimonial Section -->
+{% assign testimonial_section = section.blocks | where: "type", "testimonial_section" | first %}
+{% if testimonial_section %}
+  <section class="testimonial-section section-padding">
+    <div class="container">
+      <div class="testimonial-content">
+        <h2 class="testimonial-section-title section-title">{{ testimonial_section.settings.testimonial_title | default: 'What Our Clients Say' }}</h2>
+        <div class="testimonial-quote">
+          <div class="quote-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.5,10C7.3,10 8,9.3 8,8.5C8,7.7 7.3,7 6.5,7C5.7,7 5,7.7 5,8.5C5,9.3 5.7,10 6.5,10M9,6L9,9L6,12L3,9L3,6L9,6M17.5,10C18.3,10 19,9.3 19,8.5C19,7.7 18.3,7 17.5,7C16.7,7 16,7.7 16,8.5C16,9.3 16.7,10 17.5,10M20,6L20,9L17,12L14,9L14,6L20,6Z"/>
+            </svg>
+          </div>
+          <p class="quote-text">{{ testimonial_section.settings.testimonial_quote | default: "Foxx Life Sciences' machining team delivered high-precision parts on time every time." }}</p>
+          <p class="quote-author">- {{ testimonial_section.settings.testimonial_author | default: 'Industry Leader' }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Certifications Section -->
+{% assign certifications_section = section.blocks | where: "type", "certifications_section" | first %}
+{% if certifications_section %}
+  <section class="certifications-section section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="certifications-section-title section-title">{{ certifications_section.settings.certifications_title | default: 'Certifications & Compliance' }}</h2>
+      </div>
+      
+      <div class="certifications-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'certification_item' %}
+            <div class="certification-card">
+              {% if block.settings.cert_image != blank %}
+                <div class="certification-image">
+                  <img src="{{ block.settings.cert_image | img_url: '120x120' }}" alt="{{ block.settings.cert_title }}" loading="lazy">
+                </div>
+              {% endif %}
+              <h3 class="certification-title">{{ block.settings.cert_title | default: 'ISO 9001' }}</h3>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Facility Walkthrough Section -->
+{% assign walkthrough_section = section.blocks | where: "type", "facility_walkthrough" | first %}
+{% if walkthrough_section %}
+  <section class="facility-walkthrough-section section-padding">
+    {% if walkthrough_section.settings.walkthrough_overlay_opacity > 0 %}
+      <div class="walkthrough-overlay"></div>
+    {% endif %}
+    
+    <div class="container">
+      <div class="walkthrough-content">
+        <h2 class="walkthrough-section-title section-title">{{ walkthrough_section.settings.walkthrough_title | default: 'Facility Walkthrough' }}</h2>
+        <p class="walkthrough-subtitle">{{ walkthrough_section.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
+        
+        {% if walkthrough_section.settings.walkthrough_cta_url != blank %}
+          <a href="{{ walkthrough_section.settings.walkthrough_cta_url }}" class="walkthrough-cta">
+            {{ walkthrough_section.settings.walkthrough_cta_text | default: 'Start Virtual Tour' }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Contact Section -->
+{% assign contact_section = section.blocks | where: "type", "contact_section" | first %}
+{% if contact_section %}
+  <section class="contact-section section-padding">
+    <div class="container">
+      <div class="contact-content">
+        <h2 class="contact-section-title section-title">{{ contact_section.settings.contact_title | default: 'Ready for Your Next Project?' }}</h2>
+        <p class="contact-subtitle">{{ contact_section.settings.contact_subtitle | default: 'Get a custom quote for your plastic machining needs. Our experts are ready to help.' }}</p>
+        
+        {% if contact_section.settings.contact_cta_url != blank %}
+          <a href="{{ contact_section.settings.contact_cta_url }}" class="contact-cta-button">
+            {{ contact_section.settings.contact_cta_text | default: 'Get Custom Quote' }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<script>
+// Enhanced JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Auto-play videos when in viewport
+  const videos = document.querySelectorAll('video');
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play();
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  videos.forEach(video => {
+    videoObserver.observe(video);
+  });
+
+  // Enhanced animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animated elements
+  const animatedElements = document.querySelectorAll('.capability-card, .industry-item, .trust-card, .gallery-item, .certification-card');
+  animatedElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+</script>
