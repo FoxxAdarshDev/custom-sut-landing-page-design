@@ -3322,27 +3322,26 @@
     .text-image-container-{{ forloop.index }} {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 var(--container-padding);
+      padding: 0 20px;
     }
 
     .text-image-grid-{{ forloop.index }} {
       display: grid;
-      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}50% 50%{% else %}50% 50%{% endif %};
-      gap: {{ block.settings.content_gap | default: 60 }}px;
-      align-items: center;
-      min-height: 500px;
+      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+      gap: 60px;
+      align-items: stretch;
+      min-height: 600px;
     }
 
     .text-image-content-{{ forloop.index }} {
       {% if block.settings.layout_direction == 'text_right' %}order: 2;{% else %}order: 1;{% endif %}
-      padding: 40px;
+      padding: 50px;
       background: var(--white);
       border-radius: var(--border-radius);
       box-shadow: 0 10px 40px rgba(0, 113, 185, 0.08);
       border: 1px solid var(--border-color);
       position: relative;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -3460,7 +3459,8 @@
       position: relative;
       display: block;
       width: 100%;
-      height: 400px;
+      height: 100%;
+      min-height: 500px;
       border-radius: {{ block.settings.image_border_radius | default: 16 }}px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
@@ -3532,7 +3532,7 @@
     @media (max-width: 1024px) {
       .text-image-grid-{{ forloop.index }} {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
         min-height: auto;
       }
 
@@ -3543,7 +3543,7 @@
 
       .text-image-content-{{ forloop.index }} {
         order: 1;
-        padding: 30px;
+        padding: 40px;
       }
 
       .text-image-visual-{{ forloop.index }} {
@@ -3551,21 +3551,21 @@
       }
 
       .text-image-visual-wrapper-{{ forloop.index }} {
-        height: 350px;
+        min-height: 400px;
       }
     }
 
     @media (max-width: 768px) {
       .text-image-container-{{ forloop.index }} {
-        padding: 0 15px;
+        padding: 0 20px;
       }
 
       .text-image-grid-{{ forloop.index }} {
-        gap: 30px;
+        gap: 40px;
       }
 
       .text-image-content-{{ forloop.index }} {
-        padding: 25px;
+        padding: 30px;
       }
 
       .text-image-heading-{{ forloop.index }} {
@@ -3586,43 +3586,43 @@
 
       .text-image-description-{{ forloop.index }} ul {
         margin: 20px 0;
-        padding: 15px;
+        padding: 20px;
       }
 
       .text-image-description-{{ forloop.index }} ul li {
         font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
-        padding-left: 30px;
-        margin-bottom: 12px;
+        padding-left: 35px;
+        margin-bottom: 15px;
       }
 
       .text-image-description-{{ forloop.index }} ul li::before {
-        width: 6px;
-        height: 6px;
-        left: 10px;
-        top: 10px;
+        width: 8px;
+        height: 8px;
+        left: 12px;
+        top: 12px;
         box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
       }
 
       .text-image-visual-wrapper-{{ forloop.index }} {
-        height: 280px;
+        min-height: 300px;
       }
 
       .text-image-caption-{{ forloop.index }} {
         font-size: {{ block.settings.image_caption_size_mobile | default: 12 }}px;
-        margin-top: 12px;
-        padding: 6px 12px;
+        margin-top: 15px;
+        padding: 8px 16px;
       }
 
       .image-expand-btn-{{ forloop.index }} {
-        width: 40px;
-        height: 40px;
-        bottom: 15px;
-        right: 15px;
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
       }
 
       .image-expand-btn-{{ forloop.index }} svg {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
       }
     }
   {% endfor %}
