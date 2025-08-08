@@ -5,6 +5,209 @@
   "class": "plastic-machining-section main-plastic-machining",
   "blocks": [
     {
+      "type": "services_overview_section",
+      "name": "Plastic Machining Services Overview",
+      "settings": [
+        {
+          "type": "text",
+          "id": "services_title",
+          "label": "Section Title",
+          "default": "Plastic Machining Services"
+        },
+        {
+          "type": "range",
+          "id": "services_title_size",
+          "label": "Title Font Size (Desktop)",
+          "min": 24,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 42
+        },
+        {
+          "type": "range",
+          "id": "services_title_size_mobile",
+          "label": "Title Font Size (Mobile)",
+          "min": 18,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "color",
+          "id": "services_title_color",
+          "label": "Title Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "textarea",
+          "id": "services_description",
+          "label": "Section Description",
+          "default": "At Foxx Life Sciences, we engineer the future of precision plastic components. As a leader in plastic machining, we deliver tailor-made solutions that power breakthroughs across biotechnology, pharmaceuticals, medical devices, and beyond. Our mission? To turn your most complex designs into high-performance realities—efficiently, sustainably, and flawlessly."
+        },
+        {
+          "type": "range",
+          "id": "services_description_size",
+          "label": "Description Font Size (Desktop)",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "services_description_size_mobile",
+          "label": "Description Font Size (Mobile)",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "color",
+          "id": "services_description_color",
+          "label": "Description Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "services_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "services_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "services_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "services_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 70
+        },
+        {
+          "type": "range",
+          "id": "services_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 70
+        },
+        {
+          "type": "range",
+          "id": "services_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "services_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "service_card",
+      "name": "Service Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "service_image",
+          "label": "Service Image"
+        },
+        {
+          "type": "text",
+          "id": "service_number",
+          "label": "Service Number/Value",
+          "default": "40,000"
+        },
+        {
+          "type": "text",
+          "id": "service_unit",
+          "label": "Service Unit",
+          "default": "sq/ft"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Machining and Assembly Facility"
+        },
+        {
+          "type": "color",
+          "id": "service_number_color",
+          "label": "Number Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "color",
+          "id": "service_title_color",
+          "label": "Title Color",
+          "default": "#333333"
+        }
+      ]
+    },
+    {
       "type": "hero_section",
       "name": "Hero Banner",
       "settings": [
@@ -2122,6 +2325,39 @@
       "name": "Plastic Machining",
       "blocks": [
         {
+          "type": "services_overview_section"
+        },
+        {
+          "type": "service_card",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M3,11H5A2,2 0 0,1 7,13V19A2,2 0 0,1 5,21H3A2,2 0 0,1 1,19V13A2,2 0 0,1 3,11M3,13V19H5V13H3M9,11H19A2,2 0 0,1 21,13V15H19V19A2,2 0 0,1 17,21H9A2,2 0 0,1 7,19V13A2,2 0 0,1 9,11M9,13V19H17V17H21V13H9Z'/></svg>",
+            "service_number": "40,000",
+            "service_unit": "sq/ft",
+            "service_title": "Machining and Assembly Facility"
+          }
+        },
+        {
+          "type": "service_card",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z'/></svg>",
+            "service_title": "ARBURG Injection Machines"
+          }
+        },
+        {
+          "type": "service_card",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/></svg>",
+            "service_title": "Advanced all-Electric Milacron Injection Machines"
+          }
+        },
+        {
+          "type": "service_card",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M5,3H7V5H5V10A2,2 0 0,1 3,8V5C3,3.89 3.9,3 5,3M19,3A2,2 0 0,1 21,5V8A2,2 0 0,1 19,10V5H17V3H19M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,7A1,1 0 0,0 11,8A1,1 0 0,0 12,9A1,1 0 0,0 13,8A1,1 0 0,0 12,7Z'/></svg>",
+            "service_title": "Blow Molding Machines"
+          }
+        },
+        {
           "type": "hero_section"
         },
         {
@@ -2596,6 +2832,217 @@
     margin: 0 auto;
     font-weight: 300;
     text-align: center;
+  }
+
+  /* Services Overview Section */
+  {% assign services_overview_block = section.blocks | where: "type", "services_overview_section" | first %}
+  {% if services_overview_block %}
+    .services-overview-section {
+      --section-padding-top-desktop: {{ services_overview_block.settings.services_padding_top_desktop | default: 100 }}px;
+      --section-padding-bottom-desktop: {{ services_overview_block.settings.services_padding_bottom_desktop | default: 100 }}px;
+      --section-padding-top-tablet: {{ services_overview_block.settings.services_padding_top_tablet | default: 70 }}px;
+      --section-padding-bottom-tablet: {{ services_overview_block.settings.services_padding_bottom_tablet | default: 70 }}px;
+      --section-padding-top-mobile: {{ services_overview_block.settings.services_padding_top_mobile | default: 50 }}px;
+      --section-padding-bottom-mobile: {{ services_overview_block.settings.services_padding_bottom_mobile | default: 50 }}px;
+      background-color: {{ services_overview_block.settings.services_bg_color | default: '#ffffff' }};
+    }
+
+    .services-overview-title {
+      font-size: {{ services_overview_block.settings.services_title_size | default: 42 }}px;
+      color: {{ services_overview_block.settings.services_title_color | default: '#0071b9' }};
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 1.2;
+    }
+
+    .services-overview-description {
+      font-size: {{ services_overview_block.settings.services_description_size | default: 16 }}px;
+      color: {{ services_overview_block.settings.services_description_color | default: '#333333' }};
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    @media (max-width: 768px) {
+      .services-overview-title {
+        font-size: {{ services_overview_block.settings.services_title_size_mobile | default: 28 }}px;
+        margin-bottom: 20px;
+      }
+
+      .services-overview-description {
+        font-size: {{ services_overview_block.settings.services_description_size_mobile | default: 14 }}px;
+        margin-bottom: 40px;
+      }
+    }
+  {% endif %}
+
+  .services-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 2px solid #e8f4f8;
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
+    border-color: var(--primary-color);
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: var(--transition);
+  }
+
+  .service-card-icon svg {
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+  }
+
+  .service-card-icon img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+  }
+
+  .service-card-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .service-card-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
+  }
+
+  .service-card:hover .service-card-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .service-card-number {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .service-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--text-dark);
+  }
+
+  /* Responsive Design for Service Cards */
+  @media (max-width: 1200px) {
+    .services-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      max-width: 800px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 100%;
+    }
+
+    .service-card {
+      padding: 30px 15px;
+      min-height: 180px;
+    }
+
+    .service-card-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    .service-card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .service-card-number {
+      font-size: 24px;
+    }
+
+    .service-card-title {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .service-card {
+      padding: 25px 15px;
+      min-height: 160px;
+    }
+
+    .service-card-number {
+      font-size: 22px;
+    }
+
+    .service-card-title {
+      font-size: 13px;
+    }
   }
 
   /* Capabilities Section */
@@ -4487,6 +4934,42 @@
 <!-- Render blocks in the order they appear in the theme customizer -->
 {% for block in section.blocks %}
   {% case block.type %}
+
+    {% when 'services_overview_section' %}
+      <section class="services-overview-section section-padding">
+        <div class="container">
+          <div class="text-center">
+            <h2 class="services-overview-title">{{ block.settings.services_title | default: 'Plastic Machining Services' }}</h2>
+            {% if block.settings.services_description != blank %}
+              <p class="services-overview-description">{{ block.settings.services_description }}</p>
+            {% endif %}
+          </div>
+
+          <div class="services-cards-grid">
+            {% for service_block in section.blocks %}
+              {% if service_block.type == 'service_card' %}
+                <div class="service-card">
+                  <div class="service-card-icon {% if service_block.settings.icon_type == 'image' %}service-card-icon-image{% endif %}">
+                    {% if service_block.settings.icon_type == 'image' and service_block.settings.service_image != blank %}
+                      <img src="{{ service_block.settings.service_image | img_url: '120x120' }}" alt="{{ service_block.settings.service_title }}" loading="lazy">
+                    {% elsif service_block.settings.svg_code != blank %}
+                      {{ service_block.settings.svg_code }}
+                    {% endif %}
+                  </div>
+                  
+                  <div class="service-card-number" style="color: {{ service_block.settings.service_number_color | default: '#0071b9' }};">
+                    {{ service_block.settings.service_number | default: '40,000' }}{% if service_block.settings.service_unit != blank %} {{ service_block.settings.service_unit }}{% endif %}
+                  </div>
+                  
+                  <h3 class="service-card-title" style="color: {{ service_block.settings.service_title_color | default: '#333333' }};">
+                    {{ service_block.settings.service_title | default: 'Machining and Assembly Facility' }}
+                  </h3>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </section>
 
     {% when 'hero_section' %}
       <section class="plastic-machining-hero section-padding" style="
