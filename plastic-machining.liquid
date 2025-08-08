@@ -4387,13 +4387,22 @@
           bottom: 0;
           z-index: 1;
           pointer-events: none;
-        "></div>
-        
-        <div class="hero-content" style="
-          position: relative;
-          z-index: 10;
-          pointer-events: auto;
         ">
+          <div class="hero-content" style="
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            max-width: 1400px;
+            width: 100%;
+            padding: 0 var(--container-padding);
+            margin: 0 auto;
+          ">
           <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
           <p class="hero-subtitle">{{ block.settings.hero_subtitle | default: 'Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing' }}</p>
 
