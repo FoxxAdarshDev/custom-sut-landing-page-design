@@ -49,26 +49,7 @@
           "label": "Background Color",
           "default": "#0071b9"
         },
-        {
-          "type": "header",
-          "content": "Overlay Settings"
-        },
-        {
-          "type": "color",
-          "id": "overlay_color",
-          "label": "Overlay Color",
-          "default": "#0071b9"
-        },
-        {
-          "type": "range",
-          "id": "overlay_opacity",
-          "label": "Overlay Opacity",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "default": 85
-        },
+        
         {
           "type": "header",
           "content": "Content Settings"
@@ -1246,26 +1227,7 @@
           "id": "walkthrough_background_video",
           "label": "Background Video URL (MP4)"
         },
-        {
-          "type": "header",
-          "content": "Overlay Settings"
-        },
-        {
-          "type": "color",
-          "id": "walkthrough_overlay_color",
-          "label": "Overlay Color",
-          "default": "#0071b9"
-        },
-        {
-          "type": "range",
-          "id": "walkthrough_overlay_opacity",
-          "label": "Overlay Opacity",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "default": 85
-        },
+        
         {
           "type": "header",
           "content": "Content Settings"
@@ -2181,16 +2143,7 @@
     z-index: 0;
   }
 
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
+  
 
   .hero-video-bg {
     position: absolute;
@@ -2827,16 +2780,7 @@
       z-index: 0;
     }
 
-    .walkthrough-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: {{ walkthrough_block.settings.walkthrough_overlay_color | default: '#0071b9' }};
-      opacity: {{ walkthrough_block.settings.walkthrough_overlay_opacity | default: 85 | divided_by: 100.0 }};
-      z-index: 1;
-    }
+    
 
     .walkthrough-section-title {
       font-size: {{ walkthrough_block.settings.walkthrough_title_size | default: 48 }}px;
@@ -3111,6 +3055,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+      {% else %}
+        background-color: #0071b9;
       {% endif %}
     ">
       
@@ -3120,23 +3066,17 @@
         </video>
       {% endif %}
 
-      {% comment %} Show overlay when image or video background is used and opacity is greater than 0 {% endcomment %}
-      {% if block.settings.background_type == 'image' or block.settings.background_type == 'video' %}
-        {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
-        {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
-        {% if overlay_opacity > 0 %}
-          <div class="hero-overlay" style="
-            background-color: {{ overlay_color }};
-            opacity: {{ overlay_opacity | divided_by: 100.0 }};
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-          "></div>
-        {% endif %}
-      {% endif %}
+      <div class="hero-overlay" style="
+        background-color: {{ block.settings.overlay_color | default: '#0071b9' }};
+        opacity: {{ block.settings.overlay_opacity | default: 85 | divided_by: 100.0 }};
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;
+      "></div>
 
       <div class="hero-content">
         <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
@@ -3349,7 +3289,19 @@
 <!-- Facility Walkthrough Section -->
 {% assign walkthrough_section = section.blocks | where: "type", "facility_walkthrough" | first %}
 {% if walkthrough_section %}
-  <section class="facility-walkthrough-section section-padding">
+  <section class="facility-walkthrough-section section-padding" style="
+    {% if walkthrough_section.settings.walkthrough_background_type == 'color' or walkthrough_section.settings.walkthrough_background_type == blank %}
+      background-color: {{ walkthrough_section.settings.walkthrough_bg_color | default: '#0071b9' }};
+    {% elsif walkthrough_section.settings.walkthrough_background_type == 'image' and walkthrough_section.settings.walkthrough_background_image != blank %}
+      background-image: url('{{ walkthrough_section.settings.walkthrough_background_image | img_url: '1920x' }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    {% else %}
+      background-color: #0071b9;
+    {% endif %}
+  ">
     
     {% if walkthrough_section.settings.walkthrough_background_type == 'video' and walkthrough_section.settings.walkthrough_background_video != blank %}
       <video class="walkthrough-video-bg" autoplay muted loop playsinline>
@@ -3357,9 +3309,17 @@
       </video>
     {% endif %}
 
-    {% if walkthrough_section.settings.walkthrough_overlay_opacity > 0 %}
-      <div class="walkthrough-overlay"></div>
-    {% endif %}
+    <div class="walkthrough-overlay" style="
+      background-color: {{ walkthrough_section.settings.walkthrough_overlay_color | default: '#0071b9' }};
+      opacity: {{ walkthrough_section.settings.walkthrough_overlay_opacity | default: 85 | divided_by: 100.0 }};
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+    "></div>
     
     <div class="container">
       <div class="walkthrough-content">
