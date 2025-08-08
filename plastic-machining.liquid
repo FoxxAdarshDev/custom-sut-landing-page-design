@@ -5350,8 +5350,9 @@
           </video>
         {% endif %}
 
+        <!-- Always show overlay -->
         <div class="walkthrough-overlay" style="
-          background: linear-gradient(135deg, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}e6 0%, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}b3 100%);
+          background: linear-gradient(135deg, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}cc 0%, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}99 100%);
           position: absolute;
           top: 0;
           left: 0;
@@ -5361,10 +5362,8 @@
           pointer-events: none;
         "></div>
 
-        <div class="container">
+        <div class="container" style="position: relative; z-index: 10;">
           <div class="walkthrough-content" style="
-            position: relative;
-            z-index: 10;
             text-align: center;
             width: 100%;
           ">
@@ -5388,10 +5387,12 @@
               margin-right: auto;
             ">{{ block.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
 
+            <!-- Always show video container if URL is provided -->
             {% if block.settings.walkthrough_cta_url != blank %}
               <div class="walkthrough-video-container" style="
-                margin: 40px auto 60px;
+                margin: 40px auto 40px;
                 max-width: 1000px;
+                width: 100%;
                 position: relative;
                 background: rgba(255, 255, 255, 0.95);
                 border-radius: 20px;
@@ -5420,36 +5421,38 @@
                       border-radius: 15px;
                     "
                     allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     loading="lazy">
                   </iframe>
                 </div>
               </div>
-            {% endif %}
 
-            {% if block.settings.walkthrough_cta_url != blank %}
-              <a href="{{ block.settings.walkthrough_cta_url }}" class="walkthrough-cta" style="
-                display: inline-flex;
-                align-items: center;
-                gap: 12px;
-                padding: 20px 40px;
-                background: rgba(255, 255, 255, 0.95);
-                color: var(--primary-color);
-                text-decoration: none;
-                border-radius: 50px;
-                font-weight: 700;
-                font-size: 18px;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
-                backdrop-filter: blur(10px);
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                text-transform: uppercase;
-                letter-spacing: 1px;
-              ">
-                {{ block.settings.walkthrough_cta_text | default: 'Start Virtual Tour' }}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </a>
+              <!-- Show CTA button below video -->
+              {% if block.settings.walkthrough_cta_text != blank %}
+                <a href="{{ block.settings.walkthrough_cta_url }}" class="walkthrough-cta" style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 12px;
+                  padding: 20px 40px;
+                  background: rgba(255, 255, 255, 0.95);
+                  color: {{ block.settings.walkthrough_bg_color | default: '#0071b9' }};
+                  text-decoration: none;
+                  border-radius: 50px;
+                  font-weight: 700;
+                  font-size: 18px;
+                  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+                  backdrop-filter: blur(10px);
+                  border: 2px solid rgba(255, 255, 255, 0.3);
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                ">
+                  {{ block.settings.walkthrough_cta_text | default: 'Start Virtual Tour' }}
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </a>
+              {% endif %}
             {% endif %}
           </div>
         </div>
