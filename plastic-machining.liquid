@@ -2379,6 +2379,21 @@
     filter: brightness(0) invert(1);
   }
 
+  .capability-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .capability-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
+  }
+
   .capability-card:hover .capability-icon {
     transform: scale(1.1) rotate(5deg);
   }
@@ -2466,6 +2481,36 @@
     width: 28px;
     height: 28px;
     filter: brightness(0) invert(1);
+  }
+
+  .industry-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .industry-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
+  }
+
+  .trust-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .trust-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
   }
 
   .industry-title {
@@ -3079,10 +3124,18 @@
       {% if block.settings.background_type == 'image' or block.settings.background_type == 'video' %}
         {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
         {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
-        <div class="hero-overlay" style="
-          background-color: {{ overlay_color }};
-          opacity: {{ overlay_opacity | divided_by: 100.0 }};
-        "></div>
+        {% if overlay_opacity > 0 %}
+          <div class="hero-overlay" style="
+            background-color: {{ overlay_color }};
+            opacity: {{ overlay_opacity | divided_by: 100.0 }};
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+          "></div>
+        {% endif %}
       {% endif %}
 
       <div class="hero-content">
@@ -3129,16 +3182,16 @@
         {% for block in section.blocks %}
           {% if block.type == 'capability_item' %}
             <div class="capability-card">
-              <div class="capability-icon">
+              <div class="capability-icon {% if block.settings.icon_type == 'image' %}capability-icon-image{% endif %}">
                 {% if block.settings.icon_type == 'image' and block.settings.capability_image != blank %}
-                  <img src="{{ block.settings.capability_image | img_url: '80x80' }}" alt="{{ block.settings.capability_title }}" loading="lazy">
+                  <img src="{{ block.settings.capability_image | img_url: '120x120' }}" alt="{{ block.settings.capability_title }}" loading="lazy">
                 {% elsif block.settings.svg_code != blank %}
                   {{ block.settings.svg_code }}
                 {% endif %}
               </div>
               <h3 class="capability-title">{{ block.settings.capability_title | default: 'CNC Plastic Machining' }}</h3>
               <p class="capability-description">{{ block.settings.capability_description | default: 'High-precision CNC machining for complex plastic components' }}</p>
-            </div>
+            </div></out str>
           {% endif %}
         {% endfor %}
       </div>
@@ -3159,9 +3212,9 @@
         {% for block in section.blocks %}
           {% if block.type == 'industry_item' %}
             <div class="industry-item">
-              <div class="industry-icon">
+              <div class="industry-icon {% if block.settings.icon_type == 'image' %}industry-icon-image{% endif %}">
                 {% if block.settings.icon_type == 'image' and block.settings.industry_image != blank %}
-                  <img src="{{ block.settings.industry_image | img_url: '80x80' }}" alt="{{ block.settings.industry_title }}" loading="lazy">
+                  <img src="{{ block.settings.industry_image | img_url: '120x120' }}" alt="{{ block.settings.industry_title }}" loading="lazy">
                 {% elsif block.settings.svg_code != blank %}
                   {{ block.settings.svg_code }}
                 {% endif %}
@@ -3191,9 +3244,9 @@
         {% for block in section.blocks %}
           {% if block.type == 'trust_item' %}
             <div class="trust-card">
-              <div class="capability-icon">
+              <div class="capability-icon {% if block.settings.icon_type == 'image' %}trust-icon-image{% endif %}">
                 {% if block.settings.icon_type == 'image' and block.settings.trust_image != blank %}
-                  <img src="{{ block.settings.trust_image | img_url: '80x80' }}" alt="{{ block.settings.trust_title }}" loading="lazy">
+                  <img src="{{ block.settings.trust_image | img_url: '120x120' }}" alt="{{ block.settings.trust_title }}" loading="lazy">
                 {% elsif block.settings.svg_code != blank %}
                   {{ block.settings.svg_code }}
                 {% endif %}
