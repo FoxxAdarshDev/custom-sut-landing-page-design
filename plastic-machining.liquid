@@ -2382,11 +2382,12 @@
       letter-spacing: -0.02em;
       margin-bottom: 24px;
       color: {{ hero_block.settings.hero_title_color | default: '#ffffff' }};
-      user-select: text;
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      pointer-events: auto;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      pointer-events: auto !important;
+      cursor: text;
     }
 
     .hero-subtitle {
@@ -2395,11 +2396,12 @@
       margin-bottom: 40px;
       color: {{ hero_block.settings.hero_subtitle_color | default: 'rgba(255, 255, 255, 0.9)' }};
       font-weight: 300;
-      user-select: text;
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      pointer-events: auto;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      pointer-events: auto !important;
+      cursor: text;
     }
 
     @media (max-width: 768px) {
