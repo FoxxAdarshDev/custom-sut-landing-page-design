@@ -3075,16 +3075,14 @@
         </video>
       {% endif %}
 
-      {% comment %} Show overlay only when image or video background is used {% endcomment %}
+      {% comment %} Show overlay when image or video background is used and opacity is greater than 0 {% endcomment %}
       {% if block.settings.background_type == 'image' or block.settings.background_type == 'video' %}
         {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
         {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
-        {% if overlay_opacity > 0 %}
-          <div class="hero-overlay" style="
-            background: {{ overlay_color }};
-            opacity: {{ overlay_opacity | divided_by: 100.0 }};
-          "></div>
-        {% endif %}
+        <div class="hero-overlay" style="
+          background-color: {{ overlay_color }};
+          opacity: {{ overlay_opacity | divided_by: 100.0 }};
+        "></div>
       {% endif %}
 
       <div class="hero-content">
