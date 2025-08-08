@@ -5,7 +5,7 @@
   "class": "plastic-machining-section main-plastic-machining",
   "blocks": [
     {
-      "type": "services_overview_section",
+      "type": "services_overview",
       "name": "Plastic Machining Services Overview",
       "settings": [
         {
@@ -2325,7 +2325,7 @@
       "name": "Plastic Machining",
       "blocks": [
         {
-          "type": "services_overview_section"
+          "type": "services_overview"
         },
         {
           "type": "service_card",
@@ -2835,7 +2835,7 @@
   }
 
   /* Services Overview Section */
-  {% assign services_overview_block = section.blocks | where: "type", "services_overview_section" | first %}
+  {% assign services_overview_block = section.blocks | where: "type", "services_overview" | first %}
   {% if services_overview_block %}
     .services-overview-section {
       --section-padding-top-desktop: {{ services_overview_block.settings.services_padding_top_desktop | default: 100 }}px;
@@ -4935,7 +4935,7 @@
 {% for block in section.blocks %}
   {% case block.type %}
 
-    {% when 'services_overview_section' %}
+    {% when 'services_overview' %}
       <section class="services-overview-section section-padding">
         <div class="container">
           <div class="text-center">
