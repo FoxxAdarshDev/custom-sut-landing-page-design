@@ -3284,13 +3284,16 @@
     justify-content: center !important;
     flex-shrink: 0 !important;
   }
+  .trust-multiple-images {
+    border:0px!important
+  }
 
   /* Multiple Images Display */
   .trust-multiple-images {
     flex-direction: column !important;
   }
 
-  .trust-card:hover .trust-multiple-images,
+  /* .trust-card:hover .trust-multiple-images, */
   .trust-card:hover .trust-icon-image,
   .trust-card:hover .capability-icon.trust-icon-image {
     transform: translateY(-2px);
@@ -3311,13 +3314,15 @@
   /* Show only first 4 images in a 2x2 grid */
   .trust-image-item {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
     background: rgba(0, 113, 185, 0.02);
     border-radius: 6px;
     padding: 3px;
+    padding:10px;
     border: 1px solid rgba(0, 113, 185, 0.08);
     display: flex;
+    border-radius:5px;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
@@ -3326,7 +3331,7 @@
   .trust-image-item:hover {
     transform: scale(1.05);
     border-color: var(--primary-color);
-    background: rgba(0, 113, 185, 0.05);
+    /* background: rgba(0, 113, 185, 0.05); */
   }
 
   .trust-image-item img {
