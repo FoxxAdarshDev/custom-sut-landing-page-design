@@ -2382,6 +2382,11 @@
       letter-spacing: -0.02em;
       margin-bottom: 24px;
       color: {{ hero_block.settings.hero_title_color | default: '#ffffff' }};
+      user-select: text;
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      pointer-events: auto;
     }
 
     .hero-subtitle {
@@ -2390,6 +2395,11 @@
       margin-bottom: 40px;
       color: {{ hero_block.settings.hero_subtitle_color | default: 'rgba(255, 255, 255, 0.9)' }};
       font-weight: 300;
+      user-select: text;
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      pointer-events: auto;
     }
 
     @media (max-width: 768px) {
@@ -2438,9 +2448,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-  }</old_str>
-
-
+  }
 
   .hero-video-bg {
     position: absolute;
@@ -2666,6 +2674,36 @@
     border-radius: 8px;
   }
 
+  .industry-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .industry-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
+  }
+
+  .trust-icon-image {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .trust-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 8px;
+  }
+
   .capability-card:hover .capability-icon {
     transform: scale(1.1) rotate(5deg);
   }
@@ -2774,36 +2812,6 @@
     width: 28px;
     height: 28px;
     filter: brightness(0) invert(1);
-  }
-
-  .industry-icon-image {
-    background: transparent !important;
-    padding: 0 !important;
-    width: 70px !important;
-    height: 70px !important;
-  }
-
-  .industry-icon-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    filter: none !important;
-    border-radius: 8px;
-  }
-
-  .trust-icon-image {
-    background: transparent !important;
-    padding: 0 !important;
-    width: 80px !important;
-    height: 80px !important;
-  }
-
-  .trust-icon-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    filter: none !important;
-    border-radius: 8px;
   }
 
   .industry-title {
@@ -4404,7 +4412,7 @@
         {% if block.settings.background_type == 'image' and block.settings.hero_background_image != blank %}
           </div>
         {% endif %}
-      </section></old_str>
+      </section>
 
     {% when 'text_image_block' %}
       <section class="text-image-block section-padding" style="
