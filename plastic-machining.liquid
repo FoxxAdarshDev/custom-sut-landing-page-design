@@ -3273,8 +3273,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     margin: 0 auto 24px;
     background: transparent;
     padding: 0;
@@ -3282,24 +3282,24 @@
 
   .trust-images-container {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 80px;
-    height: 80px;
+    max-width: 120px;
+    height: 120px;
     padding: 0;
   }
 
   .trust-image-item {
     flex-shrink: 0;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: var(--white);
-    border-radius: 8px;
-    padding: 4px;
-    box-shadow: 0 2px 8px rgba(0, 113, 185, 0.1);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0, 113, 185, 0.15);
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 113, 185, 0.1);
     display: flex;
@@ -3308,8 +3308,8 @@
   }
 
   .trust-image-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 113, 185, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0, 113, 185, 0.25);
     border-color: var(--primary-color);
   }
 
@@ -3317,45 +3317,81 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 4px;
+    border-radius: 6px;
+  }
+
+  /* Single image styling to match multiple images */
+  .trust-icon-image {
+    background: var(--white) !important;
+    padding: 6px !important;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 113, 185, 0.15) !important;
+    border: 1px solid rgba(0, 113, 185, 0.1) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .trust-card:hover .trust-icon-image {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0, 113, 185, 0.25) !important;
+    border-color: var(--primary-color) !important;
+  }
+
+  .trust-icon-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: none !important;
+    border-radius: 6px !important;
   }
 
   /* Responsive adjustments for trust images */
   @media (max-width: 768px) {
     .trust-multiple-images {
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
     }
     
     .trust-images-container {
-      gap: 6px;
-      max-width: 70px;
-      height: 70px;
+      gap: 8px;
+      max-width: 100px;
+      height: 100px;
     }
     
     .trust-image-item {
-      width: 30px;
-      height: 30px;
-      padding: 3px;
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+    }
+
+    .trust-icon-image {
+      width: 70px !important;
+      height: 70px !important;
     }
   }
 
   @media (max-width: 480px) {
     .trust-multiple-images {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
     }
     
     .trust-images-container {
-      gap: 5px;
-      max-width: 60px;
-      height: 60px;
+      gap: 6px;
+      max-width: 80px;
+      height: 80px;
     }
     
     .trust-image-item {
-      width: 25px;
-      height: 25px;
-      padding: 2px;
+      width: 35px;
+      height: 35px;
+      padding: 3px;
+    }
+
+    .trust-icon-image {
+      width: 60px !important;
+      height: 60px !important;
     }
   }
 
