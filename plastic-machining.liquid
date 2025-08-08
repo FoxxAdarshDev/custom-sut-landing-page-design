@@ -3306,327 +3306,322 @@
     }
   }
 
-  /* Text Image Block Section */
-  {% assign text_image_blocks = section.blocks | where: "type", "text_image_block" %}
-  {% for block in text_image_blocks %}
-    .text-image-block-{{ forloop.index }} {
-      --section-padding-top-desktop: {{ block.settings.text_image_padding_top_desktop | default: 80 }}px;
-      --section-padding-bottom-desktop: {{ block.settings.text_image_padding_bottom_desktop | default: 80 }}px;
-      --section-padding-top-tablet: {{ block.settings.text_image_padding_top_tablet | default: 60 }}px;
-      --section-padding-bottom-tablet: {{ block.settings.text_image_padding_bottom_tablet | default: 60 }}px;
-      --section-padding-top-mobile: {{ block.settings.text_image_padding_top_mobile | default: 40 }}px;
-      --section-padding-bottom-mobile: {{ block.settings.text_image_padding_bottom_mobile | default: 40 }}px;
-      background-color: {{ block.settings.block_bg_color | default: '#ffffff' }};
-    }
+  /* Text Image Block Section - Simplified and Fixed */
+  .text-image-block {
+    background-color: var(--white);
+    position: relative;
+  }
 
-    .text-image-container-{{ forloop.index }} {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+  .text-image-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
 
-    .text-image-grid-{{ forloop.index }} {
-      display: grid;
-      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
-      gap: {{ block.settings.content_gap | default: 60 }}px;
-      align-items: center;
+  .text-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 500px;
+  }
+
+  /* Layout Direction Control */
+  .text-image-grid.layout-text-right .text-image-content {
+    order: 2;
+  }
+
+  .text-image-grid.layout-text-right .text-image-visual {
+    order: 1;
+  }
+
+  .text-image-grid.layout-text-left .text-image-content {
+    order: 1;
+  }
+
+  .text-image-grid.layout-text-left .text-image-visual {
+    order: 2;
+  }
+
+  .text-image-content {
+    padding: 40px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(0, 113, 185, 0.08);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .text-image-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  .text-image-content:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
+    border-color: var(--primary-color);
+  }
+
+  .text-image-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .text-image-heading {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .text-image-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+  }
+
+  .text-image-description {
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  .text-image-description p {
+    margin-bottom: 20px;
+  }
+
+  .text-image-description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .text-image-description strong {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  /* Enhanced Bullet Points */
+  .text-image-description ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 24px 0;
+    background: rgba(0, 113, 185, 0.02);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .text-image-description ul li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .text-image-description ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  .text-image-description ul li::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: var(--bullet-size, 8px);
+    height: var(--bullet-size, 8px);
+    background: var(--bullet-color, var(--primary-color));
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0, 113, 185, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .text-image-description ul li:hover::before {
+    background: var(--accent-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 6px rgba(0, 113, 185, 0.3);
+  }
+
+  .text-image-visual-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .text-image-visual-wrapper:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 80px rgba(0, 113, 185, 0.25);
+  }
+
+  .text-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+  }
+
+  .text-image-visual-wrapper:hover .text-image-img {
+    transform: scale(1.05);
+  }
+
+  .image-expand-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 113, 185, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.4);
+    transition: all 0.3s ease;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .image-expand-btn:hover {
+    background: rgba(0, 90, 145, 0.95);
+    transform: scale(1.15);
+    box-shadow: 0 12px 35px rgba(0, 113, 185, 0.6);
+  }
+
+  .image-expand-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+
+  .text-image-caption {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--text-light);
+    font-style: italic;
+    font-weight: 500;
+    padding: 8px 16px;
+    background: rgba(0, 113, 185, 0.05);
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .text-image-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
       min-height: auto;
     }
 
-    .text-image-content-{{ forloop.index }} {
-      {% if block.settings.layout_direction == 'text_right' %}order: 2;{% else %}order: 1;{% endif %}
+    .text-image-content,
+    .text-image-visual {
+      order: initial !important;
+    }
+
+    .text-image-content {
+      order: 1 !important;
       padding: 40px;
-      background: var(--white);
-      border-radius: var(--border-radius);
-      box-shadow: 0 10px 40px rgba(0, 113, 185, 0.08);
-      border: 1px solid var(--border-color);
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: auto;
     }
 
-    .text-image-content-{{ forloop.index }}::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    .text-image-visual {
+      order: 2 !important;
     }
 
-    .text-image-content-{{ forloop.index }}:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
-      border-color: var(--primary-color);
+    .text-image-visual-wrapper {
+      min-height: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .text-image-container {
+      padding: 0 20px;
     }
 
-    .text-image-visual-{{ forloop.index }} {
-      {% if block.settings.layout_direction == 'text_right' %}order: 1;{% else %}order: 2;{% endif %}
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .text-image-grid {
+      gap: 40px;
     }
 
-    .text-image-heading-{{ forloop.index }} {
-      font-size: {{ block.settings.text_heading_size_desktop | default: 32 }}px;
-      line-height: {{ block.settings.text_heading_line_height | default: 1.3 }};
-      color: {{ block.settings.text_heading_color | default: '#0071b9' }};
-      font-weight: 700;
-      margin-bottom: 24px;
-      position: relative;
+    .text-image-content {
+      padding: 30px;
     }
 
-    .text-image-heading-{{ forloop.index }}::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-      border-radius: 2px;
-    }
-
-    .text-image-description-{{ forloop.index }} {
-      font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
-      line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
-      color: {{ block.settings.text_description_color | default: '#333333' }};
-      margin: 0;
-    }
-
-    .text-image-description-{{ forloop.index }} p {
+    .text-image-heading {
+      text-align: center;
       margin-bottom: 20px;
     }
 
-    .text-image-description-{{ forloop.index }} p:last-child {
-      margin-bottom: 0;
+    .text-image-heading::after {
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
     }
 
-    .text-image-description-{{ forloop.index }} strong {
-      color: {{ block.settings.text_heading_color | default: '#0071b9' }};
-      font-weight: 600;
-    }
-
-    /* Enhanced Bullet Points with Custom Design */
-    .text-image-description-{{ forloop.index }} ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 24px 0;
-      background: rgba(0, 113, 185, 0.02);
+    .text-image-description ul {
+      margin: 20px 0;
       padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid var(--primary-color);
     }
 
-    .text-image-description-{{ forloop.index }} ul li {
-      position: relative;
-      padding-left: 40px;
-      margin-bottom: 16px;
-      font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
-      line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
-      transition: all 0.3s ease;
+    .text-image-description ul li {
+      padding-left: 35px;
+      margin-bottom: 15px;
     }
 
-    .text-image-description-{{ forloop.index }} ul li:last-child {
-      margin-bottom: 0;
-    }
-
-    .text-image-description-{{ forloop.index }} ul li::before {
-      content: '';
-      position: absolute;
+    .text-image-description ul li::before {
+      width: 8px;
+      height: 8px;
       left: 12px;
       top: 12px;
-      width: {{ block.settings.bullet_size | default: 8 }}px;
-      height: {{ block.settings.bullet_size | default: 8 }}px;
-      background: {{ block.settings.bullet_color | default: '#0071b9' }};
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(0, 113, 185, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
     }
 
-    .text-image-description-{{ forloop.index }} ul li:hover::before {
-      background: var(--accent-color);
-      transform: scale(1.3);
-      box-shadow: 0 0 0 6px rgba(0, 113, 185, 0.3);
+    .text-image-visual-wrapper {
+      min-height: 300px;
     }
 
-    .text-image-visual-wrapper-{{ forloop.index }} {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 500px;
-      border-radius: {{ block.settings.image_border_radius | default: 16 }}px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    .text-image-caption {
+      margin-top: 15px;
+      padding: 8px 16px;
     }
 
-    .text-image-visual-wrapper-{{ forloop.index }}:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 30px 80px rgba(0, 113, 185, 0.25);
-    }
-
-    .text-image-img-{{ forloop.index }} {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-      cursor: pointer;
-    }
-
-    .text-image-visual-wrapper-{{ forloop.index }}:hover .text-image-img-{{ forloop.index }} {
-      transform: scale(1.05);
-    }
-
-    .image-expand-btn-{{ forloop.index }} {
-      position: absolute;
+    .image-expand-btn {
+      width: 45px;
+      height: 45px;
       bottom: 20px;
       right: 20px;
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 113, 185, 0.9);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 25px rgba(0, 113, 185, 0.4);
-      transition: all 0.3s ease;
-      z-index: 5;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
-    .image-expand-btn-{{ forloop.index }}:hover {
-      background: rgba(0, 90, 145, 0.95);
-      transform: scale(1.15);
-      box-shadow: 0 12px 35px rgba(0, 113, 185, 0.6);
+    .image-expand-btn svg {
+      width: 20px;
+      height: 20px;
     }
-
-    .image-expand-btn-{{ forloop.index }} svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    .text-image-caption-{{ forloop.index }} {
-      text-align: center;
-      margin-top: 16px;
-      font-size: {{ block.settings.image_caption_size_desktop | default: 14 }}px;
-      color: {{ block.settings.image_caption_color | default: '#666666' }};
-      font-style: italic;
-      font-weight: 500;
-      padding: 8px 16px;
-      background: rgba(0, 113, 185, 0.05);
-      border-radius: 20px;
-      display: inline-block;
-    }
-
-    @media (max-width: 1024px) {
-      .text-image-grid-{{ forloop.index }} {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        min-height: auto;
-      }
-
-      .text-image-content-{{ forloop.index }},
-      .text-image-visual-{{ forloop.index }} {
-        order: initial;
-      }
-
-      .text-image-content-{{ forloop.index }} {
-        order: 1;
-        padding: 40px;
-      }
-
-      .text-image-visual-{{ forloop.index }} {
-        order: 2;
-      }
-
-      .text-image-visual-wrapper-{{ forloop.index }} {
-        min-height: 400px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .text-image-container-{{ forloop.index }} {
-        padding: 0 20px;
-      }
-
-      .text-image-grid-{{ forloop.index }} {
-        gap: 40px;
-      }
-
-      .text-image-content-{{ forloop.index }} {
-        padding: 30px;
-      }
-
-      .text-image-heading-{{ forloop.index }} {
-        font-size: {{ block.settings.text_heading_size_mobile | default: 24 }}px;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .text-image-heading-{{ forloop.index }}::after {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-      }
-
-      .text-image-description-{{ forloop.index }} {
-        font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
-      }
-
-      .text-image-description-{{ forloop.index }} ul {
-        margin: 20px 0;
-        padding: 20px;
-      }
-
-      .text-image-description-{{ forloop.index }} ul li {
-        font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
-        padding-left: 35px;
-        margin-bottom: 15px;
-      }
-
-      .text-image-description-{{ forloop.index }} ul li::before {
-        width: 8px;
-        height: 8px;
-        left: 12px;
-        top: 12px;
-        box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
-      }
-
-      .text-image-visual-wrapper-{{ forloop.index }} {
-        min-height: 300px;
-      }
-
-      .text-image-caption-{{ forloop.index }} {
-        font-size: {{ block.settings.image_caption_size_mobile | default: 12 }}px;
-        margin-top: 15px;
-        padding: 8px 16px;
-      }
-
-      .image-expand-btn-{{ forloop.index }} {
-        width: 45px;
-        height: 45px;
-        bottom: 20px;
-        right: 20px;
-      }
-
-      .image-expand-btn-{{ forloop.index }} svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  {% endfor %}
+  }
 
   /* Image Popup Modal */
   .image-popup-modal {
@@ -4007,36 +4002,54 @@
       </section>
 
     {% when 'text_image_block' %}
-      {% assign text_image_counter = forloop.index %}
-      <section class="text-image-block-{{ text_image_counter }} section-padding">
-        <div class="text-image-container-{{ text_image_counter }}">
-          <div class="text-image-grid-{{ text_image_counter }}">
+      <section class="text-image-block section-padding" style="
+        --section-padding-top-desktop: {{ block.settings.text_image_padding_top_desktop | default: 80 }}px;
+        --section-padding-bottom-desktop: {{ block.settings.text_image_padding_bottom_desktop | default: 80 }}px;
+        --section-padding-top-tablet: {{ block.settings.text_image_padding_top_tablet | default: 60 }}px;
+        --section-padding-bottom-tablet: {{ block.settings.text_image_padding_bottom_tablet | default: 60 }}px;
+        --section-padding-top-mobile: {{ block.settings.text_image_padding_top_mobile | default: 40 }}px;
+        --section-padding-bottom-mobile: {{ block.settings.text_image_padding_bottom_mobile | default: 40 }}px;
+        background-color: {{ block.settings.block_bg_color | default: '#ffffff' }};
+        --content-gap: {{ block.settings.content_gap | default: 60 }}px;
+      ">
+        <div class="text-image-container">
+          <div class="text-image-grid layout-{{ block.settings.layout_direction | default: 'text-left' }}" style="gap: var(--content-gap);">
             <!-- Text Content -->
-            <div class="text-image-content-{{ text_image_counter }}">
+            <div class="text-image-content">
               {% if block.settings.text_heading != blank %}
-                <h2 class="text-image-heading-{{ text_image_counter }}">{{ block.settings.text_heading }}</h2>
+                <h2 class="text-image-heading" style="
+                  font-size: {{ block.settings.text_heading_size_desktop | default: 32 }}px;
+                  line-height: {{ block.settings.text_heading_line_height | default: 1.3 }};
+                  color: {{ block.settings.text_heading_color | default: '#0071b9' }};
+                ">{{ block.settings.text_heading }}</h2>
               {% endif %}
 
               {% if block.settings.text_description != blank %}
-                <div class="text-image-description-{{ text_image_counter }}">
+                <div class="text-image-description" style="
+                  font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
+                  line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
+                  color: {{ block.settings.text_description_color | default: '#333333' }};
+                  --bullet-color: {{ block.settings.bullet_color | default: '#0071b9' }};
+                  --bullet-size: {{ block.settings.bullet_size | default: 8 }}px;
+                ">
                   {{ block.settings.text_description }}
                 </div>
               {% endif %}
             </div>
 
             <!-- Image Content -->
-            <div class="text-image-visual-{{ text_image_counter }}">
+            <div class="text-image-visual">
               {% if block.settings.block_image != blank %}
-                <div class="text-image-visual-wrapper-{{ text_image_counter }}">
+                <div class="text-image-visual-wrapper" style="border-radius: {{ block.settings.image_border_radius | default: 16 }}px;">
                   <img
                     src="{{ block.settings.block_image | img_url: '800x600' }}"
                     alt="{{ block.settings.image_caption | default: block.settings.text_heading }}"
-                    class="text-image-img-{{ text_image_counter }}"
+                    class="text-image-img"
                     loading="lazy"
                     onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')"
                   >
 
-                  <button class="image-expand-btn-{{ text_image_counter }}" onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')">
+                  <button class="image-expand-btn" onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')">
                     <svg viewBox="0 0 24 24">
                       <path d="M19,19H5V5H12V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3"/>
                     </svg>
@@ -4044,12 +4057,30 @@
                 </div>
 
                 {% if block.settings.image_caption != blank %}
-                  <p class="text-image-caption-{{ text_image_counter }}">{{ block.settings.image_caption }}</p>
+                  <p class="text-image-caption" style="
+                    font-size: {{ block.settings.image_caption_size_desktop | default: 14 }}px;
+                    color: {{ block.settings.image_caption_color | default: '#666666' }};
+                  ">{{ block.settings.image_caption }}</p>
                 {% endif %}
               {% endif %}
             </div>
           </div>
         </div>
+
+        <!-- Mobile-specific styles -->
+        <style>
+          @media (max-width: 768px) {
+            .text-image-heading {
+              font-size: {{ block.settings.text_heading_size_mobile | default: 24 }}px !important;
+            }
+            .text-image-description {
+              font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px !important;
+            }
+            .text-image-caption {
+              font-size: {{ block.settings.image_caption_size_mobile | default: 12 }}px !important;
+            }
+          }
+        </style>
       </section>
 
     {% when 'capabilities_section' %}
