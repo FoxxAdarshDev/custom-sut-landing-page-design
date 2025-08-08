@@ -1629,7 +1629,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 1;
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
@@ -1646,7 +1646,7 @@
 
   .hero-content {
     position: relative;
-    z-index: 20;
+    z-index: 10;
     max-width: 1400px;
     width: 100%;
     padding: 0 var(--container-padding);
@@ -2359,11 +2359,14 @@
         </video>
       {% endif %}
 
-      {% comment %} Show overlay when opacity is greater than 0 or when background image is present {% endcomment %}
+      {% comment %} Show overlay when background is image or when opacity is greater than 0 {% endcomment %}
       {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
-      {% if overlay_opacity > 0 %}
+      {% if block.settings.background_type == 'image' or overlay_opacity > 0 %}
         <div class="hero-overlay" style="
-          background: linear-gradient(135deg, {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | divided_by: 100.0 }}, {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | times: 0.9 | divided_by: 100.0 }});
+          background: linear-gradient(135deg, 
+            {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | divided_by: 100.0 }}, 
+            {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | times: 0.8 | divided_by: 100.0 }}
+          );
         "></div>
       {% endif %}
 
