@@ -100,6 +100,30 @@
           "default": 32
         },
         {
+          "type": "range",
+          "id": "hero_title_line_height",
+          "label": "Title Line Height (Desktop)",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.1
+        },
+        {
+          "type": "range",
+          "id": "hero_title_line_height_mobile",
+          "label": "Title Line Height (Mobile)",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.2
+        },
+        {
+          "type": "color",
+          "id": "hero_title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
           "type": "textarea",
           "id": "hero_subtitle",
           "label": "Hero Subtitle",
@@ -124,6 +148,30 @@
           "step": 1,
           "unit": "px",
           "default": 16
+        },
+        {
+          "type": "range",
+          "id": "hero_subtitle_line_height",
+          "label": "Subtitle Line Height (Desktop)",
+          "min": 1.0,
+          "max": 2.5,
+          "step": 0.1,
+          "default": 1.6
+        },
+        {
+          "type": "range",
+          "id": "hero_subtitle_line_height_mobile",
+          "label": "Subtitle Line Height (Mobile)",
+          "min": 1.0,
+          "max": 2.5,
+          "step": 0.1,
+          "default": 1.5
+        },
+        {
+          "type": "color",
+          "id": "hero_subtitle_color",
+          "label": "Subtitle Color",
+          "default": "rgba(255, 255, 255, 0.9)"
         },
         {
           "type": "url",
@@ -1159,6 +1207,70 @@
       "name": "Facility Walkthrough",
       "settings": [
         {
+          "type": "header",
+          "content": "Background Settings"
+        },
+        {
+          "type": "select",
+          "id": "walkthrough_background_type",
+          "label": "Background Type",
+          "default": "color",
+          "options": [
+            {
+              "value": "color",
+              "label": "Color"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_bg_color",
+          "label": "Background Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "image_picker",
+          "id": "walkthrough_background_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "walkthrough_background_video",
+          "label": "Background Video URL (MP4)"
+        },
+        {
+          "type": "header",
+          "content": "Overlay Settings"
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 85
+        },
+        {
+          "type": "header",
+          "content": "Content Settings"
+        },
+        {
           "type": "text",
           "id": "walkthrough_title",
           "label": "Section Title",
@@ -1185,32 +1297,78 @@
           "default": 32
         },
         {
+          "type": "range",
+          "id": "walkthrough_title_line_height",
+          "label": "Title Line Height (Desktop)",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.2
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_title_line_height_mobile",
+          "label": "Title Line Height (Mobile)",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.2
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
           "type": "textarea",
           "id": "walkthrough_subtitle",
           "label": "Section Subtitle",
           "default": "Take a virtual tour of our state-of-the-art plastic machining facilities."
         },
         {
-          "type": "color",
-          "id": "walkthrough_bg_color",
-          "label": "Background Color",
-          "default": "#0071b9"
-        },
-        {
-          "type": "color",
-          "id": "walkthrough_overlay_color",
-          "label": "Overlay Color",
-          "default": "#0071b9"
+          "type": "range",
+          "id": "walkthrough_subtitle_size",
+          "label": "Subtitle Font Size (Desktop)",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 20
         },
         {
           "type": "range",
-          "id": "walkthrough_overlay_opacity",
-          "label": "Overlay Opacity",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "default": 85
+          "id": "walkthrough_subtitle_size_mobile",
+          "label": "Subtitle Font Size (Mobile)",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_subtitle_line_height",
+          "label": "Subtitle Line Height (Desktop)",
+          "min": 1.0,
+          "max": 2.5,
+          "step": 0.1,
+          "default": 1.6
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_subtitle_line_height_mobile",
+          "label": "Subtitle Line Height (Mobile)",
+          "min": 1.0,
+          "max": 2.5,
+          "step": 0.1,
+          "default": 1.5
+        },
+        {
+          "type": "color",
+          "id": "walkthrough_subtitle_color",
+          "label": "Subtitle Color",
+          "default": "rgba(255, 255, 255, 0.9)"
         },
         {
           "type": "url",
@@ -1286,6 +1444,298 @@
           "step": 5,
           "unit": "px",
           "default": 60
+        }
+      ]
+    },
+    {
+      "type": "content_block",
+      "name": "Content Block",
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout_type",
+          "label": "Layout Type",
+          "default": "two_column",
+          "options": [
+            {
+              "value": "two_column",
+              "label": "Two Column"
+            },
+            {
+              "value": "single_column",
+              "label": "Single Column"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Left Column / Main Content"
+        },
+        {
+          "type": "text",
+          "id": "left_title",
+          "label": "Left Column Title",
+          "default": "Plastic machining services - Unlimited processing possibilities"
+        },
+        {
+          "type": "range",
+          "id": "left_title_size",
+          "label": "Left Title Font Size",
+          "min": 18,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "left_title_line_height",
+          "label": "Left Title Line Height",
+          "min": 18,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "color",
+          "id": "left_title_color",
+          "label": "Left Title Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "richtext",
+          "id": "left_content",
+          "label": "Left Column Content",
+          "default": "<p>Currently for our plastic machining services we have, among others, more than:</p><ul><li>200 CNC milling machines</li><li>150 CNC lathes</li><li>15 automatic profiling machines</li><li>and a wide variety of profile extruders with over 500 Tools</li></ul>"
+        },
+        {
+          "type": "range",
+          "id": "left_content_size",
+          "label": "Left Content Font Size",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "left_content_line_height",
+          "label": "Left Content Line Height",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "color",
+          "id": "left_content_color",
+          "label": "Left Content Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "left_icon_type",
+          "label": "Left Column Icon Type",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "left_svg_code",
+          "label": "Left Column SVG Code"
+        },
+        {
+          "type": "image_picker",
+          "id": "left_image",
+          "label": "Left Column Image"
+        },
+        {
+          "type": "header",
+          "content": "Right Column / Secondary Content"
+        },
+        {
+          "type": "text",
+          "id": "right_title",
+          "label": "Right Column Title",
+          "default": "Custom machined parts - Understanding your application"
+        },
+        {
+          "type": "range",
+          "id": "right_title_size",
+          "label": "Right Title Font Size",
+          "min": 18,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "right_title_line_height",
+          "label": "Right Title Line Height",
+          "min": 18,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "color",
+          "id": "right_title_color",
+          "label": "Right Title Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "richtext",
+          "id": "right_content",
+          "label": "Right Column Content",
+          "default": "<p>Every industry has different requirements for material and products. For this reason, we analyse in-depth the specific needs in the various industries. Our goals is to develop and machine plastics parts that are perfect fit for the respective intended applications.</p>"
+        },
+        {
+          "type": "range",
+          "id": "right_content_size",
+          "label": "Right Content Font Size",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "right_content_line_height",
+          "label": "Right Content Line Height",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "color",
+          "id": "right_content_color",
+          "label": "Right Content Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "right_icon_type",
+          "label": "Right Column Icon Type",
+          "default": "image",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "right_svg_code",
+          "label": "Right Column SVG Code"
+        },
+        {
+          "type": "image_picker",
+          "id": "right_image",
+          "label": "Right Column Image"
+        },
+        {
+          "type": "header",
+          "content": "Section Settings"
+        },
+        {
+          "type": "color",
+          "id": "content_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "content_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "content_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "content_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "content_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "content_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "content_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 40
         }
       ]
     },
@@ -1595,6 +2045,17 @@
           }
         },
         {
+          "type": "content_block",
+          "settings": {
+            "layout_type": "two_column",
+            "left_title": "Plastic machining services - Unlimited processing possibilities",
+            "left_content": "<p>Currently for our plastic machining services we have, among others, more than:</p><ul><li>200 CNC milling machines</li><li>150 CNC lathes</li><li>15 automatic profiling machines</li><li>and a wide variety of profile extruders with over 500 Tools</li></ul><p>Combined components: The workflows are also designed for the production and assembling of complete assembly groups.</p>",
+            "right_title": "Custom machined parts - Understanding your application",
+            "right_content": "<p>Every industry has different requirements for material and products. For this reason, we analyse in-depth the specific needs in the various industries. Our goals is to develop and machine plastics parts that are perfect fit for the respective intended applications.</p><p>Our experts are here to assist you with all aspects of your Project. We would be delighted to visit you and examine in Detail your challenging task on site.</p>",
+            "right_icon_type": "image"
+          }
+        },
+        {
           "type": "facility_walkthrough"
         },
         {
@@ -1670,32 +2131,31 @@
 
     .hero-title {
       font-size: {{ hero_block.settings.hero_title_size | default: 64 }}px;
-      line-height: 1.1;
+      line-height: {{ hero_block.settings.hero_title_line_height | default: 1.1 }};
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       margin-bottom: 24px;
-      background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: {{ hero_block.settings.hero_title_color | default: '#ffffff' }};
     }
 
     .hero-subtitle {
       font-size: {{ hero_block.settings.hero_subtitle_size | default: 20 }}px;
-      line-height: 1.6;
+      line-height: {{ hero_block.settings.hero_subtitle_line_height | default: 1.6 }};
       margin-bottom: 40px;
-      color: rgba(255, 255, 255, 0.9);
+      color: {{ hero_block.settings.hero_subtitle_color | default: 'rgba(255, 255, 255, 0.9)' }};
       font-weight: 300;
     }
 
     @media (max-width: 768px) {
       .hero-title {
         font-size: {{ hero_block.settings.hero_title_size_mobile | default: 32 }}px;
+        line-height: {{ hero_block.settings.hero_title_line_height_mobile | default: 1.2 }};
       }
       
       .hero-subtitle {
         font-size: {{ hero_block.settings.hero_subtitle_size_mobile | default: 16 }}px;
+        line-height: {{ hero_block.settings.hero_subtitle_line_height_mobile | default: 1.5 }};
       }
     }
   {% endif %}
@@ -2298,9 +2758,28 @@
       --section-padding-bottom-tablet: {{ walkthrough_block.settings.walkthrough_padding_bottom_tablet | default: 80 }}px;
       --section-padding-top-mobile: {{ walkthrough_block.settings.walkthrough_padding_top_mobile | default: 60 }}px;
       --section-padding-bottom-mobile: {{ walkthrough_block.settings.walkthrough_padding_bottom_mobile | default: 60 }}px;
-      background-color: {{ walkthrough_block.settings.walkthrough_bg_color | default: '#0071b9' }};
-      color: var(--white);
       position: relative;
+      overflow: hidden;
+      {% if walkthrough_block.settings.walkthrough_background_type == 'color' or walkthrough_block.settings.walkthrough_background_type == blank %}
+        background-color: {{ walkthrough_block.settings.walkthrough_bg_color | default: '#0071b9' }};
+      {% elsif walkthrough_block.settings.walkthrough_background_type == 'image' and walkthrough_block.settings.walkthrough_background_image != blank %}
+        background-image: url('{{ walkthrough_block.settings.walkthrough_background_image | img_url: '1920x' }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      {% endif %}
+      color: var(--white);
+    }
+
+    .walkthrough-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
 
     .walkthrough-overlay {
@@ -2311,17 +2790,32 @@
       bottom: 0;
       background-color: {{ walkthrough_block.settings.walkthrough_overlay_color | default: '#0071b9' }};
       opacity: {{ walkthrough_block.settings.walkthrough_overlay_opacity | default: 85 | divided_by: 100.0 }};
+      z-index: 1;
     }
 
     .walkthrough-section-title {
       font-size: {{ walkthrough_block.settings.walkthrough_title_size | default: 48 }}px;
+      line-height: {{ walkthrough_block.settings.walkthrough_title_line_height | default: 1.2 }};
+      color: {{ walkthrough_block.settings.walkthrough_title_color | default: '#ffffff' }};
       font-weight: 800;
       text-align: center;
+    }
+
+    .walkthrough-subtitle {
+      font-size: {{ walkthrough_block.settings.walkthrough_subtitle_size | default: 20 }}px;
+      line-height: {{ walkthrough_block.settings.walkthrough_subtitle_line_height | default: 1.6 }};
+      color: {{ walkthrough_block.settings.walkthrough_subtitle_color | default: 'rgba(255, 255, 255, 0.9)' }};
     }
 
     @media (max-width: 768px) {
       .walkthrough-section-title {
         font-size: {{ walkthrough_block.settings.walkthrough_title_size_mobile | default: 32 }}px;
+        line-height: {{ walkthrough_block.settings.walkthrough_title_line_height_mobile | default: 1.2 }};
+      }
+      
+      .walkthrough-subtitle {
+        font-size: {{ walkthrough_block.settings.walkthrough_subtitle_size_mobile | default: 16 }}px;
+        line-height: {{ walkthrough_block.settings.walkthrough_subtitle_line_height_mobile | default: 1.5 }};
       }
     }
   {% endif %}
@@ -2452,6 +2946,100 @@
     }
   }
 
+  /* Content Block Section */
+  {% assign content_block = section.blocks | where: "type", "content_block" | first %}
+  {% if content_block %}
+    .content-block-section {
+      --section-padding-top-desktop: {{ content_block.settings.content_padding_top_desktop | default: 80 }}px;
+      --section-padding-bottom-desktop: {{ content_block.settings.content_padding_bottom_desktop | default: 80 }}px;
+      --section-padding-top-tablet: {{ content_block.settings.content_padding_top_tablet | default: 60 }}px;
+      --section-padding-bottom-tablet: {{ content_block.settings.content_padding_bottom_tablet | default: 60 }}px;
+      --section-padding-top-mobile: {{ content_block.settings.content_padding_top_mobile | default: 40 }}px;
+      --section-padding-bottom-mobile: {{ content_block.settings.content_padding_bottom_mobile | default: 40 }}px;
+      background-color: {{ content_block.settings.content_bg_color | default: '#ffffff' }};
+    }
+
+    .content-block-grid {
+      display: grid;
+      grid-template-columns: {% if content_block.settings.layout_type == 'single_column' %}1fr{% else %}1fr 1fr{% endif %};
+      gap: 40px;
+      align-items: start;
+    }
+
+    .content-block-column {
+      padding: 20px;
+    }
+
+    .content-block-title {
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .content-block-title.left-title {
+      font-size: {{ content_block.settings.left_title_size | default: 24 }}px;
+      line-height: {{ content_block.settings.left_title_line_height | default: 30 }}px;
+      color: {{ content_block.settings.left_title_color | default: '#0071b9' }};
+    }
+
+    .content-block-title.right-title {
+      font-size: {{ content_block.settings.right_title_size | default: 24 }}px;
+      line-height: {{ content_block.settings.right_title_line_height | default: 30 }}px;
+      color: {{ content_block.settings.right_title_color | default: '#0071b9' }};
+    }
+
+    .content-block-content.left-content {
+      font-size: {{ content_block.settings.left_content_size | default: 16 }}px;
+      line-height: {{ content_block.settings.left_content_line_height | default: 24 }}px;
+      color: {{ content_block.settings.left_content_color | default: '#000000' }};
+    }
+
+    .content-block-content.right-content {
+      font-size: {{ content_block.settings.right_content_size | default: 16 }}px;
+      line-height: {{ content_block.settings.right_content_line_height | default: 24 }}px;
+      color: {{ content_block.settings.right_content_color | default: '#000000' }};
+    }
+
+    .content-block-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content-block-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    .content-block-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .content-block-image {
+      margin-bottom: 20px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    .content-block-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .content-block-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  {% endif %}
+
   /* Print Styles */
   @media print {
     .plastic-machining-hero {
@@ -2487,13 +3075,17 @@
         </video>
       {% endif %}
 
-      {% comment %} Always show overlay with proper opacity control {% endcomment %}
-      {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
-      {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
-      <div class="hero-overlay" style="
-        background: {{ overlay_color }};
-        opacity: {{ overlay_opacity | divided_by: 100.0 }};
-      "></div>
+      {% comment %} Show overlay only when image or video background is used {% endcomment %}
+      {% if block.settings.background_type == 'image' or block.settings.background_type == 'video' %}
+        {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
+        {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
+        {% if overlay_opacity > 0 %}
+          <div class="hero-overlay" style="
+            background: {{ overlay_color }};
+            opacity: {{ overlay_opacity | divided_by: 100.0 }};
+          "></div>
+        {% endif %}
+      {% endif %}
 
       <div class="hero-content">
         <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
@@ -2707,6 +3299,13 @@
 {% assign walkthrough_section = section.blocks | where: "type", "facility_walkthrough" | first %}
 {% if walkthrough_section %}
   <section class="facility-walkthrough-section section-padding">
+    
+    {% if walkthrough_section.settings.walkthrough_background_type == 'video' and walkthrough_section.settings.walkthrough_background_video != blank %}
+      <video class="walkthrough-video-bg" autoplay muted loop playsinline>
+        <source src="{{ walkthrough_section.settings.walkthrough_background_video }}" type="video/mp4">
+      </video>
+    {% endif %}
+
     {% if walkthrough_section.settings.walkthrough_overlay_opacity > 0 %}
       <div class="walkthrough-overlay"></div>
     {% endif %}
@@ -2725,6 +3324,65 @@
     </div>
   </section>
 {% endif %}
+
+<!-- Content Block Section -->
+{% for block in section.blocks %}
+  {% if block.type == 'content_block' %}
+    <section class="content-block-section section-padding">
+      <div class="container">
+        <div class="content-block-grid">
+          <!-- Left Column -->
+          <div class="content-block-column">
+            {% if block.settings.left_icon_type == 'svg' and block.settings.left_svg_code != blank %}
+              <div class="content-block-icon">
+                {{ block.settings.left_svg_code }}
+              </div>
+            {% elsif block.settings.left_icon_type == 'image' and block.settings.left_image != blank %}
+              <div class="content-block-image">
+                <img src="{{ block.settings.left_image | img_url: '400x300' }}" alt="{{ block.settings.left_title }}" loading="lazy">
+              </div>
+            {% endif %}
+            
+            {% if block.settings.left_title != blank %}
+              <h3 class="content-block-title left-title">{{ block.settings.left_title }}</h3>
+            {% endif %}
+            
+            {% if block.settings.left_content != blank %}
+              <div class="content-block-content left-content">
+                {{ block.settings.left_content }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Right Column -->
+          {% if block.settings.layout_type == 'two_column' %}
+            <div class="content-block-column">
+              {% if block.settings.right_icon_type == 'svg' and block.settings.right_svg_code != blank %}
+                <div class="content-block-icon">
+                  {{ block.settings.right_svg_code }}
+                </div>
+              {% elsif block.settings.right_icon_type == 'image' and block.settings.right_image != blank %}
+                <div class="content-block-image">
+                  <img src="{{ block.settings.right_image | img_url: '400x300' }}" alt="{{ block.settings.right_title }}" loading="lazy">
+                </div>
+              {% endif %}
+              
+              {% if block.settings.right_title != blank %}
+                <h3 class="content-block-title right-title">{{ block.settings.right_title }}</h3>
+              {% endif %}
+              
+              {% if block.settings.right_content != blank %}
+                <div class="content-block-content right-content">
+                  {{ block.settings.right_content }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endfor %}
 
 <!-- Contact Section -->
 {% assign contact_section = section.blocks | where: "type", "contact_section" | first %}
