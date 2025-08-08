@@ -242,7 +242,7 @@
           "max": 64,
           "step": 2,
           "unit": "px",
-          "default": 48
+          "default": 38
         },
         {
           "type": "range",
@@ -252,13 +252,85 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 32
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "capabilities_title_line_height",
+          "label": "Title Line Height (Desktop)",
+          "min": 20,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 46
+        },
+        {
+          "type": "range",
+          "id": "capabilities_title_line_height_mobile",
+          "label": "Title Line Height (Mobile)",
+          "min": 20,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 34
+        },
+        {
+          "type": "color",
+          "id": "capabilities_title_color",
+          "label": "Title Color",
+          "default": "#0071b9"
         },
         {
           "type": "textarea",
           "id": "capabilities_subtitle",
           "label": "Section Subtitle",
           "default": "Comprehensive plastic machining solutions for your most demanding applications."
+        },
+        {
+          "type": "range",
+          "id": "capabilities_subtitle_size",
+          "label": "Subtitle Font Size (Desktop)",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "capabilities_subtitle_size_mobile",
+          "label": "Subtitle Font Size (Mobile)",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "capabilities_subtitle_line_height",
+          "label": "Subtitle Line Height (Desktop)",
+          "min": 16,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 29
+        },
+        {
+          "type": "range",
+          "id": "capabilities_subtitle_line_height_mobile",
+          "label": "Subtitle Line Height (Mobile)",
+          "min": 16,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 26
+        },
+        {
+          "type": "color",
+          "id": "capabilities_subtitle_color",
+          "label": "Subtitle Color",
+          "default": "rgba(0, 113, 185, 0.8)"
         },
         {
           "type": "color",
@@ -395,7 +467,7 @@
           "max": 64,
           "step": 2,
           "unit": "px",
-          "default": 48
+          "default": 38
         },
         {
           "type": "range",
@@ -405,7 +477,33 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 32
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "industries_title_line_height",
+          "label": "Title Line Height (Desktop)",
+          "min": 20,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 46
+        },
+        {
+          "type": "range",
+          "id": "industries_title_line_height_mobile",
+          "label": "Title Line Height (Mobile)",
+          "min": 20,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 34
+        },
+        {
+          "type": "color",
+          "id": "industries_title_color",
+          "label": "Title Color",
+          "default": "#0071b9"
         },
         {
           "type": "color",
@@ -1699,23 +1797,40 @@
     box-shadow: var(--shadow-heavy);
   }
 
-  /* Section Title Styling (inspired by about-us.liquid) */
-  .section-title {
+  /* Consistent Section Title Styling */
+  .tv-section-title {
+    font-weight: 800;
+    color: #0071b9;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px rgba(0, 113, 185, 0.3);
     position: relative;
     display: inline-block;
-    margin-bottom: 24px;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
   }
 
-  .section-title::after {
+  .tv-section-title::before {
     content: '';
     position: absolute;
-    bottom: -12px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 100px;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(90deg, transparent, #0071b9, transparent);
     border-radius: 2px;
+  }
+
+  .tv-section-subtitle {
+    color: rgba(0, 113, 185, 0.8);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+    text-align: center;
   }
 
   /* Capabilities Section */
@@ -1732,14 +1847,26 @@
     }
 
     .capabilities-title {
-      font-size: {{ capabilities_block.settings.capabilities_title_size | default: 48 }}px;
-      font-weight: 800;
-      text-align: center;
+      font-size: {{ capabilities_block.settings.capabilities_title_size | default: 38 }}px;
+      line-height: {{ capabilities_block.settings.capabilities_title_line_height | default: 46 }}px;
+      color: {{ capabilities_block.settings.capabilities_title_color | default: '#0071b9' }};
+    }
+
+    .capabilities-subtitle {
+      font-size: {{ capabilities_block.settings.capabilities_subtitle_size | default: 18 }}px;
+      line-height: {{ capabilities_block.settings.capabilities_subtitle_line_height | default: 29 }}px;
+      color: {{ capabilities_block.settings.capabilities_subtitle_color | default: 'rgba(0, 113, 185, 0.8)' }};
     }
 
     @media (max-width: 768px) {
       .capabilities-title {
-        font-size: {{ capabilities_block.settings.capabilities_title_size_mobile | default: 32 }}px;
+        font-size: {{ capabilities_block.settings.capabilities_title_size_mobile | default: 28 }}px;
+        line-height: {{ capabilities_block.settings.capabilities_title_line_height_mobile | default: 34 }}px;
+      }
+      
+      .capabilities-subtitle {
+        font-size: {{ capabilities_block.settings.capabilities_subtitle_size_mobile | default: 16 }}px;
+        line-height: {{ capabilities_block.settings.capabilities_subtitle_line_height_mobile | default: 26 }}px;
       }
     }
   {% endif %}
@@ -1824,14 +1951,15 @@
     }
 
     .industries-title {
-      font-size: {{ industries_block.settings.industries_title_size | default: 48 }}px;
-      font-weight: 800;
-      text-align: center;
+      font-size: {{ industries_block.settings.industries_title_size | default: 38 }}px;
+      line-height: {{ industries_block.settings.industries_title_line_height | default: 46 }}px;
+      color: {{ industries_block.settings.industries_title_color | default: '#0071b9' }};
     }
 
     @media (max-width: 768px) {
       .industries-title {
-        font-size: {{ industries_block.settings.industries_title_size_mobile | default: 32 }}px;
+        font-size: {{ industries_block.settings.industries_title_size_mobile | default: 28 }}px;
+        line-height: {{ industries_block.settings.industries_title_line_height_mobile | default: 34 }}px;
       }
     }
   {% endif %}
@@ -2359,16 +2487,13 @@
         </video>
       {% endif %}
 
-      {% comment %} Show overlay when background is image or when opacity is greater than 0 {% endcomment %}
+      {% comment %} Always show overlay with proper opacity control {% endcomment %}
       {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
-      {% if block.settings.background_type == 'image' or overlay_opacity > 0 %}
-        <div class="hero-overlay" style="
-          background: linear-gradient(135deg, 
-            {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | divided_by: 100.0 }}, 
-            {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | times: 0.8 | divided_by: 100.0 }}
-          );
-        "></div>
-      {% endif %}
+      {% assign overlay_color = block.settings.overlay_color | default: '#0071b9' %}
+      <div class="hero-overlay" style="
+        background: {{ overlay_color }};
+        opacity: {{ overlay_opacity | divided_by: 100.0 }};
+      "></div>
 
       <div class="hero-content">
         <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
@@ -2404,9 +2529,9 @@
   <section class="capabilities-section section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="capabilities-title section-title">{{ capabilities_section.settings.capabilities_title | default: 'Our Expertise' }}</h2>
+        <h2 class="capabilities-title tv-section-title">{{ capabilities_section.settings.capabilities_title | default: 'Our Expertise' }}</h2>
         {% if capabilities_section.settings.capabilities_subtitle != blank %}
-          <p class="section-subtitle">{{ capabilities_section.settings.capabilities_subtitle }}</p>
+          <p class="capabilities-subtitle tv-section-subtitle">{{ capabilities_section.settings.capabilities_subtitle }}</p>
         {% endif %}
       </div>
       
@@ -2437,7 +2562,7 @@
   <section class="industries-section section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="industries-title section-title">{{ industries_section.settings.industries_title | default: 'Industries We Serve' }}</h2>
+        <h2 class="industries-title tv-section-title">{{ industries_section.settings.industries_title | default: 'Industries We Serve' }}</h2>
       </div>
       
       <div class="industries-grid">
@@ -2466,9 +2591,9 @@
   <section class="trusted-section section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="trusted-title section-title">{{ trusted_section.settings.trusted_title | default: 'Trusted by Industry Leaders' }}</h2>
+        <h2 class="trusted-title tv-section-title">{{ trusted_section.settings.trusted_title | default: 'Trusted by Industry Leaders' }}</h2>
         {% if trusted_section.settings.trusted_subtitle != blank %}
-          <p class="section-subtitle">{{ trusted_section.settings.trusted_subtitle }}</p>
+          <p class="trusted-subtitle tv-section-subtitle">{{ trusted_section.settings.trusted_subtitle }}</p>
         {% endif %}
       </div>
       
@@ -2499,9 +2624,9 @@
   <section class="gallery-section section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="gallery-title section-title">{{ gallery_section.settings.gallery_title | default: 'Showcase Gallery' }}</h2>
+        <h2 class="gallery-title tv-section-title">{{ gallery_section.settings.gallery_title | default: 'Showcase Gallery' }}</h2>
         {% if gallery_section.settings.gallery_subtitle != blank %}
-          <p class="section-subtitle">{{ gallery_section.settings.gallery_subtitle }}</p>
+          <p class="gallery-subtitle tv-section-subtitle">{{ gallery_section.settings.gallery_subtitle }}</p>
         {% endif %}
       </div>
       
@@ -2536,7 +2661,7 @@
   <section class="testimonial-section section-padding">
     <div class="container">
       <div class="testimonial-content">
-        <h2 class="testimonial-section-title section-title">{{ testimonial_section.settings.testimonial_title | default: 'What Our Clients Say' }}</h2>
+        <h2 class="testimonial-section-title tv-section-title">{{ testimonial_section.settings.testimonial_title | default: 'What Our Clients Say' }}</h2>
         <div class="testimonial-quote">
           <div class="quote-mark">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -2557,7 +2682,7 @@
   <section class="certifications-section section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="certifications-section-title section-title">{{ certifications_section.settings.certifications_title | default: 'Certifications & Compliance' }}</h2>
+        <h2 class="certifications-section-title tv-section-title">{{ certifications_section.settings.certifications_title | default: 'Certifications & Compliance' }}</h2>
       </div>
       
       <div class="certifications-grid">
@@ -2588,7 +2713,7 @@
     
     <div class="container">
       <div class="walkthrough-content">
-        <h2 class="walkthrough-section-title section-title">{{ walkthrough_section.settings.walkthrough_title | default: 'Facility Walkthrough' }}</h2>
+        <h2 class="walkthrough-section-title tv-section-title">{{ walkthrough_section.settings.walkthrough_title | default: 'Facility Walkthrough' }}</h2>
         <p class="walkthrough-subtitle">{{ walkthrough_section.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
         
         {% if walkthrough_section.settings.walkthrough_cta_url != blank %}
@@ -2607,7 +2732,7 @@
   <section class="contact-section section-padding">
     <div class="container">
       <div class="contact-content">
-        <h2 class="contact-section-title section-title">{{ contact_section.settings.contact_title | default: 'Ready for Your Next Project?' }}</h2>
+        <h2 class="contact-section-title tv-section-title">{{ contact_section.settings.contact_title | default: 'Ready for Your Next Project?' }}</h2>
         <p class="contact-subtitle">{{ contact_section.settings.contact_subtitle | default: 'Get a custom quote for your plastic machining needs. Our experts are ready to help.' }}</p>
         
         {% if contact_section.settings.contact_cta_url != blank %}
