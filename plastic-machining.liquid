@@ -2872,7 +2872,7 @@
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-top: 60px;
   }
@@ -2885,6 +2885,7 @@
     border: 1px solid var(--border-color);
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 113, 185, 0.08);
+    cursor: pointer;
   }
 
   .gallery-item::before {
@@ -2900,6 +2901,20 @@
     z-index: 1;
   }
 
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 113, 185, 0.8), rgba(0, 168, 230, 0.8));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
   .gallery-item:hover {
     transform: translateY(-12px);
     box-shadow: 0 20px 60px rgba(0, 113, 185, 0.2);
@@ -2910,40 +2925,102 @@
     transform: scaleX(1);
   }
 
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+
   .gallery-media {
     width: 100%;
-    height: 250px;
+    height: 280px;
     overflow: hidden;
+    position: relative;
+    background: rgba(0, 113, 185, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .gallery-media img,
   .gallery-media video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    object-fit: contain;
     transition: transform 0.3s ease;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 113, 185, 0.1);
+    position: relative;
+    z-index: 1;
   }
 
   .gallery-item:hover .gallery-media img,
   .gallery-item:hover .gallery-media video {
-    transform: scale(1.05);
+    transform: scale(1.02);
+  }
+
+  .gallery-expand-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.3);
+  }
+
+  .gallery-item:hover .gallery-expand-icon {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .gallery-expand-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary-color);
   }
 
   .gallery-content {
     padding: 24px;
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+    transition: color 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-content {
+    color: var(--white);
+    background: transparent;
   }
 
   .gallery-item-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     color: var(--text-dark);
+    transition: color 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-item-title {
+    color: var(--white);
   }
 
   .gallery-item-description {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--text-light);
     margin: 0;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-item-description {
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* Testimonial Section */
@@ -3279,17 +3356,115 @@
     box-shadow: var(--shadow-heavy);
   }
 
-  /* Responsive Design */
+  /* Comprehensive Mobile Responsive Design */
+  @media (max-width: 1200px) {
+    .hero-title {
+      font-size: 52px;
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+    }
+    
+    .capabilities-grid,
+    .industries-grid,
+    .trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+    
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    :root {
+      --container-padding: clamp(15px, 4vw, 60px);
+    }
+    
+    .hero-title {
+      font-size: 44px;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    
+    .hero-btn {
+      padding: 14px 28px;
+      font-size: 16px;
+    }
+    
+    .tv-section-title {
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+    
+    .tv-section-subtitle {
+      font-size: 16px;
+    }
+    
+    .capability-card,
+    .trust-card {
+      padding: 30px 20px;
+    }
+    
+    .gallery-media {
+      height: 220px;
+    }
+    
+    .gallery-media img,
+    .gallery-media video {
+      padding: 15px;
+    }
+  }
+
   @media (max-width: 768px) {
+    .hero-section {
+      min-height: 80vh;
+      padding-top: 80px;
+    }
+    
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .hero-subtitle {
+      font-size: 14px;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+    
     .hero-buttons {
       flex-direction: column;
       align-items: center;
+      gap: 15px;
+      margin-top: 25px;
     }
 
     .hero-btn {
       width: 100%;
       max-width: 280px;
       justify-content: center;
+      padding: 16px 24px;
+      font-size: 16px;
+    }
+    
+    .tv-section-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+    
+    .tv-section-subtitle {
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .capabilities-grid,
@@ -3298,11 +3473,179 @@
     .gallery-grid {
       grid-template-columns: 1fr;
       gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .capability-card,
+    .trust-card {
+      padding: 25px 20px;
+    }
+    
+    .capability-icon,
+    .industry-icon {
+      width: 55px;
+      height: 55px;
+      margin-bottom: 18px;
+    }
+    
+    .capability-icon svg,
+    .industry-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .capability-title,
+    .gallery-item-title {
+      font-size: 18px;
+      line-height: 1.3;
+    }
+    
+    .capability-description,
+    .gallery-item-description {
+      font-size: 14px;
+      line-height: 1.4;
     }
 
     .certifications-grid {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    .certification-card {
+      padding: 25px 15px;
+    }
+    
+    .certification-image img {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .certification-title {
+      font-size: 14px;
+    }
+    
+    .gallery-media {
+      height: 200px;
+    }
+    
+    .gallery-media img,
+    .gallery-media video {
+      padding: 10px;
+    }
+    
+    .gallery-content {
+      padding: 18px;
+    }
+    
+    .gallery-expand-icon {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .gallery-expand-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .walkthrough-content,
+    .contact-content,
+    .testimonial-content {
+      padding: 0 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 26px;
+      line-height: 1.1;
+    }
+    
+    .hero-subtitle {
+      font-size: 13px;
+    }
+    
+    .hero-btn {
+      padding: 14px 20px;
+      font-size: 14px;
+      max-width: 240px;
+    }
+    
+    .tv-section-title {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    
+    .tv-section-subtitle {
+      font-size: 13px;
+    }
+    
+    .capability-card,
+    .trust-card {
+      padding: 20px 15px;
+    }
+    
+    .capability-icon,
+    .industry-icon {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .capability-icon svg,
+    .industry-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .capability-title {
+      font-size: 16px;
+    }
+    
+    .capability-description {
+      font-size: 13px;
+    }
+    
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .certification-card {
+      padding: 20px;
+    }
+    
+    .gallery-media {
+      height: 180px;
+    }
+    
+    .gallery-item-title {
+      font-size: 16px;
+    }
+    
+    .gallery-item-description {
+      font-size: 13px;
+    }
+    
+    .gallery-content {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero-title {
+      font-size: 22px;
+    }
+    
+    .tv-section-title {
+      font-size: 18px;
+    }
+    
+    .capability-card,
+    .trust-card,
+    .certification-card {
+      padding: 15px;
+    }
+    
+    .gallery-media {
+      height: 160px;
     }
   }
 
@@ -3372,10 +3715,27 @@
     border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
 
+  .text-image-card-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
   .text-image-card-content:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
     border-color: var(--primary-color);
+  }
+
+  .text-image-card-content:hover::after {
+    transform: scaleX(1);
   }
 
   .text-content-section {
@@ -4194,7 +4554,7 @@
           <div class="gallery-grid">
             {% for gallery_block in section.blocks %}
               {% if gallery_block.type == 'gallery_item' %}
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="{% if gallery_block.settings.gallery_image != blank %}openImagePopup('{{ gallery_block.settings.gallery_image | img_url: '1200x900' }}'){% endif %}">
                   <div class="gallery-media">
                     {% if gallery_block.settings.content_type == 'video' and gallery_block.settings.gallery_video_url != blank %}
                       <video controls muted loop>
@@ -4203,6 +4563,12 @@
                     {% elsif gallery_block.settings.gallery_image != blank %}
                       <img src="{{ gallery_block.settings.gallery_image | img_url: '600x400' }}" alt="{{ gallery_block.settings.gallery_title }}" loading="lazy">
                     {% endif %}
+                    
+                    <div class="gallery-expand-icon">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M19,19H5V5H12V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3"/>
+                      </svg>
+                    </div>
                   </div>
                   <div class="gallery-content">
                     <h3 class="gallery-item-title">{{ gallery_block.settings.gallery_title | default: 'Custom Component' }}</h3>
