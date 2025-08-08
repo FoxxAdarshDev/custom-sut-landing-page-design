@@ -1,0 +1,1904 @@
+
+{% schema %}
+{
+  "name": "Plastic Machining",
+  "tag": "section",
+  "class": "plastic-machining-section main-plastic-machining",
+  "blocks": [
+    {
+      "type": "hero_section",
+      "name": "Hero Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "hero_background_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "hero_title",
+          "label": "Hero Title",
+          "default": "PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS"
+        },
+        {
+          "type": "textarea",
+          "id": "hero_subtitle",
+          "label": "Hero Subtitle",
+          "default": "Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing"
+        },
+        {
+          "type": "url",
+          "id": "hero_cta_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "hero_cta_text",
+          "label": "CTA Button Text",
+          "default": "Get Custom Quote"
+        }
+      ]
+    },
+    {
+      "type": "trusted_by",
+      "name": "Trusted By Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "trusted_title",
+          "label": "Section Title",
+          "default": "Trusted by Industry Leaders"
+        },
+        {
+          "type": "textarea",
+          "id": "trusted_subtitle",
+          "label": "Section Subtitle",
+          "default": "Experience the difference of working with a certified plastic machining partner."
+        }
+      ]
+    },
+    {
+      "type": "capabilities_item",
+      "name": "Capability Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "capability_image",
+          "label": "Capability Image"
+        },
+        {
+          "type": "text",
+          "id": "capability_title",
+          "label": "Title",
+          "default": "ISO-certified Facilities"
+        },
+        {
+          "type": "textarea",
+          "id": "capability_description",
+          "label": "Description",
+          "default": "Quality assurance through certified manufacturing processes"
+        }
+      ]
+    },
+    {
+      "type": "expertise_section",
+      "name": "Our Expertise",
+      "settings": [
+        {
+          "type": "text",
+          "id": "expertise_title",
+          "label": "Section Title",
+          "default": "Our Expertise"
+        },
+        {
+          "type": "textarea",
+          "id": "expertise_subtitle",
+          "label": "Section Subtitle",
+          "default": "Comprehensive plastic machining solutions for your most demanding applications."
+        }
+      ]
+    },
+    {
+      "type": "expertise_item",
+      "name": "Expertise Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "default": "svg",
+          "options": [
+            {
+              "value": "svg",
+              "label": "SVG Icon"
+            },
+            {
+              "value": "image",
+              "label": "Custom Image"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/></svg>"
+        },
+        {
+          "type": "image_picker",
+          "id": "expertise_image",
+          "label": "Expertise Image"
+        },
+        {
+          "type": "text",
+          "id": "expertise_title",
+          "label": "Title",
+          "default": "CNC Plastic Machining"
+        },
+        {
+          "type": "textarea",
+          "id": "expertise_description",
+          "label": "Description",
+          "default": "High-precision CNC machining for complex plastic components"
+        }
+      ]
+    },
+    {
+      "type": "testimonial_section",
+      "name": "Client Testimonials",
+      "settings": [
+        {
+          "type": "text",
+          "id": "testimonial_title",
+          "label": "Section Title",
+          "default": "What Our Clients Say"
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_quote",
+          "label": "Testimonial Quote",
+          "default": "Foxx Life Sciences' machining team delivered high-precision parts on time every time."
+        },
+        {
+          "type": "text",
+          "id": "testimonial_author",
+          "label": "Author",
+          "default": "Industry Leader"
+        }
+      ]
+    },
+    {
+      "type": "certifications_section",
+      "name": "Certifications",
+      "settings": [
+        {
+          "type": "text",
+          "id": "certifications_title",
+          "label": "Section Title",
+          "default": "Certifications & Compliance"
+        }
+      ]
+    },
+    {
+      "type": "certification_item",
+      "name": "Certification Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cert_image",
+          "label": "Certification Image"
+        },
+        {
+          "type": "text",
+          "id": "cert_title",
+          "label": "Certification Title",
+          "default": "ISO 9001"
+        }
+      ]
+    },
+    {
+      "type": "facility_walkthrough",
+      "name": "Facility Walkthrough",
+      "settings": [
+        {
+          "type": "text",
+          "id": "walkthrough_title",
+          "label": "Section Title",
+          "default": "Facility Walkthrough"
+        },
+        {
+          "type": "textarea",
+          "id": "walkthrough_subtitle",
+          "label": "Section Subtitle",
+          "default": "Take a virtual tour of our state-of-the-art plastic machining facilities."
+        },
+        {
+          "type": "url",
+          "id": "walkthrough_cta_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "walkthrough_cta_text",
+          "label": "CTA Button Text",
+          "default": "Start Virtual Tour"
+        }
+      ]
+    },
+    {
+      "type": "contact_section",
+      "name": "Ready for Next Project",
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Section Title",
+          "default": "Ready for Your Next Project?"
+        },
+        {
+          "type": "textarea",
+          "id": "contact_subtitle",
+          "label": "Section Subtitle",
+          "default": "Get a custom quote for your plastic machining needs. Our experts are ready to help."
+        },
+        {
+          "type": "url",
+          "id": "contact_cta_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "text",
+          "id": "contact_cta_text",
+          "label": "CTA Button Text",
+          "default": "Get Custom Quote"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Plastic Machining",
+      "blocks": [
+        {
+          "type": "hero_section"
+        },
+        {
+          "type": "trusted_by"
+        },
+        {
+          "type": "capabilities_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/>",
+            "capability_title": "ISO-certified Facilities",
+            "capability_description": "Quality assurance through certified manufacturing processes"
+          }
+        },
+        {
+          "type": "capabilities_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>",
+            "capability_title": "USA & India-based Manufacturing",
+            "capability_description": "Global manufacturing capabilities with local support"
+          }
+        },
+        {
+          "type": "capabilities_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/>",
+            "capability_title": "Cleanroom-Compatible Production",
+            "capability_description": "Manufacturing environment suitable for critical applications"
+          }
+        },
+        {
+          "type": "capabilities_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/>",
+            "capability_title": "In-house Design & Engineering",
+            "capability_description": "Complete design and engineering capabilities"
+          }
+        },
+        {
+          "type": "capabilities_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z'/>",
+            "capability_title": "FDA and USP Class VI",
+            "capability_description": "Compliant materials and processes"
+          }
+        },
+        {
+          "type": "expertise_section"
+        },
+        {
+          "type": "expertise_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z'/>",
+            "expertise_title": "CNC Plastic Machining",
+            "expertise_description": "High-precision CNC machining for complex plastic components"
+          }
+        },
+        {
+          "type": "expertise_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/>",
+            "expertise_title": "Milling & Turning",
+            "expertise_description": "Advanced milling and turning operations for precise geometrics"
+          }
+        },
+        {
+          "type": "expertise_item",
+          "settings": {
+            "svg_code": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/>",
+            "expertise_title": "Complex Part Manufacturing",
+            "expertise_description": "Manufacturing of intricate and complex plastic components"
+          }
+        },
+        {
+          "type": "testimonial_section"
+        },
+        {
+          "type": "certifications_section"
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "ISO 9001"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "Cleanroom Class 7"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "USP Class VI"
+          }
+        },
+        {
+          "type": "certification_item",
+          "settings": {
+            "cert_title": "RoHS Compliant"
+          }
+        },
+        {
+          "type": "facility_walkthrough"
+        },
+        {
+          "type": "contact_section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Hero Section -->
+{% for block in section.blocks %}
+  {% if block.type == 'hero_section' %}
+    <section class="plastic-machining-hero" {% if block.settings.hero_background_image != blank %}style="background-image: linear-gradient(135deg, rgba(0, 113, 185, 0.95) 0%, rgba(0, 90, 145, 0.95) 100%), url('{{ block.settings.hero_background_image | img_url: '1920x' }}');"{% endif %}>
+      <div class="hero-particles"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">{{ block.settings.hero_title | default: 'PRECISION PLASTIC MACHINING FOR CRITICAL APPLICATIONS' }}</h1>
+          <p class="hero-subtitle">{{ block.settings.hero_subtitle | default: 'Custom solutions in medical, bioprocess, aerospace, and industrial plastics manufacturing' }}</p>
+          {% if block.settings.hero_cta_url != blank %}
+            <a href="{{ block.settings.hero_cta_url }}" class="hero-cta-button">
+              {{ block.settings.hero_cta_text | default: 'Get Custom Quote' }}
+              <span class="button-arrow">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                </svg>
+              </span>
+            </a>
+          {% endif %}
+        </div>
+        <div class="hero-visual">
+          <div class="floating-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
+  {% endif %}
+{% endfor %}
+
+<!-- Trusted By Section -->
+{% assign trusted_block = section.blocks | where: "type", "trusted_by" | first %}
+{% if trusted_block %}
+  <section class="trusted-by-section">
+    <div class="trusted-content">
+      <div class="trusted-header">
+        <h2 class="trusted-title">{{ trusted_block.settings.trusted_title | default: 'Trusted by Industry Leaders' }}</h2>
+        <p class="trusted-subtitle">{{ trusted_block.settings.trusted_subtitle | default: 'Experience the difference of working with a certified plastic machining partner.' }}</p>
+      </div>
+      
+      <div class="capabilities-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'capabilities_item' %}
+            <div class="capability-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 100 }}">
+              <div class="capability-icon">
+                {% if block.settings.icon_type == 'image' and block.settings.capability_image != blank %}
+                  <img src="{{ block.settings.capability_image | img_url: '80x80' }}" alt="{{ block.settings.capability_title }}" loading="lazy">
+                {% elsif block.settings.svg_code != blank %}
+                  {{ block.settings.svg_code }}
+                {% endif %}
+              </div>
+              <div class="capability-content">
+                <h3 class="capability-title">{{ block.settings.capability_title }}</h3>
+                <p class="capability-description">{{ block.settings.capability_description }}</p>
+              </div>
+              <div class="capability-glow"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="section-bg-pattern"></div>
+  </section>
+{% endif %}
+
+<!-- Expertise Section -->
+{% assign expertise_block = section.blocks | where: "type", "expertise_section" | first %}
+{% if expertise_block %}
+  <section class="expertise-section">
+    <div class="expertise-content">
+      <div class="expertise-header">
+        <h2 class="expertise-title">{{ expertise_block.settings.expertise_title | default: 'Our Expertise' }}</h2>
+        <p class="expertise-subtitle">{{ expertise_block.settings.expertise_subtitle | default: 'Comprehensive plastic machining solutions for your most demanding applications.' }}</p>
+      </div>
+      
+      <div class="expertise-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'expertise_item' %}
+            <div class="expertise-card" data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 150 }}">
+              <div class="expertise-card-inner">
+                <div class="expertise-front">
+                  <div class="expertise-icon">
+                    {% if block.settings.icon_type == 'image' and block.settings.expertise_image != blank %}
+                      <img src="{{ block.settings.expertise_image | img_url: '100x100' }}" alt="{{ block.settings.expertise_title }}" loading="lazy">
+                    {% elsif block.settings.svg_code != blank %}
+                      {{ block.settings.svg_code }}
+                    {% endif %}
+                  </div>
+                  <h3 class="expertise-card-title">{{ block.settings.expertise_title }}</h3>
+                </div>
+                <div class="expertise-back">
+                  <p class="expertise-description">{{ block.settings.expertise_description }}</p>
+                </div>
+              </div>
+              <div class="expertise-border"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Testimonial Section -->
+{% assign testimonial_block = section.blocks | where: "type", "testimonial_section" | first %}
+{% if testimonial_block %}
+  <section class="testimonial-section">
+    <div class="testimonial-content">
+      <h2 class="testimonial-title">{{ testimonial_block.settings.testimonial_title | default: 'What Our Clients Say' }}</h2>
+      <div class="testimonial-quote">
+        <div class="quote-mark">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.5,10C7.3,10 8,9.3 8,8.5C8,7.7 7.3,7 6.5,7C5.7,7 5,7.7 5,8.5C5,9.3 5.7,10 6.5,10M9,6L9,9L6,12L3,9L3,6L9,6M17.5,10C18.3,10 19,9.3 19,8.5C19,7.7 18.3,7 17.5,7C16.7,7 16,7.7 16,8.5C16,9.3 16.7,10 17.5,10M20,6L20,9L17,12L14,9L14,6L20,6Z"/>
+          </svg>
+        </div>
+        <p class="quote-text">{{ testimonial_block.settings.testimonial_quote | default: "Foxx Life Sciences' machining team delivered high-precision parts on time every time." }}</p>
+        <p class="quote-author">- {{ testimonial_block.settings.testimonial_author | default: 'Industry Leader' }}</p>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Certifications Section -->
+{% assign certifications_block = section.blocks | where: "type", "certifications_section" | first %}
+{% if certifications_block %}
+  <section class="certifications-section">
+    <div class="certifications-content">
+      <h2 class="certifications-title">{{ certifications_block.settings.certifications_title | default: 'Certifications & Compliance' }}</h2>
+      
+      <div class="certifications-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'certification_item' %}
+            <div class="certification-card" data-aos="zoom-in" data-aos-delay="{{ forloop.index0 | times: 100 }}">
+              {% if block.settings.cert_image != blank %}
+                <div class="certification-image">
+                  <img src="{{ block.settings.cert_image | img_url: '120x120' }}" alt="{{ block.settings.cert_title }}" loading="lazy">
+                </div>
+              {% endif %}
+              <h3 class="certification-title">{{ block.settings.cert_title }}</h3>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<!-- Facility Walkthrough Section -->
+{% assign walkthrough_block = section.blocks | where: "type", "facility_walkthrough" | first %}
+{% if walkthrough_block %}
+  <section class="facility-walkthrough-section">
+    <div class="walkthrough-content">
+      <h2 class="walkthrough-title">{{ walkthrough_block.settings.walkthrough_title | default: 'Facility Walkthrough' }}</h2>
+      <p class="walkthrough-subtitle">{{ walkthrough_block.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
+      
+      {% if walkthrough_block.settings.walkthrough_cta_url != blank %}
+        <a href="{{ walkthrough_block.settings.walkthrough_cta_url }}" class="walkthrough-cta">
+          {{ walkthrough_block.settings.walkthrough_cta_text | default: 'Start Virtual Tour' }}
+          <span class="cta-arrow">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+<!-- Contact Section -->
+{% assign contact_block = section.blocks | where: "type", "contact_section" | first %}
+{% if contact_block %}
+  <section class="contact-section">
+    <div class="contact-content">
+      <div class="contact-text">
+        <h2 class="contact-title">{{ contact_block.settings.contact_title | default: 'Ready for Your Next Project?' }}</h2>
+        <p class="contact-subtitle">{{ contact_block.settings.contact_subtitle | default: 'Get a custom quote for your plastic machining needs. Our experts are ready to help.' }}</p>
+      </div>
+      
+      {% if contact_block.settings.contact_cta_url != blank %}
+        <div class="contact-form-container">
+          <a href="{{ contact_block.settings.contact_cta_url }}" class="contact-cta-button">
+            {{ contact_block.settings.contact_cta_text | default: 'Get Custom Quote' }}
+            <span class="button-pulse"></span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="contact-bg-elements">
+      <div class="bg-element element-1"></div>
+      <div class="bg-element element-2"></div>
+    </div>
+  </section>
+{% endif %}
+
+<style>
+/* Global Variables */
+:root {
+  --primary-color: #0071b9;
+  --secondary-color: #005a91;
+  --accent-color: #00a8e6;
+  --text-dark: #1a1a1a;
+  --text-light: #666;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --border-color: #e1e5e9;
+  --shadow-light: 0 4px 20px rgba(0, 113, 185, 0.08);
+  --shadow-medium: 0 8px 40px rgba(0, 113, 185, 0.12);
+  --shadow-heavy: 0 20px 60px rgba(0, 113, 185, 0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 16px;
+  --container-padding: clamp(20px, 5vw, 80px);
+}
+
+/* Reset and Base Styles */
+.plastic-machining-section {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+.plastic-machining-section * {
+  box-sizing: border-box;
+}
+
+/* Hero Section */
+.plastic-machining-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+  background-size: 100px 100px, 150px 150px, 200px 200px;
+  animation: particleFloat 20s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+.hero-content {
+  max-width: 1400px;
+  width: 100%;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleSlideIn 1s ease-out;
+}
+
+@keyframes titleSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  animation: subtitleSlideIn 1s ease-out 0.2s both;
+}
+
+@keyframes subtitleSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #0096d4 100%);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  overflow: hidden;
+  animation: buttonSlideIn 1s ease-out 0.4s both;
+}
+
+@keyframes buttonSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-cta-button:hover::before {
+  left: 100%;
+}
+
+.hero-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.button-arrow svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta-button:hover .button-arrow svg {
+  transform: translateX(4px);
+}
+
+.floating-elements {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.floating-element {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+}
+
+.floating-element.element-1 {
+  top: 20%;
+  right: 20%;
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+.floating-element.element-2 {
+  top: 60%;
+  right: 60%;
+  width: 80px;
+  height: 80px;
+  animation: floatUpDown 8s ease-in-out infinite reverse;
+}
+
+.floating-element.element-3 {
+  bottom: 20%;
+  right: 10%;
+  width: 40px;
+  height: 40px;
+  animation: floatUpDown 10s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scrollIndicator 2s ease-in-out infinite;
+}
+
+.scroll-line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.6));
+  margin-bottom: 8px;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 50%;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+
+@keyframes scrollIndicator {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scrollDot {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Trusted By Section */
+.trusted-by-section {
+  position: relative;
+  padding: 120px var(--container-padding);
+  background: var(--light-gray);
+  overflow: hidden;
+}
+
+.section-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.03;
+  background-image: 
+    linear-gradient(90deg, var(--primary-color) 1px, transparent 1px),
+    linear-gradient(var(--primary-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.trusted-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.trusted-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.trusted-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.trusted-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.trusted-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 80px;
+}
+
+.capability-card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.capability-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 185, 0.05), transparent);
+  transition: left 0.6s ease;
+}
+
+.capability-card:hover::before {
+  left: 100%;
+}
+
+.capability-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-color);
+}
+
+.capability-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: var(--transition);
+}
+
+.capability-icon svg {
+  width: 32px;
+  height: 32px;
+  color: var(--white);
+}
+
+.capability-icon img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+.capability-card:hover .capability-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.capability-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.capability-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.capability-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 113, 185, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.capability-card:hover .capability-glow {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Expertise Section */
+.expertise-section {
+  padding: 120px var(--container-padding);
+  background: var(--white);
+  position: relative;
+}
+
+.expertise-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.expertise-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.expertise-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.expertise-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.expertise-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  margin-top: 80px;
+}
+
+.expertise-card {
+  position: relative;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.expertise-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.expertise-card:hover .expertise-card-inner {
+  transform: rotateY(180deg);
+}
+
+.expertise-front,
+.expertise-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.expertise-front {
+  background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+  border: 1px solid var(--border-color);
+}
+
+.expertise-back {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  transform: rotateY(180deg);
+}
+
+.expertise-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: var(--transition);
+}
+
+.expertise-icon svg {
+  width: 40px;
+  height: 40px;
+  color: var(--white);
+}
+
+.expertise-icon img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
+
+.expertise-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.expertise-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+.expertise-border {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--primary-color));
+  border-radius: calc(var(--border-radius) + 2px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.expertise-card:hover .expertise-border {
+  opacity: 1;
+}
+
+/* Testimonial Section */
+.testimonial-section {
+  padding: 120px var(--container-padding);
+  background: var(--light-gray);
+  text-align: center;
+}
+
+.testimonial-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonial-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 60px;
+  color: var(--text-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.testimonial-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.testimonial-quote {
+  position: relative;
+  padding: 40px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+}
+
+.quote-mark {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-mark svg {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+}
+
+.quote-text {
+  font-size: 1.375rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-style: italic;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.quote-author {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Certifications Section */
+.certifications-section {
+  padding: 120px var(--container-padding);
+  background: var(--white);
+}
+
+.certifications-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.certifications-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 80px;
+  color: var(--text-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.certifications-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-top: 80px;
+}
+
+.certification-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certification-card:hover::before {
+  opacity: 0.05;
+}
+
+.certification-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-color);
+}
+
+.certification-image {
+  margin-bottom: 24px;
+}
+
+.certification-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.certification-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Facility Walkthrough Section */
+.facility-walkthrough-section {
+  padding: 120px var(--container-padding);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.facility-walkthrough-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.walkthrough-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.walkthrough-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.walkthrough-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--white), rgba(255, 255, 255, 0.7));
+  border-radius: 2px;
+}
+
+.walkthrough-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.walkthrough-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: var(--white);
+  color: var(--primary-color);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.walkthrough-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 185, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.walkthrough-cta:hover::before {
+  left: 100%;
+}
+
+.walkthrough-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.cta-arrow svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.walkthrough-cta:hover .cta-arrow svg {
+  transform: translateX(4px);
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 120px var(--container-padding);
+  background: var(--light-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+}
+
+.contact-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  font-weight: 300;
+  margin: 0;
+}
+
+.contact-form-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contact-cta-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+  min-width: 250px;
+}
+
+.contact-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.contact-cta-button:hover::before {
+  left: 100%;
+}
+
+.contact-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.button-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+.contact-bg-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.bg-element {
+  position: absolute;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 50%;
+  opacity: 0.05;
+}
+
+.bg-element.element-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -150px;
+  animation: rotateElement 20s linear infinite;
+}
+
+.bg-element.element-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -100px;
+  left: -100px;
+  animation: rotateElement 25s linear infinite reverse;
+}
+
+@keyframes rotateElement {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  
+  .capabilities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  
+  .contact-form-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 20px;
+  }
+  
+  .plastic-machining-hero {
+    min-height: 80vh;
+    background-attachment: scroll;
+  }
+  
+  .hero-content {
+    gap: 40px;
+  }
+  
+  .floating-elements {
+    display: none;
+  }
+  
+  .trusted-by-section,
+  .expertise-section,
+  .testimonial-section,
+  .certifications-section,
+  .facility-walkthrough-section,
+  .contact-section {
+    padding: 80px var(--container-padding);
+  }
+  
+  .trusted-header,
+  .expertise-header {
+    margin-bottom: 60px;
+  }
+  
+  .capabilities-grid,
+  .expertise-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 60px;
+  }
+  
+  .certifications-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .expertise-card {
+    height: 250px;
+  }
+  
+  .capability-card,
+  .certification-card {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta-button,
+  .walkthrough-cta,
+  .contact-cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .capability-icon,
+  .expertise-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .capability-icon svg,
+  .capability-icon img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .expertise-icon svg,
+  .expertise-icon img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus States */
+.hero-cta-button:focus,
+.walkthrough-cta:focus,
+.contact-cta-button:focus {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+.capability-card:focus,
+.expertise-card:focus,
+.certification-card:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+/* Print Styles */
+@media print {
+  .plastic-machining-hero {
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+  }
+  
+  .floating-elements,
+  .hero-particles,
+  .section-bg-pattern,
+  .contact-bg-elements {
+    display: none !important;
+  }
+}
+</style>
+
+<script>
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        
+        // Trigger counter animations for stats
+        const numbers = entry.target.querySelectorAll('[data-count]');
+        numbers.forEach(numberElement => {
+          animateNumber(numberElement);
+        });
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  const sections = document.querySelectorAll('.trusted-by-section, .expertise-section, .testimonial-section, .certifications-section');
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Parallax effect for hero background
+  window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.plastic-machining-hero');
+    
+    if (hero && window.innerWidth > 768) {
+      const rate = scrolled * -0.5;
+      hero.style.backgroundPosition = `center ${rate}px`;
+    }
+  });
+
+  // Smooth scrolling for scroll indicator
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', function() {
+      const nextSection = document.querySelector('.trusted-by-section');
+      if (nextSection) {
+        nextSection.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  }
+
+  // Enhanced card interactions
+  const cards = document.querySelectorAll('.capability-card, .expertise-card, .certification-card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-8px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+
+  // Add ripple effect to buttons
+  const buttons = document.querySelectorAll('.hero-cta-button, .walkthrough-cta, .contact-cta-button');
+  buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+      `;
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  });
+});
+
+// Number animation function
+function animateNumber(element) {
+  const target = parseInt(element.dataset.count);
+  const duration = 2000;
+  const step = target / (duration / 16);
+  let current = 0;
+  
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current).toLocaleString();
+  }, 16);
+}
+
+// Add CSS for ripple animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes ripple-animation {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+  
+  .animate-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+document.head.appendChild(style);
+</script>
