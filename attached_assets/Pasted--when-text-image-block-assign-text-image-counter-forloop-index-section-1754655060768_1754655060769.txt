@@ -1,0 +1,45 @@
+{% when 'text_image_block' %}
+      {% assign text_image_counter = forloop.index %}
+      <section class="text-image-block-{{ text_image_counter }} section-padding">
+        <div class="text-image-container-{{ text_image_counter }}">
+          <div class="text-image-grid-{{ text_image_counter }}">
+            <!-- Text Content -->
+            <div class="text-image-content-{{ text_image_counter }}">
+              {% if block.settings.text_heading != blank %}
+                <h2 class="text-image-heading-{{ text_image_counter }}">{{ block.settings.text_heading }}</h2>
+              {% endif %}
+
+              {% if block.settings.text_description != blank %}
+                <div class="text-image-description-{{ text_image_counter }}">
+                  {{ block.settings.text_description }}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Image Content -->
+            <div class="text-image-visual-{{ text_image_counter }}">
+              {% if block.settings.block_image != blank %}
+                <div class="text-image-visual-wrapper-{{ text_image_counter }}">
+                  <img
+                    src="{{ block.settings.block_image | img_url: '800x600' }}"
+                    alt="{{ block.settings.image_caption | default: block.settings.text_heading }}"
+                    class="text-image-img-{{ text_image_counter }}"
+                    loading="lazy"
+                    onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')"
+                  >
+
+                  <button class="image-expand-btn-{{ text_image_counter }}" onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M19,19H5V5H12V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3"/>
+                    </svg>
+                  </button>
+                </div>
+
+                {% if block.settings.image_caption != blank %}
+                  <p class="text-image-caption-{{ text_image_counter }}">{{ block.settings.image_caption }}</p>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
