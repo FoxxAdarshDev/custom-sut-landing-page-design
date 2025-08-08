@@ -50,6 +50,10 @@
           "default": "#0071b9"
         },
         {
+          "type": "header",
+          "content": "Overlay Settings"
+        },
+        {
           "type": "color",
           "id": "overlay_color",
           "label": "Overlay Color",
@@ -2355,12 +2359,11 @@
         </video>
       {% endif %}
 
-      {% comment %} Always show overlay when opacity is greater than 0 {% endcomment %}
+      {% comment %} Show overlay when opacity is greater than 0 or when background image is present {% endcomment %}
       {% assign overlay_opacity = block.settings.overlay_opacity | default: 85 %}
       {% if overlay_opacity > 0 %}
         <div class="hero-overlay" style="
-          background-color: {{ block.settings.overlay_color | default: '#0071b9' }};
-          opacity: {{ overlay_opacity | divided_by: 100.0 }};
+          background: linear-gradient(135deg, {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | divided_by: 100.0 }}, {{ block.settings.overlay_color | default: '#0071b9' | color_modify: 'alpha', overlay_opacity | times: 0.9 | divided_by: 100.0 }});
         "></div>
       {% endif %}
 
