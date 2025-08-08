@@ -1,0 +1,44 @@
+<!-- Section 3: The Change Starts Now -->
+<section class="sustainability-change-section" data-animate="true">
+  {% if section.settings.change_bg_image != blank %}
+    <div class="change-bg-image" style="background-image: url('{{ section.settings.change_bg_image | img_url: '1920x' }}');">
+  {% endif %}
+      <div class="change-overlay">
+        <div class="change-content">
+          <div class="change-icon-wrapper">
+            <div class="change-icon-border">
+              <div class="change-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2"/>
+                  <path d="M12 2C12 2 8 6 8 12C8 16 10 18 12 18C14 18 16 16 16 12C16 6 12 2 12 2Z" fill="white" stroke="white" stroke-width="1"/>
+                  <path d="M12 2C12 2 9 3 7 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M12 2C12 2 15 3 17 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M12 8C12 8 10 9 9 11" stroke="white" stroke-width="1" stroke-linecap="round"/>
+                  <path d="M12 8C12 8 14 9 15 11" stroke="white" stroke-width="1" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="change-heading-wrapper">
+            <h2 class="change-heading">
+              <span class="change-line1">{{ section.settings.change_heading_line1 }}</span>
+              <span class="change-line2">{{ section.settings.change_heading_line2 }}</span>
+            </h2>
+          </div>
+
+          <div class="change-divider"></div>
+
+          <p class="change-description">{{ section.settings.change_description }}</p>
+
+          {% if section.settings.change_button_text != blank %}
+            <a href="{{ section.settings.change_button_url }}" class="change-button animated-button">
+              {{ section.settings.change_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+  {% if section.settings.change_bg_image != blank %}
+    </div>
+  {% endif %}
+</section>
