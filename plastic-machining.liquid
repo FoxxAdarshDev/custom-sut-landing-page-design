@@ -3356,6 +3356,40 @@
     box-shadow: var(--shadow-heavy);
   }
 
+  /* Video iframe container styles */
+  .walkthrough-video-container {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .walkthrough-video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 16px 16px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    .walkthrough-video-container {
+      margin: 30px 20px;
+      padding: 15px;
+    }
+  }
+
   /* Contact Section */
   {% assign contact_block = section.blocks | where: "type", "contact_section" | first %}
   {% if contact_block %}
@@ -4736,6 +4770,29 @@
             ">
               <h2 class="walkthrough-section-title tv-section-title">{{ block.settings.walkthrough_title | default: 'Facility Walkthrough' }}</h2>
               <p class="walkthrough-subtitle">{{ block.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
+
+              <!-- Video iframe display -->
+              {% if block.settings.walkthrough_background_video != blank %}
+                <div class="walkthrough-video-container" style="
+                  margin: 40px auto;
+                  max-width: 800px;
+                  position: relative;
+                  background: rgba(255, 255, 255, 0.95);
+                  border-radius: 16px;
+                  padding: 20px;
+                  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                  backdrop-filter: blur(10px);
+                ">
+                  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe 
+                      src="{{ block.settings.walkthrough_background_video }}"
+                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px;"
+                      allowfullscreen
+                      loading="lazy">
+                    </iframe>
+                  </div>
+                </div>
+              {% endif %}
 
               {% if block.settings.walkthrough_cta_url != blank %}
                 <a href="{{ block.settings.walkthrough_cta_url }}" class="walkthrough-cta">
