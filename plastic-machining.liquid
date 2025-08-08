@@ -1701,6 +1701,265 @@
       ]
     },
     {
+      "type": "text_image_block",
+      "name": "Text & Image Block",
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout_direction",
+          "label": "Layout Direction",
+          "default": "text_left",
+          "options": [
+            {
+              "value": "text_left",
+              "label": "Text Left, Image Right"
+            },
+            {
+              "value": "text_right",
+              "label": "Text Right, Image Left"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Text Content"
+        },
+        {
+          "type": "text",
+          "id": "text_heading",
+          "label": "Heading",
+          "default": "Plastic Machining Services - Your ideas become high quality components"
+        },
+        {
+          "type": "range",
+          "id": "text_heading_size_desktop",
+          "label": "Heading Font Size (Desktop)",
+          "min": 18,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "text_heading_size_mobile",
+          "label": "Heading Font Size (Mobile)",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "text_heading_line_height",
+          "label": "Heading Line Height",
+          "min": 1.0,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.3
+        },
+        {
+          "type": "color",
+          "id": "text_heading_color",
+          "label": "Heading Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "richtext",
+          "id": "text_description",
+          "label": "Description",
+          "default": "<p>We have specialised in the <strong>manufacture</strong> of high quality CNC machined components made of plastic for virtually every industry. We provide you with virtually unlimited processing possibilities and a leading manufacturer with one-of-a-kind installations and machinery.</p><p>This enables production of your machined plastics parts:</p><ul><li>with very small or large dimensions</li><li>in complex geometries</li><li>with narrow tolerances</li><li>while at the same time maintaining a high degree of surface quality.</li></ul>"
+        },
+        {
+          "type": "range",
+          "id": "text_description_size_desktop",
+          "label": "Description Font Size (Desktop)",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_description_size_mobile",
+          "label": "Description Font Size (Mobile)",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "text_description_line_height",
+          "label": "Description Line Height",
+          "min": 1.2,
+          "max": 2.5,
+          "step": 0.1,
+          "default": 1.6
+        },
+        {
+          "type": "color",
+          "id": "text_description_color",
+          "label": "Description Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "bullet_color",
+          "label": "Bullet Point Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "bullet_size",
+          "label": "Bullet Point Size",
+          "min": 6,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "header",
+          "content": "Image Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_caption",
+          "label": "Image Caption",
+          "default": "Machined plastic parts"
+        },
+        {
+          "type": "range",
+          "id": "image_caption_size_desktop",
+          "label": "Caption Font Size (Desktop)",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "image_caption_size_mobile",
+          "label": "Caption Font Size (Mobile)",
+          "min": 10,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "color",
+          "id": "image_caption_color",
+          "label": "Caption Color",
+          "default": "#666666"
+        },
+        {
+          "type": "range",
+          "id": "image_border_radius",
+          "label": "Image Border Radius",
+          "min": 0,
+          "max": 30,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Layout Settings"
+        },
+        {
+          "type": "color",
+          "id": "block_bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "content_gap",
+          "label": "Gap Between Text and Image",
+          "min": 20,
+          "max": 100,
+          "step": 10,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "header",
+          "content": "Spacing Controls"
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_top_desktop",
+          "label": "Top Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_bottom_desktop",
+          "label": "Bottom Padding (Desktop)",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_top_tablet",
+          "label": "Top Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_bottom_tablet",
+          "label": "Bottom Padding (Tablet)",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_top_mobile",
+          "label": "Top Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "text_image_padding_bottom_mobile",
+          "label": "Bottom Padding (Mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "default": 40
+        }
+      ]
+    },
+    {
       "type": "contact_section",
       "name": "Request Quote",
       "settings": [
@@ -2014,6 +2273,15 @@
             "right_title": "Custom machined parts - Understanding your application",
             "right_content": "<p>Every industry has different requirements for material and products. For this reason, we analyse in-depth the specific needs in the various industries. Our goals is to develop and machine plastics parts that are perfect fit for the respective intended applications.</p><p>Our experts are here to assist you with all aspects of your Project. We would be delighted to visit you and examine in Detail your challenging task on site.</p>",
             "right_icon_type": "image"
+          }
+        },
+        {
+          "type": "text_image_block",
+          "settings": {
+            "layout_direction": "text_left",
+            "text_heading": "Precision Plastic Components Manufacturing",
+            "text_description": "<p>We have specialised in the <strong>manufacture</strong> of high quality CNC machined components made of plastic for virtually every industry. We provide you with virtually unlimited processing possibilities and a leading manufacturer with one-of-a-kind installations and machinery.</p><p>This enables production of your machined plastics parts:</p><ul><li>with very small or large dimensions</li><li>in complex geometries</li><li>with narrow tolerances</li><li>while at the same time maintaining a high degree of surface quality.</li></ul>",
+            "image_caption": "Machined plastic parts"
           }
         },
         {
@@ -2945,6 +3213,169 @@
     }
   }
 
+  /* Text Image Block Section */
+  {% assign text_image_blocks = section.blocks | where: "type", "text_image_block" %}
+  {% for block in text_image_blocks %}
+    .text-image-block-{{ forloop.index }} {
+      --section-padding-top-desktop: {{ block.settings.text_image_padding_top_desktop | default: 80 }}px;
+      --section-padding-bottom-desktop: {{ block.settings.text_image_padding_bottom_desktop | default: 80 }}px;
+      --section-padding-top-tablet: {{ block.settings.text_image_padding_top_tablet | default: 60 }}px;
+      --section-padding-bottom-tablet: {{ block.settings.text_image_padding_bottom_tablet | default: 60 }}px;
+      --section-padding-top-mobile: {{ block.settings.text_image_padding_top_mobile | default: 40 }}px;
+      --section-padding-bottom-mobile: {{ block.settings.text_image_padding_bottom_mobile | default: 40 }}px;
+      background-color: {{ block.settings.block_bg_color | default: '#ffffff' }};
+    }
+
+    .text-image-grid-{{ forloop.index }} {
+      display: grid;
+      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+      gap: {{ block.settings.content_gap | default: 60 }}px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .text-image-content-{{ forloop.index }} {
+      {% if block.settings.layout_direction == 'text_right' %}order: 2;{% else %}order: 1;{% endif %}
+    }
+
+    .text-image-visual-{{ forloop.index }} {
+      {% if block.settings.layout_direction == 'text_right' %}order: 1;{% else %}order: 2;{% endif %}
+      position: relative;
+    }
+
+    .text-image-heading-{{ forloop.index }} {
+      font-size: {{ block.settings.text_heading_size_desktop | default: 32 }}px;
+      line-height: {{ block.settings.text_heading_line_height | default: 1.3 }};
+      color: {{ block.settings.text_heading_color | default: '#0071b9' }};
+      font-weight: 700;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .text-image-description-{{ forloop.index }} {
+      font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
+      line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
+      color: {{ block.settings.text_description_color | default: '#333333' }};
+      margin: 0;
+    }
+
+    .text-image-description-{{ forloop.index }} p {
+      margin-bottom: 16px;
+    }
+
+    .text-image-description-{{ forloop.index }} p:last-child {
+      margin-bottom: 0;
+    }
+
+    .text-image-description-{{ forloop.index }} strong {
+      color: {{ block.settings.text_heading_color | default: '#0071b9' }};
+      font-weight: 600;
+    }
+
+    /* Custom Bullet Points */
+    .text-image-description-{{ forloop.index }} ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 20px 0;
+    }
+
+    .text-image-description-{{ forloop.index }} ul li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+      font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
+      line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
+    }
+
+    .text-image-description-{{ forloop.index }} ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: {{ block.settings.bullet_size | default: 8 }}px;
+      height: {{ block.settings.bullet_size | default: 8 }}px;
+      background: {{ block.settings.bullet_color | default: '#0071b9' }};
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
+    }
+
+    .text-image-img-{{ forloop.index }} {
+      width: 100%;
+      height: auto;
+      border-radius: {{ block.settings.image_border_radius | default: 16 }}px;
+      box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .text-image-img-{{ forloop.index }}:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(0, 113, 185, 0.25);
+    }
+
+    .text-image-caption-{{ forloop.index }} {
+      text-align: center;
+      margin-top: 16px;
+      font-size: {{ block.settings.image_caption_size_desktop | default: 14 }}px;
+      color: {{ block.settings.image_caption_color | default: '#666666' }};
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    @media (max-width: 1024px) {
+      .text-image-grid-{{ forloop.index }} {
+        gap: {{ block.settings.content_gap | default: 60 | divided_by: 1.5 }}px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .text-image-grid-{{ forloop.index }} {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .text-image-content-{{ forloop.index }},
+      .text-image-visual-{{ forloop.index }} {
+        order: initial;
+      }
+
+      .text-image-visual-{{ forloop.index }} {
+        order: 1;
+      }
+
+      .text-image-content-{{ forloop.index }} {
+        order: 2;
+        text-align: left;
+      }
+
+      .text-image-heading-{{ forloop.index }} {
+        font-size: {{ block.settings.text_heading_size_mobile | default: 24 }}px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .text-image-description-{{ forloop.index }} {
+        font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
+      }
+
+      .text-image-description-{{ forloop.index }} ul li {
+        font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
+        padding-left: 25px;
+      }
+
+      .text-image-description-{{ forloop.index }} ul li::before {
+        width: {{ block.settings.bullet_size | default: 8 | minus: 2 }}px;
+        height: {{ block.settings.bullet_size | default: 8 | minus: 2 }}px;
+      }
+
+      .text-image-caption-{{ forloop.index }} {
+        font-size: {{ block.settings.image_caption_size_mobile | default: 12 }}px;
+      }
+    }
+  {% endfor %}
+
   /* Content Block Section */
   {% assign content_block = section.blocks | where: "type", "content_block" | first %}
   {% if content_block %}
@@ -3345,6 +3776,48 @@
     </div>
   </section>
 {% endif %}
+
+<!-- Text Image Block Sections -->
+{% assign text_image_counter = 0 %}
+{% for block in section.blocks %}
+  {% if block.type == 'text_image_block' %}
+    {% assign text_image_counter = text_image_counter | plus: 1 %}
+    <section class="text-image-block-{{ text_image_counter }} section-padding">
+      <div class="container">
+        <div class="text-image-grid-{{ text_image_counter }}">
+          <!-- Text Content -->
+          <div class="text-image-content-{{ text_image_counter }}">
+            {% if block.settings.text_heading != blank %}
+              <h2 class="text-image-heading-{{ text_image_counter }}">{{ block.settings.text_heading }}</h2>
+            {% endif %}
+            
+            {% if block.settings.text_description != blank %}
+              <div class="text-image-description-{{ text_image_counter }}">
+                {{ block.settings.text_description }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Image Content -->
+          <div class="text-image-visual-{{ text_image_counter }}">
+            {% if block.settings.block_image != blank %}
+              <img 
+                src="{{ block.settings.block_image | img_url: '800x600' }}" 
+                alt="{{ block.settings.image_caption | default: block.settings.text_heading }}"
+                class="text-image-img-{{ text_image_counter }}"
+                loading="lazy"
+              >
+              
+              {% if block.settings.image_caption != blank %}
+                <p class="text-image-caption-{{ text_image_counter }}">{{ block.settings.image_caption }}</p>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endfor %}
 
 <!-- Content Block Section -->
 {% for block in section.blocks %}
