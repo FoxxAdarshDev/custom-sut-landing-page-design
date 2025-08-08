@@ -3328,14 +3328,14 @@
     .text-image-grid-{{ forloop.index }} {
       display: grid;
       grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
-      gap: 60px;
-      align-items: stretch;
-      min-height: 600px;
+      gap: {{ block.settings.content_gap | default: 60 }}px;
+      align-items: center;
+      min-height: auto;
     }
 
     .text-image-content-{{ forloop.index }} {
       {% if block.settings.layout_direction == 'text_right' %}order: 2;{% else %}order: 1;{% endif %}
-      padding: 50px;
+      padding: 40px;
       background: var(--white);
       border-radius: var(--border-radius);
       box-shadow: 0 10px 40px rgba(0, 113, 185, 0.08);
@@ -3345,6 +3345,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      height: auto;
     }
 
     .text-image-content-{{ forloop.index }}::before {
@@ -3367,9 +3368,9 @@
     .text-image-visual-{{ forloop.index }} {
       {% if block.settings.layout_direction == 'text_right' %}order: 1;{% else %}order: 2;{% endif %}
       position: relative;
-      height: 100%;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
 
     .text-image-heading-{{ forloop.index }} {
@@ -4034,7 +4035,7 @@
                     loading="lazy"
                     onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')"
                   >
-                  
+
                   <button class="image-expand-btn-{{ text_image_counter }}" onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')">
                     <svg viewBox="0 0 24 24">
                       <path d="M19,19H5V5H12V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3"/>
@@ -4365,7 +4366,7 @@
 function openImagePopup(imageSrc) {
   const modal = document.getElementById('imagePopupModal');
   const popupImage = document.getElementById('popupImage');
-  
+
   popupImage.src = imageSrc;
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
