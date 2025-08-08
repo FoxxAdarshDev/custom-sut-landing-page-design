@@ -859,6 +859,12 @@
           "id": "industry_title",
           "label": "Industry Name",
           "default": "Bioprocessing"
+        },
+        {
+          "type": "textarea",
+          "id": "industry_description",
+          "label": "Industry Description",
+          "default": "Advanced bioprocessing solutions for pharmaceutical and biotechnology applications"
         }
       ]
     },
@@ -987,6 +993,10 @@
             {
               "value": "image",
               "label": "Custom Image"
+            },
+            {
+              "value": "multiple_images",
+              "label": "Multiple Images"
             }
           ]
         },
@@ -1000,6 +1010,50 @@
           "type": "image_picker",
           "id": "trust_image",
           "label": "Trust Factor Image"
+        },
+        {
+          "type": "header",
+          "content": "Multiple Images Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_1",
+          "label": "Trust Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_2",
+          "label": "Trust Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_3",
+          "label": "Trust Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_4",
+          "label": "Trust Image 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_5",
+          "label": "Trust Image 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_6",
+          "label": "Trust Image 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_7",
+          "label": "Trust Image 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_image_8",
+          "label": "Trust Image 8"
         },
         {
           "type": "text",
@@ -3213,6 +3267,70 @@
     border-radius: 8px;
   }
 
+  /* Multiple Images Display */
+  .trust-multiple-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .trust-images-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 113, 185, 0.3) transparent;
+  }
+
+  .trust-images-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .trust-images-container::-webkit-scrollbar-track {
+    background: rgba(0, 113, 185, 0.1);
+    border-radius: 3px;
+  }
+
+  .trust-images-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 113, 185, 0.3);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+  }
+
+  .trust-images-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 113, 185, 0.5);
+  }
+
+  .trust-image-item {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 113, 185, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 113, 185, 0.1);
+  }
+
+  .trust-image-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 113, 185, 0.2);
+    border-color: var(--primary-color);
+  }
+
+  .trust-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
   .capability-card:hover .capability-icon {
     transform: scale(1.1) rotate(5deg);
   }
@@ -3327,6 +3445,13 @@
     font-size: 18px;
     font-weight: 600;
     color: var(--text-dark);
+    margin: 0 0 12px 0;
+  }
+
+  .industry-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-light);
     margin: 0;
   }
 
@@ -5222,6 +5347,9 @@
                     {% endif %}
                   </div>
                   <h3 class="industry-title">{{ industry_block.settings.industry_title | default: 'Bioprocessing' }}</h3>
+                  {% if industry_block.settings.industry_description != blank %}
+                    <p class="industry-description">{{ industry_block.settings.industry_description }}</p>
+                  {% endif %}
                 </div>
               {% endif %}
             {% endfor %}
@@ -5243,13 +5371,60 @@
             {% for trust_block in section.blocks %}
               {% if trust_block.type == 'trust_item' %}
                 <div class="trust-card">
-                  <div class="capability-icon {% if trust_block.settings.icon_type == 'image' %}trust-icon-image{% endif %}">
-                    {% if trust_block.settings.icon_type == 'image' and trust_block.settings.trust_image != blank %}
-                      <img src="{{ trust_block.settings.trust_image | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
-                    {% elsif trust_block.settings.svg_code != blank %}
-                      {{ trust_block.settings.svg_code }}
-                    {% endif %}
-                  </div>
+                  {% if trust_block.settings.icon_type == 'multiple_images' %}
+                    <div class="trust-multiple-images">
+                      <div class="trust-images-container">
+                        {% if trust_block.settings.trust_image_1 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_1 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_2 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_2 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_3 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_3 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_4 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_4 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_5 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_5 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_6 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_6 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_7 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_7 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                        {% if trust_block.settings.trust_image_8 != blank %}
+                          <div class="trust-image-item">
+                            <img src="{{ trust_block.settings.trust_image_8 | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <div class="capability-icon {% if trust_block.settings.icon_type == 'image' %}trust-icon-image{% endif %}">
+                      {% if trust_block.settings.icon_type == 'image' and trust_block.settings.trust_image != blank %}
+                        <img src="{{ trust_block.settings.trust_image | img_url: '120x120' }}" alt="{{ trust_block.settings.trust_title }}" loading="lazy">
+                      {% elsif trust_block.settings.svg_code != blank %}
+                        {{ trust_block.settings.svg_code }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
                   <h3 class="capability-title">{{ trust_block.settings.trust_title | default: 'ISO-certified Facilities' }}</h3>
                   <p class="capability-description">{{ trust_block.settings.trust_description | default: 'Quality assurance through certified manufacturing processes' }}</p>
                 </div>
