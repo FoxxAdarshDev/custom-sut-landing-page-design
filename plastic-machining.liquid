@@ -6,7 +6,7 @@
   "blocks": [
     {
       "type": "services_overview",
-      "name": "Services Overview",
+      "name": "Plastic Machining Services Overview",
       "settings": [
         {
           "type": "text",
@@ -473,7 +473,7 @@
     },
     {
       "type": "capabilities_section",
-      "name": "Our Expertise",
+      "name": "Our Expertise Section",
       "settings": [
         {
           "type": "text",
@@ -1283,7 +1283,7 @@
       ]
     },
     {
-      "type": "certifications",
+      "type": "certifications_section",
       "name": "Certifications",
       "settings": [
         {
@@ -1425,7 +1425,7 @@
     },
     {
       "type": "facility_walkthrough",
-      "name": "Facility Tour",
+      "name": "Facility Walkthrough",
       "settings": [
         {
           "type": "header",
@@ -3633,7 +3633,7 @@
   }
 
   /* Certifications Section */
-  {% assign certifications_block = section.blocks | where: "type", "certifications" | first %}
+  {% assign certifications_block = section.blocks | where: "type", "certifications_section" | first %}
   {% if certifications_block %}
     .certifications-section {
       --section-padding-top-desktop: {{ certifications_block.settings.certifications_padding_top_desktop | default: 120 }}px;
@@ -5271,7 +5271,7 @@
         </div>
       </section>
 
-    {% when 'certifications' %}
+    {% when 'certifications_section' %}
       <section class="certifications-section section-padding">
         <div class="container">
           <div class="text-center">
