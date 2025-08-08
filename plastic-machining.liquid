@@ -48,6 +48,22 @@
           "label": "Background Color",
           "default": "#0071b9"
         },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 85
+        },
 
         {
           "type": "header",
@@ -2410,6 +2426,20 @@
     z-index: 0;
   }
 
+  .hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }</old_str>
+
 
 
   .hero-video-bg {
@@ -4316,16 +4346,12 @@
       <section class="plastic-machining-hero section-padding" style="
         {% if block.settings.background_type == 'color' or block.settings.background_type == blank %}
           background-color: {{ block.settings.hero_background_color | default: '#0071b9' }};
-        {% elsif block.settings.background_type == 'image' and block.settings.hero_background_image != blank %}
-          background-image: url('{{ block.settings.hero_background_image | img_url: '1920x' }}');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-        {% else %}
-          background-color: #0071b9;
         {% endif %}
       ">
+
+        {% if block.settings.background_type == 'image' and block.settings.hero_background_image != blank %}
+          <div class="hero-bg-image" style="background-image: url('{{ block.settings.hero_background_image | img_url: '1920x' }}');">
+        {% endif %}
 
         {% if block.settings.background_type == 'video' and block.settings.hero_background_video != blank %}
           <video class="hero-video-bg" autoplay muted loop playsinline>
@@ -4369,7 +4395,11 @@
             {% endif %}
           </div>
         </div>
-      </section>
+
+        {% if block.settings.background_type == 'image' and block.settings.hero_background_image != blank %}
+          </div>
+        {% endif %}
+      </section></old_str>
 
     {% when 'text_image_block' %}
       <section class="text-image-block section-padding" style="
