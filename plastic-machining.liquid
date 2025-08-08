@@ -1462,6 +1462,33 @@
           "label": "Background Image"
         },
         {
+          "type": "color",
+          "id": "walkthrough_image_overlay_color",
+          "label": "Image Background Overlay Color",
+          "default": "#0071b9"
+        },
+        {
+          "type": "range",
+          "id": "walkthrough_image_overlay_opacity",
+          "label": "Image Background Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "checkbox",
+          "id": "walkthrough_show_video_with_image",
+          "label": "Show Video Player with Image Background",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "walkthrough_image_video_url",
+          "label": "Video URL for Image Background (MP4 or iframe URL)"
+        },
+        {
           "type": "text",
           "id": "walkthrough_background_video",
           "label": "Background Video URL (MP4)"
@@ -5350,9 +5377,14 @@
           </video>
         {% endif %}
 
-        <!-- Always show overlay -->
+        <!-- Overlay for different background types -->
         <div class="walkthrough-overlay" style="
-          background: linear-gradient(135deg, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}cc 0%, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}99 100%);
+          {% if block.settings.walkthrough_background_type == 'image' and block.settings.walkthrough_background_image != blank %}
+            background: {{ block.settings.walkthrough_image_overlay_color | default: '#0071b9' }};
+            opacity: {{ block.settings.walkthrough_image_overlay_opacity | default: 80 | divided_by: 100.0 }};
+          {% else %}
+            background: linear-gradient(135deg, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}cc 0%, {{ block.settings.walkthrough_bg_color | default: '#0071b9' }}99 100%);
+          {% endif %}
           position: absolute;
           top: 0;
           left: 0;
@@ -5387,7 +5419,66 @@
               margin-right: auto;
             ">{{ block.settings.walkthrough_subtitle | default: 'Take a virtual tour of our state-of-the-art plastic machining facilities.' }}</p>
 
-            <!-- Always show video container if URL is provided -->
+            <!-- Show video iframe for image background type -->
+            {% if block.settings.walkthrough_background_type == 'image' and block.settings.walkthrough_show_video_with_image and block.settings.walkthrough_image_video_url != blank %}
+              <div class="walkthrough-video-container" style="
+                margin: 40px auto 40px;
+                max-width: 1000px;
+                width: 100%;
+                position: relative;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(15px);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+              ">
+                <div class="walkthrough-iframe-wrapper" style="
+                  position: relative;
+                  padding-bottom: 56.25%;
+                  height: 0;
+                  overflow: hidden;
+                  border-radius: 15px;
+                  box-shadow: 0 10px 30px rgba(0, 113, 185, 0.2);
+                ">
+                  {% if block.settings.walkthrough_image_video_url contains 'iframe' or block.settings.walkthrough_image_video_url contains 'embed' %}
+                    <iframe 
+                      src="{{ block.settings.walkthrough_image_video_url }}"
+                      style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        border-radius: 15px;
+                      "
+                      allowfullscreen
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      loading="lazy">
+                    </iframe>
+                  {% else %}
+                    <video 
+                      controls 
+                      muted 
+                      style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 15px;
+                        object-fit: cover;
+                      "
+                      preload="metadata">
+                      <source src="{{ block.settings.walkthrough_image_video_url }}" type="video/mp4">
+                    </video>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+
+            <!-- Always show video container if CTA URL is provided -->
             {% if block.settings.walkthrough_cta_url != blank %}
               <div class="walkthrough-video-container" style="
                 margin: 40px auto 40px;
