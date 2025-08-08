@@ -3321,11 +3321,12 @@
 
     .text-image-grid-{{ forloop.index }} {
       display: grid;
-      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}45% 55%{% else %}60% 40%{% endif %};
+      grid-template-columns: {% if block.settings.layout_direction == 'text_right' %}45% 55%{% else %}55% 45%{% endif %};
       gap: {{ block.settings.content_gap | default: 60 }}px;
       align-items: center;
       max-width: 1400px;
       margin: 0 auto;
+      padding: 0 20px;
     }
 
     .text-image-content-{{ forloop.index }} {
@@ -3366,7 +3367,7 @@
       font-weight: 600;
     }
 
-    /* Enhanced Bullet Points with Better Design */
+    /* Enhanced Bullet Points with Custom Design */
     .text-image-description-{{ forloop.index }} ul {
       list-style: none;
       padding-left: 0;
@@ -3375,8 +3376,8 @@
 
     .text-image-description-{{ forloop.index }} ul li {
       position: relative;
-      padding-left: 35px;
-      margin-bottom: 14px;
+      padding-left: 40px;
+      margin-bottom: 16px;
       font-size: {{ block.settings.text_description_size_desktop | default: 16 }}px;
       line-height: {{ block.settings.text_description_line_height | default: 1.6 }};
     }
@@ -3384,14 +3385,14 @@
     .text-image-description-{{ forloop.index }} ul li::before {
       content: '';
       position: absolute;
-      left: 8px;
-      top: 12px;
-      width: 12px;
-      height: 12px;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: {{ block.settings.bullet_size | default: 8 }}px;
+      height: {{ block.settings.bullet_size | default: 8 }}px;
       background: {{ block.settings.bullet_color | default: '#0071b9' }};
       border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(0, 113, 185, 0.15);
-      border: 2px solid rgba(0, 113, 185, 0.3);
+      box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
     }
 
     /* Apply bullet styles to all content blocks */
@@ -3403,8 +3404,8 @@
 
     .content-block-content ul li {
       position: relative;
-      padding-left: 35px;
-      margin-bottom: 14px;
+      padding-left: 40px;
+      margin-bottom: 16px;
       font-size: 16px;
       line-height: 1.6;
     }
@@ -3412,14 +3413,20 @@
     .content-block-content ul li::before {
       content: '';
       position: absolute;
-      left: 8px;
-      top: 12px;
-      width: 12px;
-      height: 12px;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
       background: #0071b9;
       border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(0, 113, 185, 0.15);
-      border: 2px solid rgba(0, 113, 185, 0.3);
+      box-shadow: 0 0 0 3px rgba(0, 113, 185, 0.2);
+    }
+
+    .text-image-visual-wrapper-{{ forloop.index }} {
+      position: relative;
+      display: inline-block;
+      width: 100%;
     }
 
     .text-image-img-{{ forloop.index }} {
@@ -3428,11 +3435,42 @@
       border-radius: {{ block.settings.image_border_radius | default: 16 }}px;
       box-shadow: 0 20px 60px rgba(0, 113, 185, 0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .text-image-img-{{ forloop.index }}:hover {
       transform: translateY(-8px);
       box-shadow: 0 30px 80px rgba(0, 113, 185, 0.25);
+    }
+
+    .image-expand-btn-{{ forloop.index }} {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: #0071b9;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 113, 185, 0.3);
+      transition: all 0.3s ease;
+      z-index: 5;
+    }
+
+    .image-expand-btn-{{ forloop.index }}:hover {
+      background: #005a91;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 113, 185, 0.4);
+    }
+
+    .image-expand-btn-{{ forloop.index }} svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
     }
 
     .text-image-caption-{{ forloop.index }} {
@@ -3455,6 +3493,7 @@
       .text-image-grid-{{ forloop.index }} {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding: 0 15px;
       }
 
       .text-image-content-{{ forloop.index }},
@@ -3483,21 +3522,93 @@
 
       .text-image-description-{{ forloop.index }} ul li {
         font-size: {{ block.settings.text_description_size_mobile | default: 14 }}px;
-        padding-left: 30px;
+        padding-left: 35px;
       }
 
       .text-image-description-{{ forloop.index }} ul li::before {
-        width: 10px;
-        height: 10px;
-        left: 6px;
-        top: 10px;
+        width: 6px;
+        height: 6px;
+        left: 8px;
       }
 
       .text-image-caption-{{ forloop.index }} {
         font-size: {{ block.settings.image_caption_size_mobile | default: 12 }}px;
       }
+
+      .image-expand-btn-{{ forloop.index }} {
+        width: 35px;
+        height: 35px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .image-expand-btn-{{ forloop.index }} svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   {% endfor %}
+
+  /* Image Popup Modal */
+  .image-popup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-popup-modal.active {
+    display: flex;
+  }
+
+  .image-popup-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .image-popup-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .image-popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .image-popup-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+  }
+
+  .image-popup-close svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
 
   /* Content Block Section */
   {% assign content_block = section.blocks | where: "type", "content_block" | first %}
@@ -3691,12 +3802,21 @@
             <!-- Image Content -->
             <div class="text-image-visual-{{ text_image_counter }}">
               {% if block.settings.block_image != blank %}
-                <img
-                  src="{{ block.settings.block_image | img_url: '800x600' }}"
-                  alt="{{ block.settings.image_caption | default: block.settings.text_heading }}"
-                  class="text-image-img-{{ text_image_counter }}"
-                  loading="lazy"
-                >
+                <div class="text-image-visual-wrapper-{{ text_image_counter }}">
+                  <img
+                    src="{{ block.settings.block_image | img_url: '800x600' }}"
+                    alt="{{ block.settings.image_caption | default: block.settings.text_heading }}"
+                    class="text-image-img-{{ text_image_counter }}"
+                    loading="lazy"
+                    onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')"
+                  >
+                  
+                  <button class="image-expand-btn-{{ text_image_counter }}" onclick="openImagePopup('{{ block.settings.block_image | img_url: '1200x900' }}')">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M19,19H5V5H12V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3"/>
+                    </svg>
+                  </button>
+                </div>
 
                 {% if block.settings.image_caption != blank %}
                   <p class="text-image-caption-{{ text_image_counter }}">{{ block.settings.image_caption }}</p>
@@ -3990,7 +4110,49 @@
   {% endcase %}
 {% endfor %}
 
+<!-- Image Popup Modal -->
+<div class="image-popup-modal" id="imagePopupModal">
+  <div class="image-popup-content">
+    <button class="image-popup-close" onclick="closeImagePopup()">
+      <svg viewBox="0 0 24 24">
+        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+      </svg>
+    </button>
+    <img id="popupImage" src="" alt="">
+  </div>
+</div>
+
 <script>
+// Image popup functionality
+function openImagePopup(imageSrc) {
+  const modal = document.getElementById('imagePopupModal');
+  const popupImage = document.getElementById('popupImage');
+  
+  popupImage.src = imageSrc;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImagePopup() {
+  const modal = document.getElementById('imagePopupModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Close popup when clicking outside image
+document.getElementById('imagePopupModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeImagePopup();
+  }
+});
+
+// Close popup with escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeImagePopup();
+  }
+});
+
 // Enhanced JavaScript functionality
 document.addEventListener('DOMContentLoaded', function() {
   // Auto-play videos when in viewport
