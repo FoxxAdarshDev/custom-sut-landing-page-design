@@ -239,13 +239,14 @@
   }
 
   .video-tab.active {
-    color: {{ section.settings.tab_active_text }};
-    border-bottom-color: {{ section.settings.tab_active_bg }};
+    color: {{ section.settings.tab_active_text | default: '#095ea7' }};
+    border-bottom-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
+    font-weight: 700;
   }
 
   .video-tab:hover:not(.active) {
-    color: {{ section.settings.tab_hover_text }};
-    background-color: {{ section.settings.tab_hover_bg }};
+    color: {{ section.settings.tab_hover_text | default: '#095ea7' }};
+    background-color: {{ section.settings.tab_hover_bg | default: '#e0e0e0' }};
   }
 
   .tab-content {
@@ -294,12 +295,19 @@
     width: 100%;
     height: 180px;
     background: #000;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
   }
 
-  .video-thumbnail-container iframe {
+  .video-thumbnail-container img {
     width: 100%;
     height: 100%;
-    border: none;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .youtube-video-item:hover .video-thumbnail-container img {
+    transform: scale(1.05);
   }
 
   .video-play-button {
@@ -460,6 +468,7 @@
     overflow: hidden;
     display: flex;
     position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
   .modal-video-section {
@@ -923,8 +932,15 @@ function initializeYouTubeGallery(sectionId) {
     const isShortPlaylist = playlist.name.toLowerCase().includes('short');
     const videoCount = isShortPlaylist ? 6 : 12;
     
+    // Use real YouTube video IDs for demonstration
+    const sampleVideoIds = [
+      'dQw4w9WgXcQ', 'jNQXAC9IVRw', 'J---aiyznGQ', 'ZbZSe6N_BXs',
+      '9bZkp7q19f0', 'PSoOFn3wQV4', 'L_jWHffIx5E', 'fJ9rUzIMcZQ',
+      'YQHsXMglC9A', '3tmd-ClpJxA', 'kJQP7kiw5Fk', 'rAHQY4HuDY8'
+    ];
+    
     for (let i = 1; i <= videoCount; i++) {
-      const videoId = `${playlist.id}_video_${i}`;
+      const videoId = sampleVideoIds[(i - 1) % sampleVideoIds.length];
       const title = isShortPlaylist ? 
         `${playlist.name} Short #${i}` : 
         `${playlist.name} Video #${i}`;
@@ -964,11 +980,9 @@ function initializeYouTubeGallery(sectionId) {
     
     videoDiv.innerHTML = `
       <div class="video-thumbnail-container">
-        <iframe src="https://www.youtube.com/embed/${video.id}" 
-                title="${video.title}" 
-                frameborder="0" 
-                allowfullscreen>
-        </iframe>
+        <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" 
+             alt="${video.title}"
+             style="width: 100%; height: 100%; object-fit: cover;">
         <div class="video-play-button"></div>
         <div class="video-type-badge">Video</div>
       </div>
@@ -1097,7 +1111,9 @@ function initializeYouTubeGallery(sectionId) {
     
     shortDiv.innerHTML = `
       <div class="short-thumbnail">
-        <iframe src="https://www.youtube.com/embed/${short.id}" frameborder="0" allowfullscreen></iframe>
+        <img src="https://img.youtube.com/vi/${short.id}/mqdefault.jpg" 
+             alt="${short.title}"
+             style="width: 100%; height: 100%; object-fit: cover;">
       </div>
       <div class="short-overlay">
         <div class="short-badge">Short</div>
