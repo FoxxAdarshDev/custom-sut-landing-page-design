@@ -2424,6 +2424,32 @@ function initializeYouTubeGallery(sectionId) {
     return videoDiv;
   }
 
+  // Function to convert text with links, emails, and URLs to clickable HTML
+  function formatDescriptionWithLinks(text) {
+    if (!text) return 'Video description not available';
+    
+    // Convert URLs to clickable links
+    const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+    text = text.replace(urlRegex, '<a href="$&" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline;">$&</a>');
+    
+    // Convert email addresses to clickable mailto links
+    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+    text = text.replace(emailRegex, '<a href="mailto:$&" style="color: #007bff; text-decoration: underline;">$&</a>');
+    
+    // Convert www.example.com (without http) to clickable links
+    const wwwRegex = /\bwww\.[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+    text = text.replace(wwwRegex, '<a href="https://$&" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline;">$&</a>');
+    
+    // Convert phone numbers to clickable tel links
+    const phoneRegex = /(\+\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/g;
+    text = text.replace(phoneRegex, '<a href="tel:$&" style="color: #007bff; text-decoration: underline;">$&</a>');
+    
+    // Convert line breaks to HTML breaks for better formatting
+    text = text.replace(/\n/g, '<br>');
+    
+    return text;
+  }
+
   function showModal(videoData) {
     const title = videoData.title;
     const description = videoData.description || 'Video description not available';
@@ -2438,7 +2464,7 @@ function initializeYouTubeGallery(sectionId) {
     modalPlaylistTag.textContent = playlist;
     modalTitle.textContent = title;
     modalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1&enablejsapi=0&disablekb=1&fs=1&iv_load_policy=3&cc_load_policy=0&origin=${encodeURIComponent(window.location.origin)}`;
-    modalDescription.innerHTML = description;
+    modalDescription.innerHTML = formatDescriptionWithLinks(description);
     modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
 
     // Format publish date
