@@ -1,0 +1,30 @@
+   document.addEventListener("DOMContentLoaded", function() {
+                                        const loader = document.getElementById('loader');
+                                        const loaderText = document.getElementById('loader-text');
+                                        const didYouKnowImage = document.getElementById('did-you-know-image');
+
+                                        // Check if loader has already been shown this session
+                                        const hasSeenLoader = sessionStorage.getItem('foxx_loader_shown');
+
+                                        // Check if this is a direct visit (not from internal navigation)
+                                        const isDirectVisit = !document.referrer || 
+                                                            !document.referrer.includes(window.location.hostname) ||
+                                                            performance.getEntriesByType('navigation')[0].type === 'reload';
+
+                                        if (hasSeenLoader && !isDirectVisit) {
+                                            // Hide loader immediately if already seen and it's internal navigation
+                                            loader.style.display = 'none';
+                                            return;
+                                        }
+
+                                       const messages = [
+                                        "We celebrate 15 years of ISO 13485 in 2025.",
+                                        "We have a Class 7 Clean Room with 7 Rooms in 4 locations.",
+                                        "Our products are North American designed and manufactured!",
+                                        "We are committed to USP Class VI Materials.",
+                                        "We follow cGMP Control for single-use manufacturing.",
+                                        "We meet USP665 L&E standards.",
+                                        "We have major Gamma Sterilization capabilities!",
+                                        "We have Class 7 & 8 molding capabilities.",
+                                        "Our products are manufactured in USA & India."
+                                    ];
