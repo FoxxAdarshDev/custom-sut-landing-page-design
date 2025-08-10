@@ -101,6 +101,25 @@
     gap: 15px;
     max-height: 600px;
     overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .shorts-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .shorts-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .shorts-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+
+  .shorts-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   /* Shorts fullscreen view */
@@ -149,6 +168,8 @@
     cursor: pointer;
     transition: transform 0.3s;
     height: 200px;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .short-item:hover {
@@ -904,6 +925,25 @@
     gap: 15px;
     max-height: 600px;
     overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .skeleton-shorts-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .skeleton-shorts-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .skeleton-shorts-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+
+  .skeleton-shorts-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   .skeleton-short-item {
@@ -912,7 +952,9 @@
     border-radius: 12px;
     overflow: hidden;
     height: 200px;
+    width: 100%;
     position: relative;
+    flex-shrink: 0;
     animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
@@ -1024,6 +1066,11 @@
       overflow-y: auto;
       gap: 10px;
       padding-bottom: 10px;
+      padding-right: 6px;
+    }
+
+    .shorts-container::-webkit-scrollbar {
+      width: 6px;
     }
 
     .short-item {
