@@ -705,6 +705,7 @@
     margin-top: 10px;
     position: relative;
     z-index: 1;
+    pointer-events: auto;
   }
 
    .modal-video-section iframe{
@@ -806,30 +807,37 @@
     align-items: center;
     gap: 8px;
     background: linear-gradient(135deg, #ff0000, #cc0000);
-    color: white;
+    color: white !important;
     padding: 12px 20px;
     border-radius: 25px;
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
     position: relative;
-    z-index: 10;
+    z-index: 100;
     cursor: pointer;
     border: none;
     outline: none;
+    pointer-events: auto;
   }
 
   .modal-youtube-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
-    color: white;
-    text-decoration: none;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+    background: linear-gradient(135deg, #ff2020, #dd0000) !important;
   }
 
   .modal-youtube-link:focus {
     outline: 2px solid #ff6666;
     outline-offset: 2px;
+  }
+
+  .modal-youtube-link:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.5) !important;
   }
 
   .modal-recommendations {
@@ -870,10 +878,10 @@
     align-items: center;
     gap: 10px;
     background: linear-gradient(135deg, #ff0000, #cc0000);
-    color: white;
+    color: white !important;
     padding: 14px 24px;
     border-radius: 30px;
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: 600;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -883,22 +891,29 @@
     width: 100%;
     text-align: center;
     position: relative;
-    z-index: 10;
+    z-index: 100;
     cursor: pointer;
     border: none;
     outline: none;
+    pointer-events: auto;
   }
 
   .playlist-youtube-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
-    color: white;
-    text-decoration: none;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+    background: linear-gradient(135deg, #ff2020, #dd0000) !important;
   }
 
   .playlist-youtube-link:focus {
     outline: 2px solid #ff6666;
     outline-offset: 2px;
+  }
+
+  .playlist-youtube-link:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.5) !important;
   }
 
   .playlist-youtube-link svg {
