@@ -907,7 +907,8 @@
   }
 
   .skeleton-short-item {
-    background-color: #000;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
     height: 200px;
@@ -918,9 +919,10 @@
   .skeleton-short-thumbnail {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #333 25%, #555 50%, #333 75%);
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 8px 8px 0 0;
   }
 
   .skeleton-short-overlay {
@@ -933,11 +935,20 @@
   .skeleton-short-badge {
     width: 50px;
     height: 24px;
-    background: linear-gradient(90deg, #ff0000 25%, #cc0000 50%, #ff0000 75%);
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
     margin-bottom: 4px;
+  }
+
+  .skeleton-short-play-status {
+    width: 45px;
+    height: 20px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 4px;
   }
 
   .skeleton-short-views {
@@ -946,7 +957,7 @@
     left: 10px;
     width: 60px;
     height: 16px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.3) 25%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 75%);
+    background: linear-gradient(90deg, rgba(240,240,240,0.8) 25%, rgba(224,224,224,0.8) 50%, rgba(240,240,240,0.8) 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
@@ -1375,7 +1386,7 @@ function initializeYouTubeGallery(sectionId) {
     
     // Add a small delay to show skeleton loading, then fade in real content
     setTimeout(() => {
-      displayShorts(shorts.slice(0, 3)); // Show only 3 latest shorts
+      displayShorts(shorts); // Show all available shorts
       createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
     }, 800); // 800ms delay to show skeleton loading
   }
@@ -1705,13 +1716,14 @@ function initializeYouTubeGallery(sectionId) {
 
   function showSkeletonShorts() {
     shortsContainer.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       const skeletonShort = document.createElement('div');
       skeletonShort.className = 'skeleton-short-item';
       skeletonShort.innerHTML = `
         <div class="skeleton-short-thumbnail"></div>
         <div class="skeleton-short-overlay">
           <div class="skeleton-short-badge"></div>
+          ${i === 0 ? '<div class="skeleton-short-play-status"></div>' : ''}
         </div>
         <div class="skeleton-short-views"></div>
       `;
