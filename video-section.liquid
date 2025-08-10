@@ -247,6 +247,13 @@
     background-color: #f8f9fa;
     padding: 5px;
     border-radius: 30px 30px 0 0;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .videos-tabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 
   .video-tab {
@@ -831,7 +838,7 @@
     100% { transform: rotate(360deg); }
   }
 
-  /* Skeleton Loading Styles */
+  /* YouTube-like Skeleton Loading Styles */
   .skeleton-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -841,97 +848,141 @@
 
   .skeleton-video-card {
     background-color: #ffffff;
-    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-thumbnail {
     width: 100%;
     height: 180px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 8px 8px 0 0;
+    background: #e5e5e5;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-thumbnail::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-content {
-    padding: 15px;
+    padding: 12px;
+    background: #ffffff;
   }
 
   .skeleton-title {
-    height: 20px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    height: 10px;
+    background: #e5e5e5;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-title-second {
-    height: 16px;
-    width: 70%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    height: 10px;
+    width: 60%;
+    background: #e5e5e5;
     border-radius: 4px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-title-second::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-meta {
     display: flex;
-    gap: 15px;
-    margin-bottom: 10px;
-  }
-
-  .skeleton-meta-item {
-    height: 14px;
-    width: 60px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  .skeleton-description {
-    height: 12px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 4px;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 8px;
   }
 
-  .skeleton-description-second {
-    height: 12px;
-    width: 80%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 4px;
+  .skeleton-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Skeleton animations */
+  .skeleton-avatar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
+  }
+
+  .skeleton-meta-item {
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-meta-item:first-of-type {
+    width: 100px;
+  }
+
+  .skeleton-meta-item:last-of-type {
+    width: 50px;
+  }
+
+  .skeleton-meta-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
+  }
+
+  /* YouTube-like shimmer animation */
   @keyframes skeleton-shimmer {
     0% {
-      background-position: -200% 0;
+      transform: translateX(-100%);
     }
     100% {
-      background-position: 200% 0;
+      transform: translateX(100%);
     }
   }
 
-  @keyframes skeleton-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-
-  /* Shorts skeleton */
+  /* YouTube-like Shorts skeleton */
   .skeleton-shorts-container {
     display: flex;
     flex-direction: column;
@@ -961,23 +1012,32 @@
 
   .skeleton-short-item {
     background-color: #ffffff;
-    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
     height: 200px;
     width: 100%;
     position: relative;
     flex-shrink: 0;
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-short-thumbnail {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 8px 8px 0 0;
+    background: #e5e5e5;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-short-thumbnail::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-short-overlay {
@@ -989,21 +1049,23 @@
 
   .skeleton-short-badge {
     width: 50px;
-    height: 24px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    height: 20px;
+    background: #e5e5e5;
     border-radius: 4px;
     margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-short-play-status {
-    width: 45px;
-    height: 20px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 4px;
+  .skeleton-short-badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-short-views {
@@ -1011,38 +1073,78 @@
     bottom: 10px;
     left: 10px;
     width: 60px;
-    height: 16px;
-    background: linear-gradient(90deg, rgba(240,240,240,0.8) 25%, rgba(224,224,224,0.8) 50%, rgba(240,240,240,0.8) 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    height: 12px;
+    background: #e5e5e5;
     border-radius: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Tab skeleton */
+  .skeleton-short-views::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
+  }
+
+  /* YouTube-like Tab skeleton */
   .skeleton-tabs {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     margin-bottom: 20px;
     border-bottom: 2px solid {{ section.settings.tab_border_color }};
     background-color: #f8f9fa;
     padding: 5px;
     border-radius: 30px 30px 0 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .skeleton-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .skeleton-tab {
-    height: 40px;
-    width: 120px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 25px 25px 0 0;
-    margin-right: 10px;
+    height: 32px;
+    min-width: 80px;
+    width: auto;
+    background: #e5e5e5;
+    border-radius: 16px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-tab::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-tab:first-child {
-    background: linear-gradient(90deg, #095ea7 25%, #073d73 50%, #095ea7 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #095ea7;
+  }
+
+  .skeleton-tab:nth-child(2) {
+    width: 100px;
+  }
+
+  .skeleton-tab:nth-child(3) {
+    width: 90px;
+  }
+
+  .skeleton-tab:nth-child(4) {
+    width: 110px;
   }
 
   /* Fade in animation for real content */
@@ -1391,75 +1493,69 @@ function initializeYouTubeGallery(sectionId) {
       setTimeout(() => {
         displayShorts(shorts);
         createTabs([]);
-      }, 1000); // Delay to show skeleton briefly
+      }, 1000);
       return;
     }
 
     console.log('Total playlists to load:', playlists.length);
     console.log('Playlist IDs:', playlists.map(p => p.id));
 
-    for (const playlist of playlists) {
+    // Step 1: Load only shorts first (faster initial load)
+    const shortsPromises = playlists.map(async (playlist) => {
       try {
-        console.log(`Loading playlist: ${playlist.name} (${playlist.id})`);
-
-        // Fetch real videos from YouTube API
+        console.log(`Loading shorts from: ${playlist.name} (${playlist.id})`);
         const playlistVideos = await fetchPlaylistVideos(playlist.id, playlist.name);
-
-        videosByPlaylist[playlist.id] = {
-          name: playlist.name,
-          videos: []
-        };
-
-        playlistVideos.forEach(videoData => {
-          if (videoData.isShort) {
-            shorts.push(videoData);
-          } else {
-            videosByPlaylist[playlist.id].videos.push(videoData);
-            allVideos.push(videoData);
-          }
-        });
-
-        // Sort videos in each playlist by date (latest first)
-        videosByPlaylist[playlist.id].videos.sort((a, b) => {
-          const dateA = a.publishedDate || new Date(0);
-          const dateB = b.publishedDate || new Date(0);
-          return dateB - dateA; // Descending order (latest first)
-        });
-
-        // Initialize loaded count for each playlist
-        loadedVideos[playlist.id] = 0;
-
-        console.log(`Loaded ${playlistVideos.length} videos from ${playlist.name}`);
-
+        
+        const playlistShorts = playlistVideos.filter(video => video.isShort);
+        console.log(`Found ${playlistShorts.length} shorts in ${playlist.name}`);
+        
+        return playlistShorts;
       } catch (error) {
-        console.error(`Error loading playlist ${playlist.name}:`, error);
-        // Fallback to empty playlist on error
-        videosByPlaylist[playlist.id] = {
-          name: playlist.name,
-          videos: []
-        };
-        loadedVideos[playlist.id] = 0;
+        console.error(`Error loading shorts from ${playlist.name}:`, error);
+        return [];
       }
-    }
+    });
 
-    // Sort all shorts by date (latest first)
+    // Wait for all shorts to load
+    const allShortsArrays = await Promise.all(shortsPromises);
+    allShortsArrays.forEach(shortsArray => {
+      shorts.push(...shortsArray);
+    });
+
+    // Sort shorts by date (latest first)
     shorts.sort((a, b) => {
       const dateA = a.publishedDate || new Date(0);
       const dateB = b.publishedDate || new Date(0);
-      return dateB - dateA; // Descending order (latest first)
+      return dateB - dateA;
     });
 
     // Store shorts data globally for fullscreen view
     window[`shortsData_${sectionId}`] = shorts;
 
-    console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
-    console.log(`Latest short: ${shorts[0]?.title} (${shorts[0]?.publishedAt})`);
-    
-    // Add a small delay to show skeleton loading, then fade in real content
+    // Show shorts immediately
+    displayShorts(shorts);
+
+    // Step 2: Initialize playlist structure (without loading videos yet)
+    playlists.forEach(playlist => {
+      videosByPlaylist[playlist.id] = {
+        name: playlist.name,
+        videos: [],
+        loaded: false // Track if playlist videos are loaded
+      };
+      loadedVideos[playlist.id] = 0;
+    });
+
+    // Create tabs immediately (videos will load when tabs are clicked)
+    createTabs(playlists.map(p => p.id));
+
+    // Auto-load first tab after a brief delay
     setTimeout(() => {
-      displayShorts(shorts); // Show all available shorts
-      createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
-    }, 800); // 800ms delay to show skeleton loading
+      if (playlists.length > 0) {
+        switchTab(playlists[0].id);
+      }
+    }, 500);
+
+    console.log(`Shorts loaded: ${shorts.length}. Videos will load on demand.`);
   }
 
   async function fetchPlaylistVideos(playlistId, playlistName) {
@@ -1714,14 +1810,12 @@ function initializeYouTubeGallery(sectionId) {
 
       tabContentsContainer.appendChild(tabContent);
 
-      // Load initial videos for the first tab
-      if (index === 0 && playlist.videos.length > 0) {
-        loadMoreVideos(playlistId);
-      }
+      // For lazy loading, don't load videos immediately
+      // Videos will be loaded when tab is clicked
     });
   }
 
-  function switchTab(playlistId) {
+  async function switchTab(playlistId) {
     // Update tab buttons
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.classList.remove('active');
@@ -1734,8 +1828,54 @@ function initializeYouTubeGallery(sectionId) {
     });
     document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`).classList.add('active');
 
-    // Load videos if not loaded yet
-    if (loadedVideos[playlistId] === 0) {
+    const playlist = videosByPlaylist[playlistId];
+    
+    // Check if playlist videos need to be loaded
+    if (!playlist.loaded) {
+      console.log(`Loading videos for ${playlist.name}...`);
+      
+      // Show loading in the tab content
+      const videosContainer = document.querySelector(`#videos-${playlistId}`);
+      if (videosContainer) {
+        videosContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+      }
+
+      try {
+        // Find the original playlist config
+        const originalPlaylist = playlists.find(p => p.id === playlistId);
+        if (originalPlaylist) {
+          const playlistVideos = await fetchPlaylistVideos(originalPlaylist.id, originalPlaylist.name);
+          
+          // Filter out shorts (they're already loaded)
+          const regularVideos = playlistVideos.filter(video => !video.isShort);
+          
+          // Sort videos by date (latest first)
+          regularVideos.sort((a, b) => {
+            const dateA = a.publishedDate || new Date(0);
+            const dateB = b.publishedDate || new Date(0);
+            return dateB - dateA;
+          });
+
+          playlist.videos = regularVideos;
+          playlist.loaded = true;
+
+          // Add to allVideos array
+          allVideos.push(...regularVideos);
+
+          console.log(`Loaded ${regularVideos.length} videos for ${playlist.name}`);
+        }
+      } catch (error) {
+        console.error(`Error loading videos for ${playlist.name}:`, error);
+        const videosContainer = document.querySelector(`#videos-${playlistId}`);
+        if (videosContainer) {
+          videosContainer.innerHTML = displayEmptyState(`Failed to load videos from ${playlist.name}`);
+        }
+        return;
+      }
+    }
+
+    // Load videos if not displayed yet
+    if (loadedVideos[playlistId] === 0 && playlist.videos.length > 0) {
       loadMoreVideos(playlistId);
     }
   }
@@ -1806,10 +1946,10 @@ function initializeYouTubeGallery(sectionId) {
     videosTabsContainer.innerHTML = '';
     tabContentsContainer.innerHTML = '';
 
-    // Create skeleton tabs
+    // Create skeleton tabs with realistic varying widths
     const skeletonTabsDiv = document.createElement('div');
     skeletonTabsDiv.className = 'skeleton-tabs';
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       const skeletonTab = document.createElement('div');
       skeletonTab.className = 'skeleton-tab';
       skeletonTabsDiv.appendChild(skeletonTab);
@@ -1832,15 +1972,17 @@ function initializeYouTubeGallery(sectionId) {
     skeletonDiv.innerHTML = `
       <div class="skeleton-thumbnail"></div>
       <div class="skeleton-content">
-        <div class="skeleton-title"></div>
-        <div class="skeleton-title-second"></div>
         <div class="skeleton-meta">
-          <div class="skeleton-meta-item"></div>
-          <div class="skeleton-meta-item"></div>
-          <div class="skeleton-meta-item"></div>
+          <div class="skeleton-avatar"></div>
+          <div style="flex: 1;">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-title-second"></div>
+            <div style="display: flex; gap: 8px; margin-top: 4px;">
+              <div class="skeleton-meta-item"></div>
+              <div class="skeleton-meta-item"></div>
+            </div>
+          </div>
         </div>
-        <div class="skeleton-description"></div>
-        <div class="skeleton-description-second"></div>
       </div>
     `;
     return skeletonDiv;
