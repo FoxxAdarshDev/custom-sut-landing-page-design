@@ -574,9 +574,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
     transition: all 0.3s ease;
-    font-weight: bold;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
@@ -600,6 +598,12 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
+  .nav-arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
   .youtube-modal-close {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(0, 0, 0, 0.1);
@@ -611,8 +615,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
-    font-weight: bold;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
@@ -623,6 +625,12 @@
     transform: scale(1.15);
     border-color: rgba(255, 0, 0, 0.3);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .youtube-modal-close svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
   }
 
   .modal-main-content {
@@ -714,8 +722,31 @@
     line-height: 1.6;
     color: #555;
     margin-bottom: 20px;
-    max-height: 120px;
+    max-height: 150px;
     overflow-y: auto;
+    padding-right: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #fafafa;
+  }
+
+  .modal-description::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  .modal-description::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+  }
+
+  .modal-description::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   .modal-youtube-link {
@@ -1565,9 +1596,21 @@
             <!-- Playlist name will be populated -->
           </div>
           <div class="modal-navigation">
-            <button class="nav-arrow" id="prevVideo-{{ section.id }}" title="Previous Video">‹</button>
-            <button class="nav-arrow" id="nextVideo-{{ section.id }}" title="Next Video">›</button>
-            <button class="youtube-modal-close" data-section-id="{{ section.id }}" title="Close">×</button>
+            <button class="nav-arrow" id="prevVideo-{{ section.id }}" title="Previous Video">
+              <svg viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+              </svg>
+            </button>
+            <button class="nav-arrow" id="nextVideo-{{ section.id }}" title="Next Video">
+              <svg viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+              </svg>
+            </button>
+            <button class="youtube-modal-close" data-section-id="{{ section.id }}" title="Close">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+            </button>
           </div>
         </div>
 
