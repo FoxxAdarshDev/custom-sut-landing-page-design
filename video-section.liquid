@@ -220,33 +220,40 @@
 
   .videos-tabs {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     margin-bottom: 20px;
     border-bottom: 2px solid {{ section.settings.tab_border_color }};
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: 30px 30px 0 0;
   }
 
   .video-tab {
     padding: 12px 20px;
     background: transparent;
     border: none;
-    color: {{ section.settings.tab_inactive_text }};
-    font-size: 16px;
+    color: {{ section.settings.tab_inactive_text | default: '#666666' }};
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     border-bottom: 3px solid transparent;
     transition: all 0.3s ease;
+    border-radius: 25px 25px 0 0;
+    white-space: nowrap;
   }
 
   .video-tab.active {
-    color: {{ section.settings.tab_active_text | default: '#095ea7' }} !important;
+    color: #ffffff !important;
     border-bottom-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
     font-weight: 700;
-    background-color: rgba(9, 94, 167, 0.1);
+    background-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
+    border-radius: 25px 25px 0 0;
   }
 
   .video-tab:hover:not(.active) {
     color: {{ section.settings.tab_hover_text | default: '#095ea7' }};
     background-color: {{ section.settings.tab_hover_bg | default: '#e0e0e0' }};
+    border-radius: 25px 25px 0 0;
   }
 
   .tab-content {
@@ -876,10 +883,10 @@ function initializeYouTubeGallery(sectionId) {
   // Load content from all playlists
   const playlists = [
     {% for block in section.blocks %}
-      {% if block.type == 'playlist' %}
+      {% if block.type == 'playlist' and block.settings.playlist_id != blank %}
         {
           id: '{{ block.settings.playlist_id }}',
-          name: '{{ block.settings.playlist_name }}'
+          name: '{{ block.settings.playlist_name | default: "Playlist" }}'
         }{% unless forloop.last %},{% endunless %}
       {% endif %}
     {% endfor %}
@@ -894,6 +901,9 @@ function initializeYouTubeGallery(sectionId) {
       createTabs([]);
       return;
     }
+
+    console.log('Total playlists to load:', playlists.length);
+    console.log('Playlist IDs:', playlists.map(p => p.id));
 
     for (const playlist of playlists) {
       try {
@@ -918,6 +928,8 @@ function initializeYouTubeGallery(sectionId) {
 
         // Initialize loaded count for each playlist
         loadedVideos[playlist.id] = 0;
+
+        console.log(`Loaded ${playlistVideos.length} videos from ${playlist.name}`);
 
       } catch (error) {
         console.error(`Error loading playlist ${playlist.name}:`, error);
