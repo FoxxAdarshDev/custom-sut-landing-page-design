@@ -1,7 +1,7 @@
 
 {% comment %}
   YouTube Video Gallery Section
-  Displays shorts on left and videos on right with modal popups
+  Displays shorts on left and videos in tabs on right with modal popups
 {% endcomment %}
 
 <style>
@@ -71,12 +71,28 @@
   }
 
   .auto-playing-indicator {
-    background-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
-    color: {{ section.settings.tab_active_text | default: '#ffffff' }};
+    background-color: #22c55e;
+    color: white;
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .auto-playing-indicator::before {
+    content: "●";
+    color: #22c55e;
+    background: white;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
   }
 
   .shorts-container {
@@ -88,62 +104,74 @@
   }
 
   .short-item {
-    background-color: #ffffff;
-    border: 2px solid {{ section.settings.card_border_color }};
+    position: relative;
+    background-color: #000;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
+    height: 200px;
   }
 
   .short-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
   }
 
   .short-thumbnail {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 100%;
     overflow: hidden;
+    background: #000;
   }
 
   .short-thumbnail iframe {
     width: 100%;
     height: 100%;
     border: none;
+    object-fit: cover;
   }
 
-  .short-duration {
+  .short-overlay {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background-color: rgba(0, 0, 0, 0.8);
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+  }
+
+  .short-badge {
+    background-color: #ff0000;
     color: white;
-    padding: 2px 6px;
+    padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
+    font-weight: 600;
   }
 
-  .short-details {
-    padding: 12px;
+  .short-play-status {
+    background-color: #ff0000;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 4px;
   }
 
-  .short-title {
+  .short-views {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
     font-size: 14px;
     font-weight: 600;
-    color: {{ section.settings.video_title_color }};
-    margin-bottom: 5px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .short-date {
-    font-size: 12px;
-    color: {{ section.settings.video_date_color }};
+  .short-views::before {
+    content: "👁";
   }
 
   /* Videos section */
@@ -152,19 +180,48 @@
     min-height: 600px;
   }
 
+  .videos-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid {{ section.settings.tab_border_color }};
+  }
+
+  .video-tab {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: {{ section.settings.tab_inactive_text }};
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .video-tab.active {
+    color: {{ section.settings.tab_active_text }};
+    border-bottom-color: {{ section.settings.tab_active_bg }};
+  }
+
+  .video-tab:hover:not(.active) {
+    color: {{ section.settings.tab_hover_text }};
+    background-color: {{ section.settings.tab_hover_bg }};
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
   .videos-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid {{ section.settings.tab_border_color }};
-  }
-
-  .videos-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: {{ section.settings.title_color }};
   }
 
   .video-count {
@@ -174,29 +231,62 @@
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
+    margin-bottom: 20px;
   }
 
   .youtube-video-item {
     background-color: #ffffff;
-    border: 2px solid {{ section.settings.card_border_color }};
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
   }
 
   .youtube-video-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .youtube-video-item iframe {
+  .video-thumbnail-container {
+    position: relative;
     width: 100%;
-    height: 160px;
+    height: 180px;
+    background: #000;
+  }
+
+  .video-thumbnail-container iframe {
+    width: 100%;
+    height: 100%;
     border: none;
+  }
+
+  .video-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .video-play-button::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    margin-left: 4px;
   }
 
   .youtube-video-details {
@@ -215,11 +305,56 @@
     overflow: hidden;
   }
 
-  .youtube-video-date {
-    font-size: 12px;
-    color: {{ section.settings.video_date_color }};
+  .video-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     margin: 8px 0;
-    font-weight: 500;
+    font-size: 14px;
+    color: {{ section.settings.video_date_color }};
+  }
+
+  .video-duration {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .video-duration::before {
+    content: "🕒";
+  }
+
+  .video-views {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .video-views::before {
+    content: "👁";
+  }
+
+  .video-description {
+    font-size: 14px;
+    color: {{ section.settings.description_color }};
+    line-height: 1.4;
+    margin: 8px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .video-type-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
   }
 
   .youtube-read-more {
@@ -236,6 +371,30 @@
   .youtube-read-more:hover {
     color: {{ section.settings.read_more_hover_color }};
     text-decoration: underline;
+  }
+
+  .load-more-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: {{ section.settings.tab_active_bg }};
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .load-more-button:hover {
+    background-color: {{ section.settings.read_more_hover_color }};
+  }
+
+  .load-more-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 
   /* Modal styles */
@@ -303,119 +462,6 @@
     margin-bottom: 20px;
   }
 
-  .modal-title {
-    color: {{ section.settings.modal_title_color }};
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    line-height: 1.3;
-  }
-
-  .modal-video-stats {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #dee2e6;
-  }
-
-  .modal-stat {
-    text-align: center;
-  }
-
-  .modal-stat-number {
-    font-size: 18px;
-    font-weight: 700;
-    color: {{ section.settings.modal_title_color }};
-  }
-
-  .modal-stat-label {
-    font-size: 12px;
-    color: {{ section.settings.modal_description_color }};
-    text-transform: uppercase;
-  }
-
-  .modal-description {
-    color: {{ section.settings.modal_description_color }};
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .modal-youtube-link {
-    background-color: #ff0000;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    transition: background-color 0.3s;
-  }
-
-  .modal-youtube-link:hover {
-    background-color: #cc0000;
-    color: white;
-  }
-
-  .sidebar-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: {{ section.settings.modal_title_color }};
-  }
-
-  .sidebar-video-item {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .sidebar-video-item:hover {
-    background-color: #e9ecef;
-  }
-
-  .sidebar-video-thumbnail {
-    flex: 0 0 80px;
-    height: 60px;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .sidebar-video-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .sidebar-video-info {
-    flex: 1;
-  }
-
-  .sidebar-video-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: {{ section.settings.video_title_color }};
-    margin-bottom: 5px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .sidebar-video-date {
-    font-size: 12px;
-    color: {{ section.settings.video_date_color }};
-  }
-
   .loading-spinner {
     display: flex;
     justify-content: center;
@@ -477,13 +523,19 @@
       max-height: 300px;
     }
 
-    #modalIframe {
-      height: 250px;
-    }
-
     .youtube-subscribe-container {
       display: block;
       text-align: center;
+    }
+
+    .videos-tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    .video-tab {
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   }
 </style>
@@ -518,7 +570,7 @@
       <div class="shorts-section">
         <div class="shorts-header">
           <h3 class="shorts-title">Shorts</h3>
-          <span class="auto-playing-indicator">● Auto-playing</span>
+          <span class="auto-playing-indicator">Auto-playing</span>
         </div>
         <div class="shorts-container" id="shorts-container-{{ section.id }}">
           <div class="loading-spinner">
@@ -529,14 +581,14 @@
 
       <!-- Videos Section -->
       <div class="videos-section">
-        <div class="videos-header">
-          <h3 class="videos-title">Videos</h3>
-          <span class="video-count" id="video-count-{{ section.id }}">3 videos</span>
+        <!-- Tab Navigation -->
+        <div class="videos-tabs" id="videos-tabs-{{ section.id }}">
+          <!-- Tabs will be dynamically generated -->
         </div>
-        <div class="youtube-video-container" id="youtube-videos-{{ section.id }}">
-          <div class="loading-spinner">
-            <div class="spinner"></div>
-          </div>
+
+        <!-- Tab Contents -->
+        <div id="tab-contents-{{ section.id }}">
+          <!-- Tab content will be dynamically generated -->
         </div>
       </div>
     </div>
@@ -584,8 +636,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeYouTubeGallery(sectionId) {
   const shortsContainer = document.querySelector(`#shorts-container-${sectionId}`);
-  const videosContainer = document.querySelector(`#youtube-videos-${sectionId}`);
-  const videoCount = document.querySelector(`#video-count-${sectionId}`);
+  const videosTabsContainer = document.querySelector(`#videos-tabs-${sectionId}`);
+  const tabContentsContainer = document.querySelector(`#tab-contents-${sectionId}`);
   const modal = document.querySelector(`#videoModal-${sectionId}`);
   const modalTitle = document.querySelector(`#modalTitle-${sectionId}`);
   const modalIframe = document.querySelector(`#modalIframe-${sectionId}`);
@@ -596,9 +648,12 @@ function initializeYouTubeGallery(sectionId) {
   const closeBtn = document.querySelector(`[data-section-id="${sectionId}"].youtube-modal-close`);
 
   let allVideos = [];
+  let videosByPlaylist = {};
   let currentVideoIndex = 0;
+  let videosPerLoad = 3;
+  let loadedVideos = {};
 
-  // Load content from all playlists using YouTube Embed API
+  // Load content from all playlists
   const playlists = [
     {% for block in section.blocks %}
       {% if block.type == 'playlist' %}
@@ -612,12 +667,11 @@ function initializeYouTubeGallery(sectionId) {
 
   async function loadAllContent() {
     const shorts = [];
-    const videos = [];
-
+    
     if (playlists.length === 0) {
       console.warn('No playlists configured');
       displayShorts(shorts);
-      displayVideos(videos);
+      createTabs([]);
       return;
     }
 
@@ -625,27 +679,34 @@ function initializeYouTubeGallery(sectionId) {
       try {
         console.log(`Loading playlist: ${playlist.name} (${playlist.id})`);
         
-        // Create mock video data based on playlist ID for demonstration
-        // In a real implementation, you would fetch from YouTube API
+        // Generate mock videos for demonstration
         const mockVideos = generateMockVideosFromPlaylist(playlist);
+        
+        videosByPlaylist[playlist.id] = {
+          name: playlist.name,
+          videos: []
+        };
         
         mockVideos.forEach(videoData => {
           if (videoData.isShort) {
             shorts.push(videoData);
           } else {
-            videos.push(videoData);
+            videosByPlaylist[playlist.id].videos.push(videoData);
+            allVideos.push(videoData);
           }
         });
+        
+        // Initialize loaded count for each playlist
+        loadedVideos[playlist.id] = 0;
         
       } catch (error) {
         console.error(`Error loading playlist ${playlist.name}:`, error);
       }
     }
 
-    console.log(`Total shorts: ${shorts.length}, Total videos: ${videos.length}`);
-    allVideos = [...shorts, ...videos];
-    displayShorts(shorts);
-    displayVideos(videos);
+    console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
+    displayShorts(shorts.slice(0, 3)); // Show only 3 shorts
+    createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
   }
 
   function generateMockVideosFromPlaylist(playlist) {
@@ -664,8 +725,10 @@ function initializeYouTubeGallery(sectionId) {
         title: title,
         thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
         publishedAt: new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString(),
-        description: `This is a ${isShortPlaylist ? 'short' : 'video'} from ${playlist.name}`,
-        playlistId: playlist.id
+        description: `This is a ${isShortPlaylist ? 'short' : 'video'} from ${playlist.name}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+        playlistId: playlist.id,
+        duration: isShortPlaylist ? "0:30" : `${Math.floor(Math.random() * 10) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+        views: Math.floor(Math.random() * 1000) + 100
       });
 
       mockVideos.push({
@@ -673,7 +736,9 @@ function initializeYouTubeGallery(sectionId) {
         title: title,
         playlist: playlist.name,
         isShort: isShortPlaylist,
-        id: videoId
+        id: videoId,
+        duration: isShortPlaylist ? "0:30" : `${Math.floor(Math.random() * 10) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+        views: Math.floor(Math.random() * 1000) + 100
       });
     }
     
@@ -688,16 +753,24 @@ function initializeYouTubeGallery(sectionId) {
     const publishedDate = new Date(video.publishedAt).toLocaleDateString();
     
     videoDiv.innerHTML = `
-      <iframe src="https://www.youtube.com/embed/${video.id}" 
-              title="${video.title}" 
-              frameborder="0" 
-              allowfullscreen>
-      </iframe>
+      <div class="video-thumbnail-container">
+        <iframe src="https://www.youtube.com/embed/${video.id}" 
+                title="${video.title}" 
+                frameborder="0" 
+                allowfullscreen>
+        </iframe>
+        <div class="video-play-button"></div>
+        <div class="video-type-badge">Video</div>
+      </div>
       <div class="youtube-video-details">
         <h3 class="youtube-video-title">${video.title}</h3>
-        <p class="youtube-video-date">${publishedDate}</p>
-        <p class="youtube-video-description" data-description="${video.description}">
-          ${video.description.substring(0, 100)}...
+        <div class="video-meta">
+          <span class="video-duration">${video.duration || '5:30'}</span>
+          <span class="video-views">${video.views || '208'}</span>
+          <span class="video-date">${publishedDate}</span>
+        </div>
+        <p class="video-description" data-description="${video.description}">
+          ${video.description.substring(0, 80)}...
         </p>
         <a href="#" class="youtube-read-more">Read More</a>
       </div>
@@ -706,9 +779,97 @@ function initializeYouTubeGallery(sectionId) {
     return videoDiv;
   }
 
+  function createTabs(playlistIds) {
+    videosTabsContainer.innerHTML = '';
+    tabContentsContainer.innerHTML = '';
+
+    playlistIds.forEach((playlistId, index) => {
+      const playlist = videosByPlaylist[playlistId];
+      
+      // Create tab button
+      const tabButton = document.createElement('button');
+      tabButton.className = `video-tab ${index === 0 ? 'active' : ''}`;
+      tabButton.setAttribute('data-playlist-id', playlistId);
+      tabButton.textContent = playlist.name;
+      tabButton.addEventListener('click', () => switchTab(playlistId));
+      videosTabsContainer.appendChild(tabButton);
+
+      // Create tab content
+      const tabContent = document.createElement('div');
+      tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
+      tabContent.setAttribute('data-playlist-id', playlistId);
+      
+      const videosHeader = document.createElement('div');
+      videosHeader.className = 'videos-header';
+      videosHeader.innerHTML = `
+        <span class="video-count">${playlist.videos.length} videos</span>
+      `;
+      
+      const videosContainer = document.createElement('div');
+      videosContainer.className = 'youtube-video-container';
+      videosContainer.id = `videos-${playlistId}`;
+      
+      const loadMoreButton = document.createElement('button');
+      loadMoreButton.className = 'load-more-button';
+      loadMoreButton.textContent = 'Load More Videos';
+      loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
+      
+      tabContent.appendChild(videosHeader);
+      tabContent.appendChild(videosContainer);
+      tabContent.appendChild(loadMoreButton);
+      tabContentsContainer.appendChild(tabContent);
+
+      // Load initial videos for the first tab
+      if (index === 0) {
+        loadMoreVideos(playlistId);
+      }
+    });
+  }
+
+  function switchTab(playlistId) {
+    // Update tab buttons
+    document.querySelectorAll('.video-tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    document.querySelector(`[data-playlist-id="${playlistId}"].video-tab`).classList.add('active');
+
+    // Update tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`).classList.add('active');
+
+    // Load videos if not loaded yet
+    if (loadedVideos[playlistId] === 0) {
+      loadMoreVideos(playlistId);
+    }
+  }
+
+  function loadMoreVideos(playlistId) {
+    const playlist = videosByPlaylist[playlistId];
+    const videosContainer = document.querySelector(`#videos-${playlistId}`);
+    const loadMoreButton = document.querySelector(`[data-playlist-id="${playlistId}"] .load-more-button`);
+    
+    const startIndex = loadedVideos[playlistId];
+    const endIndex = Math.min(startIndex + videosPerLoad, playlist.videos.length);
+    
+    for (let i = startIndex; i < endIndex; i++) {
+      const video = playlist.videos[i];
+      const videoElement = createVideoElementForDisplay(video, allVideos.indexOf(video));
+      videosContainer.appendChild(videoElement);
+    }
+    
+    loadedVideos[playlistId] = endIndex;
+    
+    // Hide load more button if all videos are loaded
+    if (endIndex >= playlist.videos.length) {
+      loadMoreButton.style.display = 'none';
+    }
+  }
+
   function displayShorts(shorts) {
     if (shorts.length === 0) {
-      shortsContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No shorts available. Please check your playlist configuration.</div>';
+      shortsContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No shorts available</div>';
       return;
     }
 
@@ -719,41 +880,20 @@ function initializeYouTubeGallery(sectionId) {
     });
   }
 
-  function displayVideos(videos) {
-    if (videos.length === 0) {
-      videosContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No videos available. Please check your playlist configuration.</div>';
-      videoCount.textContent = '0 videos';
-      return;
-    }
-
-    videosContainer.innerHTML = '';
-    videoCount.textContent = `${videos.length} videos`;
-    
-    videos.forEach((video, index) => {
-      const videoElement = createVideoElementForDisplay(video, index + 1000); // Offset index for videos
-      videosContainer.appendChild(videoElement);
-    });
-  }
-
   function createShortElement(short, index) {
     const shortDiv = document.createElement('div');
     shortDiv.className = 'short-item';
     shortDiv.setAttribute('data-video-index', index);
     
-    // Extract video data from element
-    const iframe = short.element.querySelector('iframe');
-    const title = short.element.querySelector('.youtube-video-title');
-    const date = short.element.querySelector('.youtube-video-date');
-    
     shortDiv.innerHTML = `
       <div class="short-thumbnail">
-        ${iframe ? iframe.outerHTML : `<iframe src="https://www.youtube.com/embed/${short.id}" frameborder="0" allowfullscreen></iframe>`}
-        <span class="short-duration">0:30</span>
+        <iframe src="https://www.youtube.com/embed/${short.id}" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="short-details">
-        <div class="short-title">${title ? title.textContent : short.title}</div>
-        <div class="short-date">${date ? date.textContent : '1 day ago'}</div>
+      <div class="short-overlay">
+        <div class="short-badge">Short</div>
+        ${index === 0 ? '<div class="short-play-status">Playing</div>' : ''}
       </div>
+      <div class="short-views">${short.views || Math.floor(Math.random() * 2000) + 100}</div>
     `;
 
     shortDiv.addEventListener('click', () => {
@@ -791,8 +931,7 @@ function initializeYouTubeGallery(sectionId) {
     const originalElement = videoData.element;
     const iframe = originalElement.querySelector('iframe');
     const title = originalElement.querySelector('.youtube-video-title')?.textContent || videoData.title;
-    const description = originalElement.querySelector('.youtube-video-description')?.textContent || 
-                      originalElement.querySelector('[data-description]')?.getAttribute('data-description') || 
+    const description = originalElement.querySelector('.video-description')?.getAttribute('data-description') || 
                       'Video description not available';
 
     // Extract video ID from iframe src
@@ -806,15 +945,15 @@ function initializeYouTubeGallery(sectionId) {
     // Add mock stats
     modalStats.innerHTML = `
       <div class="modal-stat">
-        <div class="modal-stat-number">13</div>
+        <div class="modal-stat-number">${Math.floor(Math.random() * 100) + 10}</div>
         <div class="modal-stat-label">Likes</div>
       </div>
       <div class="modal-stat">
-        <div class="modal-stat-number">208</div>
+        <div class="modal-stat-number">${videoData.views || Math.floor(Math.random() * 1000) + 100}</div>
         <div class="modal-stat-label">Views</div>
       </div>
       <div class="modal-stat">
-        <div class="modal-stat-number">5</div>
+        <div class="modal-stat-number">${Math.floor(Math.random() * 20) + 1}</div>
         <div class="modal-stat-label">Comments</div>
       </div>
     `;
@@ -829,14 +968,14 @@ function initializeYouTubeGallery(sectionId) {
   function populateSidebar() {
     const recommendations = allVideos.slice(0, 6); // Show first 6 videos as recommendations
     
-    modalSidebar.innerHTML = '';
+    modalSidebar.innerHTML = '<h4 class="sidebar-title">More Videos</h4>';
     recommendations.forEach((video, index) => {
       const sidebarItem = document.createElement('div');
       sidebarItem.className = 'sidebar-video-item';
       
       const iframe = video.element.querySelector('iframe');
       const title = video.element.querySelector('.youtube-video-title')?.textContent || video.title;
-      const date = video.element.querySelector('.youtube-video-date')?.textContent || '1 day ago';
+      const date = video.element.querySelector('.video-date')?.textContent || '1 day ago';
       
       // Extract thumbnail from iframe
       const videoId = iframe ? extractVideoId(iframe.src) : '';
@@ -914,13 +1053,13 @@ function initializeYouTubeGallery(sectionId) {
       "type": "text",
       "id": "section_title",
       "label": "Section title",
-      "default": "Shorts & Videos"
+      "default": "Video Gallery"
     },
     {
       "type": "textarea",
       "id": "section_description",
       "label": "Section description",
-      "default": "Experience our content in two formats - quick shorts and detailed videos"
+      "default": "Explore our latest videos and content"
     },
     {
       "type": "range",
@@ -965,7 +1104,6 @@ function initializeYouTubeGallery(sectionId) {
       "label": "Show subscribe button",
       "default": true
     },
-    
     {
       "type": "header",
       "content": "Colors & Styling"
@@ -1020,7 +1158,7 @@ function initializeYouTubeGallery(sectionId) {
       "type": "color",
       "id": "tab_active_text",
       "label": "Active tab text",
-      "default": "#ffffff"
+      "default": "#095ea7"
     },
     {
       "type": "color",
@@ -1085,34 +1223,6 @@ function initializeYouTubeGallery(sectionId) {
       "id": "read_more_hover_color",
       "label": "Read more hover color",
       "default": "#073d73"
-    },
-    {
-      "type": "color",
-      "id": "link_hover_color",
-      "label": "Link hover color",
-      "default": "#095ea7"
-    },
-    {
-      "type": "header",
-      "content": "Modal Styling"
-    },
-    {
-      "type": "color",
-      "id": "modal_border_color",
-      "label": "Modal border color",
-      "default": "#095ea7"
-    },
-    {
-      "type": "color",
-      "id": "modal_title_color",
-      "label": "Modal title color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "modal_description_color",
-      "label": "Modal description color",
-      "default": "#666666"
     }
   ],
   "blocks": [
