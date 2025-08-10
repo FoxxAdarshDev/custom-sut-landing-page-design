@@ -30,112 +30,8 @@
                               <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLQTBFYRQD"></script> 
                                <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-DLQTBFYRQD'); </script>
                             <!-- Google tag (gtag.js) --> 
-                               <script>
-                (function() {
-                    // Configuration for different blocks
-                    const blockConfigs = [
-                        {
-                            selector: '#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'World\'s First Custom SUT Library',
-                            color: '#00833e'
-                        },
-                        {
-                            selector: '#block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'Ships in 24-48 Hours',
-                            color: '#00833e'
-                        },
-                        {
-                            selector: '#block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'World\'s first Made-To-Order SUT, shipped in 4–6 weeks',
-                            color: '#0071b9'
-                        }
-                    ];
-
-                    function addLabelsToBlocks() {
-                        blockConfigs.forEach(function(config) {
-                            const imageContainers = document.querySelectorAll(config.selector);
-
-                            // Check if any image containers are found
-                            console.log(`Number of image containers found for ${config.selector}: `, imageContainers.length);
-
-                            // Loop through each image container
-                            imageContainers.forEach(function(container) {
-                                // Check if label already exists to avoid duplicates
-                                if (!container.querySelector('.sale-label')) {
-                                    // Create the sale label element
-                                    const saleLabel = document.createElement('div');
-                                    saleLabel.className = 'sale-label';
-                                    saleLabel.textContent = config.text;
-                                    saleLabel.style.backgroundColor = config.color;
-
-                                    // Append the sale label to the image container
-                                    container.appendChild(saleLabel);
-                                }
-                            });
-                        });
-                    }
-
-                    // Add labels immediately
-                    addLabelsToBlocks();
-
-                    // Also add when DOM is fully loaded (in case elements are added later)
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', addLabelsToBlocks);
-                    }
-
-                    // Add labels when page is fully loaded (in case images are loaded later)
-                    if (document.readyState !== 'complete') {
-                        window.addEventListener('load', addLabelsToBlocks);
-                    }
-                })();
-                </script>
-
-                <style>
-                .sale-label {
-                    border-radius: 0 0 10px 0;
-                    position: absolute !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    color: #fff;
-                    padding: 5px 10px;
-                    font-size: 14px;
-                    font-weight: 700;
-                    z-index: 10;
-                    white-space: wrap;
-                    overflow: visible;
-                    width: auto;
-                    min-width: fit-content;
-                    line-height: 1.2;
-                }
-
-                /* Responsive adjustments for longer text */
-                @media (max-width: 768px) {
-                    .sale-label {
-                        font-size: 12px!important;
-                        padding: 4px 4px;
-                        white-space: wrap;
-                        line-height: 1.2;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .sale-label {
-                        font-size: 12px!important;
-                        padding: 3px 6px;
-                        white-space: wrap;
-                    }
-                }
-
-                /* Ensure image containers have relative positioning */
-                #block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
-                #block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
-                #block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container {
-                    position: relative;
-                }
-
-                
-                </style>
-                          {{ 'custom.css' | asset_url | stylesheet_tag }}
+                               
+                          
                          {% if template == 'index' %}
                             <div id="loader">
                                 <img src="https://foxxbioprocess.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d_500x.png?v=1669752062" style="width:200px;height:76px" alt="loader image">
@@ -482,6 +378,92 @@
                             {%- endif -%}
                             {% render 'meta-tags' %}
                             {{ content_for_header }}
+                            
+                            <!-- Preload critical CSS -->
+                            <link rel="preload" href="{{ 'custom.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+                            <noscript><link rel="stylesheet" href="{{ 'custom.css' | asset_url }}"></noscript>
+                            
+                            <!-- Critical CSS for layout stability -->
+                            <style>
+                                /* Loader styles - prevent layout shift */
+                                #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999}
+                                #loader img{max-width:300px;height:auto}
+                                #loader-text{margin-top:10px;color:#121212;font-weight:900;opacity:1;transition:opacity .5s}
+                                .loader-icon{display:flex;align-items:center;gap:10px}
+                                .loader-icon img{width:50px;height:50px;display:none}
+                                
+                                /* Sale label styles - prevent layout shift */
+                                .sale-label{border-radius:0 0 10px 0;position:absolute!important;top:0!important;left:0!important;color:#fff;padding:5px 10px;font-size:14px;font-weight:700;z-index:10;white-space:wrap;overflow:visible;width:auto;min-width:fit-content;line-height:1.2}
+                                
+                                /* Image hotspot styles - prevent layout shift */
+                                #shopify-section-sections--17145117180120__image_hotspots_VUfHw7 .image-container{width:100%!important;height:auto!important}
+                                #shopify-section-sections--17145117180120__image_hotspots_VUfHw7 .image-container .base-image{width:100%!important;height:100%!important;background-size:cover!important}
+                                
+                                /* Block positioning for labels */
+                                #block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                                #block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                                #block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container{position:relative}
+                                
+                                /* Hide popup */
+                                .promptPopup-show:last-child{display:none!important}
+                                
+                                /* Responsive adjustments */
+                                @media (max-width: 768px) {
+                                    .sale-label{font-size:12px!important;padding:4px 4px;white-space:wrap;line-height:1.2}
+                                }
+                                @media (max-width: 480px) {
+                                    .sale-label{font-size:12px!important;padding:3px 6px;white-space:wrap}
+                                }
+                            </style>
+                            
+                            <!-- Critical JavaScript for immediate execution -->
+                            <script>
+                                // Configuration for different blocks - execute immediately
+                                (function() {
+                                    const blockConfigs = [
+                                        {
+                                            selector: '#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                                            text: 'World\'s First Custom SUT Library',
+                                            color: '#00833e'
+                                        },
+                                        {
+                                            selector: '#block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                                            text: 'Ships in 24-48 Hours',
+                                            color: '#00833e'
+                                        },
+                                        {
+                                            selector: '#block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                                            text: 'World\'s first Made-To-Order SUT, shipped in 4–6 weeks',
+                                            color: '#0071b9'
+                                        }
+                                    ];
+
+                                    function addLabelsToBlocks() {
+                                        blockConfigs.forEach(function(config) {
+                                            const imageContainers = document.querySelectorAll(config.selector);
+                                            imageContainers.forEach(function(container) {
+                                                if (!container.querySelector('.sale-label')) {
+                                                    const saleLabel = document.createElement('div');
+                                                    saleLabel.className = 'sale-label';
+                                                    saleLabel.textContent = config.text;
+                                                    saleLabel.style.backgroundColor = config.color;
+                                                    container.appendChild(saleLabel);
+                                                }
+                                            });
+                                        });
+                                    }
+
+                                    // Execute immediately and also on DOM ready/load
+                                    addLabelsToBlocks();
+                                    if (document.readyState === 'loading') {
+                                        document.addEventListener('DOMContentLoaded', addLabelsToBlocks);
+                                    }
+                                    if (document.readyState !== 'complete') {
+                                        window.addEventListener('load', addLabelsToBlocks);
+                                    }
+                                })();
+                            </script>
+                            
                             {% render 'variable' %}
                             {% render 'global-style' %}
                             {% render 'global-script' %}
@@ -492,7 +474,6 @@
                             .card-media.card-media--square.media--loading-effect:not(:has(.placeholder-svg)) {
                              padding-bottom: 100.22935779816513%;
                              }
-
                            </style>
                             <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
@@ -547,25 +528,7 @@
                                     assign style_text_size_varriant = 'size_varriant_style_2'
                                 endif
                             -%}
-                            <style>
-                                #shopify-section-sections--17145117180120__image_hotspots_VUfHw7 .image-container {
-                                    width:100%!important;
-                                    height:auto!important;
-                                }
-
-                                #shopify-section-sections--17145117180120__image_hotspots_VUfHw7  .image-container .base-image {
-                                 width:100%!important;
-                                 height:100%!important;
-                                 background-size: cover!important;
-                                }
-
-                  #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999}#loader img{max-width:300px;height:auto}#loader-text{margin-top:10px;color:#121212;font-weight:900;opacity:1;transition:opacity .5s}.loader-icon{display:flex;align-items:center;gap:10px}.loader-icon img{width:50px;height:50px;display:none}
-                  #block-a2681802-bbf7-416e-92bf-b004893a4002 
-                  .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container{position:relative}.sale-label{border-radius:0 0 10px 0;position:absolute!important;top:0!important;left:0!important;background-color:#00833e;color:#fff;padding:5px 10px;font-size:14px;font-weight:700;z-index:10}
-                  .promptPopup-show:last-child {
-                    display:none!important
-                  }
-                            </style>
+                            
                 <!--
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
