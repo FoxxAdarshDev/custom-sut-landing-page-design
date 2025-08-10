@@ -205,15 +205,6 @@
     border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .short-badge .shorts-icon {
-    width: 14px;
-    height: 14px;
-    fill: currentColor;
   }
 
   .short-play-status {
@@ -325,41 +316,6 @@
     align-items: center;
     justify-content: flex-end;
     margin-bottom: 20px;
-  }
-
-  .youtube-playlist-link {
-    background: linear-gradient(135deg, #ff0000, #cc0000);
-    color: white !important;
-    padding: 10px 18px;
-    border-radius: 20px;
-    text-decoration: none !important;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-    position: relative;
-    z-index: 100;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    pointer-events: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .youtube-playlist-link:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4) !important;
-    color: white !important;
-    text-decoration: none !important;
-    background: linear-gradient(135deg, #ff2020, #dd0000) !important;
-  }
-
-  .youtube-playlist-link svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
   }
 
   .video-count {
@@ -1887,16 +1843,6 @@ function populateFullscreenShorts(sectionId) {
 
   shorts.forEach((short, index) => {
     const shortElement = createShortElement(short, index, sectionId);
-    // Add shorts icon to fullscreen view
-    const badge = shortElement.querySelector('.short-badge');
-    if (badge && !badge.querySelector('.shorts-icon')) {
-      badge.innerHTML = `
-        <svg class="shorts-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.33c-.77-.32-1.2-.5-1.2-.5a18.73 18.73 0 0 0-9.14 0s-.43.18-1.2.5C5.23 10.84 5 11.4 5 12v.01c0 .6.23 1.16 1.23 1.68.77.32 1.2.5 1.2.5a18.73 18.73 0 0 0 9.14 0s.43-.18 1.2-.5c1-.52 1.23-1.08 1.23-1.68V12c0-.6-.23-1.16-1.23-1.68z"/>
-        </svg>
-        Short
-      `;
-    }
     shortsGrid.appendChild(shortElement);
   });
 }
@@ -2617,10 +2563,10 @@ function initializeYouTubeGallery(sectionId) {
   // Function to convert text with links, emails, and URLs to clickable HTML
   function formatDescriptionWithLinks(text) {
     if (!text) return 'Video description not available';
-
+    
     // First, check if the text already contains HTML links
     const hasHtmlLinks = /<a\s+[^>]*href\s*=\s*["'][^"']*["'][^>]*>/i.test(text);
-
+    
     if (hasHtmlLinks) {
       // Text already contains HTML links, just clean it up and return
       // Remove any potentially harmful scripts but keep links
@@ -2629,30 +2575,30 @@ function initializeYouTubeGallery(sectionId) {
       text = text.replace(/\n/g, '<br>');
       return text;
     }
-
+    
     // If no HTML links, treat as plain text and convert URLs
     // Escape HTML entities that might cause issues
     text = text.replace(/&(?!amp;|lt;|gt;|quot;|#39;)/g, '&amp;');
-
+    
     // Convert URLs to clickable links
     const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
     text = text.replace(urlRegex, '<a href="$&" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline; word-break: break-all;">$&</a>');
-
+    
     // Convert www.example.com (without http) to clickable links
     const wwwRegex = /(?<!https?:\/\/)(?<![\w.-])(www\.[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;
     text = text.replace(wwwRegex, '<a href="https://$1" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline; word-break: break-all;">$1</a>');
-
+    
     // Convert email addresses to clickable mailto links
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
     text = text.replace(emailRegex, '<a href="mailto:$&" style="color: #007bff; text-decoration: underline;">$&</a>');
-
+    
     // Convert phone numbers to clickable tel links
     const phoneRegex = /(\+\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/g;
     text = text.replace(phoneRegex, '<a href="tel:$&" style="color: #007bff; text-decoration: underline;">$&</a>');
-
+    
     // Convert line breaks to HTML breaks for better formatting
     text = text.replace(/\n/g, '<br>');
-
+    
     return text;
   }
 
