@@ -1979,7 +1979,9 @@ function initializeYouTubeGallery(sectionId) {
       setTimeout(() => {
         displayShorts(shorts);
         createTabs([]);
-      }, 1000); // Delay to show skeleton briefly
+        // Show error message to user
+        tabContentsContainer.innerHTML = '<div style="padding: 40px; text-align: center; color: #666;"><h3>No video playlists configured</h3><p>Please add playlist IDs in the section settings.</p></div>';
+      }, 1000);
       return;
     }
 
@@ -2183,6 +2185,13 @@ function initializeYouTubeGallery(sectionId) {
 
     // If all proxies fail, return demo data to show something
     console.log('All proxy services failed, generating demo content for:', playlistName);
+    
+    // Show user-friendly error message
+    const errorContainer = document.querySelector(`#tab-contents-${sectionId}`);
+    if (errorContainer && playlists.length === 1) {
+      errorContainer.innerHTML = '<div style="padding: 40px; text-align: center; color: #666;"><h3>Unable to load videos</h3><p>Please check your internet connection and playlist settings.</p></div>';
+    }
+    
     return generateDemoVideos(playlistId, playlistName);
   }
 
