@@ -1,0 +1,278 @@
+<script>
+        // Enhanced event data for calendar integration with full details
+        const eventData = {
+            'lab-innovations': {
+                title: 'Lab Innovations 2025',
+                start: '20251029T090000',
+                end: '20251030T170000',
+                description: `Lab Innovations - Leading exhibition for the laboratory technology and analytical instrumentation industry.
+
+About the Event: Lab Innovations brings together over 300 exhibitors and 5,000 laboratory professionals. The event features live demonstrations, technical seminars, and networking opportunities. Key focus areas include analytical instrumentation, laboratory automation, consumables, and services.
+
+Foxx Life Sciences Participation: Visit our booth to discover our latest laboratory consumables, liquid handling solutions, and specialized products for pharmaceutical and biotechnology applications.
+
+🏢Booth No: L124
+📍Locator: https://www.lab-innovations.com/exhibitor/foxx-life-sciences/
+📍Location: https://maps.google.com/?q=NEC,Birmingham,UK
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'NEC, Birmingham, UK',
+                url: 'https://www.lab-innovations.com/',
+                mapLocation: 'NEC,Birmingham,UK'
+            },
+            'india-lab-expo': {
+                title: 'India Lab Expo 2025',
+                start: '20250918T100000',
+                end: '20250920T180000',
+                description: `India Lab Expo - Premier laboratory and analytical instrumentation exhibition.
+
+About the Event: India Lab Expo is the country's largest trade fair for laboratory and analytical technology. The event attracts over 15,000 visitors and 400+ exhibitors from around the world, showcasing cutting-edge laboratory instruments, equipment, and services.
+
+Foxx Life Sciences Participation: Discover our comprehensive range of laboratory consumables specifically designed for the Indian market, including sterile and non-sterile products for pharmaceutical and biotechnology applications.
+
+🏢Booth No: H4-B42
+📍Locator: https://analyticalabindia.com/en/analytica-anacon-india-2025/exhibitor-directory/exhibitors-brands/
+📍Location: https://maps.google.com/?q=HITEX+Exhibition+Centre,Hyderabad,Telangana,India
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'HITEX Exhibition Centre, Hyderabad, Telangana, India',
+                url: 'https://www.indialabexpo.com/',
+                mapLocation: 'HITEX+Exhibition+Centre,Hyderabad,Telangana,India'
+            },
+            'ispe-boston': {
+                title: 'ISPE Boston - 1 Day Event 2025',
+                start: '20251001T080000',
+                end: '20251001T180000',
+                description: `ISPE Boston one-day pharmaceutical manufacturing event.
+
+About the Event: This exclusive one-day event brings together pharmaceutical manufacturing professionals from the New England region. Sessions cover topics including process optimization, quality systems, and emerging technologies in pharmaceutical manufacturing.
+
+Foxx Life Sciences Participation: Learn about our specialized pharmaceutical-grade consumables and how they can enhance your manufacturing processes while ensuring compliance with FDA and cGMP requirements.
+
+🏢Booth No: E-194, E-165
+📍Locator: https://productshow.ispeboston.org/exhibitors-list-by-company-category/
+📍Location: https://maps.google.com/?q=Gillette+Stadium,1+Patriot+Pl,Foxborough,MA,USA
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'Gillette Stadium, 1 Patriot Pl, Foxborough, MA, USA',
+                url: 'https://ispe.org/',
+                mapLocation: 'Gillette+Stadium,1+Patriot+Pl,Foxborough,MA,USA'
+            },
+            'cphi-europe': {
+                title: 'CPHI Europe 2025',
+                start: '20251028T090000',
+                end: '20251030T170000',
+                description: `CPHI Europe - Leading pharmaceutical manufacturing and development event.
+
+About the Event: CPHI Europe attracts over 45,000 pharmaceutical professionals and 2,500+ exhibitors from around the globe. The event spans ingredients, machinery, packaging, outsourcing, and finished dosage, making it the most comprehensive pharmaceutical event.
+
+Foxx Life Sciences Participation: Explore our complete portfolio of pharmaceutical consumables, from basic laboratory supplies to specialized single-use bioprocessing solutions designed for European market requirements.
+
+🏢Booth No: 4.1F75
+📍Locator: https://www.cphi-online.com/46/company/32/29/43/exhibitor322943-557.html
+📍Location: https://maps.google.com/?q=Messe+Frankfurt,Ludwig-Erhard-Anlage+1,60327+Frankfurt+am+Main,Germany
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'Messe Frankfurt, Ludwig-Erhard-Anlage 1, 60327 Frankfurt am Main, Germany',
+                url: 'https://www.cphi.com/europe/en/home.html',
+                mapLocation: 'Messe+Frankfurt,Ludwig-Erhard-Anlage+1,60327+Frankfurt+am+Main,Germany'
+            },
+            'cphi-india': {
+                title: 'CPHI India 2025',
+                start: '20251126T100000',
+                end: '20251128T180000',
+                description: `CPHI India - Pharmaceutical manufacturing and development exhibition.
+
+About the Event: CPHI India is South Asia's largest pharmaceutical exhibition, featuring over 1,000 exhibitors and attracting 25,000+ visitors. The event covers the entire pharmaceutical value chain from APIs to finished dosage forms.
+
+Foxx Life Sciences Participation: Meet our team to discuss custom solutions for the Indian pharmaceutical market, including cost-effective consumables and specialized products for generic drug manufacturing.
+
+🏢Booth No: 12.C44
+📍Locator: https://www.cphi-online.com/46/company/31/77/36/exhibitor317736-583.html
+📍Location: https://maps.google.com/?q=India+Expo+Centre,Greater+Noida,New+Delhi,India
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'India Expo Centre, Greater Noida, New Delhi, India',
+                url: 'https://www.cphi.com/india/en/home.html',
+                mapLocation: 'India+Expo+Centre,Greater+Noida,New+Delhi,India'
+            },
+            'acs-fall': {
+                title: 'ACS Fall 2025',
+                start: '20250817T080000',
+                end: '20250821T180000',
+                description: `ACS Fall 2025 - American Chemical Society Meeting.
+
+About the Event: The ACS Fall Meeting is one of the premier scientific conferences in chemistry, attracting thousands of researchers, academics, and industry professionals. The event features cutting-edge research presentations, technical sessions, and networking opportunities across all areas of chemistry.
+
+Foxx Life Sciences Participation: Discover our comprehensive range of laboratory consumables and chemical handling solutions designed to support cutting-edge research in analytical chemistry, biochemistry, and materials science applications.
+
+🏢 Booth No: 2713
+📍 Locator: https://s23.a2zinc.net/clients/Chemical/F2025Expo/Public/EventMap.aspx?shMode=E&ID=1164
+📍 Location: https://www.google.com/maps/place/Walter+E.+Washington+Convention+Center/@38.9048838,-77.0255683,17z/data=!3m1!4b1!4m6!3m5!1s0x89b7b7ed3715b137:0x32771de147fa5350!8m2!3d38.9048838!4d-77.0229934!16zL20vMDducHgy?entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D
+
+Walter E. Washington Convention Center, Washington, DC/USA
+
+---
+Foxx Life Sciences - Your trusted partner in laboratory solutions
+Website: https://www.foxxlifesciences.com/
+Contact: sales@foxxlifesciences.com`,
+                location: 'Walter E. Washington Convention Center',
+                url: 'https://www.acs.org/',
+                mapLocation: '801 Allen Y. Lew Place NW, Washington, DC 20001, United States'
+            }
+        };
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('trade-show-modal')) {
+                e.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function toggleCalendarDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isVisible = dropdown.classList.contains('show');
+
+            // Close all other dropdowns
+            document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => d.classList.remove('show'));
+
+            // Toggle current dropdown
+            if (!isVisible) {
+                dropdown.classList.add('show');
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function closeDropdown(e) {
+                if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                    document.removeEventListener('click', closeDropdown);
+                }
+            });
+        }
+
+        function formatDateForOutlook(dateStr) {
+            // Convert YYYYMMDDTHHMMSS to YYYY-MM-DDTHH:MM:SS
+            const year = dateStr.substring(0, 4);
+            const month = dateStr.substring(4, 6);
+            const day = dateStr.substring(6, 8);
+            const hour = dateStr.substring(9, 11);
+            const minute = dateStr.substring(11, 13);
+            const second = dateStr.substring(13, 15);
+
+            return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+        }
+
+        function formatDateForYahoo(dateStr) {
+            // Convert to YYYYMMDD format for Yahoo
+            return dateStr.substring(0, 8);
+        }
+
+        function addToCalendar(platform, eventKey) {
+            const event = eventData[eventKey];
+            if (!event) return;
+
+            let url = '';
+
+            switch(platform) {
+                case 'google':
+                    url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}Z/${event.end}Z&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&url=${encodeURIComponent(event.url)}`;
+                    window.open(url, '_blank');
+                    break;
+
+                case 'outlook':
+                    // Since Outlook web URLs are unreliable and often redirect to marketing pages,
+                    // we'll generate an ICS file which works universally with all Outlook versions
+                    console.log('Generating ICS file for Outlook compatibility');
+                    downloadICS(event);
+                    break;
+
+                case 'yahoo':
+                    const startDateYahoo = formatDateForYahoo(event.start);
+                    const endDateYahoo = formatDateForYahoo(event.end);
+                    const startTime = event.start.substring(9, 11) + event.start.substring(11, 13);
+                    const endTime = event.end.substring(9, 11) + event.end.substring(11, 13);
+                    url = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(event.title)}&st=${startDateYahoo}&et=${endDateYahoo}&desc=${encodeURIComponent(event.description)}&in_loc=${encodeURIComponent(event.location)}`;
+                    window.open(url, '_blank');
+                    break;
+
+                case 'apple':
+                case 'ics':
+                    downloadICS(event);
+                    break;
+            }
+
+            // Close dropdown
+            document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => d.classList.remove('show'));
+        }
+
+        function formatICSDate(dateStr) {
+            // Convert from YYYYMMDDTHHMMSS to YYYYMMDDTHHMMSSZ
+            return dateStr + 'Z';
+        }
+
+        function downloadICS(event) {
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const uid = `${Date.now()}@foxxlifesciences.com`;
+
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Foxx Life Sciences//Trade Shows//EN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${timestamp}
+DTSTART:${formatICSDate(event.start)}
+DTEND:${formatICSDate(event.end)}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description.replace(/\n/g, '\\n')}
+LOCATION:${event.location}
+URL:${event.url}
+ORGANIZER;CN=Foxx Life Sciences:mailto:sales@foxxlifesciences.com
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: ${event.title}
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${event.title.replace(/[^a-zA-Z0-9]/g, '_')}.ics`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
