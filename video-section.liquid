@@ -321,9 +321,15 @@
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .youtube-video-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .youtube-video-item {
@@ -857,9 +863,15 @@
   /* YouTube-like Skeleton Loading Styles */
   .skeleton-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .skeleton-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .skeleton-video-card {
@@ -1210,6 +1222,10 @@
     }
 
     .youtube-video-container {
+      grid-template-columns: 1fr;
+    }
+
+    .skeleton-container {
       grid-template-columns: 1fr;
     }
 
@@ -1866,11 +1882,11 @@ function initializeYouTubeGallery(sectionId) {
     if (!playlist.loaded) {
       console.log(`Loading videos for ${playlist.name}...`);
       
-      // Show loading message instead of skeleton
+      // Show skeleton loading
       const videosContainer = document.querySelector(`#videos-${playlistId}`);
       const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
       if (videosContainer) {
-        videosContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+        showSkeletonVideos(playlistId);
       }
       if (videoCountElement) {
         videoCountElement.textContent = 'Loading videos...';
@@ -2076,13 +2092,10 @@ function initializeYouTubeGallery(sectionId) {
     const videosContainer = document.querySelector(`#videos-${playlistId}`);
     if (videosContainer) {
       videosContainer.innerHTML = '';
-      const skeletonContainer = document.createElement('div');
-      skeletonContainer.className = 'skeleton-container';
       for (let i = 0; i < 3; i++) {
         const skeletonCard = createSkeletonVideoCard();
-        skeletonContainer.appendChild(skeletonCard);
+        videosContainer.appendChild(skeletonCard);
       }
-      videosContainer.appendChild(skeletonContainer);
     }
   }
 
