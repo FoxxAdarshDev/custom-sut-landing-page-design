@@ -473,7 +473,7 @@
   .load-more-button {
     display: block;
     width: 200px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 12px 24px;
     background-color: {{ section.settings.tab_active_bg }};
     color: white;
@@ -483,6 +483,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
   }
 
   .load-more-button:hover {
@@ -1483,6 +1484,7 @@ function initializeYouTubeGallery(sectionId) {
   let currentVideoIndex = 0;
   let videosPerLoad = 3;
   let loadedVideos = {};
+  let initialVideosPerTab = 3;
 
   // Load content from all playlists
   const playlists = [
@@ -1499,16 +1501,10 @@ function initializeYouTubeGallery(sectionId) {
   async function loadAllContent() {
     const shorts = [];
 
-    // Show skeleton loading states immediately
-    showSkeletonShorts();
-    showSkeletonTabs();
-
     if (playlists.length === 0) {
       console.warn('No playlists configured');
-      setTimeout(() => {
-        displayShorts(shorts);
-        createTabs([]);
-      }, 1000);
+      shortsContainer.innerHTML = displayEmptyState('No playlists configured');
+      tabContentsContainer.innerHTML = displayEmptyState('No video playlists available');
       return;
     }
 
@@ -1547,7 +1543,7 @@ function initializeYouTubeGallery(sectionId) {
     // Store shorts data globally for fullscreen view
     window[`shortsData_${sectionId}`] = shorts;
 
-    // Show shorts immediately
+    // Show shorts immediately without skeleton
     displayShorts(shorts);
 
     // Step 2: Initialize playlist structure (without loading videos yet)
@@ -1563,12 +1559,10 @@ function initializeYouTubeGallery(sectionId) {
     // Create tabs immediately (videos will load when tabs are clicked)
     createTabs(playlists.map(p => p.id));
 
-    // Auto-load first tab after a brief delay
-    setTimeout(() => {
-      if (playlists.length > 0) {
-        switchTab(playlists[0].id);
-      }
-    }, 500);
+    // Auto-load first tab immediately
+    if (playlists.length > 0) {
+      switchTab(playlists[0].id);
+    }
 
     console.log(`Shorts loaded: ${shorts.length}. Videos will load on demand.`);
   }
@@ -1843,9 +1837,12 @@ function initializeYouTubeGallery(sectionId) {
 
       tabContentsContainer.appendChild(tabContent);
 
-      // Show skeleton for the first tab
+      // Don't show skeleton initially - let switchTab handle loading
       if (index === 0) {
-        showSkeletonVideos(playlistId);
+        const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
+        if (videoCountElement) {
+          videoCountElement.textContent = 'Ready to load videos...';
+        }
       }
     });
   }
@@ -1869,8 +1866,15 @@ function initializeYouTubeGallery(sectionId) {
     if (!playlist.loaded) {
       console.log(`Loading videos for ${playlist.name}...`);
       
-      // Show skeleton loading
-      showSkeletonVideos(playlistId);
+      // Show loading message instead of skeleton
+      const videosContainer = document.querySelector(`#videos-${playlistId}`);
+      const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
+      if (videosContainer) {
+        videosContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+      }
+      if (videoCountElement) {
+        videoCountElement.textContent = 'Loading videos...';
+      }
 
       try {
         // Find the original playlist config
@@ -1922,14 +1926,50 @@ function initializeYouTubeGallery(sectionId) {
       videoCountElement.textContent = `${playlist.videos.length} videos`;
     }
 
-    // Load videos if not displayed yet
+    // Load initial videos if not displayed yet
     if (loadedVideos[playlistId] === 0 && playlist.videos.length > 0) {
-      // Clear skeleton first
       const videosContainer = document.querySelector(`#videos-${playlistId}`);
       if (videosContainer) {
         videosContainer.innerHTML = '';
       }
-      loadMoreVideos(playlistId);
+      loadInitialVideos(playlistId);
+    }
+  }
+
+  function loadInitialVideos(playlistId) {
+    const playlist = videosByPlaylist[playlistId];
+    const videosContainer = document.querySelector(`#videos-${playlistId}`);
+    const loadMoreButton = document.querySelector(`#load-more-${playlistId}`);
+
+    // Load only initial 3 videos
+    const endIndex = Math.min(initialVideosPerTab, playlist.videos.length);
+
+    for (let i = 0; i < endIndex; i++) {
+      const video = playlist.videos[i];
+      const videoElement = createVideoElementForDisplay(video, allVideos.indexOf(video));
+      
+      // Add fade-in animation with slight delay for staggered effect
+      videoElement.style.opacity = '0';
+      videoElement.classList.add('fade-in');
+      videosContainer.appendChild(videoElement);
+      
+      // Trigger fade-in animation
+      setTimeout(() => {
+        videoElement.style.opacity = '1';
+      }, i * 100); // Staggered animation
+    }
+
+    loadedVideos[playlistId] = endIndex;
+
+    // Show load more button if there are more videos
+    if (loadMoreButton) {
+      if (endIndex >= playlist.videos.length) {
+        loadMoreButton.style.display = 'none';
+      } else {
+        loadMoreButton.style.display = 'block';
+        loadMoreButton.style.margin = '30px auto';
+        loadMoreButton.style.textAlign = 'center';
+      }
     }
   }
 
@@ -1969,7 +2009,7 @@ function initializeYouTubeGallery(sectionId) {
   }
 
   function displayShorts(shorts) {
-    // Clear any existing skeleton loading
+    // Clear any existing loading
     shortsContainer.innerHTML = '';
     
     if (shorts.length === 0) {
@@ -1977,11 +2017,18 @@ function initializeYouTubeGallery(sectionId) {
       return;
     }
 
-    shorts.forEach((short, index) => {
-      const shortElement = createShortElement(short, index, sectionId);
-      shortElement.classList.add('fade-in');
-      shortsContainer.appendChild(shortElement);
-    });
+    // Add loading indicator while processing
+    shortsContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+
+    // Small delay to show loading, then display shorts
+    setTimeout(() => {
+      shortsContainer.innerHTML = '';
+      shorts.forEach((short, index) => {
+        const shortElement = createShortElement(short, index, sectionId);
+        shortElement.classList.add('fade-in');
+        shortsContainer.appendChild(shortElement);
+      });
+    }, 500);
   }
 
   function showSkeletonShorts() {
