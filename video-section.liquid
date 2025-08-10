@@ -12,7 +12,7 @@
   .youtube-gallery-container {
     margin: 0 auto;
     padding: 20px;
-    max-width: {{ section.settings.container_width }}px;
+    /* max-width: {{ section.settings.container_width }}px; */
   }
 
   .youtube-gallery-header {
@@ -199,7 +199,7 @@
   }
 
   .short-badge {
-    background-color: #ff0000;
+      background: rgba(9, 94, 167, 0.8);
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -231,43 +231,6 @@
 
   .short-views::before {
     content: "👁";
-  }
-
-  /* YouTube Play Button Overlay */
-  .short-play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
-  }
-
-  .short-play-button {
-    width: 64px; /* Larger play button */
-    height: 64px;
-    background: rgba(255, 255, 255, 0.3); /* Subtle background */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  }
-
-  .short-play-button:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-
-  .short-play-button svg {
-    fill: white;
-    stroke: black;
-    stroke-width: 1;
   }
 
   /* Videos section */
@@ -406,8 +369,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     background: rgba(255, 0, 0, 0.9);
     border-radius: 50%;
     display: flex;
@@ -421,9 +384,9 @@
     content: "";
     width: 0;
     height: 0;
-    border-left: 20px solid white;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
+    border-left: 15px solid white;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
     margin-left: 4px;
   }
 
@@ -487,7 +450,7 @@
     position: absolute;
     top: 8px;
     right: 8px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(9, 94, 167, 0.8);
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -892,7 +855,7 @@
 
   .modal-recommendations {
     margin-top: 30px;
-    z-index: 1;
+    /* z-index: 1; */
     padding-top: 35px;
     position: relative;
   }
@@ -927,7 +890,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #ff0000, #cc0000);
+    background: #095ea7;
     color: white !important;
     padding: 14px 24px;
     border-radius: 30px;
@@ -935,7 +898,7 @@
     font-weight: 600;
     font-size: 14px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(9, 94, 167, 0.3);
     margin-top: 20px;
     justify-content: center;
     width: 100%;
@@ -2578,19 +2541,12 @@ function initializeYouTubeGallery(sectionId) {
       <div class="short-thumbnail">
         <img src="https://img.youtube.com/vi/${short.id}/mqdefault.jpg"
              alt="${short.title}"
-             style="width: 100%; height: 100%; object-fit: cover;"
-             onerror="this.src='https://via.placeholder.com/200x200/ff0000/ffffff?text=Shorts'">
-        <div class="short-play-overlay">
-          <div class="short-play-button">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-              <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/>
-            </svg>
-          </div>
-        </div>
+             style="width: 100%; height: 100%; object-fit: cover;">
       </div>
+        <div class="video-play-button"></div>
       <div class="short-overlay">
         <div class="short-badge">Shorts</div>
-        ${index === 0 ? '<div class="short-play-status">Playing</div>' : ''}
+        ${index === 0 ? '' : ''}
       </div>
       <div class="short-views">${short.views || Math.floor(Math.random() * 2000) + 100}</div>
     `;
