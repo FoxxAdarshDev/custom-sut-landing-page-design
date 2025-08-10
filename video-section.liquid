@@ -722,12 +722,12 @@
     line-height: 1.6;
     color: #555;
     margin-bottom: 20px;
-    max-height: 150px;
+    max-height: 180px;
+    padding: 12px;
     overflow-y: auto;
     padding-right: 8px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 12px;
     background-color: #fafafa;
   }
 
@@ -1324,6 +1324,22 @@
     }
   }
 
+  /* YouTube-style Modal Description */
+  .modal-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+    max-height: 180px; /* Increased max-height */
+    overflow-y: auto;
+    padding-right: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px; /* Added padding */
+    background-color: #fafafa;
+  }
+
+
   /* Mobile responsive */
   @media screen and (max-width: 767px) {
     .shorts-videos-container {
@@ -1710,7 +1726,7 @@ function initializeYouTubeGallery(sectionId) {
         'net::ERR_BLOCKED_BY_CLIENT', '/api/stats/qoe', '/youtubei/',
         'VM14:', 'POST https://www.youtube', 'googleapis.com'
       ];
-      
+
       if (errorPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
         return; // Suppress these errors
       }
@@ -1720,10 +1736,10 @@ function initializeYouTubeGallery(sectionId) {
     console.warn = function(...args) {
       const message = args.join(' ');
       const warnPatterns = [
-        'youtube', 'ERR_BLOCKED_BY_CLIENT', 'api/stats', 
+        'youtube', 'ERR_BLOCKED_BY_CLIENT', 'api/stats',
         'googleapis.com', 'www.youtube-nocookie.com'
       ];
-      
+
       if (warnPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
         return; // Suppress these warnings
       }
@@ -1735,7 +1751,7 @@ function initializeYouTubeGallery(sectionId) {
       const logPatterns = [
         'youtube', 'ERR_BLOCKED_BY_CLIENT', 'googleapis.com'
       ];
-      
+
       if (logPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
         return; // Suppress these logs
       }
@@ -1763,8 +1779,8 @@ function initializeYouTubeGallery(sectionId) {
     window.addEventListener('unhandledrejection', function(event) {
       if (event.reason && typeof event.reason === 'string') {
         const reason = event.reason.toLowerCase();
-        if (reason.includes('youtube') || 
-            reason.includes('blocked') || 
+        if (reason.includes('youtube') ||
+            reason.includes('blocked') ||
             reason.includes('api/stats')) {
           event.preventDefault();
           return false;
@@ -1986,7 +2002,7 @@ function initializeYouTubeGallery(sectionId) {
               id: videoId,
               duration: formattedDuration,
               views: viewCount,
-              description: description.substring(0, 200),
+              description: description, // Store full description
               publishedAt: publishedAt,
               publishedDate: new Date(publishedAt) // Add date object for sorting
             });
@@ -2029,12 +2045,12 @@ function initializeYouTubeGallery(sectionId) {
       const title = `${playlistName} Video ${i + 1}`;
       const isShort = playlistName.toLowerCase().includes('short') && Math.random() > 0.5;
       const description = `Demo video content for ${playlistName} playlist. This is placeholder content.`;
-      
+
       const durationMins = Math.floor(Math.random() * 10) + 2;
       const durationSecs = Math.floor(Math.random() * 60);
       const formattedDuration = `${durationMins}:${durationSecs.toString().padStart(2, '0')}`;
       const viewCount = Math.floor(Math.random() * 5000) + 500;
-      
+
       const publishedAt = new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString(); // Days ago
 
       const videoElement = createVideoElement({
@@ -2057,7 +2073,7 @@ function initializeYouTubeGallery(sectionId) {
         id: demoId,
         duration: formattedDuration,
         views: viewCount,
-        description: description,
+        description: description, // Store full description
         publishedAt: publishedAt,
         publishedDate: new Date(publishedAt)
       });
@@ -2149,8 +2165,7 @@ function initializeYouTubeGallery(sectionId) {
           <span class="video-date">${publishedDate}</span>
         </div>
         <p class="video-description" data-description="${video.description || 'No description available'}">
-          ${(video.description || 'No description available').substring(0, 80)}...
-        </p>
+          ${(video.description || 'No description available').substring(0, 80)}...</p>
         <a href="#" class="youtube-read-more">Read More</a>
       </div>
     `;
