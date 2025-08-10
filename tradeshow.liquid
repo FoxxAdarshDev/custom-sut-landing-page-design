@@ -1,5 +1,6 @@
+
 {% comment %}
-  Trade Show Section
+  Trade Show Section - Enhanced Version
   Displays upcoming and past trade shows with interactive features
 {% endcomment %}
 
@@ -189,7 +190,7 @@
             <!-- Modal for detailed information -->
             {% if block.settings.show_read_more and block.settings.detailed_description != blank %}
               <div id="{{ block.id }}-modal" class="tradeshow-modal">
-                <div class="tradeshow-modal-overlay"></div>
+                <div class="tradeshow-modal-overlay" onclick="closeModal('{{ block.id }}-modal')"></div>
                 <div class="tradeshow-modal-content">
                   <div class="tradeshow-modal-header">
                     <h3>{{ block.settings.event_title }}</h3>
@@ -233,6 +234,11 @@
 </section>
 
 <style>
+  /* Reset and Base Styles */
+  .tradeshow-section * {
+    box-sizing: border-box;
+  }
+
   /* Main Section Styles */
   .tradeshow-section {
     background: {{ settings.tradeshow_background_color | default: '#f8f9fa' }};
@@ -242,10 +248,9 @@
     padding: {{ settings.tradeshow_padding_top | default: 80 }}px 0 {{ settings.tradeshow_padding_bottom | default: 80 }}px 0;
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 60vh;
   }
 
-  /* Background decoration */
   .tradeshow-bg-decoration {
     position: absolute;
     top: 0;
@@ -259,8 +264,7 @@
     pointer-events: none;
   }
 
-  /* Container */
-  .tradeshow-section .tradeshow-container {
+  .tradeshow-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
@@ -295,6 +299,7 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
   }
 
   .title-underline {
@@ -316,18 +321,19 @@
 
   .tradeshow-filter-tab {
     background: transparent;
-    border: 2px solid {{ settings.tradeshow_button_secondary_bg | default: '#f8f9fa' }};
+    border: 2px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
     color: {{ settings.tradeshow_button_secondary_text | default: '#0071b9' }};
     padding: 12px 24px;
     border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
     font-weight: 600;
     cursor: pointer;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 14px;
   }
 
   .tab-icon {
@@ -354,13 +360,13 @@
   /* Event Card Styles */
   .trade-show-event-card {
     background: {{ settings.tradeshow_card_background | default: '#ffffff' }};
-    border-radius: {{ settings.tradeshow_card_border_radius | default: 20 }}px;
+    border-radius: {{ settings.tradeshow_card_border_radius | default: 16 }}px;
     padding: 32px;
     border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
     position: relative;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0, 113, 185, {{ settings.tradeshow_card_shadow_opacity | default: 8 | divided_by: 100.0 }});
+    box-shadow: 0 12px 40px rgba(0, 113, 185, 0.1);
     animation: fadeInUp 0.6s ease forwards;
     display: flex;
     flex-direction: column;
@@ -376,20 +382,18 @@
     bottom: 0;
     background: linear-gradient(135deg, rgba(0, 113, 185, 0.02) 0%, rgba(0, 168, 230, 0.05) 100%);
     opacity: 0;
-    transition: opacity {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: opacity 300ms ease;
   }
 
-  {% if settings.tradeshow_enable_hover_effects %}
-    .trade-show-event-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 25px 80px rgba(0, 113, 185, 0.25);
-      border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    }
+  .trade-show-event-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 25px 80px rgba(0, 113, 185, 0.2);
+    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+  }
 
-    .trade-show-event-card:hover::before {
-      opacity: 1;
-    }
-  {% endif %}
+  .trade-show-event-card:hover::before {
+    opacity: 1;
+  }
 
   /* Status Badge */
   .event-status-badge {
@@ -491,7 +495,7 @@
 
   .trade-show-event-title {
     color: {{ settings.tradeshow_event_title_color | default: '#2c3e50' }};
-    font-size: {{ settings.tradeshow_event_title_size | default: 26 }}px;
+    font-size: {{ settings.tradeshow_event_title_size | default: 24 }}px;
     font-weight: 700;
     margin-bottom: 16px;
     line-height: 1.3;
@@ -499,7 +503,7 @@
 
   .trade-show-event-description {
     color: {{ settings.tradeshow_event_description_color | default: '#666666' }};
-    font-size: {{ settings.tradeshow_event_description_size | default: 15 }}px;
+    font-size: {{ settings.tradeshow_event_description_size | default: 14 }}px;
     line-height: 1.6;
     margin-bottom: 0;
   }
@@ -512,7 +516,7 @@
     font-weight: 600;
     text-decoration: underline;
     margin-left: 8px;
-    transition: color {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: color 300ms ease;
     font-size: 14px;
   }
 
@@ -531,25 +535,23 @@
     align-items: center;
     justify-content: center;
     border: 2px solid #e9ecef;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
   }
 
   .trade-show-event-logo {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: transform 300ms ease;
   }
 
-  {% if settings.tradeshow_enable_hover_effects %}
-    .trade-show-event-card:hover .trade-show-logo-container {
-      border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    }
+  .trade-show-event-card:hover .trade-show-logo-container {
+    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+  }
 
-    .trade-show-event-card:hover .trade-show-event-logo {
-      transform: scale(1.1);
-    }
-  {% endif %}
+  .trade-show-event-card:hover .trade-show-event-logo {
+    transform: scale(1.1);
+  }
 
   /* Event Details */
   .trade-show-event-details {
@@ -595,7 +597,7 @@
   .trade-show-location-link {
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     text-decoration: none;
-    transition: color {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: color 300ms ease;
   }
 
   .trade-show-location-link:hover {
@@ -619,7 +621,7 @@
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
     border: none;
     cursor: pointer;
     position: relative;
@@ -673,12 +675,11 @@
     right: 0;
     background: white;
     border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
-    border-radius: {{ settings.tradeshow_button_border_radius | default: 12 }}px;
+    border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     min-width: 220px;
     display: none;
-    animation: fadeInUp 0.3s ease;
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
@@ -712,7 +713,7 @@
     color: #2c3e50;
     text-decoration: none;
     font-size: 14px;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
     border-bottom: 1px solid #f0f0f0;
   }
 
@@ -721,7 +722,7 @@
   }
 
   .trade-show-calendar-option:hover {
-    background: {{ settings.tradeshow_button_secondary_bg | default: '#f8f9fa' }};
+    background: #f8f9fa;
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     transform: translateX(4px);
   }
@@ -746,10 +747,10 @@
     color: white;
     border: none;
     padding: 12px 24px;
-    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -769,8 +770,8 @@
   .pagination-info {
     background: white;
     padding: 12px 20px;
-    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
-    border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
     font-weight: 600;
     color: #2c3e50;
   }
@@ -785,11 +786,11 @@
     background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #00a8e6);
     color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
     padding: 16px 32px;
-    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
     font-size: 16px;
-    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    transition: all 300ms ease;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -919,11 +920,15 @@
   /* Responsive Design */
   @media (max-width: 768px) {
     .tradeshow-section {
-      padding: {{ settings.tradeshow_padding_top_mobile | default: 40 }}px 0 {{ settings.tradeshow_padding_bottom_mobile | default: 40 }}px 0;
+      padding: 40px 0;
     }
 
     .tradeshow-title {
-      font-size: {{ settings.tradeshow_title_size_mobile | default: 28 }}px;
+      font-size: 28px;
+    }
+
+    .tradeshow-container {
+      padding: 0 16px;
     }
 
     .tradeshow-grid {
@@ -968,10 +973,6 @@
       font-size: 16px;
     }
 
-    .tradeshow-section .tradeshow-container {
-      padding: 0 16px;
-    }
-
     .tradeshow-filter-tabs {
       gap: 10px;
     }
@@ -990,9 +991,7 @@
       padding: 10px 16px;
       font-size: 14px;
     }
-  }
 
-  @media (max-width: 480px) {
     .trade-show-event-card {
       padding: 20px;
       min-height: 350px;
@@ -1006,26 +1005,20 @@
       margin: 10px;
       width: calc(100% - 20px);
     }
-
-    .tradeshow-modal-header {
-      padding: 15px 20px;
-    }
-
-    .tradeshow-modal-body {
-      padding: 20px;
-    }
   }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Pagination settings
+  console.log('Tradeshow script loaded');
+
+  // Configuration
   const CARDS_PER_PAGE = {{ section.settings.cards_per_page | default: 6 }};
   let currentPage = 1;
   let currentFilter = 'all';
   let filteredCards = [];
 
-  // Get all elements
+  // Get elements
   const grid = document.getElementById('tradeshowGrid');
   const pagination = document.getElementById('tradeshowPagination');
   const currentPageSpan = document.getElementById('currentPage');
@@ -1035,7 +1028,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const filterTabs = document.querySelectorAll('.tradeshow-filter-tab');
   const eventCards = document.querySelectorAll('.trade-show-event-card');
 
-  // Enhanced event data with calendar integration
+  console.log('Found', eventCards.length, 'event cards');
+
+  // Event data for calendar integration
   const eventData = {
     {% for block in section.blocks %}
       {% case block.type %}
@@ -1067,13 +1062,13 @@ Contact: sales@foxxlifesciences.com`,
     {% endfor %}
   };
 
-  // Initialize filter and pagination
+  // Initialize display
   function initializeDisplay() {
     updateFilteredCards();
     updatePagination();
     showCurrentPage();
-
-    // Stagger animation for cards
+    
+    // Add staggered animation
     const visibleCards = document.querySelectorAll('.trade-show-event-card:not([style*="display: none"])');
     visibleCards.forEach((card, index) => {
       card.style.animationDelay = `${index * 0.1}s`;
@@ -1084,11 +1079,11 @@ Contact: sales@foxxlifesciences.com`,
   filterTabs.forEach(tab => {
     tab.addEventListener('click', function() {
       const filter = this.getAttribute('data-filter');
-
+      
       // Update active tab
       filterTabs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
-
+      
       currentFilter = filter;
       currentPage = 1;
       updateFilteredCards();
@@ -1102,58 +1097,59 @@ Contact: sales@foxxlifesciences.com`,
       if (currentFilter === 'all') return true;
       return card.getAttribute('data-event-status') === currentFilter;
     });
+    console.log('Filtered cards:', filteredCards.length);
   }
 
   function updatePagination() {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-
+    
     if (totalPages <= 1) {
       pagination.style.display = 'none';
     } else {
       pagination.style.display = 'flex';
       totalPagesSpan.textContent = totalPages;
     }
-
+    
     updatePaginationButtons();
   }
 
   function updatePaginationButtons() {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-
+    
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
     currentPageSpan.textContent = currentPage;
   }
 
   function showCurrentPage() {
-    // Hide all cards first
+    // Hide all cards
     eventCards.forEach(card => {
       card.style.display = 'none';
     });
-
-    // Calculate start and end indices
+    
+    // Calculate range
     const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
     const endIndex = startIndex + CARDS_PER_PAGE;
-
-    // Show cards for current page
+    
+    // Show filtered cards for current page
     filteredCards.slice(startIndex, endIndex).forEach((card, index) => {
       card.style.display = 'block';
       card.style.animationDelay = `${index * 0.1}s`;
+      // Reset animation
       card.style.animation = 'none';
       void card.offsetHeight; // Trigger reflow
       card.style.animation = 'fadeInUp 0.6s ease forwards';
     });
-
-    // Scroll to top of grid
+    
+    // Smooth scroll to grid
     grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // Pagination navigation
   window.changePage = function(direction) {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-
     const newPage = currentPage + direction;
-
+    
     if (newPage >= 1 && newPage <= totalPages) {
       currentPage = newPage;
       updatePaginationButtons();
@@ -1161,7 +1157,7 @@ Contact: sales@foxxlifesciences.com`,
     }
   };
 
-  // Initialize on load
+  // Initialize everything
   initializeDisplay();
 });
 
@@ -1169,34 +1165,15 @@ Contact: sales@foxxlifesciences.com`,
 function toggleCalendarDropdown(button, eventId) {
   const dropdown = document.getElementById(`calendar-${eventId}`);
   const isVisible = dropdown.classList.contains('show');
-
-  // Close all dropdowns first
+  
+  // Close all dropdowns
   document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
     d.classList.remove('show');
   });
-
+  
   // Toggle current dropdown
   if (!isVisible) {
     dropdown.classList.add('show');
-
-    // Ensure dropdown is properly positioned
-    const rect = button.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-
-    // Reset any previous positioning
-    dropdown.style.left = '0';
-    dropdown.style.right = '0';
-    dropdown.style.transform = 'none';
-
-    // Check if dropdown would overflow on mobile
-    setTimeout(() => {
-      const dropdownRect = dropdown.getBoundingClientRect();
-      if (dropdownRect.right > viewportWidth - 20) {
-        dropdown.style.left = 'auto';
-        dropdown.style.right = '0';
-        dropdown.style.width = '200px';
-      }
-    }, 10);
   }
 }
 
@@ -1209,60 +1186,48 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Calendar integration functions
+// Calendar integration
 function addToCalendar(platform, eventId) {
-  // Get event data
-  const eventDataScript = document.querySelector('script');
-  const eventMatch = eventDataScript.textContent.match(new RegExp(`'${eventId}':\\s*{[^}]+}`));
-
-  if (!eventMatch) {
-    console.error('Event data not found for:', eventId);
-    return;
-  }
-
-  // Parse the event data (this is a simplified approach)
+  console.log('Adding to calendar:', platform, eventId);
+  
   const card = document.querySelector(`[data-event-id="${eventId}"]`);
   if (!card) return;
-
+  
   const title = card.querySelector('.trade-show-event-title')?.textContent || 'Trade Show Event';
   const dates = card.querySelector('.trade-show-event-dates')?.textContent.replace('📅', '').trim() || '';
   const location = card.querySelector('.trade-show-detail-value')?.textContent || '';
   const description = card.querySelector('.trade-show-event-description')?.textContent || '';
-
-  // Create basic event data
+  
   const event = {
     title: title,
-    start: '20250101T090000', // Default start time
-    end: '20250101T170000',   // Default end time
-    description: `${title}\n\n${description}\n\nDates: ${dates}\nLocation: ${location}\n\n---\nFoxx Life Sciences\nWebsite: https://www.foxxlifesciences.com/\nContact: sales@foxxlifesciences.com`,
+    start: '20250101T090000Z',
+    end: '20250101T170000Z',
+    description: `${title}\n\n${description}\n\nDates: ${dates}\nLocation: ${location}`,
     location: location
   };
-
+  
   let url = '';
-
+  
   switch(platform) {
     case 'google':
-      url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}Z/${event.end}Z&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+      url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}/${event.end}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
       window.open(url, '_blank');
       break;
-
+      
     case 'outlook':
-      downloadICS(event);
-      break;
-
-    case 'yahoo':
-      const startDateYahoo = event.start.substring(0, 8);
-      const endDateYahoo = event.end.substring(0, 8);
-      url = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(event.title)}&st=${startDateYahoo}&et=${endDateYahoo}&desc=${encodeURIComponent(event.description)}&in_loc=${encodeURIComponent(event.location)}`;
-      window.open(url, '_blank');
-      break;
-
     case 'apple':
     case 'ics':
       downloadICS(event);
       break;
+      
+    case 'yahoo':
+      const startDate = event.start.substring(0, 8);
+      const endDate = event.end.substring(0, 8);
+      url = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(event.title)}&st=${startDate}&et=${endDate}&desc=${encodeURIComponent(event.description)}&in_loc=${encodeURIComponent(event.location)}`;
+      window.open(url, '_blank');
+      break;
   }
-
+  
   // Close dropdown
   document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => d.classList.remove('show'));
 }
@@ -1271,7 +1236,7 @@ function downloadICS(event) {
   const now = new Date();
   const timestamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
   const uid = `${Date.now()}@foxxlifesciences.com`;
-
+  
   const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Foxx Life Sciences//Trade Shows//EN
@@ -1279,8 +1244,8 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:${uid}
 DTSTAMP:${timestamp}
-DTSTART:${event.start}Z
-DTEND:${event.end}Z
+DTSTART:${event.start}
+DTEND:${event.end}
 SUMMARY:${event.title}
 DESCRIPTION:${event.description.replace(/\n/g, '\\n')}
 LOCATION:${event.location}
@@ -1294,7 +1259,7 @@ TRIGGER:-P1D
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
-
+  
   const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1308,6 +1273,7 @@ END:VCALENDAR`;
 
 // Modal functionality
 function openModal(modalId) {
+  console.log('Opening modal:', modalId);
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.style.display = 'block';
@@ -1316,6 +1282,7 @@ function openModal(modalId) {
 }
 
 function closeModal(modalId) {
+  console.log('Closing modal:', modalId);
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.style.display = 'none';
@@ -1325,9 +1292,12 @@ function closeModal(modalId) {
 
 // Close modal when clicking outside
 window.addEventListener('click', function(event) {
-  if (event.target.classList.contains('tradeshow-modal')) {
-    event.target.style.display = 'none';
-    document.body.style.overflow = 'auto';
+  if (event.target.classList.contains('tradeshow-modal-overlay')) {
+    const modal = event.target.closest('.tradeshow-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
   }
 });
 </script>
