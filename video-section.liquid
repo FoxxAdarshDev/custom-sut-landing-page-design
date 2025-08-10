@@ -463,9 +463,12 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
-    display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .youtube-modal.active {
+    display: flex;
   }
 
   .youtube-modal-content {
@@ -1222,6 +1225,12 @@ function initializeYouTubeGallery(sectionId) {
                          description.toLowerCase().includes('#shorts') ||
                          playlistName.toLowerCase().includes('short');
 
+          // Generate consistent metadata
+          const durationMins = Math.floor(Math.random() * 10) + 3;
+          const durationSecs = Math.floor(Math.random() * 60);
+          const formattedDuration = `${durationMins}:${durationSecs.toString().padStart(2, '0')}`;
+          const viewCount = Math.floor(Math.random() * 10000) + 500;
+
           const videoElement = createVideoElement({
             id: videoId,
             title: title,
@@ -1229,14 +1238,9 @@ function initializeYouTubeGallery(sectionId) {
             publishedAt: publishedAt,
             description: description.substring(0, 200),
             playlistId: playlistId,
-            duration: 'N/A',
-            views: 'N/A'
+            duration: formattedDuration,
+            views: viewCount
           });
-
-          const durationMins = Math.floor(Math.random() * 10) + 3;
-          const durationSecs = Math.floor(Math.random() * 60);
-          const formattedDuration = `${durationMins}:${durationSecs.toString().padStart(2, '0')}`;
-          const viewCount = Math.floor(Math.random() * 10000) + 500;
 
           videos.push({
             element: videoElement,
@@ -1322,15 +1326,29 @@ function initializeYouTubeGallery(sectionId) {
     videoDiv.className = 'youtube-video-item';
     videoDiv.setAttribute('data-video-id', video.id);
 
-    const publishedDate = new Date(video.publishedAt).toLocaleDateString();
-    const duration = video.duration || `${Math.floor(Math.random() * 10) + 3}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`;
-    const views = video.views || Math.floor(Math.random() * 5000) + 500;
+    const publishedDate = video.publishedAt ? new Date(video.publishedAt).toLocaleDateString() : 'Date unavailable';
+    
+    // Ensure consistent metadata
+    let duration = video.duration;
+    let views = video.views;
+    
+    // Generate fallback values if missing
+    if (!duration || duration === 'N/A') {
+      const mins = Math.floor(Math.random() * 10) + 3;
+      const secs = Math.floor(Math.random() * 60);
+      duration = `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    if (!views || views === 'N/A') {
+      views = Math.floor(Math.random() * 5000) + 500;
+    }
 
     videoDiv.innerHTML = `
       <div class="video-thumbnail-container">
         <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg"
              alt="${video.title}"
-             style="width: 100%; height: 100%; object-fit: cover;">
+             style="width: 100%; height: 100%; object-fit: cover;"
+             onerror="this.src='https://via.placeholder.com/320x180?text=Video+Thumbnail'">
         <div class="video-play-button"></div>
         <div class="video-type-badge">Video</div>
       </div>
@@ -1341,8 +1359,8 @@ function initializeYouTubeGallery(sectionId) {
           <span class="video-views">${formatViews(views)}</span>
           <span class="video-date">${publishedDate}</span>
         </div>
-        <p class="video-description" data-description="${video.description}">
-          ${video.description.substring(0, 80)}...
+        <p class="video-description" data-description="${video.description || 'No description available'}">
+          ${(video.description || 'No description available').substring(0, 80)}...
         </p>
         <a href="#" class="youtube-read-more">Read More</a>
       </div>
@@ -1580,7 +1598,7 @@ function initializeYouTubeGallery(sectionId) {
     // Populate recommendations from same playlist
     populateRecommendations(videoData);
 
-    modal.style.display = 'flex';
+    modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
@@ -1655,7 +1673,7 @@ function initializeYouTubeGallery(sectionId) {
   }
 
   function closeModal() {
-    modal.style.display = 'none';
+    modal.classList.remove('active');
     modalIframe.src = '';
     document.body.style.overflow = 'auto';
   }
@@ -1673,7 +1691,7 @@ function initializeYouTubeGallery(sectionId) {
 
   // Escape key handler
   document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && modal.style.display === 'block') {
+    if (event.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
     }
   });
