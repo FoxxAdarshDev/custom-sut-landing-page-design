@@ -1653,19 +1653,22 @@ function populateFullscreenShorts(sectionId) {
 }
 
 function initializeYouTubeGallery(sectionId) {
-    // Suppress YouTube API console errors
+    // Comprehensive YouTube API error suppression
     const originalConsoleError = console.error;
     const originalConsoleWarn = console.warn;
+    const originalConsoleLog = console.log;
 
+    // Enhanced console error filtering
     console.error = function(...args) {
       const message = args.join(' ');
-      // Block YouTube API related errors
-      if (message.includes('youtube') || 
-          message.includes('ERR_BLOCKED_BY_CLIENT') ||
-          message.includes('Failed to load resource') ||
-          message.includes('api/stats') ||
-          message.includes('youtubei/v1') ||
-          message.includes('www.youtube-nocookie.com')) {
+      const errorPatterns = [
+        'youtube', 'ERR_BLOCKED_BY_CLIENT', 'Failed to load resource',
+        'api/stats', 'youtubei/v1', 'www.youtube-nocookie.com',
+        'net::ERR_BLOCKED_BY_CLIENT', '/api/stats/qoe', '/youtubei/',
+        'VM14:', 'POST https://www.youtube', 'googleapis.com'
+      ];
+      
+      if (errorPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
         return; // Suppress these errors
       }
       originalConsoleError.apply(console, args);
@@ -1673,14 +1676,58 @@ function initializeYouTubeGallery(sectionId) {
 
     console.warn = function(...args) {
       const message = args.join(' ');
-      // Block YouTube API related warnings
-      if (message.includes('youtube') || 
-          message.includes('ERR_BLOCKED_BY_CLIENT') ||
-          message.includes('api/stats')) {
+      const warnPatterns = [
+        'youtube', 'ERR_BLOCKED_BY_CLIENT', 'api/stats', 
+        'googleapis.com', 'www.youtube-nocookie.com'
+      ];
+      
+      if (warnPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
         return; // Suppress these warnings
       }
       originalConsoleWarn.apply(console, args);
     };
+
+    console.log = function(...args) {
+      const message = args.join(' ');
+      const logPatterns = [
+        'youtube', 'ERR_BLOCKED_BY_CLIENT', 'googleapis.com'
+      ];
+      
+      if (logPatterns.some(pattern => message.toLowerCase().includes(pattern.toLowerCase()))) {
+        return; // Suppress these logs
+      }
+      originalConsoleLog.apply(console, args);
+    };
+
+    // Block YouTube API network requests that cause these errors
+    if (window.fetch) {
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        if (typeof url === 'string' && (
+          url.includes('youtube.com/api/stats') ||
+          url.includes('youtubei/v1') ||
+          url.includes('www.youtube-nocookie.com/api')
+        )) {
+          // Return a resolved promise to prevent errors
+          return Promise.resolve(new Response('{}', { status: 200 }));
+        }
+        return originalFetch.apply(this, args);
+      };
+    }
+
+    // Suppress unhandled promise rejections from YouTube
+    window.addEventListener('unhandledrejection', function(event) {
+      if (event.reason && typeof event.reason === 'string') {
+        const reason = event.reason.toLowerCase();
+        if (reason.includes('youtube') || 
+            reason.includes('blocked') || 
+            reason.includes('api/stats')) {
+          event.preventDefault();
+          return false;
+        }
+      }
+    });
 
     const shortsContainer = document.querySelector(`#shorts-container-${sectionId}`);
     const videosTabsContainer = document.querySelector(`#videos-tabs-${sectionId}`);
@@ -2256,7 +2303,7 @@ function initializeYouTubeGallery(sectionId) {
 
     modalPlaylistTag.textContent = playlist;
     modalTitle.textContent = title;
-    modalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1`;
+    modalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1&enablejsapi=0&disablekb=1&fs=1&iv_load_policy=3&cc_load_policy=0&origin=${encodeURIComponent(window.location.origin)}`;
     modalDescription.innerHTML = description;
     modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
 
