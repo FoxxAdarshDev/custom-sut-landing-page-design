@@ -668,8 +668,8 @@
   .trade-show-calendar-dropdown {
     position: absolute;
     top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     background: white;
     border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
     border-radius: {{ settings.tradeshow_button_border_radius | default: 12 }}px;
@@ -679,10 +679,17 @@
     display: none;
     animation: fadeInUp 0.3s ease;
     overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
   }
 
   .trade-show-calendar-dropdown.show {
     display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .dropdown-header {
@@ -943,6 +950,23 @@
       justify-content: center;
     }
 
+    .trade-show-calendar-container {
+      width: 100%;
+    }
+
+    .trade-show-calendar-dropdown {
+      left: 0;
+      right: 0;
+      width: 100%;
+      min-width: auto;
+      max-width: 100%;
+    }
+
+    .trade-show-calendar-option {
+      padding: 14px 16px;
+      font-size: 16px;
+    }
+
     .tradeshow-section .tradeshow-container {
       padding: 0 16px;
     }
@@ -1037,7 +1061,7 @@ Contact: sales@foxxlifesciences.com`,
             location: '{{ block.settings.venue_name | escape }}{% if block.settings.event_location != blank %}, {{ block.settings.event_location | escape }}{% endif %}',
             url: '{{ block.settings.locator_url | escape }}',
             mapLocation: '{{ block.settings.venue_map_url | escape }}'
-          },
+          }{% unless forloop.last %},{% endunless %}
         {% endcase %}
     {% endfor %}
   };
@@ -1144,7 +1168,7 @@ function toggleCalendarDropdown(button, eventId) {
   const dropdown = document.getElementById(`calendar-${eventId}`);
   const isVisible = dropdown.classList.contains('show');
   
-  // Close all dropdowns
+  // Close all dropdowns first
   document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
     d.classList.remove('show');
   });
@@ -1153,15 +1177,24 @@ function toggleCalendarDropdown(button, eventId) {
   if (!isVisible) {
     dropdown.classList.add('show');
     
-    // Position dropdown to avoid overflow
+    // Ensure dropdown is properly positioned
     const rect = button.getBoundingClientRect();
-    const dropdownRect = dropdown.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
     
-    if (rect.right + dropdownRect.width > window.innerWidth) {
-      dropdown.style.left = 'auto';
-      dropdown.style.right = '0';
-      dropdown.style.transform = 'none';
-    }
+    // Reset any previous positioning
+    dropdown.style.left = '0';
+    dropdown.style.right = '0';
+    dropdown.style.transform = 'none';
+    
+    // Check if dropdown would overflow on mobile
+    setTimeout(() => {
+      const dropdownRect = dropdown.getBoundingClientRect();
+      if (dropdownRect.right > viewportWidth - 20) {
+        dropdown.style.left = 'auto';
+        dropdown.style.right = '0';
+        dropdown.style.width = '200px';
+      }
+    }, 10);
   }
 }
 
