@@ -942,11 +942,14 @@ function initializeYouTubeGallery(sectionId) {
     console.log(`Fetching videos from RSS for playlist: ${playlistName} (${playlistId})`);
 
     try {
-      // Use RSS feed for playlist
+      // Use a CORS proxy to fetch the RSS feed
+      const proxyUrl = 'https://api.allorigins.win/raw?url=';
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
-      console.log('Fetching from RSS URL:', rssUrl);
+      const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
+      
+      console.log('Fetching from RSS URL via proxy:', fetchUrl);
 
-      const response = await fetch(rssUrl);
+      const response = await fetch(fetchUrl);
 
       if (!response.ok) {
         console.error(`RSS fetch failed: ${response.status}`);
@@ -954,7 +957,7 @@ function initializeYouTubeGallery(sectionId) {
       }
 
       const xmlText = await response.text();
-      console.log('RSS response received');
+      console.log('RSS response received, parsing XML...');
 
       // Parse XML using browser's DOMParser
       const parser = new DOMParser();
@@ -968,20 +971,22 @@ function initializeYouTubeGallery(sectionId) {
       }
 
       const entries = xmlDoc.querySelectorAll('entry');
-      console.log(`Found ${entries.length} entries in RSS feed`);
+      console.log(`Found ${entries.length} entries in RSS feed for ${playlistName}`);
 
       const videos = [];
 
       entries.forEach((entry, index) => {
         const title = entry.querySelector('title')?.textContent || `Video ${index + 1}`;
-        const videoId = entry.querySelector('videoId')?.textContent ||
+        const videoId = entry.querySelector('yt\\:videoId, videoId')?.textContent ||
                        entry.querySelector('id')?.textContent?.split(':').pop() || '';
-        const description = entry.querySelector('description')?.textContent ||
+        const description = entry.querySelector('media\\:description, description')?.textContent ||
                           entry.querySelector('summary')?.textContent || '';
         const publishedAt = entry.querySelector('published')?.textContent || new Date().toISOString();
 
+        console.log(`Processing video: ${title} (ID: ${videoId})`);
+
         if (videoId) {
-          // Determine if it's a short (videos under 60 seconds are typically shorts)
+          // Determine if it's a short
           const isShort = title.toLowerCase().includes('short') ||
                          description.toLowerCase().includes('#shorts') ||
                          playlistName.toLowerCase().includes('short');
@@ -993,8 +998,8 @@ function initializeYouTubeGallery(sectionId) {
             publishedAt: publishedAt,
             description: description.substring(0, 200),
             playlistId: playlistId,
-            duration: 'N/A', // RSS doesn't provide duration
-            views: 'N/A' // RSS doesn't provide view count
+            duration: 'N/A',
+            views: 'N/A'
           });
 
           videos.push({
@@ -1004,20 +1009,20 @@ function initializeYouTubeGallery(sectionId) {
             isShort: isShort,
             id: videoId,
             duration: 'N/A',
-            views: Math.floor(Math.random() * 2000) + 100, // Mock views
+            views: Math.floor(Math.random() * 2000) + 100,
             description: description.substring(0, 200),
             publishedAt: publishedAt
           });
         }
       });
 
-      console.log(`Parsed ${videos.length} videos from RSS feed: ${playlistName}`);
+      console.log(`Successfully parsed ${videos.length} real videos from RSS feed: ${playlistName}`);
       return videos;
 
     } catch (error) {
       console.error(`Error fetching RSS for playlist ${playlistId}:`, error);
-      console.log('Falling back to demo videos');
-      return generateDemoVideos(playlistName);
+      console.log('Unable to fetch real videos, showing empty state');
+      return []; // Return empty array instead of dummy videos
     }
   }
 
@@ -1057,49 +1062,11 @@ function initializeYouTubeGallery(sectionId) {
     return num.toString();
   }
 
-  function generateDemoVideos(playlistName) {
-    console.log(`Generating demo videos for: ${playlistName}`);
-    const demoVideos = [];
-    const isShortPlaylist = playlistName.toLowerCase().includes('short');
-    const videoCount = isShortPlaylist ? 6 : 12;
-
-    // Use actual working YouTube video IDs
-    const sampleVideoIds = [
-      'dQw4w9WgXcQ', 'jNQXAC9IVRw', 'M7lc1UVf-VE', 'ZZ5LpwO-An4',
-      'fJ9rUzIMcZQ', 'kJQP7kiw5Fk', 'hFZFjoX2cGg', 'astISOttCQ0',
-      'ScMzIvxBSi4', 'OPf0YbXqDm0', 'CevxZvSJLk8', 'kXYiU_JCYtU'
-    ];
-
-    for (let i = 1; i <= videoCount; i++) {
-      const videoId = sampleVideoIds[(i - 1) % sampleVideoIds.length];
-      const title = isShortPlaylist ?
-        `${playlistName} Short #${i}` :
-        `${playlistName} Video #${i}`;
-
-      const videoElement = createVideoElement({
-        id: videoId,
-        title: title,
-        thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-        publishedAt: new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString(),
-        description: `This is a ${isShortPlaylist ? 'short' : 'video'} from ${playlistName}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-        playlistId: 'demo',
-        duration: isShortPlaylist ? "0:30" : `${Math.floor(Math.random() * 10) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-        views: Math.floor(Math.random() * 1000) + 100
-      });
-
-      demoVideos.push({
-        element: videoElement,
-        title: title,
-        playlist: playlistName,
-        isShort: isShortPlaylist,
-        id: videoId,
-        duration: isShortPlaylist ? "0:30" : `${Math.floor(Math.random() * 10) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-        views: Math.floor(Math.random() * 1000) + 100,
-        description: `This is a ${isShortPlaylist ? 'short' : 'video'} from ${playlistName}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`
-      });
-    }
-
-    return demoVideos;
+  function displayEmptyState(message) {
+    return `<div style="padding: 40px; text-align: center; color: {{ section.settings.description_color | default: '#666666' }};">
+      <h3 style="margin-bottom: 10px;">${message}</h3>
+      <p>Please check your playlist IDs and ensure they are public.</p>
+    </div>`;
   }
 
   function createVideoElement(video) {
@@ -1138,6 +1105,11 @@ function initializeYouTubeGallery(sectionId) {
     videosTabsContainer.innerHTML = '';
     tabContentsContainer.innerHTML = '';
 
+    if (playlistIds.length === 0) {
+      tabContentsContainer.innerHTML = displayEmptyState('No video playlists available');
+      return;
+    }
+
     playlistIds.forEach((playlistId, index) => {
       const playlist = videosByPlaylist[playlistId];
 
@@ -1168,14 +1140,21 @@ function initializeYouTubeGallery(sectionId) {
       loadMoreButton.className = 'load-more-button';
       loadMoreButton.textContent = 'Load More Videos';
       loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
+      loadMoreButton.style.display = playlist.videos.length <= 3 ? 'none' : 'block';
 
       tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
-      tabContent.appendChild(loadMoreButton);
+      
+      if (playlist.videos.length === 0) {
+        videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
+      } else {
+        tabContent.appendChild(loadMoreButton);
+      }
+
       tabContentsContainer.appendChild(tabContent);
 
       // Load initial videos for the first tab
-      if (index === 0) {
+      if (index === 0 && playlist.videos.length > 0) {
         loadMoreVideos(playlistId);
       }
     });
@@ -1224,7 +1203,7 @@ function initializeYouTubeGallery(sectionId) {
 
   function displayShorts(shorts) {
     if (shorts.length === 0) {
-      shortsContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No shorts available</div>';
+      shortsContainer.innerHTML = displayEmptyState('No shorts available');
       return;
     }
 
