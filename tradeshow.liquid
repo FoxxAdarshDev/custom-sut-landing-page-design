@@ -1,4 +1,3 @@
-
 {% comment %}
   Trade Show Section
   Displays upcoming and past trade shows with interactive features
@@ -7,7 +6,7 @@
 <section class="tradeshow-section" data-section-id="{{ section.id }}">
   <!-- Background decorative elements -->
   <div class="tradeshow-bg-decoration"></div>
-  
+
   <div class="tradeshow-container">
     {% if section.settings.section_title != blank %}
       <div class="tradeshow-header">
@@ -49,7 +48,7 @@
             <div class="trade-show-event-card {{ block.settings.event_status }}" 
                  data-event-status="{{ block.settings.event_status }}"
                  data-event-id="{{ block.id }}">
-              
+
               <!-- Status Badge -->
               {% if block.settings.event_status == 'upcoming' %}
                 <div class="event-status-badge upcoming">
@@ -76,18 +75,18 @@
                       {{ block.settings.event_dates }}
                     </div>
                   {% endif %}
-                  
+
                   {% if block.settings.booth_number != blank %}
                     <div class="trade-show-booth-info">
                       <span class="booth-icon">🏢</span>
                       Booth: {{ block.settings.booth_number }}
                     </div>
                   {% endif %}
-                  
+
                   {% if block.settings.event_title != blank %}
                     <h3 class="trade-show-event-title">{{ block.settings.event_title }}</h3>
                   {% endif %}
-                  
+
                   {% if block.settings.event_description != blank %}
                     <div class="trade-show-event-description">
                       {{ block.settings.event_description | truncate: 150 }}
@@ -99,7 +98,7 @@
                     </div>
                   {% endif %}
                 </div>
-                
+
                 <div class="trade-show-card-right">
                   {% if block.settings.event_logo != blank %}
                     <div class="trade-show-logo-container">
@@ -119,7 +118,7 @@
                     <span class="trade-show-detail-value">{{ block.settings.event_time }}</span>
                   </div>
                 {% endif %}
-                
+
                 {% if block.settings.event_location != blank %}
                   <div class="trade-show-detail-row">
                     <span class="trade-show-detail-icon">🌍</span>
@@ -127,7 +126,7 @@
                     <span class="trade-show-detail-value">{{ block.settings.event_location }}</span>
                   </div>
                 {% endif %}
-                
+
                 {% if block.settings.venue_name != blank %}
                   <div class="trade-show-detail-row">
                     <span class="trade-show-detail-icon">📍</span>
@@ -152,7 +151,7 @@
                     Find Us
                   </a>
                 {% endif %}
-                
+
                 {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
                   <div class="trade-show-calendar-container">
                     <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this, '{{ block.id }}')">
@@ -643,7 +642,8 @@
   }
 
   .trade-show-primary-btn:hover {
-    background: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
+    background: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }} !important;
+    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }} !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 113, 185, 0.3);
   }
@@ -655,7 +655,8 @@
   }
 
   .trade-show-calendar-btn:hover {
-    background: linear-gradient(135deg, #20c997, #17a2b8);
+    background: linear-gradient(135deg, #20c997, #17a2b8) !important;
+    color: white !important;
     transform: translateY(-2px);
   }
 
@@ -1023,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentPage = 1;
   let currentFilter = 'all';
   let filteredCards = [];
-  
+
   // Get all elements
   const grid = document.getElementById('tradeshowGrid');
   const pagination = document.getElementById('tradeshowPagination');
@@ -1071,7 +1072,7 @@ Contact: sales@foxxlifesciences.com`,
     updateFilteredCards();
     updatePagination();
     showCurrentPage();
-    
+
     // Stagger animation for cards
     const visibleCards = document.querySelectorAll('.trade-show-event-card:not([style*="display: none"])');
     visibleCards.forEach((card, index) => {
@@ -1083,11 +1084,11 @@ Contact: sales@foxxlifesciences.com`,
   filterTabs.forEach(tab => {
     tab.addEventListener('click', function() {
       const filter = this.getAttribute('data-filter');
-      
+
       // Update active tab
       filterTabs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
-      
+
       currentFilter = filter;
       currentPage = 1;
       updateFilteredCards();
@@ -1105,20 +1106,20 @@ Contact: sales@foxxlifesciences.com`,
 
   function updatePagination() {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-    
+
     if (totalPages <= 1) {
       pagination.style.display = 'none';
     } else {
       pagination.style.display = 'flex';
       totalPagesSpan.textContent = totalPages;
     }
-    
+
     updatePaginationButtons();
   }
 
   function updatePaginationButtons() {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-    
+
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
     currentPageSpan.textContent = currentPage;
@@ -1150,8 +1151,9 @@ Contact: sales@foxxlifesciences.com`,
   // Pagination navigation
   window.changePage = function(direction) {
     const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
+
     const newPage = currentPage + direction;
-    
+
     if (newPage >= 1 && newPage <= totalPages) {
       currentPage = newPage;
       updatePaginationButtons();
@@ -1167,25 +1169,25 @@ Contact: sales@foxxlifesciences.com`,
 function toggleCalendarDropdown(button, eventId) {
   const dropdown = document.getElementById(`calendar-${eventId}`);
   const isVisible = dropdown.classList.contains('show');
-  
+
   // Close all dropdowns first
   document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
     d.classList.remove('show');
   });
-  
+
   // Toggle current dropdown
   if (!isVisible) {
     dropdown.classList.add('show');
-    
+
     // Ensure dropdown is properly positioned
     const rect = button.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
-    
+
     // Reset any previous positioning
     dropdown.style.left = '0';
     dropdown.style.right = '0';
     dropdown.style.transform = 'none';
-    
+
     // Check if dropdown would overflow on mobile
     setTimeout(() => {
       const dropdownRect = dropdown.getBoundingClientRect();
@@ -1212,7 +1214,7 @@ function addToCalendar(platform, eventId) {
   // Get event data
   const eventDataScript = document.querySelector('script');
   const eventMatch = eventDataScript.textContent.match(new RegExp(`'${eventId}':\\s*{[^}]+}`));
-  
+
   if (!eventMatch) {
     console.error('Event data not found for:', eventId);
     return;
@@ -1221,12 +1223,12 @@ function addToCalendar(platform, eventId) {
   // Parse the event data (this is a simplified approach)
   const card = document.querySelector(`[data-event-id="${eventId}"]`);
   if (!card) return;
-  
+
   const title = card.querySelector('.trade-show-event-title')?.textContent || 'Trade Show Event';
   const dates = card.querySelector('.trade-show-event-dates')?.textContent.replace('📅', '').trim() || '';
   const location = card.querySelector('.trade-show-detail-value')?.textContent || '';
   const description = card.querySelector('.trade-show-event-description')?.textContent || '';
-  
+
   // Create basic event data
   const event = {
     title: title,
