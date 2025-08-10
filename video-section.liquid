@@ -248,12 +248,27 @@
     padding: 5px;
     border-radius: 30px 30px 0 0;
     overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: thin; /* Firefox */
+    -ms-overflow-style: auto; /* IE and Edge */
+    max-width: 100%;
   }
 
   .videos-tabs::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    height: 6px; /* Chrome, Safari, Opera */
+  }
+
+  .videos-tabs::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  .videos-tabs::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+  }
+
+  .videos-tabs::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   .video-tab {
@@ -1770,11 +1785,33 @@ function initializeYouTubeGallery(sectionId) {
     playlistIds.forEach((playlistId, index) => {
       const playlist = videosByPlaylist[playlistId];
 
-      // Create tab button
+      // Create tab button with playlist link
       const tabButton = document.createElement('button');
       tabButton.className = `video-tab ${index === 0 ? 'active' : ''}`;
       tabButton.setAttribute('data-playlist-id', playlistId);
-      tabButton.textContent = playlist.name;
+      
+      // Create tab content with playlist link
+      const tabInner = document.createElement('div');
+      tabInner.style.display = 'flex';
+      tabInner.style.alignItems = 'center';
+      tabInner.style.gap = '8px';
+      
+      const tabText = document.createElement('span');
+      tabText.textContent = playlist.name;
+      
+      const playlistLink = document.createElement('a');
+      playlistLink.href = `https://www.youtube.com/playlist?list=${playlistId}`;
+      playlistLink.target = '_blank';
+      playlistLink.style.color = 'inherit';
+      playlistLink.style.textDecoration = 'none';
+      playlistLink.innerHTML = '↗';
+      playlistLink.title = 'Open playlist on YouTube';
+      playlistLink.onclick = (e) => e.stopPropagation();
+      
+      tabInner.appendChild(tabText);
+      tabInner.appendChild(playlistLink);
+      tabButton.appendChild(tabInner);
+      
       tabButton.addEventListener('click', () => switchTab(playlistId));
       videosTabsContainer.appendChild(tabButton);
 
@@ -1786,7 +1823,7 @@ function initializeYouTubeGallery(sectionId) {
       const videosHeader = document.createElement('div');
       videosHeader.className = 'videos-header';
       videosHeader.innerHTML = `
-        <span class="video-count">${playlist.videos.length} videos</span>
+        <span class="video-count" id="video-count-${playlistId}">Loading videos...</span>
       `;
 
       const videosContainer = document.createElement('div');
@@ -1797,21 +1834,19 @@ function initializeYouTubeGallery(sectionId) {
       loadMoreButton.className = 'load-more-button';
       loadMoreButton.textContent = 'Load More Videos';
       loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
-      loadMoreButton.style.display = playlist.videos.length <= 3 ? 'none' : 'block';
+      loadMoreButton.style.display = 'none'; // Hide initially
+      loadMoreButton.id = `load-more-${playlistId}`;
 
       tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
-      
-      if (playlist.videos.length === 0) {
-        videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
-      } else {
-        tabContent.appendChild(loadMoreButton);
-      }
+      tabContent.appendChild(loadMoreButton);
 
       tabContentsContainer.appendChild(tabContent);
 
-      // For lazy loading, don't load videos immediately
-      // Videos will be loaded when tab is clicked
+      // Show skeleton for the first tab
+      if (index === 0) {
+        showSkeletonVideos(playlistId);
+      }
     });
   }
 
@@ -1834,11 +1869,8 @@ function initializeYouTubeGallery(sectionId) {
     if (!playlist.loaded) {
       console.log(`Loading videos for ${playlist.name}...`);
       
-      // Show loading in the tab content
-      const videosContainer = document.querySelector(`#videos-${playlistId}`);
-      if (videosContainer) {
-        videosContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
-      }
+      // Show skeleton loading
+      showSkeletonVideos(playlistId);
 
       try {
         // Find the original playlist config
@@ -1862,20 +1894,41 @@ function initializeYouTubeGallery(sectionId) {
           // Add to allVideos array
           allVideos.push(...regularVideos);
 
+          // Update video count
+          const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
+          if (videoCountElement) {
+            videoCountElement.textContent = `${regularVideos.length} videos`;
+          }
+
           console.log(`Loaded ${regularVideos.length} videos for ${playlist.name}`);
         }
       } catch (error) {
         console.error(`Error loading videos for ${playlist.name}:`, error);
         const videosContainer = document.querySelector(`#videos-${playlistId}`);
+        const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
         if (videosContainer) {
           videosContainer.innerHTML = displayEmptyState(`Failed to load videos from ${playlist.name}`);
+        }
+        if (videoCountElement) {
+          videoCountElement.textContent = '0 videos';
         }
         return;
       }
     }
 
+    // Update video count if already loaded
+    const videoCountElement = document.querySelector(`#video-count-${playlistId}`);
+    if (videoCountElement && playlist.loaded) {
+      videoCountElement.textContent = `${playlist.videos.length} videos`;
+    }
+
     // Load videos if not displayed yet
     if (loadedVideos[playlistId] === 0 && playlist.videos.length > 0) {
+      // Clear skeleton first
+      const videosContainer = document.querySelector(`#videos-${playlistId}`);
+      if (videosContainer) {
+        videosContainer.innerHTML = '';
+      }
       loadMoreVideos(playlistId);
     }
   }
@@ -1883,7 +1936,7 @@ function initializeYouTubeGallery(sectionId) {
   function loadMoreVideos(playlistId) {
     const playlist = videosByPlaylist[playlistId];
     const videosContainer = document.querySelector(`#videos-${playlistId}`);
-    const loadMoreButton = document.querySelector(`[data-playlist-id="${playlistId}"] .load-more-button`);
+    const loadMoreButton = document.querySelector(`#load-more-${playlistId}`);
 
     const startIndex = loadedVideos[playlistId];
     const endIndex = Math.min(startIndex + videosPerLoad, playlist.videos.length);
@@ -1905,19 +1958,25 @@ function initializeYouTubeGallery(sectionId) {
 
     loadedVideos[playlistId] = endIndex;
 
-    // Hide load more button if all videos are loaded
-    if (endIndex >= playlist.videos.length) {
-      loadMoreButton.style.display = 'none';
+    // Show/hide load more button based on remaining videos
+    if (loadMoreButton) {
+      if (endIndex >= playlist.videos.length) {
+        loadMoreButton.style.display = 'none';
+      } else {
+        loadMoreButton.style.display = 'block';
+      }
     }
   }
 
   function displayShorts(shorts) {
+    // Clear any existing skeleton loading
+    shortsContainer.innerHTML = '';
+    
     if (shorts.length === 0) {
       shortsContainer.innerHTML = displayEmptyState('No shorts available');
       return;
     }
 
-    shortsContainer.innerHTML = '';
     shorts.forEach((short, index) => {
       const shortElement = createShortElement(short, index, sectionId);
       shortElement.classList.add('fade-in');
@@ -1964,6 +2023,20 @@ function initializeYouTubeGallery(sectionId) {
       skeletonContainer.appendChild(skeletonCard);
     }
     tabContentsContainer.appendChild(skeletonContainer);
+  }
+
+  function showSkeletonVideos(playlistId) {
+    const videosContainer = document.querySelector(`#videos-${playlistId}`);
+    if (videosContainer) {
+      videosContainer.innerHTML = '';
+      const skeletonContainer = document.createElement('div');
+      skeletonContainer.className = 'skeleton-container';
+      for (let i = 0; i < 3; i++) {
+        const skeletonCard = createSkeletonVideoCard();
+        skeletonContainer.appendChild(skeletonCard);
+      }
+      videosContainer.appendChild(skeletonContainer);
+    }
   }
 
   function createSkeletonVideoCard() {
