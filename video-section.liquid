@@ -314,7 +314,7 @@
   .videos-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: 20px;
   }
 
@@ -903,7 +903,8 @@
 
   .youtube-placeholder-logo {
     width: 60px;
-    height: 42px;
+    height:100%;
+    overflow:visible;
     opacity: 0.3;
     z-index: 1;
   }
@@ -1129,7 +1130,8 @@
 
   .youtube-short-logo {
     width: 40px;
-    height: 28px;
+    height:100%;
+    overflow:visible;
     opacity: 0.3;
     z-index: 1;
   }
@@ -1458,7 +1460,7 @@
       <div class="shorts-section">
         <div class="shorts-header">
           <h3 class="shorts-title" onclick="toggleShortsView('{{ section.id }}')">Shorts</h3>
-          <span class="auto-playing-indicator">Auto-playing</span>
+          {% comment %} <span class="auto-playing-indicator">Auto-playing</span> {% endcomment %}
         </div>
         <div class="shorts-container" id="shorts-container-{{ section.id }}">
           <div class="loading-spinner">
@@ -1994,7 +1996,7 @@ function initializeYouTubeGallery(sectionId) {
       videosHeader.className = 'videos-header';
       videosHeader.innerHTML = `
         <a href="https://www.youtube.com/playlist?list=${playlistId}" target="_blank" class="youtube-playlist-link">
-          View Playlist
+         View on YouTube
         </a>
       `;
 
@@ -2176,7 +2178,7 @@ function initializeYouTubeGallery(sectionId) {
       </div>
       <div class="short-overlay">
         <div class="short-badge">Short</div>
-        ${index === 0 ? '<div class="short-play-status">Playing</div>' : ''}
+        ${index === 0 ? '' : ''}
       </div>
       <div class="short-views">${short.views || Math.floor(Math.random() * 2000) + 100}</div>
     `;
@@ -2225,7 +2227,7 @@ function initializeYouTubeGallery(sectionId) {
 
     modalPlaylistTag.textContent = playlist;
     modalTitle.textContent = title;
-    modalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1`;
+    modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1`;
     modalDescription.innerHTML = description;
     modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
 
