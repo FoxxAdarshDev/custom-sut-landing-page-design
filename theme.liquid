@@ -30,6 +30,122 @@
                               <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLQTBFYRQD"></script> 
                                <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-DLQTBFYRQD'); </script>
                             <!-- Google tag (gtag.js) --> 
+                               <script>
+                (function() {
+                    // Configuration for different blocks
+                    const blockConfigs = [
+                        {
+                            selector: '#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'World\'s First Custom SUT Library',
+                            color: '#00833e'
+                        },
+                        {
+                            selector: '#block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'Ships in 24-48 Hours',
+                            color: '#00833e'
+                        },
+                        {
+                            selector: '#block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'World\'s first Made-To-Order SUT, shipped in 4–6 weeks',
+                            color: '#0071b9'
+                        }
+                    ];
+
+                    function addLabelsToBlocks() {
+                        blockConfigs.forEach(function(config) {
+                            const imageContainers = document.querySelectorAll(config.selector);
+
+                            // Check if any image containers are found
+                            console.log(`Number of image containers found for ${config.selector}: `, imageContainers.length);
+
+                            // Loop through each image container
+                            imageContainers.forEach(function(container) {
+                                // Check if label already exists to avoid duplicates
+                                if (!container.querySelector('.sale-label')) {
+                                    // Create the sale label element
+                                    const saleLabel = document.createElement('div');
+                                    saleLabel.className = 'sale-label';
+                                    saleLabel.textContent = config.text;
+                                    saleLabel.style.backgroundColor = config.color;
+
+                                    // Append the sale label to the image container
+                                    container.appendChild(saleLabel);
+                                }
+                            });
+                        });
+                    }
+
+                    // Add labels immediately
+                    addLabelsToBlocks();
+
+                    // Also add when DOM is fully loaded (in case elements are added later)
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', addLabelsToBlocks);
+                    }
+
+                    // Add labels when page is fully loaded (in case images are loaded later)
+                    if (document.readyState !== 'complete') {
+                        window.addEventListener('load', addLabelsToBlocks);
+                    }
+                })();
+                </script>
+
+                <style>
+                .sale-label {
+                    border-radius: 0 0 10px 0;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    color: #fff;
+                    padding: 5px 10px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    z-index: 10;
+                    white-space: wrap;
+                    overflow: visible;
+                    width: auto;
+                    min-width: fit-content;
+                    line-height: 1.2;
+                }
+
+                /* Responsive adjustments for longer text */
+                @media (max-width: 768px) {
+                    .sale-label {
+                        font-size: 12px!important;
+                        padding: 4px 4px;
+                        white-space: wrap;
+                        line-height: 1.2;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .sale-label {
+                        font-size: 12px!important;
+                        padding: 3px 6px;
+                        white-space: wrap;
+                    }
+                }
+
+                /* Ensure image containers have relative positioning */
+                #block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                #block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                #block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container {
+                    position: relative;
+                }
+
+                
+                </style>
+                          {{ 'custom.css' | asset_url | stylesheet_tag }}
+                         {% if template == 'index' %}
+                            <div id="loader">
+                                <img src="https://foxxbioprocess.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d_500x.png?v=1669752062" style="width:200px;height:76px" alt="loader image">
+                                <div class="loader-icon">
+                                    <img id="did-you-know-image" src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/did-you-know.png?v=1728086757" style="width:60px;height:auto" alt="">
+                                    <div id="loader-text"></div>
+                                </div>
+                            </div>
+                         {% endif %}
+                           
 
                     <!-- Custom Schema Tag ================================================== -->
 
@@ -359,109 +475,7 @@
 
                             <!--  Custom Script for add customize label on the cards -->
 
-                <script>
-                (function() {
-                    // Configuration for different blocks
-                    const blockConfigs = [
-                        {
-                            selector: '#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'World\'s First Custom SUT Library',
-                            color: '#00833e'
-                        },
-                        {
-                            selector: '#block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'Ships in 24-48 Hours',
-                            color: '#00833e'
-                        },
-                        {
-                            selector: '#block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
-                            text: 'World\'s first Made-To-Order SUT, shipped in 4–6 weeks',
-                            color: '#0071b9'
-                        }
-                    ];
-
-                    function addLabelsToBlocks() {
-                        blockConfigs.forEach(function(config) {
-                            const imageContainers = document.querySelectorAll(config.selector);
-
-                            // Check if any image containers are found
-                            console.log(`Number of image containers found for ${config.selector}: `, imageContainers.length);
-
-                            // Loop through each image container
-                            imageContainers.forEach(function(container) {
-                                // Check if label already exists to avoid duplicates
-                                if (!container.querySelector('.sale-label')) {
-                                    // Create the sale label element
-                                    const saleLabel = document.createElement('div');
-                                    saleLabel.className = 'sale-label';
-                                    saleLabel.textContent = config.text;
-                                    saleLabel.style.backgroundColor = config.color;
-
-                                    // Append the sale label to the image container
-                                    container.appendChild(saleLabel);
-                                }
-                            });
-                        });
-                    }
-
-                    // Add labels immediately
-                    addLabelsToBlocks();
-
-                    // Also add when DOM is fully loaded (in case elements are added later)
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', addLabelsToBlocks);
-                    }
-
-                    // Add labels when page is fully loaded (in case images are loaded later)
-                    if (document.readyState !== 'complete') {
-                        window.addEventListener('load', addLabelsToBlocks);
-                    }
-                })();
-                </script>
-
-                <style>
-                .sale-label {
-                    border-radius: 0 0 10px 0;
-                    position: absolute !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    color: #fff;
-                    padding: 5px 10px;
-                    font-size: 14px;
-                    font-weight: 700;
-                    z-index: 10;
-                    white-space: wrap;
-                    overflow: visible;
-                    width: auto;
-                    min-width: fit-content;
-                    line-height: 1.2;
-                }
-
-                /* Responsive adjustments for longer text */
-                @media (max-width: 768px) {
-                    .sale-label {
-                        font-size: 12px!important;
-                        padding: 4px 4px;
-                        white-space: wrap;
-                        line-height: 1.2;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .sale-label {
-                        font-size: 12px!important;
-                        padding: 3px 6px;
-                        white-space: wrap;
-                    }
-                }
-
-                /* Ensure image containers have relative positioning */
-                #block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
-                #block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
-                #block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container {
-                    position: relative;
-                }
-                </style>
+              
 
                             {%- if page_description -%}
                                 <meta name="description" content="{{ page_description | escape }}">
@@ -618,24 +632,80 @@
 
 
 
-                     {% if template == 'index' %}
-                            <div id="loader">
-                                <img src="https://foxxbioprocess.com/cdn/shop/files/Foxx_Logo_Tagline_0e42bd12-4dce-4fda-abf8-db37715e463d_500x.png?v=1669752062" style="width:200px;height:76px" alt="loader image">
-                                <div class="loader-icon">
-                                    <img id="did-you-know-image" src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/did-you-know.png?v=1728086757" alt="">
-                                    <div id="loader-text"></div>
-                                </div>
-                            </div>
-                         {% endif %}
+               
                          <!-- start webpushr code --> <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('setup',{'key':'BHvULKL8sh8agJcYJia3FKKBJOBiO0Q0AXedJct8MyoXbiMl4QMG3x6higgVQruEIkVS7ix8crvQQuYMe6ukdzo' ,'integration':'popup' });</script><!-- end webpushr code -->
 
                          </head>
 
                         <body class="template-{{ request.page_type }} {{layout_body}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}">
-
+            
                             <div class="body-content-wrapper">
                                 <a class="skip-to-content-link button visually-hidden" href="#MainContent">{{ "accessibility.skip_to_text" | t }}</a>
+   <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        const loader = document.getElementById('loader');
+                                        const loaderText = document.getElementById('loader-text');
+                                        const didYouKnowImage = document.getElementById('did-you-know-image');
 
+                                        // Check if loader has already been shown this session
+                                        const hasSeenLoader = sessionStorage.getItem('foxx_loader_shown');
+
+                                        // Check if this is a direct visit (not from internal navigation)
+                                        const isDirectVisit = !document.referrer || 
+                                                            !document.referrer.includes(window.location.hostname) ||
+                                                            performance.getEntriesByType('navigation')[0].type === 'reload';
+
+                                        if (hasSeenLoader && !isDirectVisit) {
+                                            // Hide loader immediately if already seen and it's internal navigation
+                                            loader.style.display = 'none';
+                                            return;
+                                        }
+
+                                       const messages = [
+                                        "We celebrate 15 years of ISO 13485 in 2025.",
+                                        "We have a Class 7 Clean Room with 7 Rooms in 4 locations.",
+                                        "Our products are North American designed and manufactured!",
+                                        "We are committed to USP Class VI Materials.",
+                                        "We follow cGMP Control for single-use manufacturing.",
+                                        "We meet USP665 L&E standards.",
+                                        "We have major Gamma Sterilization capabilities!",
+                                        "We have Class 7 & 8 molding capabilities.",
+                                        "Our products are manufactured in USA & India."
+                                    ];
+
+                                        // Display random message
+                                        loaderText.textContent = messages[Math.floor(Math.random() * messages.length)];
+                                        loaderText.style.opacity = 1;
+                                        didYouKnowImage.style.display = 'block';
+                                        loaderText.style.display = 'block';
+                                        didYouKnowImage.style.opacity = 1;
+
+                                        // Hide loader after 3 seconds or when page loads (whichever comes first)
+                                        const hideLoader = () => {
+                                            loader.style.opacity = '0';
+                                            setTimeout(() => {
+                                                loader.style.display = 'none';
+                                                // Mark that loader has been shown this session
+                                                sessionStorage.setItem('foxx_loader_shown', 'true');
+                                            }, 500); // Fade out transition
+                                        };
+
+                                        // Set minimum display time of 2.5 seconds
+                                        const minDisplayTime = setTimeout(hideLoader, 2500);
+
+                                        // Also hide when page fully loads (if it takes longer than 2.5s)
+                                        window.addEventListener('load', () => {
+                                            clearTimeout(minDisplayTime);
+                                            setTimeout(hideLoader, 300); // Small delay to ensure content is ready
+                                        });
+
+                                        // Track internal navigation
+                                        window.addEventListener('beforeunload', function() {
+                                            // Mark that user is navigating internally
+                                            sessionStorage.setItem('foxx_internal_nav', 'true');
+                                        });
+                                    });
+                                    </script> 
                                 {% sections 'header-group' %}
                                 {% render 'wrapper-header' %}
                                  {% comment %} {%- if template == 'collection.subcategory' template == 'collection.sut-mto'  or template == 'collection' or template == 'product' or template == 'cart' or template contains 'collection.SUT' -%}
@@ -731,72 +801,7 @@
 
 
                                      
-                                      <script>
-                                    document.addEventListener("DOMContentLoaded", function() {
-                                        const loader = document.getElementById('loader');
-                                        const loaderText = document.getElementById('loader-text');
-                                        const didYouKnowImage = document.getElementById('did-you-know-image');
-
-                                        // Check if loader has already been shown this session
-                                        const hasSeenLoader = sessionStorage.getItem('foxx_loader_shown');
-
-                                        // Check if this is a direct visit (not from internal navigation)
-                                        const isDirectVisit = !document.referrer || 
-                                                            !document.referrer.includes(window.location.hostname) ||
-                                                            performance.getEntriesByType('navigation')[0].type === 'reload';
-
-                                        if (hasSeenLoader && !isDirectVisit) {
-                                            // Hide loader immediately if already seen and it's internal navigation
-                                            loader.style.display = 'none';
-                                            return;
-                                        }
-
-                                       const messages = [
-                                        "We celebrate 15 years of ISO 13485 in 2025.",
-                                        "We have a Class 7 Clean Room with 7 Rooms in 4 locations.",
-                                        "Our products are North American designed and manufactured!",
-                                        "We are committed to USP Class VI Materials.",
-                                        "We follow cGMP Control for single-use manufacturing.",
-                                        "We meet USP665 L&E standards.",
-                                        "We have major Gamma Sterilization capabilities!",
-                                        "We have Class 7 & 8 molding capabilities.",
-                                        "Our products are manufactured in USA & India."
-                                    ];
-
-                                        // Display random message
-                                        loaderText.textContent = messages[Math.floor(Math.random() * messages.length)];
-                                        loaderText.style.opacity = 1;
-                                        didYouKnowImage.style.display = 'block';
-                                        loaderText.style.display = 'block';
-                                        didYouKnowImage.style.opacity = 1;
-
-                                        // Hide loader after 3 seconds or when page loads (whichever comes first)
-                                        const hideLoader = () => {
-                                            loader.style.opacity = '0';
-                                            setTimeout(() => {
-                                                loader.style.display = 'none';
-                                                // Mark that loader has been shown this session
-                                                sessionStorage.setItem('foxx_loader_shown', 'true');
-                                            }, 500); // Fade out transition
-                                        };
-
-                                        // Set minimum display time of 2.5 seconds
-                                        const minDisplayTime = setTimeout(hideLoader, 2500);
-
-                                        // Also hide when page fully loads (if it takes longer than 2.5s)
-                                        window.addEventListener('load', () => {
-                                            clearTimeout(minDisplayTime);
-                                            setTimeout(hideLoader, 300); // Small delay to ensure content is ready
-                                        });
-
-                                        // Track internal navigation
-                                        window.addEventListener('beforeunload', function() {
-                                            // Mark that user is navigating internally
-                                            sessionStorage.setItem('foxx_internal_nav', 'true');
-                                        });
-                                    });
-                                    </script> 
-
+                                  
                            
 
                         </body>

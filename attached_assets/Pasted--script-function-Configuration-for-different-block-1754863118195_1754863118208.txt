@@ -1,0 +1,105 @@
+   <script>
+                (function() {
+                    // Configuration for different blocks
+                    const blockConfigs = [
+                        {
+                            selector: '#block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'World\'s First Custom SUT Library',
+                            color: '#00833e'
+                        },
+                        {
+                            selector: '#block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'Ships in 24-48 Hours',
+                            color: '#00833e'
+                        },
+                        {
+                            selector: '#block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover',
+                            text: 'World\'s first Made-To-Order SUT, shipped in 4–6 weeks',
+                            color: '#0071b9'
+                        }
+                    ];
+
+                    function addLabelsToBlocks() {
+                        blockConfigs.forEach(function(config) {
+                            const imageContainers = document.querySelectorAll(config.selector);
+
+                            // Check if any image containers are found
+                            console.log(`Number of image containers found for ${config.selector}: `, imageContainers.length);
+
+                            // Loop through each image container
+                            imageContainers.forEach(function(container) {
+                                // Check if label already exists to avoid duplicates
+                                if (!container.querySelector('.sale-label')) {
+                                    // Create the sale label element
+                                    const saleLabel = document.createElement('div');
+                                    saleLabel.className = 'sale-label';
+                                    saleLabel.textContent = config.text;
+                                    saleLabel.style.backgroundColor = config.color;
+
+                                    // Append the sale label to the image container
+                                    container.appendChild(saleLabel);
+                                }
+                            });
+                        });
+                    }
+
+                    // Add labels immediately
+                    addLabelsToBlocks();
+
+                    // Also add when DOM is fully loaded (in case elements are added later)
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', addLabelsToBlocks);
+                    }
+
+                    // Add labels when page is fully loaded (in case images are loaded later)
+                    if (document.readyState !== 'complete') {
+                        window.addEventListener('load', addLabelsToBlocks);
+                    }
+                })();
+                </script>
+
+                <style>
+                .sale-label {
+                    border-radius: 0 0 10px 0;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    color: #fff;
+                    padding: 5px 10px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    z-index: 10;
+                    white-space: wrap;
+                    overflow: visible;
+                    width: auto;
+                    min-width: fit-content;
+                    line-height: 1.2;
+                }
+
+                /* Responsive adjustments for longer text */
+                @media (max-width: 768px) {
+                    .sale-label {
+                        font-size: 12px!important;
+                        padding: 4px 4px;
+                        white-space: wrap;
+                        line-height: 1.2;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .sale-label {
+                        font-size: 12px!important;
+                        padding: 3px 6px;
+                        white-space: wrap;
+                    }
+                }
+
+                /* Ensure image containers have relative positioning */
+                #block-a2681802-bbf7-416e-92bf-b004893a4002 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                #block-16342924847ce35dfd-0 .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container,
+                #block-d9b835ba-f9bc-4fd3-86b1-2898c31c5a0f .spotlight-item.spotlight-item__image.content_absolute.enable_border_color.enable_des_hover .image-container {
+                    position: relative;
+                }
+
+                
+                </style>

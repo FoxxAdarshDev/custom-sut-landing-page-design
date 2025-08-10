@@ -1,0 +1,65 @@
+   <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        const loader = document.getElementById('loader');
+                                        const loaderText = document.getElementById('loader-text');
+                                        const didYouKnowImage = document.getElementById('did-you-know-image');
+
+                                        // Check if loader has already been shown this session
+                                        const hasSeenLoader = sessionStorage.getItem('foxx_loader_shown');
+
+                                        // Check if this is a direct visit (not from internal navigation)
+                                        const isDirectVisit = !document.referrer || 
+                                                            !document.referrer.includes(window.location.hostname) ||
+                                                            performance.getEntriesByType('navigation')[0].type === 'reload';
+
+                                        if (hasSeenLoader && !isDirectVisit) {
+                                            // Hide loader immediately if already seen and it's internal navigation
+                                            loader.style.display = 'none';
+                                            return;
+                                        }
+
+                                       const messages = [
+                                        "We celebrate 15 years of ISO 13485 in 2025.",
+                                        "We have a Class 7 Clean Room with 7 Rooms in 4 locations.",
+                                        "Our products are North American designed and manufactured!",
+                                        "We are committed to USP Class VI Materials.",
+                                        "We follow cGMP Control for single-use manufacturing.",
+                                        "We meet USP665 L&E standards.",
+                                        "We have major Gamma Sterilization capabilities!",
+                                        "We have Class 7 & 8 molding capabilities.",
+                                        "Our products are manufactured in USA & India."
+                                    ];
+
+                                        // Display random message
+                                        loaderText.textContent = messages[Math.floor(Math.random() * messages.length)];
+                                        loaderText.style.opacity = 1;
+                                        didYouKnowImage.style.display = 'block';
+                                        loaderText.style.display = 'block';
+                                        didYouKnowImage.style.opacity = 1;
+
+                                        // Hide loader after 3 seconds or when page loads (whichever comes first)
+                                        const hideLoader = () => {
+                                            loader.style.opacity = '0';
+                                            setTimeout(() => {
+                                                loader.style.display = 'none';
+                                                // Mark that loader has been shown this session
+                                                sessionStorage.setItem('foxx_loader_shown', 'true');
+                                            }, 500); // Fade out transition
+                                        };
+
+                                        // Set minimum display time of 2.5 seconds
+                                        const minDisplayTime = setTimeout(hideLoader, 2500);
+
+                                        // Also hide when page fully loads (if it takes longer than 2.5s)
+                                        window.addEventListener('load', () => {
+                                            clearTimeout(minDisplayTime);
+                                            setTimeout(hideLoader, 300); // Small delay to ensure content is ready
+                                        });
+
+                                        // Track internal navigation
+                                        window.addEventListener('beforeunload', function() {
+                                            // Mark that user is navigating internally
+                                            sessionStorage.setItem('foxx_internal_nav', 'true');
+                                        });
+                                    });
+                                    </script> 
