@@ -325,7 +325,7 @@
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
   }
@@ -1482,6 +1482,13 @@
     background-color: #fafafa;
   }
 
+
+  /* Tablet responsive */
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    .youtube-video-container {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* Mobile responsive */
   @media screen and (max-width: 767px) {
