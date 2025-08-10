@@ -2428,8 +2428,21 @@ function initializeYouTubeGallery(sectionId) {
   function formatDescriptionWithLinks(text) {
     if (!text) return 'Video description not available';
     
-    // Escape HTML first to prevent XSS attacks
-    text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    // First, check if the text already contains HTML links
+    const hasHtmlLinks = /<a\s+[^>]*href\s*=\s*["'][^"']*["'][^>]*>/i.test(text);
+    
+    if (hasHtmlLinks) {
+      // Text already contains HTML links, just clean it up and return
+      // Remove any potentially harmful scripts but keep links
+      text = text.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      // Convert line breaks to HTML breaks
+      text = text.replace(/\n/g, '<br>');
+      return text;
+    }
+    
+    // If no HTML links, treat as plain text and convert URLs
+    // Escape HTML entities that might cause issues
+    text = text.replace(/&(?!amp;|lt;|gt;|quot;|#39;)/g, '&amp;');
     
     // Convert URLs to clickable links
     const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
