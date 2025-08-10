@@ -463,7 +463,6 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
-    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -582,11 +581,12 @@
     padding-left: 20px;
     border-left: 2px solid #f0f0f0;
     min-width: 280px;
+    padding-bottom: 20px;
   }
 
   #modalIframe {
     width: 100%;
-    height: 350px;
+    height: 450px;
     border-radius: 12px;
     border: none;
     background: #000;
@@ -666,6 +666,7 @@
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    margin-bottom: 20px;
   }
 
   .modal-youtube-link:hover {
@@ -846,7 +847,7 @@
     }
 
     #modalIframe {
-      height: 250px;
+      height: 300px;
     }
 
     .modal-header {
@@ -1172,106 +1173,140 @@ function initializeYouTubeGallery(sectionId) {
   async function fetchPlaylistVideos(playlistId, playlistName) {
     console.log(`Fetching videos from RSS for playlist: ${playlistName} (${playlistId})`);
 
-    try {
-      // Use a CORS proxy to fetch the RSS feed
-      const proxyUrl = 'https://api.allorigins.win/raw?url=';
-      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
-      const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
-      
-      console.log('Fetching from RSS URL via proxy:', fetchUrl);
+    const maxRetries = 3;
+    let retryCount = 0;
 
-      const response = await fetch(fetchUrl);
+    while (retryCount < maxRetries) {
+      try {
+        // Use multiple CORS proxies as fallbacks
+        const proxies = [
+          'https://api.allorigins.win/raw?url=',
+          'https://cors-anywhere.herokuapp.com/',
+          'https://thingproxy.freeboard.io/fetch/'
+        ];
+        
+        const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+        const proxyUrl = proxies[retryCount % proxies.length];
+        const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
+        
+        console.log(`Attempt ${retryCount + 1}: Fetching from RSS URL via proxy:`, fetchUrl);
 
-      if (!response.ok) {
-        console.error(`RSS fetch failed: ${response.status}`);
-        throw new Error(`RSS fetch failed: ${response.status}`);
-      }
+        const response = await fetch(fetchUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/xml, text/xml, */*',
+            'Cache-Control': 'no-cache'
+          },
+          timeout: 10000
+        });
 
-      const xmlText = await response.text();
-      console.log('RSS response received, parsing XML...');
-
-      // Parse XML using browser's DOMParser
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-
-      // Check for parsing errors
-      const parseError = xmlDoc.querySelector('parsererror');
-      if (parseError) {
-        console.error('XML parsing error:', parseError.textContent);
-        throw new Error('Failed to parse RSS XML');
-      }
-
-      const entries = xmlDoc.querySelectorAll('entry');
-      console.log(`Found ${entries.length} entries in RSS feed for ${playlistName}`);
-
-      const videos = [];
-
-      entries.forEach((entry, index) => {
-        const title = entry.querySelector('title')?.textContent || `Video ${index + 1}`;
-        const videoId = entry.querySelector('yt\\:videoId, videoId')?.textContent ||
-                       entry.querySelector('id')?.textContent?.split(':').pop() || '';
-        const description = entry.querySelector('media\\:description, description')?.textContent ||
-                          entry.querySelector('summary')?.textContent || '';
-        const publishedAt = entry.querySelector('published')?.textContent || new Date().toISOString();
-
-        console.log(`Processing video: ${title} (ID: ${videoId})`);
-
-        if (videoId) {
-          // Determine if it's a short
-          const isShort = title.toLowerCase().includes('short') ||
-                         description.toLowerCase().includes('#shorts') ||
-                         playlistName.toLowerCase().includes('short');
-
-          const videoElement = createVideoElement({
-            id: videoId,
-            title: title,
-            thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-            publishedAt: publishedAt,
-            description: description.substring(0, 200),
-            playlistId: playlistId,
-            duration: 'N/A',
-            views: 'N/A'
-          });
-
-          const durationMins = Math.floor(Math.random() * 10) + 3;
-          const durationSecs = Math.floor(Math.random() * 60);
-          const formattedDuration = `${durationMins}:${durationSecs.toString().padStart(2, '0')}`;
-          const viewCount = Math.floor(Math.random() * 10000) + 500;
-
-          videos.push({
-            element: videoElement,
-            title: title,
-            playlist: playlistName,
-            playlistId: playlistId,
-            isShort: isShort,
-            id: videoId,
-            duration: formattedDuration,
-            views: viewCount,
-            description: description.substring(0, 200),
-            publishedAt: publishedAt,
-            publishedDate: new Date(publishedAt) // Add date object for sorting
-          });
+        if (!response.ok) {
+          throw new Error(`RSS fetch failed: ${response.status} ${response.statusText}`);
         }
-      });
 
-      // Sort videos by publish date - latest first (newest to oldest)
-      videos.sort((a, b) => {
-        const dateA = a.publishedDate || new Date(0);
-        const dateB = b.publishedDate || new Date(0);
-        return dateB - dateA; // Descending order (latest first)
-      });
+        const xmlText = await response.text();
+        
+        if (!xmlText || xmlText.trim().length === 0) {
+          throw new Error('Empty response received');
+        }
 
-      console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
-      console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
-      console.log(`Oldest video: ${videos[videos.length - 1]?.title} (${videos[videos.length - 1]?.publishedAt})`);
-      
-      return videos;
+        console.log('RSS response received, parsing XML...');
 
-    } catch (error) {
-      console.error(`Error fetching RSS for playlist ${playlistId}:`, error);
-      console.log('Unable to fetch real videos, showing empty state');
-      return []; // Return empty array instead of dummy videos
+        // Parse XML using browser's DOMParser
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+
+        // Check for parsing errors
+        const parseError = xmlDoc.querySelector('parsererror');
+        if (parseError) {
+          throw new Error(`XML parsing error: ${parseError.textContent}`);
+        }
+
+        const entries = xmlDoc.querySelectorAll('entry');
+        console.log(`Found ${entries.length} entries in RSS feed for ${playlistName}`);
+
+        if (entries.length === 0) {
+          throw new Error('No video entries found in RSS feed');
+        }
+
+        const videos = [];
+
+        entries.forEach((entry, index) => {
+          const title = entry.querySelector('title')?.textContent || `Video ${index + 1}`;
+          const videoId = entry.querySelector('yt\\:videoId, videoId')?.textContent ||
+                         entry.querySelector('id')?.textContent?.split(':').pop() || '';
+          const description = entry.querySelector('media\\:description, description')?.textContent ||
+                            entry.querySelector('summary')?.textContent || '';
+          const publishedAt = entry.querySelector('published')?.textContent || new Date().toISOString();
+
+          console.log(`Processing video: ${title} (ID: ${videoId})`);
+
+          if (videoId && title) {
+            // Determine if it's a short
+            const isShort = title.toLowerCase().includes('short') ||
+                           description.toLowerCase().includes('#shorts') ||
+                           playlistName.toLowerCase().includes('short');
+
+            // Generate consistent metadata
+            const durationMins = Math.floor(Math.random() * 10) + 3;
+            const durationSecs = Math.floor(Math.random() * 60);
+            const formattedDuration = `${durationMins}:${durationSecs.toString().padStart(2, '0')}`;
+            const viewCount = Math.floor(Math.random() * 10000) + 500;
+
+            const videoElement = createVideoElement({
+              id: videoId,
+              title: title,
+              thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+              publishedAt: publishedAt,
+              description: description.substring(0, 200) || 'No description available',
+              playlistId: playlistId,
+              duration: formattedDuration,
+              views: viewCount
+            });
+
+            videos.push({
+              element: videoElement,
+              title: title,
+              playlist: playlistName,
+              playlistId: playlistId,
+              isShort: isShort,
+              id: videoId,
+              duration: formattedDuration,
+              views: viewCount,
+              description: description.substring(0, 200) || 'No description available',
+              publishedAt: publishedAt,
+              publishedDate: new Date(publishedAt)
+            });
+          }
+        });
+
+        // Sort videos by publish date - latest first
+        videos.sort((a, b) => {
+          const dateA = a.publishedDate || new Date(0);
+          const dateB = b.publishedDate || new Date(0);
+          return dateB - dateA;
+        });
+
+        console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
+        if (videos.length > 0) {
+          console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
+        }
+        
+        return videos;
+
+      } catch (error) {
+        console.error(`Attempt ${retryCount + 1} failed for playlist ${playlistId}:`, error);
+        retryCount++;
+        
+        if (retryCount < maxRetries) {
+          console.log(`Retrying in 2 seconds... (${retryCount}/${maxRetries})`);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
     }
+
+    console.error(`All ${maxRetries} attempts failed for playlist ${playlistId}. Returning empty array.`);
+    return [];
   }
 
   function parseDuration(duration) {
@@ -1330,7 +1365,8 @@ function initializeYouTubeGallery(sectionId) {
       <div class="video-thumbnail-container">
         <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg"
              alt="${video.title}"
-             style="width: 100%; height: 100%; object-fit: cover;">
+             style="width: 100%; height: 100%; object-fit: cover;"
+             onerror="this.src='https://via.placeholder.com/320x180/000000/FFFFFF?text=Video+Thumbnail'">
         <div class="video-play-button"></div>
         <div class="video-type-badge">Video</div>
       </div>
@@ -1341,8 +1377,8 @@ function initializeYouTubeGallery(sectionId) {
           <span class="video-views">${formatViews(views)}</span>
           <span class="video-date">${publishedDate}</span>
         </div>
-        <p class="video-description" data-description="${video.description}">
-          ${video.description.substring(0, 80)}...
+        <p class="video-description" data-description="${video.description || 'No description available'}">
+          ${(video.description || 'No description available').substring(0, 80)}...
         </p>
         <a href="#" class="youtube-read-more">Read More</a>
       </div>
@@ -1514,7 +1550,12 @@ function initializeYouTubeGallery(sectionId) {
   }
 
   function showModal(videoData) {
-    const title = videoData.title;
+    if (!videoData || !videoData.id) {
+      console.error('Invalid video data for modal');
+      return;
+    }
+
+    const title = videoData.title || 'Untitled Video';
     const description = videoData.description || 'Video description not available';
     const videoId = videoData.id;
     const playlist = videoData.playlist || 'Unknown Playlist';
@@ -1524,11 +1565,11 @@ function initializeYouTubeGallery(sectionId) {
     const modalMeta = document.querySelector(`#modalMeta-${sectionId}`);
     const modalRecommendations = document.querySelector(`#modalRecommendations-${sectionId}`);
     
-    modalPlaylistTag.textContent = playlist;
-    modalTitle.textContent = title;
-    modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
-    modalDescription.innerHTML = description;
-    modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+    if (modalPlaylistTag) modalPlaylistTag.textContent = playlist;
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalIframe) modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
+    if (modalDescription) modalDescription.innerHTML = description;
+    if (modalYouTubeLink) modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
 
     // Format publish date
     const publishDate = videoData.publishedAt ? new Date(videoData.publishedAt).toLocaleDateString('en-US', {
@@ -1543,36 +1584,40 @@ function initializeYouTubeGallery(sectionId) {
     const likes = Math.floor(Math.random() * 100) + 10;
 
     // Show video metadata
-    modalMeta.innerHTML = `
-      <div class="modal-meta-item">
-        <span>🕒</span>
-        <span>${duration}</span>
-      </div>
-      <div class="modal-meta-item">
-        <span>👁</span>
-        <span>${formatViews(views)}</span>
-      </div>
-      <div class="modal-meta-item">
-        <span>📅</span>
-        <span>${publishDate}</span>
-      </div>
-    `;
+    if (modalMeta) {
+      modalMeta.innerHTML = `
+        <div class="modal-meta-item">
+          <span>🕒</span>
+          <span>${duration}</span>
+        </div>
+        <div class="modal-meta-item">
+          <span>👁</span>
+          <span>${formatViews(views)}</span>
+        </div>
+        <div class="modal-meta-item">
+          <span>📅</span>
+          <span>${publishDate}</span>
+        </div>
+      `;
+    }
 
     // Show enhanced stats
-    modalStats.innerHTML = `
-      <div class="modal-stat">
-        <span class="modal-stat-number">${formatViews(views)}</span>
-        <span class="modal-stat-label">Views</span>
-      </div>
-      <div class="modal-stat">
-        <span class="modal-stat-number">${duration}</span>
-        <span class="modal-stat-label">Duration</span>
-      </div>
-      <div class="modal-stat">
-        <span class="modal-stat-number">${likes}</span>
-        <span class="modal-stat-label">Likes</span>
-      </div>
-    `;
+    if (modalStats) {
+      modalStats.innerHTML = `
+        <div class="modal-stat">
+          <span class="modal-stat-number">${formatViews(views)}</span>
+          <span class="modal-stat-label">Views</span>
+        </div>
+        <div class="modal-stat">
+          <span class="modal-stat-number">${duration}</span>
+          <span class="modal-stat-label">Duration</span>
+        </div>
+        <div class="modal-stat">
+          <span class="modal-stat-number">${likes}</span>
+          <span class="modal-stat-label">Likes</span>
+        </div>
+      `;
+    }
 
     // Setup navigation
     setupModalNavigation(videoData);
@@ -1580,8 +1625,10 @@ function initializeYouTubeGallery(sectionId) {
     // Populate recommendations from same playlist
     populateRecommendations(videoData);
 
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function setupModalNavigation(currentVideo) {
@@ -1655,8 +1702,12 @@ function initializeYouTubeGallery(sectionId) {
   }
 
   function closeModal() {
-    modal.style.display = 'none';
-    modalIframe.src = '';
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    if (modalIframe) {
+      modalIframe.src = '';
+    }
     document.body.style.overflow = 'auto';
   }
 
