@@ -1,7 +1,7 @@
 
 {% comment %}
   YouTube Video Gallery Section
-  Displays videos from specified playlists with tabs and modal popups
+  Displays shorts on left and videos on right with modal popups
 {% endcomment %}
 
 <style>
@@ -42,58 +42,140 @@
     margin-bottom: 30px;
   }
 
-  @media screen and (max-width: 767px) {
-    .youtube-subscribe-container {
-      display: block;
-      text-align: center;
-    }
+  /* Main layout container */
+  .shorts-videos-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
   }
 
-  .youtube-tab-container-main {
+  /* Shorts section */
+  .shorts-section {
+    flex: 0 0 300px;
+    min-height: 600px;
+  }
+
+  .shorts-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-
-  .youtube-tab-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid {{ section.settings.tab_border_color }};
   }
 
-  .youtube-tab-button {
-    background-color: {{ section.settings.tab_inactive_bg }};
-    color: {{ section.settings.tab_inactive_text }};
-    border: 2px solid {{ section.settings.tab_border_color }};
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 12px 24px;
-    margin: 5px;
+  .shorts-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+  }
+
+  .auto-playing-indicator {
+    background-color: #00ff00;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
     font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
   }
 
-  .youtube-tab-button:hover {
-    background-color: {{ section.settings.tab_hover_bg }};
-    color: {{ section.settings.tab_hover_text }};
+  .shorts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .short-item {
+    background-color: #ffffff;
+    border: 2px solid {{ section.settings.card_border_color }};
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .short-item:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  .youtube-tab-button.active {
-    background-color: {{ section.settings.tab_active_bg }};
-    color: {{ section.settings.tab_active_text }};
-    border-color: {{ section.settings.tab_active_bg }};
+  .short-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .short-thumbnail iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .short-duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .short-details {
+    padding: 12px;
+  }
+
+  .short-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ section.settings.video_title_color }};
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .short-date {
+    font-size: 12px;
+    color: {{ section.settings.video_date_color }};
+  }
+
+  /* Videos section */
+  .videos-section {
+    flex: 1;
+    min-height: 600px;
+  }
+
+  .videos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid {{ section.settings.tab_border_color }};
+  }
+
+  .videos-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+  }
+
+  .video-count {
+    color: {{ section.settings.description_color }};
+    font-size: 16px;
   }
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
   }
 
   .youtube-video-item {
@@ -103,6 +185,7 @@
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
   }
 
   .youtube-video-item:hover {
@@ -112,30 +195,24 @@
 
   .youtube-video-item iframe {
     width: 100%;
-    height: 200px;
+    height: 160px;
     border: none;
   }
 
   .youtube-video-details {
-    padding: 20px;
+    padding: 15px;
   }
 
   .youtube-video-title {
     font-size: 16px;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     color: {{ section.settings.video_title_color }};
     font-weight: 600;
     line-height: 1.4;
-  }
-
-  .youtube-video-title a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s;
-  }
-
-  .youtube-video-title a:hover {
-    color: {{ section.settings.link_hover_color }};
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .youtube-video-date {
@@ -149,7 +226,7 @@
     cursor: pointer;
     color: {{ section.settings.read_more_color }};
     text-decoration: none;
-    margin-top: 12px;
+    margin-top: 8px;
     display: inline-block;
     transition: color 0.3s;
     font-weight: 600;
@@ -161,6 +238,7 @@
     text-decoration: underline;
   }
 
+  /* Modal styles */
   .youtube-modal {
     display: none;
     position: fixed;
@@ -170,28 +248,47 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
   }
 
   .youtube-modal-content {
     background-color: #ffffff;
     margin: 2% auto;
-    padding: 30px;
-    border: 2px solid {{ section.settings.modal_border_color }};
+    padding: 0;
     border-radius: 15px;
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .modal-video-section {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-sidebar {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-left: 1px solid #dee2e6;
     max-height: 90vh;
     overflow-y: auto;
   }
 
   .youtube-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
     color: #aaa;
-    float: right;
     font-size: 32px;
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s;
+    z-index: 1001;
   }
 
   .youtube-modal-close:hover,
@@ -201,26 +298,122 @@
 
   #modalIframe {
     width: 100%;
-    height: 450px;
+    height: 400px;
     border-radius: 8px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
 
   .modal-title {
     color: {{ section.settings.modal_title_color }};
     font-size: 24px;
     font-weight: 700;
-    margin: 20px 0;
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+
+  .modal-video-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .modal-stat {
+    text-align: center;
+  }
+
+  .modal-stat-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ section.settings.modal_title_color }};
+  }
+
+  .modal-stat-label {
+    font-size: 12px;
+    color: {{ section.settings.modal_description_color }};
+    text-transform: uppercase;
   }
 
   .modal-description {
     color: {{ section.settings.modal_description_color }};
     font-size: 16px;
     line-height: 1.6;
+    margin-bottom: 20px;
   }
 
-  .modal-description a {
-    color: {{ section.settings.link_hover_color }};
+  .modal-youtube-link {
+    background-color: #ff0000;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+
+  .modal-youtube-link:hover {
+    background-color: #cc0000;
+    color: white;
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: {{ section.settings.modal_title_color }};
+  }
+
+  .sidebar-video-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .sidebar-video-item:hover {
+    background-color: #e9ecef;
+  }
+
+  .sidebar-video-thumbnail {
+    flex: 0 0 80px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .sidebar-video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sidebar-video-info {
+    flex: 1;
+  }
+
+  .sidebar-video-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ section.settings.video_title_color }};
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sidebar-video-date {
+    font-size: 12px;
+    color: {{ section.settings.video_date_color }};
   }
 
   .loading-spinner {
@@ -244,18 +437,28 @@
     100% { transform: rotate(360deg); }
   }
 
+  /* Mobile responsive */
   @media screen and (max-width: 767px) {
-    .youtube-tab-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      overflow-x: auto;
-      gap: 8px;
+    .shorts-videos-container {
+      flex-direction: column;
+      gap: 20px;
     }
 
-    .youtube-tab-button {
-      height: 45px;
-      padding: 8px 16px;
-      font-size: 12px;
+    .shorts-section {
+      flex: none;
+      min-height: auto;
+    }
+
+    .shorts-container {
+      max-height: 400px;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+
+    .short-item {
+      flex: 0 0 200px;
     }
 
     .youtube-video-container {
@@ -263,13 +466,24 @@
     }
 
     .youtube-modal-content {
-      width: 95%;
-      padding: 20px;
-      margin: 5% auto;
+      flex-direction: column;
+      width: 98%;
+      margin: 1% auto;
+    }
+
+    .modal-sidebar {
+      border-left: none;
+      border-top: 1px solid #dee2e6;
+      max-height: 300px;
     }
 
     #modalIframe {
       height: 250px;
+    }
+
+    .youtube-subscribe-container {
+      display: block;
+      text-align: center;
     }
   }
 </style>
@@ -298,25 +512,32 @@
       </div>
     {% endif %}
 
-    <!-- Playlist Tabs -->
-    <div class="youtube-tab-container-main">
-      <div class="youtube-tab-container" id="youtube-tabs-{{ section.id }}">
-        {% for block in section.blocks %}
-          {% if block.type == 'playlist' %}
-            <button class="youtube-tab-button{% if forloop.first %} active{% endif %}" 
-                    data-playlist-id="{{ block.settings.playlist_id }}"
-                    data-section-id="{{ section.id }}">
-              {{ block.settings.playlist_name | upcase }}
-            </button>
-          {% endif %}
-        {% endfor %}
+    <!-- Main Layout: Shorts & Videos -->
+    <div class="shorts-videos-container">
+      <!-- Shorts Section -->
+      <div class="shorts-section">
+        <div class="shorts-header">
+          <h3 class="shorts-title">Shorts</h3>
+          <span class="auto-playing-indicator">● Auto-playing</span>
+        </div>
+        <div class="shorts-container" id="shorts-container-{{ section.id }}">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Video Container -->
-    <div class="youtube-video-container" id="youtube-videos-{{ section.id }}">
-      <div class="loading-spinner">
-        <div class="spinner"></div>
+      <!-- Videos Section -->
+      <div class="videos-section">
+        <div class="videos-header">
+          <h3 class="videos-title">Videos</h3>
+          <span class="video-count" id="video-count-{{ section.id }}">3 videos</span>
+        </div>
+        <div class="youtube-video-container" id="youtube-videos-{{ section.id }}">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -324,9 +545,33 @@
     <div id="videoModal-{{ section.id }}" class="youtube-modal">
       <div class="youtube-modal-content">
         <span class="youtube-modal-close" data-section-id="{{ section.id }}">&times;</span>
-        <h2 id="modalTitle-{{ section.id }}" class="modal-title"></h2>
-        <iframe id="modalIframe-{{ section.id }}" frameborder="0" allowfullscreen></iframe>
-        <div id="modalDescription-{{ section.id }}" class="modal-description"></div>
+        
+        <!-- Video Section -->
+        <div class="modal-video-section">
+          <iframe id="modalIframe-{{ section.id }}" frameborder="0" allowfullscreen></iframe>
+          <h2 id="modalTitle-{{ section.id }}" class="modal-title"></h2>
+          
+          <div class="modal-video-stats" id="modalStats-{{ section.id }}">
+            <!-- Stats will be populated by JavaScript -->
+          </div>
+          
+          <div id="modalDescription-{{ section.id }}" class="modal-description"></div>
+          
+          <a id="modalYouTubeLink-{{ section.id }}" class="modal-youtube-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            See on YouTube
+          </a>
+        </div>
+
+        <!-- Sidebar with Recommendations -->
+        <div class="modal-sidebar">
+          <h4 class="sidebar-title">More Videos</h4>
+          <div id="modalSidebar-{{ section.id }}">
+            <!-- Recommendations will be populated by JavaScript -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -339,72 +584,232 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeYouTubeGallery(sectionId) {
   const serverUrl = '{{ section.settings.server_url | default: "https://fls-youtube-videos-fetch-with-api-58t9.onrender.com" }}';
-  const buttons = document.querySelectorAll(`#youtube-tabs-${sectionId} .youtube-tab-button`);
-  const container = document.querySelector(`#youtube-videos-${sectionId}`);
+  const shortsContainer = document.querySelector(`#shorts-container-${sectionId}`);
+  const videosContainer = document.querySelector(`#youtube-videos-${sectionId}`);
+  const videoCount = document.querySelector(`#video-count-${sectionId}`);
   const modal = document.querySelector(`#videoModal-${sectionId}`);
   const modalTitle = document.querySelector(`#modalTitle-${sectionId}`);
   const modalIframe = document.querySelector(`#modalIframe-${sectionId}`);
   const modalDescription = document.querySelector(`#modalDescription-${sectionId}`);
+  const modalStats = document.querySelector(`#modalStats-${sectionId}`);
+  const modalYouTubeLink = document.querySelector(`#modalYouTubeLink-${sectionId}`);
+  const modalSidebar = document.querySelector(`#modalSidebar-${sectionId}`);
   const closeBtn = document.querySelector(`[data-section-id="${sectionId}"].youtube-modal-close`);
 
-  if (buttons.length > 0) {
-    // Load initial playlist
-    const initialPlaylistId = buttons[0].getAttribute('data-playlist-id');
-    if (initialPlaylistId) {
-      loadVideos(initialPlaylistId);
+  let allVideos = [];
+  let currentVideoIndex = 0;
+
+  // Load content from all playlists
+  const playlists = [
+    {% for block in section.blocks %}
+      {% if block.type == 'playlist' %}
+        {
+          id: '{{ block.settings.playlist_id }}',
+          name: '{{ block.settings.playlist_name }}'
+        }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  ];
+
+  async function loadAllContent() {
+    const shorts = [];
+    const videos = [];
+
+    for (const playlist of playlists) {
+      try {
+        const response = await fetch(`${serverUrl}/videos/${playlist.id}`);
+        if (response.ok) {
+          const html = await response.text();
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          
+          // Parse videos from HTML response
+          const videoElements = tempDiv.querySelectorAll('.youtube-video-item');
+          videoElements.forEach(item => {
+            const title = item.querySelector('.youtube-video-title')?.textContent || '';
+            const isShort = title.toLowerCase().includes('short') || 
+                          playlist.name.toLowerCase().includes('short');
+            
+            const videoData = {
+              element: item.cloneNode(true),
+              title: title,
+              playlist: playlist.name,
+              isShort: isShort
+            };
+
+            if (isShort) {
+              shorts.push(videoData);
+            } else {
+              videos.push(videoData);
+            }
+          });
+        }
+      } catch (error) {
+        console.error(`Error loading playlist ${playlist.name}:`, error);
+      }
     }
 
-    // Tab click handlers
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        const playlistId = this.getAttribute('data-playlist-id');
-        if (playlistId) {
-          loadVideos(playlistId);
-        }
-      });
+    allVideos = [...shorts, ...videos];
+    displayShorts(shorts);
+    displayVideos(videos);
+  }
+
+  function displayShorts(shorts) {
+    if (shorts.length === 0) {
+      shortsContainer.innerHTML = '<p>No shorts available</p>';
+      return;
+    }
+
+    shortsContainer.innerHTML = '';
+    shorts.forEach((short, index) => {
+      const shortElement = createShortElement(short, index);
+      shortsContainer.appendChild(shortElement);
     });
   }
 
-  function loadVideos(playlistId) {
-    container.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+  function displayVideos(videos) {
+    if (videos.length === 0) {
+      videosContainer.innerHTML = '<p>No videos available</p>';
+      return;
+    }
+
+    videosContainer.innerHTML = '';
+    videoCount.textContent = `${videos.length} videos`;
     
-    fetch(`${serverUrl}/videos/${playlistId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(html => {
-        container.innerHTML = html;
-        attachReadMoreHandlers();
-      })
-      .catch(error => {
-        console.error('Error fetching videos:', error);
-        container.innerHTML = '<p>Error loading videos. Please try again later.</p>';
-      });
-  }
-
-  function attachReadMoreHandlers() {
-    container.addEventListener('click', function(event) {
-      if (event.target && event.target.classList.contains('youtube_read-more')) {
-        event.preventDefault();
-        const videoId = event.target.getAttribute('data-video-id');
-        const title = event.target.getAttribute('data-title');
-        const description = event.target.getAttribute('data-description');
-        showModal(videoId, title, description);
-      }
+    videos.forEach((video, index) => {
+      const videoElement = createVideoElement(video, index + 1000); // Offset index for videos
+      videosContainer.appendChild(videoElement);
     });
   }
 
-  function showModal(videoId, title, description) {
+  function createShortElement(short, index) {
+    const shortDiv = document.createElement('div');
+    shortDiv.className = 'short-item';
+    shortDiv.setAttribute('data-video-index', index);
+    
+    // Extract video data from original element
+    const originalIframe = short.element.querySelector('iframe');
+    const originalTitle = short.element.querySelector('.youtube-video-title');
+    const originalDate = short.element.querySelector('.youtube-video-date');
+    
+    shortDiv.innerHTML = `
+      <div class="short-thumbnail">
+        ${originalIframe ? originalIframe.outerHTML : ''}
+        <span class="short-duration">0:30</span>
+      </div>
+      <div class="short-details">
+        <div class="short-title">${originalTitle ? originalTitle.textContent : short.title}</div>
+        <div class="short-date">${originalDate ? originalDate.textContent : '1 day ago'}</div>
+      </div>
+    `;
+
+    shortDiv.addEventListener('click', () => {
+      currentVideoIndex = index;
+      showModal(short);
+    });
+
+    return shortDiv;
+  }
+
+  function createVideoElement(video, index) {
+    const videoDiv = video.element.cloneNode(true);
+    videoDiv.setAttribute('data-video-index', index);
+    
+    // Add click event to original read more button
+    const readMoreBtn = videoDiv.querySelector('.youtube_read-more, .youtube-read-more');
+    if (readMoreBtn) {
+      readMoreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentVideoIndex = index;
+        showModal(video);
+      });
+    }
+
+    // Add click event to entire video card
+    videoDiv.addEventListener('click', () => {
+      currentVideoIndex = index;
+      showModal(video);
+    });
+
+    return videoDiv;
+  }
+
+  function showModal(videoData) {
+    const originalElement = videoData.element;
+    const iframe = originalElement.querySelector('iframe');
+    const title = originalElement.querySelector('.youtube-video-title')?.textContent || videoData.title;
+    const description = originalElement.querySelector('.youtube-video-description')?.textContent || 
+                      originalElement.querySelector('[data-description]')?.getAttribute('data-description') || 
+                      'Video description not available';
+
+    // Extract video ID from iframe src
+    const videoId = iframe ? extractVideoId(iframe.src) : '';
+    
     modalTitle.textContent = title;
-    modalIframe.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&mute=1`;
+    modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
     modalDescription.innerHTML = description;
+    modalYouTubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+    // Add mock stats
+    modalStats.innerHTML = `
+      <div class="modal-stat">
+        <div class="modal-stat-number">13</div>
+        <div class="modal-stat-label">Likes</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-number">208</div>
+        <div class="modal-stat-label">Views</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-number">5</div>
+        <div class="modal-stat-label">Comments</div>
+      </div>
+    `;
+
+    // Populate sidebar with recommendations
+    populateSidebar();
+
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+  }
+
+  function populateSidebar() {
+    const recommendations = allVideos.slice(0, 6); // Show first 6 videos as recommendations
+    
+    modalSidebar.innerHTML = '';
+    recommendations.forEach((video, index) => {
+      const sidebarItem = document.createElement('div');
+      sidebarItem.className = 'sidebar-video-item';
+      
+      const iframe = video.element.querySelector('iframe');
+      const title = video.element.querySelector('.youtube-video-title')?.textContent || video.title;
+      const date = video.element.querySelector('.youtube-video-date')?.textContent || '1 day ago';
+      
+      // Extract thumbnail from iframe
+      const videoId = iframe ? extractVideoId(iframe.src) : '';
+      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+      
+      sidebarItem.innerHTML = `
+        <div class="sidebar-video-thumbnail">
+          <img src="${thumbnailUrl}" alt="${title}">
+        </div>
+        <div class="sidebar-video-info">
+          <div class="sidebar-video-title">${title}</div>
+          <div class="sidebar-video-date">${date}</div>
+        </div>
+      `;
+
+      sidebarItem.addEventListener('click', () => {
+        showModal(video);
+      });
+
+      modalSidebar.appendChild(sidebarItem);
+    });
+  }
+
+  function extractVideoId(url) {
+    const match = url.match(/embed\/([^?&]+)/);
+    return match ? match[1] : '';
   }
 
   function closeModal() {
@@ -430,6 +835,9 @@ function initializeYouTubeGallery(sectionId) {
       closeModal();
     }
   });
+
+  // Initialize content loading
+  loadAllContent();
 }
 </script>
 
@@ -453,13 +861,13 @@ function initializeYouTubeGallery(sectionId) {
       "type": "text",
       "id": "section_title",
       "label": "Section title",
-      "default": "Video Gallery"
+      "default": "Shorts & Videos"
     },
     {
       "type": "textarea",
       "id": "section_description",
       "label": "Section description",
-      "default": "Explore our latest videos and content"
+      "default": "Experience our content in two formats - quick shorts and detailed videos"
     },
     {
       "type": "range",
