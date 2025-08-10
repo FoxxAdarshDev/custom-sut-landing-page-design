@@ -538,44 +538,54 @@
   }
 
   .nav-arrow {
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
+    background: rgba(169, 169, 169, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    font-weight: bold;
-  }
-
-  .nav-arrow:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: scale(1.1);
-  }
-
-  .nav-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .youtube-modal-close {
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    color: #333;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-arrow:hover {
+    background: rgba(95, 95, 95, 0.95);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(169, 169, 169, 0.4);
+  }
+
+  .nav-arrow:disabled:hover {
+    transform: none;
+    background: rgba(169, 169, 169, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .youtube-modal-close {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    color: #666;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
     font-weight: bold;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -584,7 +594,9 @@
   .youtube-modal-close:hover {
     background: #ffffff;
     color: #ff0000;
-    transform: scale(1.1);
+    transform: scale(1.15);
+    border-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   .modal-main-content {
@@ -603,14 +615,15 @@
 
   .modal-details-section {
     flex: 1;
-    padding-left: 20px;
+    padding-left: 25px;
     border-left: 2px solid #f0f0f0;
     min-width: 280px;
+    margin-top: 10px;
   }
 
   #modalIframe {
     width: 100%;
-    height: 350px;
+    height: 450px;
     border-radius: 12px;
     border: none;
     background: #000;
@@ -699,8 +712,8 @@
   }
 
   .modal-recommendations {
-    margin-top: 20px;
-    padding-top: 20px;
+    margin-top: 30px;
+    padding-top: 25px;
     border-top: 2px solid #f0f0f0;
   }
 
@@ -1105,7 +1118,7 @@
     }
 
     #modalIframe {
-      height: 250px;
+      height: 320px;
     }
 
     .modal-header {
@@ -1116,6 +1129,16 @@
 
     .modal-navigation {
       justify-content: space-between;
+    }
+
+    .nav-arrow {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+
+    .nav-arrow:hover {
+      transform: scale(1.1);
     }
 
     .modal-video-stats {
