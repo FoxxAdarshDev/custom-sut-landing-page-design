@@ -236,6 +236,8 @@
   /* Videos section */
   .videos-section {
     flex: 1;
+    width:100%;
+    overflow-x:scroll;
     min-height: 600px;
   }
 
@@ -247,32 +249,6 @@
     background-color: #f8f9fa;
     padding: 5px;
     border-radius: 30px 30px 0 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: thin; /* Firefox */
-    -ms-overflow-style: auto; /* IE and Edge */
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
-  .videos-tabs::-webkit-scrollbar {
-    height: 8px; /* Chrome, Safari, Opera */
-  }
-
-  .videos-tabs::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-    margin: 0 10px;
-  }
-
-  .videos-tabs::-webkit-scrollbar-thumb {
-    background: #095ea7;
-    border-radius: 4px;
-    border: 1px solid #f1f1f1;
-  }
-
-  .videos-tabs::-webkit-scrollbar-thumb:hover {
-    background: #073d73;
   }
 
   .video-tab {
@@ -312,31 +288,22 @@
   }
 
   .videos-header {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
   }
 
   .video-count {
-    display: none;
     color: {{ section.settings.description_color }};
     font-size: 16px;
   }
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
-    max-width: 100%;
-  }
-
-  @media screen and (max-width: 1024px) {
-    .youtube-video-container {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
   }
 
   .youtube-video-item {
@@ -486,7 +453,7 @@
   .load-more-button {
     display: block;
     width: 200px;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 12px 24px;
     background-color: {{ section.settings.tab_active_bg }};
     color: white;
@@ -496,7 +463,6 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
-    text-align: center;
   }
 
   .load-more-button:hover {
@@ -657,9 +623,10 @@
     margin-top: 10px;
   }
 
-  #modalIframe {
-    width: 800px;
+   .modal-video-section iframe{
+    width: 100%;
     height: 450px;
+    max-height:100%;
     border-radius: 12px;
     border: none;
     background: #000;
@@ -749,8 +716,8 @@
 
   .modal-recommendations {
     margin-top: 30px;
-    padding-top: 25px;
-    border-top: 2px solid #f0f0f0;
+    z-index: 10;
+    padding-top: 35px;
   }
 
   .recommendations-title {
@@ -867,157 +834,107 @@
     100% { transform: rotate(360deg); }
   }
 
-  /* YouTube-like Skeleton Loading Styles */
+  /* Skeleton Loading Styles */
   .skeleton-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
   }
 
-  @media screen and (max-width: 1024px) {
-    .skeleton-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   .skeleton-video-card {
     background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-thumbnail {
     width: 100%;
     height: 180px;
-    background: #e5e5e5;
-    border-radius: 12px 12px 0 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-thumbnail::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 8px 8px 0 0;
   }
 
   .skeleton-content {
-    padding: 12px;
-    background: #ffffff;
+    padding: 15px;
   }
 
   .skeleton-title {
-    height: 10px;
-    background: #e5e5e5;
+    height: 20px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
-    margin-bottom: 6px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-title::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    margin-bottom: 10px;
   }
 
   .skeleton-title-second {
-    height: 10px;
-    width: 60%;
-    background: #e5e5e5;
+    height: 16px;
+    width: 70%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
-    margin-bottom: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-title-second::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    margin-bottom: 15px;
   }
 
   .skeleton-meta {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .skeleton-avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #e5e5e5;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-avatar::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    gap: 15px;
+    margin-bottom: 10px;
   }
 
   .skeleton-meta-item {
-    height: 8px;
-    background: #e5e5e5;
+    height: 14px;
+    width: 60px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
-    position: relative;
-    overflow: hidden;
   }
 
-  .skeleton-meta-item:first-of-type {
-    width: 100px;
+  .skeleton-description {
+    height: 12px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 4px;
+    margin-bottom: 8px;
   }
 
-  .skeleton-meta-item:last-of-type {
-    width: 50px;
+  .skeleton-description-second {
+    height: 12px;
+    width: 80%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 4px;
   }
 
-  .skeleton-meta-item::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
-  }
-
-  /* YouTube-like shimmer animation */
+  /* Skeleton animations */
   @keyframes skeleton-shimmer {
     0% {
-      transform: translateX(-100%);
+      background-position: -200% 0;
     }
     100% {
-      transform: translateX(100%);
+      background-position: 200% 0;
     }
   }
 
-  /* YouTube-like Shorts skeleton */
+  @keyframes skeleton-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  /* Shorts skeleton */
   .skeleton-shorts-container {
     display: flex;
     flex-direction: column;
@@ -1047,32 +964,23 @@
 
   .skeleton-short-item {
     background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
     height: 200px;
     width: 100%;
     position: relative;
     flex-shrink: 0;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-short-thumbnail {
     width: 100%;
     height: 100%;
-    background: #e5e5e5;
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-short-thumbnail::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 8px 8px 0 0;
   }
 
   .skeleton-short-overlay {
@@ -1084,44 +992,21 @@
 
   .skeleton-short-badge {
     width: 50px;
-    height: 20px;
-    background: #e5e5e5;
+    height: 24px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
     margin-bottom: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-short-badge::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-short-play-status {
-    width: 60px;
-    height: 16px;
-    background: #e5e5e5;
+    width: 45px;
+    height: 20px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
-    margin-top: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-short-play-status::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
   }
 
   .skeleton-short-views {
@@ -1129,78 +1014,38 @@
     bottom: 10px;
     left: 10px;
     width: 60px;
-    height: 12px;
-    background: #e5e5e5;
+    height: 16px;
+    background: linear-gradient(90deg, rgba(240,240,240,0.8) 25%, rgba(224,224,224,0.8) 50%, rgba(240,240,240,0.8) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
     border-radius: 4px;
-    position: relative;
-    overflow: hidden;
   }
 
-  .skeleton-short-views::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
-  }
-
-  /* YouTube-like Tab skeleton */
+  /* Tab skeleton */
   .skeleton-tabs {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     margin-bottom: 20px;
     border-bottom: 2px solid {{ section.settings.tab_border_color }};
     background-color: #f8f9fa;
     padding: 5px;
     border-radius: 30px 30px 0 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .skeleton-tabs::-webkit-scrollbar {
-    display: none;
   }
 
   .skeleton-tab {
-    height: 32px;
-    min-width: 80px;
-    width: auto;
-    background: #e5e5e5;
-    border-radius: 16px;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton-tab::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: skeleton-shimmer 1.2s infinite;
+    height: 40px;
+    width: 120px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 25px 25px 0 0;
+    margin-right: 10px;
   }
 
   .skeleton-tab:first-child {
-    background: #095ea7;
-  }
-
-  .skeleton-tab:nth-child(2) {
-    width: 100px;
-  }
-
-  .skeleton-tab:nth-child(3) {
-    width: 90px;
-  }
-
-  .skeleton-tab:nth-child(4) {
-    width: 110px;
+    background: linear-gradient(90deg, #095ea7 25%, #073d73 50%, #095ea7 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
   }
 
   /* Fade in animation for real content */
@@ -1250,38 +1095,8 @@
     }
 
     .youtube-video-container {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: 1fr;
     }
-
-    .skeleton-container {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    
-    .video-thumbnail-container {
-      height: 120px;
-    }
-    
-    .youtube-video-details {
-      padding: 10px;
-    }
-    
-    .youtube-video-title {
-      font-size: 14px;
-      line-height: 1.3;
-    }
-    
-    .video-meta {
-      font-size: 12px;
-      gap: 8px;
-    }
-    
-    .video-description {
-      font-size: 12px;
-      line-height: 1.3;
-    }
-  }
 
     .youtube-modal-content {
       width: 95%;
@@ -1554,7 +1369,6 @@ function initializeYouTubeGallery(sectionId) {
   let currentVideoIndex = 0;
   let videosPerLoad = 3;
   let loadedVideos = {};
-  let initialVideosPerTab = 3;
 
   // Load content from all playlists
   const playlists = [
@@ -1571,161 +1385,102 @@ function initializeYouTubeGallery(sectionId) {
   async function loadAllContent() {
     const shorts = [];
 
+    // Show skeleton loading states immediately
+    showSkeletonShorts();
+    showSkeletonTabs();
+
     if (playlists.length === 0) {
       console.warn('No playlists configured');
-      shortsContainer.innerHTML = displayEmptyState('No playlists configured');
-      tabContentsContainer.innerHTML = displayEmptyState('No video playlists available');
+      setTimeout(() => {
+        displayShorts(shorts);
+        createTabs([]);
+      }, 1000); // Delay to show skeleton briefly
       return;
     }
 
     console.log('Total playlists to load:', playlists.length);
     console.log('Playlist IDs:', playlists.map(p => p.id));
 
-    // Show skeleton loading immediately
-    showSkeletonShorts();
-    showSkeletonTabs();
+    for (const playlist of playlists) {
+      try {
+        console.log(`Loading playlist: ${playlist.name} (${playlist.id})`);
 
-    try {
-      // Initialize playlist structure first
-      playlists.forEach(playlist => {
+        // Fetch real videos from YouTube API
+        const playlistVideos = await fetchPlaylistVideos(playlist.id, playlist.name);
+
         videosByPlaylist[playlist.id] = {
           name: playlist.name,
-          videos: [],
-          loaded: false
+          videos: []
+        };
+
+        playlistVideos.forEach(videoData => {
+          if (videoData.isShort) {
+            shorts.push(videoData);
+          } else {
+            videosByPlaylist[playlist.id].videos.push(videoData);
+            allVideos.push(videoData);
+          }
+        });
+
+        // Sort videos in each playlist by date (latest first)
+        videosByPlaylist[playlist.id].videos.sort((a, b) => {
+          const dateA = a.publishedDate || new Date(0);
+          const dateB = b.publishedDate || new Date(0);
+          return dateB - dateA; // Descending order (latest first)
+        });
+
+        // Initialize loaded count for each playlist
+        loadedVideos[playlist.id] = 0;
+
+        console.log(`Loaded ${playlistVideos.length} videos from ${playlist.name}`);
+
+      } catch (error) {
+        console.error(`Error loading playlist ${playlist.name}:`, error);
+        // Fallback to empty playlist on error
+        videosByPlaylist[playlist.id] = {
+          name: playlist.name,
+          videos: []
         };
         loadedVideos[playlist.id] = 0;
-      });
-
-      // Create tabs immediately
-      createTabs(playlists.map(p => p.id));
-
-      // Load content for each playlist with timeout
-      const contentPromises = playlists.map(async (playlist) => {
-        try {
-          console.log(`Loading content from: ${playlist.name} (${playlist.id})`);
-          
-          // Add timeout to prevent hanging
-          const timeoutPromise = new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Timeout')), 10000)
-          );
-          
-          const playlistVideos = await Promise.race([
-            fetchPlaylistVideos(playlist.id, playlist.name),
-            timeoutPromise
-          ]);
-          
-          const playlistShorts = playlistVideos.filter(video => video.isShort);
-          const regularVideos = playlistVideos.filter(video => !video.isShort);
-          
-          console.log(`Loaded ${playlistShorts.length} shorts and ${regularVideos.length} regular videos from ${playlist.name}`);
-          
-          // Store videos in playlist structure
-          videosByPlaylist[playlist.id].videos = regularVideos;
-          videosByPlaylist[playlist.id].loaded = true;
-          
-          return playlistShorts;
-        } catch (error) {
-          console.error(`Error loading content from ${playlist.name}:`, error);
-          
-          // Create dummy content on error
-          const dummyContent = createDummyVideos(playlist.id, playlist.name);
-          const dummyShorts = dummyContent.filter(video => video.isShort);
-          const dummyRegular = dummyContent.filter(video => !video.isShort);
-          
-          videosByPlaylist[playlist.id].videos = dummyRegular;
-          videosByPlaylist[playlist.id].loaded = true;
-          
-          return dummyShorts;
-        }
-      });
-
-      // Wait for all content to load (with fallbacks)
-      const allShortsArrays = await Promise.all(contentPromises);
-      allShortsArrays.forEach(shortsArray => {
-        shorts.push(...shortsArray);
-      });
-
-      // Add all regular videos to allVideos
-      Object.values(videosByPlaylist).forEach(playlist => {
-        allVideos.push(...playlist.videos);
-      });
-
-      // Sort shorts by date (latest first)
-      shorts.sort((a, b) => {
-        const dateA = a.publishedDate || new Date(0);
-        const dateB = b.publishedDate || new Date(0);
-        return dateB - dateA;
-      });
-
-      // Store shorts data globally
-      window[`shortsData_${sectionId}`] = shorts;
-
-      // Display content
-      displayShorts(shorts);
-
-      // Auto-load first tab
-      if (playlists.length > 0) {
-        await switchTab(playlists[0].id);
       }
-
-      console.log(`Content loaded: ${shorts.length} shorts, ${allVideos.length} total videos`);
-      
-    } catch (error) {
-      console.error('Error in loadAllContent:', error);
-      
-      // Show fallback content
-      shortsContainer.innerHTML = displayEmptyState('Unable to load content. Please refresh the page.');
-      tabContentsContainer.innerHTML = displayEmptyState('Unable to load videos. Please refresh the page.');
     }
+
+    // Sort all shorts by date (latest first)
+    shorts.sort((a, b) => {
+      const dateA = a.publishedDate || new Date(0);
+      const dateB = b.publishedDate || new Date(0);
+      return dateB - dateA; // Descending order (latest first)
+    });
+
+    // Store shorts data globally for fullscreen view
+    window[`shortsData_${sectionId}`] = shorts;
+
+    console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
+    console.log(`Latest short: ${shorts[0]?.title} (${shorts[0]?.publishedAt})`);
+    
+    // Add a small delay to show skeleton loading, then fade in real content
+    setTimeout(() => {
+      displayShorts(shorts); // Show all available shorts
+      createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
+    }, 800); // 800ms delay to show skeleton loading
   }
 
   async function fetchPlaylistVideos(playlistId, playlistName) {
     console.log(`Fetching videos from RSS for playlist: ${playlistName} (${playlistId})`);
 
     try {
-      // Try multiple CORS proxy services
-      const proxyUrls = [
-        'https://api.allorigins.win/raw?url=',
-        'https://cors-anywhere.herokuapp.com/',
-        'https://corsproxy.io/?'
-      ];
-      
+      // Use a CORS proxy to fetch the RSS feed
+      const proxyUrl = 'https://api.allorigins.win/raw?url=';
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+      const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
       
-      let response = null;
-      let lastError = null;
+      console.log('Fetching from RSS URL via proxy:', fetchUrl);
 
-      // Try each proxy URL
-      for (const proxyUrl of proxyUrls) {
-        try {
-          const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
-          console.log(`Trying proxy: ${proxyUrl}`);
-          
-          response = await fetch(fetchUrl, {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/rss+xml, application/xml, text/xml'
-            }
-          });
+      const response = await fetch(fetchUrl);
 
-          if (response.ok) {
-            console.log(`Success with proxy: ${proxyUrl}`);
-            break;
-          } else {
-            console.log(`Failed with proxy ${proxyUrl}: ${response.status}`);
-            response = null;
-          }
-        } catch (err) {
-          console.log(`Error with proxy ${proxyUrl}:`, err.message);
-          lastError = err;
-          response = null;
-        }
-      }
-
-      // If all proxies failed, create dummy data
-      if (!response || !response.ok) {
-        console.warn(`All proxies failed for ${playlistName}. Creating dummy data.`);
-        return createDummyVideos(playlistId, playlistName);
+      if (!response.ok) {
+        console.error(`RSS fetch failed: ${response.status}`);
+        throw new Error(`RSS fetch failed: ${response.status}`);
       }
 
       const xmlText = await response.text();
@@ -1739,16 +1494,11 @@ function initializeYouTubeGallery(sectionId) {
       const parseError = xmlDoc.querySelector('parsererror');
       if (parseError) {
         console.error('XML parsing error:', parseError.textContent);
-        return createDummyVideos(playlistId, playlistName);
+        throw new Error('Failed to parse RSS XML');
       }
 
       const entries = xmlDoc.querySelectorAll('entry');
       console.log(`Found ${entries.length} entries in RSS feed for ${playlistName}`);
-
-      if (entries.length === 0) {
-        console.warn(`No entries found in RSS feed for ${playlistName}`);
-        return createDummyVideos(playlistId, playlistName);
-      }
 
       const videos = [];
 
@@ -1796,72 +1546,29 @@ function initializeYouTubeGallery(sectionId) {
             views: viewCount,
             description: description.substring(0, 200),
             publishedAt: publishedAt,
-            publishedDate: new Date(publishedAt)
+            publishedDate: new Date(publishedAt) // Add date object for sorting
           });
         }
       });
 
-      // Sort videos by publish date - latest first
+      // Sort videos by publish date - latest first (newest to oldest)
       videos.sort((a, b) => {
         const dateA = a.publishedDate || new Date(0);
         const dateB = b.publishedDate || new Date(0);
-        return dateB - dateA;
+        return dateB - dateA; // Descending order (latest first)
       });
 
-      console.log(`Successfully parsed ${videos.length} videos from RSS feed: ${playlistName}`);
+      console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
+      console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
+      console.log(`Oldest video: ${videos[videos.length - 1]?.title} (${videos[videos.length - 1]?.publishedAt})`);
       
-      return videos.length > 0 ? videos : createDummyVideos(playlistId, playlistName);
+      return videos;
 
     } catch (error) {
       console.error(`Error fetching RSS for playlist ${playlistId}:`, error);
-      return createDummyVideos(playlistId, playlistName);
+      console.log('Unable to fetch real videos, showing empty state');
+      return []; // Return empty array instead of dummy videos
     }
-  }
-
-  function createDummyVideos(playlistId, playlistName) {
-    console.log(`Creating dummy videos for ${playlistName}`);
-    
-    const dummyVideos = [];
-    const videoCount = 6; // Create 6 dummy videos per playlist
-    
-    for (let i = 1; i <= videoCount; i++) {
-      const isShort = playlistName.toLowerCase().includes('short') && i <= 3;
-      const videoId = `dummy_${playlistId}_${i}`;
-      const title = isShort ? `${playlistName} Short ${i}` : `${playlistName} Video ${i}`;
-      const description = `This is a sample ${isShort ? 'short' : 'video'} from ${playlistName}. Content will be loaded when actual data is available.`;
-      const publishedAt = new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString(); // i days ago
-      
-      const duration = isShort ? '0:' + (15 + Math.floor(Math.random() * 45)).toString().padStart(2, '0') : 
-                      Math.floor(Math.random() * 10 + 3) + ':' + Math.floor(Math.random() * 60).toString().padStart(2, '0');
-      const views = Math.floor(Math.random() * 5000) + 100;
-
-      const videoElement = createVideoElement({
-        id: videoId,
-        title: title,
-        thumbnail: `https://via.placeholder.com/320x180/095ea7/ffffff?text=${encodeURIComponent(title.substring(0, 20))}`,
-        publishedAt: publishedAt,
-        description: description,
-        playlistId: playlistId,
-        duration: duration,
-        views: views
-      });
-
-      dummyVideos.push({
-        element: videoElement,
-        title: title,
-        playlist: playlistName,
-        playlistId: playlistId,
-        isShort: isShort,
-        id: videoId,
-        duration: duration,
-        views: views,
-        description: description,
-        publishedAt: publishedAt,
-        publishedDate: new Date(publishedAt)
-      });
-    }
-
-    return dummyVideos;
   }
 
   function parseDuration(duration) {
@@ -1970,33 +1677,11 @@ function initializeYouTubeGallery(sectionId) {
     playlistIds.forEach((playlistId, index) => {
       const playlist = videosByPlaylist[playlistId];
 
-      // Create tab button with playlist link
+      // Create tab button
       const tabButton = document.createElement('button');
       tabButton.className = `video-tab ${index === 0 ? 'active' : ''}`;
       tabButton.setAttribute('data-playlist-id', playlistId);
-      
-      // Create tab content with playlist link
-      const tabInner = document.createElement('div');
-      tabInner.style.display = 'flex';
-      tabInner.style.alignItems = 'center';
-      tabInner.style.gap = '8px';
-      
-      const tabText = document.createElement('span');
-      tabText.textContent = playlist.name;
-      
-      const playlistLink = document.createElement('a');
-      playlistLink.href = `https://www.youtube.com/playlist?list=${playlistId}`;
-      playlistLink.target = '_blank';
-      playlistLink.style.color = 'inherit';
-      playlistLink.style.textDecoration = 'none';
-      playlistLink.innerHTML = '↗';
-      playlistLink.title = 'Open playlist on YouTube';
-      playlistLink.onclick = (e) => e.stopPropagation();
-      
-      tabInner.appendChild(tabText);
-      tabInner.appendChild(playlistLink);
-      tabButton.appendChild(tabInner);
-      
+      tabButton.textContent = playlist.name;
       tabButton.addEventListener('click', () => switchTab(playlistId));
       videosTabsContainer.appendChild(tabButton);
 
@@ -2004,6 +1689,12 @@ function initializeYouTubeGallery(sectionId) {
       const tabContent = document.createElement('div');
       tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
       tabContent.setAttribute('data-playlist-id', playlistId);
+
+      const videosHeader = document.createElement('div');
+      videosHeader.className = 'videos-header';
+      videosHeader.innerHTML = `
+        <span class="video-count">${playlist.videos.length} videos</span>
+      `;
 
       const videosContainer = document.createElement('div');
       videosContainer.className = 'youtube-video-container';
@@ -2013,110 +1704,49 @@ function initializeYouTubeGallery(sectionId) {
       loadMoreButton.className = 'load-more-button';
       loadMoreButton.textContent = 'Load More Videos';
       loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
-      loadMoreButton.style.display = 'none'; // Hide initially
-      loadMoreButton.id = `load-more-${playlistId}`;
+      loadMoreButton.style.display = playlist.videos.length <= 3 ? 'none' : 'block';
 
+      tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
-      tabContent.appendChild(loadMoreButton);
+      
+      if (playlist.videos.length === 0) {
+        videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
+      } else {
+        tabContent.appendChild(loadMoreButton);
+      }
 
       tabContentsContainer.appendChild(tabContent);
 
-      // Initial tab setup complete
+      // Load initial videos for the first tab
+      if (index === 0 && playlist.videos.length > 0) {
+        loadMoreVideos(playlistId);
+      }
     });
   }
 
-  async function switchTab(playlistId) {
+  function switchTab(playlistId) {
     // Update tab buttons
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.classList.remove('active');
     });
-    const activeTab = document.querySelector(`[data-playlist-id="${playlistId}"].video-tab`);
-    if (activeTab) {
-      activeTab.classList.add('active');
-    }
+    document.querySelector(`[data-playlist-id="${playlistId}"].video-tab`).classList.add('active');
 
     // Update tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
       content.classList.remove('active');
     });
-    const activeContent = document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`);
-    if (activeContent) {
-      activeContent.classList.add('active');
-    }
+    document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`).classList.add('active');
 
-    const playlist = videosByPlaylist[playlistId];
-    if (!playlist) {
-      console.error(`Playlist ${playlistId} not found`);
-      return;
-    }
-    
-    // Check if content is already loaded and displayed
-    if (playlist.loaded && loadedVideos[playlistId] > 0) {
-      console.log(`Videos for ${playlist.name} already displayed`);
-      return;
-    }
-
-    // Check if playlist videos are loaded but not displayed
-    if (playlist.loaded && playlist.videos.length > 0) {
-      console.log(`Displaying already loaded videos for ${playlist.name}`);
-      loadInitialVideos(playlistId);
-      return;
-    }
-
-    // If not loaded, show empty state or skeleton
-    const videosContainer = document.querySelector(`#videos-${playlistId}`);
-    if (videosContainer && playlist.videos.length === 0) {
-      if (playlist.loaded) {
-        // Content was loaded but no videos found
-        videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
-      } else {
-        // Still loading
-        showSkeletonVideos(playlistId);
-      }
-    }
-  }
-
-  function loadInitialVideos(playlistId) {
-    const playlist = videosByPlaylist[playlistId];
-    const videosContainer = document.querySelector(`#videos-${playlistId}`);
-    const loadMoreButton = document.querySelector(`#load-more-${playlistId}`);
-
-    // Load only initial 3 videos
-    const endIndex = Math.min(initialVideosPerTab, playlist.videos.length);
-
-    for (let i = 0; i < endIndex; i++) {
-      const video = playlist.videos[i];
-      const videoElement = createVideoElementForDisplay(video, allVideos.indexOf(video));
-      
-      // Add fade-in animation with slight delay for staggered effect
-      videoElement.style.opacity = '0';
-      videoElement.classList.add('fade-in');
-      videosContainer.appendChild(videoElement);
-      
-      // Trigger fade-in animation
-      setTimeout(() => {
-        videoElement.style.opacity = '1';
-      }, i * 100); // Staggered animation
-    }
-
-    loadedVideos[playlistId] = endIndex;
-
-    // Show load more button if there are more videos
-    if (loadMoreButton) {
-      if (endIndex >= playlist.videos.length) {
-        loadMoreButton.style.display = 'none';
-      } else {
-        loadMoreButton.style.display = 'block';
-        loadMoreButton.style.margin = '30px auto';
-        loadMoreButton.style.textAlign = 'center';
-      }
+    // Load videos if not loaded yet
+    if (loadedVideos[playlistId] === 0) {
+      loadMoreVideos(playlistId);
     }
   }
 
   function loadMoreVideos(playlistId) {
     const playlist = videosByPlaylist[playlistId];
     const videosContainer = document.querySelector(`#videos-${playlistId}`);
-    const loadMoreButton = document.querySelector(`#load-more-${playlistId}`);
+    const loadMoreButton = document.querySelector(`[data-playlist-id="${playlistId}"] .load-more-button`);
 
     const startIndex = loadedVideos[playlistId];
     const endIndex = Math.min(startIndex + videosPerLoad, playlist.videos.length);
@@ -2138,13 +1768,9 @@ function initializeYouTubeGallery(sectionId) {
 
     loadedVideos[playlistId] = endIndex;
 
-    // Show/hide load more button based on remaining videos
-    if (loadMoreButton) {
-      if (endIndex >= playlist.videos.length) {
-        loadMoreButton.style.display = 'none';
-      } else {
-        loadMoreButton.style.display = 'block';
-      }
+    // Hide load more button if all videos are loaded
+    if (endIndex >= playlist.videos.length) {
+      loadMoreButton.style.display = 'none';
     }
   }
 
@@ -2154,7 +1780,6 @@ function initializeYouTubeGallery(sectionId) {
       return;
     }
 
-    // Clear skeleton and add real shorts
     shortsContainer.innerHTML = '';
     shorts.forEach((short, index) => {
       const shortElement = createShortElement(short, index, sectionId);
@@ -2165,14 +1790,14 @@ function initializeYouTubeGallery(sectionId) {
 
   function showSkeletonShorts() {
     shortsContainer.innerHTML = '';
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 6; i++) {
       const skeletonShort = document.createElement('div');
       skeletonShort.className = 'skeleton-short-item';
       skeletonShort.innerHTML = `
         <div class="skeleton-short-thumbnail"></div>
         <div class="skeleton-short-overlay">
           <div class="skeleton-short-badge"></div>
-          ${i === 0 ? '<div class="skeleton-short-play-status" style="width: 60px; height: 16px; background: #e5e5e5; border-radius: 4px; margin-top: 4px;"></div>' : ''}
+          ${i === 0 ? '<div class="skeleton-short-play-status"></div>' : ''}
         </div>
         <div class="skeleton-short-views"></div>
       `;
@@ -2184,35 +1809,24 @@ function initializeYouTubeGallery(sectionId) {
     videosTabsContainer.innerHTML = '';
     tabContentsContainer.innerHTML = '';
 
-    // Create skeleton tabs with realistic varying widths
-    for (let i = 0; i < 4; i++) {
-      const skeletonTab = document.createElement('button');
-      skeletonTab.className = 'video-tab skeleton-tab';
-      if (i === 0) skeletonTab.classList.add('active');
-      skeletonTab.style.minWidth = ['100px', '120px', '90px', '110px'][i];
-      skeletonTab.innerHTML = '&nbsp;';
-      videosTabsContainer.appendChild(skeletonTab);
+    // Create skeleton tabs
+    const skeletonTabsDiv = document.createElement('div');
+    skeletonTabsDiv.className = 'skeleton-tabs';
+    for (let i = 0; i < 3; i++) {
+      const skeletonTab = document.createElement('div');
+      skeletonTab.className = 'skeleton-tab';
+      skeletonTabsDiv.appendChild(skeletonTab);
     }
+    videosTabsContainer.appendChild(skeletonTabsDiv);
 
     // Create skeleton video cards
     const skeletonContainer = document.createElement('div');
     skeletonContainer.className = 'skeleton-container';
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       const skeletonCard = createSkeletonVideoCard();
       skeletonContainer.appendChild(skeletonCard);
     }
     tabContentsContainer.appendChild(skeletonContainer);
-  }
-
-  function showSkeletonVideos(playlistId) {
-    const videosContainer = document.querySelector(`#videos-${playlistId}`);
-    if (videosContainer) {
-      videosContainer.innerHTML = '';
-      for (let i = 0; i < 3; i++) {
-        const skeletonCard = createSkeletonVideoCard();
-        videosContainer.appendChild(skeletonCard);
-      }
-    }
   }
 
   function createSkeletonVideoCard() {
@@ -2221,17 +1835,15 @@ function initializeYouTubeGallery(sectionId) {
     skeletonDiv.innerHTML = `
       <div class="skeleton-thumbnail"></div>
       <div class="skeleton-content">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-title-second"></div>
         <div class="skeleton-meta">
-          <div class="skeleton-avatar"></div>
-          <div style="flex: 1;">
-            <div class="skeleton-title"></div>
-            <div class="skeleton-title-second"></div>
-            <div style="display: flex; gap: 8px; margin-top: 4px;">
-              <div class="skeleton-meta-item"></div>
-              <div class="skeleton-meta-item"></div>
-            </div>
-          </div>
+          <div class="skeleton-meta-item"></div>
+          <div class="skeleton-meta-item"></div>
+          <div class="skeleton-meta-item"></div>
         </div>
+        <div class="skeleton-description"></div>
+        <div class="skeleton-description-second"></div>
       </div>
     `;
     return skeletonDiv;
