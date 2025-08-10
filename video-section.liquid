@@ -239,9 +239,10 @@
   }
 
   .video-tab.active {
-    color: {{ section.settings.tab_active_text | default: '#095ea7' }};
+    color: {{ section.settings.tab_active_text | default: '#095ea7' }} !important;
     border-bottom-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
     font-weight: 700;
+    background-color: rgba(9, 94, 167, 0.1);
   }
 
   .video-tab:hover:not(.active) {
@@ -459,31 +460,32 @@
 
   .youtube-modal-content {
     background-color: #ffffff;
-    margin: 2% auto;
+    margin: 1% auto;
     padding: 0;
-    border-radius: 15px;
+    border-radius: 12px;
     width: 95%;
-    max-width: 1200px;
-    max-height: 90vh;
+    max-width: 1400px;
+    max-height: 95vh;
     overflow: hidden;
     display: flex;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
   .modal-video-section {
-    flex: 2;
-    padding: 20px;
+    flex: 2.5;
+    padding: 30px;
     display: flex;
     flex-direction: column;
+    background: #000;
   }
 
   .modal-sidebar {
     flex: 1;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     padding: 20px;
-    border-left: 1px solid #dee2e6;
-    max-height: 90vh;
+    border-left: 1px solid #e0e0e0;
+    max-height: 95vh;
     overflow-y: auto;
   }
 
@@ -513,16 +515,18 @@
 
   #modalIframe {
     width: 100%;
-    height: 400px;
+    height: 450px;
     border-radius: 8px;
     margin-bottom: 20px;
+    border: none;
+    background: #000;
   }
 
   .modal-title {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #333;
+    color: #ffffff;
   }
 
   .modal-video-stats {
@@ -530,8 +534,9 @@
     gap: 30px;
     margin-bottom: 20px;
     padding: 15px;
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .modal-stat {
@@ -541,19 +546,19 @@
   .modal-stat-number {
     font-size: 20px;
     font-weight: 700;
-    color: #333;
+    color: #ffffff;
   }
 
   .modal-stat-label {
     font-size: 14px;
-    color: #666;
+    color: #cccccc;
     margin-top: 4px;
   }
 
   .modal-description {
     font-size: 16px;
     line-height: 1.6;
-    color: #555;
+    color: #cccccc;
     margin-bottom: 20px;
   }
 
@@ -667,14 +672,15 @@
 
     .shorts-container {
       max-height: 400px;
-      flex-direction: row;
-      overflow-x: auto;
+      flex-direction: column;
+      overflow-y: auto;
       gap: 10px;
       padding-bottom: 10px;
     }
 
     .short-item {
-      flex: 0 0 200px;
+      width: 100%;
+      height: 200px;
     }
 
     .youtube-video-container {
@@ -932,11 +938,11 @@ function initializeYouTubeGallery(sectionId) {
     const isShortPlaylist = playlist.name.toLowerCase().includes('short');
     const videoCount = isShortPlaylist ? 6 : 12;
     
-    // Use real YouTube video IDs for demonstration
+    // Use actual working YouTube video IDs
     const sampleVideoIds = [
-      'dQw4w9WgXcQ', 'jNQXAC9IVRw', 'J---aiyznGQ', 'ZbZSe6N_BXs',
-      '9bZkp7q19f0', 'PSoOFn3wQV4', 'L_jWHffIx5E', 'fJ9rUzIMcZQ',
-      'YQHsXMglC9A', '3tmd-ClpJxA', 'kJQP7kiw5Fk', 'rAHQY4HuDY8'
+      'dQw4w9WgXcQ', 'jNQXAC9IVRw', 'M7lc1UVf-VE', 'ZZ5LpwO-An4',
+      'fJ9rUzIMcZQ', 'kJQP7kiw5Fk', 'hFZFjoX2cGg', 'astISOttCQ0',
+      'ScMzIvxBSi4', 'OPf0YbXqDm0', 'CevxZvSJLk8', 'kXYiU_JCYtU'
     ];
     
     for (let i = 1; i <= videoCount; i++) {
