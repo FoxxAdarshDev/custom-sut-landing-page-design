@@ -1,7 +1,7 @@
 
 {% comment %}
   Bioprocess Components Block
-  Displays menu items as circular component cards with images, titles, and links
+  Displays menu items as circular component cards with horizontal scrolling
 {% endcomment %}
 
 {% if section.settings.menu_handle != blank %}
@@ -9,145 +9,496 @@
   
   {% if menu.links.size > 0 %}
     <section class="bioprocess-components-section" style="
-      background-color: {{ settings.bioprocess_background_color | default: '#ffffff' }};
-      padding: {{ settings.bioprocess_padding_top | default: 60 }}px 0 {{ settings.bioprocess_padding_bottom | default: 60 }}px 0;
+      background: linear-gradient(135deg, {{ settings.bioprocess_background_color | default: '#f8f9fa' }} 0%, {{ settings.bioprocess_background_color | default: '#ffffff' }} 100%);
+      padding: {{ settings.bioprocess_padding_top | default: 80 }}px 0 {{ settings.bioprocess_padding_bottom | default: 80 }}px 0;
+      position: relative;
+      overflow: hidden;
     ">
-      <div class="container">
+      <!-- Background decorative elements -->
+      <div class="bioprocess-bg-decoration"></div>
+      
+      <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
         {% if section.settings.section_title != blank %}
-          <div class="bioprocess-components-header">
+          <div class="bioprocess-components-header" style="text-align: center; margin-bottom: 60px;">
             <h2 class="bioprocess-components-title" style="
               color: {{ settings.bioprocess_title_color | default: '#0071b9' }};
-              font-size: {{ settings.bioprocess_title_size | default: 32 }}px;
-              text-align: {{ settings.bioprocess_title_alignment | default: 'center' }};
-              margin-bottom: {{ settings.bioprocess_title_margin_bottom | default: 40 }}px;
+              font-size: {{ settings.bioprocess_title_size | default: 42 }}px;
+              font-weight: 700;
+              margin-bottom: 16px;
+              letter-spacing: -0.5px;
+              line-height: 1.2;
             ">
               {{ section.settings.section_title }}
             </h2>
+            <div class="title-underline" style="
+              width: 80px;
+              height: 4px;
+              background: linear-gradient(90deg, #0071b9, #00a8e6);
+              margin: 0 auto;
+              border-radius: 2px;
+            "></div>
           </div>
         {% endif %}
 
-        <div class="bioprocess-components-grid" style="
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax({{ settings.bioprocess_component_width | default: 150 }}px, 1fr));
-          gap: {{ settings.bioprocess_grid_gap | default: 30 }}px;
-          justify-items: center;
-          align-items: start;
+        <!-- Desktop: Single row horizontal scroll -->
+        <div class="bioprocess-components-scroll-container desktop-scroll" style="
+          position: relative;
+          overflow: hidden;
+          margin: 0 -20px;
+          padding: 0 20px;
         ">
-          {% for link in menu.links %}
-            {% assign link_collection = link.object %}
-            <div class="bioprocess-component-item">
-              <a href="{{ link.url }}" class="bioprocess-component-link" style="
-                text-decoration: none;
-                color: inherit;
-                display: block;
-                transition: transform 0.3s ease;
+          <div class="bioprocess-components-grid desktop-grid" style="
+            display: flex;
+            gap: 32px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 20px 0 30px 0;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 113, 185, 0.3) transparent;
+          ">
+            {% for link in menu.links %}
+              {% assign link_collection = link.object %}
+              <div class="bioprocess-component-item" style="
+                flex: 0 0 auto;
+                min-width: 160px;
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
               ">
-                <div class="bioprocess-component-card" style="
-                  text-align: center;
-                  padding: {{ settings.bioprocess_card_padding | default: 15 }}px;
+                <a href="{{ link.url }}" class="bioprocess-component-link" style="
+                  text-decoration: none;
+                  color: inherit;
+                  display: block;
                 ">
-                  <div class="bioprocess-component-image-wrapper" style="
-                    width: {{ settings.bioprocess_image_size | default: 120 }}px;
-                    height: {{ settings.bioprocess_image_size | default: 120 }}px;
-                    margin: 0 auto {{ settings.bioprocess_image_margin_bottom | default: 15 }}px auto;
-                    border-radius: 50%;
+                  <div class="bioprocess-component-card" style="
+                    text-align: center;
+                    padding: 24px 16px;
+                    background: rgba(255, 255, 255, 0.9);
+                    border-radius: 24px;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: 0 8px 32px rgba(0, 113, 185, 0.1);
+                    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    position: relative;
                     overflow: hidden;
-                    border: {{ settings.bioprocess_border_width | default: 2 }}px solid {{ settings.bioprocess_border_color | default: '#e1e5e9' }};
-                    background-color: {{ settings.bioprocess_image_background | default: '#f8f9fa' }};
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                   ">
-                    {% if link_collection and link_collection.image %}
-                      <img src="{{ link_collection.image | img_url: 'master' }}" 
-                           alt="{{ link.title | escape }}" 
-                           style="
-                             width: 100%;
-                             height: 100%;
-                             object-fit: cover;
-                             display: block;
-                           " />
-                    {% elsif link_collection and link_collection.products.first %}
-                      <img src="{{ link_collection.products.first.featured_image | img_url: 'master' }}" 
-                           alt="{{ link.title | escape }}" 
-                           style="
-                             width: 100%;
-                             height: 100%;
-                             object-fit: cover;
-                             display: block;
-                           " />
-                    {% else %}
-                      <div style="
-                        width: 60%;
-                        height: 60%;
-                        background-color: #e8e8e8;
-                        border-radius: 8px;
+                    <!-- Card background effect -->
+                    <div class="card-bg-effect" style="
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      background: linear-gradient(135deg, rgba(0, 113, 185, 0.02) 0%, rgba(0, 168, 230, 0.05) 100%);
+                      opacity: 0;
+                      transition: opacity 0.4s ease;
+                    "></div>
+                    
+                    <div class="bioprocess-component-image-wrapper" style="
+                      width: 100px;
+                      height: 100px;
+                      margin: 0 auto 20px auto;
+                      border-radius: 50%;
+                      overflow: hidden;
+                      border: 3px solid rgba(0, 113, 185, 0.1);
+                      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                      box-shadow: 0 8px 24px rgba(0, 113, 185, 0.15);
+                      position: relative;
+                    ">
+                      <!-- Image glow effect -->
+                      <div class="image-glow" style="
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 120%;
+                        height: 120%;
+                        background: radial-gradient(circle, rgba(0, 113, 185, 0.2) 0%, transparent 70%);
+                        opacity: 0;
+                        transition: opacity 0.4s ease;
+                      "></div>
+                      
+                      {% if link_collection and link_collection.image %}
+                        <img src="{{ link_collection.image | img_url: 'master' }}" 
+                             alt="{{ link.title | escape }}" 
+                             style="
+                               width: 100%;
+                               height: 100%;
+                               object-fit: cover;
+                               display: block;
+                               position: relative;
+                               z-index: 2;
+                             " />
+                      {% elsif link_collection and link_collection.products.first %}
+                        <img src="{{ link_collection.products.first.featured_image | img_url: 'master' }}" 
+                             alt="{{ link.title | escape }}" 
+                             style="
+                               width: 100%;
+                               height: 100%;
+                               object-fit: cover;
+                               display: block;
+                               position: relative;
+                               z-index: 2;
+                             " />
+                      {% else %}
+                        <div style="
+                          width: 60%;
+                          height: 60%;
+                          background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+                          border-radius: 12px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          color: #999;
+                          font-size: 11px;
+                          font-weight: 500;
+                          position: relative;
+                          z-index: 2;
+                        ">
+                          No Image
+                        </div>
+                      {% endif %}
+                    </div>
+                    
+                    <div class="bioprocess-component-title" style="
+                      font-size: 15px;
+                      color: {{ settings.bioprocess_component_title_color | default: '#2c3e50' }};
+                      font-weight: 600;
+                      line-height: 1.3;
+                      margin: 0;
+                      transition: color 0.4s ease;
+                      position: relative;
+                      z-index: 2;
+                      letter-spacing: -0.2px;
+                    ">
+                      {{ link.title }}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Custom scrollbar indicator -->
+          <div class="scroll-indicator" style="
+            height: 4px;
+            background: rgba(0, 113, 185, 0.1);
+            border-radius: 2px;
+            margin-top: 16px;
+            position: relative;
+            overflow: hidden;
+          ">
+            <div class="scroll-thumb" style="
+              height: 100%;
+              background: linear-gradient(90deg, #0071b9, #00a8e6);
+              border-radius: 2px;
+              transition: all 0.3s ease;
+              width: 30%;
+            "></div>
+          </div>
+        </div>
+
+        <!-- Mobile: Two rows layout -->
+        <div class="bioprocess-components-mobile mobile-scroll" style="display: none;">
+          {% assign total_items = menu.links.size %}
+          {% assign items_per_row = total_items | divided_by: 2.0 | ceil %}
+          
+          <!-- First row -->
+          <div class="mobile-row" style="
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 15px 0 20px 0;
+            margin-bottom: 24px;
+            scroll-behavior: smooth;
+          ">
+            {% for link in menu.links limit: items_per_row %}
+              {% assign link_collection = link.object %}
+              <div class="bioprocess-component-item mobile-item" style="
+                flex: 0 0 auto;
+                min-width: 140px;
+              ">
+                <a href="{{ link.url }}" class="bioprocess-component-link" style="
+                  text-decoration: none;
+                  color: inherit;
+                  display: block;
+                ">
+                  <div class="bioprocess-component-card mobile-card" style="
+                    text-align: center;
+                    padding: 20px 12px;
+                    background: rgba(255, 255, 255, 0.95);
+                    border-radius: 20px;
+                    backdrop-filter: blur(8px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    box-shadow: 0 6px 24px rgba(0, 113, 185, 0.12);
+                    transition: all 0.3s ease;
+                  ">
+                    <div class="bioprocess-component-image-wrapper" style="
+                      width: 80px;
+                      height: 80px;
+                      margin: 0 auto 16px auto;
+                      border-radius: 50%;
+                      overflow: hidden;
+                      border: 2px solid rgba(0, 113, 185, 0.15);
+                      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: all 0.3s ease;
+                      box-shadow: 0 6px 18px rgba(0, 113, 185, 0.1);
+                    ">
+                      {% if link_collection and link_collection.image %}
+                        <img src="{{ link_collection.image | img_url: 'master' }}" 
+                             alt="{{ link.title | escape }}" 
+                             style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                      {% elsif link_collection and link_collection.products.first %}
+                        <img src="{{ link_collection.products.first.featured_image | img_url: 'master' }}" 
+                             alt="{{ link.title | escape }}" 
+                             style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                      {% else %}
+                        <div style="
+                          width: 60%; height: 60%; background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+                          border-radius: 10px; display: flex; align-items: center; justify-content: center;
+                          color: #999; font-size: 10px; font-weight: 500;
+                        ">No Image</div>
+                      {% endif %}
+                    </div>
+                    
+                    <div class="bioprocess-component-title" style="
+                      font-size: 13px;
+                      color: {{ settings.bioprocess_component_title_color | default: '#2c3e50' }};
+                      font-weight: 600;
+                      line-height: 1.2;
+                      margin: 0;
+                      transition: color 0.3s ease;
+                    ">
+                      {{ link.title }}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Second row -->
+          {% if total_items > items_per_row %}
+            <div class="mobile-row" style="
+              display: flex;
+              gap: 20px;
+              overflow-x: auto;
+              overflow-y: hidden;
+              padding: 15px 0;
+              scroll-behavior: smooth;
+            ">
+              {% for link in menu.links offset: items_per_row %}
+                {% assign link_collection = link.object %}
+                <div class="bioprocess-component-item mobile-item" style="
+                  flex: 0 0 auto;
+                  min-width: 140px;
+                ">
+                  <a href="{{ link.url }}" class="bioprocess-component-link" style="
+                    text-decoration: none;
+                    color: inherit;
+                    display: block;
+                  ">
+                    <div class="bioprocess-component-card mobile-card" style="
+                      text-align: center;
+                      padding: 20px 12px;
+                      background: rgba(255, 255, 255, 0.95);
+                      border-radius: 20px;
+                      backdrop-filter: blur(8px);
+                      border: 1px solid rgba(255, 255, 255, 0.3);
+                      box-shadow: 0 6px 24px rgba(0, 113, 185, 0.12);
+                      transition: all 0.3s ease;
+                    ">
+                      <div class="bioprocess-component-image-wrapper" style="
+                        width: 80px;
+                        height: 80px;
+                        margin: 0 auto 16px auto;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        border: 2px solid rgba(0, 113, 185, 0.15);
+                        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        color: #999;
-                        font-size: 12px;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 6px 18px rgba(0, 113, 185, 0.1);
                       ">
-                        No Image
+                        {% if link_collection and link_collection.image %}
+                          <img src="{{ link_collection.image | img_url: 'master' }}" 
+                               alt="{{ link.title | escape }}" 
+                               style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                        {% elsif link_collection and link_collection.products.first %}
+                          <img src="{{ link_collection.products.first.featured_image | img_url: 'master' }}" 
+                               alt="{{ link.title | escape }}" 
+                               style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                        {% else %}
+                          <div style="
+                            width: 60%; height: 60%; background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+                            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+                            color: #999; font-size: 10px; font-weight: 500;
+                          ">No Image</div>
+                        {% endif %}
                       </div>
-                    {% endif %}
-                  </div>
-                  
-                  <div class="bioprocess-component-title" style="
-                    font-size: {{ settings.bioprocess_component_title_size | default: 14 }}px;
-                    color: {{ settings.bioprocess_component_title_color | default: '#333333' }};
-                    font-weight: {{ settings.bioprocess_component_title_weight | default: '500' }};
-                    line-height: 1.3;
-                    margin: 0;
-                    transition: color 0.3s ease;
-                  ">
-                    {{ link.title }}
-                  </div>
+                      
+                      <div class="bioprocess-component-title" style="
+                        font-size: 13px;
+                        color: {{ settings.bioprocess_component_title_color | default: '#2c3e50' }};
+                        font-weight: 600;
+                        line-height: 1.2;
+                        margin: 0;
+                        transition: color 0.3s ease;
+                      ">
+                        {{ link.title }}
+                      </div>
+                    </div>
+                  </a>
                 </div>
-              </a>
+              {% endfor %}
             </div>
-          {% endfor %}
+          {% endif %}
         </div>
       </div>
     </section>
 
     <style>
+      /* Background decoration */
+      .bioprocess-bg-decoration {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+          radial-gradient(circle at 20% 50%, rgba(0, 113, 185, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(0, 168, 230, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 40% 80%, rgba(0, 113, 185, 0.02) 0%, transparent 50%);
+        pointer-events: none;
+      }
+
+      /* Custom scrollbar for desktop */
+      .desktop-grid::-webkit-scrollbar {
+        height: 6px;
+      }
+      
+      .desktop-grid::-webkit-scrollbar-track {
+        background: rgba(0, 113, 185, 0.1);
+        border-radius: 3px;
+      }
+      
+      .desktop-grid::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, #0071b9, #00a8e6);
+        border-radius: 3px;
+        transition: background 0.3s ease;
+      }
+      
+      .desktop-grid::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(90deg, #005a94, #0087b8);
+      }
+
+      /* Mobile scrollbar styling */
+      .mobile-row::-webkit-scrollbar {
+        height: 4px;
+      }
+      
+      .mobile-row::-webkit-scrollbar-track {
+        background: rgba(0, 113, 185, 0.1);
+        border-radius: 2px;
+      }
+      
+      .mobile-row::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, #0071b9, #00a8e6);
+        border-radius: 2px;
+      }
+
+      /* Hover effects */
+      .bioprocess-component-link:hover .bioprocess-component-card {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 48px rgba(0, 113, 185, 0.2);
+        border-color: rgba(0, 113, 185, 0.3);
+      }
+      
+      .bioprocess-component-link:hover .card-bg-effect {
+        opacity: 1;
+      }
+      
+      .bioprocess-component-link:hover .image-glow {
+        opacity: 1;
+      }
+      
       .bioprocess-component-link:hover .bioprocess-component-image-wrapper {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        border-color: {{ settings.bioprocess_hover_border_color | default: '#0071b9' }};
+        transform: scale(1.05);
+        border-color: rgba(0, 113, 185, 0.4);
+        box-shadow: 0 12px 32px rgba(0, 113, 185, 0.25);
       }
       
       .bioprocess-component-link:hover .bioprocess-component-title {
         color: {{ settings.bioprocess_hover_title_color | default: '#0071b9' }};
       }
+
+      /* Mobile hover effects */
+      .mobile-item .bioprocess-component-link:hover .bioprocess-component-card {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 113, 185, 0.18);
+      }
       
+      .mobile-item .bioprocess-component-link:hover .bioprocess-component-image-wrapper {
+        transform: scale(1.05);
+        border-color: rgba(0, 113, 185, 0.3);
+      }
+
+      /* Responsive design */
       @media (max-width: 768px) {
-        .bioprocess-components-grid {
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-          gap: 20px !important;
+        .desktop-scroll {
+          display: none !important;
         }
         
-        .bioprocess-component-image-wrapper {
-          width: {{ settings.bioprocess_image_size | default: 120 | minus: 20 }}px !important;
-          height: {{ settings.bioprocess_image_size | default: 120 | minus: 20 }}px !important;
+        .mobile-scroll {
+          display: block !important;
         }
         
         .bioprocess-components-title {
-          font-size: {{ settings.bioprocess_title_size | default: 32 | minus: 6 }}px !important;
+          font-size: 32px !important;
         }
         
-        .bioprocess-component-title {
-          font-size: {{ settings.bioprocess_component_title_size | default: 14 | minus: 2 }}px !important;
+        .container {
+          padding: 0 16px !important;
         }
       }
       
-      @media (max-width: 480px) {
-        .bioprocess-components-grid {
-          grid-template-columns: repeat(2, 1fr) !important;
+      @media (min-width: 769px) {
+        .mobile-scroll {
+          display: none !important;
         }
+      }
+
+      /* Scroll animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .bioprocess-component-item {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+      
+      .bioprocess-component-item:nth-child(odd) {
+        animation-delay: 0.1s;
+      }
+      
+      .bioprocess-component-item:nth-child(even) {
+        animation-delay: 0.2s;
       }
     </style>
   {% endif %}
