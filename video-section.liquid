@@ -858,108 +858,210 @@
     100% { transform: rotate(360deg); }
   }
 
-  /* Skeleton Loading Styles */
-  .skeleton-container {
+  /* YouTube-style Loading Placeholders */
+  .youtube-loading-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
   }
 
-  .skeleton-video-card {
+  .youtube-placeholder-card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 
-  .skeleton-thumbnail {
+  .youtube-placeholder-thumbnail {
     width: 100%;
     height: 180px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 8px 8px 0 0;
+    background: #f0f0f0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .skeleton-content {
+  .youtube-placeholder-thumbnail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite;
+  }
+
+  .youtube-placeholder-logo {
+    width: 60px;
+    height: 42px;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .youtube-placeholder-logo svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff0000;
+  }
+
+  .youtube-placeholder-content {
     padding: 15px;
   }
 
-  .skeleton-title {
+  .youtube-placeholder-title {
     height: 20px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #e0e0e0;
     border-radius: 4px;
     margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-title-second {
+  .youtube-placeholder-title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite 0.2s;
+  }
+
+  .youtube-placeholder-title-second {
     height: 16px;
     width: 70%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #e0e0e0;
     border-radius: 4px;
     margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-meta {
+  .youtube-placeholder-title-second::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite 0.4s;
+  }
+
+  .youtube-placeholder-meta {
     display: flex;
     gap: 15px;
     margin-bottom: 10px;
   }
 
-  .skeleton-meta-item {
+  .youtube-placeholder-meta-item {
     height: 14px;
     width: 60px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 4px;
+    background: #e8e8e8;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-description {
+  .youtube-placeholder-meta-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite 0.6s;
+  }
+
+  .youtube-placeholder-description {
     height: 12px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #e8e8e8;
     border-radius: 4px;
     margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-description-second {
+  .youtube-placeholder-description::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite 0.8s;
+  }
+
+  .youtube-placeholder-description-second {
     height: 12px;
     width: 80%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #e8e8e8;
     border-radius: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Skeleton animations */
-  @keyframes skeleton-shimmer {
+  .youtube-placeholder-description-second::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 1.8s infinite 1s;
+  }
+
+  /* YouTube shimmer animation */
+  @keyframes youtube-shimmer {
     0% {
-      background-position: -200% 0;
+      left: -100%;
     }
     100% {
-      background-position: 200% 0;
+      left: 100%;
     }
   }
 
-  @keyframes skeleton-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-
-  /* Shorts skeleton */
-  .skeleton-shorts-container {
+  /* YouTube-style Shorts placeholders */
+  .youtube-shorts-loading {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -968,25 +1070,25 @@
     padding-right: 8px;
   }
 
-  .skeleton-shorts-container::-webkit-scrollbar {
+  .youtube-shorts-loading::-webkit-scrollbar {
     width: 8px;
   }
 
-  .skeleton-shorts-container::-webkit-scrollbar-track {
+  .youtube-shorts-loading::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
 
-  .skeleton-shorts-container::-webkit-scrollbar-thumb {
+  .youtube-shorts-loading::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
   }
 
-  .skeleton-shorts-container::-webkit-scrollbar-thumb:hover {
+  .youtube-shorts-loading::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
   }
 
-  .skeleton-short-item {
+  .youtube-short-placeholder {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
@@ -995,58 +1097,137 @@
     width: 100%;
     position: relative;
     flex-shrink: 0;
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 
-  .skeleton-short-thumbnail {
+  .youtube-short-placeholder-thumbnail {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
-    border-radius: 8px 8px 0 0;
+    background: #f0f0f0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .skeleton-short-overlay {
+  .youtube-short-placeholder-thumbnail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 2s infinite;
+  }
+
+  .youtube-short-logo {
+    width: 40px;
+    height: 28px;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .youtube-short-logo svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff0000;
+  }
+
+  .youtube-short-placeholder-overlay {
     position: absolute;
     top: 10px;
     left: 10px;
     z-index: 2;
   }
 
-  .skeleton-short-badge {
+  .youtube-short-placeholder-badge {
     width: 50px;
     height: 24px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #ff000050;
     border-radius: 4px;
     margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-short-play-status {
+  .youtube-short-placeholder-badge::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: youtube-shimmer 2s infinite 0.5s;
+  }
+
+  .youtube-short-placeholder-status {
     width: 45px;
     height: 20px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #00ff0050;
     border-radius: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-short-views {
+  .youtube-short-placeholder-status::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: youtube-shimmer 2s infinite 0.7s;
+  }
+
+  .youtube-short-placeholder-views {
     position: absolute;
     bottom: 10px;
     left: 10px;
     width: 60px;
     height: 16px;
-    background: linear-gradient(90deg, rgba(240,240,240,0.8) 25%, rgba(224,224,224,0.8) 50%, rgba(240,240,240,0.8) 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: rgba(0,0,0,0.3);
     border-radius: 4px;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Tab skeleton */
-  .skeleton-tabs {
+  .youtube-short-placeholder-views::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: youtube-shimmer 2s infinite 1s;
+  }
+
+  /* YouTube-style Tab placeholders */
+  .youtube-tabs-loading {
     display: flex;
     gap: 5px;
     margin-bottom: 20px;
@@ -1056,20 +1237,42 @@
     border-radius: 30px 30px 0 0;
   }
 
-  .skeleton-tab {
+  .youtube-tab-placeholder {
     height: 40px;
     width: 120px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+    background: #e0e0e0;
     border-radius: 25px 25px 0 0;
     margin-right: 10px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .skeleton-tab:first-child {
-    background: linear-gradient(90deg, #095ea7 25%, #073d73 50%, #095ea7 75%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s infinite;
+  .youtube-tab-placeholder::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: youtube-shimmer 2.5s infinite;
+  }
+
+  .youtube-tab-placeholder:first-child {
+    background: #095ea780;
+  }
+
+  .youtube-tab-placeholder:nth-child(2)::before {
+    animation-delay: 0.3s;
+  }
+
+  .youtube-tab-placeholder:nth-child(3)::before {
+    animation-delay: 0.6s;
   }
 
   /* Fade in animation for real content */
@@ -1273,48 +1476,66 @@
 
         <!-- Tab Contents -->
         <div id="tab-contents-{{ section.id }}">
-          <!-- Show skeleton loading immediately -->
-          <div class="skeleton-container">
-            <div class="skeleton-video-card">
-              <div class="skeleton-thumbnail"></div>
-              <div class="skeleton-content">
-                <div class="skeleton-title"></div>
-                <div class="skeleton-title-second"></div>
-                <div class="skeleton-meta">
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
+          <!-- Show YouTube-style loading placeholders immediately -->
+          <div class="youtube-loading-container">
+            <div class="youtube-placeholder-card">
+              <div class="youtube-placeholder-thumbnail">
+                <div class="youtube-placeholder-logo">
+                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
+                  </svg>
                 </div>
-                <div class="skeleton-description"></div>
-                <div class="skeleton-description-second"></div>
+              </div>
+              <div class="youtube-placeholder-content">
+                <div class="youtube-placeholder-title"></div>
+                <div class="youtube-placeholder-title-second"></div>
+                <div class="youtube-placeholder-meta">
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                </div>
+                <div class="youtube-placeholder-description"></div>
+                <div class="youtube-placeholder-description-second"></div>
               </div>
             </div>
-            <div class="skeleton-video-card">
-              <div class="skeleton-thumbnail"></div>
-              <div class="skeleton-content">
-                <div class="skeleton-title"></div>
-                <div class="skeleton-title-second"></div>
-                <div class="skeleton-meta">
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
+            <div class="youtube-placeholder-card">
+              <div class="youtube-placeholder-thumbnail">
+                <div class="youtube-placeholder-logo">
+                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
+                  </svg>
                 </div>
-                <div class="skeleton-description"></div>
-                <div class="skeleton-description-second"></div>
+              </div>
+              <div class="youtube-placeholder-content">
+                <div class="youtube-placeholder-title"></div>
+                <div class="youtube-placeholder-title-second"></div>
+                <div class="youtube-placeholder-meta">
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                </div>
+                <div class="youtube-placeholder-description"></div>
+                <div class="youtube-placeholder-description-second"></div>
               </div>
             </div>
-            <div class="skeleton-video-card">
-              <div class="skeleton-thumbnail"></div>
-              <div class="skeleton-content">
-                <div class="skeleton-title"></div>
-                <div class="skeleton-title-second"></div>
-                <div class="skeleton-meta">
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
-                  <div class="skeleton-meta-item"></div>
+            <div class="youtube-placeholder-card">
+              <div class="youtube-placeholder-thumbnail">
+                <div class="youtube-placeholder-logo">
+                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
+                  </svg>
                 </div>
-                <div class="skeleton-description"></div>
-                <div class="skeleton-description-second"></div>
+              </div>
+              <div class="youtube-placeholder-content">
+                <div class="youtube-placeholder-title"></div>
+                <div class="youtube-placeholder-title-second"></div>
+                <div class="youtube-placeholder-meta">
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                  <div class="youtube-placeholder-meta-item"></div>
+                </div>
+                <div class="youtube-placeholder-description"></div>
+                <div class="youtube-placeholder-description-second"></div>
               </div>
             </div>
           </div>
@@ -1872,17 +2093,23 @@ function initializeYouTubeGallery(sectionId) {
   function showSkeletonShorts() {
     shortsContainer.innerHTML = '';
     for (let i = 0; i < 6; i++) {
-      const skeletonShort = document.createElement('div');
-      skeletonShort.className = 'skeleton-short-item';
-      skeletonShort.innerHTML = `
-        <div class="skeleton-short-thumbnail"></div>
-        <div class="skeleton-short-overlay">
-          <div class="skeleton-short-badge"></div>
-          ${i === 0 ? '<div class="skeleton-short-play-status"></div>' : ''}
+      const youtubePlaceholder = document.createElement('div');
+      youtubePlaceholder.className = 'youtube-short-placeholder';
+      youtubePlaceholder.innerHTML = `
+        <div class="youtube-short-placeholder-thumbnail">
+          <div class="youtube-short-logo">
+            <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
+            </svg>
+          </div>
         </div>
-        <div class="skeleton-short-views"></div>
+        <div class="youtube-short-placeholder-overlay">
+          <div class="youtube-short-placeholder-badge"></div>
+          ${i === 0 ? '<div class="youtube-short-placeholder-status"></div>' : ''}
+        </div>
+        <div class="youtube-short-placeholder-views"></div>
       `;
-      shortsContainer.appendChild(skeletonShort);
+      shortsContainer.appendChild(youtubePlaceholder);
     }
   }
 
@@ -1890,44 +2117,50 @@ function initializeYouTubeGallery(sectionId) {
     videosTabsContainer.innerHTML = '';
     tabContentsContainer.innerHTML = '';
 
-    // Create skeleton tabs
-    const skeletonTabsDiv = document.createElement('div');
-    skeletonTabsDiv.className = 'skeleton-tabs';
+    // Create YouTube-style tab placeholders
+    const youtubeTabsDiv = document.createElement('div');
+    youtubeTabsDiv.className = 'youtube-tabs-loading';
     for (let i = 0; i < 3; i++) {
-      const skeletonTab = document.createElement('div');
-      skeletonTab.className = 'skeleton-tab';
-      skeletonTabsDiv.appendChild(skeletonTab);
+      const youtubeTab = document.createElement('div');
+      youtubeTab.className = 'youtube-tab-placeholder';
+      youtubeTabsDiv.appendChild(youtubeTab);
     }
-    videosTabsContainer.appendChild(skeletonTabsDiv);
+    videosTabsContainer.appendChild(youtubeTabsDiv);
 
-    // Create skeleton video cards
-    const skeletonContainer = document.createElement('div');
-    skeletonContainer.className = 'skeleton-container';
+    // Create YouTube-style video card placeholders
+    const youtubeContainer = document.createElement('div');
+    youtubeContainer.className = 'youtube-loading-container';
     for (let i = 0; i < 6; i++) {
-      const skeletonCard = createSkeletonVideoCard();
-      skeletonContainer.appendChild(skeletonCard);
+      const youtubeCard = createYouTubeVideoPlaceholder();
+      youtubeContainer.appendChild(youtubeCard);
     }
-    tabContentsContainer.appendChild(skeletonContainer);
+    tabContentsContainer.appendChild(youtubeContainer);
   }
 
-  function createSkeletonVideoCard() {
-    const skeletonDiv = document.createElement('div');
-    skeletonDiv.className = 'skeleton-video-card';
-    skeletonDiv.innerHTML = `
-      <div class="skeleton-thumbnail"></div>
-      <div class="skeleton-content">
-        <div class="skeleton-title"></div>
-        <div class="skeleton-title-second"></div>
-        <div class="skeleton-meta">
-          <div class="skeleton-meta-item"></div>
-          <div class="skeleton-meta-item"></div>
-          <div class="skeleton-meta-item"></div>
+  function createYouTubeVideoPlaceholder() {
+    const youtubePlaceholder = document.createElement('div');
+    youtubePlaceholder.className = 'youtube-placeholder-card';
+    youtubePlaceholder.innerHTML = `
+      <div class="youtube-placeholder-thumbnail">
+        <div class="youtube-placeholder-logo">
+          <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
+          </svg>
         </div>
-        <div class="skeleton-description"></div>
-        <div class="skeleton-description-second"></div>
+      </div>
+      <div class="youtube-placeholder-content">
+        <div class="youtube-placeholder-title"></div>
+        <div class="youtube-placeholder-title-second"></div>
+        <div class="youtube-placeholder-meta">
+          <div class="youtube-placeholder-meta-item"></div>
+          <div class="youtube-placeholder-meta-item"></div>
+          <div class="youtube-placeholder-meta-item"></div>
+        </div>
+        <div class="youtube-placeholder-description"></div>
+        <div class="youtube-placeholder-description-second"></div>
       </div>
     `;
-    return skeletonDiv;
+    return youtubePlaceholder;
   }
 
   function createShortElement(short, index, sectionId) {
