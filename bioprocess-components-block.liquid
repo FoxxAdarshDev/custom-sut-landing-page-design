@@ -10,7 +10,7 @@
   {% if menu.links.size > 0 %}
     <section class="bioprocess-components-section" style="
       background: linear-gradient(135deg, {{ settings.bioprocess_background_color | default: '#f8f9fa' }} 0%, {{ settings.bioprocess_background_color | default: '#ffffff' }} 100%);
-      padding: {{ settings.bioprocess_padding_top | default: 80 }}px 0 {{ settings.bioprocess_padding_bottom | default: 80 }}px 0;
+      padding: {{ settings.bioprocess_padding_top | default: 60 }}px 0 {{ settings.bioprocess_padding_bottom | default: 60 }}px 0;
       position: relative;
       overflow: hidden;
     ">
@@ -23,10 +23,10 @@
             <h2 class="bioprocess-components-title" style="
               color: {{ settings.bioprocess_title_color | default: '#0071b9' }};
               font-size: {{ settings.bioprocess_title_size | default: 42 }}px;
+              line-height: {{ settings.bioprocess_title_line_height | default: 50 }}px;
               font-weight: 700;
-              margin-bottom: 16px;
+              margin-bottom: {{ settings.bioprocess_title_margin_bottom | default: 60 }}px;
               letter-spacing: -0.5px;
-              line-height: 1.2;
             ">
               {{ section.settings.section_title }}
             </h2>
@@ -49,7 +49,7 @@
         ">
           <div class="bioprocess-components-grid desktop-grid" style="
             display: flex;
-            gap: 32px;
+            gap: {{ settings.bioprocess_grid_gap | default: 32 }}px;
             overflow-x: auto;
             overflow-y: hidden;
             padding: 20px 0 30px 0;
@@ -61,7 +61,7 @@
               {% assign link_collection = link.object %}
               <div class="bioprocess-component-item" style="
                 flex: 0 0 auto;
-                min-width: 160px;
+                min-width: {{ settings.bioprocess_component_width | default: 160 }}px;
                 transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
               ">
                 <a href="{{ link.url }}" class="bioprocess-component-link" style="
@@ -71,7 +71,7 @@
                 ">
                   <div class="bioprocess-component-card" style="
                     text-align: center;
-                    padding: 24px 16px;
+                    padding: {{ settings.bioprocess_card_padding | default: 24 }}px 16px;
                     background: rgba(255, 255, 255, 0.9);
                     border-radius: 24px;
                     backdrop-filter: blur(10px);
@@ -94,9 +94,9 @@
                     "></div>
                     
                     <div class="bioprocess-component-image-wrapper" style="
-                      width: 100px;
-                      height: 100px;
-                      margin: 0 auto 20px auto;
+                      width: {{ settings.bioprocess_image_size | default: 100 }}px;
+                      height: {{ settings.bioprocess_image_size | default: 100 }}px;
+                      margin: 0 auto {{ settings.bioprocess_image_margin_bottom | default: 20 }}px auto;
                       border-radius: 50%;
                       overflow: hidden;
                       border: 3px solid rgba(0, 113, 185, 0.1);
@@ -164,10 +164,10 @@
                     </div>
                     
                     <div class="bioprocess-component-title" style="
-                      font-size: 15px;
+                      font-size: {{ settings.bioprocess_component_title_size | default: 15 }}px;
+                      line-height: {{ settings.bioprocess_component_title_line_height | default: 19 }}px;
                       color: {{ settings.bioprocess_component_title_color | default: '#2c3e50' }};
-                      font-weight: 600;
-                      line-height: 1.3;
+                      font-weight: {{ settings.bioprocess_component_title_weight | default: 600 }};
                       margin: 0;
                       transition: color 0.4s ease;
                       position: relative;
@@ -453,7 +453,44 @@
       }
 
       /* Responsive design */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        /* Tablet styles */
+        .bioprocess-components-section {
+          padding: {{ settings.bioprocess_padding_top_tablet | default: 50 }}px 0 {{ settings.bioprocess_padding_bottom_tablet | default: 50 }}px 0 !important;
+        }
+        
+        .bioprocess-components-title {
+          font-size: {{ settings.bioprocess_title_size_tablet | default: 36 }}px !important;
+          line-height: {{ settings.bioprocess_title_line_height_tablet | default: 42 }}px !important;
+          margin-bottom: {{ settings.bioprocess_title_margin_bottom_tablet | default: 50 }}px !important;
+        }
+        
+        .desktop-grid {
+          gap: {{ settings.bioprocess_grid_gap_tablet | default: 25 }}px !important;
+        }
+        
+        .bioprocess-component-item {
+          min-width: {{ settings.bioprocess_component_width_tablet | default: 140 }}px !important;
+        }
+        
+        .bioprocess-component-card {
+          padding: {{ settings.bioprocess_card_padding_tablet | default: 20 }}px 16px !important;
+        }
+        
+        .bioprocess-component-image-wrapper {
+          width: {{ settings.bioprocess_image_size_tablet | default: 90 }}px !important;
+          height: {{ settings.bioprocess_image_size_tablet | default: 90 }}px !important;
+          margin-bottom: {{ settings.bioprocess_image_margin_bottom_tablet | default: 18 }}px !important;
+        }
+        
+        .bioprocess-component-title {
+          font-size: {{ settings.bioprocess_component_title_size_tablet | default: 14 }}px !important;
+          line-height: {{ settings.bioprocess_component_title_line_height_tablet | default: 17 }}px !important;
+        }
+      }
+      
       @media (max-width: 768px) {
+        /* Mobile styles */
         .desktop-scroll {
           display: none !important;
         }
@@ -462,8 +499,37 @@
           display: block !important;
         }
         
+        .bioprocess-components-section {
+          padding: {{ settings.bioprocess_padding_top_mobile | default: 40 }}px 0 {{ settings.bioprocess_padding_bottom_mobile | default: 40 }}px 0 !important;
+        }
+        
         .bioprocess-components-title {
-          font-size: 32px !important;
+          font-size: {{ settings.bioprocess_title_size_mobile | default: 28 }}px !important;
+          line-height: {{ settings.bioprocess_title_line_height_mobile | default: 34 }}px !important;
+          margin-bottom: {{ settings.bioprocess_title_margin_bottom_mobile | default: 40 }}px !important;
+        }
+        
+        .mobile-row {
+          gap: {{ settings.bioprocess_grid_gap_mobile | default: 20 }}px !important;
+        }
+        
+        .mobile-item {
+          min-width: {{ settings.bioprocess_component_width_mobile | default: 140 }}px !important;
+        }
+        
+        .mobile-card {
+          padding: {{ settings.bioprocess_card_padding_mobile | default: 20 }}px 12px !important;
+        }
+        
+        .mobile-scroll .bioprocess-component-image-wrapper {
+          width: {{ settings.bioprocess_image_size_mobile | default: 80 }}px !important;
+          height: {{ settings.bioprocess_image_size_mobile | default: 80 }}px !important;
+          margin-bottom: {{ settings.bioprocess_image_margin_bottom_mobile | default: 16 }}px !important;
+        }
+        
+        .mobile-scroll .bioprocess-component-title {
+          font-size: {{ settings.bioprocess_component_title_size_mobile | default: 13 }}px !important;
+          line-height: {{ settings.bioprocess_component_title_line_height_mobile | default: 16 }}px !important;
         }
         
         .container {

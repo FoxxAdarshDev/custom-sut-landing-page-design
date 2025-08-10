@@ -6978,11 +6978,15 @@
         "default": "#ffffff"
       },
       {
+        "type": "header",
+        "content": "Section Padding - Desktop"
+      },
+      {
         "type": "range",
         "id": "bioprocess_padding_top",
-        "label": "Top Padding",
+        "label": "Top Padding (Desktop)",
         "min": 0,
-        "max": 100,
+        "max": 120,
         "step": 5,
         "unit": "px",
         "default": 60
@@ -6990,16 +6994,64 @@
       {
         "type": "range",
         "id": "bioprocess_padding_bottom",
-        "label": "Bottom Padding",
+        "label": "Bottom Padding (Desktop)",
         "min": 0,
-        "max": 100,
+        "max": 120,
         "step": 5,
         "unit": "px",
         "default": 60
       },
       {
         "type": "header",
-        "content": "Title Settings"
+        "content": "Section Padding - Tablet"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_padding_top_tablet",
+        "label": "Top Padding (Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_padding_bottom_tablet",
+        "label": "Bottom Padding (Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Section Padding - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_padding_top_mobile",
+        "label": "Top Padding (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_padding_bottom_mobile",
+        "label": "Bottom Padding (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "Title Settings - Desktop"
       },
       {
         "type": "color",
@@ -7010,12 +7062,74 @@
       {
         "type": "range",
         "id": "bioprocess_title_size",
-        "label": "Title Font Size",
+        "label": "Title Font Size (Desktop)",
         "min": 20,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_line_height",
+        "label": "Title Line Height (Desktop)",
+        "min": 20,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Title Settings - Tablet"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_size_tablet",
+        "label": "Title Font Size (Tablet)",
+        "min": 18,
         "max": 50,
         "step": 2,
         "unit": "px",
-        "default": 32
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_line_height_tablet",
+        "label": "Title Line Height (Tablet)",
+        "min": 18,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "type": "header",
+        "content": "Title Settings - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_size_mobile",
+        "label": "Title Font Size (Mobile)",
+        "min": 16,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_line_height_mobile",
+        "label": "Title Line Height (Mobile)",
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "default": 34
+      },
+      {
+        "type": "header",
+        "content": "Title General Settings"
       },
       {
         "type": "select",
@@ -7040,70 +7154,218 @@
       {
         "type": "range",
         "id": "bioprocess_title_margin_bottom",
-        "label": "Title Bottom Margin",
+        "label": "Title Bottom Margin (Desktop)",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "unit": "px",
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_margin_bottom_tablet",
+        "label": "Title Bottom Margin (Tablet)",
         "min": 10,
         "max": 60,
+        "step": 5,
+        "unit": "px",
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_title_margin_bottom_mobile",
+        "label": "Title Bottom Margin (Mobile)",
+        "min": 10,
+        "max": 50,
         "step": 5,
         "unit": "px",
         "default": 40
       },
       {
         "type": "header",
-        "content": "Grid Layout"
+        "content": "Grid Layout - Desktop"
       },
       {
         "type": "range",
         "id": "bioprocess_component_width",
-        "label": "Component Minimum Width",
+        "label": "Component Min Width (Desktop)",
         "min": 120,
-        "max": 200,
+        "max": 220,
         "step": 10,
         "unit": "px",
-        "default": 150
+        "default": 160
       },
       {
         "type": "range",
         "id": "bioprocess_grid_gap",
-        "label": "Grid Gap",
+        "label": "Grid Gap (Desktop)",
         "min": 10,
         "max": 50,
         "step": 5,
         "unit": "px",
-        "default": 30
+        "default": 32
       },
       {
         "type": "header",
-        "content": "Component Card Settings"
+        "content": "Grid Layout - Tablet"
       },
       {
         "type": "range",
-        "id": "bioprocess_card_padding",
-        "label": "Card Padding",
-        "min": 5,
-        "max": 30,
-        "step": 5,
-        "unit": "px",
-        "default": 15
-      },
-      {
-        "type": "range",
-        "id": "bioprocess_image_size",
-        "label": "Image Size",
-        "min": 80,
-        "max": 150,
+        "id": "bioprocess_component_width_tablet",
+        "label": "Component Min Width (Tablet)",
+        "min": 100,
+        "max": 180,
         "step": 10,
         "unit": "px",
-        "default": 120
+        "default": 140
       },
       {
         "type": "range",
-        "id": "bioprocess_image_margin_bottom",
-        "label": "Image Bottom Margin",
+        "id": "bioprocess_grid_gap_tablet",
+        "label": "Grid Gap (Tablet)",
+        "min": 10,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "default": 25
+      },
+      {
+        "type": "header",
+        "content": "Grid Layout - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_width_mobile",
+        "label": "Component Min Width (Mobile)",
+        "min": 100,
+        "max": 160,
+        "step": 10,
+        "unit": "px",
+        "default": 140
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_grid_gap_mobile",
+        "label": "Grid Gap (Mobile)",
         "min": 10,
         "max": 30,
         "step": 5,
         "unit": "px",
-        "default": 15
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Component Card Padding - Desktop"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_card_padding",
+        "label": "Card Padding (Desktop)",
+        "min": 5,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "Component Card Padding - Tablet"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_card_padding_tablet",
+        "label": "Card Padding (Tablet)",
+        "min": 5,
+        "max": 35,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Component Card Padding - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_card_padding_mobile",
+        "label": "Card Padding (Mobile)",
+        "min": 5,
+        "max": 30,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Image Settings - Desktop"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_size",
+        "label": "Image Size (Desktop)",
+        "min": 80,
+        "max": 150,
+        "step": 10,
+        "unit": "px",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_margin_bottom",
+        "label": "Image Bottom Margin (Desktop)",
+        "min": 10,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Image Settings - Tablet"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_size_tablet",
+        "label": "Image Size (Tablet)",
+        "min": 70,
+        "max": 120,
+        "step": 10,
+        "unit": "px",
+        "default": 90
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_margin_bottom_tablet",
+        "label": "Image Bottom Margin (Tablet)",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "unit": "px",
+        "default": 18
+      },
+      {
+        "type": "header",
+        "content": "Image Settings - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_size_mobile",
+        "label": "Image Size (Mobile)",
+        "min": 60,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_image_margin_bottom_mobile",
+        "label": "Image Bottom Margin (Mobile)",
+        "min": 10,
+        "max": 25,
+        "step": 5,
+        "unit": "px",
+        "default": 16
       },
       {
         "type": "color",
@@ -7139,17 +7401,79 @@
       },
       {
         "type": "header",
-        "content": "Component Title Settings"
+        "content": "Component Title - Desktop"
       },
       {
         "type": "range",
         "id": "bioprocess_component_title_size",
-        "label": "Component Title Font Size",
+        "label": "Component Title Font Size (Desktop)",
         "min": 12,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_title_line_height",
+        "label": "Component Title Line Height (Desktop)",
+        "min": 12,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 19
+      },
+      {
+        "type": "header",
+        "content": "Component Title - Tablet"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_title_size_tablet",
+        "label": "Component Title Font Size (Tablet)",
+        "min": 11,
         "max": 20,
         "step": 1,
         "unit": "px",
         "default": 14
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_title_line_height_tablet",
+        "label": "Component Title Line Height (Tablet)",
+        "min": 11,
+        "max": 25,
+        "step": 1,
+        "unit": "px",
+        "default": 17
+      },
+      {
+        "type": "header",
+        "content": "Component Title - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_title_size_mobile",
+        "label": "Component Title Font Size (Mobile)",
+        "min": 10,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "bioprocess_component_title_line_height_mobile",
+        "label": "Component Title Line Height (Mobile)",
+        "min": 10,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "header",
+        "content": "Component Title General"
       },
       {
         "type": "color",
@@ -7185,7 +7509,7 @@
             "label": "Bold"
           }
         ],
-        "default": "500"
+        "default": "600"
       }
     ]
   },
