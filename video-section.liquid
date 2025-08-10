@@ -251,12 +251,26 @@
     border-radius: 30px 30px 0 0;
     overflow-x: auto;
     flex-wrap: nowrap;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin; /* Added for light scrollbar */
+    -ms-overflow-style: thin; /* Added for light scrollbar */
   }
 
   .videos-tabs::-webkit-scrollbar {
-    display: none;
+    height: 6px; /* Adjust scrollbar height */
+  }
+
+  .videos-tabs::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light track color */
+    border-radius: 3px;
+  }
+
+  .videos-tabs::-webkit-scrollbar-thumb {
+    background: #c1c1c1; /* Light thumb color */
+    border-radius: 3px;
+  }
+
+  .videos-tabs::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   .video-tab {
@@ -1259,7 +1273,51 @@
 
         <!-- Tab Contents -->
         <div id="tab-contents-{{ section.id }}">
-          <!-- Tab content will be dynamically generated -->
+          <!-- Show skeleton loading immediately -->
+          <div class="skeleton-container">
+            <div class="skeleton-video-card">
+              <div class="skeleton-thumbnail"></div>
+              <div class="skeleton-content">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-title-second"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                </div>
+                <div class="skeleton-description"></div>
+                <div class="skeleton-description-second"></div>
+              </div>
+            </div>
+            <div class="skeleton-video-card">
+              <div class="skeleton-thumbnail"></div>
+              <div class="skeleton-content">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-title-second"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                </div>
+                <div class="skeleton-description"></div>
+                <div class="skeleton-description-second"></div>
+              </div>
+            </div>
+            <div class="skeleton-video-card">
+              <div class="skeleton-thumbnail"></div>
+              <div class="skeleton-content">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-title-second"></div>
+                <div class="skeleton-meta">
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                  <div class="skeleton-meta-item"></div>
+                </div>
+                <div class="skeleton-description"></div>
+                <div class="skeleton-description-second"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1300,7 +1358,7 @@
           <!-- Details Section (Right) -->
           <div class="modal-details-section">
             <h2 id="modalTitle-{{ section.id }}" class="modal-title"></h2>
-            
+
             <div class="modal-video-meta" id="modalMeta-{{ section.id }}">
               <!-- Meta will be populated by JavaScript -->
             </div>
@@ -1477,7 +1535,7 @@ function initializeYouTubeGallery(sectionId) {
 
     console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
     console.log(`Latest short: ${shorts[0]?.title} (${shorts[0]?.publishedAt})`);
-    
+
     // Add a small delay to show skeleton loading, then fade in real content
     setTimeout(() => {
       displayShorts(shorts); // Show all available shorts
@@ -1493,7 +1551,7 @@ function initializeYouTubeGallery(sectionId) {
       const proxyUrl = 'https://api.allorigins.win/raw?url=';
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
       const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
-      
+
       console.log('Fetching from RSS URL via proxy:', fetchUrl);
 
       const response = await fetch(fetchUrl);
@@ -1581,7 +1639,7 @@ function initializeYouTubeGallery(sectionId) {
       console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
       console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
       console.log(`Oldest video: ${videos[videos.length - 1]?.title} (${videos[videos.length - 1]?.publishedAt})`);
-      
+
       return videos;
 
     } catch (error) {
@@ -1640,18 +1698,18 @@ function initializeYouTubeGallery(sectionId) {
     videoDiv.setAttribute('data-video-id', video.id);
 
     const publishedDate = video.publishedAt ? new Date(video.publishedAt).toLocaleDateString() : 'Date unavailable';
-    
+
     // Ensure consistent metadata
     let duration = video.duration;
     let views = video.views;
-    
+
     // Generate fallback values if missing
     if (!duration || duration === 'N/A') {
       const mins = Math.floor(Math.random() * 10) + 3;
       const secs = Math.floor(Math.random() * 60);
       duration = `${mins}:${secs.toString().padStart(2, '0')}`;
     }
-    
+
     if (!views || views === 'N/A') {
       views = Math.floor(Math.random() * 5000) + 500;
     }
@@ -1710,10 +1768,13 @@ function initializeYouTubeGallery(sectionId) {
       tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
       tabContent.setAttribute('data-playlist-id', playlistId);
 
+      // Replace video count with playlist link
       const videosHeader = document.createElement('div');
       videosHeader.className = 'videos-header';
       videosHeader.innerHTML = `
-        <span class="video-count">${playlist.videos.length} videos</span>
+        <a href="https://www.youtube.com/playlist?list=${playlistId}" target="_blank" class="youtube-playlist-link">
+          View Playlist
+        </a>
       `;
 
       const videosContainer = document.createElement('div');
@@ -1728,7 +1789,7 @@ function initializeYouTubeGallery(sectionId) {
 
       tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
-      
+
       if (playlist.videos.length === 0) {
         videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
       } else {
@@ -1774,12 +1835,12 @@ function initializeYouTubeGallery(sectionId) {
     for (let i = startIndex; i < endIndex; i++) {
       const video = playlist.videos[i];
       const videoElement = createVideoElementForDisplay(video, allVideos.indexOf(video));
-      
+
       // Add fade-in animation with slight delay for staggered effect
       videoElement.style.opacity = '0';
       videoElement.classList.add('fade-in');
       videosContainer.appendChild(videoElement);
-      
+
       // Trigger fade-in animation
       setTimeout(() => {
         videoElement.style.opacity = '1';
@@ -1923,12 +1984,12 @@ function initializeYouTubeGallery(sectionId) {
     const description = videoData.description || 'Video description not available';
     const videoId = videoData.id;
     const playlist = videoData.playlist || 'Unknown Playlist';
-    
+
     // Update playlist tag
     const modalPlaylistTag = document.querySelector(`#modalPlaylistTag-${sectionId}`);
     const modalMeta = document.querySelector(`#modalMeta-${sectionId}`);
     const modalRecommendations = document.querySelector(`#modalRecommendations-${sectionId}`);
-    
+
     modalPlaylistTag.textContent = playlist;
     modalTitle.textContent = title;
     modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&playsinline=1`;
@@ -1992,22 +2053,22 @@ function initializeYouTubeGallery(sectionId) {
   function setupModalNavigation(currentVideo) {
     const prevButton = document.querySelector(`#prevVideo-${sectionId}`);
     const nextButton = document.querySelector(`#nextVideo-${sectionId}`);
-    
+
     // Find current video in playlist
     const playlistVideos = videosByPlaylist[currentVideo.playlistId]?.videos || [];
     const currentIndex = playlistVideos.findIndex(v => v.id === currentVideo.id);
-    
+
     // Update button states
     prevButton.disabled = currentIndex <= 0;
     nextButton.disabled = currentIndex >= playlistVideos.length - 1;
-    
+
     // Add click handlers
     prevButton.onclick = () => {
       if (currentIndex > 0) {
         showModal(playlistVideos[currentIndex - 1]);
       }
     };
-    
+
     nextButton.onclick = () => {
       if (currentIndex < playlistVideos.length - 1) {
         showModal(playlistVideos[currentIndex + 1]);
@@ -2017,13 +2078,13 @@ function initializeYouTubeGallery(sectionId) {
 
   function populateRecommendations(currentVideo) {
     const modalRecommendations = document.querySelector(`#modalRecommendations-${sectionId}`);
-    
+
     // Get videos from same playlist, excluding current video
     const playlistVideos = videosByPlaylist[currentVideo.playlistId]?.videos || [];
     const recommendations = playlistVideos.filter(v => v.id !== currentVideo.id).slice(0, 6);
 
     modalRecommendations.innerHTML = '';
-    
+
     if (recommendations.length === 0) {
       modalRecommendations.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No more videos in this playlist</p>';
       return;
