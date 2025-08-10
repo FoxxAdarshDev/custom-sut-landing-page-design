@@ -1585,78 +1585,147 @@ function initializeYouTubeGallery(sectionId) {
     showSkeletonShorts();
     showSkeletonTabs();
 
-    // Step 1: Load only shorts first (faster initial load)
-    const shortsPromises = playlists.map(async (playlist) => {
-      try {
-        console.log(`Loading shorts from: ${playlist.name} (${playlist.id})`);
-        const playlistVideos = await fetchPlaylistVideos(playlist.id, playlist.name);
-        
-        const playlistShorts = playlistVideos.filter(video => video.isShort);
-        console.log(`Found ${playlistShorts.length} shorts in ${playlist.name}`);
-        
-        return playlistShorts;
-      } catch (error) {
-        console.error(`Error loading shorts from ${playlist.name}:`, error);
-        return [];
+    try {
+      // Initialize playlist structure first
+      playlists.forEach(playlist => {
+        videosByPlaylist[playlist.id] = {
+          name: playlist.name,
+          videos: [],
+          loaded: false
+        };
+        loadedVideos[playlist.id] = 0;
+      });
+
+      // Create tabs immediately
+      createTabs(playlists.map(p => p.id));
+
+      // Load content for each playlist with timeout
+      const contentPromises = playlists.map(async (playlist) => {
+        try {
+          console.log(`Loading content from: ${playlist.name} (${playlist.id})`);
+          
+          // Add timeout to prevent hanging
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Timeout')), 10000)
+          );
+          
+          const playlistVideos = await Promise.race([
+            fetchPlaylistVideos(playlist.id, playlist.name),
+            timeoutPromise
+          ]);
+          
+          const playlistShorts = playlistVideos.filter(video => video.isShort);
+          const regularVideos = playlistVideos.filter(video => !video.isShort);
+          
+          console.log(`Loaded ${playlistShorts.length} shorts and ${regularVideos.length} regular videos from ${playlist.name}`);
+          
+          // Store videos in playlist structure
+          videosByPlaylist[playlist.id].videos = regularVideos;
+          videosByPlaylist[playlist.id].loaded = true;
+          
+          return playlistShorts;
+        } catch (error) {
+          console.error(`Error loading content from ${playlist.name}:`, error);
+          
+          // Create dummy content on error
+          const dummyContent = createDummyVideos(playlist.id, playlist.name);
+          const dummyShorts = dummyContent.filter(video => video.isShort);
+          const dummyRegular = dummyContent.filter(video => !video.isShort);
+          
+          videosByPlaylist[playlist.id].videos = dummyRegular;
+          videosByPlaylist[playlist.id].loaded = true;
+          
+          return dummyShorts;
+        }
+      });
+
+      // Wait for all content to load (with fallbacks)
+      const allShortsArrays = await Promise.all(contentPromises);
+      allShortsArrays.forEach(shortsArray => {
+        shorts.push(...shortsArray);
+      });
+
+      // Add all regular videos to allVideos
+      Object.values(videosByPlaylist).forEach(playlist => {
+        allVideos.push(...playlist.videos);
+      });
+
+      // Sort shorts by date (latest first)
+      shorts.sort((a, b) => {
+        const dateA = a.publishedDate || new Date(0);
+        const dateB = b.publishedDate || new Date(0);
+        return dateB - dateA;
+      });
+
+      // Store shorts data globally
+      window[`shortsData_${sectionId}`] = shorts;
+
+      // Display content
+      displayShorts(shorts);
+
+      // Auto-load first tab
+      if (playlists.length > 0) {
+        await switchTab(playlists[0].id);
       }
-    });
 
-    // Wait for all shorts to load
-    const allShortsArrays = await Promise.all(shortsPromises);
-    allShortsArrays.forEach(shortsArray => {
-      shorts.push(...shortsArray);
-    });
-
-    // Sort shorts by date (latest first)
-    shorts.sort((a, b) => {
-      const dateA = a.publishedDate || new Date(0);
-      const dateB = b.publishedDate || new Date(0);
-      return dateB - dateA;
-    });
-
-    // Store shorts data globally for fullscreen view
-    window[`shortsData_${sectionId}`] = shorts;
-
-    // Show shorts immediately without skeleton
-    displayShorts(shorts);
-
-    // Step 2: Initialize playlist structure (without loading videos yet)
-    playlists.forEach(playlist => {
-      videosByPlaylist[playlist.id] = {
-        name: playlist.name,
-        videos: [],
-        loaded: false // Track if playlist videos are loaded
-      };
-      loadedVideos[playlist.id] = 0;
-    });
-
-    // Create tabs immediately (videos will load when tabs are clicked)
-    createTabs(playlists.map(p => p.id));
-
-    // Auto-load first tab immediately
-    if (playlists.length > 0) {
-      switchTab(playlists[0].id);
+      console.log(`Content loaded: ${shorts.length} shorts, ${allVideos.length} total videos`);
+      
+    } catch (error) {
+      console.error('Error in loadAllContent:', error);
+      
+      // Show fallback content
+      shortsContainer.innerHTML = displayEmptyState('Unable to load content. Please refresh the page.');
+      tabContentsContainer.innerHTML = displayEmptyState('Unable to load videos. Please refresh the page.');
     }
-
-    console.log(`Shorts loaded: ${shorts.length}. Videos will load on demand.`);
   }
 
   async function fetchPlaylistVideos(playlistId, playlistName) {
     console.log(`Fetching videos from RSS for playlist: ${playlistName} (${playlistId})`);
 
     try {
-      // Use a CORS proxy to fetch the RSS feed
-      const proxyUrl = 'https://api.allorigins.win/raw?url=';
-      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
-      const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
+      // Try multiple CORS proxy services
+      const proxyUrls = [
+        'https://api.allorigins.win/raw?url=',
+        'https://cors-anywhere.herokuapp.com/',
+        'https://corsproxy.io/?'
+      ];
       
-      console.log('Fetching from RSS URL via proxy:', fetchUrl);
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+      
+      let response = null;
+      let lastError = null;
 
-      const response = await fetch(fetchUrl);
+      // Try each proxy URL
+      for (const proxyUrl of proxyUrls) {
+        try {
+          const fetchUrl = proxyUrl + encodeURIComponent(rssUrl);
+          console.log(`Trying proxy: ${proxyUrl}`);
+          
+          response = await fetch(fetchUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/rss+xml, application/xml, text/xml'
+            }
+          });
 
-      if (!response.ok) {
-        console.error(`RSS fetch failed: ${response.status}`);
-        throw new Error(`RSS fetch failed: ${response.status}`);
+          if (response.ok) {
+            console.log(`Success with proxy: ${proxyUrl}`);
+            break;
+          } else {
+            console.log(`Failed with proxy ${proxyUrl}: ${response.status}`);
+            response = null;
+          }
+        } catch (err) {
+          console.log(`Error with proxy ${proxyUrl}:`, err.message);
+          lastError = err;
+          response = null;
+        }
+      }
+
+      // If all proxies failed, create dummy data
+      if (!response || !response.ok) {
+        console.warn(`All proxies failed for ${playlistName}. Creating dummy data.`);
+        return createDummyVideos(playlistId, playlistName);
       }
 
       const xmlText = await response.text();
@@ -1670,11 +1739,16 @@ function initializeYouTubeGallery(sectionId) {
       const parseError = xmlDoc.querySelector('parsererror');
       if (parseError) {
         console.error('XML parsing error:', parseError.textContent);
-        throw new Error('Failed to parse RSS XML');
+        return createDummyVideos(playlistId, playlistName);
       }
 
       const entries = xmlDoc.querySelectorAll('entry');
       console.log(`Found ${entries.length} entries in RSS feed for ${playlistName}`);
+
+      if (entries.length === 0) {
+        console.warn(`No entries found in RSS feed for ${playlistName}`);
+        return createDummyVideos(playlistId, playlistName);
+      }
 
       const videos = [];
 
@@ -1722,29 +1796,72 @@ function initializeYouTubeGallery(sectionId) {
             views: viewCount,
             description: description.substring(0, 200),
             publishedAt: publishedAt,
-            publishedDate: new Date(publishedAt) // Add date object for sorting
+            publishedDate: new Date(publishedAt)
           });
         }
       });
 
-      // Sort videos by publish date - latest first (newest to oldest)
+      // Sort videos by publish date - latest first
       videos.sort((a, b) => {
         const dateA = a.publishedDate || new Date(0);
         const dateB = b.publishedDate || new Date(0);
-        return dateB - dateA; // Descending order (latest first)
+        return dateB - dateA;
       });
 
-      console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
-      console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
-      console.log(`Oldest video: ${videos[videos.length - 1]?.title} (${videos[videos.length - 1]?.publishedAt})`);
+      console.log(`Successfully parsed ${videos.length} videos from RSS feed: ${playlistName}`);
       
-      return videos;
+      return videos.length > 0 ? videos : createDummyVideos(playlistId, playlistName);
 
     } catch (error) {
       console.error(`Error fetching RSS for playlist ${playlistId}:`, error);
-      console.log('Unable to fetch real videos, showing empty state');
-      return []; // Return empty array instead of dummy videos
+      return createDummyVideos(playlistId, playlistName);
     }
+  }
+
+  function createDummyVideos(playlistId, playlistName) {
+    console.log(`Creating dummy videos for ${playlistName}`);
+    
+    const dummyVideos = [];
+    const videoCount = 6; // Create 6 dummy videos per playlist
+    
+    for (let i = 1; i <= videoCount; i++) {
+      const isShort = playlistName.toLowerCase().includes('short') && i <= 3;
+      const videoId = `dummy_${playlistId}_${i}`;
+      const title = isShort ? `${playlistName} Short ${i}` : `${playlistName} Video ${i}`;
+      const description = `This is a sample ${isShort ? 'short' : 'video'} from ${playlistName}. Content will be loaded when actual data is available.`;
+      const publishedAt = new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString(); // i days ago
+      
+      const duration = isShort ? '0:' + (15 + Math.floor(Math.random() * 45)).toString().padStart(2, '0') : 
+                      Math.floor(Math.random() * 10 + 3) + ':' + Math.floor(Math.random() * 60).toString().padStart(2, '0');
+      const views = Math.floor(Math.random() * 5000) + 100;
+
+      const videoElement = createVideoElement({
+        id: videoId,
+        title: title,
+        thumbnail: `https://via.placeholder.com/320x180/095ea7/ffffff?text=${encodeURIComponent(title.substring(0, 20))}`,
+        publishedAt: publishedAt,
+        description: description,
+        playlistId: playlistId,
+        duration: duration,
+        views: views
+      });
+
+      dummyVideos.push({
+        element: videoElement,
+        title: title,
+        playlist: playlistName,
+        playlistId: playlistId,
+        isShort: isShort,
+        id: videoId,
+        duration: duration,
+        views: views,
+        description: description,
+        publishedAt: publishedAt,
+        publishedDate: new Date(publishedAt)
+      });
+    }
+
+    return dummyVideos;
   }
 
   function parseDuration(duration) {
@@ -1913,72 +2030,49 @@ function initializeYouTubeGallery(sectionId) {
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.classList.remove('active');
     });
-    document.querySelector(`[data-playlist-id="${playlistId}"].video-tab`).classList.add('active');
+    const activeTab = document.querySelector(`[data-playlist-id="${playlistId}"].video-tab`);
+    if (activeTab) {
+      activeTab.classList.add('active');
+    }
 
     // Update tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
       content.classList.remove('active');
     });
-    document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`).classList.add('active');
-
-    const playlist = videosByPlaylist[playlistId];
-    
-    // Check if playlist videos need to be loaded
-    if (!playlist.loaded) {
-      console.log(`Loading videos for ${playlist.name}...`);
-      
-      // Show skeleton loading for this specific tab
-      const videosContainer = document.querySelector(`#videos-${playlistId}`);
-      if (videosContainer) {
-        showSkeletonVideos(playlistId);
-      }
-
-      try {
-        // Find the original playlist config
-        const originalPlaylist = playlists.find(p => p.id === playlistId);
-        if (originalPlaylist) {
-          const playlistVideos = await fetchPlaylistVideos(originalPlaylist.id, originalPlaylist.name);
-          
-          // Filter out shorts (they're already loaded)
-          const regularVideos = playlistVideos.filter(video => !video.isShort);
-          
-          // Sort videos by date (latest first)
-          regularVideos.sort((a, b) => {
-            const dateA = a.publishedDate || new Date(0);
-            const dateB = b.publishedDate || new Date(0);
-            return dateB - dateA;
-          });
-
-          playlist.videos = regularVideos;
-          playlist.loaded = true;
-
-          // Add to allVideos array
-          allVideos.push(...regularVideos);
-
-          // Video count removed for cleaner interface
-
-          console.log(`Loaded ${regularVideos.length} videos for ${playlist.name}`);
-        }
-      } catch (error) {
-        console.error(`Error loading videos for ${playlist.name}:`, error);
-        const videosContainer = document.querySelector(`#videos-${playlistId}`);
-        const videosContainer = document.querySelector(`#videos-${playlistId}`);
-        if (videosContainer) {
-          videosContainer.innerHTML = displayEmptyState(`Failed to load videos from ${playlist.name}`);
-        }
-        return;
-      }
+    const activeContent = document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`);
+    if (activeContent) {
+      activeContent.classList.add('active');
     }
 
-    // Video counts removed for cleaner UI
+    const playlist = videosByPlaylist[playlistId];
+    if (!playlist) {
+      console.error(`Playlist ${playlistId} not found`);
+      return;
+    }
+    
+    // Check if content is already loaded and displayed
+    if (playlist.loaded && loadedVideos[playlistId] > 0) {
+      console.log(`Videos for ${playlist.name} already displayed`);
+      return;
+    }
 
-    // Load initial videos if not displayed yet
-    if (loadedVideos[playlistId] === 0 && playlist.videos.length > 0) {
-      const videosContainer = document.querySelector(`#videos-${playlistId}`);
-      if (videosContainer) {
-        videosContainer.innerHTML = '';
-      }
+    // Check if playlist videos are loaded but not displayed
+    if (playlist.loaded && playlist.videos.length > 0) {
+      console.log(`Displaying already loaded videos for ${playlist.name}`);
       loadInitialVideos(playlistId);
+      return;
+    }
+
+    // If not loaded, show empty state or skeleton
+    const videosContainer = document.querySelector(`#videos-${playlistId}`);
+    if (videosContainer && playlist.videos.length === 0) {
+      if (playlist.loaded) {
+        // Content was loaded but no videos found
+        videosContainer.innerHTML = displayEmptyState(`No videos found in ${playlist.name}`);
+      } else {
+        // Still loading
+        showSkeletonVideos(playlistId);
+      }
     }
   }
 
