@@ -1119,6 +1119,13 @@ function initializeYouTubeGallery(sectionId) {
           }
         });
 
+        // Sort videos in each playlist by date (latest first)
+        videosByPlaylist[playlist.id].videos.sort((a, b) => {
+          const dateA = a.publishedDate || new Date(0);
+          const dateB = b.publishedDate || new Date(0);
+          return dateB - dateA; // Descending order (latest first)
+        });
+
         // Initialize loaded count for each playlist
         loadedVideos[playlist.id] = 0;
 
@@ -1135,11 +1142,19 @@ function initializeYouTubeGallery(sectionId) {
       }
     }
 
+    // Sort all shorts by date (latest first)
+    shorts.sort((a, b) => {
+      const dateA = a.publishedDate || new Date(0);
+      const dateB = b.publishedDate || new Date(0);
+      return dateB - dateA; // Descending order (latest first)
+    });
+
     // Store shorts data globally for fullscreen view
     window[`shortsData_${sectionId}`] = shorts;
 
     console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
-    displayShorts(shorts.slice(0, 3)); // Show only 3 shorts
+    console.log(`Latest short: ${shorts[0]?.title} (${shorts[0]?.publishedAt})`);
+    displayShorts(shorts.slice(0, 3)); // Show only 3 latest shorts
     createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
   }
 
@@ -1222,12 +1237,23 @@ function initializeYouTubeGallery(sectionId) {
             duration: formattedDuration,
             views: viewCount,
             description: description.substring(0, 200),
-            publishedAt: publishedAt
+            publishedAt: publishedAt,
+            publishedDate: new Date(publishedAt) // Add date object for sorting
           });
         }
       });
 
-      console.log(`Successfully parsed ${videos.length} real videos from RSS feed: ${playlistName}`);
+      // Sort videos by publish date - latest first (newest to oldest)
+      videos.sort((a, b) => {
+        const dateA = a.publishedDate || new Date(0);
+        const dateB = b.publishedDate || new Date(0);
+        return dateB - dateA; // Descending order (latest first)
+      });
+
+      console.log(`Successfully parsed and sorted ${videos.length} real videos from RSS feed: ${playlistName}`);
+      console.log(`Latest video: ${videos[0]?.title} (${videos[0]?.publishedAt})`);
+      console.log(`Oldest video: ${videos[videos.length - 1]?.title} (${videos[videos.length - 1]?.publishedAt})`);
+      
       return videos;
 
     } catch (error) {
