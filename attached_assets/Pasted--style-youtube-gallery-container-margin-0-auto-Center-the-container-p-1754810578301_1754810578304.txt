@@ -1,0 +1,138 @@
+
+
+<style>
+    .youtube_gallery_container {
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding around the content */
+}
+.youtube_gallery_container_inner {
+align-items: center;
+margin-bottom:20px;
+display:flex;
+text-align:center;
+gap:20px;
+justify-content: center; }
+
+
+@media screen and  (max-width:767px) {
+    .youtube_gallery_container_inner {
+display:block;}
+}
+
+.youtube_modal-content {
+  border: 1px solid #095ea7!important;
+  border-radius: 10px;
+  z-index:10!important;
+}
+
+.youtube_modal-content  a{
+ color: #095ea7!important;
+}
+</style>
+<div class="youtube_gallery_container">
+  <div class=youtube_gallery_container_inner>
+    <h1>{{ page.title }}</h1> 
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <!-- Subscribe button container -->
+    <div class="g-ytsubscribe" data-channelid="UCfTcuV6zESARyzKfG2T6YFg" data-layout="full" data-count="hidden"></div>
+   
+   <!-- Include the external script -->
+   <script src="//www.foxxlifesciences.com/cdn/shop/t/37/assets/modalFunctions.js"></script>
+  </div>
+<div id="target-div"></div>
+
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Specify the URL of your server
+    const serverUrl = 'https://fls-youtube-videos-fetch-with-api-58t9.onrender.com/videos';
+
+    // Fetch the HTML content from your server
+    fetch(serverUrl)
+      .then(response => response.text())
+      .then(html => {
+        // Insert the HTML into the target div
+        document.getElementById('target-div').innerHTML = html;
+
+        // Reinitialize JavaScript functionality
+        initializeTabs();
+      })
+      .catch(error => {
+        console.error('Error fetching HTML:', error);
+      });
+  });
+
+  function initializeTabs() {
+    const buttons = document.querySelectorAll('.youtube_tab-button');
+    const container = document.querySelector('.youtube_video-container');
+
+    if (buttons.length > 0) {
+      // Load the videos for the initial tab
+      loadVideos(buttons[0].getAttribute('data-playlist-id'));
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          loadVideos(button.getAttribute('data-playlist-id'));
+        });
+      });
+    }
+
+    function loadVideos(playlistId) {
+      fetch('https://fls-youtube-videos-fetch-with-api-58t9.onrender.com/videos/' + playlistId)
+        .then(response => response.text())
+        .then(html => {
+          container.innerHTML = html;
+        });
+    }
+
+    // Event delegation for handling "Read More" clicks
+    container.addEventListener('click', (event) => {
+        if (event.target && event.target.classList.contains('youtube_read-more')) {
+        toggleDescription(event);
+      }
+    });
+
+    function toggleDescription(event) {
+      const target = event.target;
+      const videoId = target.getAttribute('data-video-id');
+      const title = target.getAttribute('data-title');
+      const description = target.getAttribute('data-description');
+
+      // Show modal with the video details
+      showModal(videoId, title, description);
+    }
+
+    function showModal(videoId, title, description) {
+      const modal = document.getElementById("videoModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalIframe = document.getElementById("modalIframe");
+      const modalDescription = document.getElementById("modalDescription");
+      const closeBtn = document.querySelector(".youtube_modal .youtube_modal-close");
+
+      modalTitle.textContent = title;
+      modalIframe.src = "https://www.youtube.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&mute=1";
+      modalDescription.innerHTML = description;
+
+      modal.style.display = "block";
+
+      closeBtn.onclick = function() {
+        modal.style.display = "none";
+        // Stop the video by clearing the iframe src
+        modalIframe.src = "";
+      }
+
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          // Stop the video by clearing the iframe src
+          modalIframe.src = "";
+        }
+      }
+    }
+  }
+</script>
+
+
+{{ nodeJsData }}
