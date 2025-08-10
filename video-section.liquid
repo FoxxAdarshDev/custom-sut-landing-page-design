@@ -1653,17 +1653,46 @@ function populateFullscreenShorts(sectionId) {
 }
 
 function initializeYouTubeGallery(sectionId) {
-  const shortsContainer = document.querySelector(`#shorts-container-${sectionId}`);
-  const videosTabsContainer = document.querySelector(`#videos-tabs-${sectionId}`);
-  const tabContentsContainer = document.querySelector(`#tab-contents-${sectionId}`);
-  const modal = document.querySelector(`#videoModal-${sectionId}`);
-  const modalTitle = document.querySelector(`#modalTitle-${sectionId}`);
-  const modalIframe = document.querySelector(`#modalIframe-${sectionId}`);
-  const modalDescription = document.querySelector(`#modalDescription-${sectionId}`);
-  const modalStats = document.querySelector(`#modalStats-${sectionId}`);
-  const modalYouTubeLink = document.querySelector(`#modalYouTubeLink-${sectionId}`);
-  const modalSidebar = document.querySelector(`#modalSidebar-${sectionId}`);
-  const closeBtn = document.querySelector(`[data-section-id="${sectionId}"].youtube-modal-close`);
+    // Suppress YouTube API console errors
+    const originalConsoleError = console.error;
+    const originalConsoleWarn = console.warn;
+
+    console.error = function(...args) {
+      const message = args.join(' ');
+      // Block YouTube API related errors
+      if (message.includes('youtube') || 
+          message.includes('ERR_BLOCKED_BY_CLIENT') ||
+          message.includes('Failed to load resource') ||
+          message.includes('api/stats') ||
+          message.includes('youtubei/v1') ||
+          message.includes('www.youtube-nocookie.com')) {
+        return; // Suppress these errors
+      }
+      originalConsoleError.apply(console, args);
+    };
+
+    console.warn = function(...args) {
+      const message = args.join(' ');
+      // Block YouTube API related warnings
+      if (message.includes('youtube') || 
+          message.includes('ERR_BLOCKED_BY_CLIENT') ||
+          message.includes('api/stats')) {
+        return; // Suppress these warnings
+      }
+      originalConsoleWarn.apply(console, args);
+    };
+
+    const shortsContainer = document.querySelector(`#shorts-container-${sectionId}`);
+    const videosTabsContainer = document.querySelector(`#videos-tabs-${sectionId}`);
+    const tabContentsContainer = document.querySelector(`#tab-contents-${sectionId}`);
+    const modal = document.querySelector(`#videoModal-${sectionId}`);
+    const modalTitle = document.querySelector(`#modalTitle-${sectionId}`);
+    const modalIframe = document.querySelector(`#modalIframe-${sectionId}`);
+    const modalDescription = document.querySelector(`#modalDescription-${sectionId}`);
+    const modalStats = document.querySelector(`#modalStats-${sectionId}`);
+    const modalYouTubeLink = document.querySelector(`#modalYouTubeLink-${sectionId}`);
+    const modalSidebar = document.querySelector(`#modalSidebar-${sectionId}`);
+    const closeBtn = document.querySelector(`[data-section-id="${sectionId}"].youtube-modal-close`);
 
   let allVideos = [];
   let videosByPlaylist = {};
