@@ -1,4 +1,3 @@
-
 {% comment %}
   YouTube Video Gallery Section
   Displays shorts on left and videos in tabs on right with modal popups
@@ -726,13 +725,13 @@
         {% if section.settings.section_description != blank %}
           <p class="youtube-gallery-description">{{ section.settings.section_description }}</p>
         {% endif %}
-        
+
         {% if section.settings.show_subscribe_button and section.settings.youtube_channel_id != blank %}
           <div class="youtube-subscribe-container">
             <script src="https://apis.google.com/js/platform.js"></script>
-            <div class="g-ytsubscribe" 
-                 data-channelid="{{ section.settings.youtube_channel_id }}" 
-                 data-layout="full" 
+            <div class="g-ytsubscribe"
+                 data-channelid="{{ section.settings.youtube_channel_id }}"
+                 data-layout="full"
                  data-count="hidden">
             </div>
           </div>
@@ -784,18 +783,18 @@
     <div id="videoModal-{{ section.id }}" class="youtube-modal">
       <div class="youtube-modal-content">
         <span class="youtube-modal-close" data-section-id="{{ section.id }}">&times;</span>
-        
+
         <!-- Video Section -->
         <div class="modal-video-section">
           <iframe id="modalIframe-{{ section.id }}" frameborder="0" allowfullscreen></iframe>
           <h2 id="modalTitle-{{ section.id }}" class="modal-title"></h2>
-          
+
           <div class="modal-video-stats" id="modalStats-{{ section.id }}">
             <!-- Stats will be populated by JavaScript -->
           </div>
-          
+
           <div id="modalDescription-{{ section.id }}" class="modal-description"></div>
-          
+
           <a id="modalYouTubeLink-{{ section.id }}" class="modal-youtube-link" target="_blank">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -824,11 +823,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function toggleShortsView(sectionId) {
   const shortsFullscreen = document.querySelector(`#shorts-fullscreen-${sectionId}`);
   const mainContainer = document.querySelector(`#main-container-${sectionId}`);
-  
+
   shortsFullscreen.style.display = 'flex';
   mainContainer.style.display = 'none';
   document.body.style.overflow = 'hidden';
-  
+
   // Populate fullscreen shorts if not already done
   populateFullscreenShorts(sectionId);
 }
@@ -836,7 +835,7 @@ function toggleShortsView(sectionId) {
 function closeShortsView(sectionId) {
   const shortsFullscreen = document.querySelector(`#shorts-fullscreen-${sectionId}`);
   const mainContainer = document.querySelector(`#main-container-${sectionId}`);
-  
+
   shortsFullscreen.style.display = 'none';
   mainContainer.style.display = 'flex';
   document.body.style.overflow = 'auto';
@@ -845,10 +844,10 @@ function closeShortsView(sectionId) {
 function populateFullscreenShorts(sectionId) {
   const shortsGrid = document.querySelector(`#shorts-fullscreen-grid-${sectionId}`);
   if (shortsGrid.children.length > 0) return; // Already populated
-  
+
   // Get shorts from the stored data
   const shorts = window[`shortsData_${sectionId}`] || [];
-  
+
   shorts.forEach((short, index) => {
     const shortElement = createShortElement(short, index, sectionId);
     shortsGrid.appendChild(shortElement);
@@ -888,7 +887,7 @@ function initializeYouTubeGallery(sectionId) {
 
   async function loadAllContent() {
     const shorts = [];
-    
+
     if (playlists.length === 0) {
       console.warn('No playlists configured');
       displayShorts(shorts);
@@ -899,15 +898,15 @@ function initializeYouTubeGallery(sectionId) {
     for (const playlist of playlists) {
       try {
         console.log(`Loading playlist: ${playlist.name} (${playlist.id})`);
-        
+
         // Fetch real videos from YouTube API
         const playlistVideos = await fetchPlaylistVideos(playlist.id, playlist.name);
-        
+
         videosByPlaylist[playlist.id] = {
           name: playlist.name,
           videos: []
         };
-        
+
         playlistVideos.forEach(videoData => {
           if (videoData.isShort) {
             shorts.push(videoData);
@@ -916,10 +915,10 @@ function initializeYouTubeGallery(sectionId) {
             allVideos.push(videoData);
           }
         });
-        
+
         // Initialize loaded count for each playlist
         loadedVideos[playlist.id] = 0;
-        
+
       } catch (error) {
         console.error(`Error loading playlist ${playlist.name}:`, error);
         // Fallback to empty playlist on error
@@ -940,90 +939,79 @@ function initializeYouTubeGallery(sectionId) {
   }
 
   async function fetchPlaylistVideos(playlistId, playlistName) {
-    const apiKey = '{{ settings.youtube_api_key | default: "YOUR_API_KEY" }}';
-    
-    if (!apiKey || apiKey === 'YOUR_API_KEY') {
-      console.warn('YouTube API key not configured, using demo data');
-      return generateDemoVideos(playlistName);
-    }
-    
-    console.log(`Attempting to fetch playlist: ${playlistId} with API key: ${apiKey ? 'Present' : 'Missing'}`);
-    
-    if (!playlistId || playlistId.trim() === '') {
-      console.warn('Empty playlist ID provided, using demo data');
-      return generateDemoVideos(playlistName);
-    }
+    console.log(`Fetching videos from RSS for playlist: ${playlistName} (${playlistId})`);
 
     try {
-      const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${playlistId}&maxResults=50&key=${apiKey}`;
-      console.log('Fetching from URL:', playlistUrl);
-      
-      const response = await fetch(playlistUrl);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`YouTube API error: ${response.status} - ${errorText}`);
-        throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
-      }
-      
-      const data = await response.json();
-      console.log('YouTube API response:', data);
-      const videos = [];
-      
-      for (const item of data.items) {
-        const snippet = item.snippet;
-        const videoId = snippet.resourceId.videoId;
-        
-        // Fetch additional video details
-        const videoDetailsResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoId}&key=${apiKey}`
-        );
-        
-        if (videoDetailsResponse.ok) {
-          const videoDetails = await videoDetailsResponse.json();
-          const video = videoDetails.items[0];
-          
-          if (video) {
-            const duration = parseDuration(video.contentDetails.duration);
-            const isShort = duration && duration.totalSeconds <= 60;
-            const views = video.statistics.viewCount || 0;
-            
-            const videoElement = createVideoElement({
-              id: videoId,
-              title: snippet.title,
-              thumbnail: snippet.thumbnails.medium?.url || `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-              publishedAt: snippet.publishedAt,
-              description: snippet.description || '',
-              playlistId: playlistId,
-              duration: duration ? duration.formatted : '0:00',
-              views: formatViews(views)
-            });
+      // Use RSS feed for playlist
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+      console.log('Fetching from RSS URL:', rssUrl);
 
-            videos.push({
-              element: videoElement,
-              title: snippet.title,
-              playlist: playlistName,
-              isShort: isShort,
-              id: videoId,
-              duration: duration ? duration.formatted : '0:00',
-              views: formatViews(views),
-              description: snippet.description || '',
-              publishedAt: snippet.publishedAt
-            });
-          }
-        }
-        
-        // Add delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 100));
+      const response = await fetch(rssUrl);
+
+      if (!response.ok) {
+        console.error(`RSS fetch failed: ${response.status}`);
+        throw new Error(`RSS fetch failed: ${response.status}`);
       }
-      
-      console.log(`Fetched ${videos.length} videos from playlist: ${playlistName}`);
+
+      const xmlText = await response.text();
+      console.log('RSS response received');
+
+      // Parse XML using browser's DOMParser
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+
+      // Check for parsing errors
+      const parseError = xmlDoc.querySelector('parsererror');
+      if (parseError) {
+        console.error('XML parsing error:', parseError.textContent);
+        throw new Error('Failed to parse RSS XML');
+      }
+
+      const entries = xmlDoc.querySelectorAll('entry');
+      console.log(`Found ${entries.length} entries in RSS feed`);
+
+      const videos = [];
+
+      entries.forEach((entry, index) => {
+        const title = entry.querySelector('title')?.textContent || `Video ${index + 1}`;
+        const videoId = entry.querySelector('videoId')?.textContent ||
+                       entry.querySelector('id')?.textContent?.split(':').pop() || '';
+        const description = entry.querySelector('description')?.textContent ||
+                          entry.querySelector('summary')?.textContent || '';
+        const publishedAt = entry.querySelector('published')?.textContent || new Date().toISOString();
+
+        if (videoId) {
+          const videoElement = createVideoElement({
+            id: videoId,
+            title: title,
+            thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+            publishedAt: publishedAt,
+            description: description.substring(0, 200),
+            playlistId: playlistId,
+            duration: 'N/A', // RSS doesn't provide duration
+            views: 'N/A' // RSS doesn't provide view count
+          });
+
+          videos.push({
+            element: videoElement,
+            title: title,
+            playlist: playlistName,
+            isShort: false, // Can't determine from RSS
+            id: videoId,
+            duration: 'N/A',
+            views: 'N/A',
+            description: description.substring(0, 200),
+            publishedAt: publishedAt
+          });
+        }
+      });
+
+      console.log(`Parsed ${videos.length} videos from RSS feed: ${playlistName}`);
       return videos;
-      
+
     } catch (error) {
-      console.error(`Error fetching playlist ${playlistId}:`, error);
-      // Show error to user instead of falling back to demo data silently
-      alert(`Failed to load playlist "${playlistName}": ${error.message}. Please check your YouTube API key and playlist ID.`);
+      console.error(`Error fetching RSS for playlist ${playlistId}:`, error);
+      console.log('Falling back to demo videos');
       return generateDemoVideos(playlistName);
     }
   }
@@ -1031,20 +1019,20 @@ function initializeYouTubeGallery(sectionId) {
   function parseDuration(duration) {
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) return null;
-    
+
     const hours = parseInt(match[1] || 0);
     const minutes = parseInt(match[2] || 0);
     const seconds = parseInt(match[3] || 0);
-    
+
     const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-    
+
     let formatted = '';
     if (hours > 0) {
       formatted = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     } else {
       formatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    
+
     return {
       hours,
       minutes,
@@ -1069,20 +1057,20 @@ function initializeYouTubeGallery(sectionId) {
     const demoVideos = [];
     const isShortPlaylist = playlistName.toLowerCase().includes('short');
     const videoCount = isShortPlaylist ? 6 : 12;
-    
+
     // Use actual working YouTube video IDs
     const sampleVideoIds = [
       'dQw4w9WgXcQ', 'jNQXAC9IVRw', 'M7lc1UVf-VE', 'ZZ5LpwO-An4',
       'fJ9rUzIMcZQ', 'kJQP7kiw5Fk', 'hFZFjoX2cGg', 'astISOttCQ0',
       'ScMzIvxBSi4', 'OPf0YbXqDm0', 'CevxZvSJLk8', 'kXYiU_JCYtU'
     ];
-    
+
     for (let i = 1; i <= videoCount; i++) {
       const videoId = sampleVideoIds[(i - 1) % sampleVideoIds.length];
-      const title = isShortPlaylist ? 
-        `${playlistName} Short #${i}` : 
+      const title = isShortPlaylist ?
+        `${playlistName} Short #${i}` :
         `${playlistName} Video #${i}`;
-      
+
       const videoElement = createVideoElement({
         id: videoId,
         title: title,
@@ -1105,7 +1093,7 @@ function initializeYouTubeGallery(sectionId) {
         description: `This is a ${isShortPlaylist ? 'short' : 'video'} from ${playlistName}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`
       });
     }
-    
+
     return demoVideos;
   }
 
@@ -1113,12 +1101,12 @@ function initializeYouTubeGallery(sectionId) {
     const videoDiv = document.createElement('div');
     videoDiv.className = 'youtube-video-item';
     videoDiv.setAttribute('data-video-id', video.id);
-    
+
     const publishedDate = new Date(video.publishedAt).toLocaleDateString();
-    
+
     videoDiv.innerHTML = `
       <div class="video-thumbnail-container">
-        <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" 
+        <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg"
              alt="${video.title}"
              style="width: 100%; height: 100%; object-fit: cover;">
         <div class="video-play-button"></div>
@@ -1137,7 +1125,7 @@ function initializeYouTubeGallery(sectionId) {
         <a href="#" class="youtube-read-more">Read More</a>
       </div>
     `;
-    
+
     return videoDiv;
   }
 
@@ -1147,7 +1135,7 @@ function initializeYouTubeGallery(sectionId) {
 
     playlistIds.forEach((playlistId, index) => {
       const playlist = videosByPlaylist[playlistId];
-      
+
       // Create tab button
       const tabButton = document.createElement('button');
       tabButton.className = `video-tab ${index === 0 ? 'active' : ''}`;
@@ -1160,22 +1148,22 @@ function initializeYouTubeGallery(sectionId) {
       const tabContent = document.createElement('div');
       tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
       tabContent.setAttribute('data-playlist-id', playlistId);
-      
+
       const videosHeader = document.createElement('div');
       videosHeader.className = 'videos-header';
       videosHeader.innerHTML = `
         <span class="video-count">${playlist.videos.length} videos</span>
       `;
-      
+
       const videosContainer = document.createElement('div');
       videosContainer.className = 'youtube-video-container';
       videosContainer.id = `videos-${playlistId}`;
-      
+
       const loadMoreButton = document.createElement('button');
       loadMoreButton.className = 'load-more-button';
       loadMoreButton.textContent = 'Load More Videos';
       loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
-      
+
       tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
       tabContent.appendChild(loadMoreButton);
@@ -1211,18 +1199,18 @@ function initializeYouTubeGallery(sectionId) {
     const playlist = videosByPlaylist[playlistId];
     const videosContainer = document.querySelector(`#videos-${playlistId}`);
     const loadMoreButton = document.querySelector(`[data-playlist-id="${playlistId}"] .load-more-button`);
-    
+
     const startIndex = loadedVideos[playlistId];
     const endIndex = Math.min(startIndex + videosPerLoad, playlist.videos.length);
-    
+
     for (let i = startIndex; i < endIndex; i++) {
       const video = playlist.videos[i];
       const videoElement = createVideoElementForDisplay(video, allVideos.indexOf(video));
       videosContainer.appendChild(videoElement);
     }
-    
+
     loadedVideos[playlistId] = endIndex;
-    
+
     // Hide load more button if all videos are loaded
     if (endIndex >= playlist.videos.length) {
       loadMoreButton.style.display = 'none';
@@ -1246,10 +1234,10 @@ function initializeYouTubeGallery(sectionId) {
     const shortDiv = document.createElement('div');
     shortDiv.className = 'short-item';
     shortDiv.setAttribute('data-video-index', index);
-    
+
     shortDiv.innerHTML = `
       <div class="short-thumbnail">
-        <img src="https://img.youtube.com/vi/${short.id}/mqdefault.jpg" 
+        <img src="https://img.youtube.com/vi/${short.id}/mqdefault.jpg"
              alt="${short.title}"
              style="width: 100%; height: 100%; object-fit: cover;">
       </div>
@@ -1271,7 +1259,7 @@ function initializeYouTubeGallery(sectionId) {
   function createVideoElementForDisplay(video, index) {
     const videoDiv = video.element.cloneNode(true);
     videoDiv.setAttribute('data-video-index', index);
-    
+
     // Add click event to read more button
     const readMoreBtn = videoDiv.querySelector('.youtube-read-more');
     if (readMoreBtn) {
@@ -1295,7 +1283,7 @@ function initializeYouTubeGallery(sectionId) {
     const title = videoData.title;
     const description = videoData.description || 'Video description not available';
     const videoId = videoData.id;
-    
+
     modalTitle.textContent = title;
     modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0`;
     modalDescription.innerHTML = description;
@@ -1326,19 +1314,19 @@ function initializeYouTubeGallery(sectionId) {
 
   function populateSidebar() {
     const recommendations = allVideos.slice(0, 6); // Show first 6 videos as recommendations
-    
+
     modalSidebar.innerHTML = '<h4 class="sidebar-title">More Videos</h4>';
     recommendations.forEach((video, index) => {
       const sidebarItem = document.createElement('div');
       sidebarItem.className = 'sidebar-video-item';
-      
+
       const videoId = video.id;
       const title = video.title;
       const date = new Date().toLocaleDateString();
-      
+
       // Extract thumbnail from iframe
       const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-      
+
       sidebarItem.innerHTML = `
         <div class="sidebar-video-thumbnail">
           <img src="${thumbnailUrl}" alt="${title}">
