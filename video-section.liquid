@@ -233,6 +233,43 @@
     content: "👁";
   }
 
+  /* YouTube Play Button Overlay */
+  .short-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  }
+
+  .short-play-button {
+    width: 64px; /* Larger play button */
+    height: 64px;
+    background: rgba(255, 255, 255, 0.3); /* Subtle background */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
+  .short-play-button:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .short-play-button svg {
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+  }
+
   /* Videos section */
   .videos-section {
     flex: 1;
@@ -2541,11 +2578,19 @@ function initializeYouTubeGallery(sectionId) {
       <div class="short-thumbnail">
         <img src="https://img.youtube.com/vi/${short.id}/mqdefault.jpg"
              alt="${short.title}"
-             style="width: 100%; height: 100%; object-fit: cover;">
+             style="width: 100%; height: 100%; object-fit: cover;"
+             onerror="this.src='https://via.placeholder.com/200x200/ff0000/ffffff?text=Shorts'">
+        <div class="short-play-overlay">
+          <div class="short-play-button">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+              <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/>
+            </svg>
+          </div>
+        </div>
       </div>
       <div class="short-overlay">
         <div class="short-badge">Shorts</div>
-        ${index === 0 ? '' : ''}
+        ${index === 0 ? '<div class="short-play-status">Playing</div>' : ''}
       </div>
       <div class="short-views">${short.views || Math.floor(Math.random() * 2000) + 100}</div>
     `;
