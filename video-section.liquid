@@ -71,8 +71,8 @@
   }
 
   .auto-playing-indicator {
-    background-color: #00ff00;
-    color: white;
+    background-color: {{ section.settings.tab_active_bg | default: '#095ea7' }};
+    color: {{ section.settings.tab_active_text | default: '#ffffff' }};
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
@@ -615,16 +615,34 @@ function initializeYouTubeGallery(sectionId) {
     const shorts = [];
     const videos = [];
 
+    if (playlists.length === 0) {
+      console.warn('No playlists configured');
+      displayShorts(shorts);
+      displayVideos(videos);
+      return;
+    }
+
     for (const playlist of playlists) {
       try {
-        const response = await fetch(`${serverUrl}/videos/${playlist.id}`);
+        console.log(`Loading playlist: ${playlist.name} (${playlist.id})`);
+        const response = await fetch(`${serverUrl}/videos/${playlist.id}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          },
+        });
+        
         if (response.ok) {
           const html = await response.text();
+          console.log(`Received HTML for ${playlist.name}:`, html.substring(0, 200));
+          
           const tempDiv = document.createElement('div');
           tempDiv.innerHTML = html;
           
           // Parse videos from HTML response
           const videoElements = tempDiv.querySelectorAll('.youtube-video-item');
+          console.log(`Found ${videoElements.length} video elements for ${playlist.name}`);
+          
           videoElements.forEach(item => {
             const title = item.querySelector('.youtube-video-title')?.textContent || '';
             const isShort = title.toLowerCase().includes('short') || 
@@ -643,12 +661,15 @@ function initializeYouTubeGallery(sectionId) {
               videos.push(videoData);
             }
           });
+        } else {
+          console.error(`Failed to load playlist ${playlist.name}: ${response.status} ${response.statusText}`);
         }
       } catch (error) {
         console.error(`Error loading playlist ${playlist.name}:`, error);
       }
     }
 
+    console.log(`Total shorts: ${shorts.length}, Total videos: ${videos.length}`);
     allVideos = [...shorts, ...videos];
     displayShorts(shorts);
     displayVideos(videos);
@@ -656,7 +677,7 @@ function initializeYouTubeGallery(sectionId) {
 
   function displayShorts(shorts) {
     if (shorts.length === 0) {
-      shortsContainer.innerHTML = '<p>No shorts available</p>';
+      shortsContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No shorts available. Please check your playlist configuration.</div>';
       return;
     }
 
@@ -669,7 +690,8 @@ function initializeYouTubeGallery(sectionId) {
 
   function displayVideos(videos) {
     if (videos.length === 0) {
-      videosContainer.innerHTML = '<p>No videos available</p>';
+      videosContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: {{ section.settings.description_color | default: "#666666" }};">No videos available. Please check your server connection and playlist configuration.</div>';
+      videoCount.textContent = '0 videos';
       return;
     }
 
