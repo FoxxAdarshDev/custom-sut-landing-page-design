@@ -11737,5 +11737,187 @@
         "info": "API Key Gemini Cloud"
       }
     ]
+  },
+  {
+    "name": "YouTube Video Gallery",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Global YouTube Settings"
+      },
+      {
+        "type": "text",
+        "id": "youtube_api_server",
+        "label": "YouTube API Server URL",
+        "default": "https://fls-youtube-videos-fetch-with-api-58t9.onrender.com",
+        "info": "URL of your YouTube video fetching server"
+      },
+      {
+        "type": "text",
+        "id": "default_youtube_channel_id",
+        "label": "Default YouTube Channel ID",
+        "info": "Your main YouTube channel ID for subscribe buttons"
+      },
+      {
+        "type": "header",
+        "content": "Video Gallery Appearance"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_video_autoplay",
+        "label": "Enable video autoplay in modals",
+        "default": true,
+        "info": "Videos will autoplay when modal opens (muted by default)"
+      },
+      {
+        "type": "select",
+        "id": "video_gallery_layout",
+        "label": "Default gallery layout",
+        "default": "grid",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid layout"
+          },
+          {
+            "value": "list",
+            "label": "List layout"
+          },
+          {
+            "value": "masonry",
+            "label": "Masonry layout"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "videos_per_row_desktop",
+        "label": "Videos per row (desktop)",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "videos_per_row_tablet",
+        "label": "Videos per row (tablet)",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "videos_per_row_mobile",
+        "label": "Videos per row (mobile)",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "default": 1
+      },
+      {
+        "type": "header",
+        "content": "Video Card Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_video_thumbnails",
+        "label": "Show video thumbnails",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_video_duration",
+        "label": "Show video duration",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_publish_date",
+        "label": "Show publish date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_count",
+        "label": "Show view count",
+        "default": false,
+        "info": "Requires additional API calls"
+      },
+      {
+        "type": "range",
+        "id": "video_title_max_length",
+        "label": "Video title max length (characters)",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "video_description_max_length",
+        "label": "Video description max length (characters)",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "default": 120
+      },
+      {
+        "type": "header",
+        "content": "Performance Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_lazy_loading",
+        "label": "Enable lazy loading for videos",
+        "default": true,
+        "info": "Improves page load speed"
+      },
+      {
+        "type": "range",
+        "id": "cache_duration_minutes",
+        "label": "Cache duration (minutes)",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "default": 15,
+        "info": "How long to cache video data"
+      },
+      {
+        "type": "range",
+        "id": "max_videos_per_playlist",
+        "label": "Maximum videos per playlist",
+        "min": 6,
+        "max": 50,
+        "step": 2,
+        "default": 20,
+        "info": "Limit number of videos loaded per playlist"
+      },
+      {
+        "type": "header",
+        "content": "SEO & Analytics"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_video_schema",
+        "label": "Enable video schema markup",
+        "default": true,
+        "info": "Improves video SEO"
+      },
+      {
+        "type": "checkbox",
+        "id": "track_video_interactions",
+        "label": "Track video interactions",
+        "default": false,
+        "info": "Track video clicks and modal opens for analytics"
+      },
+      {
+        "type": "text",
+        "id": "google_analytics_id",
+        "label": "Google Analytics ID",
+        "info": "Optional: Track video events in Google Analytics"
+      }
+    ]
   }
 ]
