@@ -12,7 +12,7 @@
       <!-- Background decorative elements -->
       <div class="bioprocess-bg-decoration"></div>
       
-      <div class="container">
+      <div class="bioprocess-container">
         {% if section.settings.section_title != blank %}
           <div class="bioprocess-components-header">
             <h2 class="bioprocess-components-title">
@@ -151,7 +151,7 @@
       }
 
       /* Container */
-      .container {
+      .bioprocess-components-section .bioprocess-container {
         max-width: 1400px;
         margin: 0 auto;
         padding: 0 20px;
@@ -557,7 +557,7 @@
           line-height: {{ settings.bioprocess_component_title_line_height_mobile | default: 16 }}px !important;
         }
         
-        .container {
+        .bioprocess-components-section .bioprocess-container {
           padding: 0 16px !important;
         }
       }
