@@ -1,0 +1,1038 @@
+
+{% comment %}
+  Trade Show Section
+  Displays upcoming and past trade shows with interactive features
+{% endcomment %}
+
+<section class="tradeshow-section" data-section-id="{{ section.id }}">
+  <!-- Background decorative elements -->
+  <div class="tradeshow-bg-decoration"></div>
+  
+  <div class="tradeshow-container">
+    {% if section.settings.section_title != blank %}
+      <div class="tradeshow-header">
+        <h2 class="tradeshow-title">
+          {{ section.settings.section_title }}
+        </h2>
+        {% if section.settings.section_subtitle != blank %}
+          <p class="tradeshow-subtitle">
+            {{ section.settings.section_subtitle }}
+          </p>
+        {% endif %}
+        <div class="title-underline"></div>
+      </div>
+    {% endif %}
+
+    <!-- Filter Tabs -->
+    {% if section.settings.show_filter_tabs %}
+      <div class="tradeshow-filter-tabs">
+        <button class="tradeshow-filter-tab active" data-filter="all">
+          All Events
+        </button>
+        <button class="tradeshow-filter-tab" data-filter="upcoming">
+          Upcoming
+        </button>
+        <button class="tradeshow-filter-tab" data-filter="past">
+          Past Events
+        </button>
+      </div>
+    {% endif %}
+
+    <!-- Trade Show Grid -->
+    <div class="tradeshow-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'tradeshow_event' %}
+            <div class="trade-show-event-card {{ block.settings.event_status }}" data-event-status="{{ block.settings.event_status }}">
+              <!-- Status Badge -->
+              {% if block.settings.event_status == 'upcoming' %}
+                <div class="event-status-badge upcoming">Upcoming</div>
+              {% elsif block.settings.event_status == 'live' %}
+                <div class="event-status-badge live">Live Now</div>
+              {% elsif block.settings.event_status == 'past' %}
+                <div class="event-status-badge past">Past Event</div>
+              {% endif %}
+
+              <div class="trade-show-card-header">
+                <div class="trade-show-card-left">
+                  {% if block.settings.event_dates != blank %}
+                    <div class="trade-show-event-dates">
+                      📅 {{ block.settings.event_dates }}
+                    </div>
+                  {% endif %}
+                  
+                  {% if block.settings.booth_number != blank %}
+                    <div class="trade-show-booth-info">
+                      🏢 Booth No: {{ block.settings.booth_number }}
+                    </div>
+                  {% endif %}
+                  
+                  {% if block.settings.event_title != blank %}
+                    <h3 class="trade-show-event-title">{{ block.settings.event_title }}</h3>
+                  {% endif %}
+                  
+                  {% if block.settings.event_description != blank %}
+                    <div class="trade-show-event-description">
+                      {{ block.settings.event_description }}
+                      {% if block.settings.show_read_more %}
+                        <span class="trade-show-read-more-link" onclick="openModal('{{ block.id }}-modal')">
+                          Read More
+                        </span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+                
+                <div class="trade-show-card-right">
+                  {% if block.settings.event_logo != blank %}
+                    <img src="{{ block.settings.event_logo | img_url: '200x200' }}" 
+                         alt="{{ block.settings.event_title | escape }} Logo" 
+                         class="trade-show-event-logo">
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="trade-show-event-details">
+                {% if block.settings.event_time != blank %}
+                  <div class="trade-show-detail-row">
+                    <span class="trade-show-detail-label">Time:</span>
+                    <span class="trade-show-detail-value">{{ block.settings.event_time }}</span>
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.event_location != blank %}
+                  <div class="trade-show-detail-row">
+                    <span class="trade-show-detail-label">City/Country:</span>
+                    <span class="trade-show-detail-value">{{ block.settings.event_location }}</span>
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.venue_name != blank %}
+                  <div class="trade-show-detail-row">
+                    <span class="trade-show-detail-label">Location:</span>
+                    <span class="trade-show-detail-value">
+                      {% if block.settings.venue_map_url != blank %}
+                        <a href="{{ block.settings.venue_map_url }}" target="_blank" class="trade-show-location-link">
+                          📍 {{ block.settings.venue_name }}
+                        </a>
+                      {% else %}
+                        📍 {{ block.settings.venue_name }}
+                      {% endif %}
+                    </span>
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="trade-show-event-actions">
+                {% if block.settings.locator_url != blank %}
+                  <a href="{{ block.settings.locator_url }}" target="_blank" class="trade-show-btn trade-show-view-event-btn">
+                    Locator
+                  </a>
+                {% endif %}
+                
+                {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
+                  <div class="trade-show-calendar-container">
+                    <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this)">
+                      📅 Add to Calendar
+                    </button>
+                    <div class="trade-show-calendar-dropdown">
+                      <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google','{{ block.id }}')">Google Calendar</a>
+                      <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook','{{ block.id }}')">Outlook</a>
+                      <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo','{{ block.id }}')">Yahoo Calendar</a>
+                      <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple','{{ block.id }}')">Apple Calendar</a>
+                      <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics','{{ block.id }}')">Download ICS</a>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Modal for detailed information -->
+            {% if block.settings.show_read_more and block.settings.detailed_description != blank %}
+              <div id="{{ block.id }}-modal" class="tradeshow-modal">
+                <div class="tradeshow-modal-content">
+                  <span class="tradeshow-modal-close" onclick="closeModal('{{ block.id }}-modal')">&times;</span>
+                  <h3>{{ block.settings.event_title }}</h3>
+                  <div class="tradeshow-modal-body">
+                    {{ block.settings.detailed_description }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <!-- View All Button -->
+    {% if section.settings.show_view_all_button and section.settings.view_all_url != blank %}
+      <div class="tradeshow-view-all-container">
+        <a href="{{ section.settings.view_all_url }}" class="tradeshow-view-all-btn">
+          {{ section.settings.view_all_text | default: "View All Trade Shows" }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  /* Main Section Styles */
+  .tradeshow-section {
+    background: {{ settings.tradeshow_background_color | default: '#f8f9fa' }};
+    {% if settings.tradeshow_background_gradient != blank %}
+      background: {{ settings.tradeshow_background_gradient }};
+    {% endif %}
+    padding: {{ settings.tradeshow_padding_top | default: 80 }}px 0 {{ settings.tradeshow_padding_bottom | default: 80 }}px 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  /* Background decoration */
+  .tradeshow-bg-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 113, 185, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 168, 230, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(0, 113, 185, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    {% if settings.tradeshow_enable_parallax %}
+      transform: translateZ(0);
+      will-change: transform;
+    {% endif %}
+  }
+
+  /* Container */
+  .tradeshow-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Header Styles */
+  .tradeshow-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .tradeshow-title {
+    color: {{ settings.tradeshow_title_color | default: '#0071b9' }};
+    font-size: {{ settings.tradeshow_title_size | default: 42 }}px;
+    line-height: {{ settings.tradeshow_title_line_height | default: 1.2 }};
+    font-weight: {{ settings.tradeshow_title_font_weight | default: 700 }};
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, {{ settings.tradeshow_title_color | default: '#0071b9' }}, #00a8e6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tradeshow-subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .title-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, {{ settings.tradeshow_title_color | default: '#0071b9' }}, #00a8e6);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  /* Filter Tabs */
+  .tradeshow-filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .tradeshow-filter-tab {
+    background: transparent;
+    border: 2px solid {{ settings.tradeshow_button_secondary_bg | default: '#f8f9fa' }};
+    color: {{ settings.tradeshow_button_secondary_text | default: '#0071b9' }};
+    padding: 12px 24px;
+    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tradeshow-filter-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .tradeshow-filter-tab:hover::before {
+    left: 100%;
+  }
+
+  .tradeshow-filter-tab.active,
+  .tradeshow-filter-tab:hover {
+    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
+    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.3);
+  }
+
+  /* Trade Show Grid */
+  .tradeshow-grid {
+    display: grid;
+    grid-template-columns: repeat({{ settings.tradeshow_cards_per_row | default: 2 }}, 1fr);
+    gap: {{ settings.tradeshow_card_gap | default: 24 }}px;
+    margin-bottom: 60px;
+  }
+
+  /* Event Card Styles */
+  .trade-show-event-card {
+    background: {{ settings.tradeshow_card_background | default: '#ffffff' }};
+    border-radius: {{ settings.tradeshow_card_border_radius | default: 16 }}px;
+    padding: 30px;
+    border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
+    position: relative;
+    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 113, 185, {{ settings.tradeshow_card_shadow_opacity | default: 10 | divided_by: 100.0 }});
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .trade-show-event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 113, 185, 0.02) 0%, rgba(0, 168, 230, 0.05) 100%);
+    opacity: 0;
+    transition: opacity {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+  }
+
+  {% if settings.tradeshow_enable_hover_effects %}
+    .trade-show-event-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 113, 185, 0.25);
+      border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    }
+
+    .trade-show-event-card:hover::before {
+      opacity: 1;
+    }
+  {% endif %}
+
+  /* Status Badge */
+  .event-status-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+  }
+
+  .event-status-badge.upcoming {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  }
+
+  .event-status-badge.live {
+    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    color: white;
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  }
+
+  .event-status-badge.past {
+    background: linear-gradient(135deg, #6c757d, #8d959a);
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+  }
+
+  /* Card Header */
+  .trade-show-card-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .trade-show-card-left {
+    flex: 1;
+  }
+
+  .trade-show-card-right {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Event Information */
+  .trade-show-event-dates {
+    color: {{ settings.tradeshow_event_date_color | default: '#0071b9' }};
+    font-size: {{ settings.tradeshow_event_date_size | default: 14 }}px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    background: rgba(0, 113, 185, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  .trade-show-booth-info {
+    color: #28a745;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    background: rgba(40, 167, 69, 0.1);
+    padding: 4px 10px;
+    border-radius: 15px;
+    display: inline-block;
+  }
+
+  .trade-show-event-title {
+    color: {{ settings.tradeshow_event_title_color | default: '#2c3e50' }};
+    font-size: {{ settings.tradeshow_event_title_size | default: 24 }}px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .trade-show-event-description {
+    color: {{ settings.tradeshow_event_description_color | default: '#666666' }};
+    font-size: {{ settings.tradeshow_event_description_size | default: 14 }}px;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .trade-show-read-more-link {
+    color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    margin-left: 8px;
+    transition: color {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+  }
+
+  .trade-show-read-more-link:hover {
+    color: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
+  }
+
+  /* Event Logo */
+  .trade-show-event-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+  }
+
+  {% if settings.tradeshow_enable_hover_effects %}
+    .trade-show-event-card:hover .trade-show-event-logo {
+      transform: scale(1.1) rotate(2deg);
+    }
+  {% endif %}
+
+  /* Event Details */
+  .trade-show-event-details {
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .trade-show-detail-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .trade-show-detail-label {
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  .trade-show-detail-value {
+    color: #666;
+    font-size: 13px;
+    flex: 1;
+  }
+
+  .trade-show-location-link {
+    color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    text-decoration: none;
+    transition: color {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+  }
+
+  .trade-show-location-link:hover {
+    color: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
+    text-decoration: underline;
+  }
+
+  /* Event Actions */
+  .trade-show-event-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 5;
+  }
+
+  .trade-show-btn {
+    padding: 12px 20px;
+    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trade-show-view-event-btn {
+    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
+  }
+
+  .trade-show-view-event-btn:hover {
+    background: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 113, 185, 0.3);
+  }
+
+  .trade-show-calendar-btn {
+    background: {{ settings.tradeshow_button_secondary_bg | default: '#f8f9fa' }};
+    color: {{ settings.tradeshow_button_secondary_text | default: '#0071b9' }};
+    border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
+  }
+
+  .trade-show-calendar-btn:hover {
+    background: {{ settings.tradeshow_button_secondary_hover_bg | default: '#e9ecef' }};
+    transform: translateY(-2px);
+  }
+
+  /* Calendar Dropdown */
+  .trade-show-calendar-container {
+    position: relative;
+  }
+
+  .trade-show-calendar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid {{ settings.tradeshow_card_border_color | default: '#e6e6e6' }};
+    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 200px;
+    display: none;
+    animation: fadeInUp 0.3s ease;
+  }
+
+  .trade-show-calendar-dropdown.show {
+    display: block;
+  }
+
+  .trade-show-calendar-option {
+    display: block;
+    padding: 12px 16px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .trade-show-calendar-option:last-child {
+    border-bottom: none;
+  }
+
+  .trade-show-calendar-option:hover {
+    background: {{ settings.tradeshow_button_secondary_bg | default: '#f8f9fa' }};
+    color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+  }
+
+  /* View All Button */
+  .tradeshow-view-all-container {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .tradeshow-view-all-btn {
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #00a8e6);
+    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
+    padding: 16px 32px;
+    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all {{ settings.tradeshow_animation_duration | default: 300 }}ms ease;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tradeshow-view-all-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 113, 185, 0.4);
+  }
+
+  /* Modal Styles */
+  .tradeshow-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+  }
+
+  .tradeshow-modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+  }
+
+  .tradeshow-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .tradeshow-modal-close:hover {
+    color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+  }
+
+  .tradeshow-modal-body {
+    margin-top: 20px;
+    line-height: 1.6;
+    color: #666;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+    }
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .tradeshow-section {
+      padding: {{ settings.tradeshow_padding_top_mobile | default: 40 }}px 0 {{ settings.tradeshow_padding_bottom_mobile | default: 40 }}px 0;
+    }
+
+    .tradeshow-title {
+      font-size: {{ settings.tradeshow_title_size_mobile | default: 28 }}px;
+    }
+
+    .tradeshow-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .trade-show-card-header {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .trade-show-card-right {
+      width: 80px;
+      height: 80px;
+      align-self: center;
+    }
+
+    .trade-show-event-actions {
+      flex-direction: column;
+    }
+
+    .trade-show-btn {
+      text-align: center;
+    }
+
+    .tradeshow-container {
+      padding: 0 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .trade-show-event-card {
+      padding: 20px;
+    }
+
+    .trade-show-event-title {
+      font-size: 20px;
+    }
+
+    .tradeshow-filter-tabs {
+      gap: 10px;
+    }
+
+    .tradeshow-filter-tab {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Filter functionality
+  const filterTabs = document.querySelectorAll('.tradeshow-filter-tab');
+  const eventCards = document.querySelectorAll('.trade-show-event-card');
+
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      
+      // Update active tab
+      filterTabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Filter events
+      eventCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-event-status') === filter) {
+          card.style.display = 'block';
+          card.style.animation = 'fadeInUp 0.6s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Parallax effect
+  {% if settings.tradeshow_enable_parallax %}
+  window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const parallax = document.querySelector('.tradeshow-bg-decoration');
+    if (parallax) {
+      const speed = scrolled * 0.5;
+      parallax.style.transform = `translate3d(0, ${speed}px, 0)`;
+    }
+  });
+  {% endif %}
+
+  // Stagger animation for cards
+  const cards = document.querySelectorAll('.trade-show-event-card');
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.1}s`;
+  });
+});
+
+// Calendar dropdown functionality
+function toggleCalendarDropdown(button) {
+  const dropdown = button.nextElementSibling;
+  const isVisible = dropdown.classList.contains('show');
+  
+  // Close all dropdowns
+  document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
+    d.classList.remove('show');
+  });
+  
+  // Toggle current dropdown
+  if (!isVisible) {
+    dropdown.classList.add('show');
+  }
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.trade-show-calendar-container')) {
+    document.querySelectorAll('.trade-show-calendar-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+  }
+});
+
+// Calendar integration functions
+function addToCalendar(type, eventId) {
+  // Get event details from the card
+  const card = document.querySelector(`[data-event-id="${eventId}"]`);
+  if (!card) return;
+  
+  const title = card.querySelector('.trade-show-event-title')?.textContent || 'Trade Show Event';
+  const dates = card.querySelector('.trade-show-event-dates')?.textContent.replace('📅 ', '') || '';
+  const location = card.querySelector('.trade-show-location-link')?.textContent.replace('📍 ', '') || '';
+  
+  // Calendar URLs would be generated here based on the type
+  console.log(`Adding to ${type} calendar:`, { title, dates, location });
+}
+
+// Modal functionality
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  if (event.target.classList.contains('tradeshow-modal')) {
+    event.target.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Trade Show Section",
+  "tag": "section",
+  "class": "tradeshow-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Upcoming Trade Shows"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Meet us at these upcoming events to discover our latest innovations"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter_tabs",
+      "label": "Show Filter Tabs",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all_button",
+      "label": "Show View All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Button Text",
+      "default": "View All Trade Shows"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Button URL",
+      "default": "/pages/trade-shows"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tradeshow_event",
+      "name": "Trade Show Event",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Event Information"
+        },
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event Title",
+          "default": "Trade Show Name"
+        },
+        {
+          "type": "text",
+          "id": "event_dates",
+          "label": "Event Dates",
+          "default": "January 15-17, 2024"
+        },
+        {
+          "type": "text",
+          "id": "event_time",
+          "label": "Event Time",
+          "default": "9:00 AM - 5:00 PM"
+        },
+        {
+          "type": "text",
+          "id": "event_location",
+          "label": "City/Country",
+          "default": "New York, NY/USA"
+        },
+        {
+          "type": "text",
+          "id": "venue_name",
+          "label": "Venue Name",
+          "default": "Convention Center"
+        },
+        {
+          "type": "url",
+          "id": "venue_map_url",
+          "label": "Venue Map URL"
+        },
+        {
+          "type": "text",
+          "id": "booth_number",
+          "label": "Booth Number",
+          "default": "A123"
+        },
+        {
+          "type": "select",
+          "id": "event_status",
+          "label": "Event Status",
+          "default": "upcoming",
+          "options": [
+            {
+              "value": "upcoming",
+              "label": "Upcoming"
+            },
+            {
+              "value": "live",
+              "label": "Live Now"
+            },
+            {
+              "value": "past",
+              "label": "Past Event"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Event Description"
+        },
+        {
+          "type": "textarea",
+          "id": "event_description",
+          "label": "Short Description",
+          "default": "Join us at this premier industry event featuring the latest innovations in bioprocessing technology."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_read_more",
+          "label": "Show Read More Link",
+          "default": true
+        },
+        {
+          "type": "richtext",
+          "id": "detailed_description",
+          "label": "Detailed Description (Modal Content)"
+        },
+        {
+          "type": "header",
+          "content": "Event Logo & Links"
+        },
+        {
+          "type": "image_picker",
+          "id": "event_logo",
+          "label": "Event Logo"
+        },
+        {
+          "type": "url",
+          "id": "locator_url",
+          "label": "Event Locator URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_calendar_buttons",
+          "label": "Show Calendar Buttons",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Show Section",
+      "category": "Events",
+      "blocks": [
+        {
+          "type": "tradeshow_event"
+        },
+        {
+          "type": "tradeshow_event"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

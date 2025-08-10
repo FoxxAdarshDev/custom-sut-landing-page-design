@@ -12382,5 +12382,340 @@
         "info": "API Key Gemini Cloud"
       }
     ]
+  },
+  {
+    "name": "Trade Show Section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General Settings"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_background_color",
+        "label": "Background Color",
+        "default": "#f8f9fa"
+      },
+      {
+        "type": "color_background",
+        "id": "tradeshow_background_gradient",
+        "label": "Background Gradient"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_padding_top",
+        "label": "Padding Top",
+        "min": 0,
+        "max": 120,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_padding_bottom",
+        "label": "Padding Bottom",
+        "min": 0,
+        "max": 120,
+        "step": 10,
+        "unit": "px",
+        "default": 80
+      },
+      {
+        "type": "header",
+        "content": "Section Title"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_title_color",
+        "label": "Title Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_title_size",
+        "label": "Title Font Size",
+        "min": 24,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_title_line_height",
+        "label": "Title Line Height",
+        "min": 1,
+        "max": 3,
+        "step": 0.1,
+        "default": 1.2
+      },
+      {
+        "type": "select",
+        "id": "tradeshow_title_font_weight",
+        "label": "Title Font Weight",
+        "default": "700",
+        "options": [
+          {
+            "value": "400",
+            "label": "Normal"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Card Styling"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_card_background",
+        "label": "Card Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_card_border_color",
+        "label": "Card Border Color",
+        "default": "#e6e6e6"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_card_border_radius",
+        "label": "Card Border Radius",
+        "min": 0,
+        "max": 30,
+        "step": 2,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_card_shadow_color",
+        "label": "Card Shadow Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_card_shadow_opacity",
+        "label": "Card Shadow Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "Event Text"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_event_title_color",
+        "label": "Event Title Color",
+        "default": "#2c3e50"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_event_title_size",
+        "label": "Event Title Font Size",
+        "min": 16,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_event_date_color",
+        "label": "Event Date Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_event_date_size",
+        "label": "Event Date Font Size",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_event_description_color",
+        "label": "Event Description Color",
+        "default": "#666666"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_event_description_size",
+        "label": "Event Description Font Size",
+        "min": 12,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_primary_bg",
+        "label": "Primary Button Background",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_primary_text",
+        "label": "Primary Button Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_primary_hover_bg",
+        "label": "Primary Button Hover Background",
+        "default": "#005a94"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_secondary_bg",
+        "label": "Secondary Button Background",
+        "default": "#f8f9fa"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_secondary_text",
+        "label": "Secondary Button Text Color",
+        "default": "#0071b9"
+      },
+      {
+        "type": "color",
+        "id": "tradeshow_button_secondary_hover_bg",
+        "label": "Secondary Button Hover Background",
+        "default": "#e9ecef"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_button_border_radius",
+        "label": "Button Border Radius",
+        "min": 0,
+        "max": 25,
+        "step": 1,
+        "unit": "px",
+        "default": 8
+      },
+      {
+        "type": "header",
+        "content": "Layout Options"
+      },
+      {
+        "type": "select",
+        "id": "tradeshow_cards_per_row",
+        "label": "Cards Per Row (Desktop)",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "1 Card"
+          },
+          {
+            "value": "2",
+            "label": "2 Cards"
+          },
+          {
+            "value": "3",
+            "label": "3 Cards"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_card_gap",
+        "label": "Gap Between Cards",
+        "min": 16,
+        "max": 48,
+        "step": 4,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "Animation & Effects"
+      },
+      {
+        "type": "checkbox",
+        "id": "tradeshow_enable_hover_effects",
+        "label": "Enable Hover Effects",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "tradeshow_enable_parallax",
+        "label": "Enable Parallax Background",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_animation_duration",
+        "label": "Animation Duration",
+        "min": 200,
+        "max": 800,
+        "step": 50,
+        "unit": "ms",
+        "default": 300
+      },
+      {
+        "type": "header",
+        "content": "Mobile Settings"
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_title_size_mobile",
+        "label": "Title Font Size (Mobile)",
+        "min": 20,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_padding_top_mobile",
+        "label": "Padding Top (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "tradeshow_padding_bottom_mobile",
+        "label": "Padding Bottom (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      }
+    ]
   }
 ]
