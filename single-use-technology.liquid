@@ -1,4 +1,3 @@
-
 <style>
   .sut-main-container {
     max-width: 100%;
@@ -398,61 +397,53 @@
 
   .sut-categories-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
     margin-top: 40px;
   }
 
   .sut-category-card {
-    border-radius: 25px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    min-height: 450px;
+    min-height: 350px;
+    background: white;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
   }
 
   .sut-category-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Alternating card backgrounds */
-  .sut-category-card:nth-child(odd) {
-    background: white;
-  }
-
-  .sut-category-card:nth-child(even) {
-    background: rgba(0, 113, 185, 0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   }
 
   .sut-category-content {
-    padding: 40px;
+    padding: 30px 30px 20px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     z-index: 2;
-    height: 100%;
   }
 
   .sut-category-image-wrapper {
     position: relative;
-    height: 100%;
+    height: 120px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 20px;
     overflow: hidden;
+    background: transparent;
   }
 
   .sut-category-image {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 100px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -460,13 +451,13 @@
   }
 
   .sut-category-card:hover .sut-category-image {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   .sut-category-name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.3;
     color: #0071b9;
   }
@@ -474,13 +465,13 @@
   .sut-category-desc {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     flex: 1;
     color: #666;
   }
 
   .sut-category-button {
-    padding: 12px 30px;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -492,8 +483,6 @@
     align-self: flex-start;
     background: #0071b9;
     color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
   }
 
   .sut-category-button:hover {
@@ -725,31 +714,29 @@
 
     .sut-categories-grid {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 20px;
     }
 
     .sut-category-card {
-      min-height: 350px;
-      grid-template-columns: 1fr;
-      grid-template-rows: 200px 1fr;
+      min-height: 300px;
     }
 
     .sut-category-image-wrapper {
-      height: 200px;
-      padding: 20px;
+      height: 100px;
+      padding: 15px;
     }
 
     .sut-category-content {
-      padding: 30px 25px;
+      padding: 20px 20px 15px 20px;
     }
 
     .sut-category-image {
-      max-width: 150px;
-      max-height: 120px;
+      max-width: 120px;
+      max-height: 80px;
     }
 
     .sut-category-name {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     .sut-stats-grid {
@@ -791,10 +778,6 @@
   @media (max-width: 1024px) and (min-width: 769px) {
     .sut-stats-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .sut-categories-grid {
-      grid-template-columns: 1fr;
     }
   }
 
@@ -1474,16 +1457,6 @@
           "id": "tab_active",
           "label": "Set as Active Tab",
           "default": false
-        },
-        {
-          "type": "range",
-          "id": "tab_order",
-          "label": "Tab Order",
-          "min": 1,
-          "max": 10,
-          "step": 1,
-          "default": 1,
-          "info": "Set the order of this tab (lower numbers appear first)"
         }
       ]
     },
@@ -1522,16 +1495,6 @@
           "type": "url",
           "id": "category_url",
           "label": "Category URL"
-        },
-        {
-          "type": "range",
-          "id": "category_order",
-          "label": "Category Order",
-          "min": 1,
-          "max": 20,
-          "step": 1,
-          "default": 1,
-          "info": "Set the order of this category within its tab (lower numbers appear first)"
         }
       ]
     },
@@ -1860,15 +1823,13 @@
           "type": "category_tab",
           "settings": {
             "tab_name": "Accumax",
-            "tab_active": true,
-            "tab_order": 1
+            "tab_active": true
           }
         },
         {
           "type": "category_tab",
           "settings": {
-            "tab_name": "Neuation",
-            "tab_order": 2
+            "tab_name": "Neuation"
           }
         },
         {
@@ -1876,8 +1837,7 @@
           "settings": {
             "category_tab": "Accumax",
             "category_name": "FAB Pipette",
-            "category_description": "With unmatched precision and accuracy, it offers ergonomic pipetting ensuring consistent results",
-            "category_order": 1
+            "category_description": "With unmatched precision and accuracy, it offers ergonomic pipetting ensuring consistent results"
           }
         },
         {
@@ -1885,8 +1845,7 @@
           "settings": {
             "category_tab": "Accumax",
             "category_name": "GreenMAX Tip Racks",
-            "category_description": "They work seamlessly with single channel and multi-channel pipettes, making loading and unloading tips a breeze.",
-            "category_order": 2
+            "category_description": "They work seamlessly with single channel and multi-channel pipettes, making loading and unloading tips a breeze."
           }
         },
         {
@@ -2185,45 +2144,49 @@
 
             <!-- Category Tabs -->
             <div class="sut-category-tabs">
-              {% assign sorted_tabs = section.blocks | where: 'type', 'category_tab' | sort: 'settings.tab_order' %}
-              {% for tab_block in sorted_tabs %}
-                <button class="sut-tab-button{% if tab_block.settings.tab_active %} active{% endif %}" 
-                        onclick="switchSUTTab('{{ tab_block.settings.tab_name | handleize }}')" 
-                        {{ tab_block.shopify_attributes }}>
-                  {{ tab_block.settings.tab_name }}
-                </button>
+              {% for tab_block in section.blocks %}
+                {% if tab_block.type == 'category_tab' %}
+                  <button class="sut-tab-button{% if tab_block.settings.tab_active %} active{% endif %}" 
+                          onclick="switchSUTTab('{{ tab_block.settings.tab_name | handleize }}')" 
+                          {{ tab_block.shopify_attributes }}>
+                    {{ tab_block.settings.tab_name }}
+                  </button>
+                {% endif %}
               {% endfor %}
             </div>
 
             <!-- Category Content -->
-            {% for tab_block in sorted_tabs %}
-              <div id="sut-tab-{{ tab_block.settings.tab_name | handleize }}" 
-                   class="sut-tab-content{% if tab_block.settings.tab_active %} active{% endif %}" 
-                   style="display: {% if tab_block.settings.tab_active %}block{% else %}none{% endif %};">
-                <div class="sut-categories-grid">
-                  {% assign sorted_categories = section.blocks | where: 'type', 'product_category' | where: 'settings.category_tab', tab_block.settings.tab_name | sort: 'settings.category_order' %}
-                  {% for category_block in sorted_categories %}
-                    <div class="sut-category-card" {{ category_block.shopify_attributes }}>
-                      <div class="sut-category-content">
-                        <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
-                        <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
-                        {% if category_block.settings.category_url %}
-                          <a href="{{ category_block.settings.category_url }}" class="sut-category-button">
-                            Know More
-                          </a>
-                        {% endif %}
-                      </div>
-                      {% if category_block.settings.category_image %}
-                        <div class="sut-category-image-wrapper">
-                          <img src="{{ category_block.settings.category_image | img_url: '400x' }}" 
-                               alt="{{ category_block.settings.category_name }}" 
-                               class="sut-category-image">
+            {% for tab_block in section.blocks %}
+              {% if tab_block.type == 'category_tab' %}
+                <div id="sut-tab-{{ tab_block.settings.tab_name | handleize }}" 
+                     class="sut-tab-content{% if tab_block.settings.tab_active %} active{% endif %}" 
+                     style="display: {% if tab_block.settings.tab_active %}block{% else %}none{% endif %};">
+                  <div class="sut-categories-grid">
+                    {% for category_block in section.blocks %}
+                      {% if category_block.type == 'product_category' and category_block.settings.category_tab == tab_block.settings.tab_name %}
+                        <div class="sut-category-card" {{ category_block.shopify_attributes }}>
+                          <div class="sut-category-content">
+                            <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
+                            <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
+                            {% if category_block.settings.category_url %}
+                              <a href="{{ category_block.settings.category_url }}" class="sut-category-button">
+                                Know More
+                              </a>
+                            {% endif %}
+                          </div>
+                          {% if category_block.settings.category_image %}
+                            <div class="sut-category-image-wrapper">
+                              <img src="{{ category_block.settings.category_image | img_url: '300x' }}" 
+                                   alt="{{ category_block.settings.category_name }}" 
+                                   class="sut-category-image">
+                            </div>
+                          {% endif %}
                         </div>
                       {% endif %}
-                    </div>
-                  {% endfor %}
+                    {% endfor %}
+                  </div>
                 </div>
-              </div>
+              {% endif %}
             {% endfor %}
           </div>
         </section>
