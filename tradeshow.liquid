@@ -1,7 +1,7 @@
 
 {% comment %}
-  Trade Show Section - Clean Professional Version
-  Displays upcoming and past trade shows with clean design
+  Trade Show Section - Modern Clean Design
+  Displays upcoming and past trade shows with improved UI/UX
 {% endcomment %}
 
 <section class="tradeshow-section" data-section-id="{{ section.id }}">
@@ -44,84 +44,82 @@
                  data-event-status="{{ block.settings.event_status }}"
                  data-event-id="{{ block.id }}">
 
-              <!-- Status Badge (No Emoji) -->
-              {% if block.settings.event_status == 'upcoming' %}
-                <div class="event-status-badge upcoming">
-                  UPCOMING
-                </div>
-              {% elsif block.settings.event_status == 'live' %}
-                <div class="event-status-badge live">
-                  LIVE NOW
-                </div>
-              {% elsif block.settings.event_status == 'past' %}
-                <div class="event-status-badge past">
-                  COMPLETED
-                </div>
-              {% endif %}
-
-              <div class="trade-show-card-content">
-                <div class="trade-show-card-header">
-                  <div class="trade-show-card-left">
-                    {% if block.settings.event_dates != blank %}
-                      <div class="trade-show-event-dates">
-                        {{ block.settings.event_dates }}
-                      </div>
-                    {% endif %}
-
-                    {% if block.settings.booth_number != blank %}
-                      <div class="trade-show-booth-info">
-                        Booth: {{ block.settings.booth_number }}
-                      </div>
-                    {% endif %}
-
-                    {% if block.settings.event_title != blank %}
-                      <h3 class="trade-show-event-title">{{ block.settings.event_title }}</h3>
-                    {% endif %}
-
-                    {% if block.settings.event_description != blank %}
-                      <div class="trade-show-event-description">
-                        {{ block.settings.event_description | truncate: 150 }}
-                        {% if block.settings.show_read_more %}
-                          <button class="trade-show-read-more-link" onclick="openModal('{{ block.id }}-modal')">
-                            Read More
-                          </button>
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                  </div>
-
-                  <div class="trade-show-card-right">
-                    {% if block.settings.event_logo != blank %}
-                      <div class="trade-show-logo-container">
-                        <img src="{{ block.settings.event_logo | img_url: '200x200' }}" 
-                             alt="{{ block.settings.event_title | escape }} Logo" 
-                             class="trade-show-event-logo">
-                      </div>
-                    {% endif %}
-                  </div>
+              <!-- Card Header with Status and Logo -->
+              <div class="card-header">
+                <div class="header-left">
+                  {% if block.settings.event_dates != blank %}
+                    <div class="event-date-badge">
+                      {{ block.settings.event_dates }}
+                    </div>
+                  {% endif %}
+                  
+                  {% if block.settings.booth_number != blank %}
+                    <div class="booth-badge">
+                      Booth: {{ block.settings.booth_number }}
+                    </div>
+                  {% endif %}
                 </div>
 
-                <div class="trade-show-event-details">
+                <div class="header-right">
+                  <!-- Status Badge -->
+                  {% if block.settings.event_status == 'upcoming' %}
+                    <div class="status-badge upcoming">UPCOMING</div>
+                  {% elsif block.settings.event_status == 'live' %}
+                    <div class="status-badge live">LIVE NOW</div>
+                  {% elsif block.settings.event_status == 'past' %}
+                    <div class="status-badge past">COMPLETED</div>
+                  {% endif %}
+
+                  <!-- Event Logo -->
+                  {% if block.settings.event_logo != blank %}
+                    <div class="event-logo">
+                      <img src="{{ block.settings.event_logo | img_url: '120x80' }}" 
+                           alt="{{ block.settings.event_title | escape }} Logo" 
+                           class="logo-img">
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card-body">
+                {% if block.settings.event_title != blank %}
+                  <h3 class="event-title">{{ block.settings.event_title }}</h3>
+                {% endif %}
+
+                {% if block.settings.event_description != blank %}
+                  <p class="event-description">
+                    {{ block.settings.event_description | truncate: 120 }}
+                    {% if block.settings.show_read_more %}
+                      <button class="read-more-btn" onclick="openModal('{{ block.id }}-modal')">
+                        Read More
+                      </button>
+                    {% endif %}
+                  </p>
+                {% endif %}
+
+                <!-- Event Details Grid -->
+                <div class="event-details">
                   {% if block.settings.event_time != blank %}
-                    <div class="trade-show-detail-row">
-                      <span class="trade-show-detail-label">Time:</span>
-                      <span class="trade-show-detail-value">{{ block.settings.event_time }}</span>
+                    <div class="detail-item">
+                      <span class="detail-icon">⏰</span>
+                      <span class="detail-text">{{ block.settings.event_time }}</span>
                     </div>
                   {% endif %}
 
                   {% if block.settings.event_location != blank %}
-                    <div class="trade-show-detail-row">
-                      <span class="trade-show-detail-label">Location:</span>
-                      <span class="trade-show-detail-value">{{ block.settings.event_location }}</span>
+                    <div class="detail-item">
+                      <span class="detail-icon">📍</span>
+                      <span class="detail-text">{{ block.settings.event_location }}</span>
                     </div>
                   {% endif %}
 
                   {% if block.settings.venue_name != blank %}
-                    <div class="trade-show-detail-row">
-                      <span class="trade-show-detail-label">Venue:</span>
-                      <span class="trade-show-detail-value">
+                    <div class="detail-item">
+                      <span class="detail-icon">🏢</span>
+                      <span class="detail-text">
                         {% if block.settings.venue_map_url != blank %}
-                          <a href="{{ block.settings.venue_map_url }}" target="_blank" class="trade-show-location-link">
+                          <a href="{{ block.settings.venue_map_url }}" target="_blank" class="venue-link">
                             {{ block.settings.venue_name }}
                           </a>
                         {% else %}
@@ -131,53 +129,64 @@
                     </div>
                   {% endif %}
                 </div>
+              </div>
 
-                <div class="trade-show-event-actions">
-                  {% if block.settings.locator_url != blank %}
-                    <a href="{{ block.settings.locator_url }}" target="_blank" class="trade-show-btn trade-show-primary-btn">
-                      Find Us
-                    </a>
-                  {% endif %}
+              <!-- Card Footer with Actions -->
+              <div class="card-footer">
+                {% if block.settings.locator_url != blank %}
+                  <a href="{{ block.settings.locator_url }}" target="_blank" class="btn btn-primary">
+                    <span class="btn-icon">🔍</span>
+                    Find Us
+                  </a>
+                {% endif %}
 
-                  {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
-                    <div class="trade-show-calendar-container">
-                      <button class="trade-show-btn trade-show-calendar-btn" onclick="toggleCalendarDropdown(this, '{{ block.id }}')">
-                        Add to Calendar
-                      </button>
-                      <div class="trade-show-calendar-dropdown" id="calendar-{{ block.id }}">
+                {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
+                  <div class="calendar-dropdown-wrapper">
+                    <button class="btn btn-secondary calendar-btn" onclick="toggleCalendarDropdown(this, '{{ block.id }}')">
+                      <span class="btn-icon">📅</span>
+                      Add to Calendar
+                      <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="calendar-dropdown" id="calendar-{{ block.id }}">
+                      <div class="dropdown-content">
                         <div class="dropdown-header">Choose Calendar</div>
-                        <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('google','{{ block.id }}')">
+                        <a href="#" class="calendar-option" onclick="addToCalendar('google','{{ block.id }}')">
+                          <span class="option-icon">📱</span>
                           Google Calendar
                         </a>
-                        <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('outlook','{{ block.id }}')">
+                        <a href="#" class="calendar-option" onclick="addToCalendar('outlook','{{ block.id }}')">
+                          <span class="option-icon">💼</span>
                           Outlook
                         </a>
-                        <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('yahoo','{{ block.id }}')">
+                        <a href="#" class="calendar-option" onclick="addToCalendar('yahoo','{{ block.id }}')">
+                          <span class="option-icon">🌐</span>
                           Yahoo Calendar
                         </a>
-                        <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('apple','{{ block.id }}')">
+                        <a href="#" class="calendar-option" onclick="addToCalendar('apple','{{ block.id }}')">
+                          <span class="option-icon">🍎</span>
                           Apple Calendar
                         </a>
-                        <a href="#" class="trade-show-calendar-option" onclick="addToCalendar('ics','{{ block.id }}')">
+                        <a href="#" class="calendar-option" onclick="addToCalendar('ics','{{ block.id }}')">
+                          <span class="option-icon">💾</span>
                           Download ICS
                         </a>
                       </div>
                     </div>
-                  {% endif %}
-                </div>
+                  </div>
+                {% endif %}
               </div>
             </div>
 
             <!-- Modal for detailed information -->
             {% if block.settings.show_read_more and block.settings.detailed_description != blank %}
-              <div id="{{ block.id }}-modal" class="tradeshow-modal">
-                <div class="tradeshow-modal-overlay" onclick="closeModal('{{ block.id }}-modal')"></div>
-                <div class="tradeshow-modal-content">
-                  <div class="tradeshow-modal-header">
+              <div id="{{ block.id }}-modal" class="event-modal">
+                <div class="modal-overlay" onclick="closeModal('{{ block.id }}-modal')"></div>
+                <div class="modal-content">
+                  <div class="modal-header">
                     <h3>{{ block.settings.event_title }}</h3>
-                    <button class="tradeshow-modal-close" onclick="closeModal('{{ block.id }}-modal')">&times;</button>
+                    <button class="modal-close" onclick="closeModal('{{ block.id }}-modal')">&times;</button>
                   </div>
-                  <div class="tradeshow-modal-body">
+                  <div class="modal-body">
                     {{ block.settings.detailed_description }}
                   </div>
                 </div>
@@ -190,7 +199,7 @@
     <!-- View All Button -->
     {% if section.settings.show_view_all_button and section.settings.view_all_url != blank %}
       <div class="tradeshow-view-all-container">
-        <a href="{{ section.settings.view_all_url }}" class="tradeshow-view-all-btn">
+        <a href="{{ section.settings.view_all_url }}" class="view-all-btn">
           {{ section.settings.view_all_text | default: "View All Trade Shows" }}
         </a>
       </div>
@@ -202,9 +211,11 @@
   /* Reset and Base Styles */
   .tradeshow-section * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Main Section Styles */
+  /* Main Section */
   .tradeshow-section {
     background: {{ settings.tradeshow_background_color | default: '#f8f9fa' }};
     {% if settings.tradeshow_background_gradient != blank %}
@@ -215,7 +226,7 @@
   }
 
   .tradeshow-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -257,324 +268,303 @@
   /* Trade Show Grid */
   .tradeshow-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: {{ settings.tradeshow_card_gap | default: 30 }}px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 30px;
     margin-bottom: 60px;
   }
 
-  /* Event Card Styles - New Clean Design */
+  /* Modern Card Design */
   .trade-show-event-card {
-    background: {{ settings.tradeshow_card_background | default: '#ffffff' }};
-    border-radius: {{ settings.tradeshow_card_border_radius | default: 20 }}px;
-    position: relative;
-    transition: all 300ms ease;
+    background: #ffffff;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.08);
-    animation: fadeInUp 0.6s ease forwards;
-    border: 2px solid transparent;
-    min-height: 420px;
+    box-shadow: 0 10px 30px rgba(0, 113, 185, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
   }
 
   .trade-show-event-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 113, 185, 0.15);
+    box-shadow: 0 25px 50px rgba(0, 113, 185, 0.15);
     border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
   }
 
-  /* Card Content Wrapper */
-  .trade-show-card-content {
-    padding: 32px;
-    height: 100%;
+  /* Card Header */
+  .card-header {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px 24px 0 24px;
+    gap: 16px;
   }
 
-  /* Status Badge - Clean Design */
-  .event-status-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Date and Booth Badges */
+  .event-date-badge {
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #0056b3);
+    color: white;
     padding: 8px 16px;
     border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .booth-badge {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Status Badge */
+  .status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    z-index: 10;
   }
 
-  .event-status-badge.upcoming {
-    background: #28a745;
+  .status-badge.upcoming {
+    background: linear-gradient(135deg, #28a745, #20c997);
     color: white;
   }
 
-  .event-status-badge.live {
-    background: #dc3545;
+  .status-badge.live {
+    background: linear-gradient(135deg, #dc3545, #c82333);
     color: white;
     animation: pulse 2s infinite;
   }
 
-  .event-status-badge.past {
-    background: #6c757d;
+  .status-badge.past {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
     color: white;
   }
 
-  /* Card Header */
-  .trade-show-card-header {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
+  /* Event Logo */
+  .event-logo {
+    width: 100px;
+    height: 60px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 8px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+  }
+
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .trade-show-event-card:hover .event-logo {
+    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    transform: scale(1.05);
+  }
+
+  /* Card Body */
+  .card-body {
+    padding: 24px;
     flex: 1;
-  }
-
-  .trade-show-card-left {
-    flex: 1;
-  }
-
-  .trade-show-card-right {
-    flex-shrink: 0;
-    width: 120px;
-    height: 80px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  /* Event Information - Clean Typography */
-  .trade-show-event-dates {
-    color: {{ settings.tradeshow_event_date_color | default: '#0071b9' }};
-    font-size: {{ settings.tradeshow_event_date_size | default: 14 }}px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    background: rgba(0, 113, 185, 0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
-    display: inline-block;
-  }
-
-  .trade-show-booth-info {
-    color: #28a745;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    background: rgba(40, 167, 69, 0.1);
-    padding: 6px 16px;
-    border-radius: 15px;
-    display: inline-block;
-  }
-
-  .trade-show-event-title {
-    color: {{ settings.tradeshow_event_title_color | default: '#2c3e50' }};
-    font-size: {{ settings.tradeshow_event_title_size | default: 24 }}px;
+  .event-title {
+    color: #2c3e50;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 16px;
     line-height: 1.3;
+    margin-bottom: 0;
   }
 
-  .trade-show-event-description {
-    color: {{ settings.tradeshow_event_description_color | default: '#666666' }};
-    font-size: {{ settings.tradeshow_event_description_size | default: 14 }}px;
+  .event-description {
+    color: #666;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 0;
   }
 
-  .trade-show-read-more-link {
+  .read-more-btn {
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     background: none;
     border: none;
     cursor: pointer;
     font-weight: 600;
     text-decoration: underline;
-    margin-left: 8px;
-    transition: color 300ms ease;
+    margin-left: 6px;
+    transition: color 0.3s ease;
     font-size: 14px;
   }
 
-  .trade-show-read-more-link:hover {
-    color: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
-  }
-
-  /* Logo Container */
-  .trade-show-logo-container {
-    width: 100%;
-    height: 100%;
-    background: #f8f9fa;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #e9ecef;
-    transition: all 300ms ease;
-  }
-
-  .trade-show-event-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 300ms ease;
-  }
-
-  .trade-show-event-card:hover .trade-show-logo-container {
-    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-  }
-
-  .trade-show-event-card:hover .trade-show-event-logo {
-    transform: scale(1.05);
+  .read-more-btn:hover {
+    color: #005a94;
   }
 
   /* Event Details */
-  .trade-show-event-details {
-    margin-bottom: 24px;
+  .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     background: #f8f9fa;
     padding: 20px;
     border-radius: 12px;
     border-left: 4px solid {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
   }
 
-  .trade-show-detail-row {
+  .detail-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: 10px;
+    font-size: 14px;
   }
 
-  .trade-show-detail-row:last-child {
-    margin-bottom: 0;
+  .detail-icon {
+    font-size: 16px;
+    width: 20px;
+    flex-shrink: 0;
   }
 
-  .trade-show-detail-label {
-    font-weight: 600;
-    color: #2c3e50;
-    min-width: 80px;
-    font-size: 13px;
-  }
-
-  .trade-show-detail-value {
-    color: #666;
-    font-size: 13px;
+  .detail-text {
+    color: #555;
     flex: 1;
   }
 
-  .trade-show-location-link {
+  .venue-link {
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     text-decoration: none;
-    transition: color 300ms ease;
+    transition: color 0.3s ease;
   }
 
-  .trade-show-location-link:hover {
-    color: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }};
+  .venue-link:hover {
+    color: #005a94;
     text-decoration: underline;
   }
 
-  /* Event Actions */
-  .trade-show-event-actions {
+  /* Card Footer */
+  .card-footer {
+    padding: 0 24px 24px 24px;
     display: flex;
     gap: 12px;
-    flex-wrap: wrap;
     margin-top: auto;
   }
 
-  .trade-show-btn {
+  /* Buttons */
+  .btn {
     padding: 12px 20px;
-    border-radius: {{ settings.tradeshow_button_border_radius | default: 8 }}px;
+    border-radius: 10px;
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
-    transition: all 300ms ease;
+    transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-  }
-
-  .trade-show-primary-btn {
-    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
+    gap: 8px;
     flex: 1;
+    position: relative;
   }
 
-  .trade-show-primary-btn:hover {
-    background: {{ settings.tradeshow_button_primary_hover_bg | default: '#005a94' }} !important;
-    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }} !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 113, 185, 0.3);
-  }
-
-  .trade-show-calendar-btn {
-    background: #28a745;
+  .btn-primary {
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #005a94);
     color: white;
-    flex: 1;
   }
 
-  .trade-show-calendar-btn:hover {
-    background: #20c997 !important;
-    color: white !important;
+  .btn-primary:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.3);
+    color: white;
   }
 
-  /* Calendar Dropdown - Fixed positioning to break out of card */
-  .trade-show-calendar-container {
+  .btn-secondary {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    color: white;
+  }
+
+  .btn-icon {
+    font-size: 16px;
+  }
+
+  /* Calendar Dropdown - Fixed Positioning */
+  .calendar-dropdown-wrapper {
     position: relative;
     flex: 1;
   }
 
-  .trade-show-calendar-dropdown {
-    position: fixed;
-    top: auto;
-    left: auto;
-    right: auto;
+  .dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .calendar-btn.active .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .calendar-dropdown {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 8px;
     background: white;
-    border: 1px solid #e6e6e6;
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    z-index: 10001; /* Very high z-index */
-    min-width: 220px;
-    display: none;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+    border: 1px solid #e6e6e6;
   }
 
-  .trade-show-calendar-dropdown.show {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
+  .calendar-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  /* Backdrop blur overlay */
-  .dropdown-backdrop {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.4) !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    z-index: 10000 !important;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease !important;
-    pointer-events: auto !important;
-  }
-
-  .dropdown-backdrop.show {
-    opacity: 1 !important;
-    visibility: visible !important;
+  .dropdown-content {
+    padding: 0;
   }
 
   .dropdown-header {
-    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #005a94);
     color: white;
     padding: 12px 16px;
     font-weight: 600;
@@ -584,53 +574,35 @@
     letter-spacing: 0.5px;
   }
 
-  .trade-show-calendar-option {
-    display: block;
+  .calendar-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 14px 16px;
     color: #2c3e50;
     text-decoration: none;
     font-size: 14px;
-    transition: all 300ms ease;
+    transition: all 0.3s ease;
     border-bottom: 1px solid #f0f0f0;
   }
 
-  .trade-show-calendar-option:last-child {
+  .calendar-option:last-child {
     border-bottom: none;
   }
 
-  .trade-show-calendar-option:hover {
+  .calendar-option:hover {
     background: #f8f9fa;
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     transform: translateX(4px);
   }
 
-  /* View All Button */
-  .tradeshow-view-all-container {
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  .tradeshow-view-all-btn {
-    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    color: {{ settings.tradeshow_button_primary_text | default: '#ffffff' }};
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-weight: 700;
-    text-decoration: none;
+  .option-icon {
     font-size: 16px;
-    transition: all 300ms ease;
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    width: 20px;
   }
 
-  .tradeshow-view-all-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 113, 185, 0.4);
-  }
-
-  /* Modal Styles */
-  .tradeshow-modal {
+  /* Modal Styles - Enhanced with Overlay */
+  .event-modal {
     display: none;
     position: fixed;
     z-index: 99999;
@@ -640,73 +612,103 @@
     height: 100%;
   }
 
-  .tradeshow-modal-overlay {
+  .modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
   }
 
-  .tradeshow-modal-content {
-    background-color: white;
+  .modal-content {
+    background: white;
     margin: 5% auto;
     padding: 0;
     border-radius: 20px;
     width: 90%;
     max-width: 600px;
     position: relative;
-    animation: modalSlideIn 0.3s ease;
+    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
   }
 
-  .tradeshow-modal-header {
-    background: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
+  .modal-header {
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #005a94);
     color: white;
-    padding: 20px 30px;
+    padding: 24px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .tradeshow-modal-header h3 {
+  .modal-header h3 {
     margin: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
   }
 
-  .tradeshow-modal-close {
+  .modal-close {
     color: white;
     background: none;
     border: none;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     padding: 0;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
   }
 
-  .tradeshow-modal-close:hover {
-    color: #ffcc00;
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
   }
 
-  .tradeshow-modal-body {
+  .modal-body {
     padding: 30px;
-    line-height: 1.6;
-    color: #666;
+    line-height: 1.7;
+    color: #555;
     overflow-y: auto;
     flex: 1;
+  }
+
+  /* View All Button */
+  .tradeshow-view-all-container {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .view-all-btn {
+    background: linear-gradient(135deg, {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }}, #005a94);
+    color: white;
+    padding: 18px 36px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .view-all-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 113, 185, 0.4);
+    color: white;
   }
 
   /* Animations */
@@ -733,14 +735,19 @@
     }
   }
 
-  @keyframes modalSlideIn {
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideInUp {
     from {
       opacity: 0;
-      transform: translateY(-50px);
+      transform: translateY(50px) scale(0.95);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -763,56 +770,70 @@
       gap: 20px;
     }
 
-    .trade-show-card-header {
+    .card-header {
       flex-direction: column;
-      gap: 16px;
+      align-items: flex-start;
+      gap: 12px;
     }
 
-    .trade-show-card-right {
-      width: 100px;
-      height: 60px;
-      align-self: center;
+    .header-right {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
     }
 
-    .trade-show-event-actions {
+    .event-logo {
+      width: 80px;
+      height: 50px;
+    }
+
+    .card-footer {
       flex-direction: column;
     }
 
-    .trade-show-btn {
+    .btn {
       width: 100%;
       justify-content: center;
     }
 
-    .trade-show-calendar-dropdown {
+    .calendar-dropdown {
       left: 0;
       right: 0;
-      width: 100%;
-      min-width: auto;
-      max-width: 100%;
     }
 
-    .trade-show-event-card {
-      padding: 20px;
-      min-height: 350px;
+    .modal-content {
+      margin: 20px;
+      width: calc(100% - 40px);
+      max-height: 90vh;
     }
 
-    .trade-show-card-content {
+    .modal-header {
       padding: 20px;
     }
 
-    .trade-show-event-title {
+    .modal-body {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .event-title {
       font-size: 20px;
     }
 
-    .tradeshow-modal-content {
-      margin: 10px;
-      width: calc(100% - 20px);
+    .card-body {
+      padding: 20px;
+    }
+
+    .event-details {
+      padding: 16px;
     }
   }
 </style>
 
 <script>
-// Calendar dropdown functionality with proper positioning
+// Enhanced Calendar dropdown functionality with improved positioning
 function toggleCalendarDropdown(button, eventId) {
   console.log('Toggling dropdown for event:', eventId);
   const dropdown = document.getElementById(`calendar-${eventId}`);
@@ -823,144 +844,49 @@ function toggleCalendarDropdown(button, eventId) {
   }
   
   const isVisible = dropdown.classList.contains('show');
-  console.log('Current visibility:', isVisible);
   
-  // Close all dropdowns and remove backdrop
-  document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
+  // Close all dropdowns first
+  document.querySelectorAll('.calendar-dropdown').forEach(d => {
     d.classList.remove('show');
   });
-  removeDropdownBackdrop();
+  document.querySelectorAll('.calendar-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
   
   // Toggle current dropdown
   if (!isVisible) {
-    // Position dropdown relative to button
-    const buttonRect = button.getBoundingClientRect();
-    const dropdownWidth = 220;
-    const dropdownHeight = 200; // Approximate height
-    
-    console.log('Button rect:', buttonRect);
-    
-    // Calculate position
-    let left = buttonRect.left;
-    let top = buttonRect.bottom + 8;
-    
-    // Adjust if dropdown would go off screen horizontally
-    if (left + dropdownWidth > window.innerWidth) {
-      left = buttonRect.right - dropdownWidth;
-    }
-    
-    if (left < 10) {
-      left = 10;
-    }
-    
-    // Adjust if dropdown would go off screen vertically
-    if (top + dropdownHeight > window.innerHeight) {
-      top = buttonRect.top - dropdownHeight - 8;
-    }
-    
-    // Ensure minimum distance from edges
-    if (top < 10) {
-      top = 10;
-    }
-    
-    console.log('Setting dropdown position:', { left, top });
-    
-    // Set position and show with important styles
-    dropdown.style.setProperty('left', left + 'px', 'important');
-    dropdown.style.setProperty('top', top + 'px', 'important');
-    dropdown.style.setProperty('position', 'fixed', 'important');
-    dropdown.style.setProperty('z-index', '10001', 'important');
-    
-    // Add backdrop first
-    addDropdownBackdrop();
-    
-    // Then show dropdown
-    setTimeout(() => {
-      dropdown.classList.add('show');
-    }, 50);
+    button.classList.add('active');
+    dropdown.classList.add('show');
   }
 }
 
-// Add backdrop blur
-function addDropdownBackdrop() {
-  console.log('Adding backdrop');
-  // Remove existing backdrop if any
-  removeDropdownBackdrop();
-  
-  const backdrop = document.createElement('div');
-  backdrop.className = 'dropdown-backdrop';
-  backdrop.id = 'dropdown-backdrop';
-  
-  // Set styles directly with important
-  backdrop.style.setProperty('position', 'fixed', 'important');
-  backdrop.style.setProperty('top', '0', 'important');
-  backdrop.style.setProperty('left', '0', 'important');
-  backdrop.style.setProperty('width', '100vw', 'important');
-  backdrop.style.setProperty('height', '100vh', 'important');
-  backdrop.style.setProperty('background', 'rgba(0, 0, 0, 0.4)', 'important');
-  backdrop.style.setProperty('backdrop-filter', 'blur(5px)', 'important');
-  backdrop.style.setProperty('-webkit-backdrop-filter', 'blur(5px)', 'important');
-  backdrop.style.setProperty('z-index', '10000', 'important');
-  backdrop.style.setProperty('pointer-events', 'auto', 'important');
-  backdrop.style.setProperty('transition', 'all 0.3s ease', 'important');
-  
-  document.body.appendChild(backdrop);
-  
-  // Trigger show with slight delay for transition
-  setTimeout(() => {
-    backdrop.classList.add('show');
-  }, 10);
-  
-  // Close dropdown when clicking backdrop
-  backdrop.addEventListener('click', function(e) {
-    console.log('Backdrop clicked');
-    e.preventDefault();
-    e.stopPropagation();
-    closeAllDropdowns();
-  });
-}
-
-// Remove backdrop blur
-function removeDropdownBackdrop() {
-  const backdrop = document.getElementById('dropdown-backdrop');
-  if (backdrop) {
-    console.log('Removing backdrop');
-    backdrop.classList.remove('show');
-    setTimeout(() => {
-      if (backdrop && backdrop.parentNode) {
-        backdrop.parentNode.removeChild(backdrop);
-      }
-    }, 300);
-  }
-}
-
-// Helper function to close all dropdowns
-function closeAllDropdowns() {
-  console.log('Closing all dropdowns');
-  document.querySelectorAll('.trade-show-calendar-dropdown').forEach(dropdown => {
-    dropdown.classList.remove('show');
-  });
-  removeDropdownBackdrop();
-}
-
-// Close dropdowns when clicking outside (but not on dropdown itself)
+// Close dropdowns when clicking outside
 document.addEventListener('click', function(event) {
-  // Don't close if clicking on the dropdown or its button
-  if (!event.target.closest('.trade-show-calendar-container') && 
-      !event.target.closest('.trade-show-calendar-dropdown')) {
-    closeAllDropdowns();
+  if (!event.target.closest('.calendar-dropdown-wrapper')) {
+    document.querySelectorAll('.calendar-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+    document.querySelectorAll('.calendar-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
   }
-});
-
-// Handle window resize
-window.addEventListener('resize', function() {
-  closeAllDropdowns();
 });
 
 // Handle escape key
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
-    closeAllDropdowns();
+    document.querySelectorAll('.calendar-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+    document.querySelectorAll('.calendar-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    
+    // Also close modals
+    document.querySelectorAll('.event-modal').forEach(modal => {
+      modal.style.display = 'none';
+    });
+    document.body.style.overflow = 'auto';
   }
 });
 
@@ -974,10 +900,10 @@ function addToCalendar(platform, eventId) {
     return;
   }
   
-  const title = card.querySelector('.trade-show-event-title')?.textContent || 'Trade Show Event';
-  const dates = card.querySelector('.trade-show-event-dates')?.textContent || '';
-  const location = card.querySelector('.trade-show-detail-value')?.textContent || '';
-  const description = card.querySelector('.trade-show-event-description')?.textContent || '';
+  const title = card.querySelector('.event-title')?.textContent || 'Trade Show Event';
+  const dates = card.querySelector('.event-date-badge')?.textContent || '';
+  const location = card.querySelector('.detail-text')?.textContent || '';
+  const description = card.querySelector('.event-description')?.textContent || '';
   
   const event = {
     title: title.trim(),
@@ -1011,7 +937,12 @@ function addToCalendar(platform, eventId) {
   
   // Close dropdown after selection
   setTimeout(() => {
-    closeAllDropdowns();
+    document.querySelectorAll('.calendar-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+    document.querySelectorAll('.calendar-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
   }, 100);
 }
 
@@ -1054,13 +985,21 @@ END:VCALENDAR`;
   window.URL.revokeObjectURL(url);
 }
 
-// Modal functionality
+// Enhanced Modal functionality with proper overlay
 function openModal(modalId) {
   console.log('Opening modal:', modalId);
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    
+    // Add click event to overlay
+    const overlay = modal.querySelector('.modal-overlay');
+    if (overlay) {
+      overlay.onclick = function() {
+        closeModal(modalId);
+      };
+    }
   }
 }
 
@@ -1073,10 +1012,10 @@ function closeModal(modalId) {
   }
 }
 
-// Close modal when clicking outside
+// Close modal when clicking outside content
 window.addEventListener('click', function(event) {
-  if (event.target.classList.contains('tradeshow-modal-overlay')) {
-    const modal = event.target.closest('.tradeshow-modal');
+  if (event.target.classList.contains('modal-overlay')) {
+    const modal = event.target.closest('.event-modal');
     if (modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
