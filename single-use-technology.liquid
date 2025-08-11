@@ -405,10 +405,11 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 400px;
+    min-height: 350px;
     background: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
   }
 
   .sut-category-card:hover {
@@ -416,33 +417,37 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   }
 
-  .sut-category-image-wrapper {
-    height: 200px;
+  .sut-category-content {
+    padding: 30px 30px 20px 30px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 2;
+  }
+
+  .sut-category-image-wrapper {
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     padding: 20px;
     overflow: hidden;
-    background: #f8f9fa;
+    background: transparent;
   }
 
   .sut-category-image {
-    width: 100%;
-    height: 100%;
+    max-width: 150px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
   }
 
   .sut-category-card:hover .sut-category-image {
     transform: scale(1.05);
-  }
-
-  .sut-category-content {
-    padding: 30px;
-    position: relative;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
   }
 
   .sut-category-name {
@@ -708,16 +713,21 @@
     }
 
     .sut-category-card {
-      min-height: 350px;
+      min-height: 300px;
     }
 
     .sut-category-image-wrapper {
-      height: 150px;
+      height: 100px;
       padding: 15px;
     }
 
     .sut-category-content {
-      padding: 20px;
+      padding: 20px 20px 15px 20px;
+    }
+
+    .sut-category-image {
+      max-width: 120px;
+      max-height: 80px;
     }
 
     .sut-category-name {
@@ -2122,13 +2132,6 @@
                     {% for category_block in section.blocks %}
                       {% if category_block.type == 'product_category' and category_block.settings.category_tab == tab_block.settings.tab_name %}
                         <div class="sut-category-card" {{ category_block.shopify_attributes }}>
-                          {% if category_block.settings.category_image %}
-                            <div class="sut-category-image-wrapper">
-                              <img src="{{ category_block.settings.category_image | img_url: '500x' }}" 
-                                   alt="{{ category_block.settings.category_name }}" 
-                                   class="sut-category-image">
-                            </div>
-                          {% endif %}
                           <div class="sut-category-content">
                             <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
                             <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
@@ -2138,6 +2141,13 @@
                               </a>
                             {% endif %}
                           </div>
+                          {% if category_block.settings.category_image %}
+                            <div class="sut-category-image-wrapper">
+                              <img src="{{ category_block.settings.category_image | img_url: '300x' }}" 
+                                   alt="{{ category_block.settings.category_name }}" 
+                                   class="sut-category-image">
+                            </div>
+                          {% endif %}
                         </div>
                       {% endif %}
                     {% endfor %}
