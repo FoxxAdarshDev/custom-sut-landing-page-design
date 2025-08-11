@@ -409,11 +409,16 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    min-height: 350px;
-    background: white;
+    min-height: 280px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr 200px;
+    align-items: center;
+    gap: 20px;
+    background: white;
+  }
+
+  .sut-category-card:nth-child(even) {
+    background: rgba(0, 113, 185, 0.08);
   }
 
   .sut-category-card:hover {
@@ -422,28 +427,28 @@
   }
 
   .sut-category-content {
-    padding: 30px 30px 20px 30px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     z-index: 2;
   }
 
   .sut-category-image-wrapper {
     position: relative;
-    height: 120px;
+    height: 200px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
     overflow: hidden;
     background: transparent;
   }
 
   .sut-category-image {
-    max-width: 150px;
-    max-height: 100px;
+    max-width: 180px;
+    max-height: 160px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -455,23 +460,25 @@
   }
 
   .sut-category-name {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     line-height: 1.3;
     color: #0071b9;
+    max-width: 300px;
   }
 
   .sut-category-desc {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     flex: 1;
     color: #666;
+    max-width: 350px;
   }
 
   .sut-category-button {
-    padding: 12px 25px;
+    padding: 15px 30px;
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -483,6 +490,8 @@
     align-self: flex-start;
     background: #0071b9;
     color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .sut-category-button:hover {
@@ -719,24 +728,36 @@
 
     .sut-category-card {
       min-height: 300px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      text-align: center;
     }
 
     .sut-category-image-wrapper {
-      height: 100px;
+      height: 150px;
       padding: 15px;
+      order: 2;
     }
 
     .sut-category-content {
-      padding: 20px 20px 15px 20px;
+      padding: 25px 20px 20px 20px;
+      order: 1;
+      align-items: center;
+      text-align: center;
     }
 
     .sut-category-image {
-      max-width: 120px;
-      max-height: 80px;
+      max-width: 140px;
+      max-height: 120px;
     }
 
     .sut-category-name {
-      font-size: 20px;
+      font-size: 22px;
+    }
+
+    .sut-category-desc {
+      max-width: 100%;
+      text-align: center;
     }
 
     .sut-stats-grid {
