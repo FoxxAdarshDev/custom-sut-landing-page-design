@@ -182,23 +182,23 @@
                       {{ block.settings.detailed_description }}
                     {% else %}
                       <p>{{ block.settings.event_description | default: 'More details about this event will be available soon.' }}</p>
-                      
+
                       {% if block.settings.event_dates != blank %}
                         <p><strong>Event Dates:</strong> {{ block.settings.event_dates }}</p>
                       {% endif %}
-                      
+
                       {% if block.settings.event_time != blank %}
                         <p><strong>Event Time:</strong> {{ block.settings.event_time }}</p>
                       {% endif %}
-                      
+
                       {% if block.settings.event_location != blank %}
                         <p><strong>Location:</strong> {{ block.settings.event_location }}</p>
                       {% endif %}
-                      
+
                       {% if block.settings.venue_name != blank %}
                         <p><strong>Venue:</strong> {{ block.settings.venue_name }}</p>
                       {% endif %}
-                      
+
                       {% if block.settings.booth_number != blank %}
                         <p><strong>Booth Number:</strong> {{ block.settings.booth_number }}</p>
                       {% endif %}
@@ -471,9 +471,9 @@
     line-height: 1.4;
     margin-bottom: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 0;
     -webkit-box-orient: vertical;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
   }
 
@@ -575,6 +575,11 @@
   .btn-secondary-unique {
     background: linear-gradient(135deg, #28a745, #20c997);
     color: white;
+    padding-top: 20px;
+    padding-bottom:20px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
   }
 
   .btn-secondary-unique:hover {
@@ -726,6 +731,7 @@
   .modal-header-unique h3 {
     margin: 0;
     font-size: 22px;
+    color:#ffffff;
     font-weight: 700;
   }
 
@@ -1099,7 +1105,7 @@ function openModalUnique(modalId) {
 
   // Show modal with flex display for proper centering
   modal.style.display = 'flex';
-  
+
   // Force reflow and add show class for animation
   requestAnimationFrame(() => {
     modal.classList.add('show');
@@ -1126,7 +1132,7 @@ function closeModalUnique(modalId) {
 
   // Remove show class for animation
   modal.classList.remove('show');
-  
+
   // Hide modal after animation
   setTimeout(() => {
     modal.style.display = 'none';
