@@ -415,8 +415,8 @@
     background: white;
   }
 
-  .sut-category-card:nth-child(even) {
-    background: rgba(0, 113, 185, 0.08);
+  .sut-category-card:nth-child(odd) {
+    background: #ffffff;
   }
 
   .sut-category-card:hover {
@@ -2188,7 +2188,11 @@
                             <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
                             {% if category_block.settings.category_url %}
                               <a href="{{ category_block.settings.category_url }}" class="sut-category-button">
-                                Know More
+                                KNOW MORE
+                              </a>
+                            {% else %}
+                              <a href="#" class="sut-category-button">
+                                KNOW MORE
                               </a>
                             {% endif %}
                           </div>
