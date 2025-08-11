@@ -409,10 +409,12 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    min-height: 320px;
+    min-height: 380px;
     display: flex;
     flex-direction: column;
     background: white;
+    text-decoration: none;
+    color: inherit;
   }
 
   .sut-category-card:nth-child(odd) {
@@ -437,20 +439,20 @@
 
   .sut-category-image-wrapper {
     position: relative;
-    height: 140px;
+    height: 200px;
     width: 100%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    padding: 0 20px 20px;
+    padding: 20px;
     overflow: hidden;
     background: transparent;
     margin-top: auto;
   }
 
   .sut-category-image {
-    max-width: 160px;
-    max-height: 120px;
+    max-width: 280px;
+    max-height: 180px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -480,7 +482,7 @@
 
   .sut-category-button {
     padding: 15px 30px;
-    border: none;
+    border: 2px solid #0071b9;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
@@ -489,15 +491,17 @@
     font-size: 14px;
     text-align: center;
     align-self: flex-start;
-    background: #0071b9;
-    color: white;
+    background: transparent;
+    color: #0071b9;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .sut-category-button:hover {
-    background: #005a94;
+    background: #0071b9;
+    color: white;
     transform: translateY(-2px);
+    border-color: #005a94;
   }
 
   /* Component Logos Section */
@@ -728,7 +732,7 @@
     }
 
     .sut-category-card {
-      min-height: 280px;
+      min-height: 320px;
     }
 
     .sut-category-content {
@@ -738,14 +742,14 @@
     }
 
     .sut-category-image-wrapper {
-      height: 120px;
-      padding: 0 15px 15px;
-      align-items: flex-end;
+      height: 150px;
+      padding: 15px;
+      align-items: center;
     }
 
     .sut-category-image {
-      max-width: 120px;
-      max-height: 100px;
+      max-width: 200px;
+      max-height: 130px;
     }
 
     .sut-category-name {
@@ -2182,28 +2186,26 @@
                   <div class="sut-categories-grid">
                     {% for category_block in section.blocks %}
                       {% if category_block.type == 'product_category' and category_block.settings.category_tab == tab_block.settings.tab_name %}
-                        <div class="sut-category-card" {{ category_block.shopify_attributes }}>
+                        {% if category_block.settings.category_url %}
+                          <a href="{{ category_block.settings.category_url }}" class="sut-category-card" {{ category_block.shopify_attributes }}>
+                        {% else %}
+                          <a href="#" class="sut-category-card" {{ category_block.shopify_attributes }}>
+                        {% endif %}
                           <div class="sut-category-content">
                             <h3 class="sut-category-name">{{ category_block.settings.category_name }}</h3>
                             <p class="sut-category-desc">{{ category_block.settings.category_description }}</p>
-                            {% if category_block.settings.category_url %}
-                              <a href="{{ category_block.settings.category_url }}" class="sut-category-button">
-                                KNOW MORE
-                              </a>
-                            {% else %}
-                              <a href="#" class="sut-category-button">
-                                KNOW MORE
-                              </a>
-                            {% endif %}
+                            <span class="sut-category-button">
+                              KNOW MORE
+                            </span>
                           </div>
                           {% if category_block.settings.category_image %}
                             <div class="sut-category-image-wrapper">
-                              <img src="{{ category_block.settings.category_image | img_url: '300x' }}" 
+                              <img src="{{ category_block.settings.category_image | img_url: '400x' }}" 
                                    alt="{{ category_block.settings.category_name }}" 
                                    class="sut-category-image">
                             </div>
                           {% endif %}
-                        </div>
+                        </a>
                       {% endif %}
                     {% endfor %}
                   </div>
