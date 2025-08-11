@@ -409,11 +409,9 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    min-height: 280px;
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    align-items: center;
-    gap: 20px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
     background: white;
   }
 
@@ -427,28 +425,32 @@
   }
 
   .sut-category-content {
-    padding: 40px 30px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    z-index: 2;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .sut-category-image-wrapper {
     position: relative;
-    height: 200px;
+    height: 140px;
+    width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    padding: 20px;
+    padding: 0 20px 20px;
     overflow: hidden;
     background: transparent;
+    margin-top: auto;
   }
 
   .sut-category-image {
-    max-width: 180px;
-    max-height: 160px;
+    max-width: 160px;
+    max-height: 120px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -465,16 +467,15 @@
     margin-bottom: 20px;
     line-height: 1.3;
     color: #0071b9;
-    max-width: 300px;
+    width: 100%;
   }
 
   .sut-category-desc {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 30px;
-    flex: 1;
+    margin-bottom: 25px;
     color: #666;
-    max-width: 350px;
+    width: 100%;
   }
 
   .sut-category-button {
@@ -727,36 +728,32 @@
     }
 
     .sut-category-card {
-      min-height: 300px;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr;
-      text-align: center;
-    }
-
-    .sut-category-image-wrapper {
-      height: 150px;
-      padding: 15px;
-      order: 2;
+      min-height: 280px;
     }
 
     .sut-category-content {
-      padding: 25px 20px 20px 20px;
-      order: 1;
-      align-items: center;
+      padding: 25px 20px;
       text-align: center;
+      align-items: center;
+    }
+
+    .sut-category-image-wrapper {
+      height: 120px;
+      padding: 0 15px 15px;
+      align-items: flex-end;
     }
 
     .sut-category-image {
-      max-width: 140px;
-      max-height: 120px;
+      max-width: 120px;
+      max-height: 100px;
     }
 
     .sut-category-name {
       font-size: 22px;
+      text-align: center;
     }
 
     .sut-category-desc {
-      max-width: 100%;
       text-align: center;
     }
 
