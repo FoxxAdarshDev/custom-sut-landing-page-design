@@ -52,7 +52,7 @@
                       {{ block.settings.event_dates }}
                     </div>
                   {% endif %}
-                  
+
                   {% if block.settings.booth_number != blank %}
                     <div class="booth-badge">
                       Booth: {{ block.settings.booth_number }}
@@ -870,14 +870,14 @@
 function toggleCalendarDropdown(button, eventId) {
   console.log('Toggling dropdown for event:', eventId);
   const dropdown = document.getElementById(`calendar-${eventId}`);
-  
+
   if (!dropdown) {
     console.error('Dropdown not found for event:', eventId);
     return;
   }
-  
+
   const isVisible = dropdown.classList.contains('show');
-  
+
   // Close all dropdowns first
   document.querySelectorAll('.calendar-dropdown').forEach(d => {
     d.classList.remove('show');
@@ -885,7 +885,7 @@ function toggleCalendarDropdown(button, eventId) {
   document.querySelectorAll('.calendar-btn').forEach(btn => {
     btn.classList.remove('active');
   });
-  
+
   // Toggle current dropdown
   if (!isVisible) {
     button.classList.add('active');
@@ -914,7 +914,7 @@ document.addEventListener('keydown', function(event) {
     document.querySelectorAll('.calendar-btn').forEach(btn => {
       btn.classList.remove('active');
     });
-    
+
     // Also close modals
     document.querySelectorAll('.event-modal').forEach(modal => {
       modal.style.display = 'none';
@@ -926,18 +926,18 @@ document.addEventListener('keydown', function(event) {
 // Calendar integration
 function addToCalendar(platform, eventId) {
   console.log('Adding to calendar:', platform, eventId);
-  
+
   const card = document.querySelector(`[data-event-id="${eventId}"]`);
   if (!card) {
     console.error('Card not found for event:', eventId);
     return;
   }
-  
+
   const title = card.querySelector('.event-title')?.textContent || 'Trade Show Event';
   const dates = card.querySelector('.event-date-badge')?.textContent || '';
   const location = card.querySelector('.detail-text')?.textContent || '';
   const description = card.querySelector('.event-description')?.textContent || '';
-  
+
   const event = {
     title: title.trim(),
     start: '20250101T090000Z',
@@ -945,21 +945,21 @@ function addToCalendar(platform, eventId) {
     description: `${title}\n\n${description}\n\nDates: ${dates}\nLocation: ${location}`,
     location: location.trim()
   };
-  
+
   let url = '';
-  
+
   switch(platform) {
     case 'google':
       url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}/${event.end}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
       window.open(url, '_blank');
       break;
-      
+
     case 'outlook':
     case 'apple':
     case 'ics':
       downloadICS(event);
       break;
-      
+
     case 'yahoo':
       const startDate = event.start.substring(0, 8);
       const endDate = event.end.substring(0, 8);
@@ -967,7 +967,7 @@ function addToCalendar(platform, eventId) {
       window.open(url, '_blank');
       break;
   }
-  
+
   // Close dropdown after selection
   setTimeout(() => {
     document.querySelectorAll('.calendar-dropdown').forEach(dropdown => {
@@ -983,7 +983,7 @@ function downloadICS(event) {
   const now = new Date();
   const timestamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
   const uid = `${Date.now()}@foxxlifesciences.com`;
-  
+
   const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Foxx Life Sciences//Trade Shows//EN
@@ -1006,7 +1006,7 @@ TRIGGER:-P1D
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
-  
+
   const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1026,9 +1026,9 @@ function openModal(modalId) {
     // Add body blur effect
     document.body.style.overflow = 'hidden';
     document.body.style.filter = 'blur(2px)';
-    
+
     modal.style.display = 'block';
-    
+
     // Add click event to overlay
     const overlay = modal.querySelector('.modal-overlay');
     if (overlay) {
@@ -1071,7 +1071,7 @@ function openModal(modalId) {
   if (modal) {
     document.body.classList.add('modal-open');
     modal.style.display = 'block';
-    
+
     const overlay = modal.querySelector('.modal-overlay');
     if (overlay) {
       overlay.onclick = function(e) {
@@ -1136,8 +1136,7 @@ function closeModal(modalId) {
     {
       "type": "url",
       "id": "view_all_url",
-      "label": "View All Button URL",
-      "default": "/pages/trade-shows"
+      "label": "View All Button URL"
     }
   ],
   "blocks": [
