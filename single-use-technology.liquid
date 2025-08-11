@@ -439,9 +439,9 @@
 
   .sut-category-bottom-section {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(120px, auto) 1fr;
     align-items: flex-start;
-    gap: 20px;
+    gap: 25px;
     padding: 0 30px 30px 30px;
     min-height: 120px;
   }
@@ -450,6 +450,7 @@
     display: flex;
     align-items: flex-start;
     padding-top: 10px;
+    justify-content: flex-start;
   }
 
   .sut-category-image-wrapper {
@@ -499,20 +500,24 @@
   }
 
   .sut-category-button {
-    padding: 15px 30px;
+    padding: 12px 20px;
     border: 2px solid #0071b9;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s ease;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     align-self: flex-start;
     background: transparent;
     color: #0071b9;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .sut-category-button:hover {
@@ -772,6 +777,12 @@
     .sut-category-cta-wrapper {
       justify-content: center;
       padding-top: 0;
+    }
+
+    .sut-category-button {
+      max-width: 100px;
+      padding: 10px 15px;
+      font-size: 11px;
     }
 
     .sut-category-image-wrapper {
