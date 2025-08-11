@@ -229,6 +229,20 @@
     max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+  }
+
+  /* Scroll hint gradient */
+  .tradeshow-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(248, 249, 250, 0.8), transparent);
+    pointer-events: none;
+    z-index: 1;
   }
 
   /* Header Styles */
@@ -265,14 +279,37 @@
     border-radius: 2px;
   }
 
-  /* Trade Show Grid */
+  /* Trade Show Grid - Horizontal Scroll */
   .tradeshow-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    display: flex;
     gap: 20px;
     margin-bottom: 60px;
-    padding: 0;
+    padding: 0 20px;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Custom scrollbar styling */
+  .tradeshow-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .tradeshow-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .tradeshow-grid::-webkit-scrollbar-thumb {
+    background: rgba(0, 113, 185, 0.3);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .tradeshow-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 113, 185, 0.6);
   }
 
   /* Modern Card Design */
@@ -287,6 +324,9 @@
     display: flex;
     flex-direction: column;
     min-height: 400px;
+    width: 380px;
+    flex-shrink: 0;
+    max-width: 380px;
   }
 
   .trade-show-event-card:hover {
@@ -802,9 +842,14 @@
     }
 
     .tradeshow-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 0 5px;
+      padding: 0 16px;
+      gap: 16px;
+    }
+
+    .trade-show-event-card {
+      width: 320px;
+      max-width: 320px;
+      min-height: 420px;
     }
 
     .card-header {
