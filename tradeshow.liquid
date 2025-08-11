@@ -226,7 +226,7 @@
   }
 
   .tradeshow-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -271,7 +271,8 @@
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 20px;
     margin-bottom: 60px;
-    padding: 0 10px;
+    padding: 0;
+    width: 100%;
   }
 
   /* Modern Card Design */
@@ -606,7 +607,7 @@
   .event-modal {
     display: none;
     position: fixed;
-    z-index: 99999;
+    z-index: 999999;
     left: 0;
     top: 0;
     width: 100%;
@@ -623,7 +624,7 @@
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     animation: fadeIn 0.3s ease;
-    z-index: 99998;
+    z-index: 999998;
   }
 
   .modal-content {
@@ -640,7 +641,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-    z-index: 99999;
+    z-index: 999999;
   }
 
   .modal-header {
@@ -780,6 +781,9 @@
   /* Body styles when modal is open */
   body.modal-open {
     overflow: hidden;
+  }
+  
+  body.modal-open > *:not(.event-modal) {
     filter: blur(2px);
   }
 
@@ -1071,6 +1075,13 @@ function openModal(modalId) {
   if (modal) {
     document.body.classList.add('modal-open');
     modal.style.display = 'block';
+    modal.style.zIndex = '999999';
+
+    // Force modal to top
+    setTimeout(() => {
+      modal.style.opacity = '1';
+      modal.style.visibility = 'visible';
+    }, 10);
 
     const overlay = modal.querySelector('.modal-overlay');
     if (overlay) {
@@ -1088,6 +1099,8 @@ function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.style.display = 'none';
+    modal.style.opacity = '0';
+    modal.style.visibility = 'hidden';
     document.body.classList.remove('modal-open');
   }
 }
