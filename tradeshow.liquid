@@ -519,22 +519,22 @@
     transform: translateY(-2px);
   }
 
-  /* Calendar Dropdown - Fixed z-index */
+  /* Calendar Dropdown - Fixed positioning to break out of card */
   .trade-show-calendar-container {
     position: relative;
     flex: 1;
   }
 
   .trade-show-calendar-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: auto;
     background: white;
     border: 1px solid #e6e6e6;
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    z-index: 9999; /* Very high z-index */
+    z-index: 10000; /* Very high z-index */
     min-width: 220px;
     display: none;
     overflow: hidden;
@@ -549,6 +549,26 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+  }
+
+  /* Backdrop blur overlay */
+  .dropdown-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-backdrop.show {
+    opacity: 1;
+    visibility: visible;
   }
 
   .dropdown-header {
@@ -624,8 +644,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .tradeshow-modal-content {
@@ -789,19 +810,80 @@
 </style>
 
 <script>
-// Calendar dropdown functionality
+// Calendar dropdown functionality with proper positioning
 function toggleCalendarDropdown(button, eventId) {
   const dropdown = document.getElementById(`calendar-${eventId}`);
   const isVisible = dropdown.classList.contains('show');
   
-  // Close all dropdowns
+  // Close all dropdowns and remove backdrop
   document.querySelectorAll('.trade-show-calendar-dropdown').forEach(d => {
     d.classList.remove('show');
   });
+  removeDropdownBackdrop();
   
   // Toggle current dropdown
   if (!isVisible) {
+    // Position dropdown relative to button
+    const buttonRect = button.getBoundingClientRect();
+    const dropdownWidth = 220;
+    
+    // Calculate position
+    let left = buttonRect.left;
+    let top = buttonRect.bottom + 8;
+    
+    // Adjust if dropdown would go off screen
+    if (left + dropdownWidth > window.innerWidth) {
+      left = buttonRect.right - dropdownWidth;
+    }
+    
+    if (left < 10) {
+      left = 10;
+    }
+    
+    // Set position and show
+    dropdown.style.left = left + 'px';
+    dropdown.style.top = top + 'px';
     dropdown.classList.add('show');
+    
+    // Add backdrop
+    addDropdownBackdrop();
+  }
+}
+
+// Add backdrop blur
+function addDropdownBackdrop() {
+  // Remove existing backdrop if any
+  removeDropdownBackdrop();
+  
+  const backdrop = document.createElement('div');
+  backdrop.className = 'dropdown-backdrop';
+  backdrop.id = 'dropdown-backdrop';
+  document.body.appendChild(backdrop);
+  
+  // Trigger show with slight delay for transition
+  setTimeout(() => {
+    backdrop.classList.add('show');
+  }, 10);
+  
+  // Close dropdown when clicking backdrop
+  backdrop.addEventListener('click', function() {
+    document.querySelectorAll('.trade-show-calendar-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+    removeDropdownBackdrop();
+  });
+}
+
+// Remove backdrop blur
+function removeDropdownBackdrop() {
+  const backdrop = document.getElementById('dropdown-backdrop');
+  if (backdrop) {
+    backdrop.classList.remove('show');
+    setTimeout(() => {
+      if (backdrop.parentNode) {
+        backdrop.parentNode.removeChild(backdrop);
+      }
+    }, 300);
   }
 }
 
@@ -811,7 +893,16 @@ document.addEventListener('click', function(event) {
     document.querySelectorAll('.trade-show-calendar-dropdown').forEach(dropdown => {
       dropdown.classList.remove('show');
     });
+    removeDropdownBackdrop();
   }
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  document.querySelectorAll('.trade-show-calendar-dropdown').forEach(dropdown => {
+    dropdown.classList.remove('show');
+  });
+  removeDropdownBackdrop();
 });
 
 // Calendar integration
