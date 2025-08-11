@@ -1991,9 +1991,17 @@
                   {% if block.settings.video_url %}
                     {% if block.settings.video_url contains 'iframe' %}
                       {{ block.settings.video_url }}
+                    {% elsif block.settings.video_url contains 'youtube.com' or block.settings.video_url contains 'youtu.be' %}
+                      {% assign video_id = block.settings.video_url | split: 'v=' | last | split: '&' | first %}
+                      {% if block.settings.video_url contains 'youtu.be' %}
+                        {% assign video_id = block.settings.video_url | split: 'youtu.be/' | last | split: '?' | first %}
+                      {% endif %}
+                      <iframe src="https://www.youtube.com/embed/{{ video_id }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
+                  {% elsif block.settings.video_poster %}
+                    <img src="{{ block.settings.video_poster | img_url: '800x' }}" alt="Video Poster" class="sut-video-embed" style="object-fit: cover;">
                   {% endif %}
                 </div>
               {% else %}
@@ -2001,9 +2009,17 @@
                   {% if block.settings.video_url %}
                     {% if block.settings.video_url contains 'iframe' %}
                       {{ block.settings.video_url }}
+                    {% elsif block.settings.video_url contains 'youtube.com' or block.settings.video_url contains 'youtu.be' %}
+                      {% assign video_id = block.settings.video_url | split: 'v=' | last | split: '&' | first %}
+                      {% if block.settings.video_url contains 'youtu.be' %}
+                        {% assign video_id = block.settings.video_url | split: 'youtu.be/' | last | split: '?' | first %}
+                      {% endif %}
+                      <iframe src="https://www.youtube.com/embed/{{ video_id }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
+                  {% elsif block.settings.video_poster %}
+                    <img src="{{ block.settings.video_poster | img_url: '800x' }}" alt="Video Poster" class="sut-video-embed" style="object-fit: cover;">
                   {% endif %}
                 </div>
                 <div class="sut-video-text">
