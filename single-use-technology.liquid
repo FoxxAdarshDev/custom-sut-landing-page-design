@@ -1186,6 +1186,16 @@
           "type": "url",
           "id": "video_button_url",
           "label": "Video Button URL"
+        },
+        {
+          "type": "range",
+          "id": "video_duration_start",
+          "label": "Video Start Time (seconds)",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "default": 10,
+          "info": "Set the starting time for video playback"
         }
       ]
     },
@@ -1996,7 +2006,8 @@
                       {% if block.settings.video_url contains 'youtu.be' %}
                         {% assign video_id = block.settings.video_url | split: 'youtu.be/' | last | split: '?' | first %}
                       {% endif %}
-                      <iframe src="https://www.youtube.com/embed/{{ video_id }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                      {% assign start_time = block.settings.video_duration_start | default: 10 %}
+                      <iframe src="https://www.youtube.com/embed/{{ video_id }}?start={{ start_time }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
@@ -2014,7 +2025,8 @@
                       {% if block.settings.video_url contains 'youtu.be' %}
                         {% assign video_id = block.settings.video_url | split: 'youtu.be/' | last | split: '?' | first %}
                       {% endif %}
-                      <iframe src="https://www.youtube.com/embed/{{ video_id }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                      {% assign start_time = block.settings.video_duration_start | default: 10 %}
+                      <iframe src="https://www.youtube.com/embed/{{ video_id }}?start={{ start_time }}" class="sut-video-embed" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
