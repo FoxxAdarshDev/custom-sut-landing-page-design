@@ -1,4 +1,5 @@
 
+
 <style>
   .sut-main-container {
     max-width: 100%;
@@ -150,7 +151,7 @@
 
   .sut-strategy-title {
     font-size: 42px;
-    color: #333;
+    color: #0071b9;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 25px;
@@ -187,6 +188,7 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    background: #000;
   }
 
   .sut-video-embed {
@@ -196,13 +198,19 @@
     border-radius: 15px;
   }
 
+  .sut-video-player {
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+  }
+
   .sut-video-text {
     padding: 20px 0;
   }
 
   .sut-video-title {
     font-size: 42px;
-    color: #333;
+    color: #0071b9;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 25px;
@@ -260,6 +268,7 @@
   .sut-stats-title {
     font-weight: 700;
     margin-bottom: 20px;
+    color: #0071b9;
   }
 
   .sut-stats-description {
@@ -332,7 +341,7 @@
 
   .sut-categories-title {
     font-size: 48px;
-    color: #333;
+    color: #0071b9;
     font-weight: 700;
     margin-bottom: 20px;
   }
@@ -386,13 +395,13 @@
 
   .sut-categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 40px;
   }
 
   .sut-category-card {
-    border-radius: {{ settings.sut_card_border_radius | default: 20 }}px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -400,15 +409,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 450px;
-  }
-
-  .sut-category-card:nth-child(odd) {
-    background: {{ settings.sut_card_bg_odd | default: '#f5f5f5' }};
-  }
-
-  .sut-category-card:nth-child(even) {
-    background: {{ settings.sut_card_bg_even | default: '#0071b9' }};
+    min-height: 400px;
+    background: white;
   }
 
   .sut-category-card:hover {
@@ -417,12 +419,13 @@
   }
 
   .sut-category-image-wrapper {
-    height: {{ settings.sut_card_image_height | default: 250 }}px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     overflow: hidden;
+    background: #f8f9fa;
   }
 
   .sut-category-image {
@@ -444,29 +447,12 @@
     flex-direction: column;
   }
 
-  .sut-category-card:nth-child(odd) .sut-category-name {
-    color: {{ settings.sut_card_text_odd | default: '#333333' }};
-  }
-
-  .sut-category-card:nth-child(even) .sut-category-name {
-    color: {{ settings.sut_card_text_even | default: '#ffffff' }};
-  }
-
   .sut-category-name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 15px;
     line-height: 1.3;
-  }
-
-  .sut-category-card:nth-child(odd) .sut-category-desc {
-    color: {{ settings.sut_card_text_odd | default: '#333333' }};
-    opacity: 0.8;
-  }
-
-  .sut-category-card:nth-child(even) .sut-category-desc {
-    color: {{ settings.sut_card_text_even | default: '#ffffff' }};
-    opacity: 0.9;
+    color: #0071b9;
   }
 
   .sut-category-desc {
@@ -474,16 +460,7 @@
     line-height: 1.6;
     margin-bottom: 25px;
     flex: 1;
-  }
-
-  .sut-category-card:nth-child(odd) .sut-category-button {
-    background: {{ settings.sut_card_button_odd | default: '#0071b9' }};
-    color: white;
-  }
-
-  .sut-category-card:nth-child(even) .sut-category-button {
-    background: {{ settings.sut_card_button_even | default: '#ffffff' }};
-    color: {{ settings.sut_card_bg_even | default: '#0071b9' }};
+    color: #666;
   }
 
   .sut-category-button {
@@ -497,21 +474,78 @@
     font-size: 14px;
     text-align: center;
     align-self: flex-start;
+    background: #0071b9;
+    color: white;
   }
 
-  .sut-category-card:nth-child(odd) .sut-category-button:hover {
+  .sut-category-button:hover {
     background: #005a94;
     transform: translateY(-2px);
   }
 
-  .sut-category-card:nth-child(even) .sut-category-button:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
+  /* Component Logos Section */
+  .sut-component-logos-section {
+    background: white;
+    text-align: center;
+  }
+
+  .sut-component-logos-header {
+    margin-bottom: 60px;
+  }
+
+  .sut-component-logos-title {
+    font-size: 42px;
+    color: #0071b9;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sut-component-logos-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .sut-component-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .sut-component-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .sut-component-logo-item:hover {
+    transform: scale(1.1);
+  }
+
+  .sut-component-logo-image {
+    max-width: 100px;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    filter: grayscale(50%);
+    transition: filter 0.3s ease;
+  }
+
+  .sut-component-logo-item:hover .sut-component-logo-image {
+    filter: grayscale(0%);
   }
 
   /* Sustainability Section */
   .sut-sustainability-section {
-    background: white;
+    background: #f8f9fa;
   }
 
   .sut-sustainability-container {
@@ -527,7 +561,7 @@
 
   .sut-sustainability-title {
     font-size: 42px;
-    color: #333;
+    color: #0071b9;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 25px;
@@ -560,7 +594,7 @@
 
   /* Features Section */
   .sut-features-section {
-    background: #f8f9fa;
+    background: white;
   }
 
   .sut-features-header {
@@ -570,14 +604,14 @@
 
   .sut-features-title {
     font-size: 48px;
-    color: #333;
+    color: #0071b9;
     font-weight: 700;
     margin-bottom: 20px;
   }
 
   .sut-features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
   }
 
@@ -603,7 +637,7 @@
   .sut-feature-name {
     font-size: 24px;
     font-weight: 700;
-    color: #333;
+    color: #0071b9;
     margin-bottom: 15px;
   }
 
@@ -662,7 +696,11 @@
 
     .sut-strategy-title,
     .sut-video-title,
-    .sut-sustainability-title {
+    .sut-sustainability-title,
+    .sut-categories-title,
+    .sut-features-title,
+    .sut-cta-title,
+    .sut-component-logos-title {
       font-size: 28px;
     }
 
@@ -672,11 +710,11 @@
     }
 
     .sut-category-card {
-      min-height: 400px;
+      min-height: 350px;
     }
 
     .sut-category-image-wrapper {
-      height: 200px;
+      height: 150px;
       padding: 15px;
     }
 
@@ -685,7 +723,7 @@
     }
 
     .sut-category-name {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     .sut-stats-grid {
@@ -712,23 +750,38 @@
     .sut-features-grid {
       grid-template-columns: 1fr;
     }
+
+    .sut-component-logos-grid {
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 20px;
+    }
+
+    .sut-component-logo-image {
+      max-width: 80px;
+      max-height: 60px;
+    }
   }
 
   @media (max-width: 1024px) and (min-width: 769px) {
     .sut-stats-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 480px) {
     .sut-categories-title,
     .sut-features-title,
-    .sut-cta-title {
-      font-size: 28px;
+    .sut-cta-title,
+    .sut-component-logos-title {
+      font-size: 24px;
     }
 
     .sut-stats-grid {
       grid-template-columns: 1fr;
+    }
+
+    .sut-stat-item {
+      margin-bottom: 30px;
     }
   }
 </style>
@@ -738,16 +791,42 @@
   "name": "Single Use Technology",
   "tag": "section",
   "class": "sut-section main-sut",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Colors"
+    },
+    {
+      "type": "color",
+      "id": "primary_brand_color",
+      "label": "Primary Brand Color",
+      "default": "#0071b9"
+    },
+    {
+      "type": "color",
+      "id": "secondary_brand_color",
+      "label": "Secondary Brand Color",
+      "default": "#003366"
+    }
+  ],
   "blocks": [
     {
       "type": "hero_section",
-      "name": "Hero Section",
+      "name": "🏠 Hero Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Hero Section Settings"
+        },
         {
           "type": "checkbox",
           "id": "enable_hero_section",
           "label": "Enable Hero Section",
           "default": true
+        },
+        {
+          "type": "header",
+          "content": "Background Settings"
         },
         {
           "type": "image_picker",
@@ -769,26 +848,6 @@
             }
           ],
           "default": "full_content"
-        },
-        {
-          "type": "range",
-          "id": "hero_padding_top",
-          "label": "Padding Top",
-          "min": 0,
-          "max": 200,
-          "step": 10,
-          "unit": "px",
-          "default": 80
-        },
-        {
-          "type": "range",
-          "id": "hero_padding_bottom",
-          "label": "Padding Bottom",
-          "min": 0,
-          "max": 200,
-          "step": 10,
-          "unit": "px",
-          "default": 80
         },
         {
           "type": "color",
@@ -813,10 +872,48 @@
           "default": 80
         },
         {
+          "type": "header",
+          "content": "Spacing Settings"
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "hero_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "header",
+          "content": "Content Settings"
+        },
+        {
           "type": "text",
           "id": "hero_title",
           "label": "Hero Title",
           "default": "Single-use systems"
+        },
+        {
+          "type": "richtext",
+          "id": "hero_description",
+          "label": "Hero Description",
+          "default": "<p>How to make bioprocessing faster, more efficient, and economical</p>"
+        },
+        {
+          "type": "header",
+          "content": "Typography Settings"
         },
         {
           "type": "range",
@@ -839,25 +936,10 @@
           "default": 32
         },
         {
-          "type": "range",
-          "id": "hero_title_line_height",
-          "label": "Title Line Height",
-          "min": 1.0,
-          "max": 2.0,
-          "step": 0.1,
-          "default": 1.1
-        },
-        {
           "type": "color",
           "id": "hero_title_color",
           "label": "Title Color",
           "default": "#ffffff"
-        },
-        {
-          "type": "richtext",
-          "id": "hero_description",
-          "label": "Hero Description",
-          "default": "<p>How to make bioprocessing faster, more efficient, and economical</p>"
         },
         {
           "type": "range",
@@ -880,19 +962,14 @@
           "default": 16
         },
         {
-          "type": "range",
-          "id": "hero_description_line_height",
-          "label": "Description Line Height",
-          "min": 1.2,
-          "max": 2.0,
-          "step": 0.1,
-          "default": 1.6
-        },
-        {
           "type": "color",
           "id": "hero_description_color",
           "label": "Description Color",
           "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Button Settings"
         },
         {
           "type": "text",
@@ -916,23 +993,41 @@
           "id": "hero_button_text_color",
           "label": "Button Text Color",
           "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "hero_button_hover_bg_color",
-          "label": "Button Hover Background Color",
-          "default": "#009d63"
         }
       ]
     },
     {
       "type": "strategy",
-      "name": "Strategy",
+      "name": "📋 Strategy Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Strategy Section Settings"
+        },
         {
           "type": "image_picker",
           "id": "strategy_image",
           "label": "Strategy Image"
+        },
+        {
+          "type": "select",
+          "id": "strategy_layout",
+          "label": "Layout",
+          "default": "image_right",
+          "options": [
+            {
+              "value": "image_left",
+              "label": "Image Left, Content Right"
+            },
+            {
+              "value": "image_right",
+              "label": "Image Right, Content Left"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Spacing Settings"
         },
         {
           "type": "range",
@@ -955,20 +1050,8 @@
           "default": 100
         },
         {
-          "type": "select",
-          "id": "strategy_layout",
-          "label": "Layout",
-          "default": "image_right",
-          "options": [
-            {
-              "value": "image_left",
-              "label": "Image Left, Content Right"
-            },
-            {
-              "value": "image_right",
-              "label": "Image Right, Content Left"
-            }
-          ]
+          "type": "header",
+          "content": "Content Settings"
         },
         {
           "type": "text",
@@ -997,12 +1080,63 @@
     },
     {
       "type": "video_content",
-      "name": "Video Content",
+      "name": "🎥 Video Content Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Video Content Settings"
+        },
+        {
+          "type": "select",
+          "id": "video_type",
+          "label": "Video Type",
+          "options": [
+            {
+              "value": "url",
+              "label": "Video URL/Embed"
+            },
+            {
+              "value": "file",
+              "label": "Video File"
+            }
+          ],
+          "default": "url"
+        },
         {
           "type": "text",
           "id": "video_url",
           "label": "Video URL or Embed Code"
+        },
+        {
+          "type": "file_picker",
+          "id": "video_file",
+          "label": "Video File (MP4)",
+          "accept": "video/*"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_poster",
+          "label": "Video Poster Image"
+        },
+        {
+          "type": "select",
+          "id": "video_layout",
+          "label": "Layout",
+          "default": "video_left",
+          "options": [
+            {
+              "value": "video_left",
+              "label": "Video Left, Content Right"
+            },
+            {
+              "value": "video_right",
+              "label": "Video Right, Content Left"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Spacing Settings"
         },
         {
           "type": "range",
@@ -1025,20 +1159,8 @@
           "default": 100
         },
         {
-          "type": "select",
-          "id": "video_layout",
-          "label": "Layout",
-          "default": "video_left",
-          "options": [
-            {
-              "value": "video_left",
-              "label": "Video Left, Content Right"
-            },
-            {
-              "value": "video_right",
-              "label": "Video Right, Content Left"
-            }
-          ]
+          "type": "header",
+          "content": "Content Settings"
         },
         {
           "type": "text",
@@ -1067,8 +1189,12 @@
     },
     {
       "type": "stats",
-      "name": "Stats",
+      "name": "📊 Stats Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Stats Section Settings"
+        },
         {
           "type": "select",
           "id": "stats_background_type",
@@ -1113,6 +1239,10 @@
           "default": 90
         },
         {
+          "type": "header",
+          "content": "Spacing Settings"
+        },
+        {
           "type": "range",
           "id": "stats_padding_top",
           "label": "Section Padding Top",
@@ -1133,76 +1263,14 @@
           "default": 80
         },
         {
-          "type": "range",
-          "id": "stats_inner_padding_top",
-          "label": "Inner Content Padding Top",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "px",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "stats_inner_padding_bottom",
-          "label": "Inner Content Padding Bottom",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "px",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "stats_inner_padding_horizontal",
-          "label": "Inner Content Padding Horizontal",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "px",
-          "default": 20
+          "type": "header",
+          "content": "Content Settings"
         },
         {
           "type": "text",
           "id": "stats_title",
           "label": "Stats Section Title",
-          "default": "Foxx Today"
-        },
-        {
-          "type": "select",
-          "id": "stats_title_alignment",
-          "label": "Title & Description Alignment",
-          "options": [
-            {
-              "value": "left",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
-          ],
-          "default": "center"
-        },
-        {
-          "type": "range",
-          "id": "stats_title_size",
-          "label": "Title Font Size",
-          "min": 24,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "default": 48
-        },
-        {
-          "type": "color",
-          "id": "stats_title_color",
-          "label": "Title Color",
-          "default": "#ffffff"
+          "default": "Our Story in Numbers"
         },
         {
           "type": "richtext",
@@ -1211,20 +1279,8 @@
           "default": "<p>For more than two decades, we have been a leading global manufacturer of single-use bioprocess consumables.</p>"
         },
         {
-          "type": "range",
-          "id": "stats_description_size",
-          "label": "Description Font Size",
-          "min": 14,
-          "max": 28,
-          "step": 1,
-          "unit": "px",
-          "default": 18
-        },
-        {
-          "type": "color",
-          "id": "stats_description_color",
-          "label": "Description Color",
-          "default": "#ffffff"
+          "type": "header",
+          "content": "Layout Settings"
         },
         {
           "type": "range",
@@ -1242,7 +1298,7 @@
           "min": 1,
           "max": 4,
           "step": 1,
-          "default": 3
+          "default": 2
         },
         {
           "type": "range",
@@ -1251,46 +1307,18 @@
           "min": 1,
           "max": 3,
           "step": 1,
-          "default": 2
-        },
-        {
-          "type": "range",
-          "id": "stats_number_size",
-          "label": "Number Font Size",
-          "min": 24,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "default": 48
-        },
-        {
-          "type": "color",
-          "id": "stats_number_color",
-          "label": "Number Color",
-          "default": "#00a86b"
-        },
-        {
-          "type": "range",
-          "id": "stats_label_size",
-          "label": "Label Font Size",
-          "min": 14,
-          "max": 24,
-          "step": 1,
-          "unit": "px",
-          "default": 18
-        },
-        {
-          "type": "color",
-          "id": "stats_label_color",
-          "label": "Label Color",
-          "default": "#ffffff"
+          "default": 1
         }
       ]
     },
     {
       "type": "stat_item",
-      "name": "Stat Item",
+      "name": "📈 Stat Item",
       "settings": [
+        {
+          "type": "header",
+          "content": "Stat Item Settings"
+        },
         {
           "type": "select",
           "id": "stat_icon_type",
@@ -1298,35 +1326,35 @@
           "options": [
             {
               "value": "location",
-              "label": "Location Pin"
+              "label": "📍 Location Pin"
             },
             {
               "value": "building",
-              "label": "Building"
+              "label": "🏢 Building"
             },
             {
               "value": "users",
-              "label": "Users/Employees"
+              "label": "👥 Users/Employees"
             },
             {
               "value": "certificate",
-              "label": "Certificate/Patent"
+              "label": "📜 Certificate/Patent"
             },
             {
               "value": "clipboard",
-              "label": "Clipboard/SKUs"
+              "label": "📋 Clipboard/SKUs"
             },
             {
               "value": "shield",
-              "label": "Shield/Quality"
+              "label": "🛡️ Shield/Quality"
             },
             {
               "value": "star",
-              "label": "Star/Excellence"
+              "label": "⭐ Star/Excellence"
             },
             {
               "value": "heart",
-              "label": "Heart/Care"
+              "label": "❤️ Heart/Care"
             }
           ],
           "default": "location"
@@ -1353,8 +1381,12 @@
     },
     {
       "type": "categories",
-      "name": "Product Categories",
+      "name": "📦 Product Categories",
       "settings": [
+        {
+          "type": "header",
+          "content": "Product Categories Settings"
+        },
         {
           "type": "range",
           "id": "categories_padding_top",
@@ -1391,8 +1423,12 @@
     },
     {
       "type": "category_tab",
-      "name": "Category Tab",
+      "name": "🏷️ Category Tab",
       "settings": [
+        {
+          "type": "header",
+          "content": "Category Tab Settings"
+        },
         {
           "type": "text",
           "id": "tab_name",
@@ -1409,8 +1445,12 @@
     },
     {
       "type": "product_category",
-      "name": "Product Category",
+      "name": "🛍️ Product Category",
       "settings": [
+        {
+          "type": "header",
+          "content": "Product Category Settings"
+        },
         {
           "type": "text",
           "id": "category_tab",
@@ -1442,9 +1482,81 @@
       ]
     },
     {
-      "type": "sustainability",
-      "name": "Sustainability",
+      "type": "component_logos",
+      "name": "🏆 Component Logos Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Component Logos Settings"
+        },
+        {
+          "type": "range",
+          "id": "component_logos_padding_top",
+          "label": "Padding Top",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "component_logos_padding_bottom",
+          "label": "Padding Bottom",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "component_logos_title",
+          "label": "Section Title",
+          "default": "Component Manufacturer for Your Single use Assemblies"
+        },
+        {
+          "type": "richtext",
+          "id": "component_logos_description",
+          "label": "Section Description",
+          "default": "<p>Trusted certifications and quality standards that ensure the highest level of product reliability and safety.</p>"
+        }
+      ]
+    },
+    {
+      "type": "component_logo_item",
+      "name": "🏅 Component Logo Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Logo Item Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "logo_alt",
+          "label": "Logo Alt Text",
+          "default": "Certification Logo"
+        },
+        {
+          "type": "url",
+          "id": "logo_url",
+          "label": "Logo URL (Optional)"
+        }
+      ]
+    },
+    {
+      "type": "sustainability",
+      "name": "♻️ Sustainability Section",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Sustainability Settings"
+        },
         {
           "type": "range",
           "id": "sustainability_padding_top",
@@ -1492,8 +1604,12 @@
     },
     {
       "type": "sustainability_logo",
-      "name": "Sustainability Logo",
+      "name": "🌱 Sustainability Logo",
       "settings": [
+        {
+          "type": "header",
+          "content": "Sustainability Logo Settings"
+        },
         {
           "type": "image_picker",
           "id": "logo_image",
@@ -1509,8 +1625,12 @@
     },
     {
       "type": "features",
-      "name": "Features",
+      "name": "⭐ Features Section",
       "settings": [
+        {
+          "type": "header",
+          "content": "Features Settings"
+        },
         {
           "type": "range",
           "id": "features_padding_top",
@@ -1547,8 +1667,12 @@
     },
     {
       "type": "feature_item",
-      "name": "Feature Item",
+      "name": "🔧 Feature Item",
       "settings": [
+        {
+          "type": "header",
+          "content": "Feature Item Settings"
+        },
         {
           "type": "text",
           "id": "feature_icon",
@@ -1571,8 +1695,12 @@
     },
     {
       "type": "cta",
-      "name": "Call to Action",
+      "name": "📢 Call to Action",
       "settings": [
+        {
+          "type": "header",
+          "content": "CTA Settings"
+        },
         {
           "type": "range",
           "id": "cta_padding_top",
@@ -1672,42 +1800,6 @@
           }
         },
         {
-          "type": "stat_item",
-          "settings": {
-            "stat_icon_type": "clipboard",
-            "stat_number": "6,000+",
-            "stat_label": "SKUs",
-            "stat_description": "Comprehensive product portfolio for every need"
-          }
-        },
-        {
-          "type": "stat_item",
-          "settings": {
-            "stat_icon_type": "shield",
-            "stat_number": "7",
-            "stat_label": "Class 7 Cleanrooms",
-            "stat_description": "Controlled environment for precision manufacturing"
-          }
-        },
-        {
-          "type": "stat_item",
-          "settings": {
-            "stat_icon_type": "star",
-            "stat_number": "17+",
-            "stat_label": "Years in Single-Use Technology",
-            "stat_description": "Leading expertise in single-use bioprocessing solutions"
-          }
-        },
-        {
-          "type": "stat_item",
-          "settings": {
-            "stat_icon_type": "heart",
-            "stat_number": "15+",
-            "stat_label": "Years of ISO 13485",
-            "stat_description": "Certified quality management for medical devices"
-          }
-        },
-        {
           "type": "categories"
         },
         {
@@ -1740,12 +1832,16 @@
           }
         },
         {
-          "type": "product_category",
-          "settings": {
-            "category_tab": "Accumax",
-            "category_name": "Reagent Bottles",
-            "category_description": "Crafted with top-quality materials, they are excellent storage containers for powder and liquid samples"
-          }
+          "type": "component_logos"
+        },
+        {
+          "type": "component_logo_item"
+        },
+        {
+          "type": "component_logo_item"
+        },
+        {
+          "type": "component_logo_item"
         },
         {
           "type": "sustainability"
@@ -1754,16 +1850,7 @@
           "type": "sustainability_logo"
         },
         {
-          "type": "sustainability_logo"
-        },
-        {
           "type": "features"
-        },
-        {
-          "type": "feature_item"
-        },
-        {
-          "type": "feature_item"
         },
         {
           "type": "feature_item"
@@ -1797,14 +1884,14 @@
               <div class="sut-hero-overlay" style="background-color: {{ block.settings.hero_overlay_color | default: '#003366' }}; opacity: {{ block.settings.hero_overlay_opacity | default: 80 | divided_by: 100.0 }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
                 <div class="sut-container">
                   <div class="sut-hero-content">
-                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; line-height: {{ block.settings.hero_title_line_height | default: 1.1 }}; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
+                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
                       {{ block.settings.hero_title }}
                     </h1>
-                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; line-height: {{ block.settings.hero_description_line_height | default: 1.6 }}; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
+                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
                       {{ block.settings.hero_description }}
                     </div>
                     {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};" onmouseover="this.style.background='{{ block.settings.hero_button_hover_bg_color | default: '#009d63' }}'" onmouseout="this.style.background='{{ block.settings.hero_button_bg_color | default: '#00a86b' }}'">
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};">
                         {{ block.settings.hero_button_text }}
                       </a>
                     {% endif %}
@@ -1815,14 +1902,14 @@
               <div class="sut-hero-background" style="background: {{ block.settings.hero_background_color | default: '#0071b9' }}; padding-top: {{ block.settings.hero_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.hero_padding_bottom | default: 80 }}px;">
                 <div class="sut-container">
                   <div class="sut-hero-content">
-                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; line-height: {{ block.settings.hero_title_line_height | default: 1.1 }}; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
+                    <h1 class="sut-hero-title" style="font-size: {{ block.settings.hero_title_size_desktop | default: 56 }}px; color: {{ block.settings.hero_title_color | default: '#ffffff' }};">
                       {{ block.settings.hero_title }}
                     </h1>
-                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; line-height: {{ block.settings.hero_description_line_height | default: 1.6 }}; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
+                    <div class="sut-hero-description" style="font-size: {{ block.settings.hero_description_size_desktop | default: 20 }}px; color: {{ block.settings.hero_description_color | default: '#ffffff' }};">
                       {{ block.settings.hero_description }}
                     </div>
                     {% if block.settings.hero_button_text and block.settings.hero_button_url %}
-                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};" onmouseover="this.style.background='{{ block.settings.hero_button_hover_bg_color | default: '#009d63' }}'" onmouseout="this.style.background='{{ block.settings.hero_button_bg_color | default: '#00a86b' }}'">
+                      <a href="{{ block.settings.hero_button_url }}" class="sut-hero-button" style="background: {{ block.settings.hero_button_bg_color | default: '#00a86b' }}; color: {{ block.settings.hero_button_text_color | default: '#ffffff' }};">
                         {{ block.settings.hero_button_text }}
                       </a>
                     {% endif %}
@@ -1850,7 +1937,6 @@
           <div class="sut-container">
             <div class="sut-strategy-container{% if block.settings.strategy_layout == 'image_left' %} sut-reverse-layout{% endif %}">
               {% if block.settings.strategy_layout == 'image_right' %}
-                <!-- Content First -->
                 <div class="sut-strategy-text">
                   <h2 class="sut-strategy-title">{{ block.settings.strategy_title }}</h2>
                   <div class="sut-strategy-description">{{ block.settings.strategy_description }}</div>
@@ -1860,20 +1946,17 @@
                     </a>
                   {% endif %}
                 </div>
-                <!-- Image Second -->
                 {% if block.settings.strategy_image %}
                   <div class="sut-strategy-image-wrapper">
                     <img src="{{ block.settings.strategy_image | img_url: '800x' }}" alt="{{ block.settings.strategy_title }}" class="sut-strategy-image">
                   </div>
                 {% endif %}
               {% else %}
-                <!-- Image First -->
                 {% if block.settings.strategy_image %}
                   <div class="sut-strategy-image-wrapper">
                     <img src="{{ block.settings.strategy_image | img_url: '800x' }}" alt="{{ block.settings.strategy_title }}" class="sut-strategy-image">
                   </div>
                 {% endif %}
-                <!-- Content Second -->
                 <div class="sut-strategy-text">
                   <h2 class="sut-strategy-title">{{ block.settings.strategy_title }}</h2>
                   <div class="sut-strategy-description">{{ block.settings.strategy_description }}</div>
@@ -1893,7 +1976,6 @@
           <div class="sut-container">
             <div class="sut-video-container{% if block.settings.video_layout == 'video_right' %} sut-reverse-layout{% endif %}">
               {% if block.settings.video_layout == 'video_right' %}
-                <!-- Content First -->
                 <div class="sut-video-text">
                   <h2 class="sut-video-title">{{ block.settings.video_title }}</h2>
                   <div class="sut-video-description">{{ block.settings.video_description }}</div>
@@ -1903,28 +1985,35 @@
                     </a>
                   {% endif %}
                 </div>
-                <!-- Video Second -->
-                {% if block.settings.video_url %}
-                  <div class="sut-video-wrapper">
+                <div class="sut-video-wrapper">
+                  {% if block.settings.video_type == 'file' and block.settings.video_file %}
+                    <video class="sut-video-player" controls{% if block.settings.video_poster %} poster="{{ block.settings.video_poster | img_url: '800x' }}"{% endif %}>
+                      <source src="{{ block.settings.video_file }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  {% elsif block.settings.video_url %}
                     {% if block.settings.video_url contains 'iframe' %}
                       {{ block.settings.video_url }}
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
-                  </div>
-                {% endif %}
+                  {% endif %}
+                </div>
               {% else %}
-                <!-- Video First -->
-                {% if block.settings.video_url %}
-                  <div class="sut-video-wrapper">
+                <div class="sut-video-wrapper">
+                  {% if block.settings.video_type == 'file' and block.settings.video_file %}
+                    <video class="sut-video-player" controls{% if block.settings.video_poster %} poster="{{ block.settings.video_poster | img_url: '800x' }}"{% endif %}>
+                      <source src="{{ block.settings.video_file }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  {% elsif block.settings.video_url %}
                     {% if block.settings.video_url contains 'iframe' %}
                       {{ block.settings.video_url }}
                     {% else %}
                       <iframe src="{{ block.settings.video_url }}" class="sut-video-embed" frameborder="0" allowfullscreen></iframe>
                     {% endif %}
-                  </div>
-                {% endif %}
-                <!-- Content Second -->
+                  {% endif %}
+                </div>
                 <div class="sut-video-text">
                   <h2 class="sut-video-title">{{ block.settings.video_title }}</h2>
                   <div class="sut-video-description">{{ block.settings.video_description }}</div>
@@ -1943,20 +2032,20 @@
         <section class="sut-stats-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.stats_padding_top | default: 80 }}px; padding-bottom: {{ block.settings.stats_padding_bottom | default: 80 }}px;">
           {% if block.settings.stats_background_type == 'image' and block.settings.stats_background_image %}
             <div class="sut-stats-background" style="background-image: url('{{ block.settings.stats_background_image | img_url: '1920x' }}');"></div>
-            <div class="sut-stats-overlay" style="background-color: {{ block.settings.stats_overlay_color | default: '#0071b9' }}{{ block.settings.stats_overlay_opacity | default: 90 | divided_by: 100.0 | prepend: '; opacity: ' }};"></div>
-            <div class="sut-stats-content-wrapper" style="position: relative; z-index: 3; padding: {{ block.settings.stats_inner_padding_top | default: 40 }}px {{ block.settings.stats_inner_padding_horizontal | default: 20 }}px {{ block.settings.stats_inner_padding_bottom | default: 40 }}px;">
+            <div class="sut-stats-overlay" style="background-color: {{ block.settings.stats_overlay_color | default: '#0071b9' }}; opacity: {{ block.settings.stats_overlay_opacity | default: 90 | divided_by: 100.0 }};"></div>
+            <div class="sut-stats-content-wrapper" style="position: relative; z-index: 3; padding: 40px 20px;">
           {% else %}
-            <div style="background-color: {{ block.settings.stats_background_color | default: '#0071b9' }}; padding: {{ block.settings.stats_inner_padding_top | default: 40 }}px {{ block.settings.stats_inner_padding_horizontal | default: 20 }}px {{ block.settings.stats_inner_padding_bottom | default: 40 }}px;">
+            <div style="background-color: {{ block.settings.stats_background_color | default: '#0071b9' }}; padding: 40px 20px;">
           {% endif %}
               <div class="sut-container">
                 <div class="sut-stats-content">
                   {% if block.settings.stats_title or block.settings.stats_description %}
-                    <div class="sut-stats-header" style="text-align: {{ block.settings.stats_title_alignment | default: 'center' }};">
+                    <div class="sut-stats-header">
                       {% if block.settings.stats_title %}
-                        <h2 class="sut-stats-title" style="font-size: {{ block.settings.stats_title_size | default: 48 }}px; color: {{ block.settings.stats_title_color | default: '#ffffff' }};">{{ block.settings.stats_title }}</h2>
+                        <h2 class="sut-stats-title" style="color: white;">{{ block.settings.stats_title }}</h2>
                       {% endif %}
                       {% if block.settings.stats_description %}
-                        <div class="sut-stats-description" style="font-size: {{ block.settings.stats_description_size | default: 18 }}px; color: {{ block.settings.stats_description_color | default: '#ffffff' }};">{{ block.settings.stats_description }}</div>
+                        <div class="sut-stats-description" style="color: white;">{{ block.settings.stats_description }}</div>
                       {% endif %}
                     </div>
                   {% endif %}
@@ -1965,7 +2054,7 @@
                     {% for stat_block in section.blocks %}
                       {% if stat_block.type == 'stat_item' %}
                         <div class="sut-stat-item" {{ stat_block.shopify_attributes }}>
-                          <div class="sut-stat-icon" style="color: {{ block.settings.stats_label_color | default: '#ffffff' }};">
+                          <div class="sut-stat-icon" style="color: white;">
                             {% case stat_block.settings.stat_icon_type %}
                               {% when 'location' %}
                                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -1975,22 +2064,22 @@
                                 <svg viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17.5c-.83 0-1.54.5-1.85 1.22l-1.92 5.78H12v-2c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h2.73l1.73-5.19c.08-.23.29-.39.54-.39h1.54l1.9 5.58H16v6c0 .55.45 1 1 1s1-.45 1-1z"/></svg>
                               {% when 'certificate' %}
                                 <svg viewBox="0 0 24 24"><path d="M9,10H7V8H9V10M13,10H11V8H13V10M17,10H15V8H17V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/></svg>
-                              {% when 'clipboard' %>
+                              {% when 'clipboard' %}
                                 <svg viewBox="0 0 24 24"><path d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3Z"/></svg>
                               {% when 'shield' %}
                                 <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/></svg>
                               {% when 'star' %}
                                 <svg viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z"/></svg>
-                              {% when 'heart' %>
+                              {% when 'heart' %}
                                 <svg viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
                               {% else %}
                                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             {% endcase %}
                           </div>
-                          <div class="sut-stat-number" style="font-size: {{ block.settings.stats_number_size | default: 48 }}px; color: {{ block.settings.stats_number_color | default: '#00a86b' }};">{{ stat_block.settings.stat_number }}</div>
-                          <div class="sut-stat-label" style="font-size: {{ block.settings.stats_label_size | default: 18 }}px; color: {{ block.settings.stats_label_color | default: '#ffffff' }};">{{ stat_block.settings.stat_label }}</div>
+                          <div class="sut-stat-number" style="font-size: 48px; color: #00a86b;">{{ stat_block.settings.stat_number }}</div>
+                          <div class="sut-stat-label" style="font-size: 18px; color: white;">{{ stat_block.settings.stat_label }}</div>
                           {% if stat_block.settings.stat_description %}
-                            <div class="sut-stat-description" style="color: {{ block.settings.stats_label_color | default: '#ffffff' }};">{{ stat_block.settings.stat_description }}</div>
+                            <div class="sut-stat-description" style="color: white;">{{ stat_block.settings.stat_description }}</div>
                           {% endif %}
                         </div>
                       {% endif %}
@@ -2008,13 +2097,14 @@
         <style>
           @media (max-width: 1024px) and (min-width: 769px) {
             .sut-stats-grid {
-              grid-template-columns: repeat({{ block.settings.stats_per_row_tablet | default: 3 }}, 1fr) !important;
+              grid-template-columns: repeat({{ block.settings.stats_per_row_tablet | default: 2 }}, 1fr) !important;
             }
           }
           
           @media (max-width: 768px) {
             .sut-stats-grid {
-              grid-template-columns: repeat({{ block.settings.stats_per_row_mobile | default: 2 }}, 1fr) !important;
+              grid-template-columns: repeat({{ block.settings.stats_per_row_mobile | default: 1 }}, 1fr) !important;
+              gap: 40px;
             }
           }
         </style>
@@ -2073,6 +2163,42 @@
                 </div>
               {% endif %}
             {% endfor %}
+          </div>
+        </section>
+
+      {% when 'component_logos' %}
+        <section class="sut-component-logos-section" {{ block.shopify_attributes }} style="padding-top: {{ block.settings.component_logos_padding_top | default: 100 }}px; padding-bottom: {{ block.settings.component_logos_padding_bottom | default: 100 }}px;">
+          <div class="sut-container">
+            {% if block.settings.component_logos_title or block.settings.component_logos_description %}
+              <div class="sut-component-logos-header">
+                {% if block.settings.component_logos_title %}
+                  <h2 class="sut-component-logos-title">{{ block.settings.component_logos_title }}</h2>
+                {% endif %}
+                {% if block.settings.component_logos_description %}
+                  <div class="sut-component-logos-description">{{ block.settings.component_logos_description }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+            
+            <div class="sut-component-logos-grid">
+              {% for logo_block in section.blocks %}
+                {% if logo_block.type == 'component_logo_item' and logo_block.settings.logo_image %}
+                  <div class="sut-component-logo-item" {{ logo_block.shopify_attributes }}>
+                    {% if logo_block.settings.logo_url %}
+                      <a href="{{ logo_block.settings.logo_url }}" target="_blank">
+                        <img src="{{ logo_block.settings.logo_image | img_url: '200x' }}" 
+                             alt="{{ logo_block.settings.logo_alt }}" 
+                             class="sut-component-logo-image">
+                      </a>
+                    {% else %}
+                      <img src="{{ logo_block.settings.logo_image | img_url: '200x' }}" 
+                           alt="{{ logo_block.settings.logo_alt }}" 
+                           class="sut-component-logo-image">
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </section>
 
@@ -2181,3 +2307,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
