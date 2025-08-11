@@ -679,6 +679,8 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
   }
 
   .event-modal.show {
@@ -700,7 +702,7 @@
 
   .modal-content {
     background: white;
-    margin: 3% auto;
+    margin: 0;
     padding: 0;
     border-radius: 20px;
     width: 95%;
@@ -859,8 +861,9 @@
     overflow: hidden;
   }
   
-  body.modal-open > *:not(.event-modal) {
-    filter: blur(2px);
+  body.modal-open .tradeshow-section {
+    filter: blur(5px);
+    pointer-events: none;
   }
 
   /* Responsive Design */
@@ -1115,13 +1118,13 @@ function openModal(modalId) {
   // Add body class for blur effect
   document.body.classList.add('modal-open');
   
-  // Show modal
-  modal.style.display = 'block';
+  // Show modal with flex display for proper centering
+  modal.style.display = 'flex';
   
   // Force reflow and add show class for animation
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     modal.classList.add('show');
-  }, 10);
+  });
 
   // Add click event to overlay
   const overlay = modal.querySelector('.modal-overlay');
@@ -1150,6 +1153,14 @@ function closeModal(modalId) {
     modal.style.display = 'none';
     document.body.classList.remove('modal-open');
   }, 300);
+}
+
+// Debug function to check modal state
+function checkModalState() {
+  const modals = document.querySelectorAll('.event-modal');
+  modals.forEach(modal => {
+    console.log('Modal ID:', modal.id, 'Display:', modal.style.display, 'Show class:', modal.classList.contains('show'));
+  });
 }
 
 // Close modal when clicking outside content
