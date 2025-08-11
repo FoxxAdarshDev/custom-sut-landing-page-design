@@ -178,16 +178,40 @@
             </div>
 
             <!-- Modal for detailed information -->
-            {% if block.settings.show_read_more and block.settings.detailed_description != blank %}
+            {% if block.settings.show_read_more %}
               <div id="{{ block.id }}-modal" class="event-modal">
-                <div class="modal-overlay" onclick="closeModal('{{ block.id }}-modal')"></div>
+                <div class="modal-overlay"></div>
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3>{{ block.settings.event_title }}</h3>
+                    <h3>{{ block.settings.event_title | default: 'Event Details' }}</h3>
                     <button class="modal-close" onclick="closeModal('{{ block.id }}-modal')">&times;</button>
                   </div>
                   <div class="modal-body">
-                    {{ block.settings.detailed_description }}
+                    {% if block.settings.detailed_description != blank %}
+                      {{ block.settings.detailed_description }}
+                    {% else %}
+                      <p>{{ block.settings.event_description | default: 'More details about this event will be available soon.' }}</p>
+                      
+                      {% if block.settings.event_dates != blank %}
+                        <p><strong>Event Dates:</strong> {{ block.settings.event_dates }}</p>
+                      {% endif %}
+                      
+                      {% if block.settings.event_time != blank %}
+                        <p><strong>Event Time:</strong> {{ block.settings.event_time }}</p>
+                      {% endif %}
+                      
+                      {% if block.settings.event_location != blank %}
+                        <p><strong>Location:</strong> {{ block.settings.event_location }}</p>
+                      {% endif %}
+                      
+                      {% if block.settings.venue_name != blank %}
+                        <p><strong>Venue:</strong> {{ block.settings.venue_name }}</p>
+                      {% endif %}
+                      
+                      {% if block.settings.booth_number != blank %}
+                        <p><strong>Booth Number:</strong> {{ block.settings.booth_number }}</p>
+                      {% endif %}
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -652,6 +676,14 @@
     top: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .event-modal.show {
+    opacity: 1;
+    visibility: visible;
   }
 
   .modal-overlay {
@@ -663,7 +695,6 @@
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    animation: fadeIn 0.3s ease;
     z-index: 999998;
   }
 
@@ -675,13 +706,18 @@
     width: 95%;
     max-width: 700px;
     position: relative;
-    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
     z-index: 999999;
+    transform: translateY(50px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .event-modal.show .modal-content {
+    transform: translateY(0) scale(1);
   }
 
   .modal-header {
@@ -1071,84 +1107,60 @@ END:VCALENDAR`;
 function openModal(modalId) {
   console.log('Opening modal:', modalId);
   const modal = document.getElementById(modalId);
-  if (modal) {
-    // Add body blur effect
-    document.body.style.overflow = 'hidden';
-    document.body.style.filter = 'blur(2px)';
+  if (!modal) {
+    console.error('Modal not found:', modalId);
+    return;
+  }
 
-    modal.style.display = 'block';
+  // Add body class for blur effect
+  document.body.classList.add('modal-open');
+  
+  // Show modal
+  modal.style.display = 'block';
+  
+  // Force reflow and add show class for animation
+  setTimeout(() => {
+    modal.classList.add('show');
+  }, 10);
 
-    // Add click event to overlay
-    const overlay = modal.querySelector('.modal-overlay');
-    if (overlay) {
-      overlay.onclick = function(e) {
-        if (e.target === overlay) {
-          closeModal(modalId);
-        }
-      };
-    }
+  // Add click event to overlay
+  const overlay = modal.querySelector('.modal-overlay');
+  if (overlay) {
+    overlay.onclick = function(e) {
+      if (e.target === overlay) {
+        closeModal(modalId);
+      }
+    };
   }
 }
 
 function closeModal(modalId) {
   console.log('Closing modal:', modalId);
   const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    document.body.style.filter = 'none';
+  if (!modal) {
+    console.error('Modal not found:', modalId);
+    return;
   }
+
+  // Remove show class for animation
+  modal.classList.remove('show');
+  
+  // Hide modal after animation
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }, 300);
 }
 
 // Close modal when clicking outside content
-window.addEventListener('click', function(event) {
+document.addEventListener('click', function(event) {
   if (event.target.classList.contains('modal-overlay')) {
     const modal = event.target.closest('.event-modal');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-      document.body.style.filter = 'none';
-      document.body.classList.remove('modal-open');
+    if (modal && modal.id) {
+      closeModal(modal.id);
     }
   }
 });
-
-// Enhanced modal opening with body class
-function openModal(modalId) {
-  console.log('Opening modal:', modalId);
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    document.body.classList.add('modal-open');
-    modal.style.display = 'block';
-    modal.style.zIndex = '999999';
-
-    // Force modal to top
-    setTimeout(() => {
-      modal.style.opacity = '1';
-      modal.style.visibility = 'visible';
-    }, 10);
-
-    const overlay = modal.querySelector('.modal-overlay');
-    if (overlay) {
-      overlay.onclick = function(e) {
-        if (e.target === overlay) {
-          closeModal(modalId);
-        }
-      };
-    }
-  }
-}
-
-function closeModal(modalId) {
-  console.log('Closing modal:', modalId);
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.style.display = 'none';
-    modal.style.opacity = '0';
-    modal.style.visibility = 'hidden';
-    document.body.classList.remove('modal-open');
-  }
-}
 </script>
 
 {% schema %}
