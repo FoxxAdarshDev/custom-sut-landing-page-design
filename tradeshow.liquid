@@ -150,23 +150,23 @@
                     <div class="calendar-dropdown" id="calendar-{{ block.id }}">
                       <div class="dropdown-content">
                         <div class="dropdown-header">Choose Calendar</div>
-                        <a href="#" class="calendar-option" onclick="addToCalendar('google','{{ block.id }}')">
+                        <a href="javascript:void(0)" class="calendar-option" onclick="addToCalendar('google','{{ block.id }}')">
                           <span class="option-icon">📱</span>
                           Google Calendar
                         </a>
-                        <a href="#" class="calendar-option" onclick="addToCalendar('outlook','{{ block.id }}')">
+                        <a href="javascript:void(0)" class="calendar-option" onclick="addToCalendar('outlook','{{ block.id }}')">
                           <span class="option-icon">💼</span>
                           Outlook
                         </a>
-                        <a href="#" class="calendar-option" onclick="addToCalendar('yahoo','{{ block.id }}')">
+                        <a href="javascript:void(0)" class="calendar-option" onclick="addToCalendar('yahoo','{{ block.id }}')">
                           <span class="option-icon">🌐</span>
                           Yahoo Calendar
                         </a>
-                        <a href="#" class="calendar-option" onclick="addToCalendar('apple','{{ block.id }}')">
+                        <a href="javascript:void(0)" class="calendar-option" onclick="addToCalendar('apple','{{ block.id }}')">
                           <span class="option-icon">🍎</span>
                           Apple Calendar
                         </a>
-                        <a href="#" class="calendar-option" onclick="addToCalendar('ics','{{ block.id }}')">
+                        <a href="javascript:void(0)" class="calendar-option" onclick="addToCalendar('ics','{{ block.id }}')">
                           <span class="option-icon">💾</span>
                           Download ICS
                         </a>
@@ -268,9 +268,10 @@
   /* Trade Show Grid */
   .tradeshow-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 20px;
     margin-bottom: 60px;
+    padding: 0 10px;
   }
 
   /* Modern Card Design */
@@ -613,31 +614,33 @@
   }
 
   .modal-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     animation: fadeIn 0.3s ease;
+    z-index: 99998;
   }
 
   .modal-content {
     background: white;
-    margin: 5% auto;
+    margin: 3% auto;
     padding: 0;
     border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
+    width: 95%;
+    max-width: 700px;
     position: relative;
     animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    max-height: 80vh;
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    z-index: 99999;
   }
 
   .modal-header {
@@ -678,11 +681,34 @@
   }
 
   .modal-body {
-    padding: 30px;
-    line-height: 1.7;
+    padding: 30px 40px;
+    line-height: 1.8;
     color: #555;
     overflow-y: auto;
     flex: 1;
+    font-size: 16px;
+  }
+
+  .modal-body p {
+    margin-bottom: 20px;
+  }
+
+  .modal-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .modal-body ul, .modal-body ol {
+    margin: 15px 0;
+    padding-left: 25px;
+  }
+
+  .modal-body li {
+    margin-bottom: 8px;
+  }
+
+  .modal-body h4, .modal-body h5, .modal-body h6 {
+    margin: 25px 0 15px 0;
+    color: #2c3e50;
   }
 
   /* View All Button */
@@ -751,6 +777,12 @@
     }
   }
 
+  /* Body styles when modal is open */
+  body.modal-open {
+    overflow: hidden;
+    filter: blur(2px);
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .tradeshow-section {
@@ -768,6 +800,7 @@
     .tradeshow-grid {
       grid-template-columns: 1fr;
       gap: 20px;
+      padding: 0 5px;
     }
 
     .card-header {
@@ -985,19 +1018,24 @@ END:VCALENDAR`;
   window.URL.revokeObjectURL(url);
 }
 
-// Enhanced Modal functionality with proper overlay
+// Enhanced Modal functionality with proper overlay and body lock
 function openModal(modalId) {
   console.log('Opening modal:', modalId);
   const modal = document.getElementById(modalId);
   if (modal) {
-    modal.style.display = 'block';
+    // Add body blur effect
     document.body.style.overflow = 'hidden';
+    document.body.style.filter = 'blur(2px)';
+    
+    modal.style.display = 'block';
     
     // Add click event to overlay
     const overlay = modal.querySelector('.modal-overlay');
     if (overlay) {
-      overlay.onclick = function() {
-        closeModal(modalId);
+      overlay.onclick = function(e) {
+        if (e.target === overlay) {
+          closeModal(modalId);
+        }
       };
     }
   }
@@ -1009,6 +1047,7 @@ function closeModal(modalId) {
   if (modal) {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    document.body.style.filter = 'none';
   }
 }
 
@@ -1019,9 +1058,39 @@ window.addEventListener('click', function(event) {
     if (modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      document.body.style.filter = 'none';
+      document.body.classList.remove('modal-open');
     }
   }
 });
+
+// Enhanced modal opening with body class
+function openModal(modalId) {
+  console.log('Opening modal:', modalId);
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    document.body.classList.add('modal-open');
+    modal.style.display = 'block';
+    
+    const overlay = modal.querySelector('.modal-overlay');
+    if (overlay) {
+      overlay.onclick = function(e) {
+        if (e.target === overlay) {
+          closeModal(modalId);
+        }
+      };
+    }
+  }
+}
+
+function closeModal(modalId) {
+  console.log('Closing modal:', modalId);
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+}
 </script>
 
 {% schema %}
