@@ -459,11 +459,12 @@
     justify-content: center;
     overflow: hidden;
     background: transparent;
+    min-height: 180px;
   }
 
   .sut-category-image {
-    max-width: 200px;
-    max-height: 120px;
+    max-width: 280px;
+    max-height: 180px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -489,6 +490,12 @@
     margin-bottom: 25px;
     color: #666;
     width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.8em; /* 3 lines * 1.6 line-height */
   }
 
   .sut-category-button {
@@ -768,13 +775,13 @@
     }
 
     .sut-category-image-wrapper {
-      height: 120px;
+      min-height: 140px;
       align-items: center;
     }
 
     .sut-category-image {
-      max-width: 160px;
-      max-height: 100px;
+      max-width: 220px;
+      max-height: 140px;
     }
 
     .sut-category-name {
