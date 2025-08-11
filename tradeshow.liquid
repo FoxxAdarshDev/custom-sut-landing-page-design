@@ -40,13 +40,26 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'tradeshow_event' %}
-            <div class="trade-show-event-card-unique {{ block.settings.event_status }}" 
-                 data-event-status="{{ block.settings.event_status }}"
-                 data-event-id="{{ block.id }}">
+            <a href="/pages/trade-shows" class="trade-show-card-link-unique">
+              <div class="trade-show-event-card-unique {{ block.settings.event_status }}" 
+                   data-event-status="{{ block.settings.event_status }}"
+                   data-event-id="{{ block.id }}">
 
-              <!-- Card Header with Status and Logo -->
-              <div class="card-header-unique">
-                <div class="header-left-unique">
+                <!-- Event Logo -->
+                {% if block.settings.event_logo != blank %}
+                  <div class="event-logo-container-unique">
+                    <img src="{{ block.settings.event_logo | img_url: '200x120' }}" 
+                         alt="{{ block.settings.event_title | escape }} Logo" 
+                         class="logo-img-unique">
+                  </div>
+                {% endif %}
+
+                <!-- Card Body with minimal content -->
+                <div class="card-body-unique">
+                  {% if block.settings.event_title != blank %}
+                    <h3 class="event-title-unique">{{ block.settings.event_title }}</h3>
+                  {% endif %}
+
                   {% if block.settings.event_dates != blank %}
                     <div class="event-date-badge-unique">
                       {{ block.settings.event_dates }}
@@ -60,113 +73,90 @@
                   {% endif %}
                 </div>
 
-                <div class="header-right-unique">
-                  <!-- Status Badge -->
-                  {% if block.settings.event_status == 'upcoming' %}
-                    <div class="status-badge-unique upcoming">UPCOMING</div>
-                  {% elsif block.settings.event_status == 'live' %}
-                    <div class="status-badge-unique live">LIVE NOW</div>
-                  {% elsif block.settings.event_status == 'past' %}
-                    <div class="status-badge-unique past">COMPLETED</div>
+                <!-- Hidden elements for future use -->
+                <div style="display: none;">
+                  <!-- Event Description (hidden) -->
+                  {% if block.settings.event_description != blank %}
+                    <p class="event-description-unique">
+                      {{ block.settings.event_description | truncate: 120 }}
+                      {% if block.settings.show_read_more %}
+                        <button class="read-more-btn-unique" onclick="openModalUnique('{{ block.id }}-modal')">
+                          Read More
+                        </button>
+                      {% endif %}
+                    </p>
                   {% endif %}
 
-                  <!-- Event Logo -->
-                  {% if block.settings.event_logo != blank %}
-                    <div class="event-logo-unique">
-                      <img src="{{ block.settings.event_logo | img_url: '120x80' }}" 
-                           alt="{{ block.settings.event_title | escape }} Logo" 
-                           class="logo-img-unique">
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-
-              <!-- Card Body -->
-              <div class="card-body-unique">
-                {% if block.settings.event_title != blank %}
-                  <h3 class="event-title-unique">{{ block.settings.event_title }}</h3>
-                {% endif %}
-
-                {% if block.settings.event_description != blank %}
-                  <p class="event-description-unique">
-                    {{ block.settings.event_description | truncate: 120 }}
-                    {% if block.settings.show_read_more %}
-                      <button class="read-more-btn-unique" onclick="openModalUnique('{{ block.id }}-modal')">
-                        Read More
-                      </button>
-                    {% endif %}
-                  </p>
-                {% endif %}
-
-                <!-- Event Details Grid -->
-                <div class="event-details-unique">
-                  {% if block.settings.event_time != blank %}
-                    <div class="detail-item-unique">
-                      <span class="detail-text-unique"><strong>Time:</strong> {{ block.settings.event_time }}</span>
-                    </div>
-                  {% endif %}
-
-                  {% if block.settings.event_location != blank %}
-                    <div class="detail-item-unique">
-                      <span class="detail-text-unique"><strong>Location:</strong> {{ block.settings.event_location }}</span>
-                    </div>
-                  {% endif %}
-
-                  {% if block.settings.venue_name != blank %}
-                    <div class="detail-item-unique">
-                      <span class="detail-text-unique">
-                        <strong>Venue:</strong>
-                        {% if block.settings.venue_map_url != blank %}
-                          <a href="{{ block.settings.venue_map_url }}" target="_blank" class="venue-link-unique">
-                            {{ block.settings.venue_name }}
-                          </a>
-                        {% else %}
-                          {{ block.settings.venue_name }}
-                        {% endif %}
-                      </span>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-
-              <!-- Card Footer with Actions -->
-              <div class="card-footer-unique">
-                {% if block.settings.locator_url != blank %}
-                  <a href="{{ block.settings.locator_url }}" target="_blank" class="btn-unique btn-primary-unique">
-                    Find Us
-                  </a>
-                {% endif %}
-
-                {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
-                  <div class="calendar-dropdown-wrapper-unique">
-                    <button class="btn-unique btn-secondary-unique calendar-btn-unique" onclick="toggleCalendarDropdownUnique(this, '{{ block.id }}')">
-                      Add to Calendar
-                      <span class="dropdown-arrow-unique">▼</span>
-                    </button>
-                    <div class="calendar-dropdown-unique" id="calendar-{{ block.id }}">
-                      <div class="dropdown-content-unique">
-                        <div class="dropdown-header-unique">Choose Calendar</div>
-                        <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('google','{{ block.id }}')">
-                          Google Calendar
-                        </a>
-                        <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('outlook','{{ block.id }}')">
-                          Outlook
-                        </a>
-                        <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('yahoo','{{ block.id }}')">
-                          Yahoo Calendar
-                        </a>
-                        <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('apple','{{ block.id }}')">
-                          Apple Calendar
-                        </a>
-                        <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('ics','{{ block.id }}')">
-                          Download ICS
-                        </a>
+                  <!-- Event Details Grid (hidden) -->
+                  <div class="event-details-unique">
+                    {% if block.settings.event_time != blank %}
+                      <div class="detail-item-unique">
+                        <span class="detail-text-unique"><strong>Time:</strong> {{ block.settings.event_time }}</span>
                       </div>
-                    </div>
+                    {% endif %}
+
+                    {% if block.settings.event_location != blank %}
+                      <div class="detail-item-unique">
+                        <span class="detail-text-unique"><strong>Location:</strong> {{ block.settings.event_location }}</span>
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.venue_name != blank %}
+                      <div class="detail-item-unique">
+                        <span class="detail-text-unique">
+                          <strong>Venue:</strong>
+                          {% if block.settings.venue_map_url != blank %}
+                            <a href="{{ block.settings.venue_map_url }}" target="_blank" class="venue-link-unique">
+                              {{ block.settings.venue_name }}
+                            </a>
+                          {% else %}
+                            {{ block.settings.venue_name }}
+                          {% endif %}
+                        </span>
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
+
+                  <!-- Card Footer with Actions (hidden) -->
+                  <div class="card-footer-unique">
+                    {% if block.settings.locator_url != blank %}
+                      <a href="{{ block.settings.locator_url }}" target="_blank" class="btn-unique btn-primary-unique">
+                        Find Us
+                      </a>
+                    {% endif %}
+
+                    {% if block.settings.show_calendar_buttons and block.settings.event_status == 'upcoming' %}
+                      <div class="calendar-dropdown-wrapper-unique">
+                        <button class="btn-unique btn-secondary-unique calendar-btn-unique" onclick="toggleCalendarDropdownUnique(this, '{{ block.id }}')">
+                          Add to Calendar
+                          <span class="dropdown-arrow-unique">▼</span>
+                        </button>
+                        <div class="calendar-dropdown-unique" id="calendar-{{ block.id }}">
+                          <div class="dropdown-content-unique">
+                            <div class="dropdown-header-unique">Choose Calendar</div>
+                            <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('google','{{ block.id }}')">
+                              Google Calendar
+                            </a>
+                            <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('outlook','{{ block.id }}')">
+                              Outlook
+                            </a>
+                            <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('yahoo','{{ block.id }}')">
+                              Yahoo Calendar
+                            </a>
+                            <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('apple','{{ block.id }}')">
+                              Apple Calendar
+                            </a>
+                            <a href="javascript:void(0)" class="calendar-option-unique" onclick="addToCalendarUnique('ics','{{ block.id }}')">
+                              Download ICS
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
               </div>
-            </div>
+            </a>
 
             <!-- Modal for detailed information -->
             {% if block.settings.show_read_more %}
@@ -327,11 +317,18 @@
     background: rgba(0, 113, 185, 0.6);
   }
 
-  /* Modern Card Design */
+  /* Card Link Wrapper */
+  .trade-show-card-link-unique {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* Modern Card Design - Simplified */
   .trade-show-event-card-unique {
     background: #ffffff;
     border-radius: 16px;
-    margin-top:15px;
+    margin-top: 15px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 113, 185, 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -339,13 +336,13 @@
     border: 1px solid #f0f0f0;
     display: flex;
     flex-direction: column;
-    min-height: 320px;
+    min-height: 280px;
     width: 380px;
     flex-shrink: 0;
     max-width: 380px;
   }
 
-  .trade-show-event-card-unique:hover {
+  .trade-show-card-link-unique:hover .trade-show-event-card-unique {
     transform: translateY(-8px);
     box-shadow: 0 25px 50px rgba(0, 113, 185, 0.15);
     border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
@@ -376,29 +373,31 @@
     flex-shrink: 0;
   }
 
-  /* Date and Booth Badges */
+  /* Date and Booth Badges - Simplified */
   .event-date-badge-unique {
     background: #f8f9fa;
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
     padding: 8px 16px;
     border-radius: 25px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     display: inline-block;
     width: fit-content;
     border: 1px solid #e9ecef;
+    margin: 0 auto;
   }
 
   .booth-badge-unique {
     background: #f8f9fa;
     color: #28a745;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 14px;
     font-weight: 600;
     display: inline-block;
     width: fit-content;
     border: 1px solid #e9ecef;
+    margin: 0 auto;
   }
 
   /* Status Badge */
@@ -427,43 +426,45 @@
     color: white;
   }
 
-  /* Event Logo */
-  .event-logo-unique {
-    width: 100px;
-    height: 60px;
+  /* Event Logo Container - Simplified */
+  .event-logo-container-unique {
+    width: 100%;
+    height: 120px;
     background: #f8f9fa;
-    border-radius: 12px;
-    padding: 8px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e9ecef;
   }
 
   .logo-img-unique {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
   }
 
-  .trade-show-event-card-unique:hover .event-logo-unique {
-    border-color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    transform: scale(1.05);
+  .trade-show-card-link-unique:hover .event-logo-container-unique {
+    background: #e9ecef;
   }
 
-  /* Card Body */
+  /* Card Body - Simplified */
   .card-body-unique {
-    padding: 16px 20px;
+    padding: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    text-align: center;
   }
 
   .event-title-unique {
     color: {{ settings.tradeshow_button_primary_bg | default: '#0071b9' }};
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 0;
+    text-align: center;
   }
 
   .event-description-unique {
