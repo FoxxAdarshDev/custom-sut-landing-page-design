@@ -325,9 +325,24 @@
 
   .youtube-video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
+  }
+
+  /* Big screen adjustments */
+  @media screen and (min-width: 1400px) {
+    .youtube-video-container {
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1400px;
+      margin: 0 auto 20px auto;
+    }
+  }
+
+  @media screen and (min-width: 1200px) and (max-width: 1399px) {
+    .youtube-video-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .youtube-video-item {
@@ -1675,69 +1690,7 @@
 
         <!-- Tab Contents -->
         <div id="tab-contents-{{ section.id }}">
-          <!-- Show YouTube-style loading placeholders immediately -->
-          <div class="youtube-loading-container">
-            <div class="youtube-placeholder-card">
-              <div class="youtube-placeholder-thumbnail">
-                <div class="youtube-placeholder-logo">
-                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="youtube-placeholder-content">
-                <div class="youtube-placeholder-title"></div>
-                <div class="youtube-placeholder-title-second"></div>
-                <div class="youtube-placeholder-meta">
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                </div>
-                <div class="youtube-placeholder-description"></div>
-                <div class="youtube-placeholder-description-second"></div>
-              </div>
-            </div>
-            <div class="youtube-placeholder-card">
-              <div class="youtube-placeholder-thumbnail">
-                <div class="youtube-placeholder-logo">
-                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="youtube-placeholder-content">
-                <div class="youtube-placeholder-title"></div>
-                <div class="youtube-placeholder-title-second"></div>
-                <div class="youtube-placeholder-meta">
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                </div>
-                <div class="youtube-placeholder-description"></div>
-                <div class="youtube-placeholder-description-second"></div>
-              </div>
-            </div>
-            <div class="youtube-placeholder-card">
-              <div class="youtube-placeholder-thumbnail">
-                <div class="youtube-placeholder-logo">
-                  <svg viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M88.4 18.4c-1 -3.8 -3.9 -6.8 -7.7 -7.8C73.6 9 45 9 45 9s-28.6 0 -35.7 1.6c-3.8 1 -6.8 4 -7.7 7.8C0 25.5 0 40 0 40s0 14.5 1.6 21.6c1 3.8 3.9 6.8 7.7 7.8C16.4 71 45 71 45 71s28.6 0 35.7-1.6c3.8-1 6.8-4 7.7-7.8C90 54.5 90 40 90 40s0-14.5-1.6-21.6z M36 51V29l24 11-24 11z"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="youtube-placeholder-content">
-                <div class="youtube-placeholder-title"></div>
-                <div class="youtube-placeholder-title-second"></div>
-                <div class="youtube-placeholder-meta">
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                  <div class="youtube-placeholder-meta-item"></div>
-                </div>
-                <div class="youtube-placeholder-description"></div>
-                <div class="youtube-placeholder-description-second"></div>
-              </div>
-            </div>
-          </div>
+          <!-- Content will be loaded dynamically -->
         </div>
       </div>
     </div>
@@ -1959,7 +1912,7 @@ function initializeYouTubeGallery(sectionId) {
   let allVideos = [];
   let videosByPlaylist = {};
   let currentVideoIndex = 0;
-  let videosPerLoad = 3;
+  let videosPerLoad = 6;
   let loadedVideos = {};
 
   // Load content from all playlists
@@ -2050,11 +2003,9 @@ function initializeYouTubeGallery(sectionId) {
     console.log(`Total shorts: ${shorts.length}, Total videos: ${allVideos.length}`);
     console.log(`Latest short: ${shorts[0]?.title} (${shorts[0]?.publishedAt})`);
 
-    // Add a small delay to show skeleton loading, then fade in real content
-    setTimeout(() => {
-      displayShorts(shorts); // Show all available shorts
-      createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
-    }, 800); // 800ms delay to show skeleton loading
+    // Display content immediately, only first tab will load videos
+    displayShorts(shorts); // Show all available shorts
+    createTabs(Object.keys(videosByPlaylist).filter(id => videosByPlaylist[id].videos.length > 0));
   }
 
   async function fetchPlaylistVideos(playlistId, playlistName) {
@@ -2382,7 +2333,7 @@ function initializeYouTubeGallery(sectionId) {
       loadMoreButton.className = 'load-more-button';
       loadMoreButton.textContent = 'Load More Videos';
       loadMoreButton.addEventListener('click', () => loadMoreVideos(playlistId));
-      loadMoreButton.style.display = playlist.videos.length <= 3 ? 'none' : 'block';
+      loadMoreButton.style.display = playlist.videos.length <= 6 ? 'none' : 'block';
 
       tabContent.appendChild(videosHeader);
       tabContent.appendChild(videosContainer);
@@ -2395,9 +2346,9 @@ function initializeYouTubeGallery(sectionId) {
 
       tabContentsContainer.appendChild(tabContent);
 
-      // Load initial videos for the first tab
+      // Load initial videos only for the first tab
       if (index === 0 && playlist.videos.length > 0) {
-        loadMoreVideos(playlistId);
+        setTimeout(() => loadMoreVideos(playlistId), 100);
       }
     });
   }
@@ -2415,9 +2366,18 @@ function initializeYouTubeGallery(sectionId) {
     });
     document.querySelector(`[data-playlist-id="${playlistId}"].tab-content`).classList.add('active');
 
-    // Load videos if not loaded yet
-    if (loadedVideos[playlistId] === 0) {
-      loadMoreVideos(playlistId);
+    // Load videos if not loaded yet (lazy loading)
+    if (loadedVideos[playlistId] === 0 && videosByPlaylist[playlistId].videos.length > 0) {
+      // Show loading state for this specific tab
+      const videosContainer = document.querySelector(`#videos-${playlistId}`);
+      videosContainer.innerHTML = `
+        <div class="youtube-loading-container">
+          ${Array(6).fill(0).map(() => createYouTubeVideoPlaceholder().outerHTML).join('')}
+        </div>
+      `;
+      
+      // Load videos after short delay
+      setTimeout(() => loadMoreVideos(playlistId), 300);
     }
   }
 
