@@ -13,16 +13,16 @@
               "position": {{ forloop.index }},
               "url": "{{ request.origin }}{{ link.url }}",
               "name": "{{ link.title | escape }}",
-              "image": "https:{{ link.object.image | img_url: 'medium' | escape }}", 
+              "image": "https:{{ link.object.image | img_url: 'medium' | escape }}",
               "description": {{ link.object.description | strip_html | escape | json }}
           }{% if forloop.last == false %},{% endif %}
           {% endfor %}
       ]
   }
-  </script>   
+  </script>
 <!--  subcategory collecion template schema end -->
 {% endif %}
-{%- if template contains 'collection.SUT' -%}
+{%- if template.name == 'collection.SUT' -%}
   <!-- Don't include breadcrumb -->
 {%- else -%}
   {% include 'breadcrumb' %}
@@ -55,10 +55,10 @@
               </div>
             </div>
           </div> {% endcomment %}
-        
+
           {% comment %} <script>
             const SERVER_ENDPOINT = 'https://foxxbp-did-yoy-know-summarize-server.onrender.com/summarize';
-          
+
               document.addEventListener("DOMContentLoaded", function () {
                   console.log("Page loaded. Starting script...");
 
@@ -131,36 +131,36 @@
               // Log the extracted description
               console.log("Extracted description:", description);
 
-             
+
               // Step 5: Scrape the text from articleLookbook-title
               const titleContainer = document.querySelector("h1.section-header__title");
-          
+
               if (!titleContainer) {
                 console.error("h1 inside articleLookbook-title not found.");
                 hideMarqueeWrapper();
                 return;
               }
-          
+
               const titleText = "Facts about FLS - " + titleContainer.textContent.trim();
-          
+
               // Step 6: Show placeholder animation
               const marqueeContainer = document.getElementById("marquee-content");
               showMarqueeWrapper();
-          
+
               // Step 7: Create badge label with scraped title text
               createBadgeLabel(titleText);
 
                // Log the description before summarizing
             // console.log("Description to be summarized:", description);
-          
+
               // Step 8: Summarize the description using the server endpoint
               summarizeDescription(description).then((summary) => {
                 if (summary && marqueeContainer) {
                   console.log("Summarized content:", summary);
-          
+
                   // Step 9: Replace placeholder with summarized content
                   replacePlaceholderWithSummary(marqueeContainer, summary);
-          
+
                   // Step 10: Start the marquee animation
                   startMarqueeAnimation(marqueeContainer);
                 } else {
@@ -169,26 +169,26 @@
                 }
               });
             });
-          
+
             // Function to create badge label with scraped title text
             function createBadgeLabel(text) {
               const marqueeWrapper = document.querySelector(".marquee-wrapper");
               if (!marqueeWrapper) return;
-          
+
               // Create badge label
               const badgeLabel = document.createElement("div");
               badgeLabel.className = "badge-label";
               badgeLabel.textContent = text;
-          
+
               // Append badge label to marquee wrapper
               marqueeWrapper.appendChild(badgeLabel);
             }
-          
+
             // Function to replace placeholder with summarized content
             function replacePlaceholderWithSummary(marqueeContainer, summary) {
               // Split the summary into paragraphs based on periods
               const paragraphs = summary.split(". ").filter((p) => p.trim() !== "");
-          
+
               // Add SVGs and format each paragraph
               const formattedParagraphs = paragraphs
                 .map(
@@ -200,31 +200,31 @@
               `
                 )
                 .join("");
-          
+
               // Display the formatted content in the marquee
               marqueeContainer.innerHTML = formattedParagraphs;
             }
-          
+
             // Function to start the marquee animation
             function startMarqueeAnimation(marqueeContainer) {
               const paragraphs = marqueeContainer.querySelectorAll(".marquee-paragraph");
-          
+
               // Calculate the total width of all paragraphs
               let totalWidth = 0;
               paragraphs.forEach((paragraph) => {
                 totalWidth += paragraph.offsetWidth + 20; // Include margin-right (20px)
               });
-          
+
               // Duplicate the marquee content for seamless scrolling
               marqueeContainer.innerHTML += marqueeContainer.innerHTML;
-          
+
               // Set the animation duration based on the total width
               const animationDuration = Math.max(totalWidth / 100, 15); // Minimum duration of 15 seconds
-          
+
               // Apply the animation to the marquee container
               marqueeContainer.style.animation = `scroll-marquee ${animationDuration}s linear infinite`;
             }
-          
+
             // Function to summarize the description using the server endpoint
             async function summarizeDescription(text) {
               try {
@@ -235,10 +235,10 @@
                   },
                   body: JSON.stringify({ text }),
                 });
-          
+
                 const data = await response.json();
                 console.log("Server Response:", data);
-          
+
                 if (data.summary) {
                   return data.summary; // Return the summarized content
                 } else {
@@ -250,7 +250,7 @@
                 return null;
               }
             }
-          
+
             // Function to show the marquee wrapper
             function showMarqueeWrapper() {
               const marqueeWrapper = document.querySelector(".marquee-wrapper");
@@ -258,7 +258,7 @@
                 marqueeWrapper.style.display = "flex"; // Show the marquee wrapper
               }
             }
-          
+
             // Function to hide the marquee wrapper
             function hideMarqueeWrapper() {
               const marqueeWrapper = document.querySelector(".marquee-wrapper");
@@ -267,27 +267,27 @@
               }
             }
           </script> {% endcomment %}
-          
+
           {% comment %} <script>
             // Show the marquee wrapper for demonstration
           const marqueeWrapper = document.querySelector(".marquee-wrapper");
           if (marqueeWrapper) {
             marqueeWrapper.style.display = "flex";
           }
-          
+
           // Sticky functionality
           window.addEventListener("scroll", function () {
             const marqueeWrapper = document.querySelector(".marquee-wrapper");
             const productListing = document.querySelector(".block-marquee-stop");
-          
+
             // Check if the marquee wrapper exists
             if (marqueeWrapper) {
               // Get the scroll position
               const scrollPosition = window.scrollY || window.pageYOffset;
-          
+
               // Get 10% of the viewport height
               const scrollThreshold = window.innerHeight * 0.1;
-          
+
               // Check if the user has scrolled past the productListing div
               if (productListing && isElementScrolledPast(productListing, 50)) {
                 marqueeWrapper.classList.remove("sticky"); // Remove sticky class
@@ -298,15 +298,15 @@
               }
             }
           });
-          
+
           // Function to check if an element has been scrolled past
           function isElementScrolledPast(el, tolerance = 0) {
             const rect = el.getBoundingClientRect();
             return rect.bottom <= tolerance; // Bottom of the element is above the tolerance threshold
           }
-          
+
             </script> {% endcomment %}
-          
+
             {% comment %} <style>
                 /* .marquee-wrapper {
                   width: 100%;
@@ -314,7 +314,7 @@
                   background: #f8f8f8;
                   padding: 10px 0;
                   position: relative;
-                  display: none; 
+                  display: none;
                   align-items: center;
                   gap: 20px;
                 }
@@ -359,7 +359,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for visibility */
 background: rgba(255, 255, 255, 0.9); /* White background with transparency */
 }
 
-.productListing { 
+.productListing {
 padding-top:20px;
 margin-top: 20px;
 }
@@ -368,49 +368,49 @@ margin-top: 20px;
                   height: 42px;
                   margin-right: 20px; /* Space between image and marquee */
                 }
-            
+
                 .marquee-container {
                   display: flex;
                   width: 100%;
                   white-space: nowrap;
                   overflow: hidden;
                 }
-            
+
                 .marquee-content {
                   display: flex;
                   align-items: center;
                   padding-left: 10px;
                 }
-            
+
                 .marquee-paragraph {
                   display: flex;
                   align-items: center;
                   margin-right: 20px; /* Space between paragraphs */
                 }
-            
+
                 .marquee-icon {
                   margin-right: 10px; /* Space between icon and text */
                 }
-            
+
                 .marquee-content svg {
                   fill: #095ea7 !important;
                   width: 24px;
                   height: 24px;
                 }
-            
+
                 .marquee-text {
                   font-size: 20px;
                   color: #095ea7;
                   letter-spacing: 2px; /* Character spacing */
                 }
-            
+
                 /* Placeholder Animation */
                 .marquee-placeholder {
                   display: flex;
                   flex-direction: column;
                   gap: 10px;
                 }
-            
+
                 .placeholder-line {
                   width: 200px;
                   height: 20px;
@@ -419,12 +419,12 @@ margin-top: 20px;
                   animation: placeholderAnimation 1.5s infinite linear;
                   border-radius: 4px;
                 }
-            
+
                 @keyframes placeholderAnimation {
                   0% { background-position: 200% 0; }
                   100% { background-position: -200% 0; }
                 }
-            
+
                 /* Marquee Animation */
                 @keyframes scroll-marquee {
                   0% { transform: translateX(0); }
@@ -432,7 +432,7 @@ margin-top: 20px;
                 }
               </style> {% endcomment %}
 
-          
+
         <!-- Marquee section powered by AI end -->
   <!-- Two Column Layout Container -->
   <div class="two-column-container">
@@ -578,25 +578,30 @@ margin-top: 20px;
   font-weight: 500;
 }
 
-/* Main layout container */
+/* Main layout with sidebar and content */
 .subcategory-layout-container {
   display: flex;
   gap: 30px;
   padding: 0 20px;
   align-items: flex-start;
+  min-height: 100vh;
 }
 
 /* Sidebar preview styles */
 .sidebar-preview {
-  width: 280px;
+  width: 350px;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 16px;
-  padding: 20px;
+  padding: 25px;
   position: sticky;
   top: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  height: calc(100vh - 40px);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.12);
   transition: all 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-header h3 {
@@ -719,17 +724,17 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
   .subcategory-layout-container {
     flex-direction: column;
   }
-  
+
   .sidebar-preview {
     width: 100%;
     position: static;
     margin-bottom: 20px;
   }
-  
+
   .preview-box {
     height: 150px;
   }
-  
+
   .category-count-header {
     margin: 0 0 20px 0;
   }
@@ -740,24 +745,24 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
     padding: 0 10px;
     gap: 15px;
   }
-  
+
   .sidebar-preview {
     padding: 15px;
   }
-  
+
   .count-display {
     flex-direction: column;
     gap: 5px;
   }
-  
+
   .total-count {
     font-size: 2.5em;
   }
-  
+
   .count-label {
     font-size: 1em;
   }
-  
+
   ul.sidebar_menu {
     grid-template-columns: 1fr !important;
   }
@@ -783,7 +788,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
     const previewActions = document.getElementById('preview-actions');
     const previewLink = document.getElementById('preview-link');
     const previewProductCount = document.getElementById('preview-product-count');
-    
+
     // Add hover listeners to category cards
     document.querySelectorAll('.sidebarmenu_list').forEach(item => {
       item.addEventListener('mouseenter', function() {
@@ -791,7 +796,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
         const url = this.getAttribute('data-preview-url');
         const count = this.getAttribute('data-preview-count');
         const image = this.getAttribute('data-preview-image');
-        
+
         // Update preview content
         previewContainer.innerHTML = `
           <div class="preview-content">
@@ -799,17 +804,17 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
             <div class="preview-title">${title}</div>
           </div>
         `;
-        
+
         // Update preview actions
         previewLink.href = url;
         previewProductCount.textContent = `${count} products`;
         previewActions.style.display = 'block';
-        
+
         // Add active styles
         previewContainer.style.border = '2px solid #0071ce';
         previewContainer.style.background = '#f8f9ff';
       });
-      
+
       item.addEventListener('mouseleave', function() {
         // Reset to placeholder after a short delay
         setTimeout(() => {
@@ -819,7 +824,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
         }, 200);
       });
     });
-    
+
     // Keep preview when hovering over preview area
     previewContainer.addEventListener('mouseleave', function() {
       setTimeout(() => {
@@ -828,7 +833,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
         }
       }, 200);
     });
-    
+
     previewActions.addEventListener('mouseleave', function() {
       setTimeout(() => {
         if (!document.querySelector('.sidebarmenu_list:hover')) {
@@ -836,7 +841,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
         }
       }, 200);
     });
-    
+
     function resetPreview() {
       previewContainer.innerHTML = `
         <div class="preview-placeholder">
@@ -897,8 +902,8 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
 
         {% for link in linklists[side_links1].links %}
           {% assign link_collection = link.object %}
-          <li class="grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list" 
-              data-preview-title="{{ link.title | escape }}" 
+          <li class="grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list"
+              data-preview-title="{{ link.title | escape }}"
               data-preview-url="{{ link.url }}"
               data-preview-count="{{ link_collection.products_count | default: 0 }}"
               data-preview-image="{% if link_collection.image %}{{ link_collection.image | img_url: 'medium' }}{% else %}{{ link_collection.products.first | img_url: 'medium' }}{% endif %}">
@@ -943,7 +948,7 @@ if (sidebarMenu) {
  customSutLi.style.display = 'flex'; // 🔹 Display flex
     customSutLi.style.alignItems = 'center'; // 🔹 Vertically center content
     customSutLi.style.justifyContent = 'center'; // 🔹 Horizontally center content
-    customSutLi.style.gap = '20px'; 
+    customSutLi.style.gap = '20px';
     customSutLi.style.marginTop = '50px'; // 🔹 Add top margin
 
     // Optional: Paragraph before image
@@ -970,7 +975,7 @@ const baseUrl = 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxx-bio
 const highResUrl = baseUrl + '&width=2048&height=1024'; // Specify both width and height
 
     // Create image
-   
+ 
     img.src = highResUrl;
     img.alt = 'Custom SUT Library Banner';
     img.style.display = 'block';
@@ -1100,7 +1105,7 @@ window.addEventListener('load', () => {
 
   <div class="block-marquee-stop">&nbsp;</div>
 <style>
-.cross-selling-recommendations .sidebar_menu{text-align:center}.cross-selling-recommendations .item-container{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.cross-selling-recommendations .item{flex:1 1 1;margin:10px;list-style:none}.cross-selling-recommendations .item a{text-decoration:none;color:#121212}.cross-selling-recommendations .item a:hover,.cross-selling-recommendations .item a:active{text-decoration:underline;color:#095ea7}.cross-selling-recommendations .collection-image{width:100px;height:100px; background-size:contain;aspect-ratio:1/1;overflow:hidden;border-radius:50%;border:1px solid #095ea7!important;display:flex;justify-content:center;margin:0 auto;align-items:center}.cross-selling-recommendations .collection-image img{width:100%;height:100%;object-fit:contain;display:block}.cross-selling-recommendations .item-title{align-items:center;margin:0 auto;width:130px;display:inline-flex;margin-top:5px;justify-content:center;text-align:center;font-weight:700;flex-wrap:wrap;margin-top:5px;font-weight:bold}.cross-selling-recommendations .block{padding-top:50px;padding-bottom:50px}.cross-selling-recommendations .block:first-child, .cross-selling-recommendations .block:last-child{border-top:1px solid #ccc;border-bottom:1px solid #ccc}; 
+.cross-selling-recommendations .sidebar_menu{text-align:center}.cross-selling-recommendations .item-container{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.cross-selling-recommendations .item{flex:1 1 1;margin:10px;list-style:none}.cross-selling-recommendations .item a{text-decoration:none;color:#121212}.cross-selling-recommendations .item a:hover,.cross-selling-recommendations .item a:active{text-decoration:underline;color:#095ea7}.cross-selling-recommendations .collection-image{width:100px;height:100px; background-size:contain;aspect-ratio:1/1;overflow:hidden;border-radius:50%;border:1px solid #095ea7!important;display:flex;justify-content:center;margin:0 auto;align-items:center}.cross-selling-recommendations .collection-image img{width:100%;height:100%;object-fit:contain;display:block}.cross-selling-recommendations .item-title{align-items:center;margin:0 auto;width:130px;display:inline-flex;margin-top:5px;justify-content:center;text-align:center;font-weight:700;flex-wrap:wrap;margin-top:5px;font-weight:bold}.cross-selling-recommendations .block{padding-top:50px;padding-bottom:50px}.cross-selling-recommendations .block:first-child, .cross-selling-recommendations .block:last-child{border-top:1px solid #ccc;border-bottom:1px solid #ccc};
 
   /* .cross-selling-recommendations .block:last-child {
     border-bottom: 1px solid #cccccc;
@@ -1153,7 +1158,7 @@ window.addEventListener('load', () => {
 {{ second_block_items }}
 {% if link.links %}
   {% assign has_page_links = false %}
-  
+
   {% comment %} Check if there are any page links {% endcomment %}
   {% for sublink in link.links %}
     {% if sublink.url contains '/pages/' %}
@@ -1161,7 +1166,7 @@ window.addEventListener('load', () => {
       {% break %}
     {% endif %}
   {% endfor %}
-  
+
   {% comment %} Only show collection block if there are NO page links {% endcomment %}
   {% unless has_page_links %}
     <div class="item-container"> <!-- Added a container for flex layout -->
@@ -1193,7 +1198,7 @@ window.addEventListener('load', () => {
 {{ third_block_items }}
 {% if link.links %}
   {% assign has_page_links = false %}
-  
+
   {% comment %} Check if there are any page links {% endcomment %}
   {% for sublink in link.links %}
     {% if sublink.url contains '/pages/' %}
@@ -1201,11 +1206,11 @@ window.addEventListener('load', () => {
       {% break %}
     {% endif %}
   {% endfor %}
-  
+
   {% comment %} Only show page block if there ARE page links {% endcomment %}
   {% if has_page_links %}
     <div class="services-section">
-      
+
       <div class="item-container">
         {% for sublink in link.links %}
           {% if sublink.handle != current_url_handle %}
@@ -1214,7 +1219,7 @@ window.addEventListener('load', () => {
                 <a href="{{ sublink.url }}">
                   {% assign child_page_handle = sublink.url | split: '/' | last | url_decode %}
                   {% assign child_page = pages[child_page_handle] %}
-                  
+
                   {% comment %} Extract first image from page content {% endcomment %}
                   {% assign page_image_src = '' %}
                   {% if child_page and child_page.content contains '<img' %}
@@ -1224,14 +1229,14 @@ window.addEventListener('load', () => {
                       {% assign page_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
                     {% endif %}
                   {% endif %}
-                  
+
                   {% comment %} Display page image or fallback {% endcomment %}
                   {% if page_image_src != '' %}
                     <img src="{{ page_image_src }}" alt="{{ sublink.title | escape }}" class="collection-image" />
                   {% else %}
                     <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ sublink.title | escape }}" class="collection-image" />
                   {% endif %}
-                  
+
                   <span class="item-title">{{ sublink.title }}</span>
                 </a>
               </div>
@@ -1265,7 +1270,7 @@ window.addEventListener('load', () => {
     </div>
     {% endif %}
 
-    
+
     {% if third_block_items != '' %}
     <div class="block">
         <h3>Applications & Services</h3>
