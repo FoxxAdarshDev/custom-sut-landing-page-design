@@ -596,9 +596,9 @@ margin-top: 20px;
   padding: 25px;
   position: sticky;
   top: 20px;
-  height: calc(100vh - 40px);
+  height: fit-content;
+  max-height: calc(100vh - 40px);
   box-shadow: 0 4px 25px rgba(0,0,0,0.12);
-  transition: all 0.3s ease;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -620,14 +620,13 @@ margin-top: 20px;
 .preview-box {
   margin: 20px 0;
   height: 200px;
-  border: 2px dashed #e0e0e0;
+  border: 2px solid #0071ce;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #fafafa;
-  transition: all 0.3s ease;
+  background: #f8f9ff;
   overflow: hidden;
 }
 
@@ -789,7 +788,28 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
     const previewLink = document.getElementById('preview-link');
     const previewProductCount = document.getElementById('preview-product-count');
 
-    // Add hover listeners to category cards
+    // Show first category by default
+    const firstCategory = document.querySelector('.sidebarmenu_list');
+    if (firstCategory) {
+      const title = firstCategory.getAttribute('data-preview-title');
+      const url = firstCategory.getAttribute('data-preview-url');
+      const count = firstCategory.getAttribute('data-preview-count');
+      const image = firstCategory.getAttribute('data-preview-image');
+
+      // Update preview content with first category
+      previewContainer.innerHTML = `
+        <div class="preview-content">
+          <img src="${image}" alt="${title}" class="preview-image">
+          <div class="preview-title">${title}</div>
+        </div>
+      `;
+
+      // Update preview actions
+      previewLink.href = url;
+      previewProductCount.textContent = `${count} products`;
+    }
+
+    // Add click listeners to category cards for mobile/tablet
     document.querySelectorAll('.sidebarmenu_list').forEach(item => {
       item.addEventListener('mouseenter', function() {
         const title = this.getAttribute('data-preview-title');
@@ -808,51 +828,8 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
         // Update preview actions
         previewLink.href = url;
         previewProductCount.textContent = `${count} products`;
-        previewActions.style.display = 'block';
-
-        // Add active styles
-        previewContainer.style.border = '2px solid #0071ce';
-        previewContainer.style.background = '#f8f9ff';
-      });
-
-      item.addEventListener('mouseleave', function() {
-        // Reset to placeholder after a short delay
-        setTimeout(() => {
-          if (!previewContainer.matches(':hover') && !previewActions.matches(':hover')) {
-            resetPreview();
-          }
-        }, 200);
       });
     });
-
-    // Keep preview when hovering over preview area
-    previewContainer.addEventListener('mouseleave', function() {
-      setTimeout(() => {
-        if (!document.querySelector('.sidebarmenu_list:hover')) {
-          resetPreview();
-        }
-      }, 200);
-    });
-
-    previewActions.addEventListener('mouseleave', function() {
-      setTimeout(() => {
-        if (!document.querySelector('.sidebarmenu_list:hover')) {
-          resetPreview();
-        }
-      }, 200);
-    });
-
-    function resetPreview() {
-      previewContainer.innerHTML = `
-        <div class="preview-placeholder">
-          <div class="placeholder-icon">👁️</div>
-          <p>Hover over any category to see preview</p>
-        </div>
-      `;
-      previewActions.style.display = 'none';
-      previewContainer.style.border = '2px dashed #e0e0e0';
-      previewContainer.style.background = '#fafafa';
-    }
   });
 </script>
 
@@ -882,10 +859,10 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
     <div class="preview-box" id="preview-container">
       <div class="preview-placeholder">
         <div class="placeholder-icon">👁️</div>
-        <p>Hover over any category to see preview</p>
+        <p>Loading preview...</p>
       </div>
     </div>
-    <div class="preview-actions" id="preview-actions" style="display: none;">
+    <div class="preview-actions" id="preview-actions">
       <a href="#" id="preview-link" class="preview-btn">View Details</a>
       <div class="preview-info">
         <span id="preview-product-count">0 products</span>
