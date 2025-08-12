@@ -1,377 +1,991 @@
+{% if template contains 'collection.subcategory' %}
+  <!-- Subcategory collection template schema start -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "{{ collection.title | escape }}",
+      "itemListElement": [
+          {% assign side_links1 = collection.handle %}
+          {% for link in linklists[side_links1].links %}
+          {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "url": "{{ request.origin }}{{ link.url }}",
+              "name": "{{ link.title | escape }}",
+              "image": "https:{{ link.object.image | img_url: 'medium' | escape }}", 
+              "description": {{ link.object.description | strip_html | escape | json }}
+          }{% if forloop.last == false %},{% endif %}
+          {% endfor %}
+      ]
+  }
+  </script>   
+<!--  subcategory collecion template schema end -->
+{% endif %}
+{%- if template contains 'collection.SUT' -%}
+  <!-- Don't include breadcrumb -->
+{%- else -%}
+  {% include 'breadcrumb' %}
+{%- endif -%}
+<style>
+  .section-header__title {
+    color:#0071b9;
+    line-height: 1.3;
+    font-size:32px;
+  }
 
- {% if template contains 'collection.subcategory' %}
-   <!-- Subcategory collection template schema start -->
-   <script type="application/ld+json">
-   {
-       "@context": "https://schema.org",
-       "@type": "ItemList",
-       "name": "{{ collection.title | escape }}",
-       "itemListElement": [
-           {% assign side_links1 = collection.handle %}
-           {% for link in linklists[side_links1].links %}
-           {
-               "@type": "ListItem",
-               "position": {{ forloop.index }},
-               "url": "{{ request.origin }}{{ link.url }}",
-               "name": "{{ link.title | escape }}",
-               "image": "https:{{ link.object.image | img_url: 'medium' | escape }}", 
-               "description": {{ link.object.description | strip_html | escape | json }}
-           }{% if forloop.last == false %},{% endif %}
-           {% endfor %}
-       ]
-   }
-   </script>   
- <!--  subcategory collecion template schema end -->
- {% endif %}
-{% include 'breadcrumb' %}
+  @media screen and (max-width: 767px) {
+    .section-header__title {
+      font-size: 24px;
+    }
+  }
+</style>
 
-{% comment %} {% if request.query_string contains 'collection_url=' or request.query_string contains 'promotion=breast_cancer_awareness' %}
-  <meta name="robots" content="noindex">
-{% endif %} {% endcomment %}
-
-<header class="section-header section-header--large">
-  <h1 class="section-header__title section-header__title--left">{{ collection.title }}</h1>
-  <div class="section-header__link--right">
-    {% if settings.collections_sort_enable %}
-      {% include 'collection-sorting' %}
-    {% endif %}
-    {% if settings.collections_views_enable %}
-      {% include 'collection-views' %}
-    {% endif %}
-  </div>
-</header>
- <!-- Reusable Breast Cancer Promotional Banner Section -->
- {% render 'breast-cancer-promotional-css' %}
-<!-- Desktop Breast cancer Banner Below Breadcrumb -->
-<div class="promotional-banner promotional-banner-desktop">
-  {% comment %} <a href="/pages/foxx-open-house-registration-2025">
-  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Website_Banner_2708x417-foxx-open-house.jpg?v=1739196928"
-        alt="Foxx Loves India Open House | 14th February 2025, 10:30AM 📍 619 Pudur, Medchal, Hyderabad, Telangana-501401, India"
-          title="Foxx Loves India Open House | 14th February 2025, 10:30AM 📍 619 Pudur, Medchal, Hyderabad, Telangana-501401, India"
-        class="banner-img">
-</a> {% endcomment %}
-  {% comment %} <a href="/collections/all?collection_url={{ collection.handle | url_encode }}&promotion=breast_cancer_awareness">
-    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/Breast-cancer-banners-email-banner-new_1.jpg?v=1728040752"
-         alt="Breast Cancer Awareness - 5% off on all products"
-         class="banner-img">
-  </a> {% endcomment %}
-    <!-- New section Prmotional Bannner -->
-    <div class="second-inner mb-xl-3">
-      <div class="container">
-          {% comment %} <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> {% endcomment %}
-
-          <!-- Desktop Breast Cancer Awareness Banner Slider Container -->
-          {% comment %} <div class="banner-container">
-            <div class="promotional-banner promotional-banner-desktop swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <a href="/pages/halloween-sale-offers-deals?&promotion=halloween-sale-offers-deals">
-                    <img style="border:2px solid  #0171BB;border-radius:5px"  src="https://cdn.shopify.com/s/files/1/1064/0118/files/Halloween_Promo_Banner-02.jpg?v=1730229148"
-                         alt="Halloween Sale on Carboys (Buy 3 Get 1 Free)"
-                         class="banner-img">
-                  </a>
+           <!-- Marquee section powered by AI -->
+           {% comment %} <div class="marquee-wrapper">
+            <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/did-you-know.png?v=1728086757" style="width:42px;height:42px" alt="Did You Know" class="marquee-icon" />
+            <div class="marquee-container">
+              <div id="marquee-content" class="marquee-content">
+                <!-- Placeholder Content -->
+                <div class="marquee-placeholder">
+                  <div class="placeholder-line"></div>
+                  <div class="placeholder-line"></div>
+                  <div class="placeholder-line"></div>
                 </div>
-                <div class="swiper-slide">
-                  <a href="/collections/all?&promotion=breast_cancer_awareness">
-                    <img style="border:2px solid  #0171BB;border-radius:5px" src="https://cdn.shopify.com/s/files/1/1064/0118/files/Breast-cancer-banners-email-banner-new-2700x417.jpg?v=1730230037"
-                         alt="Breast Cancer Awareness - 5% off on all products"
-                         class="banner-img">
-                  </a>
-                </div>
-
-
               </div>
-
-              <div class="swiper-pagination-1"></div>
             </div>
           </div> {% endcomment %}
+
           {% comment %} <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const swiper = new Swiper('.swiper-container', {
-                  loop: true,
-                  autoplay: {
-                    delay: 5000, // 5 seconds between slides
-                    disableOnInteraction: false,
-                  },
-                  pagination: {
-                    el: '.swiper-pagination-1',
-                    clickable: true,
-                  },
-                  navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                  },
+            const SERVER_ENDPOINT = 'https://foxxbp-did-yoy-know-summarize-server.onrender.com/summarize';
+
+              document.addEventListener("DOMContentLoaded", function () {
+                  console.log("Page loaded. Starting script...");
+
+                let description = "";
+
+              // Step 1: Extract from .collection-description
+              const collectionDescriptionContainer = document.querySelector(".collection-description");
+              if (collectionDescriptionContainer) {
+                description = Array.from(collectionDescriptionContainer.querySelectorAll("p"))
+                  .map((p) => p.textContent.trim())
+                  .join(" ");
+              }
+
+              // Step 2: Extract from #description-visible and #description-hidden
+              const visibleDescription = document.querySelector("#description-visible");
+              const hiddenDescription = document.querySelector("#description-hidden");
+              if (visibleDescription) {
+                description += (description ? " " : "") + visibleDescription.textContent.trim();
+              }
+              if (hiddenDescription) {
+                description += (description ? " " : "") + hiddenDescription.textContent.trim();
+              }
+
+              // Step 3: Extract from h1.collection-title and h1.section-header__title
+              const collectionTitle = document.querySelector("h1.collection-title");
+              const sectionHeaderTitle = document.querySelector("h1.section-header__title");
+              if (collectionTitle && collectionTitle.textContent.trim()) {
+                description += (description ? " " : "") + collectionTitle.textContent.trim();
+              }
+              if (sectionHeaderTitle && sectionHeaderTitle.textContent.trim()) {
+                description += (description ? " " : "") + sectionHeaderTitle.textContent.trim();
+              }
+
+              // Step 4: Extract from .sub-category p and all spans
+             // Step 4: Extract from .sub-category p and all spans
+              // Step 4: Extract from all .sub-category p and spans
+              const subCategories = document.querySelectorAll(".sidebar_menu .sub-category");
+              if (subCategories.length > 0) {
+                subCategories.forEach((subCategory) => {
+                  // Extract from <p> inside .sub-category
+                  const subCategoryP = subCategory.querySelector("p");
+                  if (subCategoryP && subCategoryP.textContent.trim()) {
+                    // Add a period at the end of the text if it doesn't already have one
+                    let text = subCategoryP.textContent.trim();
+                    if (!text.endsWith(".")) {
+                      text += ".";
+                    }
+                    description += (description ? " " : "") + text;
+                  }
                 });
+              }
+
+
+              // Step 5: If no description found, fallback to h3.card__heading a tags
+              if (!description.trim()) {
+              console.log("No description found in h3.card__heading a tags. Falling back to h1.section-header__title...");
+
+              const sectionHeaderTitle = document.querySelector("h1.section-header__title");
+              if (sectionHeaderTitle && sectionHeaderTitle.textContent.trim()) {
+                description = sectionHeaderTitle.textContent.trim();
+              }
+            }
+              // Step 6: If still no description found, hide the marquee wrapper and exit
+              if (!description.trim()) {
+                console.error("No description found in any container.");
+                hideMarqueeWrapper();
+                return;
+              }
+
+              // Log the extracted description
+              console.log("Extracted description:", description);
+
+
+              // Step 5: Scrape the text from articleLookbook-title
+              const titleContainer = document.querySelector("h1.section-header__title");
+
+              if (!titleContainer) {
+                console.error("h1 inside articleLookbook-title not found.");
+                hideMarqueeWrapper();
+                return;
+              }
+
+              const titleText = "Facts about FLS - " + titleContainer.textContent.trim();
+
+              // Step 6: Show placeholder animation
+              const marqueeContainer = document.getElementById("marquee-content");
+              showMarqueeWrapper();
+
+              // Step 7: Create badge label with scraped title text
+              createBadgeLabel(titleText);
+
+               // Log the description before summarizing
+            // console.log("Description to be summarized:", description);
+
+              // Step 8: Summarize the description using the server endpoint
+              summarizeDescription(description).then((summary) => {
+                if (summary && marqueeContainer) {
+                  console.log("Summarized content:", summary);
+
+                  // Step 9: Replace placeholder with summarized content
+                  replacePlaceholderWithSummary(marqueeContainer, summary);
+
+                  // Step 10: Start the marquee animation
+                  startMarqueeAnimation(marqueeContainer);
+                } else {
+                  console.error("No summary returned.");
+                  hideMarqueeWrapper();
+                }
               });
+            });
+
+            // Function to create badge label with scraped title text
+            function createBadgeLabel(text) {
+              const marqueeWrapper = document.querySelector(".marquee-wrapper");
+              if (!marqueeWrapper) return;
+
+              // Create badge label
+              const badgeLabel = document.createElement("div");
+              badgeLabel.className = "badge-label";
+              badgeLabel.textContent = text;
+
+              // Append badge label to marquee wrapper
+              marqueeWrapper.appendChild(badgeLabel);
+            }
+
+            // Function to replace placeholder with summarized content
+            function replacePlaceholderWithSummary(marqueeContainer, summary) {
+              // Split the summary into paragraphs based on periods
+              const paragraphs = summary.split(". ").filter((p) => p.trim() !== "");
+
+              // Add SVGs and format each paragraph
+              const formattedParagraphs = paragraphs
+                .map(
+                  (paragraph, index) => `
+                <div class="marquee-paragraph">
+                  <svg class="icon icon-thunder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 506.53 510.69"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M500.7,27.62q-36.6,35-73.12,70.12-51.12,49.06-102.29,98.1a55.94,55.94,0,0,1-5.33,4c3.14,2.3,5.08,3.77,7.06,5.18,29.3,21,58.69,42,87.82,63.22a21,21,0,0,1,7.21,10.15c2.13,7-1.16,12.82-8.35,16.79Q383.18,312,352.54,328.66L59.88,488.36a297,297,0,0,1-35,20A23.59,23.59,0,0,1,20,510.11h0a19.7,19.7,0,0,1-4.67.58,15.23,15.23,0,0,1-9.59-3.19c-.18-.13-.34-.28-.51-.43a1.49,1.49,0,0,1-.14-.12l-.58-.55L4.19,506a16.25,16.25,0,0,1-4.08-9.31,16.08,16.08,0,0,1-.11-1.8A13.51,13.51,0,0,1,.57,491a18.36,18.36,0,0,1,5.26-7.94q33.48-32,66.89-64.15,67.46-65.28,135-130.49a49.09,49.09,0,0,1,5.42-3.89c-8.41-6.07-15.5-11.2-22.62-16.3l-79.41-57c-12.42-8.92-11.34-21.75,2.4-28.48L481.61,2.37C493.53-3.47,505,1.88,506.42,14,507.08,19.56,504.66,23.84,500.7,27.62Z"></path></g></g></svg>
+                  <span class="marquee-text">${paragraph.trim()}.<span>
+                </div>
+              `
+                )
+                .join("");
+
+              // Display the formatted content in the marquee
+              marqueeContainer.innerHTML = formattedParagraphs;
+            }
+
+            // Function to start the marquee animation
+            function startMarqueeAnimation(marqueeContainer) {
+              const paragraphs = marqueeContainer.querySelectorAll(".marquee-paragraph");
+
+              // Calculate the total width of all paragraphs
+              let totalWidth = 0;
+              paragraphs.forEach((paragraph) => {
+                totalWidth += paragraph.offsetWidth + 20; // Include margin-right (20px)
+              });
+
+              // Duplicate the marquee content for seamless scrolling
+              marqueeContainer.innerHTML += marqueeContainer.innerHTML;
+
+              // Set the animation duration based on the total width
+              const animationDuration = Math.max(totalWidth / 100, 15); // Minimum duration of 15 seconds
+
+              // Apply the animation to the marquee container
+              marqueeContainer.style.animation = `scroll-marquee ${animationDuration}s linear infinite`;
+            }
+
+            // Function to summarize the description using the server endpoint
+            async function summarizeDescription(text) {
+              try {
+                const response = await fetch(SERVER_ENDPOINT, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ text }),
+                });
+
+                const data = await response.json();
+                console.log("Server Response:", data);
+
+                if (data.summary) {
+                  return data.summary; // Return the summarized content
+                } else {
+                  console.error("No summary returned from the server.");
+                  return null;
+                }
+              } catch (error) {
+                console.error("Error calling server:", error);
+                return null;
+              }
+            }
+
+            // Function to show the marquee wrapper
+            function showMarqueeWrapper() {
+              const marqueeWrapper = document.querySelector(".marquee-wrapper");
+              if (marqueeWrapper) {
+                marqueeWrapper.style.display = "flex"; // Show the marquee wrapper
+              }
+            }
+
+            // Function to hide the marquee wrapper
+            function hideMarqueeWrapper() {
+              const marqueeWrapper = document.querySelector(".marquee-wrapper");
+              if (marqueeWrapper) {
+                marqueeWrapper.style.display = "none"; // Hide the marquee wrapper
+              }
+            }
+          </script> {% endcomment %}
+
+          {% comment %} <script>
+            // Show the marquee wrapper for demonstration
+          const marqueeWrapper = document.querySelector(".marquee-wrapper");
+          if (marqueeWrapper) {
+            marqueeWrapper.style.display = "flex";
+          }
+
+          // Sticky functionality
+          window.addEventListener("scroll", function () {
+            const marqueeWrapper = document.querySelector(".marquee-wrapper");
+            const productListing = document.querySelector(".block-marquee-stop");
+
+            // Check if the marquee wrapper exists
+            if (marqueeWrapper) {
+              // Get the scroll position
+              const scrollPosition = window.scrollY || window.pageYOffset;
+
+              // Get 10% of the viewport height
+              const scrollThreshold = window.innerHeight * 0.1;
+
+              // Check if the user has scrolled past the productListing div
+              if (productListing && isElementScrolledPast(productListing, 50)) {
+                marqueeWrapper.classList.remove("sticky"); // Remove sticky class
+              } else if (scrollPosition > scrollThreshold) {
+                marqueeWrapper.classList.add("sticky"); // Add sticky class
+              } else {
+                marqueeWrapper.classList.remove("sticky"); // Remove sticky class
+              }
+            }
+          });
+
+          // Function to check if an element has been scrolled past
+          function isElementScrolledPast(el, tolerance = 0) {
+            const rect = el.getBoundingClientRect();
+            return rect.bottom <= tolerance; // Bottom of the element is above the tolerance threshold
+          }
+
             </script> {% endcomment %}
 
-            <style>
-              /* Center the banner container and make images full-width */
-              .banner-container {
-                max-width: 100%; /* Make banner container responsive */
-                margin: 0 auto;
-                overflow: hidden;
-              }
+            {% comment %} <style>
+                /* .marquee-wrapper {
+                  width: 100%;
+                  overflow: hidden;
+                  background: #f8f8f8;
+                  padding: 10px 0;
+                  position: relative;
+                  display: none; 
+                  align-items: center;
+                  gap: 20px;
+                }
+             */
 
-              /* Ensure the Swiper container takes full width */
-              .promotional-banner {
-                width: 100%;
-                overflow: hidden;
-              }
+             .marquee-wrapper {
+width: 100%;
+margin-bottom: 20px;
+overflow: hidden;
+background: #f8f8f8; /* Default background */
+padding: 10px 0;
+position: relative; /* Default position */
+display: none; /* Initially hidden */
+align-items: center;
+gap: 20px; /* Gap between image and marquee */
+padding-left:10px;
+overflow:visible;
+transition: top 0.3s ease; /* Smooth transition */
+}
 
-              /* Ensure each image is centered and full width */
-              .swiper-slide, .swiper-pagination-1 {
-                display: flex;
-                justify-content: center;
-              }
-              .banner-img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-              }
-            </style>
+.badge-label {
+position: absolute;
+bottom: -25px; /* Position below the marquee wrapper */
+left: 10px; /* Align to the left */
+background-color: rgba(9, 94, 167, 0.8); /* Fully opaque */
+color: #fff; /* Text color */
+padding: 5px 10px; /* Padding */
+font-size: 14px; /* Font size */
+border-radius: 5px; /* Rounded corners */
+overflow:visible;
+z-index: 100; /* Ensure it's above other content */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
 
-      </div>
+.marquee-wrapper.sticky {
+position: fixed;
+top: 65px; /* Stick to the top */
+z-index: 100; /* Ensure it stays above other content */
+width: 100%; /* Full width */
+margin-bottom: 0; /* Remove margin when sticky */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for visibility */
+background: rgba(255, 255, 255, 0.9); /* White background with transparency */
+}
+
+.productListing { 
+padding-top:20px;
+margin-top: 20px;
+}
+                .marquee-icon img {
+                  width: 42px; /* Size of the "Did You Know" image */
+                  height: 42px;
+                  margin-right: 20px; /* Space between image and marquee */
+                }
+
+                .marquee-container {
+                  display: flex;
+                  width: 100%;
+                  white-space: nowrap;
+                  overflow: hidden;
+                }
+
+                .marquee-content {
+                  display: flex;
+                  align-items: center;
+                  padding-left: 10px;
+                }
+
+                .marquee-paragraph {
+                  display: flex;
+                  align-items: center;
+                  margin-right: 20px; /* Space between paragraphs */
+                }
+
+                .marquee-icon {
+                  margin-right: 10px; /* Space between icon and text */
+                }
+
+                .marquee-content svg {
+                  fill: #095ea7 !important;
+                  width: 24px;
+                  height: 24px;
+                }
+
+                .marquee-text {
+                  font-size: 20px;
+                  color: #095ea7;
+                  letter-spacing: 2px; /* Character spacing */
+                }
+
+                /* Placeholder Animation */
+                .marquee-placeholder {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                }
+
+                .placeholder-line {
+                  width: 200px;
+                  height: 20px;
+                  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                  background-size: 200% 100%;
+                  animation: placeholderAnimation 1.5s infinite linear;
+                  border-radius: 4px;
+                }
+
+                @keyframes placeholderAnimation {
+                  0% { background-position: 200% 0; }
+                  100% { background-position: -200% 0; }
+                }
+
+                /* Marquee Animation */
+                @keyframes scroll-marquee {
+                  0% { transform: translateX(0); }
+                  100% { transform: translateX(-50%); }
+                }
+              </style> {% endcomment %}
+
+
+        <!-- Marquee section powered by AI end -->
+  <!-- Two Column Layout Container -->
+  <div class="two-column-container">
+    <!-- Left Column: Existing Content -->
+    <div class="left-column">
+      <header class="section-header section-header--large">
+        <h1 class="section-header__title section-header__title--left">{{ collection.title }}</h1>
+        <div class="section-header__link--right">
+          {% if settings.collections_sort_enable %}
+            {% include 'collection-sorting' %}
+          {% endif %}
+          {% if settings.collections_views_enable %}
+            {% include 'collection-views' %}
+          {% endif %}
+        </div>
+      </header>
+
+      {% if settings.collections_tags_enable %}
+        {% include 'collection-tags' %}
+      {% endif %}
+
+      {% if collection.description != blank %}
+        <div class="rte rte--header" style="padding-left:5px">
+          {% assign paragraphs = collection.description | split: '</p>' %}
+
+          <!-- Display the first paragraph as HTML -->
+          <div id="description-visible">
+            {{ paragraphs[0] }}</p>
+          </div>
+
+          <!-- Hidden content for remaining paragraphs -->
+          <div id="description-hidden" >
+            {% for paragraph in paragraphs %}
+              {% if forloop.index > 1 %}
+                {{ paragraph }}{% unless forloop.last %}</p>{% endunless %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+           <!-- Read More link -->
+          {% comment %} <a href="javascript:void(0);" id="read-more" style="color: blue; cursor: pointer;"> Read more...</a>  {% endcomment %}
+        </div>
+        <hr>
+      {% endif %}
+    </div>
+
+    <!-- Right Column: Image -->
+    <div class="right-column">
+      <div class="placeholder"></div> <!-- Placeholder Animation -->
+    </div>
   </div>
-  <!-- -->
-</div>
 
-<!-- Reusable Breast Cancer Promotional Banner Section -->
- <div class="promotional-banner">
-    <a href="/pages/us-independence-day-sale-25">
-      <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/4th_July_Independence_day-sale-promo-inner.jpg?v=1751632791"
-            alt="Our Biggest Patriotic Sale of the Year"
-              title="Our Biggest Patriotic Sale of the Year"
-            class="banner-img">
-    </a>
-  </div> 
-{% comment %} <div class="promotional-banner">
-  <a href="/collections/all">
-    <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/christmas-banner-foxx-life-sciences-banner-inner-promotional.jpg?v=1734788603"
-          alt="Cyber Monday Sale - upto 40% off on selected cateogy"
-          class="banner-img">
-  </a>
-  </div> {% endcomment %}
-  {% comment %} {% render 'christmas-promo-offer' %} {% endcomment %}
-<!-- Desktop Breast cancer Banner Below Breadcrumb -->
- {% comment %} <div class="promotional-banner">
-<a href="/pages/cyber-monday-sale">
-  <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/cyber-monday-sale-v2.jpg?v=1733145618"
-        alt="Cyber Monday Sale - upto 40% off on selected cateogy"
-        class="banner-img">
-</a>
-</div>  {% endcomment %}
-<!-- Desktop Banner Below Breadcrumb -->
-
-{% if settings.collections_tags_enable %}
-  {% include 'collection-tags' %}
-{% endif %}
+  <style>
 
 
+.two-column-container{display:flex;flex-direction:row;gap:20px;padding:0 20px}.left-column{flex:.7}.right-column{flex:.3;display:flex;justify-content:center;align-items:center}.placeholder{width:100%;height:200px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:placeholderAnimation 1.5s infinite linear;border-radius:8px;display:none}.placeholder:empty{display:block!important}@keyframes placeholderAnimation{0%{background-position:200% 0}100%{background-position:-200% 0}}.right-column img{width:100%;height:auto;margin-top:20px;display:none}.image-container{position:relative;width:100%;height:auto;border:0px dotted #ccc;border-radius:2px;overflow:hidden}.image-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#add8e6cc;pointer-events:none}.image-container img{width:70%;height:auto;display:block}
+@media screen and (max-width: 767px) {
+  .two-column-container {
+    flex-direction: column!important;
+    gap:0px!important
+  }
 
-{% if collection.description != blank %}
-  <div class="rte rte--header">
-    {{ collection.description }}
-  </div>
-  <hr>
-{% endif %}
+
+  .description-hidden p {
+    margin-bottom:0px;
+    padding-bottom:0px!important
+  }
+  .image-container img {
+    width:100%!important;
+    margin-top:0px!important
+  }
+
+  .image-container {
+    margin-top:0px!important;
+    margin-bottom:0px!important;
+  }
+ }
+  </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var readMoreLink = document.getElementById('read-more');
+    var hiddenContent = document.getElementById('description-hidden');
+    var visibleContent = document.getElementById('description-visible');
+
+    if (readMoreLink) {
+      readMoreLink.addEventListener('click', function () {
+        if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+          hiddenContent.style.display = 'block'; // Show hidden content
+          readMoreLink.textContent = ' Read less...'; // Change link text
+        } else {
+          hiddenContent.style.display = 'none'; // Hide hidden content
+          readMoreLink.textContent = ' Read more...'; // Change link text back
+        }
+      });
+    }
+  });
+</script>
+
 
 
 {% if template.name == 'collection.subcategory' %}
- <style>
-  #collection-filters-container, .section-header__link--right {
-  display:none!important
-}
+<style>
+  #collection-filters-container,
+  .section-header__link--right {
+    display: none !important
+  }
 
-.sidebar-module .section-header__title.h4 {
-  margin-bottom:8px!important
-}
- </style>
+  .sidebar-module .section-header__title.h4 {
+    margin-bottom: 8px !important
+  }
+</style>
 {% else %}
- <style>
-  #collection-filters-container, .section-header__link--right {
-  display:none!important
-}
-
-.section-header {
-  margin-bottom:0px!important
-}
-
-.sidebar-module .section-header__title.h4 {
-  margin-bottom:12px!important
-}
- </style>
+<style>
+#collection-filters-container,.section-header__link--right{display:none!important}.section-header{margin-bottom:0!important}.sidebar-module .section-header__title.h4{margin-bottom:12px!important}ul.sidebar_menu{display:grid;gap:20px;padding:0 40px;padding-left:20px!important;padding-right:20px!important}@media (min-width: 768px){ul.sidebar_menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}.grid__item{list-style:none;flex-basis:calc(25% - 10px);box-sizing:border-box}.sub-category{border:2px solid #0071ce;border-radius:10px!important;overflow:hidden!important}.sub-category p{justify-content:center;align-items:center;display:grid;height:72px;font-size:18px;max-height:100px;background-color:#0071ce;color:#fff;margin-bottom:0;border-radius:0 0 8px 8px;padding:10px 5px;text-align:center}.grid-link__image{position:relative;display:table;border-radius:10px;table-layout:fixed;overflow:hidden;margin:0 auto 6px}.grid-link__image img{display:block;width:100%;height:300px;object-fit:contain}
+</style>
 {% endif %}
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     // Create the section
     var section = `
       {% if collection.handle == 'bioprocess-caps-and-gaskets' %}
-        <p>If you have any questions or inquiries, please email us at <a href="mailto:sales@foxxlifesciences.com">sales@foxxlifesciences.com</a> or call 1-603-890-3699.</p>
+        <p style="padding:0px 20px 0px 20px;cursor:pointer">If you have any questions or inquiries, please email us at <a style="color:#0071ce;cursor:pointer !important" href="mailto:sales@foxxlifesciences.com">sales@foxxlifesciences.com</a> or call <a style="color:#0071ce;cursor:pointer !important" href="tel:1-603-890-3699">1-603-890-3699</a>.</p>
       {% endif %}
     `;
 
     var hrTag = $('.grid-link__container').next('hr');
 
-// Append the section after the <hr /> tag
-hrTag.after(section);
+    // Append the section after the <hr /> tag
+    hrTag.after(section);
   });
 </script>
+
+<!-- snippet section image -->
+<div style="padding: 0px 20px; z-index: 24;margin-top:20px;margin-bottom:20px;padding:20px">
+  <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxxbioprocess-website-group-logo-snippet-inner-layout.png?v=1754940270" alt="snippet-image" style="width:100%;height:auto;padding:20px">
+</div>
+<!-- -->
+<!--- Main card section -->
 <div class="grid-uniform grid-link__container">
   <ul class=" sidebar_menu">
-            {%- assign side_links1 = collection.handle -%}
+    {%- assign side_links1 = collection.handle -%}
 
- {% for link in linklists[side_links1].links %}
-    {% assign collection = link.object %}
-    {%- assign first_product = collection.products.first -%}
-    {%- if first_product -%}
-      {%- assign created_at_timestamp = first_product.created_at | date: '%s' -%}
-    {%- else -%}
-      {%- assign created_at_timestamp = 0 -%}
-    {%- endif -%}
 
-    <li class="grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list" 
-        data-link-created-at="{{ created_at_timestamp }}"
-        data-link-url="{{ link.url }}"
-        style="position: relative;">
+  {% for link in linklists[side_links1].links %}
+    {% assign link_collection = link.object %}
+    <li class="grid__item small--one-half medium--one-third large--one-quarter text-center  sidebarmenu_list">
       <a href="{{ link.url }}">
         <div class="sub-category">
           <span class="grid-link__image grid-link__image--collection">
             <span class="grid-link__image-centered">
-              {% if collection.image %}
-                <img src="{{ collection | img_url: 'master' }}" alt="{{ collection.title | escape }}" style="display: block;" />
+              {% if link_collection.image %}
+              <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
               {% else %}
-                <img src="{{ collection.products.first | img_url: 'master' }}" alt="{{ collection.title | escape }}" style="display: block;" />
+              <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
               {% endif %}
             </span>
           </span>
-          <p>{{ link.title }}</p>
+          <p> {{ link.title }}</p>
         </div>
       </a>
     </li>
-  {% endfor %}
+{% endfor %}
 
-    </ul>
-
+  </ul>
 
 </div>
 
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var oneMonthAgo = new Date();
-  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+// Step 1: Target the sidebar menu
+const sidebarMenu = document.querySelector('.grid-link__container');
 
-  var listItemElements = document.querySelectorAll('.sidebarmenu_list');
+// Step 2: Proceed if sidebar exists
+if (sidebarMenu) {
 
-  listItemElements.forEach(function(listItem) {
-    var createdAtTimestamp = parseInt(listItem.getAttribute('data-link-created-at')) * 1000;
+// Create <li>
+const customSutLi = document.createElement('div');
+customSutLi.className = "grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list";
 
-    var isNewProduct = !isNaN(createdAtTimestamp) && createdAtTimestamp > oneMonthAgo.getTime();
+ // Add styles to the div
+ customSutLi.style.display = 'flex'; // 🔹 Display flex
+    customSutLi.style.alignItems = 'center'; // 🔹 Vertically center content
+    customSutLi.style.justifyContent = 'center'; // 🔹 Horizontally center content
+    customSutLi.style.gap = '20px'; 
+    customSutLi.style.marginTop = '50px'; // 🔹 Add top margin
 
-    if (isNewProduct) {
-      var newBadge = document.createElement('span');
-      newBadge.className = 'badge-custom badge--new-custom';
-      var imageURL = 'https://cdn.shopify.com/s/files/1/1064/0118/files/new-badge-star-type-custom-fls.png?v=1715900030';
-      var imageStyle = 'background-image: url(' + imageURL + '); background-size: cover; display: inline-block; width: 50px; height: 50px; position: absolute; top: 0; right: 0;';
-      newBadge.innerHTML = '<span class="badge__image" style="' + imageStyle + '"></span><span class="badge_custom__text badge__text">New</span>';
-      listItem.querySelector('.sub-category').appendChild(newBadge);
+// Optional: Paragraph before image
+const messageP = document.createElement('p');
+messageP.textContent = "Don't find what you are looking for? Check out our Custom SUT Library";
+messageP.style.marginTop = '20px';
+messageP.style.textAlign = 'left';
+    messageP.style.width = '30%';
+    messageP.style.color = '#095ea7';
+    messageP.style.lineHeight = '1.3';
+
+messageP.style.marginTop = '0px';
+messageP.style.fontSize = '28px';
+
+// Create <a> tag
+const imgLink = document.createElement('a');
+imgLink.href = '/pages/process-custom-sut';
+imgLink.style.position = 'relative';
+imgLink.style.display = 'inline-block';
+
+ const img = document.createElement('img');
+// Try different high-resolution URLs
+const baseUrl = 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxx-biorpocess-custom-sut-promo-banner-header-2nd-version-800x400.png?v=1754412854';
+const highResUrl = baseUrl + '&width=2048&height=1024'; // Specify both width and height
+
+// Create image
+
+img.src = highResUrl;
+img.alt = 'Custom SUT Library Banner';
+img.style.display = 'block';
+img.style.width = '100%';
+img.style.height = 'auto';
+img.style.border = '2px solid #095ea7';         // 🔹 Border
+img.style.borderRadius = '8px';              // 🔹 Rounded corners
+
+// Create overlay div
+const overlay = document.createElement('div');
+overlay.style.position = 'absolute';
+overlay.style.top = '0';
+overlay.style.left = '0';
+overlay.style.width = '100%';
+overlay.style.height = '100%';
+overlay.style.backgroundColor = 'rgba(173, 216, 230, 0.8)'; // light blue transparent
+overlay.style.zIndex = '1';
+overlay.style.borderRadius = '8px'; // 🔹 Match image border-radius
+
+// Create label (inside <a>, on top of image)
+  const imageLabel = document.createElement('span');
+imageLabel.textContent = "World Largest Custom SUT Library with over 1000+ Drawings";
+imageLabel.style.position = 'absolute';
+imageLabel.style.top = '0px';
+imageLabel.style.left = '0px';
+imageLabel.style.backgroundColor = '#00833e'; // ✅ Bootstrap-style green
+imageLabel.style.color = 'white';             // ✅ White text for contrast
+imageLabel.style.padding = '5px 10px';
+imageLabel.style.zIndex = '2';
+imageLabel.style.fontWeight = 'bold';
+imageLabel.style.borderRadius = '4px';
+
+
+// Assemble inside <a>
+imgLink.appendChild(img);
+imgLink.appendChild(overlay);
+imgLink.appendChild(imageLabel);
+
+// Add <p> and <a> to <li>
+customSutLi.appendChild(messageP);
+customSutLi.appendChild(imgLink);
+
+// Add to sidebar
+sidebarMenu.appendChild(customSutLi);
+}
+
+</script>
+
+<script>
+window.addEventListener('load', () => {
+  // Step 1: Find the sidebar menu and the right column container
+  const sidebarMenu = document.querySelector('.sidebar_menu');
+  const rightColumn = document.querySelector('.right-column');
+  const placeholder = rightColumn.querySelector('.placeholder');
+
+  // Step 2: Check if the elements exist
+  if (!sidebarMenu || !rightColumn || !placeholder) {
+    console.error('Required elements not found in the DOM.');
+    return;
+  }
+
+  // Step 3: Get collection image data - USE HIGHER RESOLUTION
+  const collectionImageSrc = '{{ collection.image | img_url: "master" }}'; // Changed from "large" to "master"
+  const collectionTitle = '{{ collection.title | escape }}';
+  const hasCollectionImage = '{{ collection.image }}' !== '';
+
+  let imageSource = '';
+  let imageAlt = '';
+
+  // Step 4: Check collection image first
+  if (hasCollectionImage && collectionImageSrc && collectionImageSrc !== '') {
+    imageSource = collectionImageSrc;
+    imageAlt = collectionTitle;
+    console.log('Using collection image:', imageSource);
+  } else {
+    // Step 5: Fallback to first image in sidebar menu
+    const firstImage = sidebarMenu.querySelector('img');
+    if (firstImage) {
+      imageSource = firstImage.src;
+      imageAlt = firstImage.alt;
+      console.log('Using first sidebar image (fallback):', imageSource);
+    } else {
+      console.warn('No collection image and no sidebar image found.');
+      return;
     }
-  });
+  }
+
+  // Step 6: Create the image element
+  const img = new Image();
+  img.src = imageSource;
+  img.alt = imageAlt;
+
+  // Step 7: Create image container and overlay
+  const imageContainer = document.createElement('div');
+  imageContainer.classList.add('image-container');
+
+  const imageOverlay = document.createElement('div');
+  imageOverlay.classList.add('image-overlay');
+
+  // Step 8: Append image and overlay to container
+  imageContainer.appendChild(img);
+  imageContainer.appendChild(imageOverlay);
+
+  // Step 9: Remove placeholder and add image container
+  img.onload = () => {
+    console.log('Image loaded successfully.');
+    placeholder.remove();
+    rightColumn.appendChild(imageContainer);
+  };
+
+  // Step 10: Handle loading errors
+  img.onerror = () => {
+    console.error('Failed to load image:', imageSource);
+    if (hasCollectionImage && imageSource === collectionImageSrc) {
+      const firstImage = sidebarMenu.querySelector('img');
+      if (firstImage) {
+        console.log('Retrying with sidebar image...');
+        img.src = firstImage.src;
+        img.alt = firstImage.alt;
+      }
+    } else {
+      placeholder.remove();
+    }
+  };
 });
 </script>
 
-
-
+  <div class="block-marquee-stop">&nbsp;</div>
 <style>
+.cross-selling-recommendations .sidebar_menu{text-align:center}.cross-selling-recommendations .item-container{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.cross-selling-recommendations .item{flex:1 1 1;margin:10px;list-style:none}.cross-selling-recommendations .item a{text-decoration:none;color:#121212}.cross-selling-recommendations .item a:hover,.cross-selling-recommendations .item a:active{text-decoration:underline;color:#095ea7}.cross-selling-recommendations .collection-image{width:100px;height:100px; background-size:contain;aspect-ratio:1/1;overflow:hidden;border-radius:50%;border:1px solid #095ea7!important;display:flex;justify-content:center;margin:0 auto;align-items:center}.cross-selling-recommendations .collection-image img{width:100%;height:100%;object-fit:contain;display:block}.cross-selling-recommendations .item-title{align-items:center;margin:0 auto;width:130px;display:inline-flex;margin-top:5px;justify-content:center;text-align:center;font-weight:700;flex-wrap:wrap;margin-top:5px;font-weight:bold}.cross-selling-recommendations .block{padding-top:50px;padding-bottom:50px}.cross-selling-recommendations .block:first-child, .cross-selling-recommendations .block:last-child{border-top:1px solid #ccc;border-bottom:1px solid #ccc}; 
 
-  .large--one-quarter.sidebarmenu_list {
-    position:relative
-  }
-  .badge-custom {
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    right: 0; /* Correcting to place it at the right */
-  }
-  .badge__image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background-size: cover;
-  }
-  .badge_custom__text {
-    position: absolute;
-    top: 7px;
-    color:#fff;
-    right: 0;
-  }
+  /* .cross-selling-recommendations .block:last-child {
+    border-bottom: 1px solid #cccccc;
+  } */
 </style>
+
+<div class="cross-selling-recommendations" style="padding:20px;">
+  <div class="sidebar_menu">
+    {% assign current_url_handle = request.path | split: '/' | last %}
+    <!-- Get the current collection handle from the URL -->
+    {% assign sidebar_menu_handle = 'sidebar-menu-new' %}
+
+    {% assign first_block_items = '' %}
+    {% assign second_block_items = '' %}
+    {% assign block_counter = 0 %} <!-- Counter to switch blocks -->
+
+    {% for link in linklists[sidebar_menu_handle].links %}
+    {% if link.handle != current_url_handle and link.url != '/pages/process-custom-sut' %}
+    {% if block_counter == 0 %}
+    {% capture first_block_items %}
+    {{ first_block_items }}
+    {% if link.links %}
+    <div class="item-container"> <!-- Added a container for flex layout -->
+      {% for sublink in link.links %}
+      {% if sublink.handle != current_url_handle %}
+      <div class="item">
+        <a href="{{ sublink.url }}">
+          {% assign child_collection_handle = sublink.url | split: '/' | last | url_decode %}
+          <!-- Decode the child collection handle -->
+          {% assign child_collection = collections[child_collection_handle] %}
+          {% if child_collection and child_collection.image %}
+          <img src="{{ child_collection.image | img_url }}" alt="{{ child_collection.title | escape }}"
+            class="collection-image" />
+          {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184"
+            alt="{{ child_collection.title | escape }}" class="collection-image" />
+          {% endif %}
+          <span class="item-title">{{ sublink.title }}</span>
+        </a>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endcapture %}
+    {% assign block_counter = block_counter | plus: 1 %}
+    {% elsif block_counter == 1 %}
+ {% comment %} Second block - Collections only {% endcomment %}
+{% capture second_block_items %}
+{{ second_block_items }}
+{% if link.links %}
+  {% assign has_page_links = false %}
+
+  {% comment %} Check if there are any page links {% endcomment %}
+  {% for sublink in link.links %}
+    {% if sublink.url contains '/pages/' %}
+      {% assign has_page_links = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %} Only show collection block if there are NO page links {% endcomment %}
+  {% unless has_page_links %}
+    <div class="item-container"> <!-- Added a container for flex layout -->
+      {% for sublink in link.links %}
+        {% if sublink.handle != current_url_handle %}
+          {% unless sublink.url contains '/pages/' %}
+            <div class="item">
+              <a href="{{ sublink.url }}">
+                {% assign child_collection_handle = sublink.url | split: '/' | last | url_decode %}
+                {% assign child_collection = collections[child_collection_handle] %}
+                {% if child_collection and child_collection.image %}
+                  <img src="{{ child_collection.image | img_url: 'master' }}" alt="{{ child_collection.title | escape }}" class="collection-image" />
+                {% else %}
+                  <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ child_collection.title | escape }}" class="collection-image" />
+                {% endif %}
+                <span class="item-title">{{ sublink.title }}</span>
+              </a>
+            </div>
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endunless %}
+{% endif %}
+{% endcapture %}
+
+{% comment %} Third block - Pages only with heading {% endcomment %}
+{% capture third_block_items %}
+{{ third_block_items }}
+{% if link.links %}
+  {% assign has_page_links = false %}
+
+  {% comment %} Check if there are any page links {% endcomment %}
+  {% for sublink in link.links %}
+    {% if sublink.url contains '/pages/' %}
+      {% assign has_page_links = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %} Only show page block if there ARE page links {% endcomment %}
+  {% if has_page_links %}
+    <div class="services-section">
+
+      <div class="item-container">
+        {% for sublink in link.links %}
+          {% if sublink.handle != current_url_handle %}
+            {% if sublink.url contains '/pages/' %}
+              <div class="item">
+                <a href="{{ sublink.url }}">
+                  {% assign child_page_handle = sublink.url | split: '/' | last | url_decode %}
+                  {% assign child_page = pages[child_page_handle] %}
+
+                  {% comment %} Extract first image from page content {% endcomment %}
+                  {% assign page_image_src = '' %}
+                  {% if child_page and child_page.content contains '<img' %}
+                    {% assign img_tag_start = child_page.content | split: '<img' | last %}
+                    {% assign img_tag_end = img_tag_start | split: '>' | first %}
+                    {% if img_tag_end contains 'src="' %}
+                      {% assign page_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
+                    {% endif %}
+                  {% endif %}
+
+                  {% comment %} Display page image or fallback {% endcomment %}
+                  {% if page_image_src != '' %}
+                    <img src="{{ page_image_src }}" alt="{{ sublink.title | escape }}" class="collection-image" />
+                  {% else %}
+                    <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ sublink.title | escape }}" class="collection-image" />
+                  {% endif %}
+
+                  <span class="item-title">{{ sublink.title }}</span>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+{% endcapture %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if first_block_items != '' %}
+    <div class="block">
+      <h3>Other SUT Categories you may like</h3>
+      <div class="item-container">
+        {{ first_block_items }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if second_block_items != '' %}
+    <div class="block">
+      <h3>You may also like Made To Order SUT</h3>
+      <div class="item-container">
+        {{ second_block_items }}
+      </div>
+    </div>
+    {% endif %}
+
+
+    {% if third_block_items != '' %}
+    <div class="block">
+        <h3>Applications & Services</h3>
+      <div class="item-container">
+        {{ third_block_items }}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+
+
 
 
 <hr />
 
 {% comment %} <style>
+  .product_page_top_form_section {
+    display: none !important
+  }
 
-.product_page_top_form_section {
-  display:none!important
-}
-
-.template-collection .saleDateTitle_1O_jI .price_container {
-  font-size:16px!important
-}
+  .template-collection .saleDateTitle_1O_jI .price_container {
+    font-size: 16px !important
+  }
 </style>
-<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2 class="recommended-buy-title_col-1 browse-category-hand-picked-title" style="color:#333333!important;font-size:22px;line-height:33.9px">EZBio® PC SUT Media Bottle Sale</h2>
-{% render 'bfs-timer-v2'  %}
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+  <h2 class="recommended-buy-title_col-1 browse-category-hand-picked-title"
+    style="color:#333333!important;font-size:22px;line-height:33.9px">EZBio® PC SUT Media Bottle Sale</h2>
+  {% render 'bfs-timer-v2' %}
 </div>
 {% section 'cross-sale-product-promo-ezeaster-sale' %} {% endcomment %}
 
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var collectionFiltersContainer = document.querySelector("#collection-filters-container");
+  document.addEventListener("DOMContentLoaded", function () {
+    var collectionFiltersContainer = document.querySelector("#collection-filters-container");
 
-  if (collectionFiltersContainer) {
-    var sidebarModules = document.querySelectorAll(".sidebar-module");
+    if (collectionFiltersContainer) {
+      var sidebarModules = document.querySelectorAll(".sidebar-module");
 
-    sidebarModules.forEach(function(module) {
-      module.style.marginBottom = "0px";
-      module.style.paddingBottom = "0.2px";
-    });
-  }
-});
+      sidebarModules.forEach(function (module) {
+        module.style.marginBottom = "0px";
+        module.style.paddingBottom = "0.2px";
+      });
+    }
+  });
 </script>
-
-<!-- For chirstmas Only section block -->
-<!--  Cross Sale Product Promotions -->
-  <div style="margin-top:50px">&nbsp;</div>
-  {% comment %} <style>
-  .recommended-product-card {
-     border-radius: 10px;
-     position:relative;
-     padding: 10px;
-     text-align: center;
-     background: #ffff;}
-  </style> {% endcomment %}
-{% comment %} {% section 'cross-sale-product-promo-ezeaster-sale' %} {% endcomment %}
-<!--  Cross Sale Product Promotions -->
-   <!--  Top selling product section (for christmas) -->
-{% comment %} {% render 'top-selling-product-index-sec' %} {% endcomment %}
-<!--  Top selling product section (for christmas) -->
-<!--  Trending Product section (for christmas) -->
-{% comment %} {% render 'trending-weekly-product-index-sec' %} {% endcomment %}
-<!--  Trending Product section (for christmas) -->
-
-<!-- For chirstmas Only section block -->
-
-<div class="promotional-banner">
-  <a href="/pages/us-independence-day-sale-25">
-      <img src="https://cdn.shopify.com/s/files/1/1064/0118/files/4th_July_Independence_day-sale-promo-inner.jpg?v=1751632791"
-            alt="Our Biggest Patriotic Sale of the Year"
-              title="Our Biggest Patriotic Sale of the Year"
-            class="banner-img">
-    </a>
-  </div> 
