@@ -13,13 +13,13 @@
               "position": {{ forloop.index }},
               "url": "{{ request.origin }}{{ link.url }}",
               "name": "{{ link.title | escape }}",
-              "image": "https:{{ link.object.image | img_url: 'medium' | escape }}", 
+              "image": "https:{{ link.object.image | img_url: 'medium' | escape }}",
               "description": {{ link.object.description | strip_html | escape | json }}
           }{% if forloop.last == false %},{% endif %}
           {% endfor %}
       ]
   }
-  </script>   
+  </script>
 <!--  subcategory collecion template schema end -->
 {% endif %}
 {%- if template contains 'collection.SUT' -%}
@@ -314,7 +314,7 @@
                   background: #f8f8f8;
                   padding: 10px 0;
                   position: relative;
-                  display: none; 
+                  display: none;
                   align-items: center;
                   gap: 20px;
                 }
@@ -359,7 +359,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for visibility */
 background: rgba(255, 255, 255, 0.9); /* White background with transparency */
 }
 
-.productListing { 
+.productListing {
 padding-top:20px;
 margin-top: 20px;
 }
@@ -435,9 +435,9 @@ margin-top: 20px;
 
         <!-- Marquee section powered by AI end -->
   <!-- Two Column Layout Container -->
-  <div class="two-column-container">
+  <div class="collection-layout-container">
     <!-- Left Column: Existing Content -->
-    <div class="left-column">
+    <div class="cards-grid-container">
       <header class="section-header section-header--large">
         <h1 class="section-header__title section-header__title--left">{{ collection.title }}</h1>
         <div class="section-header__link--right">
@@ -477,303 +477,42 @@ margin-top: 20px;
         </div>
         <hr>
       {% endif %}
-    </div>
 
-    <!-- Right Column: Image -->
-    <div class="right-column">
-      <div class="placeholder"></div> <!-- Placeholder Animation -->
-    </div>
-  </div>
+      <div class="category-count-header">
+        <h3>Total Categories: {{ collection.all_tags.size }}</h3>
+        <span class="count-badge">{{ linklists[collection.handle].links.size }} Items Found</span>
+      </div>
 
-  <style>
-
-
-.two-column-container{display:flex;flex-direction:row;gap:20px;padding:0 20px}.left-column{flex:.7}.right-column{flex:.3;display:flex;justify-content:center;align-items:center}.placeholder{width:100%;height:200px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:placeholderAnimation 1.5s infinite linear;border-radius:8px;display:none}.placeholder:empty{display:block!important}@keyframes placeholderAnimation{0%{background-position:200% 0}100%{background-position:-200% 0}}.right-column img{width:100%;height:auto;margin-top:20px;display:none}.image-container{position:relative;width:100%;height:auto;border:0px dotted #ccc;border-radius:2px;overflow:hidden}.image-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#add8e6cc;pointer-events:none}.image-container img{width:70%;height:auto;display:block}
-@media screen and (max-width: 767px) {
-  .two-column-container {
-    flex-direction: column!important;
-    gap:0px!important
-  }
+      <ul class="sidebar_menu">
+        {%- assign side_links1 = collection.handle -%}
 
 
-  .description-hidden p {
-    margin-bottom:0px;
-    padding-bottom:0px!important
-  }
-  .image-container img {
-    width:100%!important;
-    margin-top:0px!important
-  }
+      {% for link in linklists[side_links1].links %}
+        {% assign link_collection = link.object %}
+        <li class="grid__item small--one-half medium--one-third large--one-quarter text-center  sidebarmenu_list">
+          <a href="{{ link.url }}" class="category-card-link">
+            <div class="sub-category">
+              <span class="grid-link__image grid-link__image--collection">
+                <span class="grid-link__image-centered">
+                  {% if link_collection.image %}
+                  <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                  {% else %}
+                  <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                  {% endif %}
+                </span>
+              </span>
+              <p> {{ link.title }}</p>
+              <span class="product-count">{{ link_collection.products.size }}</span>
+            </div>
+          </a>
+        </li>
+    {% endfor %}
 
-  .image-container {
-    margin-top:0px!important;
-    margin-bottom:0px!important;
-  }
- }
-  </style>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var readMoreLink = document.getElementById('read-more');
-    var hiddenContent = document.getElementById('description-hidden');
-    var visibleContent = document.getElementById('description-visible');
+      </ul>
 
-    if (readMoreLink) {
-      readMoreLink.addEventListener('click', function () {
-        if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
-          hiddenContent.style.display = 'block'; // Show hidden content
-          readMoreLink.textContent = ' Read less...'; // Change link text
-        } else {
-          hiddenContent.style.display = 'none'; // Hide hidden content
-          readMoreLink.textContent = ' Read more...'; // Change link text back
-        }
-      });
-    }
-  });
-</script>
-
-
-
-{% if template.name == 'collection.subcategory' %}
+        <div class="block-marquee-stop">&nbsp;</div>
 <style>
-  #collection-filters-container,
-  .section-header__link--right {
-    display: none !important
-  }
-
-  .sidebar-module .section-header__title.h4 {
-    margin-bottom: 8px !important
-  }
-</style>
-{% else %}
-<style>
-#collection-filters-container,.section-header__link--right{display:none!important}.section-header{margin-bottom:0!important}.sidebar-module .section-header__title.h4{margin-bottom:12px!important}ul.sidebar_menu{display:grid;gap:20px;padding:0 40px;padding-left:20px!important;padding-right:20px!important}@media (min-width: 768px){ul.sidebar_menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}.grid__item{list-style:none;flex-basis:calc(25% - 10px);box-sizing:border-box}.sub-category{border:2px solid #0071ce;border-radius:10px!important;overflow:hidden!important}.sub-category p{justify-content:center;align-items:center;display:grid;height:72px;font-size:18px;max-height:100px;background-color:#0071ce;color:#fff;margin-bottom:0;border-radius:0 0 8px 8px;padding:10px 5px;text-align:center}.grid-link__image{position:relative;display:table;border-radius:10px;table-layout:fixed;overflow:hidden;margin:0 auto 6px}.grid-link__image img{display:block;width:100%;height:300px;object-fit:contain}
-</style>
-{% endif %}
-<script>
-  $(document).ready(function () {
-    // Create the section
-    var section = `
-      {% if collection.handle == 'bioprocess-caps-and-gaskets' %}
-        <p style="padding:0px 20px 0px 20px;cursor:pointer">If you have any questions or inquiries, please email us at <a style="color:#0071ce;cursor:pointer !important" href="mailto:sales@foxxlifesciences.com">sales@foxxlifesciences.com</a> or call <a style="color:#0071ce;cursor:pointer !important" href="tel:1-603-890-3699">1-603-890-3699</a>.</p>
-      {% endif %}
-    `;
-
-    var hrTag = $('.grid-link__container').next('hr');
-
-    // Append the section after the <hr /> tag
-    hrTag.after(section);
-  });
-</script>
-
-<!-- snippet section image -->
-<div style="padding: 0px 20px; z-index: 24;margin-top:20px;margin-bottom:20px;padding:20px">
-  <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxxbioprocess-website-group-logo-snippet-inner-layout.png?v=1754940270" alt="snippet-image" style="width:100%;height:auto;padding:20px">
-</div>
-<!-- -->
-<!--- Main card section -->
-<div class="grid-uniform grid-link__container">
-  <ul class=" sidebar_menu">
-    {%- assign side_links1 = collection.handle -%}
-
-
-  {% for link in linklists[side_links1].links %}
-    {% assign link_collection = link.object %}
-    <li class="grid__item small--one-half medium--one-third large--one-quarter text-center  sidebarmenu_list">
-      <a href="{{ link.url }}">
-        <div class="sub-category">
-          <span class="grid-link__image grid-link__image--collection">
-            <span class="grid-link__image-centered">
-              {% if link_collection.image %}
-              <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
-              {% else %}
-              <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
-              {% endif %}
-            </span>
-          </span>
-          <p> {{ link.title }}</p>
-        </div>
-      </a>
-    </li>
-{% endfor %}
-
-  </ul>
-
-</div>
-
-
-<script>
-// Step 1: Target the sidebar menu
-const sidebarMenu = document.querySelector('.grid-link__container');
-
-// Step 2: Proceed if sidebar exists
-if (sidebarMenu) {
-
-// Create <li>
-const customSutLi = document.createElement('div');
-customSutLi.className = "grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list";
-
- // Add styles to the div
- customSutLi.style.display = 'flex'; // 🔹 Display flex
-    customSutLi.style.alignItems = 'center'; // 🔹 Vertically center content
-    customSutLi.style.justifyContent = 'center'; // 🔹 Horizontally center content
-    customSutLi.style.gap = '20px'; 
-    customSutLi.style.marginTop = '50px'; // 🔹 Add top margin
-
-// Optional: Paragraph before image
-const messageP = document.createElement('p');
-messageP.textContent = "Don't find what you are looking for? Check out our Custom SUT Library";
-messageP.style.marginTop = '20px';
-messageP.style.textAlign = 'left';
-    messageP.style.width = '30%';
-    messageP.style.color = '#095ea7';
-    messageP.style.lineHeight = '1.3';
-
-messageP.style.marginTop = '0px';
-messageP.style.fontSize = '28px';
-
-// Create <a> tag
-const imgLink = document.createElement('a');
-imgLink.href = '/pages/process-custom-sut';
-imgLink.style.position = 'relative';
-imgLink.style.display = 'inline-block';
-
- const img = document.createElement('img');
-// Try different high-resolution URLs
-const baseUrl = 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxx-biorpocess-custom-sut-promo-banner-header-2nd-version-800x400.png?v=1754412854';
-const highResUrl = baseUrl + '&width=2048&height=1024'; // Specify both width and height
-
-// Create image
-
-img.src = highResUrl;
-img.alt = 'Custom SUT Library Banner';
-img.style.display = 'block';
-img.style.width = '100%';
-img.style.height = 'auto';
-img.style.border = '2px solid #095ea7';         // 🔹 Border
-img.style.borderRadius = '8px';              // 🔹 Rounded corners
-
-// Create overlay div
-const overlay = document.createElement('div');
-overlay.style.position = 'absolute';
-overlay.style.top = '0';
-overlay.style.left = '0';
-overlay.style.width = '100%';
-overlay.style.height = '100%';
-overlay.style.backgroundColor = 'rgba(173, 216, 230, 0.8)'; // light blue transparent
-overlay.style.zIndex = '1';
-overlay.style.borderRadius = '8px'; // 🔹 Match image border-radius
-
-// Create label (inside <a>, on top of image)
-  const imageLabel = document.createElement('span');
-imageLabel.textContent = "World Largest Custom SUT Library with over 1000+ Drawings";
-imageLabel.style.position = 'absolute';
-imageLabel.style.top = '0px';
-imageLabel.style.left = '0px';
-imageLabel.style.backgroundColor = '#00833e'; // ✅ Bootstrap-style green
-imageLabel.style.color = 'white';             // ✅ White text for contrast
-imageLabel.style.padding = '5px 10px';
-imageLabel.style.zIndex = '2';
-imageLabel.style.fontWeight = 'bold';
-imageLabel.style.borderRadius = '4px';
-
-
-// Assemble inside <a>
-imgLink.appendChild(img);
-imgLink.appendChild(overlay);
-imgLink.appendChild(imageLabel);
-
-// Add <p> and <a> to <li>
-customSutLi.appendChild(messageP);
-customSutLi.appendChild(imgLink);
-
-// Add to sidebar
-sidebarMenu.appendChild(customSutLi);
-}
-
-</script>
-
-<script>
-window.addEventListener('load', () => {
-  // Step 1: Find the sidebar menu and the right column container
-  const sidebarMenu = document.querySelector('.sidebar_menu');
-  const rightColumn = document.querySelector('.right-column');
-  const placeholder = rightColumn.querySelector('.placeholder');
-
-  // Step 2: Check if the elements exist
-  if (!sidebarMenu || !rightColumn || !placeholder) {
-    console.error('Required elements not found in the DOM.');
-    return;
-  }
-
-  // Step 3: Get collection image data - USE HIGHER RESOLUTION
-  const collectionImageSrc = '{{ collection.image | img_url: "master" }}'; // Changed from "large" to "master"
-  const collectionTitle = '{{ collection.title | escape }}';
-  const hasCollectionImage = '{{ collection.image }}' !== '';
-
-  let imageSource = '';
-  let imageAlt = '';
-
-  // Step 4: Check collection image first
-  if (hasCollectionImage && collectionImageSrc && collectionImageSrc !== '') {
-    imageSource = collectionImageSrc;
-    imageAlt = collectionTitle;
-    console.log('Using collection image:', imageSource);
-  } else {
-    // Step 5: Fallback to first image in sidebar menu
-    const firstImage = sidebarMenu.querySelector('img');
-    if (firstImage) {
-      imageSource = firstImage.src;
-      imageAlt = firstImage.alt;
-      console.log('Using first sidebar image (fallback):', imageSource);
-    } else {
-      console.warn('No collection image and no sidebar image found.');
-      return;
-    }
-  }
-
-  // Step 6: Create the image element
-  const img = new Image();
-  img.src = imageSource;
-  img.alt = imageAlt;
-
-  // Step 7: Create image container and overlay
-  const imageContainer = document.createElement('div');
-  imageContainer.classList.add('image-container');
-
-  const imageOverlay = document.createElement('div');
-  imageOverlay.classList.add('image-overlay');
-
-  // Step 8: Append image and overlay to container
-  imageContainer.appendChild(img);
-  imageContainer.appendChild(imageOverlay);
-
-  // Step 9: Remove placeholder and add image container
-  img.onload = () => {
-    console.log('Image loaded successfully.');
-    placeholder.remove();
-    rightColumn.appendChild(imageContainer);
-  };
-
-  // Step 10: Handle loading errors
-  img.onerror = () => {
-    console.error('Failed to load image:', imageSource);
-    if (hasCollectionImage && imageSource === collectionImageSrc) {
-      const firstImage = sidebarMenu.querySelector('img');
-      if (firstImage) {
-        console.log('Retrying with sidebar image...');
-        img.src = firstImage.src;
-        img.alt = firstImage.alt;
-      }
-    } else {
-      placeholder.remove();
-    }
-  };
-});
-</script>
-
-  <div class="block-marquee-stop">&nbsp;</div>
-<style>
-.cross-selling-recommendations .sidebar_menu{text-align:center}.cross-selling-recommendations .item-container{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.cross-selling-recommendations .item{flex:1 1 1;margin:10px;list-style:none}.cross-selling-recommendations .item a{text-decoration:none;color:#121212}.cross-selling-recommendations .item a:hover,.cross-selling-recommendations .item a:active{text-decoration:underline;color:#095ea7}.cross-selling-recommendations .collection-image{width:100px;height:100px; background-size:contain;aspect-ratio:1/1;overflow:hidden;border-radius:50%;border:1px solid #095ea7!important;display:flex;justify-content:center;margin:0 auto;align-items:center}.cross-selling-recommendations .collection-image img{width:100%;height:100%;object-fit:contain;display:block}.cross-selling-recommendations .item-title{align-items:center;margin:0 auto;width:130px;display:inline-flex;margin-top:5px;justify-content:center;text-align:center;font-weight:700;flex-wrap:wrap;margin-top:5px;font-weight:bold}.cross-selling-recommendations .block{padding-top:50px;padding-bottom:50px}.cross-selling-recommendations .block:first-child, .cross-selling-recommendations .block:last-child{border-top:1px solid #ccc;border-bottom:1px solid #ccc}; 
+  .cross-selling-recommendations .sidebar_menu{text-align:center}.cross-selling-recommendations .item-container{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.cross-selling-recommendations .item{flex:1 1 1;margin:10px;list-style:none}.cross-selling-recommendations .item a{text-decoration:none;color:#121212}.cross-selling-recommendations .item a:hover,.cross-selling-recommendations .item a:active{text-decoration:underline;color:#095ea7}.cross-selling-recommendations .collection-image{width:100px;height:100px; background-size:contain;aspect-ratio:1/1;overflow:hidden;border-radius:50%;border:1px solid #095ea7!important;display:flex;justify-content:center;margin:0 auto;align-items:center}.cross-selling-recommendations .collection-image img{width:100%;height:100%;object-fit:contain;display:block}.cross-selling-recommendations .item-title{align-items:center;margin:0 auto;width:130px;display:inline-flex;margin-top:5px;justify-content:center;text-align:center;font-weight:700;flex-wrap:wrap;margin-top:5px;font-weight:bold}.cross-selling-recommendations .block{padding-top:50px;padding-bottom:50px}.cross-selling-recommendations .block:first-child, .cross-selling-recommendations .block:last-child{border-top:1px solid #ccc;border-bottom:1px solid #ccc};
 
   /* .cross-selling-recommendations .block:last-child {
     border-bottom: 1px solid #cccccc;
@@ -953,10 +692,6 @@ window.addEventListener('load', () => {
 
 
 
-
-
-<hr />
-
 {% comment %} <style>
   .product_page_top_form_section {
     display: none !important
@@ -974,7 +709,6 @@ window.addEventListener('load', () => {
 {% section 'cross-sale-product-promo-ezeaster-sale' %} {% endcomment %}
 
 
-
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var collectionFiltersContainer = document.querySelector("#collection-filters-container");
@@ -987,5 +721,651 @@ window.addEventListener('load', () => {
         module.style.paddingBottom = "0.2px";
       });
     }
+  });
+</script>
+
+    </div>
+
+    <!-- Right Column: Preview Sidebar -->
+    <div class="preview-sidebar">
+      <div class="preview-container">
+        <div class="preview-placeholder">
+          <svg class="preview-icon" width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
+          </svg>
+          <span>Select a category to see a preview</span>
+        </div>
+        <div class="preview-content" style="display: none;">
+          <div class="preview-image-container">
+            <img src="" alt="Category Preview" class="preview-image" />
+          </div>
+          <div class="preview-details">
+            <h4 class="preview-title"></h4>
+            <p class="preview-description"></p>
+            <div class="preview-meta">
+              <span class="preview-product-count"></span>
+              <a href="#" class="preview-cta">View Category</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Collection Layout with Preview Sidebar */
+    .collection-layout-container {
+      display: flex;
+      gap: 30px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .cards-grid-container {
+      flex: 2;
+    }
+
+    .category-count-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 15px 0;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .category-count-header h3 {
+      color: #0071b9;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .count-badge {
+      background: #0071b9;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .preview-sidebar {
+      flex: 1;
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .preview-container {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 400px;
+      transition: all 0.3s ease;
+    }
+
+    .preview-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 400px;
+      color: #6c757d;
+      text-align: center;
+    }
+
+    .preview-icon {
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .preview-content {
+      padding: 0;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-image-container {
+      height: 200px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .preview-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .preview-details {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-title {
+      color: #0071b9;
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .preview-description {
+      color: #495057;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .preview-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .preview-product-count {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .preview-cta {
+      color: #0071b9;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .preview-cta:hover {
+      color: #005a9e;
+    }
+
+    /* Enhanced category cards */
+    .category-card-link {
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .category-card-link:hover {
+      transform: translateY(-5px);
+    }
+
+    .sub-category {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .sub-category:hover {
+      box-shadow: 0 10px 25px rgba(0, 113, 185, 0.15);
+    }
+
+    .product-count {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 113, 185, 0.9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    /* Mobile responsiveness */
+    @media screen and (max-width: 768px) {
+      .collection-layout-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .preview-sidebar {
+        position: relative;
+        top: auto;
+        order: -1;
+      }
+
+      .preview-container {
+        min-height: 300px;
+      }
+
+      .preview-content {
+        height: 300px;
+      }
+
+      .preview-image-container {
+        height: 150px;
+      }
+
+      .category-count-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .sidebar_menu {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryLinks = document.querySelectorAll('.category-card-link');
+    const previewImage = document.querySelector('.preview-image');
+    const previewTitle = document.querySelector('.preview-title');
+    const previewDescription = document.querySelector('.preview-description');
+    const previewProductCount = document.querySelector('.preview-product-count');
+    const previewCTA = document.querySelector('.preview-cta');
+    const previewContent = document.querySelector('.preview-content');
+    const previewPlaceholder = document.querySelector('.preview-placeholder');
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Remove active class from previously selected link
+        document.querySelectorAll('.category-card-link').forEach(l => l.classList.remove('active'));
+        // Add active class to the clicked link
+        link.classList.add('active');
+
+        const imageUrl = link.querySelector('img') ? link.querySelector('img').src : '';
+        const title = link.querySelector('p') ? link.querySelector('p').textContent : 'N/A';
+        const productCount = link.querySelector('.product-count') ? link.querySelector('.product-count').textContent : '0 items';
+        // Attempt to get description from a nearby element or data attribute
+        // For now, using a placeholder description
+        const description = link.closest('.sub-category').querySelector('p') ? link.closest('.sub-category').querySelector('p').textContent + ' - A brief description of this category.' : 'No description available.';
+        const categoryUrl = link.href;
+
+        // Update preview content
+        previewImage.src = imageUrl;
+        previewTitle.textContent = title;
+        previewDescription.textContent = description;
+        previewProductCount.textContent = productCount;
+        previewCTA.href = categoryUrl;
+
+        // Show preview content and hide placeholder
+        previewContent.style.display = 'flex';
+        previewPlaceholder.style.display = 'none';
+
+        // Optional: Add visual feedback for selected category
+        link.style.borderColor = '#0071b9';
+        link.style.borderWidth = '2px';
+        link.style.borderRadius = '8px';
+      });
+    });
+  });
+</script>
+
+<script>
+  // Ensure the script runs after the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    // Find the sidebar menu and the right column container
+    const sidebarMenu = document.querySelector('.sidebar_menu');
+    const rightColumn = document.querySelector('.right-column');
+    const placeholder = rightColumn ? rightColumn.querySelector('.placeholder') : null;
+
+    // Check if the elements exist
+    if (!sidebarMenu || !rightColumn || !placeholder) {
+      console.error('Required elements for image preview not found in the DOM.');
+      return;
+    }
+
+    // Get all the category links within the sidebar menu
+    const categoryLinks = sidebarMenu.querySelectorAll('.category-card-link');
+
+    // Add event listeners to each category link
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Get the image source, title, and description from the clicked link's context
+        const categoryImageSrc = link.querySelector('img')?.src;
+        const categoryTitle = link.querySelector('p')?.textContent.trim();
+        const categoryProductCount = link.querySelector('.product-count')?.textContent || '0 products';
+        // You might need to adjust how the description is fetched based on your theme's structure
+        const categoryDescription = link.closest('.sub-category').querySelector('p')?.textContent.trim() + " - This is a sample description for the category.";
+        const categoryUrl = link.href;
+
+        // Update the preview sidebar content
+        const previewImage = document.querySelector('.preview-image');
+        const previewTitle = document.querySelector('.preview-title');
+        const previewDescription = document.querySelector('.preview-description');
+        const previewProductCount = document.querySelector('.preview-product-count');
+        const previewCTA = document.querySelector('.preview-cta');
+        const previewContent = document.querySelector('.preview-content');
+        const previewPlaceholder = document.querySelector('.preview-placeholder');
+
+        if (previewImage) previewImage.src = categoryImageSrc || '{{ "placeholder.png" | asset_url }}'; // Fallback image
+        if (previewTitle) previewTitle.textContent = categoryTitle || 'Category Title';
+        if (previewDescription) previewDescription.textContent = categoryDescription || 'Category Description';
+        if (previewProductCount) previewProductCount.textContent = categoryProductCount;
+        if (previewCTA) previewCTA.href = categoryUrl;
+
+        // Show the preview content and hide the placeholder
+        if (previewContent) previewContent.style.display = 'flex';
+        if (previewPlaceholder) previewPlaceholder.style.display = 'none';
+
+        // Remove 'active' class from previously selected links
+        document.querySelectorAll('.category-card-link.active').forEach(activeLink => {
+          activeLink.classList.remove('active');
+          activeLink.style.borderColor = ''; // Reset border
+          activeLink.style.borderWidth = '';
+          activeLink.style.borderRadius = '';
+        });
+
+        // Add 'active' class to the clicked link and style it
+        link.classList.add('active');
+        link.style.borderColor = '#0071b9';
+        link.style.borderWidth = '2px';
+        link.style.borderRadius = '8px';
+      });
+    });
+  });
+</script>
+
+  <style>
+    /* Existing styles for .two-column-container, .left-column, .right-column, etc. */
+    .two-column-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .left-column {
+      flex: 0.7;
+    }
+
+    .right-column {
+      flex: 0.3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: placeholderAnimation 1.5s infinite linear;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .placeholder:empty {
+      display: block !important;
+    }
+
+    @keyframes placeholderAnimation {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .right-column img {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border: 0px dotted #ccc;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #add8e6cc;
+      pointer-events: none;
+    }
+
+    .image-container img {
+      width: 70%;
+      height: auto;
+      display: block;
+    }
+
+    @media screen and (max-width: 767px) {
+      .two-column-container {
+        flex-direction: column !important;
+        gap: 0px !important;
+      }
+
+      .description-hidden p {
+        margin-bottom: 0px;
+        padding-bottom: 0px !important;
+      }
+
+      .image-container img {
+        width: 100% !important;
+        margin-top: 0px !important;
+      }
+
+      .image-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+      }
+    }
+  </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var readMoreLink = document.getElementById('read-more');
+    var hiddenContent = document.getElementById('description-hidden');
+    var visibleContent = document.getElementById('description-visible');
+
+    if (readMoreLink) {
+      readMoreLink.addEventListener('click', function () {
+        if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+          hiddenContent.style.display = 'block'; // Show hidden content
+          readMoreLink.textContent = ' Read less...'; // Change link text
+        } else {
+          hiddenContent.style.display = 'none'; // Hide hidden content
+          readMoreLink.textContent = ' Read more...'; // Change link text back
+        }
+      });
+    }
+  });
+</script>
+
+{% if template.name == 'collection.subcategory' %}
+<style>
+  #collection-filters-container,
+  .section-header__link--right {
+    display: none !important
+  }
+
+  .sidebar-module .section-header__title.h4 {
+    margin-bottom: 8px !important
+  }
+</style>
+{% else %}
+<style>
+#collection-filters-container,.section-header__link--right{display:none!important}.section-header{margin-bottom:0!important}.sidebar-module .section-header__title.h4{margin-bottom:12px!important}ul.sidebar_menu{display:grid;gap:20px;padding:0 40px;padding-left:20px!important;padding-right:20px!important}@media (min-width: 768px){ul.sidebar_menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}.grid__item{list-style:none;flex-basis:calc(25% - 10px);box-sizing:border-box}.sub-category{border:2px solid #0071ce;border-radius:10px!important;overflow:hidden!important}.sub-category p{justify-content:center;align-items:center;display:grid;height:72px;font-size:18px;max-height:100px;background-color:#0071ce;color:#fff;margin-bottom:0;border-radius:0 0 8px 8px;padding:10px 5px;text-align:center}.grid-link__image{position:relative;display:table;border-radius:10px;table-layout:fixed;overflow:hidden;margin:0 auto 6px}.grid-link__image img{display:block;width:100%;height:300px;object-fit:contain}
+</style>
+{% endif %}
+<script>
+  $(document).ready(function () {
+    // Create the section
+    var section = `
+      {% if collection.handle == 'bioprocess-caps-and-gaskets' %}
+        <p style="padding:0px 20px 0px 20px;cursor:pointer">If you have any questions or inquiries, please email us at <a style="color:#0071ce;cursor:pointer !important" href="mailto:sales@foxxlifesciences.com">sales@foxxlifesciences.com</a> or call <a style="color:#0071ce;cursor:pointer !important" href="tel:1-603-890-3699">1-603-890-3699</a>.</p>
+      {% endif %}
+    `;
+
+    var hrTag = $('.grid-link__container').next('hr');
+
+    // Append the section after the <hr /> tag
+    hrTag.after(section);
+  });
+</script>
+
+<!-- snippet section image -->
+<div style="padding: 0px 20px; z-index: 24;margin-top:20px;margin-bottom:20px;padding:20px">
+  <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxxbioprocess-website-group-logo-snippet-inner-layout.png?v=1754940270" alt="snippet-image" style="width:100%;height:auto;padding:20px">
+</div>
+<!-- -->
+<!--- Main card section -->
+
+<script>
+  // Step 1: Target the sidebar menu
+  const sidebarMenu = document.querySelector('.grid-link__container');
+
+  // Step 2: Proceed if sidebar exists
+  if (sidebarMenu) {
+
+// Create <li>
+const customSutLi = document.createElement('div');
+customSutLi.className = "grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list";
+
+ // Add styles to the div
+ customSutLi.style.display = 'flex'; // 🔹 Display flex
+    customSutLi.style.alignItems = 'center'; // 🔹 Vertically center content
+    customSutLi.style.justifyContent = 'center'; // 🔹 Horizontally center content
+    customSutLi.style.gap = '20px';
+    customSutLi.style.marginTop = '50px'; // 🔹 Add top margin
+
+// Optional: Paragraph before image
+const messageP = document.createElement('p');
+messageP.textContent = "Don't find what you are looking for? Check out our Custom SUT Library";
+messageP.style.marginTop = '20px';
+messageP.style.textAlign = 'left';
+    messageP.style.width = '30%';
+    messageP.style.color = '#095ea7';
+    messageP.style.lineHeight = '1.3';
+
+messageP.style.marginTop = '0px';
+messageP.style.fontSize = '28px';
+
+// Create <a> tag
+const imgLink = document.createElement('a');
+imgLink.href = '/pages/process-custom-sut';
+imgLink.style.position = 'relative';
+imgLink.style.display = 'inline-block';
+
+ const img = document.createElement('img');
+// Try different high-resolution URLs
+const baseUrl = 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxx-biorpocess-custom-sut-promo-banner-header-2nd-version-800x400.png?v=1754412854';
+const highResUrl = baseUrl + '&width=2048&height=1024'; // Specify both width and height
+
+// Create image
+
+img.src = highResUrl;
+img.alt = 'Custom SUT Library Banner';
+img.style.display = 'block';
+img.style.width = '100%';
+img.style.height = 'auto';
+img.style.border = '2px solid #095ea7';         // 🔹 Border
+img.style.borderRadius = '8px';              // 🔹 Rounded corners
+
+// Create overlay div
+const overlay = document.createElement('div');
+overlay.style.position = 'absolute';
+overlay.style.top = '0';
+overlay.style.left = '0';
+overlay.style.width = '100%';
+overlay.style.height = '100%';
+overlay.style.backgroundColor = 'rgba(173, 216, 230, 0.8)'; // light blue transparent
+overlay.style.zIndex = '1';
+overlay.style.borderRadius = '8px'; // 🔹 Match image border-radius
+
+// Create label (inside <a>, on top of image)
+  const imageLabel = document.createElement('span');
+imageLabel.textContent = "World Largest Custom SUT Library with over 1000+ Drawings";
+imageLabel.style.position = 'absolute';
+imageLabel.style.top = '0px';
+imageLabel.style.left = '0px';
+imageLabel.style.backgroundColor = '#00833e'; // ✅ Bootstrap-style green
+imageLabel.style.color = 'white';             // ✅ White text for contrast
+imageLabel.style.padding = '5px 10px';
+imageLabel.style.zIndex = '2';
+imageLabel.style.fontWeight = 'bold';
+imageLabel.style.borderRadius = '4px';
+
+
+// Assemble inside <a>
+imgLink.appendChild(img);
+imgLink.appendChild(overlay);
+imgLink.appendChild(imageLabel);
+
+// Add <p> and <a> to <li>
+customSutLi.appendChild(messageP);
+customSutLi.appendChild(imgLink);
+
+// Add to sidebar
+sidebarMenu.appendChild(customSutLi);
+}
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryLinks = document.querySelectorAll('.category-card-link');
+    const previewImage = document.querySelector('.preview-image');
+    const previewTitle = document.querySelector('.preview-title');
+    const previewDescription = document.querySelector('.preview-description');
+    const previewProductCount = document.querySelector('.preview-product-count');
+    const previewCTA = document.querySelector('.preview-cta');
+    const previewContent = document.querySelector('.preview-content');
+    const previewPlaceholder = document.querySelector('.preview-placeholder');
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('mouseover', () => { // Changed from 'click' to 'mouseover' for preview
+        // Remove active class from previously selected link
+        document.querySelectorAll('.category-card-link').forEach(l => l.classList.remove('active'));
+        // Add active class to the hovered link
+        link.classList.add('active');
+
+        const imageUrl = link.querySelector('img') ? link.querySelector('img').src : '';
+        const title = link.querySelector('p') ? link.querySelector('p').textContent : 'N/A';
+        const productCount = link.querySelector('.product-count') ? link.querySelector('.product-count').textContent : '0 items';
+        const descriptionElement = link.closest('.sub-category').querySelector('p'); // Target the <p> tag for description
+        const description = descriptionElement ? descriptionElement.textContent.trim() + ' - A brief description of this category.' : 'No description available.';
+        const categoryUrl = link.href;
+
+        // Update preview content
+        previewImage.src = imageUrl;
+        previewTitle.textContent = title;
+        previewDescription.textContent = description;
+        previewProductCount.textContent = productCount;
+        previewCTA.href = categoryUrl;
+
+        // Show preview content and hide placeholder
+        previewContent.style.display = 'flex';
+        previewPlaceholder.style.display = 'none';
+      });
+
+      link.addEventListener('mouseout', () => { // Reset preview when mouse leaves
+        previewContent.style.display = 'none';
+        previewPlaceholder.style.display = 'flex';
+        // Remove 'active' class and styles from all links
+        document.querySelectorAll('.category-card-link').forEach(l => {
+          l.classList.remove('active');
+          l.style.borderColor = '';
+          l.style.borderWidth = '';
+          l.style.borderRadius = '';
+        });
+      });
+    });
   });
 </script>
