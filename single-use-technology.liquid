@@ -891,41 +891,51 @@
 
     .sut-stats-grid {
       grid-template-columns: repeat(2, 1fr) !important;
-      gap: 25px;
+      gap: 30px;
       max-width: 100%;
+      padding: 0 20px;
     }
 
     .sut-stat-item {
       text-align: center;
-      padding: 0 10px;
-      margin-bottom: 20px;
+      padding: 25px 15px;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
     }
 
     .sut-stat-number {
-      font-size: 24px !important;
-      margin-bottom: 8px;
+      font-size: 28px !important;
+      margin-bottom: 12px;
+      line-height: 1.1;
     }
 
     .sut-stat-label {
-      font-size: 14px !important;
-      margin-bottom: 8px;
+      font-size: 16px !important;
+      margin-bottom: 12px;
       font-weight: 600;
+      line-height: 1.2;
     }
 
     .sut-stat-description {
-      font-size: 12px !important;
-      line-height: 1.3;
+      font-size: 13px !important;
+      line-height: 1.4;
+      text-align: center;
+      max-width: 180px;
     }
 
     .sut-stat-icon {
-      width: 40px;
-      height: 40px;
-      margin: 0 auto 15px;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 20px;
     }
 
     .sut-stat-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
     .sut-category-tabs {
@@ -1003,26 +1013,44 @@
 
     .sut-stats-grid {
       grid-template-columns: 1fr !important;
-      gap: 30px;
+      gap: 25px;
+      padding: 0 15px;
     }
 
     .sut-stat-item {
-      margin-bottom: 25px;
-      max-width: 300px;
+      margin-bottom: 0;
+      max-width: 280px;
       margin-left: auto;
       margin-right: auto;
+      padding: 30px 20px;
+      min-height: 220px;
     }
 
     .sut-stat-number {
-      font-size: 32px !important;
+      font-size: 36px !important;
+      margin-bottom: 15px;
     }
 
     .sut-stat-label {
-      font-size: 16px !important;
+      font-size: 18px !important;
+      margin-bottom: 15px;
     }
 
     .sut-stat-description {
       font-size: 14px !important;
+      line-height: 1.5;
+      max-width: 240px;
+    }
+
+    .sut-stat-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 25px;
+    }
+
+    .sut-stat-icon svg {
+      width: 32px;
+      height: 32px;
     }
 
     .sut-container {
@@ -1033,11 +1061,20 @@
   @media (max-width: 480px) {
     .sut-stats-header {
       margin-bottom: 40px;
+      padding: 0 15px;
     }
 
     .sut-stats-section {
       padding-top: 60px !important;
       padding-bottom: 60px !important;
+    }
+
+    .sut-stats-content {
+      padding: 0 10px;
+    }
+
+    .sut-stats-grid {
+      padding: 0 10px;
     }
   }
 
