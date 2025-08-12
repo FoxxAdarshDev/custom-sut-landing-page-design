@@ -546,7 +546,222 @@ margin-top: 20px;
 </style>
 {% else %}
 <style>
-#collection-filters-container,.section-header__link--right{display:none!important}.section-header{margin-bottom:0!important}.sidebar-module .section-header__title.h4{margin-bottom:12px!important}ul.sidebar_menu{display:grid;gap:20px;padding:0 40px;padding-left:20px!important;padding-right:20px!important}@media (min-width: 768px){ul.sidebar_menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}.grid__item{list-style:none;flex-basis:calc(25% - 10px);box-sizing:border-box}.sub-category{border:2px solid #0071ce;border-radius:10px!important;overflow:hidden!important}.sub-category p{justify-content:center;align-items:center;display:grid;height:72px;font-size:18px;max-height:100px;background-color:#0071ce;color:#fff;margin-bottom:0;border-radius:0 0 8px 8px;padding:10px 5px;text-align:center}.grid-link__image{position:relative;display:table;border-radius:10px;table-layout:fixed;overflow:hidden;margin:0 auto 6px}.grid-link__image img{display:block;width:100%;height:300px;object-fit:contain}
+#collection-filters-container,.section-header__link--right{display:none!important}.section-header{margin-bottom:0!important}.sidebar-module .section-header__title.h4{margin-bottom:12px!important}
+
+/* Category count header */
+.category-count-header {
+  text-align: center;
+  margin: 20px 0 30px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  margin: 0 20px 30px 20px;
+}
+
+.count-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.total-count {
+  font-size: 3em;
+  font-weight: bold;
+  color: #0071ce;
+  line-height: 1;
+}
+
+.count-label {
+  font-size: 1.2em;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Main layout container */
+.subcategory-layout-container {
+  display: flex;
+  gap: 30px;
+  padding: 0 20px;
+  align-items: flex-start;
+}
+
+/* Sidebar preview styles */
+.sidebar-preview {
+  width: 280px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 20px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.sidebar-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.4em;
+  color: #333;
+  font-weight: 600;
+}
+
+.preview-hint {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+.preview-box {
+  margin: 20px 0;
+  height: 200px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.preview-placeholder {
+  text-align: center;
+  color: #999;
+}
+
+.placeholder-icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.preview-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  text-align: center;
+}
+
+.preview-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.preview-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.preview-actions {
+  margin-top: 15px;
+}
+
+.preview-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #0071ce;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.preview-btn:hover {
+  background: #005bb5;
+  transform: translateY(-1px);
+}
+
+.preview-info {
+  font-size: 0.9em;
+  color: #666;
+  text-align: center;
+}
+
+/* Main content area */
+.main-content-area {
+  flex: 1;
+}
+
+ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sidebar_menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}.grid__item{list-style:none;flex-basis:calc(25% - 10px);box-sizing:border-box;transition: all 0.3s ease;}.grid__item:hover{transform: translateY(-5px);}.sub-category{border:2px solid #0071ce;border-radius:10px!important;overflow:hidden!important;transition: all 0.3s ease;position: relative;}.sub-category:hover{box-shadow: 0 8px 25px rgba(0,113,206,0.2);border-color: #005bb5;}.sub-category p{justify-content:center;align-items:center;display:grid;height:72px;font-size:18px;max-height:100px;background-color:#0071ce;color:#fff;margin-bottom:0;border-radius:0 0 8px 8px;padding:10px 5px;text-align:center}.grid-link__image{position:relative;display:table;border-radius:10px;table-layout:fixed;overflow:hidden;margin:0 auto 6px}.grid-link__image img{display:block;width:100%;height:300px;object-fit:contain}
+
+.category-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,113,206,0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.product-count {
+  font-size: 0.8em;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 1024px) {
+  .subcategory-layout-container {
+    flex-direction: column;
+  }
+  
+  .sidebar-preview {
+    width: 100%;
+    position: static;
+    margin-bottom: 20px;
+  }
+  
+  .preview-box {
+    height: 150px;
+  }
+  
+  .category-count-header {
+    margin: 0 0 20px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .subcategory-layout-container {
+    padding: 0 10px;
+    gap: 15px;
+  }
+  
+  .sidebar-preview {
+    padding: 15px;
+  }
+  
+  .count-display {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .total-count {
+    font-size: 2.5em;
+  }
+  
+  .count-label {
+    font-size: 1em;
+  }
+  
+  ul.sidebar_menu {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>
 {% endif %}
 <script>
@@ -562,6 +777,77 @@ margin-top: 20px;
 
     // Append the section after the <hr /> tag
     hrTag.after(section);
+
+    // Sidebar preview functionality
+    const previewContainer = document.getElementById('preview-container');
+    const previewActions = document.getElementById('preview-actions');
+    const previewLink = document.getElementById('preview-link');
+    const previewProductCount = document.getElementById('preview-product-count');
+    
+    // Add hover listeners to category cards
+    document.querySelectorAll('.sidebarmenu_list').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        const title = this.getAttribute('data-preview-title');
+        const url = this.getAttribute('data-preview-url');
+        const count = this.getAttribute('data-preview-count');
+        const image = this.getAttribute('data-preview-image');
+        
+        // Update preview content
+        previewContainer.innerHTML = `
+          <div class="preview-content">
+            <img src="${image}" alt="${title}" class="preview-image">
+            <div class="preview-title">${title}</div>
+          </div>
+        `;
+        
+        // Update preview actions
+        previewLink.href = url;
+        previewProductCount.textContent = `${count} products`;
+        previewActions.style.display = 'block';
+        
+        // Add active styles
+        previewContainer.style.border = '2px solid #0071ce';
+        previewContainer.style.background = '#f8f9ff';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        // Reset to placeholder after a short delay
+        setTimeout(() => {
+          if (!previewContainer.matches(':hover') && !previewActions.matches(':hover')) {
+            resetPreview();
+          }
+        }, 200);
+      });
+    });
+    
+    // Keep preview when hovering over preview area
+    previewContainer.addEventListener('mouseleave', function() {
+      setTimeout(() => {
+        if (!document.querySelector('.sidebarmenu_list:hover')) {
+          resetPreview();
+        }
+      }, 200);
+    });
+    
+    previewActions.addEventListener('mouseleave', function() {
+      setTimeout(() => {
+        if (!document.querySelector('.sidebarmenu_list:hover')) {
+          resetPreview();
+        }
+      }, 200);
+    });
+    
+    function resetPreview() {
+      previewContainer.innerHTML = `
+        <div class="preview-placeholder">
+          <div class="placeholder-icon">👁️</div>
+          <p>Hover over any category to see preview</p>
+        </div>
+      `;
+      previewActions.style.display = 'none';
+      previewContainer.style.border = '2px dashed #e0e0e0';
+      previewContainer.style.background = '#fafafa';
+    }
   });
 </script>
 
@@ -569,35 +855,76 @@ margin-top: 20px;
 <div style="padding: 0px 20px; z-index: 24;margin-top:20px;margin-bottom:20px;padding:20px">
   <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/foxxbioprocess-website-group-logo-snippet-inner-layout.png?v=1754940270" alt="snippet-image" style="width:100%;height:auto;padding:20px">
 </div>
-<!-- -->
-<!--- Main card section -->
-<div class="grid-uniform grid-link__container">
-  <ul class=" sidebar_menu">
-    {%- assign side_links1 = collection.handle -%}
 
+<!-- Category count display -->
+<div class="category-count-header">
+  {%- assign side_links1 = collection.handle -%}
+  {%- assign total_categories = linklists[side_links1].links.size -%}
+  <div class="count-display">
+    <span class="total-count">{{ total_categories }}</span>
+    <span class="count-label">{{ total_categories | pluralize: 'Category', 'Categories' }} Available</span>
+  </div>
+</div>
 
-  {% for link in linklists[side_links1].links %}
-    {% assign link_collection = link.object %}
-    <li class="grid__item small--one-half medium--one-third large--one-quarter text-center  sidebarmenu_list">
-      <a href="{{ link.url }}">
-        <div class="sub-category">
-          <span class="grid-link__image grid-link__image--collection">
-            <span class="grid-link__image-centered">
-              {% if link_collection.image %}
-              <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
-              {% else %}
-              <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
-              {% endif %}
-            </span>
-          </span>
-          <p> {{ link.title }}</p>
-        </div>
-      </a>
-    </li>
-{% endfor %}
+<!-- Main layout with sidebar and content -->
+<div class="subcategory-layout-container">
+  <!-- Left Sidebar Preview -->
+  <div class="sidebar-preview">
+    <div class="sidebar-header">
+      <h3>Quick Preview</h3>
+      <span class="preview-hint">Hover cards to preview</span>
+    </div>
+    <div class="preview-box" id="preview-container">
+      <div class="preview-placeholder">
+        <div class="placeholder-icon">👁️</div>
+        <p>Hover over any category to see preview</p>
+      </div>
+    </div>
+    <div class="preview-actions" id="preview-actions" style="display: none;">
+      <a href="#" id="preview-link" class="preview-btn">View Details</a>
+      <div class="preview-info">
+        <span id="preview-product-count">0 products</span>
+      </div>
+    </div>
+  </div>
 
-  </ul>
+  <!-- Main Content Area -->
+  <div class="main-content-area">
+    <!--- Main card section -->
+    <div class="grid-uniform grid-link__container">
+      <ul class="sidebar_menu">
+        {%- assign side_links1 = collection.handle -%}
 
+        {% for link in linklists[side_links1].links %}
+          {% assign link_collection = link.object %}
+          <li class="grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list" 
+              data-preview-title="{{ link.title | escape }}" 
+              data-preview-url="{{ link.url }}"
+              data-preview-count="{{ link_collection.products_count | default: 0 }}"
+              data-preview-image="{% if link_collection.image %}{{ link_collection.image | img_url: 'medium' }}{% else %}{{ link_collection.products.first | img_url: 'medium' }}{% endif %}">
+            <a href="{{ link.url }}">
+              <div class="sub-category">
+                <span class="grid-link__image grid-link__image--collection">
+                  <span class="grid-link__image-centered">
+                    {% if link_collection.image %}
+                    <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                    {% else %}
+                    <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                    {% endif %}
+                  </span>
+                </span>
+                <p>{{ link.title }}</p>
+                <div class="category-badge">
+                  <span class="product-count">{{ link_collection.products_count | default: 0 }} products</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
 </div>
 
 
