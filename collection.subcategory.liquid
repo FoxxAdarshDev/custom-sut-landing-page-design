@@ -747,6 +747,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
 
   .sidebar-preview {
     padding: 15px;
+    display: block !important;
   }
 
   .count-display {
@@ -788,48 +789,56 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
     const previewLink = document.getElementById('preview-link');
     const previewProductCount = document.getElementById('preview-product-count');
 
-    // Show first category by default
-    const firstCategory = document.querySelector('.sidebarmenu_list');
-    if (firstCategory) {
-      const title = firstCategory.getAttribute('data-preview-title');
-      const url = firstCategory.getAttribute('data-preview-url');
-      const count = firstCategory.getAttribute('data-preview-count');
-      const image = firstCategory.getAttribute('data-preview-image');
+    // Check if elements exist before proceeding
+    if (previewContainer && previewLink && previewProductCount) {
+      // Show first category by default
+      const firstCategory = document.querySelector('.sidebarmenu_list');
+      if (firstCategory) {
+        const title = firstCategory.getAttribute('data-preview-title') || 'No title';
+        const url = firstCategory.getAttribute('data-preview-url') || '#';
+        const count = firstCategory.getAttribute('data-preview-count') || '0';
+        const image = firstCategory.getAttribute('data-preview-image') || 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184';
 
-      // Update preview content with first category
-      previewContainer.innerHTML = `
-        <div class="preview-content">
-          <img src="${image}" alt="${title}" class="preview-image">
-          <div class="preview-title">${title}</div>
-        </div>
-      `;
+        // Update preview content with first category
+        if (title !== 'null' && url !== 'null') {
+          previewContainer.innerHTML = `
+            <div class="preview-content">
+              <img src="${image}" alt="${title}" class="preview-image" onerror="this.src='https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184'">
+              <div class="preview-title">${title}</div>
+            </div>
+          `;
 
-      // Update preview actions
-      previewLink.href = url;
-      previewProductCount.textContent = `${count} products`;
-    }
+          // Update preview actions
+          previewLink.href = url;
+          previewProductCount.textContent = `${count} products`;
+        }
+      }
 
-    // Add click listeners to category cards for mobile/tablet
-    document.querySelectorAll('.sidebarmenu_list').forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        const title = this.getAttribute('data-preview-title');
-        const url = this.getAttribute('data-preview-url');
-        const count = this.getAttribute('data-preview-count');
-        const image = this.getAttribute('data-preview-image');
+      // Add hover listeners to category cards
+      document.querySelectorAll('.sidebarmenu_list').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          const title = this.getAttribute('data-preview-title') || 'No title';
+          const url = this.getAttribute('data-preview-url') || '#';
+          const count = this.getAttribute('data-preview-count') || '0';
+          const image = this.getAttribute('data-preview-image') || 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184';
 
-        // Update preview content
-        previewContainer.innerHTML = `
-          <div class="preview-content">
-            <img src="${image}" alt="${title}" class="preview-image">
-            <div class="preview-title">${title}</div>
-          </div>
-        `;
+          // Only update if we have valid data (not null)
+          if (title !== 'null' && url !== 'null' && title !== '' && url !== '') {
+            // Update preview content
+            previewContainer.innerHTML = `
+              <div class="preview-content">
+                <img src="${image}" alt="${title}" class="preview-image" onerror="this.src='https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184'">
+                <div class="preview-title">${title}</div>
+              </div>
+            `;
 
-        // Update preview actions
-        previewLink.href = url;
-        previewProductCount.textContent = `${count} products`;
+            // Update preview actions
+            previewLink.href = url;
+            previewProductCount.textContent = `${count} products`;
+          }
+        });
       });
-    });
+    }
   });
 </script>
 
@@ -851,7 +860,7 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
 <!-- Main layout with sidebar and content -->
 <div class="subcategory-layout-container">
   <!-- Left Sidebar Preview -->
-  <div class="sidebar-preview">
+  <div class="sidebar-preview" style="display: block;">
     <div class="sidebar-header">
       <h3>Quick Preview</h3>
       <span class="preview-hint">Hover cards to preview</span>
@@ -879,19 +888,32 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
 
         {% for link in linklists[side_links1].links %}
           {% assign link_collection = link.object %}
+          {% assign collection_image = '' %}
+          {% assign fallback_image = 'https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184' %}
+          
+          {% if link_collection.image %}
+            {% assign collection_image = link_collection.image | img_url: 'medium' %}
+          {% elsif link_collection.products.first.featured_image %}
+            {% assign collection_image = link_collection.products.first.featured_image | img_url: 'medium' %}
+          {% else %}
+            {% assign collection_image = fallback_image %}
+          {% endif %}
+
           <li class="grid__item small--one-half medium--one-third large--one-quarter text-center sidebarmenu_list"
-              data-preview-title="{{ link.title | escape }}"
-              data-preview-url="{{ link.url }}"
+              data-preview-title="{{ link.title | escape | default: 'Category' }}"
+              data-preview-url="{{ link.url | default: '#' }}"
               data-preview-count="{{ link_collection.products_count | default: 0 }}"
-              data-preview-image="{% if link_collection.image %}{{ link_collection.image | img_url: 'medium' }}{% else %}{{ link_collection.products.first | img_url: 'medium' }}{% endif %}">
+              data-preview-image="{{ collection_image }}">
             <a href="{{ link.url }}">
               <div class="sub-category">
                 <span class="grid-link__image grid-link__image--collection">
                   <span class="grid-link__image-centered">
                     {% if link_collection.image %}
-                    <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                    <img src="{{ link_collection.image | img_url: 'master' }}" alt="{{ link_collection.title | escape | default: 'Category Image' }}" display="block" />
+                    {% elsif link_collection.products.first.featured_image %}
+                    <img src="{{ link_collection.products.first.featured_image | img_url: 'master' }}" alt="{{ link_collection.title | escape | default: 'Category Image' }}" display="block" />
                     {% else %}
-                    <img src="{{ link_collection.products.first | img_url: 'master' }}" alt="{{ link_collection.title | escape }}" display="block" />
+                    <img src="{{ fallback_image }}" alt="{{ link.title | escape | default: 'Category Image' }}" display="block" />
                     {% endif %}
                   </span>
                 </span>
