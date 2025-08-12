@@ -743,11 +743,15 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
   .subcategory-layout-container {
     padding: 0 10px;
     gap: 15px;
+    flex-direction: column !important;
   }
 
   .sidebar-preview {
     padding: 15px;
     display: block !important;
+    width: 100% !important;
+    position: static !important;
+    margin-bottom: 20px;
   }
 
   .count-display {
@@ -765,6 +769,22 @@ ul.sidebar_menu{display:grid;gap:20px;padding:0}@media (min-width: 768px){ul.sid
 
   ul.sidebar_menu {
     grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+
+  .grid__item {
+    width: 100% !important;
+    flex-basis: 100% !important;
+    margin: 0 !important;
+  }
+
+  .sub-category {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .main-content-area {
+    width: 100%;
   }
 }
 </style>
