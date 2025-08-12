@@ -890,7 +890,7 @@
     }
 
     .sut-stats-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
+      grid-template-columns: 1fr !important;
       gap: 25px;
       max-width: 100%;
     }
@@ -972,6 +972,22 @@
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 30px;
     }
+  }
+
+  /* Mobile devices (up to 768px) - Force single column */
+  @media (max-width: 768px) {
+    .sut-stats-grid {
+      grid-template-columns: 1fr !important;
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .sut-stat-item {
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+    }
+  }
 
     /* Tablet Responsive (1024px and below) */
     .single_use_technology_section {
@@ -1027,6 +1043,44 @@
 
     .sut-container {
       padding: 0 10px;
+    }
+  }
+
+  /* Extra small devices (up to 480px) */
+  @media (max-width: 480px) {
+    .sut-stats-grid {
+      grid-template-columns: 1fr !important;
+      gap: 25px;
+      max-width: 100%;
+    }
+
+    .sut-stat-item {
+      margin-bottom: 20px;
+      max-width: 280px;
+      padding: 0 15px;
+    }
+
+    .sut-stat-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 15px;
+    }
+
+    .sut-stat-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .sut-stat-number {
+      font-size: 28px !important;
+    }
+
+    .sut-stat-label {
+      font-size: 15px !important;
+    }
+
+    .sut-stat-description {
+      font-size: 13px !important;
     }
   }
 
