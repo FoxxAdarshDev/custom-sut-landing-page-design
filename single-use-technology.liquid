@@ -978,14 +978,16 @@
   @media (max-width: 768px) {
     .sut-stats-grid {
       grid-template-columns: 1fr !important;
-      gap: 30px;
+      gap: 30px !important;
       justify-items: center;
+      display: grid !important;
     }
 
     .sut-stat-item {
       max-width: 320px;
       width: 100%;
       text-align: center;
+      margin: 0 auto;
     }
   }
 
@@ -2447,8 +2449,17 @@
 
           @media (max-width: 768px) {
             .sut-stats-grid {
-              grid-template-columns: repeat({{ block.settings.stats_per_row_mobile | default: 1 }}, 1fr) !important;
-              gap: 40px;
+              grid-template-columns: 1fr !important;
+              gap: 40px !important;
+              display: grid !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .sut-stats-grid {
+              grid-template-columns: 1fr !important;
+              gap: 30px !important;
+              display: grid !important;
             }
           }
         </style>
