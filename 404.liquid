@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found - {{ shop.name }}</title>
     <style>
-        * {
+        .error-404-page * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        .error-404-page {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
@@ -20,14 +20,14 @@
             flex-direction: column;
         }
 
-        .container {
+        .error-404-page .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             flex: 1;
         }
 
-        .header-section {
+        .error-404-page .header-section {
             text-align: center;
             padding: 40px 0;
             background: white;
@@ -36,7 +36,7 @@
             margin-bottom: 40px;
         }
 
-        .error-code {
+        .error-404-page .error-code {
             font-size: 120px;
             font-weight: bold;
             color: #3378c2;
@@ -44,20 +44,20 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .error-title {
+        .error-404-page .error-title {
             font-size: 32px;
             color: #333;
             margin-bottom: 15px;
         }
 
-        .error-message {
+        .error-404-page .error-message {
             font-size: 18px;
             color: #666;
             margin-bottom: 30px;
             line-height: 1.6;
         }
 
-        .search-section {
+        .error-404-page .search-section {
             background: white;
             padding: 30px;
             border-radius: 15px;
@@ -65,13 +65,13 @@
             margin-bottom: 40px;
         }
 
-        .search-box {
+        .error-404-page .search-box {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .search-input {
+        .error-404-page .search-input {
             flex: 1;
             padding: 15px;
             border: 2px solid #e0e0e0;
@@ -80,12 +80,12 @@
             transition: border-color 0.3s;
         }
 
-        .search-input:focus {
+        .error-404-page .search-input:focus {
             outline: none;
             border-color: #3378c2;
         }
 
-        .search-btn {
+        .error-404-page .search-btn {
             padding: 15px 30px;
             background: #3378c2;
             color: white;
@@ -96,11 +96,11 @@
             transition: background 0.3s;
         }
 
-        .search-btn:hover {
+        .error-404-page .search-btn:hover {
             background: #2a5f9e;
         }
 
-        .suggestions-section {
+        .error-404-page .suggestions-section {
             background: white;
             padding: 30px;
             border-radius: 15px;
@@ -108,21 +108,21 @@
             margin-bottom: 40px;
         }
 
-        .section-title {
+        .error-404-page .section-title {
             font-size: 24px;
             color: #333;
             margin-bottom: 25px;
             text-align: center;
         }
 
-        .products-grid {
+        .error-404-page .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
-        .product-card {
+        .error-404-page .product-card {
             border: 1px solid #e0e0e0;
             border-radius: 10px;
             overflow: hidden;
@@ -130,22 +130,22 @@
             background: white;
         }
 
-        .product-card:hover {
+        .error-404-page .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        .product-image {
+        .error-404-page .product-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
 
-        .product-info {
+        .error-404-page .product-info {
             padding: 15px;
         }
 
-        .product-title {
+        .error-404-page .product-title {
             font-size: 16px;
             font-weight: bold;
             color: #333;
@@ -153,20 +153,20 @@
             line-height: 1.4;
         }
 
-        .product-price {
+        .error-404-page .product-price {
             font-size: 18px;
             color: #3378c2;
             font-weight: bold;
         }
 
-        .quick-links {
+        .error-404-page .quick-links {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 30px;
         }
 
-        .quick-link {
+        .error-404-page .quick-link {
             display: block;
             padding: 15px 20px;
             background: #f8f9fa;
@@ -178,13 +178,13 @@
             border: 2px solid transparent;
         }
 
-        .quick-link:hover {
+        .error-404-page .quick-link:hover {
             background: #3378c2;
             color: white;
             border-color: #3378c2;
         }
 
-        .help-section {
+        .error-404-page .help-section {
             background: #3378c2;
             color: white;
             padding: 30px;
@@ -192,18 +192,18 @@
             text-align: center;
         }
 
-        .help-title {
+        .error-404-page .help-title {
             font-size: 24px;
             margin-bottom: 15px;
         }
 
-        .help-text {
+        .error-404-page .help-text {
             font-size: 16px;
             margin-bottom: 20px;
             opacity: 0.9;
         }
 
-        .contact-btn {
+        .error-404-page .contact-btn {
             display: inline-block;
             padding: 12px 25px;
             background: white;
@@ -214,51 +214,51 @@
             transition: transform 0.3s;
         }
 
-        .contact-btn:hover {
+        .error-404-page .contact-btn:hover {
             transform: scale(1.05);
         }
 
-        .loading {
+        .error-404-page .loading {
             text-align: center;
             padding: 40px;
             color: #666;
         }
 
-        .spinner {
+        .error-404-page .spinner {
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
             border-top: 4px solid #3378c2;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: error-404-spin 1s linear infinite;
             margin: 0 auto 20px;
         }
 
-        @keyframes spin {
+        @keyframes error-404-spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
-            .error-code {
+            .error-404-page .error-code {
                 font-size: 80px;
             }
             
-            .error-title {
+            .error-404-page .error-title {
                 font-size: 24px;
             }
             
-            .search-box {
+            .error-404-page .search-box {
                 flex-direction: column;
             }
             
-            .products-grid {
+            .error-404-page .products-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
     </style>
 </head>
-<body>
+<body class="error-404-page">
     <div class="container">
         <div class="header-section">
             <div class="error-code">404</div>
