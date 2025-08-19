@@ -84,50 +84,36 @@ async function fetchVariantBySKU(sku) {
     }
 }
 
-// Function to update a product variant in Shopify
+// Function to update a product variant in Shopify using REST API
 async function updateShopifyVariant(variantId, variantPrice, compareAtVariantPrice, retries = 3) {
-    const mutation = `
-        mutation ($input: ProductVariantInput!) {
-            productVariantUpdate(input: $input) {
-                productVariant {
-                    id
-                    price
-                    compareAtPrice
-                }
-                userErrors {
-                    field
-                    message
-                }
-            }
-        }
-    `;
-
-    const variables = {
-        input: {
-            id: variantId,
+    // Extract numeric ID from GraphQL ID format
+    const numericVariantId = variantId.split('/').pop();
+    
+    const variantData = {
+        variant: {
+            id: numericVariantId,
             price: variantPrice.toString(),
-            compareAtPrice: compareAtVariantPrice ? compareAtVariantPrice.toString() : null
+            compare_at_price: compareAtVariantPrice ? compareAtVariantPrice.toString() : null
         }
     };
 
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            console.log(`Attempt ${attempt} - Updating variant with ID: ${variantId}`);
-            console.log(`Payload: ${JSON.stringify(variables)}`);
+            console.log(`Attempt ${attempt} - Updating variant with ID: ${variantId} (numeric: ${numericVariantId})`);
+            console.log(`Payload: ${JSON.stringify(variantData)}`);
 
-            const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
-                method: 'POST',
+            const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/variants/${numericVariantId}.json`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Shopify-Access-Token': shopifyAccessToken,
                 },
-                body: JSON.stringify({ query: mutation, variables }),
+                body: JSON.stringify(variantData),
             });
 
-            const { data, errors } = await response.json();
-
-            if (errors) {
-                console.error('GraphQL errors:', errors);
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`HTTP Error ${response.status}: ${errorText}`);
                 if (attempt < retries) {
                     console.log('Retrying...');
                     await new Promise((resolve) => setTimeout(resolve, 2000 * attempt)); // Exponential backoff
@@ -135,12 +121,17 @@ async function updateShopifyVariant(variantId, variantPrice, compareAtVariantPri
                 continue;
             }
 
-            const productVariant = data.productVariantUpdate.productVariant;
-            console.log(`Successfully updated variant ${variantId}. New Price: ${productVariant.price}, Compare At Price: ${productVariant.compareAtPrice}`);
+            const data = await response.json();
+            const variant = data.variant;
+            console.log(`Successfully updated variant ${variantId}. New Price: ${variant.price}, Compare At Price: ${variant.compare_at_price}`);
 
             return;
         } catch (error) {
             console.error(`Error during attempt ${attempt} updating variant ${variantId}:`, error);
+            if (attempt < retries) {
+                console.log('Retrying...');
+                await new Promise((resolve) => setTimeout(resolve, 2000 * attempt)); // Exponential backoff
+            }
         }
     }
 }
