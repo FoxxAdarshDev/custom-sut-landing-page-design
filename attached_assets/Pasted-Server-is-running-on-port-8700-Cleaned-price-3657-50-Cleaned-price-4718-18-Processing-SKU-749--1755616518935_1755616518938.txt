@@ -1,0 +1,55 @@
+Server is running on port 8700
+Cleaned price: 3657.50
+Cleaned price: 4718.18
+Processing SKU: 749-2115-FLS, Variant Price: 3657.50, Compare At Variant Price: 4718.18
+Fetching variant for SKU: 749-2115-FLS
+SKU found on store: 749-2115-FLS
+Current Store Prices -> Price: 2194.50, Compare At Price: 4718.18
+Attempt 1 - Updating variant with ID: gid://shopify/ProductVariant/46054280560809
+Payload: {"input":{"id":"gid://shopify/ProductVariant/46054280560809","price":"3657.50","compareAtPrice":"4718.18"}}
+Cleaned price: 3657.50
+Cleaned price: 4718.18
+Processing SKU: 749-2115-FLS, Variant Price: 3657.50, Compare At Variant Price: 4718.18
+Fetching variant for SKU: 749-2115-FLS
+GraphQL errors: [
+  {
+    message: "Field 'productVariantUpdate' doesn't exist on type 'Mutation'",
+    locations: [ [Object] ],
+    path: [ 'mutation', 'productVariantUpdate' ],
+    extensions: {
+      code: 'undefinedField',
+      typeName: 'Mutation',
+      fieldName: 'productVariantUpdate'
+    }
+  },
+  {
+    message: 'Variable $input is declared by anonymous mutation but not used',
+    locations: [ [Object] ],
+    path: [ 'mutation' ],
+    extensions: { code: 'variableNotUsed', variableName: 'input' }
+  }
+]
+Retrying...
+SKU found on store: 749-2115-FLS
+Current Store Prices -> Price: 2194.50, Compare At Price: 4718.18
+Attempt 1 - Updating variant with ID: gid://shopify/ProductVariant/46054280560809
+Payload: {"input":{"id":"gid://shopify/ProductVariant/46054280560809","price":"3657.50","compareAtPrice":"4718.18"}}
+GraphQL errors: [
+  {
+    message: "Field 'productVariantUpdate' doesn't exist on type 'Mutation'",
+    locations: [ [Object] ],
+    path: [ 'mutation', 'productVariantUpdate' ],
+    extensions: {
+      code: 'undefinedField',
+      typeName: 'Mutation',
+      fieldName: 'productVariantUpdate'
+    }
+  },
+  {
+    message: 'Variable $input is declared by anonymous mutation but not used',
+    locations: [ [Object] ],
+    path: [ 'mutation' ],
+    extensions: { code: 'variableNotUsed', variableName: 'input' }
+  }
+]
+Retrying...
