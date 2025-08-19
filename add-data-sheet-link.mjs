@@ -198,6 +198,91 @@ async function appendToMissingSKU(sku) {
     }
 }
 
+// Function to update videos tab in product description
+async function updateVideosTab(productId, currentDescriptionHtml, youtubeVideoId, sku) {
+    // Check if the videos tab exists
+    if (!currentDescriptionHtml.includes('id="videos"')) {
+        console.log(`Product ${sku} does not have a videos tab - skipping`);
+        return;
+    }
+
+    // Extract the videos tab content
+    const videosTabRegex = /<div[^>]*id="videos"[^>]*>(.*?)<\/div>/s;
+    const videosTabMatch = currentDescriptionHtml.match(videosTabRegex);
+    
+    if (!videosTabMatch) {
+        console.log(`Could not find videos tab content for SKU: ${sku}`);
+        return;
+    }
+
+    const videosTabContent = videosTabMatch[1];
+    
+    // Remove the "To be loaded" paragraph
+    const updatedContent = videosTabContent.replace(/<p>To be loaded<\/p>\s*/i, '');
+    
+    // Create the YouTube iframe
+    const youtubeIframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeVideoId}?si=WtIKUvuty7sUorKj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+    
+    // Add the iframe at the beginning of the content
+    const finalContent = youtubeIframe + '\n' + updatedContent;
+    
+    // Replace the entire videos tab in the description
+    const newDescriptionHtml = currentDescriptionHtml.replace(videosTabRegex, `<div class="tab-content" id="videos">${finalContent}</div>`);
+
+    // Check if the content was actually changed
+    if (currentDescriptionHtml === newDescriptionHtml) {
+        console.log(`No changes needed for SKU: ${sku} - videos tab already up to date`);
+        return;
+    }
+
+    const mutation = `
+        mutation productUpdate($input: ProductInput!) {
+            productUpdate(input: $input) {
+                product {
+                    id
+                    descriptionHtml
+                }
+                userErrors {
+                    field
+                    message
+                }
+            }
+        }
+    `;
+
+    const variables = {
+        input: {
+            id: productId,
+            descriptionHtml: newDescriptionHtml,
+        }
+    };
+
+    try {
+        console.log(`Updating videos tab for SKU: ${sku}`);
+        console.log(`Adding YouTube video ID: ${youtubeVideoId}`);
+
+        const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAccessToken,
+            },
+            body: JSON.stringify({ query: mutation, variables }),
+        });
+
+        const { data, errors } = await response.json();
+
+        if (errors) {
+            console.error('GraphQL errors:', errors);
+            return;
+        }
+
+        console.log(`Successfully updated videos tab for SKU: ${sku}`);
+    } catch (error) {
+        console.error('Error updating product description:', error);
+    }
+}
+
 // Main function to update datasheet links from Google Sheet
 async function updateDatasheetLinksFromSheet(range) {
     const rows = await readGoogleSheet(range);
@@ -216,6 +301,7 @@ async function updateDatasheetLinksFromSheet(range) {
 
     const skuIndex = headers.indexOf('SKU');
     const pdfLinkIndex = headers.indexOf('Pdf Link');
+    const videoIdIndex = headers.indexOf('Video ID'); // New column for YouTube video IDs
 
     if (skuIndex === -1 || pdfLinkIndex === -1) {
         console.error('Required columns (SKU, Pdf Link) not found in Google Sheet');
@@ -228,13 +314,14 @@ async function updateDatasheetLinksFromSheet(range) {
     for (const row of data) {
         const sku = row[skuIndex];
         const pdfLink = row[pdfLinkIndex];
+        const videoId = videoIdIndex !== -1 ? row[videoIdIndex] : null;
 
         if (!sku || !pdfLink) {
             console.warn('Skipping row: Missing SKU or PDF link.');
             continue;
         }
 
-        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}`);
+        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}${videoId ? `, Video ID: ${videoId}` : ''}`);
 
         const variant = await fetchVariantBySKU(sku);
         if (!variant) {
@@ -245,21 +332,32 @@ async function updateDatasheetLinksFromSheet(range) {
         }
 
         console.log(`SKU found on store: ${sku}`);
+        
+        // Update datasheet link
         await updateDatasheetLink(variant.product.id, variant.product.descriptionHtml, pdfLink, sku);
+        
+        // Update videos tab if video ID is provided
+        if (videoId) {
+            // Fetch updated product description after datasheet update
+            const updatedVariant = await fetchVariantBySKU(sku);
+            if (updatedVariant) {
+                await updateVideosTab(updatedVariant.product.id, updatedVariant.product.descriptionHtml, videoId, sku);
+            }
+        }
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Avoid hitting rate limits
     }
 }
 
-// Endpoint to trigger the datasheet link update process
+// Endpoint to trigger the datasheet link and videos update process
 app.get('/update-datasheet-links', async (req, res) => {
-    const range = 'Sheet1!A:B'; // Adjust the range as per your sheet (assuming A is SKU and B is PDF Link)
+    const range = 'Sheet1!A:C'; // Adjust the range as per your sheet (A=SKU, B=PDF Link, C=Video ID)
     try {
         await updateDatasheetLinksFromSheet(range);
-        res.send('Datasheet links updated successfully');
+        res.send('Datasheet links and videos updated successfully');
     } catch (error) {
-        console.error('Error while updating datasheet links:', error);
-        res.status(500).send('Error updating datasheet links');
+        console.error('Error while updating datasheet links and videos:', error);
+        res.status(500).send('Error updating datasheet links and videos');
     }
 });
 
