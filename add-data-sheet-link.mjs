@@ -199,7 +199,7 @@ async function appendToMissingSKU(sku) {
 }
 
 // Function to update videos tab in product description
-async function updateVideosTab(productId, currentDescriptionHtml, youtubeVideoId, sku) {
+async function updateVideosTab(productId, currentDescriptionHtml, iframeHtml, sku) {
     // Check if the videos tab exists
     if (!currentDescriptionHtml.includes('id="videos"')) {
         console.log(`Product ${sku} does not have a videos tab - skipping`);
@@ -220,11 +220,8 @@ async function updateVideosTab(productId, currentDescriptionHtml, youtubeVideoId
     // Remove the "To be loaded" paragraph
     const updatedContent = videosTabContent.replace(/<p>To be loaded<\/p>\s*/i, '');
     
-    // Create the YouTube iframe
-    const youtubeIframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeVideoId}?si=WtIKUvuty7sUorKj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
-    
-    // Add the iframe at the beginning of the content
-    const finalContent = youtubeIframe + '\n' + updatedContent;
+    // Use the provided iframe HTML directly
+    const finalContent = iframeHtml + '\n' + updatedContent;
     
     // Replace the entire videos tab in the description
     const newDescriptionHtml = currentDescriptionHtml.replace(videosTabRegex, `<div class="tab-content" id="videos">${finalContent}</div>`);
@@ -259,7 +256,7 @@ async function updateVideosTab(productId, currentDescriptionHtml, youtubeVideoId
 
     try {
         console.log(`Updating videos tab for SKU: ${sku}`);
-        console.log(`Adding YouTube video ID: ${youtubeVideoId}`);
+        console.log(`Adding iframe HTML: ${iframeHtml.substring(0, 100)}...`);
 
         const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
             method: 'POST',
@@ -301,7 +298,7 @@ async function updateDatasheetLinksFromSheet(range) {
 
     const skuIndex = headers.indexOf('SKU');
     const pdfLinkIndex = headers.indexOf('Pdf Link');
-    const videoIdIndex = headers.indexOf('Video ID'); // New column for YouTube video IDs
+    const iframeHtmlIndex = headers.indexOf('Iframe HTML'); // Column for full iframe HTML
 
     if (skuIndex === -1 || pdfLinkIndex === -1) {
         console.error('Required columns (SKU, Pdf Link) not found in Google Sheet');
@@ -314,14 +311,14 @@ async function updateDatasheetLinksFromSheet(range) {
     for (const row of data) {
         const sku = row[skuIndex];
         const pdfLink = row[pdfLinkIndex];
-        const videoId = videoIdIndex !== -1 ? row[videoIdIndex] : null;
+        const iframeHtml = iframeHtmlIndex !== -1 ? row[iframeHtmlIndex] : null;
 
         if (!sku || !pdfLink) {
             console.warn('Skipping row: Missing SKU or PDF link.');
             continue;
         }
 
-        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}${videoId ? `, Video ID: ${videoId}` : ''}`);
+        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}${iframeHtml ? `, Iframe HTML provided` : ''}`);
 
         const variant = await fetchVariantBySKU(sku);
         if (!variant) {
@@ -336,12 +333,12 @@ async function updateDatasheetLinksFromSheet(range) {
         // Update datasheet link
         await updateDatasheetLink(variant.product.id, variant.product.descriptionHtml, pdfLink, sku);
         
-        // Update videos tab if video ID is provided
-        if (videoId) {
+        // Update videos tab if iframe HTML is provided
+        if (iframeHtml && iframeHtml.trim()) {
             // Fetch updated product description after datasheet update
             const updatedVariant = await fetchVariantBySKU(sku);
             if (updatedVariant) {
-                await updateVideosTab(updatedVariant.product.id, updatedVariant.product.descriptionHtml, videoId, sku);
+                await updateVideosTab(updatedVariant.product.id, updatedVariant.product.descriptionHtml, iframeHtml, sku);
             }
         }
 
@@ -351,7 +348,7 @@ async function updateDatasheetLinksFromSheet(range) {
 
 // Endpoint to trigger the datasheet link and videos update process
 app.get('/update-datasheet-links', async (req, res) => {
-    const range = 'Sheet1!A:C'; // Adjust the range as per your sheet (A=SKU, B=PDF Link, C=Video ID)
+    const range = 'Sheet1!A:C'; // Adjust the range as per your sheet (A=SKU, B=PDF Link, C=Iframe HTML)
     try {
         await updateDatasheetLinksFromSheet(range);
         res.send('Datasheet links and videos updated successfully');
