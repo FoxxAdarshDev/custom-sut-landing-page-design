@@ -79,105 +79,6 @@ async function fetchVariantBySKU(sku) {
     }
 }
 
-// Function to update datasheet link in product description
-async function updateDatasheetLink(productId, currentDescriptionHtml, newPdfLink, sku) {
-    // Check if the documentation tab exists
-    if (!currentDescriptionHtml.includes('id="documentation"')) {
-        console.log(`Product ${sku} does not have a documentation tab - skipping`);
-        return;
-    }
-
-    // Extract the documentation tab content
-    const docTabRegex = /<div[^>]*id="documentation"[^>]*>(.*?)<\/div>/s;
-    const docTabMatch = currentDescriptionHtml.match(docTabRegex);
-    
-    if (!docTabMatch) {
-        console.log(`Could not find documentation tab content for SKU: ${sku}`);
-        return;
-    }
-
-    const docTabContent = docTabMatch[1];
-    
-    // Find the first <a> tag in the documentation tab
-    const firstLinkRegex = /<a\s+[^>]*href="[^"]*"[^>]*>.*?<\/a>/i;
-    const firstLinkMatch = docTabContent.match(firstLinkRegex);
-    
-    if (!firstLinkMatch) {
-        console.log(`No datasheet link found in documentation tab for SKU: ${sku}`);
-        return;
-    }
-
-    const oldLink = firstLinkMatch[0];
-    
-    // Extract the link text from the old link
-    const linkTextRegex = />([^<]+)</;
-    const linkTextMatch = oldLink.match(linkTextRegex);
-    const linkText = linkTextMatch ? linkTextMatch[1] : 'Product Datasheet';
-    
-    // Create new link with the same text but new URL
-    const newLink = `<a href="${newPdfLink}" target="_blank">${linkText}</a>`;
-    
-    // Replace the old link with the new one in the documentation tab
-    const updatedDocTabContent = docTabContent.replace(firstLinkRegex, newLink);
-    
-    // Replace the entire documentation tab in the description
-    const newDescriptionHtml = currentDescriptionHtml.replace(docTabRegex, `<div class="tab-content" id="documentation">${updatedDocTabContent}</div>`);
-
-    // Check if the link was actually changed
-    if (currentDescriptionHtml === newDescriptionHtml) {
-        console.log(`No changes needed for SKU: ${sku} - link already up to date`);
-        return;
-    }
-
-    const mutation = `
-        mutation productUpdate($input: ProductInput!) {
-            productUpdate(input: $input) {
-                product {
-                    id
-                    descriptionHtml
-                }
-                userErrors {
-                    field
-                    message
-                }
-            }
-        }
-    `;
-
-    const variables = {
-        input: {
-            id: productId,
-            descriptionHtml: newDescriptionHtml,
-        }
-    };
-
-    try {
-        console.log(`Updating datasheet link for SKU: ${sku}`);
-        console.log(`Old link: ${oldLink}`);
-        console.log(`New link: ${newLink}`);
-
-        const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Shopify-Access-Token': shopifyAccessToken,
-            },
-            body: JSON.stringify({ query: mutation, variables }),
-        });
-
-        const { data, errors } = await response.json();
-
-        if (errors) {
-            console.error('GraphQL errors:', errors);
-            return;
-        }
-
-        console.log(`Successfully updated datasheet link for SKU: ${sku}`);
-    } catch (error) {
-        console.error('Error updating product description:', error);
-    }
-}
-
 // Function to append missing SKUs to the Google Sheet
 async function appendToMissingSKU(sku) {
     const range = 'Missing SKU on Website!A:A'; // Adjust the range where you want to add missing SKUs
@@ -220,7 +121,7 @@ async function updateVideosTab(productId, currentDescriptionHtml, iframeHtml, sk
     // Remove the "To be loaded" paragraph
     const updatedContent = videosTabContent.replace(/<p>To be loaded<\/p>\s*/i, '');
     
-    // Use the provided iframe HTML directly
+    // Use the provided iframe HTML directly and add the remaining content
     const finalContent = iframeHtml + '\n' + updatedContent;
     
     // Replace the entire videos tab in the description
@@ -280,8 +181,8 @@ async function updateVideosTab(productId, currentDescriptionHtml, iframeHtml, sk
     }
 }
 
-// Main function to update datasheet links from Google Sheet
-async function updateDatasheetLinksFromSheet(range) {
+// Main function to update videos tabs from Google Sheet
+async function updateVideosFromSheet(range) {
     const rows = await readGoogleSheet(range);
 
     if (!rows.length) {
@@ -297,11 +198,10 @@ async function updateDatasheetLinksFromSheet(range) {
     }
 
     const skuIndex = headers.indexOf('SKU');
-    const pdfLinkIndex = headers.indexOf('Pdf Link');
-    const iframeHtmlIndex = headers.indexOf('Iframe HTML'); // Column for full iframe HTML
+    const iframeHtmlIndex = headers.indexOf('Iframe Link');
 
-    if (skuIndex === -1 || pdfLinkIndex === -1) {
-        console.error('Required columns (SKU, Pdf Link) not found in Google Sheet');
+    if (skuIndex === -1 || iframeHtmlIndex === -1) {
+        console.error('Required columns (SKU, Iframe Link) not found in Google Sheet');
         console.log('Available headers:', headers);
         return;
     }
@@ -310,15 +210,14 @@ async function updateDatasheetLinksFromSheet(range) {
 
     for (const row of data) {
         const sku = row[skuIndex];
-        const pdfLink = row[pdfLinkIndex];
-        const iframeHtml = iframeHtmlIndex !== -1 ? row[iframeHtmlIndex] : null;
+        const iframeHtml = row[iframeHtmlIndex];
 
-        if (!sku || !pdfLink) {
-            console.warn('Skipping row: Missing SKU or PDF link.');
+        if (!sku || !iframeHtml) {
+            console.warn('Skipping row: Missing SKU or Iframe Link.');
             continue;
         }
 
-        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}${iframeHtml ? `, Iframe HTML provided` : ''}`);
+        console.log(`Processing SKU: ${sku}, Iframe HTML provided`);
 
         const variant = await fetchVariantBySKU(sku);
         if (!variant) {
@@ -330,31 +229,22 @@ async function updateDatasheetLinksFromSheet(range) {
 
         console.log(`SKU found on store: ${sku}`);
         
-        // Update datasheet link
-        await updateDatasheetLink(variant.product.id, variant.product.descriptionHtml, pdfLink, sku);
-        
-        // Update videos tab if iframe HTML is provided
-        if (iframeHtml && iframeHtml.trim()) {
-            // Fetch updated product description after datasheet update
-            const updatedVariant = await fetchVariantBySKU(sku);
-            if (updatedVariant) {
-                await updateVideosTab(updatedVariant.product.id, updatedVariant.product.descriptionHtml, iframeHtml, sku);
-            }
-        }
+        // Update videos tab with iframe HTML
+        await updateVideosTab(variant.product.id, variant.product.descriptionHtml, iframeHtml, sku);
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Avoid hitting rate limits
     }
 }
 
-// Endpoint to trigger the datasheet link and videos update process
-app.get('/update-datasheet-links', async (req, res) => {
-    const range = 'Sheet1!A:C'; // Adjust the range as per your sheet (A=SKU, B=PDF Link, C=Iframe HTML)
+// Endpoint to trigger the videos update process
+app.get('/update-videos', async (req, res) => {
+    const range = 'Sheet1!A:B'; // A=SKU, B=Iframe Link
     try {
-        await updateDatasheetLinksFromSheet(range);
-        res.send('Datasheet links and videos updated successfully');
+        await updateVideosFromSheet(range);
+        res.send('Videos updated successfully');
     } catch (error) {
-        console.error('Error while updating datasheet links and videos:', error);
-        res.status(500).send('Error updating datasheet links and videos');
+        console.error('Error while updating videos:', error);
+        res.status(500).send('Error updating videos');
     }
 });
 
@@ -362,5 +252,5 @@ app.get('/update-datasheet-links', async (req, res) => {
 const PORT = process.env.PORT || 8700;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-    console.log(`Visit http://localhost:${PORT}/update-datasheet-links to start the update process`);
+    console.log(`Visit http://localhost:${PORT}/update-videos to start the update process`);
 });
