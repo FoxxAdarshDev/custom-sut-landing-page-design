@@ -87,7 +87,7 @@ async function fetchVariantBySKU(sku) {
 // Function to update a product variant in Shopify
 async function updateShopifyVariant(variantId, variantPrice, compareAtVariantPrice, retries = 3) {
     const mutation = `
-        mutation($input: ProductVariantInput!) {
+        mutation productVariantUpdate($input: ProductVariantInput!) {
             productVariantUpdate(input: $input) {
                 productVariant {
                     id
