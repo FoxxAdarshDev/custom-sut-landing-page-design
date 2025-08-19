@@ -1,3 +1,4 @@
+
 import express from 'express';
 import fetch from 'node-fetch';
 import cors from 'cors';
@@ -78,11 +79,53 @@ async function fetchVariantBySKU(sku) {
     }
 }
 
-// Function to update a product description in Shopify
-async function updateShopifyDescription(productId, currentDescriptionHtml, amazonLink) {
-    // Check if the current description already contains the Amazon link
-    if (currentDescriptionHtml.includes(amazonLink)) {
-        console.log(`The Amazon link has already been added to product ID: ${productId}`);
+// Function to update datasheet link in product description
+async function updateDatasheetLink(productId, currentDescriptionHtml, newPdfLink, sku) {
+    // Check if the documentation tab exists
+    if (!currentDescriptionHtml.includes('id="documentation"')) {
+        console.log(`Product ${sku} does not have a documentation tab - skipping`);
+        return;
+    }
+
+    // Extract the documentation tab content
+    const docTabRegex = /<div[^>]*id="documentation"[^>]*>(.*?)<\/div>/s;
+    const docTabMatch = currentDescriptionHtml.match(docTabRegex);
+    
+    if (!docTabMatch) {
+        console.log(`Could not find documentation tab content for SKU: ${sku}`);
+        return;
+    }
+
+    const docTabContent = docTabMatch[1];
+    
+    // Find the first <a> tag in the documentation tab
+    const firstLinkRegex = /<a\s+[^>]*href="[^"]*"[^>]*>.*?<\/a>/i;
+    const firstLinkMatch = docTabContent.match(firstLinkRegex);
+    
+    if (!firstLinkMatch) {
+        console.log(`No datasheet link found in documentation tab for SKU: ${sku}`);
+        return;
+    }
+
+    const oldLink = firstLinkMatch[0];
+    
+    // Extract the link text from the old link
+    const linkTextRegex = />([^<]+)</;
+    const linkTextMatch = oldLink.match(linkTextRegex);
+    const linkText = linkTextMatch ? linkTextMatch[1] : 'Product Datasheet';
+    
+    // Create new link with the same text but new URL
+    const newLink = `<a href="${newPdfLink}" target="_blank">${linkText}</a>`;
+    
+    // Replace the old link with the new one in the documentation tab
+    const updatedDocTabContent = docTabContent.replace(firstLinkRegex, newLink);
+    
+    // Replace the entire documentation tab in the description
+    const newDescriptionHtml = currentDescriptionHtml.replace(docTabRegex, `<div class="tab-content" id="documentation">${updatedDocTabContent}</div>`);
+
+    // Check if the link was actually changed
+    if (currentDescriptionHtml === newDescriptionHtml) {
+        console.log(`No changes needed for SKU: ${sku} - link already up to date`);
         return;
     }
 
@@ -101,8 +144,6 @@ async function updateShopifyDescription(productId, currentDescriptionHtml, amazo
         }
     `;
 
-    const newDescriptionHtml = `${currentDescriptionHtml}<br><a rel="noopener noreferrer" href="${amazonLink}" style="color: #0071ba; text-decoration: underline;" target="_blank">Also Available on Amazon</a>`;
-
     const variables = {
         input: {
             id: productId,
@@ -111,7 +152,9 @@ async function updateShopifyDescription(productId, currentDescriptionHtml, amazo
     };
 
     try {
-        console.log(`Updating product description for ID: ${productId}`);
+        console.log(`Updating datasheet link for SKU: ${sku}`);
+        console.log(`Old link: ${oldLink}`);
+        console.log(`New link: ${newLink}`);
 
         const response = await fetch(`https://${shopName}.myshopify.com/admin/api/2024-01/graphql.json`, {
             method: 'POST',
@@ -129,7 +172,7 @@ async function updateShopifyDescription(productId, currentDescriptionHtml, amazo
             return;
         }
 
-       // console.log(`Successfully updated product ${productId}. New Description: ${newDescriptionHtml}`);
+        console.log(`Successfully updated datasheet link for SKU: ${sku}`);
     } catch (error) {
         console.error('Error updating product description:', error);
     }
@@ -155,8 +198,8 @@ async function appendToMissingSKU(sku) {
     }
 }
 
-// Main function to update Shopify descriptions from Google Sheet
-async function updateDescriptionsFromSheet(range) {
+// Main function to update datasheet links from Google Sheet
+async function updateDatasheetLinksFromSheet(range) {
     const rows = await readGoogleSheet(range);
 
     if (!rows.length) {
@@ -172,23 +215,26 @@ async function updateDescriptionsFromSheet(range) {
     }
 
     const skuIndex = headers.indexOf('SKU');
-    const amazonLinkIndex = headers.indexOf('Amazon Link');
+    const pdfLinkIndex = headers.indexOf('Pdf Link');
 
-    if (skuIndex === -1 || amazonLinkIndex === -1) {
-        console.error('Required columns not found in Google Sheet');
+    if (skuIndex === -1 || pdfLinkIndex === -1) {
+        console.error('Required columns (SKU, Pdf Link) not found in Google Sheet');
+        console.log('Available headers:', headers);
         return;
     }
 
+    console.log(`Processing ${data.length} rows from Google Sheet`);
+
     for (const row of data) {
         const sku = row[skuIndex];
-        const amazonLink = row[amazonLinkIndex];
+        const pdfLink = row[pdfLinkIndex];
 
-        if (!sku || !amazonLink) {
-            console.warn('Skipping row: Missing SKU or Amazon link.');
+        if (!sku || !pdfLink) {
+            console.warn('Skipping row: Missing SKU or PDF link.');
             continue;
         }
 
-       //console.log(`Processing SKU: ${sku}, Amazon Link: ${amazonLink}`);
+        console.log(`Processing SKU: ${sku}, PDF Link: ${pdfLink}`);
 
         const variant = await fetchVariantBySKU(sku);
         if (!variant) {
@@ -199,21 +245,21 @@ async function updateDescriptionsFromSheet(range) {
         }
 
         console.log(`SKU found on store: ${sku}`);
-        await updateShopifyDescription(variant.product.id, variant.product.descriptionHtml, amazonLink);
+        await updateDatasheetLink(variant.product.id, variant.product.descriptionHtml, pdfLink, sku);
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Avoid hitting rate limits
     }
 }
 
-// Endpoint to trigger the description update process
-app.get('/update-amazon-link', async (req, res) => {
-    const range = 'Sheet1!A:B'; // Adjust the range as per your sheet (assuming A is SKU and B is Amazon Link)
+// Endpoint to trigger the datasheet link update process
+app.get('/update-datasheet-links', async (req, res) => {
+    const range = 'Sheet1!A:B'; // Adjust the range as per your sheet (assuming A is SKU and B is PDF Link)
     try {
-        await updateDescriptionsFromSheet(range);
-        res.send('Descriptions updated successfully');
+        await updateDatasheetLinksFromSheet(range);
+        res.send('Datasheet links updated successfully');
     } catch (error) {
-        console.error('Error while updating descriptions:', error);
-        res.status(500).send('Error updating descriptions');
+        console.error('Error while updating datasheet links:', error);
+        res.status(500).send('Error updating datasheet links');
     }
 });
 
@@ -221,4 +267,5 @@ app.get('/update-amazon-link', async (req, res) => {
 const PORT = process.env.PORT || 8700;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    console.log(`Visit http://localhost:${PORT}/update-datasheet-links to start the update process`);
 });
