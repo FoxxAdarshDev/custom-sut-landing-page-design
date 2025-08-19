@@ -118,19 +118,45 @@ async function updateVideosTab(productId, currentDescriptionHtml, iframeHtml, sk
 
     const videosTabContent = videosTabMatch[1];
     
-    // Remove the "To be loaded" paragraph
-    const updatedContent = videosTabContent.replace(/<p>To be loaded<\/p>\s*/i, '');
-    
-    // Use the provided iframe HTML directly and add the remaining content
-    const finalContent = iframeHtml + '\n' + updatedContent;
-    
-    // Replace the entire videos tab in the description
-    const newDescriptionHtml = currentDescriptionHtml.replace(videosTabRegex, `<div class="tab-content" id="videos">${finalContent}</div>`);
+    // Check if iframe already exists in the videos tab to prevent duplicates
+    const existingIframeRegex = /<iframe[^>]*>/i;
+    if (existingIframeRegex.test(videosTabContent)) {
+        console.log(`SKU ${sku} already has an iframe in videos tab - removing existing iframe first`);
+        
+        // Remove all existing iframes from the videos tab content
+        const contentWithoutIframes = videosTabContent.replace(/<iframe[^>]*>.*?<\/iframe>/gis, '');
+        
+        // Remove the "To be loaded" paragraph
+        const updatedContent = contentWithoutIframes.replace(/<p>To be loaded<\/p>\s*/i, '');
+        
+        // Add the new iframe and remaining content
+        const finalContent = iframeHtml + '\n' + updatedContent;
+        
+        // Replace the entire videos tab in the description
+        const newDescriptionHtml = currentDescriptionHtml.replace(videosTabRegex, `<div class="tab-content" id="videos">${finalContent}</div>`);
+        
+        console.log(`Replaced existing iframe for SKU: ${sku}`);
+        
+        // Update the current description for further processing
+        currentDescriptionHtml = newDescriptionHtml;
+    } else {
+        // Remove the "To be loaded" paragraph
+        const updatedContent = videosTabContent.replace(/<p>To be loaded<\/p>\s*/i, '');
+        
+        // Use the provided iframe HTML directly and add the remaining content
+        const finalContent = iframeHtml + '\n' + updatedContent;
+        
+        // Replace the entire videos tab in the description
+        const newDescriptionHtml = currentDescriptionHtml.replace(videosTabRegex, `<div class="tab-content" id="videos">${finalContent}</div>`);
 
-    // Check if the content was actually changed
-    if (currentDescriptionHtml === newDescriptionHtml) {
-        console.log(`No changes needed for SKU: ${sku} - videos tab already up to date`);
-        return;
+        // Check if the content was actually changed
+        if (currentDescriptionHtml === newDescriptionHtml) {
+            console.log(`No changes needed for SKU: ${sku} - videos tab already up to date`);
+            return;
+        }
+        
+        // Update the current description for further processing
+        currentDescriptionHtml = newDescriptionHtml;
     }
 
     const mutation = `
@@ -151,7 +177,7 @@ async function updateVideosTab(productId, currentDescriptionHtml, iframeHtml, sk
     const variables = {
         input: {
             id: productId,
-            descriptionHtml: newDescriptionHtml,
+            descriptionHtml: currentDescriptionHtml,
         }
     };
 
