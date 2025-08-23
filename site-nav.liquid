@@ -126,6 +126,51 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
   padding-left: 25px;
 }
 
+/* Fix dropdown hover behavior */
+.site-nav--has-dropdown {
+  position: relative;
+}
+
+.site-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  margin-top: 0;
+}
+
+.site-nav--has-dropdown:hover .site-nav__dropdown {
+  display: block !important;
+}
+
+/* Submenu labels styling */
+.submenu-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.submenu-label.standard-sut {
+  background: #e8f5e8;
+  color: #2d6930;
+}
+
+.submenu-label.mto {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.submenu-label.custom-sut {
+  background: #e7f3ff;
+  color: #0056b3;
+}
+
 @keyframes foxxGradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -195,7 +240,16 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
         <ul class="site-nav__dropdown{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-dropdown{% endif %}">
           {% for childlink in linklists[child_list_handle].links %}
             <li{% if childlink.active %} class="site-nav--active"{% endif %}>
-              <a href="{{ childlink.url }}" class="site-nav__link" target="{% if childlink.url contains 'foxxbioprocess' %}_blank{% endif %}">{{ childlink.title | escape }}</a>
+              <a href="{{ childlink.url }}" class="site-nav__link" target="{% if childlink.url contains 'foxxbioprocess' %}_blank{% endif %}">
+                {{ childlink.title | escape }}
+                {% if childlink.title contains 'STANDARD SUT' %}
+                  <span class="submenu-label standard-sut">Ships in 24-48 Hours</span>
+                {% elsif childlink.title contains 'MADE TO ORDER' or childlink.title contains 'MTO' %}
+                  <span class="submenu-label mto">Shipped in 4–6 weeks</span>
+                {% elsif childlink.title contains 'CUSTOM SUT' %}
+                  <span class="submenu-label custom-sut">World's First Custom SUT Library</span>
+                {% endif %}
+              </a>
             </li>
           {% endfor %}
         </ul>

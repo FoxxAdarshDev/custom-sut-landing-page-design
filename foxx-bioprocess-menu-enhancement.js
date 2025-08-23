@@ -37,11 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Enhanced dropdown behavior
+    // Enhanced dropdown behavior with proper hover state management
     foxxMenuItems.forEach(menuItem => {
         const dropdown = menuItem.querySelector('.foxx-bioprocess-dropdown');
         if (dropdown) {
-            menuItem.addEventListener('mouseenter', function() {
+            let hoverTimeout;
+            
+            const showDropdown = () => {
+                clearTimeout(hoverTimeout);
                 dropdown.style.opacity = '0';
                 dropdown.style.transform = 'translateY(-10px)';
                 dropdown.style.display = 'block';
@@ -51,16 +54,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     dropdown.style.opacity = '1';
                     dropdown.style.transform = 'translateY(0)';
                 });
-            });
+            };
             
-            menuItem.addEventListener('mouseleave', function() {
-                dropdown.style.opacity = '0';
-                dropdown.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    dropdown.style.display = 'none';
-                }, 300);
+            const hideDropdown = () => {
+                hoverTimeout = setTimeout(() => {
+                    dropdown.style.opacity = '0';
+                    dropdown.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        dropdown.style.display = 'none';
+                    }, 300);
+                }, 100);
+            };
+            
+            menuItem.addEventListener('mouseenter', showDropdown);
+            menuItem.addEventListener('mouseleave', hideDropdown);
+            
+            // Keep dropdown open when hovering over it
+            dropdown.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
             });
+            dropdown.addEventListener('mouseleave', hideDropdown);
         }
     });
     
