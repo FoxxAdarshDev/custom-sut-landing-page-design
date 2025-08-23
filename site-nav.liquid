@@ -94,29 +94,36 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
 }
 
 .foxx-bioprocess-dropdown {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 113, 185, 0.2);
-  border-radius: 16px;
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-  padding: 10px;
-  margin-top: 8px;
+  background: #ffffff !important;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  margin-top: 5px;
+  min-width: 200px;
+}
+
+.foxx-bioprocess-dropdown li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .foxx-bioprocess-dropdown li a {
-  border-radius: 10px;
-  padding: 10px 15px;
-  transition: all 0.3s ease;
+  display: block;
+  padding: 12px 20px;
   color: #333 !important;
+  text-decoration: none;
   font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border-radius: 0;
 }
 
 .foxx-bioprocess-dropdown li a:hover {
-  background: linear-gradient(135deg, rgba(0, 113, 185, 0.1), rgba(0, 90, 148, 0.1));
+  background: #f8f9fa !important;
   color: #0071b9 !important;
-  transform: translateX(5px);
+  padding-left: 25px;
 }
 
 @keyframes foxxGradientShift {
@@ -145,20 +152,14 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
   }
 }
 
-/* Dark mode compatibility */
-@media (prefers-color-scheme: dark) {
-  .foxx-bioprocess-dropdown {
-    background: rgba(30, 30, 30, 0.95);
-    border-color: rgba(0, 113, 185, 0.3);
-  }
-  
-  .foxx-bioprocess-dropdown li a {
-    color: #fff !important;
-  }
-  
-  .foxx-bioprocess-dropdown li a:hover {
-    color: #0071b9 !important;
-  }
+/* Ensure consistent dropdown styling */
+.foxx-bioprocess-dropdown {
+  background: #ffffff !important;
+  border-color: #e1e5e9 !important;
+}
+
+.foxx-bioprocess-dropdown li a {
+  background: transparent !important;
 }
     </style>
 <a href="/pages/ezbio-lab-essentials-sale-up-to-25-off-centrifuge-vacuum-assemblies" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Foxx Summer Sale</a> 
