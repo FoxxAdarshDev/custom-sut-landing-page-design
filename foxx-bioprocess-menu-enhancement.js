@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create modern particle effect (2030 trend)
     function createHoverParticles(element) {
         const rect = element.getBoundingClientRect();
-        const colors = ['#0071ce', '#00833e', '#ffffff'];
+        const colors = ['#0071b9', '#005a94', '#ffffff'];
         
         for (let i = 0; i < 5; i++) {
             setTimeout(() => {
