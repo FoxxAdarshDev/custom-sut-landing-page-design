@@ -255,12 +255,14 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
             <li{% if childlink.active %} class="site-nav--active"{% endif %}>
               <a href="{{ childlink.url }}" class="site-nav__link" target="{% if childlink.url contains 'foxxbioprocess' %}_blank{% endif %}">
                 {{ childlink.title | escape }}
-                {% if childlink.title contains 'STANDARD SUT' %}
-                  <span class="submenu-label standard-sut">Ships in 24-48 Hours</span>
-                {% elsif childlink.title contains 'MADE TO ORDER' or childlink.title contains 'MTO' %}
-                  <span class="submenu-label mto">Shipped in 4–6 weeks</span>
-                {% elsif childlink.title contains 'CUSTOM SUT' %}
-                  <span class="submenu-label custom-sut">World's First Custom SUT Library</span>
+                {% if link.url contains 'foxxbioprocess' %}
+                  {% if childlink.title contains 'STANDARD SUT' %}
+                    <span class="submenu-label standard-sut">Ships in 24-48 Hours</span>
+                  {% elsif childlink.title contains 'MADE TO ORDER' or childlink.title contains 'MTO' %}
+                    <span class="submenu-label mto">shipped in 4–6 weeks</span>
+                  {% elsif childlink.title contains 'CUSTOM SUT' %}
+                    <span class="submenu-label custom-sut">World's First Custom SUT Library</span>
+                  {% endif %}
                 {% endif %}
               </a>
             </li>

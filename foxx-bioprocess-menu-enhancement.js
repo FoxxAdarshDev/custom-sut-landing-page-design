@@ -37,34 +37,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Enhanced dropdown behavior with proper hover state management
-    foxxMenuItems.forEach(menuItem => {
-        const dropdown = menuItem.querySelector('.foxx-bioprocess-dropdown');
+    // Enhanced dropdown behavior with improved hover state management
+    const allDropdownItems = document.querySelectorAll('.site-nav--has-dropdown');
+    
+    allDropdownItems.forEach(menuItem => {
+        const dropdown = menuItem.querySelector('.site-nav__dropdown');
         if (dropdown) {
             let hoverTimeout;
+            let isHovering = false;
             
             const showDropdown = () => {
                 clearTimeout(hoverTimeout);
-                dropdown.style.opacity = '0';
-                dropdown.style.transform = 'translateY(-10px)';
+                isHovering = true;
                 dropdown.style.display = 'block';
-                
-                requestAnimationFrame(() => {
-                    dropdown.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    dropdown.style.opacity = '1';
-                    dropdown.style.transform = 'translateY(0)';
-                });
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
             };
             
             const hideDropdown = () => {
+                isHovering = false;
                 hoverTimeout = setTimeout(() => {
-                    dropdown.style.opacity = '0';
-                    dropdown.style.transform = 'translateY(-10px)';
-                    
-                    setTimeout(() => {
-                        dropdown.style.display = 'none';
-                    }, 300);
-                }, 300);
+                    if (!isHovering) {
+                        dropdown.style.opacity = '0';
+                        dropdown.style.visibility = 'hidden';
+                        
+                        setTimeout(() => {
+                            if (!isHovering) {
+                                dropdown.style.display = 'none';
+                            }
+                        }, 200);
+                    }
+                }, 150);
             };
             
             menuItem.addEventListener('mouseenter', showDropdown);
@@ -73,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Keep dropdown open when hovering over it
             dropdown.addEventListener('mouseenter', () => {
                 clearTimeout(hoverTimeout);
+                isHovering = true;
             });
             dropdown.addEventListener('mouseleave', hideDropdown);
         }
