@@ -42,6 +42,124 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
     background-position: 0% 50%; 
   }
 }
+
+/* Modern 2030 Foxx Bioprocess Menu Highlight Styles */
+.foxx-bioprocess-highlight {
+  position: relative;
+  overflow: visible;
+}
+
+.foxx-bioprocess-link {
+  position: relative;
+  background: linear-gradient(135deg, #0071ce 0%, #00833e 50%, #0071ce 100%);
+  background-size: 200% 200%;
+  color: #ffffff !important;
+  padding: 12px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 8px 25px rgba(0, 113, 206, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  animation: foxxGradientShift 6s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.foxx-bioprocess-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(0, 113, 206, 0.4),
+    0 5px 15px rgba(0, 131, 62, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  animation-duration: 3s;
+}
+
+.foxx-new-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  color: #333;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 12px;
+  text-shadow: none;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+  animation: foxxPulse 2s ease-in-out infinite;
+  z-index: 10;
+}
+
+.foxx-bioprocess-dropdown {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 113, 206, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.foxx-bioprocess-dropdown li a {
+  border-radius: 10px;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.foxx-bioprocess-dropdown li a:hover {
+  background: linear-gradient(135deg, rgba(0, 113, 206, 0.1), rgba(0, 131, 62, 0.1));
+  color: #0071ce !important;
+  transform: translateX(5px);
+}
+
+@keyframes foxxGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes foxxPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .foxx-bioprocess-link {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+  
+  .foxx-new-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .foxx-bioprocess-dropdown {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(0, 113, 206, 0.3);
+  }
+  
+  .foxx-bioprocess-dropdown li a {
+    color: #fff !important;
+  }
+  
+  .foxx-bioprocess-dropdown li a:hover {
+    color: #0071ce !important;
+  }
+}
     </style>
 <a href="/pages/ezbio-lab-essentials-sale-up-to-25-off-centrifuge-vacuum-assemblies" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Foxx Summer Sale</a> 
     
@@ -63,24 +181,32 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
     {% endcomment %}
     {% assign child_list_handle = link.title | handleize %}
     {% if linklists[child_list_handle].links != blank %}
-      <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
-        <a href="{{ link.url }}" class="site-nav__link">
+      <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-highlight{% endif %}" aria-haspopup="true">
+        <a href="{{ link.url }}" class="site-nav__link{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-link{% endif %}" target="{% if link.url contains 'foxxbioprocess' %}_blank{% endif %}">
           {{ link.title }}
+          {% if link.url contains 'foxxbioprocess' %}
+            <span class="foxx-new-badge">NEW</span>
+          {% endif %}
           <span class="icon-fallback-text">
             <span class="icon icon-arrow-down" aria-hidden="true"></span>
           </span>
         </a>
-        <ul class="site-nav__dropdown">
+        <ul class="site-nav__dropdown{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-dropdown{% endif %}">
           {% for childlink in linklists[child_list_handle].links %}
             <li{% if childlink.active %} class="site-nav--active"{% endif %}>
-              <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+              <a href="{{ childlink.url }}" class="site-nav__link" target="{% if childlink.url contains 'foxxbioprocess' %}_blank{% endif %}">{{ childlink.title | escape }}</a>
             </li>
           {% endfor %}
         </ul>
       </li>
     {% else %}
-      <li {% if link.active %}class="site-nav--active"{% endif %}>
-        <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+      <li {% if link.active %}class="site-nav--active"{% endif %}{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-highlight{% endif %}>
+        <a href="{{ link.url }}" class="site-nav__link{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-link{% endif %}" target="{% if link.url contains 'foxxbioprocess' %}_blank{% endif %}">
+          {{ link.title }}
+          {% if link.url contains 'foxxbioprocess' %}
+            <span class="foxx-new-badge">NEW</span>
+          {% endif %}
+        </a>
       </li>
     {% endif %}
   {% endfor %}
