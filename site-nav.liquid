@@ -1,0 +1,87 @@
+{% comment %}
+  List out your main-menu linklist (default)
+
+  More info on linklists:
+    - http://docs.shopify.com/themes/liquid-variables/linklists
+{% endcomment %}
+<ul class="site-nav" id="AccessibleNav">
+  {% assign page_id = page.id %}
+  {% if page_id != 111115698331 %}
+    <style>
+
+.black-friday-sale-menu-link-desktop {
+  background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
+  background-size: 300% 300%; /* Larger than the element to enable movement */
+  color: #ffffff;
+  padding: 10px 5px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: inline-block;
+  animation: movingBackground 5s linear infinite; /* Add background animation */
+  text-decoration: none; /* Ensure the link looks clean */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+
+a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-desktop:active {
+  color:#ffff!important
+}
+@keyframes movingBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%; 
+  }
+}
+    </style>
+<a href="/pages/ezbio-lab-essentials-sale-up-to-25-off-centrifuge-vacuum-assemblies" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Foxx Summer Sale</a> 
+
+  {% endif %}  
+ {% comment %} <a href="/pages/us-independence-day-sale-25" style="
+   background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
+    color: #ffffff;
+    padding-inline: 10px;
+    font-weight: 500!important;
+    border-radius:10px;
+    letter-spacing: 0.5px;position: relative;
+    padding: 10px 10px;">Biggest Patriotic Sale</a>  {% endcomment %}
+  {% for link in linklists.new-main-menu.links %}
+    {% comment %}
+      Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+      More info on dropdowns:
+        - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+    {% endcomment %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if linklists[child_list_handle].links != blank %}
+      <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+        <a href="{{ link.url }}" class="site-nav__link">
+          {{ link.title }}
+          <span class="icon-fallback-text">
+            <span class="icon icon-arrow-down" aria-hidden="true"></span>
+          </span>
+        </a>
+        <ul class="site-nav__dropdown">
+          {% for childlink in linklists[child_list_handle].links %}
+            <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+              <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li {% if link.active %}class="site-nav--active"{% endif %}>
+        <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
