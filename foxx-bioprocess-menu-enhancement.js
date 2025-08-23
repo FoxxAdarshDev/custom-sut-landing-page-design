@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         dropdown.style.display = 'none';
                     }, 300);
-                }, 100);
+                }, 300);
             };
             
             menuItem.addEventListener('mouseenter', showDropdown);

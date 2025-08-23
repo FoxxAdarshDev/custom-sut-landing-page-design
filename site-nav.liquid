@@ -138,10 +138,23 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
   z-index: 1000;
   display: none;
   margin-top: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .site-nav--has-dropdown:hover .site-nav__dropdown {
   display: block !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure dropdown stays visible when hovering over it */
+.site-nav--has-dropdown:hover .site-nav__dropdown,
+.site-nav__dropdown:hover {
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Submenu labels styling */
@@ -152,7 +165,7 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
   margin-top: 3px;
   padding: 2px 6px;
   border-radius: 10px;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.3px;
 }
 
