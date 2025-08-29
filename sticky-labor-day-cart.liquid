@@ -3,7 +3,7 @@
 /* Sticky Bottom Cart Bar */
 .sticky-labor-cart {
   position: fixed;
-  bottom: -100px;
+  bottom: -200px;
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
@@ -11,13 +11,15 @@
   z-index: 1000;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  transition: bottom 0.3s ease-in-out;
+  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  transform: translateY(100%);
 }
 
 .sticky-labor-cart.show {
   bottom: 0;
+  transform: translateY(0);
 }
 
 .sticky-cart-content {
@@ -316,7 +318,7 @@
 @media (max-width: 480px) {
   .sticky-labor-cart {
     padding: 8px 12px;
-    bottom: -120px;
+    bottom: -250px;
   }
   
   .sticky-labor-cart.show {
@@ -466,10 +468,14 @@
 let stickyCartVisible = false;
 let currentDiscountPercent = 20; // Default discount
 
-// Show/Hide sticky cart based on scroll
+// Show/Hide sticky cart based on scroll (20% of viewport)
 function handleStickyCartScroll() {
   const scrollPosition = window.scrollY;
-  const triggerPosition = 100; // Show after minimal scrolling (100px)
+  const viewportHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+  const scrollableHeight = documentHeight - viewportHeight;
+  const triggerPosition = scrollableHeight * 0.2; // Show after 20% of scrollable content
+  
   const stickyCart = document.getElementById('stickyLaborCart');
   
   if (scrollPosition > triggerPosition && !stickyCartVisible) {
@@ -481,14 +487,7 @@ function handleStickyCartScroll() {
   }
 }
 
-// Show sticky cart immediately on page load
-function showStickyCartImmediately() {
-  const stickyCart = document.getElementById('stickyLaborCart');
-  setTimeout(() => {
-    stickyCart.classList.add('show');
-    stickyCartVisible = true;
-  }, 1000); // Show after 1 second delay
-}
+// Remove immediate show function - only show on scroll
 
 // Update sticky cart prices based on promo ticker logic
 function updateStickyPrices() {
@@ -603,9 +602,6 @@ function initStickyLaborCart() {
   if (sessionStorage.getItem('stickyCartHidden') === 'true') {
     return;
   }
-  
-  // Show cart immediately on load
-  showStickyCartImmediately();
   
   // Add scroll listener for hide/show behavior
   window.addEventListener('scroll', handleStickyCartScroll);
