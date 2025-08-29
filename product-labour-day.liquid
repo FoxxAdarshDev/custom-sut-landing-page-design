@@ -582,7 +582,16 @@
   jQuery(function($) {
     new Shopify.OptionSelectors('productSelect', {
       product: {%- include 'bold-product', output: 'json' -%},
-      onVariantSelected: selectCallback,
+      onVariantSelected: function(variant, selector) {
+        selectCallback(variant, selector);
+        
+        // Dispatch event for promo ticker when variant changes
+        if (variant) {
+          document.dispatchEvent(new CustomEvent('stickyVariantChange', {
+            detail: { variantId: variant.id }
+          }));
+        }
+      },
       enableHistoryState: true
     });
 

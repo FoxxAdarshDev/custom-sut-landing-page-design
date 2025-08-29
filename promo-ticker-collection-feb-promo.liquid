@@ -332,8 +332,9 @@
           function initPromoTickerSync() {
             const productSelect = document.getElementById('productSelect');
             if (productSelect) {
-              // Update on variant change
+              // Update on variant change from main form
               productSelect.addEventListener('change', function() {
+                console.log('Main product variant changed, updating promo ticker');
                 setTimeout(updatePromoTickerPrices, 100);
               });
               
@@ -341,8 +342,9 @@
               setTimeout(updatePromoTickerPrices, 500);
             }
             
-            // Also listen for sticky cart changes
-            document.addEventListener('stickyVariantChange', function() {
+            // Also listen for sticky cart changes and main form variant changes via custom event
+            document.addEventListener('stickyVariantChange', function(event) {
+              console.log('Sticky variant change event received, updating promo ticker');
               setTimeout(updatePromoTickerPrices, 100);
             });
           }
