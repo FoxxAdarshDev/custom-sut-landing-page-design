@@ -170,13 +170,14 @@
 .sticky-variant-select {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #1e3a8a;
-  border-radius: 4px;
-  padding: 3px 6px;
-  font-size: 9px;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 11px;
   color: #1e3a8a;
   font-weight: 600;
-  min-width: 120px;
-  max-width: 120px;
+  min-width: 140px;
+  max-width: 140px;
+  height: 36px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -191,26 +192,8 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 6px;
-  padding: 1px;
-  gap: 1px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(30, 58, 138, 0.2);
-}
-
-.sticky-qty-btn {
-  background: #1e3a8a;
-  color: white;
-  border: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sticky-qty-input {
@@ -218,10 +201,11 @@
   border: none;
   color: #1e3a8a;
   text-align: center;
-  width: 30px;
-  font-size: 11px;
+  width: 50px;
+  height: 36px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 2px;
+  padding: 8px;
   outline: none;
 }
 
@@ -300,9 +284,17 @@
   }
 
   .sticky-variant-select {
-    min-width: 100px;
-    max-width: 100px;
-    font-size: 8px;
+    min-width: 120px;
+    max-width: 120px;
+    font-size: 10px;
+    padding: 6px 8px;
+    height: 32px;
+  }
+
+  .sticky-qty-input {
+    width: 45px;
+    height: 32px;
+    font-size: 11px;
   }
 
   .sticky-add-to-cart {
@@ -408,9 +400,7 @@
 
       <div class="sticky-controls-row">
         <div class="sticky-quantity-controls">
-          <button type="button" onclick="decreaseQuantity()" class="sticky-qty-btn">−</button>
-          <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" readonly>
-          <button type="button" onclick="increaseQuantity()" class="sticky-qty-btn">+</button>
+          <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" oninput="syncQuantityToMain()">
         </div>
 
         <button class="sticky-add-to-cart" onclick="addToCartFromSticky()">
@@ -511,21 +501,24 @@ function syncVariantToMain() {
   const stickySelect = document.getElementById('stickyVariantSelect');
   const mainSelect = document.getElementById('productSelect');
 
-  if (mainSelect && stickySelect) {
+  if (mainSelect && stickySelect && mainSelect.value !== stickySelect.value) {
+    console.log('Syncing variant to main form:', stickySelect.value);
     mainSelect.value = stickySelect.value;
 
-    // Trigger change event on main selector to update pricing
+    // Trigger change event on main selector to update pricing and other dependencies
     const changeEvent = new Event('change', { bubbles: true });
     mainSelect.dispatchEvent(changeEvent);
 
-    // Update sticky prices and SKU
-    updateStickyPrices();
-    updateStickySKU();
-
-    // Dispatch event for promo ticker
-    document.dispatchEvent(new CustomEvent('stickyVariantChange', {
-      detail: { variantId: stickySelect.value }
-    }));
+    // Small delay to ensure main form updates first
+    setTimeout(() => {
+      updateStickyPrices();
+      updateStickySKU();
+      
+      // Dispatch event for promo ticker
+      document.dispatchEvent(new CustomEvent('stickyVariantChange', {
+        detail: { variantId: stickySelect.value }
+      }));
+    }, 100);
   }
 }
 
@@ -534,15 +527,19 @@ function syncVariantFromMain() {
   const mainSelect = document.getElementById('productSelect');
   const stickySelect = document.getElementById('stickyVariantSelect');
 
-  if (mainSelect && stickySelect) {
+  if (mainSelect && stickySelect && stickySelect.value !== mainSelect.value) {
+    console.log('Syncing variant from main form:', mainSelect.value);
     stickySelect.value = mainSelect.value;
-    updateStickyPrices();
-    updateStickySKU();
-
-    // Dispatch event for promo ticker
-    document.dispatchEvent(new CustomEvent('stickyVariantChange', {
-      detail: { variantId: mainSelect.value }
-    }));
+    
+    setTimeout(() => {
+      updateStickyPrices();
+      updateStickySKU();
+      
+      // Dispatch event for promo ticker
+      document.dispatchEvent(new CustomEvent('stickyVariantChange', {
+        detail: { variantId: mainSelect.value }
+      }));
+    }, 100);
   }
 }
 
@@ -552,10 +549,16 @@ function syncQuantityToMain() {
   const mainQty = document.getElementById('Quantity');
 
   if (mainQty && stickyQty) {
-    mainQty.value = stickyQty.value;
-    // Trigger change event to update any dependent calculations
+    const newValue = parseInt(stickyQty.value) || 1;
+    mainQty.value = newValue;
+    
+    // Trigger change and input events to update any dependent calculations
     const changeEvent = new Event('change', { bubbles: true });
+    const inputEvent = new Event('input', { bubbles: true });
     mainQty.dispatchEvent(changeEvent);
+    mainQty.dispatchEvent(inputEvent);
+    
+    console.log('Synced quantity to main form:', newValue);
   }
 }
 
@@ -564,35 +567,14 @@ function syncQuantityFromMain() {
   const mainQty = document.getElementById('Quantity');
   const stickyQty = document.getElementById('stickyQuantity');
 
-  if (mainQty && stickyQty) {
-    const currentMainQty = parseInt(mainQty.value) || 1;
-    const currentStickyQty = parseInt(stickyQty.value) || 1;
+  if (mainQty && stickyQty && !stickyQty.matches(':focus')) {
+    const newValue = parseInt(mainQty.value) || 1;
+    const currentStickyValue = parseInt(stickyQty.value) || 1;
 
-    // Only update if values are different
-    if (currentMainQty !== currentStickyQty) {
-      stickyQty.value = currentMainQty;
-    }
-  }
-}
-
-// Increase quantity
-function increaseQuantity() {
-  const stickyQty = document.getElementById('stickyQuantity');
-  if (stickyQty) {
-    const currentValue = parseInt(stickyQty.value) || 1;
-    stickyQty.value = currentValue + 1;
-    syncQuantityToMain();
-  }
-}
-
-// Decrease quantity
-function decreaseQuantity() {
-  const stickyQty = document.getElementById('stickyQuantity');
-  if (stickyQty) {
-    const currentValue = parseInt(stickyQty.value) || 1;
-    if (currentValue > 1) {
-      stickyQty.value = currentValue - 1;
-      syncQuantityToMain();
+    // Only update if values are different and sticky input is not focused
+    if (newValue !== currentStickyValue) {
+      stickyQty.value = newValue;
+      console.log('Synced quantity from main form:', newValue);
     }
   }
 }
@@ -679,11 +661,10 @@ function initStickyLaborCart() {
     const productSelect = document.getElementById('productSelect');
     if (productSelect) {
       productSelect.addEventListener('change', () => {
+        console.log('Main variant changed:', productSelect.value);
         setTimeout(() => {
           syncVariantFromMain();
-          updateStickyPrices();
-          updateStickySKU();
-        }, 100);
+        }, 150);
       });
     }
 
@@ -691,10 +672,29 @@ function initStickyLaborCart() {
     const mainQty = document.getElementById('Quantity');
     if (mainQty) {
       mainQty.addEventListener('change', () => {
+        console.log('Main quantity changed:', mainQty.value);
         syncQuantityFromMain();
       });
       mainQty.addEventListener('input', () => {
+        console.log('Main quantity input:', mainQty.value);
         syncQuantityFromMain();
+      });
+    }
+
+    // Listen for changes on sticky controls
+    const stickySelect = document.getElementById('stickyVariantSelect');
+    if (stickySelect) {
+      stickySelect.addEventListener('change', () => {
+        console.log('Sticky variant changed:', stickySelect.value);
+        syncVariantToMain();
+      });
+    }
+
+    const stickyQty = document.getElementById('stickyQuantity');
+    if (stickyQty) {
+      stickyQty.addEventListener('change', () => {
+        console.log('Sticky quantity changed:', stickyQty.value);
+        syncQuantityToMain();
       });
     }
 

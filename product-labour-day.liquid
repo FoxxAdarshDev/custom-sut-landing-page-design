@@ -590,6 +590,13 @@
           document.dispatchEvent(new CustomEvent('stickyVariantChange', {
             detail: { variantId: variant.id }
           }));
+          
+          // Sync to sticky cart after a short delay
+          setTimeout(() => {
+            if (typeof syncVariantFromMain === 'function') {
+              syncVariantFromMain();
+            }
+          }, 200);
         }
       },
       enableHistoryState: true
