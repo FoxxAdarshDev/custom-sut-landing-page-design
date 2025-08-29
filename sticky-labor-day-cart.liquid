@@ -3,7 +3,7 @@
 /* Sticky Bottom Cart Bar */
 .sticky-labor-cart {
   position: fixed;
-  bottom: -200px;
+  bottom: 0;
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
@@ -11,14 +11,13 @@
   z-index: 1000;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   transform: translateY(100%);
 }
 
 .sticky-labor-cart.show {
-  bottom: 0;
   transform: translateY(0);
 }
 
@@ -318,11 +317,6 @@
 @media (max-width: 480px) {
   .sticky-labor-cart {
     padding: 8px 12px;
-    bottom: -250px;
-  }
-  
-  .sticky-labor-cart.show {
-    bottom: 0;
   }
   
   .sticky-cart-content {
