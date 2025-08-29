@@ -259,7 +259,7 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
                   {% if childlink.title contains 'STANDARD SUT' %}
                     <span class="submenu-label standard-sut">Ships in 24-48 Hours</span>
                   {% elsif childlink.title contains 'MADE TO ORDER' or childlink.title contains 'MTO' %}
-                    <span class="submenu-label mto">shipped in 4–6 weeks</span>
+                    <span class="submenu-label mto">Shipped in 4–6 weeks</span>
                   {% elsif childlink.title contains 'CUSTOM SUT' %}
                     <span class="submenu-label custom-sut">World's First Custom SUT Library</span>
                   {% endif %}
@@ -281,3 +281,186 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
     {% endif %}
   {% endfor %}
 </ul>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced Foxx Bioprocess menu functionality
+    const foxxMenuItems = document.querySelectorAll('.foxx-bioprocess-highlight');
+    const foxxLinks = document.querySelectorAll('.foxx-bioprocess-link');
+    const foxxDropdowns = document.querySelectorAll('.foxx-bioprocess-dropdown');
+    
+    // Add enhanced hover effects
+    foxxLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.setProperty('--hover-scale', '1.05');
+            
+            // Add particle effect on hover (modern 2030 trend)
+            createHoverParticles(this);
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.setProperty('--hover-scale', '1');
+        });
+        
+        // Add click analytics tracking
+        link.addEventListener('click', function() {
+            // Track Foxx Bioprocess menu clicks
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'foxx_bioprocess_menu_click', {
+                    'event_category': 'navigation',
+                    'event_label': this.textContent.trim()
+                });
+            }
+            
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+    
+    // Enhanced dropdown behavior with improved hover state management
+    const allDropdownItems = document.querySelectorAll('.site-nav--has-dropdown');
+    
+    allDropdownItems.forEach(menuItem => {
+        const dropdown = menuItem.querySelector('.site-nav__dropdown');
+        if (dropdown) {
+            let hoverTimeout;
+            let isHovering = false;
+            
+            const showDropdown = () => {
+                clearTimeout(hoverTimeout);
+                isHovering = true;
+                dropdown.style.display = 'block';
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
+            };
+            
+            const hideDropdown = () => {
+                isHovering = false;
+                hoverTimeout = setTimeout(() => {
+                    if (!isHovering) {
+                        dropdown.style.opacity = '0';
+                        dropdown.style.visibility = 'hidden';
+                        
+                        setTimeout(() => {
+                            if (!isHovering) {
+                                dropdown.style.display = 'none';
+                            }
+                        }, 200);
+                    }
+                }, 150);
+            };
+            
+            menuItem.addEventListener('mouseenter', showDropdown);
+            menuItem.addEventListener('mouseleave', hideDropdown);
+            
+            // Keep dropdown open when hovering over it
+            dropdown.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
+                isHovering = true;
+            });
+            dropdown.addEventListener('mouseleave', hideDropdown);
+        }
+    });
+    
+    // Create modern particle effect (2030 trend)
+    function createHoverParticles(element) {
+        const rect = element.getBoundingClientRect();
+        const colors = ['#0071b9', '#005a94', '#ffffff'];
+        
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'foxx-hover-particle';
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 4px;
+                    height: 4px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1000;
+                    left: ${rect.left + Math.random() * rect.width}px;
+                    top: ${rect.top + Math.random() * rect.height}px;
+                    animation: foxxParticleFloat 1s ease-out forwards;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }, i * 50);
+        }
+    }
+    
+    // Add particle animation CSS
+    if (!document.getElementById('foxx-particle-styles')) {
+        const particleStyles = document.createElement('style');
+        particleStyles.id = 'foxx-particle-styles';
+        particleStyles.textContent = `
+            @keyframes foxxParticleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-30px) scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(particleStyles);
+    }
+    
+    // Intersection Observer for scroll animations (2030 trend)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'foxxSlideIn 0.6s ease-out';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    foxxMenuItems.forEach(item => {
+        observer.observe(item);
+    });
+    
+    // Add slide-in animation CSS
+    if (!document.getElementById('foxx-slide-styles')) {
+        const slideStyles = document.createElement('style');
+        slideStyles.id = 'foxx-slide-styles';
+        slideStyles.textContent = `
+            @keyframes foxxSlideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(slideStyles);
+    }
+    
+    // Performance optimization: Debounce resize events
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Recalculate positions if needed
+            foxxMenuItems.forEach(item => {
+                item.style.transition = 'none';
+                item.offsetHeight; // Trigger reflow
+                item.style.transition = '';
+            });
+        }, 250);
+    });
+});
+</script>
