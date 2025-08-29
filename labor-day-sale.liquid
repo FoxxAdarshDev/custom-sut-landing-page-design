@@ -1,3 +1,4 @@
+
 <style>
 
 
@@ -1048,7 +1049,8 @@
 .popup-product-image {
   width: 80px;
   height: 80px;
-  background: #f8f9fa;
+  background: #f```html
+8f9fa;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1073,17 +1075,17 @@
 }
 
 .popup-product-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0071b9;
-    margin-bottom: 8px;
-    line-height: 1.3;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  font-size: 18px;
+  font-weight: 600;
+  color: #0071ce;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 .popup-product-sku {
   font-size: 14px;
@@ -1144,6 +1146,19 @@
   color: #6c757d;
   margin: 0;
   line-height: 1.2;
+}
+
+.popup-savings-details {
+  display: none;
+  padding-top: 12px;
+}
+
+.popup-smart-savings.expanded .popup-savings-details {
+  display: block;
+}
+
+.popup-smart-savings.expanded .popup-smart-savings-toggle {
+  transform: rotate(180deg);
 }
 
 .popup-savings-details {
@@ -1285,25 +1300,23 @@
 }
 
 .popup-add-to-cart {
-    background: linear-gradient(135deg, #dc3545 0%, #0071b9 100%);
-    color: white;
-    border: 2px solid white;
-    border-radius: 12px;
-    padding: 16px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    width: 100%;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-  }
+  background: #0071ce;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-  .popup-add-to-cart:hover {
-    background: linear-gradient(135deg, #b91c2c 0%, #005ba6 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
-  }
+.popup-add-to-cart:hover {
+  background: #005ba6;
+  transform: translateY(-1px);
+}
 
 .popup-recommended {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -1460,15 +1473,14 @@
 }
 
 .checkout-btn.primary {
-    background: linear-gradient(135deg, #0071b9 0%, #dc3545 100%);
-    color: white;
-    border: 1px solid white;
-  }
+  background: #0071ce;
+  color: white;
+}
 
-  .checkout-btn.primary:hover {
-    background: linear-gradient(135deg, #005ba6 0%, #b91c2c 100%);
-    transform: translateY(-1px);
-  }
+.checkout-btn.primary:hover {
+  background: #005ba6;
+  transform: translateY(-1px);
+}
 
 .checkout-btn.secondary {
   background: rgba(0, 0, 0, 0.04);
@@ -2049,7 +2061,7 @@
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   }
 
-  /*Popup variant selector styles */
+  /* Popup variant selector styles */
   .popup-variant-selector {
     margin-bottom: 20px;
   }
@@ -2645,7 +2657,7 @@ function updateCountdown() {
 function scrollToProducts() {
   const productsSection = document.getElementById('products-section');
   if (productsSection) {
-    productsSection.scrollIntoView({
+    productsSection.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
     });
@@ -3331,10 +3343,10 @@ function updateSmartSavingsForVariant(priceInDollars, discountPercentage) {
     const popupSavingsAmount3El = document.getElementById('popupSavingsAmount3');
     const popupSavingsAmount5El = document.getElementById('popupSavingsAmount5');
 
-    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = formatPrice(perItemSavings2);
-    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = formatPrice(perItemSavings2);
-    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = formatPrice(perItemSavings3);
-    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = formatPrice(perItemSavings5);
+    if (popupSavingsPreviewEl) popupSavingsPreviewEl.textContent = perItemSavings2.toFixed(2);
+    if (popupSavingsAmount2El) popupSavingsAmount2El.textContent = perItemSavings2.toFixed(2);
+    if (popupSavingsAmount3El) popupSavingsAmount3El.textContent = perItemSavings3.toFixed(2);
+    if (popupSavingsAmount5El) popupSavingsAmount5El.textContent = perItemSavings5.toFixed(2);
 }
 
 function checkForAutomaticCoupons() {
@@ -3565,8 +3577,8 @@ function updateCheckoutButton() {
         `;
     }
 
-    const cartText = meetsMinimum
-        ? `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})`
+    const cartText = meetsMinimum 
+        ? `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})` 
         : `🔒 Minimum Order Required`;
 
     checkoutSection.innerHTML = `
