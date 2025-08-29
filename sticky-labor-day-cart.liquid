@@ -475,19 +475,15 @@ function hideStickyCart() {
   stickyCart.style.display = 'none';
   stickyCartVisible = false;
   
-  // Remember user preference
-  sessionStorage.setItem('stickyCartHidden', 'true');
+  // Only hide for current page session, will show again on page refresh
 }
 
 // Initialize sticky cart
 function initStickyLaborCart() {
-  // Check if user previously hid the cart
-  if (sessionStorage.getItem('stickyCartHidden') === 'true') {
-    const stickyCart = document.getElementById('stickyLaborCart');
-    if (stickyCart) {
-      stickyCart.style.display = 'none';
-    }
-    return;
+  // Always show the cart on page load - ignore previous hide preference
+  const stickyCart = document.getElementById('stickyLaborCart');
+  if (stickyCart) {
+    stickyCart.style.display = 'block';
   }
   
   // Update prices initially
