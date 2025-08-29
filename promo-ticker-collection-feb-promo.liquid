@@ -177,7 +177,10 @@
       </div>
       <div style="padding-left: 5px;">
 
-
+    {% comment %} <div class="fallback-offer">
+          <div class="patriotic-shield">🛡️</div>
+          <span>LABOUR DAY SALE OFFER</span>
+        </div> {% endcomment %}
 
         {% comment %}
         Loop through the product tags to find the one containing 'percent_' and extract the value
@@ -206,7 +209,7 @@
             {% assign savings_amount = original_price | minus: final_price %}
             {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
             <div class="compact-savings-badge">
-              <span class="savings-text">You Save {{ savings_percent }}% ({{ savings_amount | money }})</span>
+              <span class="savings-text">You Save ({{ savings_amount | money }} overall)</span>
             </div>
           </div>
           {% endif %}
@@ -214,34 +217,35 @@
           <!-- Compact Independence Special Card (SHOWN SECOND) -->
           <div class="compact-promo-card">
             <div class="promo-header">
-              <div class="promo-badge">🇺🇸 INDEPENDENCE SPECIAL</div>
+              <div class="promo-badge"><img src="https://cdn.shopify.com/s/files/1/1064/0118/files/flag_1.png?v=1751649263" alt="Us Flag">LABOUR SPECIAL</div>
               <div class="countdown-timer">
                 <div class="timer-label">Sale Ends:</div>
                 <div class="timer-units">
                   <div class="timer-unit">
-                    <span id="promo-days">02</span>
+                    <span id="promo-days">00</span>
                     <label>D</label>
                   </div>
                   <div class="timer-unit">
-                    <span id="promo-hours">06</span>
+                    <span id="promo-hours">00</span>
                     <label>H</label>
                   </div>
                   <div class="timer-unit">
-                    <span id="promo-minutes">25</span>
+                    <span id="promo-minutes">00</span>
                     <label>M</label>
                   </div>
                 </div>
               </div>
             </div>
             <div class="promo-content">
+                  <div class="savings-label">Instant Savings:</div>
               <div class="discount-circle">
                 <span class="discount-percent">{{ percent_tag }}%</span>
                 <span class="discount-off">OFF</span>
               </div>
               <div class="savings-info">
-                <div class="savings-label">Instant Savings:</div>
-                {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
-                <div class="savings-amount">${{ price_discount | money_without_currency }}</div>
+
+                {% comment %} {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+                <div class="savings-amount">${{ price_discount | money_without_currency }}</div> {% endcomment %}
               </div>
             </div>
           </div>
@@ -249,52 +253,14 @@
         {% else %}
         <div class="fallback-offer">
           <div class="patriotic-shield">🛡️</div>
-          <span>Patriotic Sale Offer</span>
+          <span>LABOUR SALE OFFER</span>
         </div>
         {% endif %}
 
         <script>
-          // Update promo ticker prices based on selected variant
-          function updatePromoTickerPrices() {
-            const productSelect = document.getElementById('productSelect');
-            if (!productSelect) return;
-            
-            const selectedOption = productSelect.options[productSelect.selectedIndex];
-            const selectedVariantText = selectedOption.text;
-            
-            // Extract price from variant text (format: "Variant - $XX.XX")
-            const priceMatch = selectedVariantText.match(/\$([0-9,]+\.?[0-9]*)/);
-            if (!priceMatch) return;
-            
-            const currentPrice = parseFloat(priceMatch[1].replace(/,/g, ''));
-            
-            // Calculate discounted price (20% off for Labor Day)
-            const discountPercent = {{ percent_tag | default: 20 }};
-            const discountedPrice = currentPrice * (1 - discountPercent / 100);
-            const savings = currentPrice - discountedPrice;
-            
-            // Update final price display
-            const finalPriceElement = document.querySelector('.final-price-value');
-            if (finalPriceElement) {
-              finalPriceElement.textContent = '$' + discountedPrice.toFixed(2);
-            }
-            
-            // Update savings amount display
-            const savingsAmountElement = document.querySelector('.savings-amount');
-            if (savingsAmountElement) {
-              savingsAmountElement.textContent = '$' + savings.toFixed(2);
-            }
-            
-            // Update discount amount in promo card
-            const discountAmountElement = document.querySelector('.savings-amount');
-            if (discountAmountElement) {
-              discountAmountElement.textContent = savings.toFixed(2);
-            }
-          }
-
           // Countdown Timer for promo ticker
           function updatePromoCountdown() {
-            const countDownDate = new Date('2025-07-31T23:59:59').getTime();
+            const countDownDate = new Date('2025-09-30T23:59:59').getTime();
             const now = new Date().getTime();
             const distance = countDownDate - now;
 
@@ -323,23 +289,9 @@
             }
           }
 
-          // Initialize when DOM is ready
-          document.addEventListener('DOMContentLoaded', function() {
-            // Initial price update
-            updatePromoTickerPrices();
-            
-            // Listen for variant changes on main form
-            const productSelect = document.getElementById('productSelect');
-            if (productSelect) {
-              productSelect.addEventListener('change', function() {
-                setTimeout(updatePromoTickerPrices, 100); // Small delay to ensure price updates
-              });
-            }
-            
-            // Start countdown
-            updatePromoCountdown();
-            setInterval(updatePromoCountdown, 60000); // Update every minute
-          });
+          // Start countdown
+          updatePromoCountdown();
+          setInterval(updatePromoCountdown, 60000); // Update every minute
         </script>
 
       </div>
@@ -348,21 +300,20 @@
     <style>
       .promo-elements-container {
         display: flex;
-        gap: 6px;
+        gap: 8px;
         align-items: stretch;
         flex-wrap: nowrap;
         margin: 4px 0;
         width: 100%;
-        max-width: 100%;
       }
 
       .compact-promo-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
-        border-radius: 10px;
-        padding: 8px;
-        flex: 1;
+        border-radius: 12px;
+        padding: 12px;
+        flex: 0 0 55%;
         min-width: 0;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
       }
@@ -382,8 +333,10 @@
         border-radius: 8px;
         font-size: 8px;
         font-weight: 700;
+        gap:5px;
         text-align: center;
-        display: inline-block;
+        display: flex;
+        align-items: center;
         flex-shrink: 0;
       }
 
@@ -476,14 +429,14 @@
       }
 
       .savings-label {
-        font-size: 9px;
+        font-size: 13px;
         color: #ffc107;
         font-weight: 600;
         margin-bottom: 2px;
       }
 
       .savings-amount {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 900;
         color: white;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -509,46 +462,38 @@
       /* Mobile responsiveness */
       @media (max-width: 768px) {
         .promo-elements-container {
-          flex-direction: row;
-          gap: 4px;
+          flex-direction: column;
+          gap: 8px;
           width: 100%;
-          flex-wrap: wrap;
-        }
-
-        .compact-price-display {
-          flex: 1 1 100%;
-          min-width: 100%;
-          order: -1;
-          margin-bottom: 4px;
         }
 
         .compact-promo-card {
-          flex: 1 1 100%;
-          padding: 8px;
+          width: 100%;
+          padding: 10px;
         }
 
         .promo-header {
-          margin-bottom: 4px;
+          margin-bottom: 6px;
         }
 
         .promo-badge {
-          font-size: 7px;
-          padding: 2px 4px;
+          font-size: 10px;
+          padding: 2px 6px;
         }
 
         .timer-label {
           font-size: 7px;
-          padding: 1px 2px;
+          padding: 1px 3px;
         }
 
         .timer-unit {
-          min-width: 18px;
-          padding: 2px;
-          gap: 2px;
+          min-width: 20px;
+          padding: 2px 3px;
+          gap: 3px;
         }
 
         .timer-unit span {
-          font-size: 9px;
+          font-size: 10px;
         }
 
         .timer-unit label {
@@ -556,28 +501,28 @@
         }
 
         .promo-content {
-          gap: 6px;
+          gap: 8px;
         }
 
         .discount-circle {
-          width: 35px;
-          height: 35px;
+          width: 40px;
+          height: 40px;
         }
 
         .discount-percent {
-          font-size: 11px;
+          font-size: 12px;
         }
 
         .discount-off {
-          font-size: 5px;
+          font-size: 6px;
         }
 
         .savings-label {
-          font-size: 7px;
+          font-size: 8px;
         }
 
         .savings-amount {
-          font-size: 12px;
+          font-size: 14px;
         }
       }
     </style>
@@ -588,10 +533,10 @@
       .compact-price-display {
         background: #f8fdf9;
         border-radius: 8px;
-        padding: 6px;
+        padding: 8px;
         border: 1px solid #d1f2dd;
-        flex: 1;
-        min-width: 120px;
+        flex: 0 0 45%;
+        min-width: 140px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -612,10 +557,12 @@
       }
 
       .final-price-value {
-        color: #059669;
-        font-size: 16px;
-        font-weight: 900;
-        font-family: 'Arial', sans-serif;
+      font-size:30px;
+    font-weight: 900;
+    color: #dc3545;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
       }
 
       .compact-savings-badge {
@@ -628,7 +575,7 @@
 
       .savings-text {
         font-weight: 600;
-        font-size: 9px;
+        font-size: 14px;
       }
 
       /* Template-specific adjustments */
