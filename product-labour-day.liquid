@@ -620,6 +620,35 @@
     {% if bold_variants_size == 1 and bold_selected_or_first_available_variant.title contains 'Default' %}
       $('.selector-wrapper').hide();
     {% endif %}
+
+    // Listen for sticky cart updates
+    document.addEventListener('variantchange', function(event) {
+      console.log('Received variant change from sticky cart:', event.detail);
+      
+      // Find and select the variant
+      const variantId = event.detail.variant;
+      const productSelect = document.getElementById('productSelect');
+      
+      if (productSelect && productSelect.value !== variantId) {
+        productSelect.value = variantId;
+        
+        // Trigger the Shopify option selector
+        const changeEvent = new Event('change', { bubbles: true });
+        productSelect.dispatchEvent(changeEvent);
+      }
+    });
+
+    // Listen for quantity changes from sticky cart
+    document.addEventListener('quantitychange', function(event) {
+      if (event.detail.source !== 'sticky') return;
+      
+      console.log('Received quantity change from sticky cart:', event.detail.quantity);
+      
+      const mainQty = document.getElementById('Quantity');
+      if (mainQty && parseInt(mainQty.value) !== event.detail.quantity) {
+        mainQty.value = event.detail.quantity;
+      }
+    });
   });
 </script>
 <style>

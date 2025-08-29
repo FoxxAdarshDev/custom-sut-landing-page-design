@@ -503,11 +503,30 @@ function syncVariantToMain() {
 
   if (mainSelect && stickySelect && mainSelect.value !== stickySelect.value) {
     console.log('Syncing variant to main form:', stickySelect.value);
+    
+    // Update main select value
     mainSelect.value = stickySelect.value;
 
-    // Trigger change event on main selector to update pricing and other dependencies
-    const changeEvent = new Event('change', { bubbles: true });
-    mainSelect.dispatchEvent(changeEvent);
+    // Trigger multiple events to ensure all dependencies are updated
+    const events = ['change', 'input'];
+    events.forEach(eventType => {
+      const event = new Event(eventType, { bubbles: true });
+      mainSelect.dispatchEvent(event);
+    });
+
+    // Also trigger Shopify's option selector change if it exists
+    if (window.Shopify && window.Shopify.OptionSelectors) {
+      const optionSelectors = window.Shopify.OptionSelectors;
+      if (optionSelectors && typeof optionSelectors.onVariantSelected === 'function') {
+        // Force Shopify to update
+        setTimeout(() => {
+          const customEvent = new CustomEvent('variantchange', {
+            detail: { variant: stickySelect.value }
+          });
+          document.dispatchEvent(customEvent);
+        }, 50);
+      }
+    }
 
     // Small delay to ensure main form updates first
     setTimeout(() => {
@@ -518,7 +537,7 @@ function syncVariantToMain() {
       document.dispatchEvent(new CustomEvent('stickyVariantChange', {
         detail: { variantId: stickySelect.value }
       }));
-    }, 100);
+    }, 150);
   }
 }
 
@@ -550,15 +569,27 @@ function syncQuantityToMain() {
 
   if (mainQty && stickyQty) {
     const newValue = parseInt(stickyQty.value) || 1;
-    mainQty.value = newValue;
+    const currentMainValue = parseInt(mainQty.value) || 1;
     
-    // Trigger change and input events to update any dependent calculations
-    const changeEvent = new Event('change', { bubbles: true });
-    const inputEvent = new Event('input', { bubbles: true });
-    mainQty.dispatchEvent(changeEvent);
-    mainQty.dispatchEvent(inputEvent);
-    
-    console.log('Synced quantity to main form:', newValue);
+    // Only update if values are different
+    if (newValue !== currentMainValue) {
+      mainQty.value = newValue;
+      
+      // Trigger multiple events to ensure all dependencies are updated
+      const events = ['input', 'change', 'keyup'];
+      events.forEach(eventType => {
+        const event = new Event(eventType, { bubbles: true });
+        mainQty.dispatchEvent(event);
+      });
+      
+      // Also dispatch a custom event for any other listeners
+      const customEvent = new CustomEvent('quantitychange', {
+        detail: { quantity: newValue, source: 'sticky' }
+      });
+      document.dispatchEvent(customEvent);
+      
+      console.log('Synced quantity to main form:', newValue);
+    }
   }
 }
 
@@ -673,11 +704,22 @@ function initStickyLaborCart() {
     if (mainQty) {
       mainQty.addEventListener('change', () => {
         console.log('Main quantity changed:', mainQty.value);
-        syncQuantityFromMain();
+        setTimeout(() => {
+          syncQuantityFromMain();
+        }, 50);
       });
       mainQty.addEventListener('input', () => {
         console.log('Main quantity input:', mainQty.value);
-        syncQuantityFromMain();
+        setTimeout(() => {
+          syncQuantityFromMain();
+        }, 50);
+      });
+      // Also listen for keyup events
+      mainQty.addEventListener('keyup', () => {
+        console.log('Main quantity keyup:', mainQty.value);
+        setTimeout(() => {
+          syncQuantityFromMain();
+        }, 50);
       });
     }
 
@@ -694,6 +736,14 @@ function initStickyLaborCart() {
     if (stickyQty) {
       stickyQty.addEventListener('change', () => {
         console.log('Sticky quantity changed:', stickyQty.value);
+        syncQuantityToMain();
+      });
+      stickyQty.addEventListener('input', () => {
+        console.log('Sticky quantity input:', stickyQty.value);
+        syncQuantityToMain();
+      });
+      stickyQty.addEventListener('keyup', () => {
+        console.log('Sticky quantity keyup:', stickyQty.value);
         syncQuantityToMain();
       });
     }
