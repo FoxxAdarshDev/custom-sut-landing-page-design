@@ -14,15 +14,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 8px;
-    background: linear-gradient(90deg, #b22234 0%, #b22234 33%, #ffffff 33%, #ffffff 66%, #3c3b6e 66%, #3c3b6e 100%);
-    background-size: 60px 8px;
-    animation: wave 2s linear infinite;
-  }
-
-  @keyframes wave {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 0; }
+    height: 6px;
+    background: linear-gradient(90deg, #b22234 0%, #ffffff 50%, #3c3b6e 100%);
   }
 
   .sale-header {
@@ -43,22 +36,22 @@
   }
 
   .sale-header::before {
-    content: '🇺🇸';
+    content: '⚒️';
     position: absolute;
     top: 20px;
     left: 30px;
     font-size: 2rem;
-    opacity: 0.3;
+    opacity: 0.4;
     animation: pulse 2s infinite;
   }
 
   .sale-header::after {
-    content: '🇺🇸';
+    content: '🏭';
     position: absolute;
     bottom: 20px;
     right: 30px;
     font-size: 2rem;
-    opacity: 0.3;
+    opacity: 0.4;
     animation: pulse 2s infinite 1s;
   }
 
@@ -141,19 +134,38 @@
   .sale-header .discount {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 900;
-    background: linear-gradient(135deg, #b22234 0%, #ffffff 25%, #3c3b6e 50%, #ffffff 75%, #b22234 100%);
+    background: linear-gradient(135deg, #b22234 0%, #ffffff 50%, #3c3b6e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 15px;
     letter-spacing: 2px;
-    text-shadow: 0 4px 8px rgba(178, 34, 52, 0.3);
-    animation: flagWave 4s ease-in-out infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    opacity: 1;
   }
 
-  @keyframes flagWave {
-    0%, 100% { background-size: 200% 100%; background-position: 0% 50%; }
-    50% { background-size: 200% 100%; background-position: 100% 50%; }
+  .flag-wave {
+    position: relative;
+    display: inline-block;
+  }
+
+  .flag-wave::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #b22234 25%, transparent 25%, transparent 50%, #b22234 50%, #b22234 75%, transparent 75%);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    z-index: -1;
+    animation: slideFlag 3s linear infinite;
+  }
+
+  @keyframes slideFlag {
+    0% { transform: translateX(-20px); }
+    100% { transform: translateX(20px); }
   }
 
   .sale-subtitle {
@@ -203,7 +215,7 @@
 
   .header-timer-label::before,
   .header-timer-label::after {
-    content: '🇺🇸';
+    content: '⚒️';
     font-size: 1rem;
     animation: patrioticPulse 2s ease-in-out infinite;
   }
@@ -2300,11 +2312,11 @@
 <div class="modern-sale-container">
   <div class="sale-header">
     <div class="hero-left">
-      <div class="sale-badge">🇺🇸 LIMITED TIME OFFER 🇺🇸</div>
+      <div class="sale-badge">⚒️ LABOR DAY SALE ⚒️</div>
       <h1>Our <span class="gradient-text">Biggest Labor Day Sale!</span></h1>
       <div class="discount">FLAT 20% OFF</div>
       <div class="sale-subtitle">
-        Elevate Your Lab Game with EZBio® – Now at 20% Off!
+        Celebrate American Labor with EZBio® – Premium Lab Equipment at 20% Off!
       </div>
       <a href="#products-section" class="shop-now-cta" onclick="scrollToProducts()">Shop Now & Save Big!</a>
     </div>
