@@ -161,12 +161,48 @@
   gap: 10px;
 }
 
+.sticky-variant-controls {
+  margin-bottom: 10px;
+}
+
+.sticky-variant-select {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #1e3a8a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #1e3a8a;
+  font-weight: 600;
+  width: 100%;
+  max-width: 200px;
+}
+
 .sticky-quantity-controls {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   padding: 2px;
+  gap: 2px;
+}
+
+.sticky-qty-btn {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticky-qty-btn:hover {
+  background: #2563eb;
 }
 
 .sticky-qty-input {
@@ -174,7 +210,7 @@
   border: none;
   color: #1e3a8a;
   text-align: center;
-  width: 60px;
+  width: 50px;
   font-size: 14px;
   font-weight: 600;
   padding: 4px;
@@ -329,19 +365,27 @@
     </div>
     
     <div class="sticky-cart-actions">
-      <div class="sticky-quantity-controls">
-        <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" onchange="syncQuantityToMain()">
+        <div class="sticky-variant-controls" id="stickyVariantSection" style="display: none;">
+          <select id="stickyVariantSelect" class="sticky-variant-select" onchange="syncVariantToMain()">
+            <!-- Options will be populated by JavaScript -->
+          </select>
+        </div>
+        
+        <div class="sticky-quantity-controls">
+          <button type="button" onclick="decreaseQuantity()" class="sticky-qty-btn">-</button>
+          <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" onchange="syncQuantityToMain()">
+          <button type="button" onclick="increaseQuantity()" class="sticky-qty-btn">+</button>
+        </div>
+        
+        <button class="sticky-add-to-cart" onclick="addToCartFromSticky()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+          </svg>
+          Add to Cart
+        </button>
+        
+        <button class="sticky-close" onclick="hideStickyCart()">×</button>
       </div>
-      
-      <button class="sticky-add-to-cart" onclick="addToCartFromSticky()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
-        </svg>
-        Add to Cart
-      </button>
-      
-      <button class="sticky-close" onclick="hideStickyCart()">×</button>
-    </div>
   </div>
 </div>
 
@@ -401,6 +445,62 @@ function updateStickyCountdown() {
   }
 }
 
+// Populate sticky variant selector
+function populateStickyVariants() {
+  const mainSelect = document.getElementById('productSelect');
+  const stickySelect = document.getElementById('stickyVariantSelect');
+  const stickyVariantSection = document.getElementById('stickyVariantSection');
+  
+  if (mainSelect && stickySelect) {
+    // Clear existing options
+    stickySelect.innerHTML = '';
+    
+    // Copy options from main selector
+    Array.from(mainSelect.options).forEach(option => {
+      const newOption = option.cloneNode(true);
+      stickySelect.appendChild(newOption);
+    });
+    
+    // Show variant section if there are multiple options
+    if (stickySelect.options.length > 1) {
+      stickyVariantSection.style.display = 'block';
+    }
+    
+    // Sync initial selection
+    stickySelect.value = mainSelect.value;
+  }
+}
+
+// Sync variant selection to main form
+function syncVariantToMain() {
+  const stickySelect = document.getElementById('stickyVariantSelect');
+  const mainSelect = document.getElementById('productSelect');
+  
+  if (mainSelect && stickySelect) {
+    mainSelect.value = stickySelect.value;
+    
+    // Trigger change event on main selector to update pricing
+    const changeEvent = new Event('change', { bubbles: true });
+    mainSelect.dispatchEvent(changeEvent);
+    
+    // Update sticky prices and SKU
+    updateStickyPrices();
+    updateStickySKU();
+  }
+}
+
+// Sync variant selection from main form
+function syncVariantFromMain() {
+  const mainSelect = document.getElementById('productSelect');
+  const stickySelect = document.getElementById('stickyVariantSelect');
+  
+  if (mainSelect && stickySelect) {
+    stickySelect.value = mainSelect.value;
+    updateStickyPrices();
+    updateStickySKU();
+  }
+}
+
 // Sync quantity with main product form
 function syncQuantityToMain() {
   const stickyQty = document.getElementById('stickyQuantity');
@@ -411,16 +511,64 @@ function syncQuantityToMain() {
   }
 }
 
+// Sync quantity from main form
+function syncQuantityFromMain() {
+  const mainQty = document.getElementById('Quantity');
+  const stickyQty = document.getElementById('stickyQuantity');
+  
+  if (mainQty && stickyQty) {
+    stickyQty.value = mainQty.value;
+  }
+}
+
+// Increase quantity
+function increaseQuantity() {
+  const stickyQty = document.getElementById('stickyQuantity');
+  if (stickyQty) {
+    stickyQty.value = parseInt(stickyQty.value) + 1;
+    syncQuantityToMain();
+  }
+}
+
+// Decrease quantity
+function decreaseQuantity() {
+  const stickyQty = document.getElementById('stickyQuantity');
+  if (stickyQty && parseInt(stickyQty.value) > 1) {
+    stickyQty.value = parseInt(stickyQty.value) - 1;
+    syncQuantityToMain();
+  }
+}
+
 // Add to cart from sticky bar
 function addToCartFromSticky() {
+  const stickyQty = document.getElementById('stickyQuantity');
+  const stickySelect = document.getElementById('stickyVariantSelect');
+  const mainQty = document.getElementById('Quantity');
+  const mainSelect = document.getElementById('productSelect');
+  
+  // Sync everything first
+  if (mainQty && stickyQty) {
+    mainQty.value = stickyQty.value;
+  }
+  
+  if (mainSelect && stickySelect) {
+    mainSelect.value = stickySelect.value;
+  }
+  
+  // Trigger the main add to cart button
   const mainAddToCartBtn = document.getElementById('AddToCart');
   if (mainAddToCartBtn) {
-    // Sync quantities first
-    const stickyQty = document.getElementById('stickyQuantity').value;
-    const mainQty = document.getElementById('Quantity');
-    if (mainQty) mainQty.value = stickyQty;
+    // Create a custom event to ensure proper quantity is used
+    const customEvent = new CustomEvent('stickyAddToCart', {
+      detail: { 
+        quantity: stickyQty ? parseInt(stickyQty.value) : 1,
+        variantId: stickySelect ? stickySelect.value : (mainSelect ? mainSelect.value : null)
+      }
+    });
     
-    // Trigger main add to cart
+    document.dispatchEvent(customEvent);
+    
+    // Also click the main button as fallback
     mainAddToCartBtn.click();
     
     // Show success animation
@@ -452,6 +600,9 @@ function initStickyLaborCart() {
     stickyCart.style.display = 'block';
   }
   
+  // Populate variant selector
+  populateStickyVariants();
+  
   // Update prices initially
   updateStickyPrices();
   updateStickySKU();
@@ -460,22 +611,28 @@ function initStickyLaborCart() {
   updateStickyCountdown();
   setInterval(updateStickyCountdown, 60000); // Update every minute
   
-  // Listen for variant changes
+  // Listen for variant changes on main form
   const productSelect = document.getElementById('productSelect');
   if (productSelect) {
     productSelect.addEventListener('change', () => {
-      updateStickyPrices();
-      updateStickySKU();
+      syncVariantFromMain();
     });
   }
   
-  // Sync quantity changes
+  // Listen for quantity changes on main form
   const mainQty = document.getElementById('Quantity');
   if (mainQty) {
     mainQty.addEventListener('change', () => {
-      document.getElementById('stickyQuantity').value = mainQty.value;
+      syncQuantityFromMain();
+    });
+    mainQty.addEventListener('input', () => {
+      syncQuantityFromMain();
     });
   }
+  
+  // Initial sync
+  syncQuantityFromMain();
+  syncVariantFromMain();
 }
 
 // Initialize when DOM is ready

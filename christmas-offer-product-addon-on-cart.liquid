@@ -16,7 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const form = document.getElementById('AddToCartForm');
             const selectedVariantId = form.querySelector('#productSelect').value;
-            const qty = parseInt(this.getAttribute('data-qty'), 10) || 1; // Default quantity to 1 if not provided
+            
+            // Get quantity from main form or sticky cart
+            let qty = parseInt(document.getElementById('Quantity')?.value || '1', 10);
+            
+            // Check if quantity was set by sticky cart
+            const stickyQty = document.getElementById('stickyQuantity');
+            if (stickyQty && parseInt(stickyQty.value) > 1) {
+                qty = parseInt(stickyQty.value, 10);
+            }
 
             try {
                 await addItemToCart(selectedVariantId, qty);
@@ -262,6 +270,21 @@ document.addEventListener('DOMContentLoaded', function () {
             notification.remove();
         }
     }
+
+    // Listen for custom sticky cart events
+    document.addEventListener('stickyAddToCart', async function(event) {
+        const { quantity, variantId } = event.detail;
+        
+        try {
+            await addItemToCart(variantId, quantity);
+            console.log(`Product ${variantId} with quantity ${quantity} added to cart from sticky`);
+            await showNotification('Product added to cart!', true);
+            await updateCartCount();
+            await updateCartDisplay();
+        } catch (error) {
+            console.error('Error processing sticky cart:', error);
+        }
+    });
 
     // Ensure the view cart button visibility is set correctly on load
     updateCartDisplay();
