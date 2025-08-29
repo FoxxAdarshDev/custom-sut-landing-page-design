@@ -3,7 +3,7 @@
 /* Sticky Bottom Cart Bar */
 .sticky-labor-cart {
   position: fixed;
-  bottom: -120px; /* Start hidden below screen */
+  bottom: 0; /* Always visible at bottom */
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
@@ -11,15 +11,8 @@
   z-index: 1000;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.sticky-labor-cart.show {
-  bottom: 0;
   opacity: 1;
   visibility: visible;
 }
@@ -251,7 +244,7 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .sticky-labor-cart {
-    bottom: -140px; /* Adjust for mobile */
+    bottom: 0; /* Always visible on mobile too */
   }
   
   .sticky-cart-content {
@@ -376,28 +369,8 @@
 
 <script>
 // Sticky Labor Day Cart Functionality
-let stickyCartVisible = false;
+let stickyCartVisible = true; // Always visible now
 let currentDiscountPercent = 20; // Default discount
-
-// Show/Hide sticky cart based on scroll
-function handleStickyCartScroll() {
-  const scrollPosition = window.scrollY;
-  const viewportHeight = window.innerHeight;
-  const triggerPosition = 200; // Show after scrolling 200px down
-  const stickyCart = document.getElementById('stickyLaborCart');
-  
-  if (!stickyCart) return;
-  
-  if (scrollPosition > triggerPosition && !stickyCartVisible) {
-    stickyCart.classList.add('show');
-    stickyCartVisible = true;
-    console.log('Sticky cart shown at scroll position:', scrollPosition);
-  } else if (scrollPosition <= triggerPosition && stickyCartVisible) {
-    stickyCart.classList.remove('show');
-    stickyCartVisible = false;
-    console.log('Sticky cart hidden at scroll position:', scrollPosition);
-  }
-}
 
 // Update sticky cart prices based on promo ticker logic
 function updateStickyPrices() {
@@ -499,7 +472,7 @@ function addToCartFromSticky() {
 // Hide sticky cart
 function hideStickyCart() {
   const stickyCart = document.getElementById('stickyLaborCart');
-  stickyCart.classList.remove('show');
+  stickyCart.style.display = 'none';
   stickyCartVisible = false;
   
   // Remember user preference
@@ -510,15 +483,12 @@ function hideStickyCart() {
 function initStickyLaborCart() {
   // Check if user previously hid the cart
   if (sessionStorage.getItem('stickyCartHidden') === 'true') {
+    const stickyCart = document.getElementById('stickyLaborCart');
+    if (stickyCart) {
+      stickyCart.style.display = 'none';
+    }
     return;
   }
-  
-  // Add throttled scroll listener for better performance
-  let scrollTimeout;
-  window.addEventListener('scroll', function() {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(handleStickyCartScroll, 10);
-  });
   
   // Update prices initially
   updateStickyPrices();
