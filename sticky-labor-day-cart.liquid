@@ -514,6 +514,11 @@ function syncVariantToMain() {
     // Update sticky prices and SKU
     updateStickyPrices();
     updateStickySKU();
+    
+    // Dispatch event for promo ticker
+    document.dispatchEvent(new CustomEvent('stickyVariantChange', {
+      detail: { variantId: stickySelect.value }
+    }));
   }
 }
 
@@ -526,6 +531,11 @@ function syncVariantFromMain() {
     stickySelect.value = mainSelect.value;
     updateStickyPrices();
     updateStickySKU();
+    
+    // Dispatch event for promo ticker
+    document.dispatchEvent(new CustomEvent('stickyVariantChange', {
+      detail: { variantId: mainSelect.value }
+    }));
   }
 }
 

@@ -289,9 +289,74 @@
             }
           }
 
-          // Start countdown
+          // Function to update promo ticker prices based on current variant
+          function updatePromoTickerPrices() {
+            const productSelect = document.getElementById('productSelect');
+            if (!productSelect) return;
+            
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            if (!selectedOption) return;
+            
+            // Extract price from the option text (format: "Title - $XX.XX")
+            const priceText = selectedOption.text.split(' - $')[1];
+            if (!priceText) return;
+            
+            const currentPrice = parseFloat(priceText.replace(/[^\d.]/g, ''));
+            if (isNaN(currentPrice)) return;
+            
+            // Apply the discount percentage from the liquid template
+            const discountPercent = {{ percent_tag | default: 20 }};
+            const discountedPrice = currentPrice * (1 - discountPercent / 100);
+            const savings = currentPrice - discountedPrice;
+            
+            // Update the final price display
+            const finalPriceElement = document.querySelector('.final-price-value');
+            if (finalPriceElement) {
+              finalPriceElement.textContent = '$' + discountedPrice.toFixed(2);
+            }
+            
+            // Update savings display
+            const savingsElement = document.querySelector('.savings-text');
+            if (savingsElement) {
+              savingsElement.textContent = 'You Save ($' + savings.toFixed(2) + ' overall)';
+            }
+            
+            console.log('Promo ticker updated:', {
+              originalPrice: currentPrice,
+              discountedPrice: discountedPrice,
+              savings: savings
+            });
+          }
+
+          // Listen for variant changes
+          function initPromoTickerSync() {
+            const productSelect = document.getElementById('productSelect');
+            if (productSelect) {
+              // Update on variant change
+              productSelect.addEventListener('change', function() {
+                setTimeout(updatePromoTickerPrices, 100);
+              });
+              
+              // Initial update
+              setTimeout(updatePromoTickerPrices, 500);
+            }
+            
+            // Also listen for sticky cart changes
+            document.addEventListener('stickyVariantChange', function() {
+              setTimeout(updatePromoTickerPrices, 100);
+            });
+          }
+
+          // Start countdown and sync
           updatePromoCountdown();
           setInterval(updatePromoCountdown, 60000); // Update every minute
+          
+          // Initialize promo ticker sync when DOM is ready
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPromoTickerSync);
+          } else {
+            initPromoTickerSync();
+          }
         </script>
 
       </div>
