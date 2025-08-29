@@ -10,36 +10,62 @@
     <style>
 
 .black-friday-sale-menu-link-desktop {
-  background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
-  background-size: 300% 300%; /* Larger than the element to enable movement */
+  background: linear-gradient(45deg, #b22234 0%, #ffffff 25%, #3c3b6e 50%, #ffffff 75%, #b22234 100%);
+  background-size: 400% 400%;
   color: #ffffff;
-  padding: 10px 5px;
-  font-weight: 500;
+  padding: 12px 16px;
+  font-weight: 700;
   font-size: 14px;
-  border-radius: 10px;
-  letter-spacing: 0.5px;
+  border-radius: 25px;
+  letter-spacing: 1px;
   text-align: center;
   display: inline-block;
-  animation: movingBackground 5s linear infinite; /* Add background animation */
-  text-decoration: none; /* Ensure the link looks clean */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  animation: americanFlag 4s ease-in-out infinite;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(178, 34, 52, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 }
 
+.black-friday-sale-menu-link-desktop::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
+}
+
+.black-friday-sale-menu-link-desktop:hover::before {
+  left: 100%;
+}
 
 a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-desktop:active {
-  color:#ffff!important
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(178, 34, 52, 0.6);
 }
-@keyframes movingBackground {
+
+@keyframes americanFlag {
   0% {
     background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 25%;
   }
   50% {
     background-position: 100% 50%;
   }
+  75% {
+    background-position: 50% 75%;
+  }
   100% {
-    background-position: 0% 50%; 
+    background-position: 0% 50%;
   }
 }
 
@@ -220,7 +246,7 @@ a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-deskt
   background: transparent !important;
 }
     </style>
-<a href="/pages/ezbio-lab-essentials-sale-up-to-25-off-centrifuge-vacuum-assemblies" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Foxx Summer Sale</a> 
+<a href="/pages/labor-day-lab-essentials-sale-up-to-15-off-bioprocess-components-bottles-carboys" target="_blank" follow="no-follow" class="black-friday-sale-menu-link-desktop ">Labor Day Sale</a> 
     
   {% endif %}  
  {% comment %} <a href="/pages/us-independence-day-sale-25" style="
