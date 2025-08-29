@@ -254,6 +254,44 @@
         {% endif %}
 
         <script>
+          // Update promo ticker prices based on selected variant
+          function updatePromoTickerPrices() {
+            const productSelect = document.getElementById('productSelect');
+            if (!productSelect) return;
+            
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const selectedVariantText = selectedOption.text;
+            
+            // Extract price from variant text (format: "Variant - $XX.XX")
+            const priceMatch = selectedVariantText.match(/\$([0-9,]+\.?[0-9]*)/);
+            if (!priceMatch) return;
+            
+            const currentPrice = parseFloat(priceMatch[1].replace(/,/g, ''));
+            
+            // Calculate discounted price (20% off for Labor Day)
+            const discountPercent = {{ percent_tag | default: 20 }};
+            const discountedPrice = currentPrice * (1 - discountPercent / 100);
+            const savings = currentPrice - discountedPrice;
+            
+            // Update final price display
+            const finalPriceElement = document.querySelector('.final-price-value');
+            if (finalPriceElement) {
+              finalPriceElement.textContent = '$' + discountedPrice.toFixed(2);
+            }
+            
+            // Update savings amount display
+            const savingsAmountElement = document.querySelector('.savings-amount');
+            if (savingsAmountElement) {
+              savingsAmountElement.textContent = '$' + savings.toFixed(2);
+            }
+            
+            // Update discount amount in promo card
+            const discountAmountElement = document.querySelector('.savings-amount');
+            if (discountAmountElement) {
+              discountAmountElement.textContent = savings.toFixed(2);
+            }
+          }
+
           // Countdown Timer for promo ticker
           function updatePromoCountdown() {
             const countDownDate = new Date('2025-07-31T23:59:59').getTime();
@@ -285,9 +323,23 @@
             }
           }
 
-          // Start countdown
-          updatePromoCountdown();
-          setInterval(updatePromoCountdown, 60000); // Update every minute
+          // Initialize when DOM is ready
+          document.addEventListener('DOMContentLoaded', function() {
+            // Initial price update
+            updatePromoTickerPrices();
+            
+            // Listen for variant changes on main form
+            const productSelect = document.getElementById('productSelect');
+            if (productSelect) {
+              productSelect.addEventListener('change', function() {
+                setTimeout(updatePromoTickerPrices, 100); // Small delay to ensure price updates
+              });
+            }
+            
+            // Start countdown
+            updatePromoCountdown();
+            setInterval(updatePromoCountdown, 60000); // Update every minute
+          });
         </script>
 
       </div>
@@ -296,20 +348,21 @@
     <style>
       .promo-elements-container {
         display: flex;
-        gap: 8px;
+        gap: 6px;
         align-items: stretch;
         flex-wrap: nowrap;
         margin: 4px 0;
         width: 100%;
+        max-width: 100%;
       }
 
       .compact-promo-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
-        border-radius: 12px;
-        padding: 12px;
-        flex: 0 0 55%;
+        border-radius: 10px;
+        padding: 8px;
+        flex: 1;
         min-width: 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
       }
@@ -456,38 +509,46 @@
       /* Mobile responsiveness */
       @media (max-width: 768px) {
         .promo-elements-container {
-          flex-direction: column;
-          gap: 8px;
+          flex-direction: row;
+          gap: 4px;
           width: 100%;
+          flex-wrap: wrap;
+        }
+
+        .compact-price-display {
+          flex: 1 1 100%;
+          min-width: 100%;
+          order: -1;
+          margin-bottom: 4px;
         }
 
         .compact-promo-card {
-          width: 100%;
-          padding: 10px;
+          flex: 1 1 100%;
+          padding: 8px;
         }
 
         .promo-header {
-          margin-bottom: 6px;
+          margin-bottom: 4px;
         }
 
         .promo-badge {
           font-size: 7px;
-          padding: 2px 6px;
+          padding: 2px 4px;
         }
 
         .timer-label {
           font-size: 7px;
-          padding: 1px 3px;
+          padding: 1px 2px;
         }
 
         .timer-unit {
-          min-width: 20px;
-          padding: 2px 3px;
-          gap: 3px;
+          min-width: 18px;
+          padding: 2px;
+          gap: 2px;
         }
 
         .timer-unit span {
-          font-size: 10px;
+          font-size: 9px;
         }
 
         .timer-unit label {
@@ -495,28 +556,28 @@
         }
 
         .promo-content {
-          gap: 8px;
+          gap: 6px;
         }
 
         .discount-circle {
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
         }
 
         .discount-percent {
-          font-size: 12px;
+          font-size: 11px;
         }
 
         .discount-off {
-          font-size: 6px;
+          font-size: 5px;
         }
 
         .savings-label {
-          font-size: 8px;
+          font-size: 7px;
         }
 
         .savings-amount {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
     </style>
@@ -527,10 +588,10 @@
       .compact-price-display {
         background: #f8fdf9;
         border-radius: 8px;
-        padding: 8px;
+        padding: 6px;
         border: 1px solid #d1f2dd;
-        flex: 0 0 45%;
-        min-width: 140px;
+        flex: 1;
+        min-width: 120px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
