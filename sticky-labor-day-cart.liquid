@@ -1,0 +1,534 @@
+
+<style>
+/* Sticky Bottom Cart Bar */
+.sticky-labor-cart {
+  position: fixed;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+  padding: 12px 20px;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: bottom 0.3s ease-in-out;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.sticky-labor-cart.show {
+  bottom: 0;
+}
+
+.sticky-cart-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.sticky-cart-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.sticky-product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sticky-product-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  padding: 2px;
+}
+
+.sticky-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sticky-product-details h4 {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.sticky-sku {
+  color: #ffc107;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sticky-price-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sticky-sale-badge {
+  background: #ffc107;
+  color: #1e3a8a;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sticky-price-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sticky-original-price {
+  color: #ffffff80;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.sticky-final-price {
+  color: #ffc107;
+  font-size: 20px;
+  font-weight: 900;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sticky-savings {
+  color: #10b981;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.sticky-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sticky-timer-label {
+  color: #ffc107;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sticky-countdown {
+  display: flex;
+  gap: 4px;
+}
+
+.sticky-time-unit {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 2px 4px;
+  text-align: center;
+  min-width: 20px;
+}
+
+.sticky-time-unit span {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  color: #1e3a8a;
+  line-height: 1;
+}
+
+.sticky-time-unit label {
+  font-size: 7px;
+  font-weight: 700;
+  color: #dc2626;
+  line-height: 1;
+}
+
+.sticky-cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sticky-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.sticky-qty-btn {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a8a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sticky-qty-btn:hover {
+  background: #ffc107;
+}
+
+.sticky-qty-input {
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  width: 30px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sticky-add-to-cart {
+  background: linear-gradient(45deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.sticky-add-to-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.sticky-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.sticky-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sticky-cart-content {
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 0;
+  }
+  
+  .sticky-cart-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .sticky-cart-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .sticky-product-details h4 {
+    font-size: 12px;
+  }
+  
+  .sticky-final-price {
+    font-size: 18px;
+  }
+  
+  .sticky-add-to-cart {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticky-labor-cart {
+    padding: 8px 15px;
+  }
+  
+  .sticky-product-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sticky-timer {
+    display: none;
+  }
+  
+  .sticky-countdown {
+    gap: 2px;
+  }
+  
+  .sticky-time-unit {
+    min-width: 18px;
+    padding: 1px 2px;
+  }
+}
+</style>
+
+<!-- Sticky Labor Day Cart Bar -->
+<div class="sticky-labor-cart" id="stickyLaborCart">
+  <div class="sticky-cart-content">
+    <div class="sticky-cart-left">
+      <div class="sticky-product-info">
+        <div class="sticky-product-image">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '100x100' }}" alt="{{ product.title }}">
+          {% else %}
+            <div style="color: #666; font-size: 20px; display: flex; align-items: center; justify-content: center; height: 100%;">📦</div>
+          {% endif %}
+        </div>
+        <div class="sticky-product-details">
+          <h4>{{ product.title | truncate: 40 }}</h4>
+          <div class="sticky-sku">SKU: <span class="sticky-current-sku">{{ product.variants.first.sku }}</span></div>
+        </div>
+      </div>
+      
+      <div class="sticky-price-section">
+        <div class="sticky-sale-badge">Labour Special</div>
+        <div class="sticky-price-display">
+          <span class="sticky-original-price" id="stickyOriginalPrice">${{ product.price | money_without_currency }}</span>
+          <span class="sticky-final-price" id="stickyFinalPrice">$0.00</span>
+        </div>
+        <div class="sticky-savings" id="stickySavings">You Save $0.00</div>
+      </div>
+      
+      <div class="sticky-timer">
+        <div class="sticky-timer-label">Sale Ends:</div>
+        <div class="sticky-countdown">
+          <div class="sticky-time-unit">
+            <span id="stickyDays">30</span>
+            <label>D</label>
+          </div>
+          <div class="sticky-time-unit">
+            <span id="stickyHours">22</span>
+            <label>H</label>
+          </div>
+          <div class="sticky-time-unit">
+            <span id="stickyMinutes">48</span>
+            <label>M</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="sticky-cart-actions">
+      <div class="sticky-quantity-controls">
+        <button class="sticky-qty-btn" onclick="decreaseStickyQuantity()">−</button>
+        <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" readonly>
+        <button class="sticky-qty-btn" onclick="increaseStickyQuantity()">+</button>
+      </div>
+      
+      <button class="sticky-add-to-cart" onclick="addToCartFromSticky()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+        </svg>
+        Add to Cart
+      </button>
+      
+      <button class="sticky-close" onclick="hideStickyCart()">×</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Sticky Labor Day Cart Functionality
+let stickyCartVisible = false;
+let currentDiscountPercent = 20; // Default discount
+
+// Show/Hide sticky cart based on scroll
+function handleStickyCartScroll() {
+  const scrollPosition = window.scrollY;
+  const triggerPosition = 500; // Show after scrolling 500px
+  const stickyCart = document.getElementById('stickyLaborCart');
+  
+  if (scrollPosition > triggerPosition && !stickyCartVisible) {
+    stickyCart.classList.add('show');
+    stickyCartVisible = true;
+  } else if (scrollPosition <= triggerPosition && stickyCartVisible) {
+    stickyCart.classList.remove('show');
+    stickyCartVisible = false;
+  }
+}
+
+// Update sticky cart prices based on promo ticker logic
+function updateStickyPrices() {
+  // Get current variant price
+  const productSelect = document.getElementById('productSelect');
+  if (!productSelect) return;
+  
+  const selectedOption = productSelect.options[productSelect.selectedIndex];
+  const currentPrice = parseFloat(selectedOption.text.split('$')[1]?.replace(/[^\d.]/g, '') || '0');
+  
+  // Calculate discounted price (20% off for Labor Day)
+  const discountedPrice = currentPrice * (1 - currentDiscountPercent / 100);
+  const savings = currentPrice - discountedPrice;
+  
+  // Update sticky cart prices
+  document.getElementById('stickyOriginalPrice').textContent = '$' + currentPrice.toFixed(2);
+  document.getElementById('stickyFinalPrice').textContent = '$' + discountedPrice.toFixed(2);
+  document.getElementById('stickySavings').textContent = 'You Save $' + savings.toFixed(2);
+}
+
+// Update sticky cart SKU when variant changes
+function updateStickySKU() {
+  const productSelect = document.getElementById('productSelect');
+  if (!productSelect) return;
+  
+  const selectedOption = productSelect.options[productSelect.selectedIndex];
+  const sku = selectedOption.getAttribute('data-sku') || '';
+  
+  document.querySelector('.sticky-current-sku').textContent = sku;
+}
+
+// Sticky cart countdown timer
+function updateStickyCountdown() {
+  const countDownDate = new Date('2025-09-30T23:59:59').getTime();
+  const now = new Date().getTime();
+  const distance = countDownDate - now;
+
+  if (distance > 0) {
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById('stickyDays').textContent = String(days).padStart(2, '0');
+    document.getElementById('stickyHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('stickyMinutes').textContent = String(minutes).padStart(2, '0');
+  } else {
+    document.getElementById('stickyDays').textContent = '00';
+    document.getElementById('stickyHours').textContent = '00';
+    document.getElementById('stickyMinutes').textContent = '00';
+  }
+}
+
+// Quantity controls
+function increaseStickyQuantity() {
+  const qtyInput = document.getElementById('stickyQuantity');
+  qtyInput.value = parseInt(qtyInput.value) + 1;
+  
+  // Sync with main quantity input
+  const mainQty = document.getElementById('Quantity');
+  if (mainQty) mainQty.value = qtyInput.value;
+}
+
+function decreaseStickyQuantity() {
+  const qtyInput = document.getElementById('stickyQuantity');
+  const currentValue = parseInt(qtyInput.value);
+  if (currentValue > 1) {
+    qtyInput.value = currentValue - 1;
+    
+    // Sync with main quantity input
+    const mainQty = document.getElementById('Quantity');
+    if (mainQty) mainQty.value = qtyInput.value;
+  }
+}
+
+// Add to cart from sticky bar
+function addToCartFromSticky() {
+  const mainAddToCartBtn = document.getElementById('AddToCart');
+  if (mainAddToCartBtn) {
+    // Sync quantities first
+    const stickyQty = document.getElementById('stickyQuantity').value;
+    const mainQty = document.getElementById('Quantity');
+    if (mainQty) mainQty.value = stickyQty;
+    
+    // Trigger main add to cart
+    mainAddToCartBtn.click();
+    
+    // Show success animation
+    const stickyBtn = document.querySelector('.sticky-add-to-cart');
+    const originalText = stickyBtn.innerHTML;
+    stickyBtn.innerHTML = '✓ Added!';
+    stickyBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+    
+    setTimeout(() => {
+      stickyBtn.innerHTML = originalText;
+    }, 2000);
+  }
+}
+
+// Hide sticky cart
+function hideStickyCart() {
+  const stickyCart = document.getElementById('stickyLaborCart');
+  stickyCart.classList.remove('show');
+  stickyCartVisible = false;
+  
+  // Remember user preference
+  sessionStorage.setItem('stickyCartHidden', 'true');
+}
+
+// Initialize sticky cart
+function initStickyLaborCart() {
+  // Check if user previously hid the cart
+  if (sessionStorage.getItem('stickyCartHidden') === 'true') {
+    return;
+  }
+  
+  // Add scroll listener
+  window.addEventListener('scroll', handleStickyCartScroll);
+  
+  // Update prices initially
+  updateStickyPrices();
+  updateStickySKU();
+  
+  // Start countdown
+  updateStickyCountdown();
+  setInterval(updateStickyCountdown, 60000); // Update every minute
+  
+  // Listen for variant changes
+  const productSelect = document.getElementById('productSelect');
+  if (productSelect) {
+    productSelect.addEventListener('change', () => {
+      updateStickyPrices();
+      updateStickySKU();
+    });
+  }
+  
+  // Sync quantity changes
+  const mainQty = document.getElementById('Quantity');
+  if (mainQty) {
+    mainQty.addEventListener('change', () => {
+      document.getElementById('stickyQuantity').value = mainQty.value;
+    });
+  }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initStickyLaborCart);
+</script>
