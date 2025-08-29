@@ -1,4 +1,3 @@
-
 <style>
 /* Sticky Bottom Cart Bar */
 .sticky-labor-cart {
@@ -157,51 +156,47 @@
 .sticky-cart-controls {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
   align-items: flex-end;
-}
-
-.sticky-variant-controls {
-  display: none; /* Hidden by default, shown only when multiple variants */
 }
 
 .sticky-variant-select {
   background: rgba(255, 255, 255, 0.95);
-  border: 2px solid #1e3a8a;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 12px;
+  border: 1px solid #1e3a8a;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 10px;
   color: #1e3a8a;
   font-weight: 600;
-  min-width: 180px;
+  min-width: 150px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .sticky-controls-row {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .sticky-quantity-controls {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 10px;
-  padding: 4px;
-  gap: 4px;
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid rgba(30, 58, 138, 0.2);
+  border: 1px solid rgba(30, 58, 138, 0.2);
 }
 
 .sticky-qty-btn {
   background: #1e3a8a;
   color: white;
   border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -210,20 +205,15 @@
   transition: all 0.2s ease;
 }
 
-.sticky-qty-btn:hover {
-  background: #2563eb;
-  transform: scale(1.05);
-}
-
 .sticky-qty-input {
   background: transparent;
   border: none;
   color: #1e3a8a;
   text-align: center;
-  width: 45px;
-  font-size: 16px;
+  width: 35px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 6px;
+  padding: 3px;
   outline: none;
 }
 
@@ -231,25 +221,20 @@
   background: linear-gradient(45deg, #10b981, #059669);
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-  letter-spacing: 0.5px;
-  min-width: 140px;
+  letter-spacing: 0.3px;
+  min-width: 110px;
   justify-content: center;
-}
-
-.sticky-add-to-cart:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .sticky-close {
@@ -282,34 +267,34 @@
     gap: 15px;
     text-align: center;
   }
-  
+
   .sticky-product-info {
     justify-content: center;
   }
-  
+
   .sticky-price-timer-section {
     order: -1;
   }
-  
+
   .sticky-cart-controls {
     align-items: center;
     width: 100%;
   }
-  
+
   .sticky-controls-row {
     justify-content: center;
     width: 100%;
   }
-  
+
   .sticky-product-details h4 {
     font-size: 13px;
     max-width: 250px;
   }
-  
+
   .sticky-final-price {
     font-size: 20px;
   }
-  
+
   .sticky-add-to-cart {
     flex: 1;
     max-width: 200px;
@@ -320,25 +305,25 @@
   .sticky-labor-cart {
     padding: 12px 15px;
   }
-  
+
   .sticky-product-image {
     width: 50px;
     height: 50px;
   }
-  
+
   .sticky-timer {
     display: none;
   }
-  
+
   .sticky-controls-row {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .sticky-quantity-controls {
     order: 1;
   }
-  
+
   .sticky-add-to-cart {
     order: 2;
     width: 100%;
@@ -364,7 +349,7 @@
         <div class="sticky-sku">SKU: <span class="sticky-current-sku">{{ product.variants.first.sku }}</span></div>
       </div>
     </div>
-    
+
     <div class="sticky-price-timer-section">
       <div class="sticky-sale-badge">Labour Special</div>
       <div class="sticky-price-display">
@@ -372,7 +357,7 @@
         <span class="sticky-final-price" id="stickyFinalPrice">$0.00</span>
       </div>
       <div class="sticky-savings" id="stickySavings">You Save $0.00</div>
-      
+
       <div class="sticky-timer">
         <div class="sticky-timer-label">Sale Ends:</div>
         <div class="sticky-countdown">
@@ -391,21 +376,21 @@
         </div>
       </div>
     </div>
-    
+
     <div class="sticky-cart-controls">
       <div class="sticky-variant-controls" id="stickyVariantSection">
         <select id="stickyVariantSelect" class="sticky-variant-select" onchange="syncVariantToMain()">
           <!-- Options will be populated by JavaScript -->
         </select>
       </div>
-      
+
       <div class="sticky-controls-row">
         <div class="sticky-quantity-controls">
           <button type="button" onclick="decreaseQuantity()" class="sticky-qty-btn">−</button>
           <input type="number" class="sticky-qty-input" id="stickyQuantity" value="1" min="1" readonly>
           <button type="button" onclick="increaseQuantity()" class="sticky-qty-btn">+</button>
         </div>
-        
+
         <button class="sticky-add-to-cart" onclick="addToCartFromSticky()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
@@ -427,14 +412,14 @@ function updateStickyPrices() {
   // Get current variant price
   const productSelect = document.getElementById('productSelect');
   if (!productSelect) return;
-  
+
   const selectedOption = productSelect.options[productSelect.selectedIndex];
   const currentPrice = parseFloat(selectedOption.text.split('$')[1]?.replace(/[^\d.]/g, '') || '0');
-  
+
   // Calculate discounted price (20% off for Labor Day)
   const discountedPrice = currentPrice * (1 - currentDiscountPercent / 100);
   const savings = currentPrice - discountedPrice;
-  
+
   // Update sticky cart prices
   document.getElementById('stickyOriginalPrice').textContent = '$' + currentPrice.toFixed(2);
   document.getElementById('stickyFinalPrice').textContent = '$' + discountedPrice.toFixed(2);
@@ -445,10 +430,10 @@ function updateStickyPrices() {
 function updateStickySKU() {
   const productSelect = document.getElementById('productSelect');
   if (!productSelect) return;
-  
+
   const selectedOption = productSelect.options[productSelect.selectedIndex];
   const sku = selectedOption.getAttribute('data-sku') || '';
-  
+
   document.querySelector('.sticky-current-sku').textContent = sku;
 }
 
@@ -478,22 +463,22 @@ function populateStickyVariants() {
   const mainSelect = document.getElementById('productSelect');
   const stickySelect = document.getElementById('stickyVariantSelect');
   const stickyVariantSection = document.getElementById('stickyVariantSection');
-  
+
   if (mainSelect && stickySelect) {
     // Clear existing options
     stickySelect.innerHTML = '';
-    
+
     // Copy options from main selector
     Array.from(mainSelect.options).forEach(option => {
       const newOption = option.cloneNode(true);
       stickySelect.appendChild(newOption);
     });
-    
+
     // Show variant section if there are multiple options
     if (stickySelect.options.length > 1) {
       stickyVariantSection.style.display = 'block';
     }
-    
+
     // Sync initial selection
     stickySelect.value = mainSelect.value;
   }
@@ -503,18 +488,18 @@ function populateStickyVariants() {
 function syncVariantToMain() {
   const stickySelect = document.getElementById('stickyVariantSelect');
   const mainSelect = document.getElementById('productSelect');
-  
+
   if (mainSelect && stickySelect) {
     mainSelect.value = stickySelect.value;
-    
+
     // Trigger change event on main selector to update pricing
     const changeEvent = new Event('change', { bubbles: true });
     mainSelect.dispatchEvent(changeEvent);
-    
+
     // Update sticky prices and SKU
     updateStickyPrices();
     updateStickySKU();
-    
+
     // Dispatch event for promo ticker
     document.dispatchEvent(new CustomEvent('stickyVariantChange', {
       detail: { variantId: stickySelect.value }
@@ -526,12 +511,12 @@ function syncVariantToMain() {
 function syncVariantFromMain() {
   const mainSelect = document.getElementById('productSelect');
   const stickySelect = document.getElementById('stickyVariantSelect');
-  
+
   if (mainSelect && stickySelect) {
     stickySelect.value = mainSelect.value;
     updateStickyPrices();
     updateStickySKU();
-    
+
     // Dispatch event for promo ticker
     document.dispatchEvent(new CustomEvent('stickyVariantChange', {
       detail: { variantId: mainSelect.value }
@@ -543,7 +528,7 @@ function syncVariantFromMain() {
 function syncQuantityToMain() {
   const stickyQty = document.getElementById('stickyQuantity');
   const mainQty = document.getElementById('Quantity');
-  
+
   if (mainQty && stickyQty) {
     mainQty.value = stickyQty.value;
     // Trigger change event to update any dependent calculations
@@ -556,11 +541,11 @@ function syncQuantityToMain() {
 function syncQuantityFromMain() {
   const mainQty = document.getElementById('Quantity');
   const stickyQty = document.getElementById('stickyQuantity');
-  
+
   if (mainQty && stickyQty) {
     const currentMainQty = parseInt(mainQty.value) || 1;
     const currentStickyQty = parseInt(stickyQty.value) || 1;
-    
+
     // Only update if values are different
     if (currentMainQty !== currentStickyQty) {
       stickyQty.value = currentMainQty;
@@ -596,16 +581,16 @@ function addToCartFromSticky() {
   const stickySelect = document.getElementById('stickyVariantSelect');
   const mainQty = document.getElementById('Quantity');
   const mainSelect = document.getElementById('productSelect');
-  
+
   // Sync everything first
   if (mainQty && stickyQty) {
     mainQty.value = stickyQty.value;
   }
-  
+
   if (mainSelect && stickySelect) {
     mainSelect.value = stickySelect.value;
   }
-  
+
   // Trigger the main add to cart button
   const mainAddToCartBtn = document.getElementById('AddToCart');
   if (mainAddToCartBtn) {
@@ -616,18 +601,18 @@ function addToCartFromSticky() {
         variantId: stickySelect ? stickySelect.value : (mainSelect ? mainSelect.value : null)
       }
     });
-    
+
     document.dispatchEvent(customEvent);
-    
+
     // Also click the main button as fallback
     mainAddToCartBtn.click();
-    
+
     // Show success animation
     const stickyBtn = document.querySelector('.sticky-add-to-cart');
     const originalText = stickyBtn.innerHTML;
     stickyBtn.innerHTML = '✓ Added!';
     stickyBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
-    
+
     setTimeout(() => {
       stickyBtn.innerHTML = originalText;
     }, 2000);
@@ -639,7 +624,7 @@ function hideStickyCart() {
   const stickyCart = document.getElementById('stickyLaborCart');
   stickyCart.style.display = 'none';
   stickyCartVisible = false;
-  
+
   // Only hide for current page session, will show again on page refresh
 }
 
@@ -650,24 +635,24 @@ function initStickyLaborCart() {
   if (stickyCart) {
     stickyCart.style.display = 'block';
   }
-  
+
   // Wait a bit for the main form to be fully loaded
   setTimeout(() => {
     // Populate variant selector
     populateStickyVariants();
-    
+
     // Initial sync from main form
     syncQuantityFromMain();
     syncVariantFromMain();
-    
+
     // Update prices initially
     updateStickyPrices();
     updateStickySKU();
-    
+
     // Start countdown
     updateStickyCountdown();
     setInterval(updateStickyCountdown, 60000); // Update every minute
-    
+
     // Listen for variant changes on main form
     const productSelect = document.getElementById('productSelect');
     if (productSelect) {
@@ -679,7 +664,7 @@ function initStickyLaborCart() {
         }, 100);
       });
     }
-    
+
     // Listen for quantity changes on main form
     const mainQty = document.getElementById('Quantity');
     if (mainQty) {
@@ -690,7 +675,7 @@ function initStickyLaborCart() {
         syncQuantityFromMain();
       });
     }
-    
+
     // Force initial update
     setTimeout(() => {
       syncQuantityFromMain();
