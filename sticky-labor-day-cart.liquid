@@ -472,9 +472,7 @@ let currentDiscountPercent = 20; // Default discount
 function handleStickyCartScroll() {
   const scrollPosition = window.scrollY;
   const viewportHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-  const scrollableHeight = documentHeight - viewportHeight;
-  const triggerPosition = scrollableHeight * 0.2; // Show after 20% of scrollable content
+  const triggerPosition = viewportHeight * 0.2; // Show after scrolling 20% of viewport height
   
   const stickyCart = document.getElementById('stickyLaborCart');
   
