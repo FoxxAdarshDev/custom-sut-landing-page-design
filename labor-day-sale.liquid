@@ -1,4 +1,3 @@
-
 <style>
 
 
@@ -82,19 +81,19 @@
 
   .sale-subtitle {
     font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-    color: #666;
+    color: #667680;
     font-weight: 400;
     line-height: 1.4;
     margin-bottom: 25px;
   }
 
   .header-timer {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0071b9 0%, #228cd1 100%);
     border: none;
     border-radius: 20px;
     padding: 25px 20px;
     width: 100%;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.4);
     color: white;
   }
 
@@ -201,7 +200,7 @@
   }
 
   .shop-now-cta {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #dc3545 0%, #b91c1c 100%);
     color: white;
     padding: 15px 35px;
     border: none;
@@ -214,14 +213,14 @@
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 1.2px;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
     position: relative;
     overflow: hidden;
   }
 
   .shop-now-cta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.6);
     color: white;
     text-decoration: none;
     filter: brightness(1.1);
@@ -398,17 +397,29 @@
     background: white;
     border-radius: 25px;
     overflow: hidden;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(220, 53, 69, 0.2);
+    box-shadow: 0 8px 30px rgba(220, 53, 69, 0.1);
+    position: relative;
+  }
+
+  .collection-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #dc3545 0%, #ffffff 50%, #0071b9 100%);
   }
 
   .collection-header {
     padding: 20px 40px;
-    background: white;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(248, 250, 252, 0.8) 100%);
     display: flex;
     align-items: center;
     gap: 20px;
     min-height: auto;
+    border-bottom: 1px solid rgba(220, 53, 69, 0.1);
   }
 
   .collection-header.reverse {
@@ -422,7 +433,7 @@
   .collection-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #667eea;
+    color: #0071b9;
     margin-bottom: 10px;
     line-height: 1.2;
   }
@@ -439,18 +450,18 @@
     border-radius: 20px;
     overflow: hidden;
     transition: all 0.3s ease;
-    border: 2px solid #667eea;
+    border: 2px solid #0071b9;
     position: relative;
     max-width: 350px;
     width: 100%;
     margin: 0 auto;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 113, 185, 0.1);
   }
 
   .product-card:hover {
     transform: translateY(-5px);
-    border-color: #764ba2;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    border-color: #228cd1;
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.2);
   }
 
   .discount-badge {
@@ -461,7 +472,7 @@
   }
 
   .discount-label {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #dc3545 0%, #b91c1c 100%) !important;
     color: white !important;
     padding: 8px 16px 8px 12px;
     font-weight: 700;
@@ -472,7 +483,8 @@
     align-items: center;
     min-height: 28px;
     border-radius: 15px 4px 4px 15px;
-    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.4);
+    border: 1px solid #ffffff;
   }
 
   /* .discount-label::before {
@@ -512,12 +524,12 @@
 
   .product-image {
     height: 220px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(0, 113, 185, 0.05) 0%, rgba(220, 53, 69, 0.05) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0px;
-    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+    border-bottom: 1px solid rgba(0, 113, 185, 0.1);
     position: relative;
   }
 
@@ -534,7 +546,7 @@
   .product-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #667eea;
+    color: #0071b9;
     margin-bottom: 15px;
     line-height: 1.4;
     min-height: 52px;
@@ -548,9 +560,9 @@
   }
 
   .product-title:hover {
-    color: #764ba2;
+    color: #228cd1;
     transform: translateY(-1px);
-    text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 113, 185, 0.3);
   }
 
   .product-title-link {
@@ -697,7 +709,7 @@
   }
 
   .product-cta {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0071b9 0%, #228cd1 100%);
     color: white;
     padding: 14px 28px;
     border: none;
@@ -712,13 +724,13 @@
     width: 100%;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 113, 185, 0.3);
   }
 
   .product-cta:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    background: linear-gradient(135deg, #005ba6 0%, #1a7bb5 100%);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.4);
     color: white;
     text-decoration: none;
   }
@@ -1049,8 +1061,7 @@
 .popup-product-image {
   width: 80px;
   height: 80px;
-  background: #f```html
-8f9fa;
+  background: #f8f9fa;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -2657,7 +2668,7 @@ function updateCountdown() {
 function scrollToProducts() {
   const productsSection = document.getElementById('products-section');
   if (productsSection) {
-    productsSection.scrollIntoView({ 
+    productsSection.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
@@ -3577,8 +3588,8 @@ function updateCheckoutButton() {
         `;
     }
 
-    const cartText = meetsMinimum 
-        ? `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})` 
+    const cartText = meetsMinimum
+        ? `🛒 Checkout (${currentCartCount} items - $${(currentCartTotal / 100).toFixed(2)})`
         : `🔒 Minimum Order Required`;
 
     checkoutSection.innerHTML = `
