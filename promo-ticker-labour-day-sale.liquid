@@ -1,0 +1,603 @@
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if bold_compare_at_price > bold_price %}
+{% assign on_sale = true %}
+{% endif %}
+
+
+<promo-ticker class="promo-ticker text-uppercase" style="--ticker-speed: 3s;"
+  id="item_580a7897-25df-497c-aa15-ce4640142dba">
+  <style>
+    .lbl.on-sale,
+    .discount-badge {
+      background: #C5EBCD !important;
+      color: #069512 !important;
+      border: 1px solid #b1d4b9 !important;
+      border-radius: 20px;
+      padding: 0 6px;
+      white-space: nowrap;
+      font-weight: 500;
+      font-size: 10px;
+    }
+
+    .ticker-item {
+      background: #fdf8e5 padding:12px;
+      border-radius: 10px;
+    }
+
+    .discount-svg-icon {
+      display: flex;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+    }
+
+    .ticker-item {
+      /* display: flex; */
+      margin-right: 0px;
+      vertical-align: middle;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+
+    .black-friday-deal-message-badge__text {
+      color: #1d252c !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      line-height: 13px;
+    }
+
+    .badgeWrpDefault_2Eb6h>div {
+      max-width: 132px;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    .primary_1d4Wm {
+      background-color: #bb0628;
+    }
+
+    .offer-callout-simple.personalised {
+      background: #bb0628;
+      font-size: 11px;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    .offer-callout-simple {
+      color: #fff;
+      background: #d83333;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      text-align: center;
+      line-height: normal;
+      margin-bottom: 5px;
+    }
+
+    .d-md-block {
+      display: block !important;
+    }
+
+    .offer-callout-simple {
+      width: fit-content;
+      border-radius: 10px;
+      padding: 5px 12px;
+    }
+
+    .medium_1n4Qn {
+      display: inline-block;
+    }
+
+    .price_2j8lL {
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .salePrice_3B6QJ {
+      color: #bb0628;
+      line-height: 1;
+      margin-top: 0;
+    }
+
+    /* Default styles */
+    .discountAndPrice .priceContainer {
+      font-size: 18px;
+    }
+
+    /* Product Page */
+    .discountAndPrice.product .priceContainer {
+      font-size: 32px;
+    }
+
+    /* Collection Page */
+    .discountAndPrice.collection .priceContainer {
+      font-size: 18px;
+    }
+
+    .ajax_modal_custom_btn_css {
+      background: none !important;
+      line-height: normal;
+      text-align: left !important;
+      color: #000 !important;
+      padding: 0;
+    }
+
+    .page-template .ajax_modal_custom_btn_css {
+      font-size: 10px !important;
+      line-height: 1 !important;
+      display: none !important
+    }
+
+    .template-collection .ajax_modal_custom_btn_css span,
+    .template-collection p.ajax_modal_custom_btn_css {
+      font-size: 14px !important
+    }
+
+    .template-page .ticker-item {
+      margin-bottom: 0px;
+      line-height: 1;
+      margin: 0px !important
+    }
+
+    .template-page .ajax_modal_custom_btn_css {
+      margin: 0px !important;
+      display: none !important
+    }
+
+    .ajax_modal_custom_btn_css {
+      margin: 0px !important
+    }
+
+
+    .template-collection .discount-svg-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .template-page .discount-svg-icon {
+      display: none !important
+    }
+  </style>
+  <div class="ticker-scroll">
+    <!-- discount Offer -->
+    <div class="ticker-item {{ template | split: '.' | first }} default-discount">
+      <div class="discount-svg-icon {{ template | split: '.' | first }}">
+        {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M10.0688 2.95233C10.1311 2.98844 10.1793 3.0446 10.2055 3.11164C10.2318 3.17868 10.2345 3.25263 10.2133 3.32142L9.06719 7.04542H11.1818C11.244 7.0454 11.3048 7.06357 11.3567 7.0977C11.4086 7.13183 11.4494 7.18042 11.4741 7.23747C11.4987 7.29452 11.5061 7.35754 11.4953 7.41875C11.4846 7.47995 11.4561 7.53666 11.4135 7.58188L6.32256 12.991C6.2733 13.0433 6.20775 13.0775 6.1366 13.0879C6.06544 13.0982 5.99288 13.0842 5.93073 13.048C5.86858 13.0118 5.82052 12.9557 5.79437 12.8887C5.76822 12.8217 5.76553 12.7479 5.78674 12.6791L6.93283 8.95451H4.81819C4.75605 8.95454 4.69526 8.93636 4.64332 8.90223C4.59139 8.86811 4.55059 8.81952 4.52595 8.76246C4.50132 8.70541 4.49393 8.64239 4.5047 8.58119C4.51547 8.51998 4.54393 8.46327 4.58656 8.41806L9.67747 3.00897C9.72666 2.95666 9.79211 2.92253 9.86317 2.91213C9.93422 2.90173 10.0067 2.91568 10.0688 2.95169V2.95233Z"
+            fill="#121212"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M8 14.4916C11.5852 14.4916 14.4916 11.5852 14.4916 8C14.4916 4.4148 11.5852 1.50842 8 1.50842C4.4148 1.50842 1.50842 4.4148 1.50842 8C1.50842 11.5852 4.4148 14.4916 8 14.4916ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z"
+            fill="#121212"></path>
+        </svg> {% endcomment %}
+      </div>
+      <div style="padding-left: 5px;">
+
+    <div class="fallback-offer">
+          <div class="patriotic-shield">🛡️</div>
+          <span>LABOUR DAY SALE OFFER</span>
+        </div>
+
+        {% comment %}
+        Loop through the product tags to find the one containing 'percent_' and extract the value
+        {% endcomment %}
+        {% for tag in product.tags %}
+        {% if tag contains 'percent_' %}
+        {% assign percent_tag = tag | remove: 'percent_' %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+
+        {% if percent_tag != '' %}
+        {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+        {% assign final_price = product.price | minus: price_discount %}
+        <!-- Promo Elements Container -->
+        <div class="promo-elements-container">
+          <!-- Compact Final Price Display (SHOWN FIRST) -->
+          {% if final_price %}
+          <div class="compact-price-display {{ template | split: '.' | first }}">
+            <div class="price-row">
+              <span class="price-label">Your Price:</span>
+              <span class="final-price-value">{{ final_price | money }}</span>
+            </div>
+
+            {% assign original_price = product.variants.first.compare_at_price %}
+            {% assign savings_amount = original_price | minus: final_price %}
+            {% assign savings_percent = savings_amount | times: 100 | divided_by: original_price | round %}
+            <div class="compact-savings-badge">
+              <span class="savings-text">You Save ({{ savings_amount | money }} overall)</span>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Compact Independence Special Card (SHOWN SECOND) -->
+          <div class="compact-promo-card">
+            <div class="promo-header">
+              <div class="promo-badge"><img src="https://cdn.shopify.com/s/files/1/1064/0118/files/flag_1.png?v=1751649263" alt="Us Flag">LABOUR SPECIAL</div>
+              <div class="countdown-timer">
+                <div class="timer-label">Sale Ends:</div>
+                <div class="timer-units">
+                  <div class="timer-unit">
+                    <span id="promo-days">00</span>
+                    <label>D</label>
+                  </div>
+                  <div class="timer-unit">
+                    <span id="promo-hours">00</span>
+                    <label>H</label>
+                  </div>
+                  <div class="timer-unit">
+                    <span id="promo-minutes">00</span>
+                    <label>M</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="promo-content">
+                  <div class="savings-label">Instant Savings:</div>
+              <div class="discount-circle">
+                <span class="discount-percent">{{ percent_tag }}%</span>
+                <span class="discount-off">OFF</span>
+              </div>
+              <div class="savings-info">
+
+                {% comment %} {% assign price_discount = product.price | times: percent_tag | divided_by: 100.0 %}
+                <div class="savings-amount">${{ price_discount | money_without_currency }}</div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="fallback-offer">
+          <div class="patriotic-shield">🛡️</div>
+          <span>LABOUR SALE OFFER</span>
+        </div>
+        {% endif %}
+
+        <script>
+          // Countdown Timer for promo ticker
+          function updatePromoCountdown() {
+            const countDownDate = new Date('2025-09-30T23:59:59').getTime();
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance > 0) {
+              const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+              const dayStr = String(days).padStart(2, '0');
+              const hourStr = String(hours).padStart(2, '0');
+              const minuteStr = String(minutes).padStart(2, '0');
+
+              const daysEl = document.getElementById("promo-days");
+              const hoursEl = document.getElementById("promo-hours");
+              const minutesEl = document.getElementById("promo-minutes");
+
+              if (daysEl) daysEl.innerHTML = dayStr;
+              if (hoursEl) hoursEl.innerHTML = hourStr;
+              if (minutesEl) minutesEl.innerHTML = minuteStr;
+            } else {
+              // Reset timer if expired
+              ["promo-days", "promo-hours", "promo-minutes"].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.innerHTML = "00";
+              });
+            }
+          }
+
+          // Start countdown
+          updatePromoCountdown();
+          setInterval(updatePromoCountdown, 60000); // Update every minute
+        </script>
+
+      </div>
+    </div>
+
+    <style>
+      .promo-elements-container {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        margin: 4px 0;
+        width: 100%;
+      }
+
+      .compact-promo-card {
+        background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+        border-radius: 12px;
+        padding: 12px;
+        flex: 0 0 55%;
+        min-width: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .promo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+        gap: 8px;
+      }
+
+      .promo-badge {
+        background: rgba(255, 193, 7, 0.9);
+        color: #1e3a8a;
+        padding: 3px 8px;
+        border-radius: 8px;
+        font-size: 8px;
+        font-weight: 700;
+        gap:5px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+
+      .countdown-timer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+      }
+
+      .timer-label {
+        color: #ffffff;
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+
+      .timer-units {
+        display: flex;
+        gap: 4px;
+      }
+
+      .timer-unit {
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid #ffc107;
+        border-radius: 6px;
+        padding: 3px 4px;
+        text-align: center;
+        min-width: 22px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .timer-unit span {
+        display: block;
+        font-size: 11px;
+        font-weight: 900;
+        color: #1e3a8a;
+        line-height: 1;
+        text-shadow: none;
+      }
+
+      .timer-unit label {
+        font-size: 7px;
+        font-weight: 700;
+        color: #dc2626;
+        line-height: 1;
+        text-shadow: none;
+      }
+
+      .promo-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .discount-circle {
+        background: linear-gradient(45deg, #ffc107, #ffeb3b);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(255, 193, 7, 0.3);
+        flex-shrink: 0;
+      }
+
+      .discount-percent {
+        font-size: 14px;
+        font-weight: 900;
+        color: #1e3a8a;
+        line-height: 1;
+      }
+
+      .discount-off {
+        font-size: 7px;
+        font-weight: 700;
+        color: #1e3a8a;
+        line-height: 1;
+      }
+
+      .savings-info {
+        flex: 1;
+        color: white;
+      }
+
+      .savings-label {
+        font-size: 13px;
+        color: #ffc107;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .savings-amount {
+        font-size: 18px;
+        font-weight: 900;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .fallback-offer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        font-weight: 600;
+        justify-content: center;
+        padding: 16px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+        border-radius: 16px;
+        margin: 8px 0;
+      }
+
+      .patriotic-shield {
+        font-size: 20px;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .promo-elements-container {
+          flex-direction: column;
+          gap: 8px;
+          width: 100%;
+        }
+
+        .compact-promo-card {
+          width: 100%;
+          padding: 10px;
+        }
+
+        .promo-header {
+          margin-bottom: 6px;
+        }
+
+        .promo-badge {
+          font-size: 10px;
+          padding: 2px 6px;
+        }
+
+        .timer-label {
+          font-size: 7px;
+          padding: 1px 3px;
+        }
+
+        .timer-unit {
+          min-width: 20px;
+          padding: 2px 3px;
+          gap: 3px;
+        }
+
+        .timer-unit span {
+          font-size: 10px;
+        }
+
+        .timer-unit label {
+          font-size: 6px;
+        }
+
+        .promo-content {
+          gap: 8px;
+        }
+
+        .discount-circle {
+          width: 40px;
+          height: 40px;
+        }
+
+        .discount-percent {
+          font-size: 12px;
+        }
+
+        .discount-off {
+          font-size: 6px;
+        }
+
+        .savings-label {
+          font-size: 8px;
+        }
+
+        .savings-amount {
+          font-size: 14px;
+        }
+      }
+    </style>
+
+
+
+    <style>
+      .compact-price-display {
+        background: #f8fdf9;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid #d1f2dd;
+        flex: 0 0 45%;
+        min-width: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        order: -1;
+      }
+
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+
+      .price-label {
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .final-price-value {
+      font-size:30px;
+    font-weight: 900;
+    color: #dc3545;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+      }
+
+      .compact-savings-badge {
+        background: linear-gradient(45deg, #059669, #10b981);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 6px;
+        text-align: center;
+      }
+
+      .savings-text {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      /* Template-specific adjustments */
+      .template-collection .final-price-value {
+        font-size: 18px;
+      }
+
+      .template-collection .compact-price-display {
+        max-width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .compact-price-display {
+          width: 100%;
+          order: -1;
+        }
+
+        .final-price-value {
+          font-size: 18px;
+        }
+      }
+    </style>
+
+
+</promo-ticker>
