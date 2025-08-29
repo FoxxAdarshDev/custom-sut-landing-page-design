@@ -2,38 +2,101 @@
 
 
   .modern-sale-container {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e8f2ff 100%);
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 0px 20px 40px 20px;
+    position: relative;
+  }
+
+  .modern-sale-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #b22234 0%, #b22234 33%, #ffffff 33%, #ffffff 66%, #3c3b6e 66%, #3c3b6e 100%);
+    background-size: 60px 8px;
+    animation: wave 2s linear infinite;
+  }
+
+  @keyframes wave {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 0; }
   }
 
   .sale-header {
     margin-bottom: 30px;
-    padding: 30px 20px;
-    background: transparent;
-    border-radius: 20px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(178, 34, 52, 0.05) 20%, rgba(60, 59, 110, 0.05) 80%, #ffffff 100%);
+    border-radius: 25px;
     color: #333;
-    box-shadow: none;
+    box-shadow: 0 8px 32px rgba(178, 34, 52, 0.1);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
     min-height: 400px;
+    border: 2px solid rgba(178, 34, 52, 0.2);
+    overflow: hidden;
+  }
+
+  .sale-header::before {
+    content: '🇺🇸';
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: pulse 2s infinite;
+  }
+
+  .sale-header::after {
+    content: '🇺🇸';
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: pulse 2s infinite 1s;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.6; }
   }
 
   .sale-badge {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #b22234 0%, #3c3b6e 100%);
     color: white;
-    padding: 10px 24px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 800;
     display: inline-block;
     margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    letter-spacing: 1.5px;
+    box-shadow: 0 6px 20px rgba(178, 34, 52, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sale-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.8s ease;
+  }
+
+  .sale-badge:hover::before {
+    left: 100%;
   }
 
   .hero-left {
@@ -53,30 +116,44 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3c3b6e 0%, #b22234 50%, #3c3b6e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 1px;
     line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .sale-header h1 .gradient-text {
-    background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background: linear-gradient(45deg, #b22234 0%, #3c3b6e 50%, #b22234 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: patrioticGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes patrioticGlow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
   }
 
   .sale-header .discount {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 900;
-    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    background: linear-gradient(135deg, #b22234 0%, #ffffff 25%, #3c3b6e 50%, #ffffff 75%, #b22234 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 15px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 8px rgba(178, 34, 52, 0.3);
+    animation: flagWave 4s ease-in-out infinite;
+  }
+
+  @keyframes flagWave {
+    0%, 100% { background-size: 200% 100%; background-position: 0% 50%; }
+    50% { background-size: 200% 100%; background-position: 100% 50%; }
   }
 
   .sale-subtitle {
@@ -88,34 +165,52 @@
   }
 
   .header-timer {
-    background: linear-gradient(135deg, #0071b9 0%, #228cd1 100%);
-    border: none;
+    background: linear-gradient(135deg, #3c3b6e 0%, #b22234 100%);
+    border: 3px solid #ffffff;
     border-radius: 20px;
     padding: 25px 20px;
     width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 113, 185, 0.4);
+    box-shadow: 0 8px 25px rgba(178, 34, 52, 0.4);
     color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-timer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #b22234 0px, #b22234 20px, #ffffff 20px, #ffffff 30px, #3c3b6e 30px, #3c3b6e 50px);
   }
 
   .header-timer-label {
     color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 800;
     margin-bottom: 15px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   .header-timer-label::before,
   .header-timer-label::after {
-    content: '⚡';
-    color: white;
-    font-size: 1.2rem;
-    animation: flash 1.5s infinite;
+    content: '🇺🇸';
+    font-size: 1rem;
+    animation: patrioticPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes patrioticPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
 
   .header-countdown {
@@ -125,35 +220,51 @@
   }
 
   .header-countdown-unit {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(178, 34, 52, 0.3);
     border-radius: 12px;
     padding: 12px 8px;
     backdrop-filter: blur(10px);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-countdown-unit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #b22234 0%, #ffffff 50%, #3c3b6e 100%);
   }
 
   .header-countdown-unit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(178, 34, 52, 0.3);
+    border-color: #b22234;
   }
 
   .header-countdown-unit span {
     display: block;
     font-size: 1.8rem;
     font-weight: 900;
-    color: white;
+    background: linear-gradient(135deg, #b22234 0%, #3c3b6e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1;
     margin-bottom: 4px;
     font-family: 'Arial', sans-serif;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .header-countdown-unit label {
     font-size: 0.65rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
+    color: #3c3b6e;
     text-transform: uppercase;
     letter-spacing: 0.8px;
   }
@@ -200,11 +311,11 @@
   }
 
   .shop-now-cta {
-    background: linear-gradient(135deg, #dc3545 0%, #b91c1c 100%);
+    background: linear-gradient(135deg, #b22234 0%, #ffffff 50%, #3c3b6e 100%);
     color: white;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 30px;
+    padding: 16px 40px;
+    border: 3px solid #ffffff;
+    border-radius: 35px;
     font-weight: 900;
     font-size: 1.1rem;
     cursor: pointer;
@@ -212,10 +323,11 @@
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+    letter-spacing: 1.5px;
+    box-shadow: 0 10px 30px rgba(178, 34, 52, 0.5);
     position: relative;
     overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   .shop-now-cta:hover {
@@ -2188,7 +2300,7 @@
 <div class="modern-sale-container">
   <div class="sale-header">
     <div class="hero-left">
-      <div class="sale-badge">Limited Time Offer</div>
+      <div class="sale-badge">🇺🇸 LIMITED TIME OFFER 🇺🇸</div>
       <h1>Our <span class="gradient-text">Biggest Labor Day Sale!</span></h1>
       <div class="discount">FLAT 20% OFF</div>
       <div class="sale-subtitle">
@@ -2199,7 +2311,7 @@
 
     <div class="hero-right">
       <div class="header-timer">
-        <div class="header-timer-label">Sale Ends September 30th</div>
+        <div class="header-timer-label">SALE ENDS SEPTEMBER 30TH</div>
         <div class="header-countdown">
           <div class="header-countdown-unit">
             <span id="days">02</span>
@@ -2614,8 +2726,8 @@ function openAddToCartPopupWithEvent(event, productId, productTitle, productImag
 }
 
 function updateCountdown() {
-  // Set the date we're counting down to (August 31st, 2025 at 11:59 PM)
-  const countDownDate = new Date('2025-08-31T23:59:59').getTime();
+  // Set the date we're counting down to (September 30th, 2025 at 11:59 PM)
+  const countDownDate = new Date('2025-09-30T23:59:59').getTime();
 
   const timer = setInterval(function() {
     const now = new Date().getTime();
