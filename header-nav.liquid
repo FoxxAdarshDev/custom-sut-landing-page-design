@@ -1,4 +1,4 @@
-<li class="menu-lv-item menu-lv-1 text-left no-megamenu {% if link.links != blank %}dropdown {% endif %} {% if sale_item_lv1 contains title %} menu-sale{% endif %}">
+<li class="menu-lv-item menu-lv-1 text-left no-megamenu {% if link.links != blank %}dropdown {% endif %} {% if sale_item_lv1 contains title %} menu-sale{% endif %} {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}labour-day-sale-menu{% endif %}">
     {%- if link.links != blank -%}
         <a class="menu-lv-1__action  header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
 
@@ -9,6 +9,12 @@
 
             <span class="text p-relative{%- if link.child_active %} header__active-menu-item{% endif %}">
                 {{ link.title | escape }}
+                {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}
+                    <span class="labour-day-badge">NEW</span>
+                    <div class="labour-day-countdown" id="labour-day-countdown">
+                        <span id="countdown-text"></span>
+                    </div>
+                {% endif %}
             </span>
             <span class="icon-dropdown" data-toggle-menu-mb="">
                 {% render 'icon-caret-right' %}
@@ -26,7 +32,7 @@
                     {{ 'general.navigation.hot_label' | t }}
                 </span>
             {%- endif -%}
-        </a>
+        </a></old_str>
         <ul  id="submenu-container" class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list">
             <div class="bg_white">
                 <div class="nav-title-mobile text-center">
@@ -43,6 +49,79 @@
                     </a>
                 </li>
                 <style>
+                    /* Labour Day Sale Menu Highlighting */
+.labour-day-sale-menu {
+    position: relative;
+}
+
+.labour-day-sale-menu .menu-lv-1__action {
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD23F 100%) !important;
+    color: white !important;
+    border-radius: 25px !important;
+    padding: 8px 16px !important;
+    margin: 4px 0 !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4) !important;
+    border: 2px solid #FFD23F !important;
+    position: relative;
+    overflow: visible !important;
+}
+
+.labour-day-sale-menu .menu-lv-1__action:hover {
+    background: linear-gradient(135deg, #E55A2B 0%, #E8841A 50%, #F0C838 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6) !important;
+}
+
+.labour-day-badge {
+    position: absolute !important;
+    top: -8px !important;
+    right: -5px !important;
+    background: #FF4444 !important;
+    color: white !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    padding: 2px 6px !important;
+    border-radius: 10px !important;
+    border: 2px solid white !important;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4) !important;
+    z-index: 10 !important;
+    animation: badge-pulse 2s infinite !important;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.labour-day-countdown {
+    position: absolute !important;
+    bottom: -20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: #FFD23F !important;
+    font-size: 9px !important;
+    font-weight: bold !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    z-index: 10 !important;
+    border: 1px solid #FFD23F !important;
+    min-width: 100px !important;
+    text-align: center !important;
+}
+
+.labour-day-countdown.expired {
+    display: none !important;
+}
+
+/* Hide countdown on mobile to prevent layout issues */
+@media (max-width: 768px) {
+    .labour-day-countdown {
+        display: none !important;
+    }
+}
+
                     /* Active child navigation link styling */
 .active-child-nav-link {
     background: linear-gradient(135deg, #095ea7 0%, #0d7dd1 100%) !important;
@@ -50,7 +129,7 @@
     border-radius: 8px !important;
     box-shadow: 0 6px 20px rgba(9, 94, 167, 0.3) !important;
     border-left: 4px solid #ffffff !important;
-}
+}</old_str>
 
 
 
@@ -466,4 +545,64 @@
     {%- endif -%}
 </li>
 
-<script></script>
+<script>
+// Labour Day Sale Countdown Timer (Boston Time)
+function updateLabourDayCountdown() {
+    try {
+        // Set target date to September 30th, 2025 11:59 PM Boston Time
+        const targetDate = new Date('2025-09-30T23:59:59-04:00'); // EDT timezone
+        
+        // Get current time in Boston timezone
+        const now = new Date();
+        const bostonTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+        
+        const timeDifference = targetDate.getTime() - bostonTime.getTime();
+        
+        const countdownElement = document.getElementById('countdown-text');
+        
+        if (!countdownElement) return;
+        
+        if (timeDifference > 0) {
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            
+            let countdownText = '';
+            if (days > 0) {
+                countdownText = `${days}d ${hours}h ${minutes}m`;
+            } else if (hours > 0) {
+                countdownText = `${hours}h ${minutes}m`;
+            } else if (minutes > 0) {
+                countdownText = `${minutes}m left`;
+            } else {
+                countdownText = 'Ending soon!';
+            }
+            
+            countdownElement.textContent = `Sale ends: ${countdownText}`;
+        } else {
+            // Sale has ended - hide the entire countdown and potentially the menu highlight
+            const countdownContainer = document.getElementById('labour-day-countdown');
+            const labourDayMenu = document.querySelector('.labour-day-sale-menu');
+            
+            if (countdownContainer) {
+                countdownContainer.classList.add('expired');
+            }
+            
+            // Optionally remove the special styling when sale ends
+            if (labourDayMenu) {
+                labourDayMenu.classList.remove('labour-day-sale-menu');
+            }
+        }
+    } catch (error) {
+        console.error('Labour Day countdown error:', error);
+    }
+}
+
+// Initialize countdown when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updateLabourDayCountdown();
+    
+    // Update countdown every minute
+    setInterval(updateLabourDayCountdown, 60000);
+});
+</script>
