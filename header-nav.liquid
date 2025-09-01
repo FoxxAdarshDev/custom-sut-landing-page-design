@@ -1,0 +1,469 @@
+<li class="menu-lv-item menu-lv-1 text-left no-megamenu {% if link.links != blank %}dropdown {% endif %} {% if sale_item_lv1 contains title %} menu-sale{% endif %}">
+    {%- if link.links != blank -%}
+        <a class="menu-lv-1__action  header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
+
+            {% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}
+            <span class="icon-img">
+                <img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';">
+            </span>
+
+            <span class="text p-relative{%- if link.child_active %} header__active-menu-item{% endif %}">
+                {{ link.title | escape }}
+            </span>
+            <span class="icon-dropdown" data-toggle-menu-mb="">
+                {% render 'icon-caret-right' %}
+            </span>
+            {%- if new_label contains title -%}
+                <span class="label new-label">
+                    {{ 'general.navigation.new_label' | t }}
+                </span>
+            {%- elsif sale_label contains title -%}
+                <span class="label sale-label">
+                    {{ 'general.navigation.sale_label' | t }}
+                </span>
+            {%- elsif hot_label contains title -%}
+                <span class="label hot-label">
+                    {{ 'general.navigation.hot_label' | t }}
+                </span>
+            {%- endif -%}
+        </a>
+        <ul  id="submenu-container" class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list">
+            <div class="bg_white">
+                <div class="nav-title-mobile text-center">
+                    <span class="icon-dropdown">
+                        {% render 'icon-arrow-nav' %}
+                    </span>
+                    {{ link.title | escape }}
+                </div>
+                <li class="menu-lv-item menu-lv-2 text-left navigation_all_mobile d-none">
+                    <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large"{% if childlink.current %} aria-current="page"{% endif %}>
+                        <span class="text{%- if link.child_active %} header__active-menu-item{% endif %}">
+                            {{ 'general.navigation.go_to' | t }} {{ link.title | escape }}
+                        </span>
+                    </a>
+                </li>
+                <style>
+                    /* Active child navigation link styling */
+.active-child-nav-link {
+    background: linear-gradient(135deg, #095ea7 0%, #0d7dd1 100%) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 6px 20px rgba(9, 94, 167, 0.3) !important;
+    border-left: 4px solid #ffffff !important;
+}
+
+
+
+/* Active child title styling */
+.active-child-nav-title {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+/* Override existing list-menu__item--active */
+.list-menu__item--active.active-child-nav-title {
+    color: white !important;
+}
+
+/* Base child link styling */
+.menu-lv-2__action {
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+/* Non-active child hover effects */
+.menu-lv-2__action:not(.active-child-nav-link):hover {
+    background-color: rgba(9, 94, 167, 0.08);
+    border-left: 3px solid rgba(9, 94, 167, 0.3);
+}
+
+.menu-lv-2__action:not(.active-child-nav-link):hover .image-container-site-nav {
+    border: 2px solid rgba(9, 94, 167, 0.3);
+}
+
+.menu-lv-2__action:not(.active-child-nav-link):hover .text {
+    color: #095ea7;
+    font-weight: 600;
+}
+                </style>
+                {%- for childlink in link.links -%}
+                    {% assign childtitle = childlink.title | escape | downcase | handle %}
+                <li class="menu-lv-item menu-lv-2 text-left {% if childlink.links != blank %} dropdown{% endif %} {% if sale_item_lv2 contains childtitle %} menu-sale{% endif %}" 
+                   onmouseenter="{% if childlink.links != blank %}this.classList.add('hovered');{% endif %}" 
+                    onmouseleave="{% if childlink.links != blank %}this.classList.remove('hovered');{% endif %}" >
+
+                        {%- if childlink.links == blank -%}
+                           <a {% if childlink.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ childlink.url }}"{% endif %} 
+                            class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} active-child-nav-link{% endif %}"
+                            {% if childlink.current %} aria-current="page"{% endif %}
+                            data-url="{{ childlink.url | split: '/' | last | url_decode }}">
+
+                                <span class="image-text-container{% if childlink.current %} active-image-text-container{% endif %}">
+                                    <span class="image-container-site-nav{% if childlink.current %} active-child-image-container{% endif %}">
+                                        {% assign collection_handle = childlink.url | split: '/' | last | url_decode %}
+                                        {% assign collection = collections[collection_handle] %}
+                                        {% assign page_handle = childlink.url | split: '/' | last | url_decode %}
+                                        {% assign page = pages[page_handle] %}
+
+                                        {% comment %} Check if it's a page URL first {% endcomment %}
+                                        {% if childlink.url contains '/pages/' and page %}
+                                            {% if page.content contains '<img' %}
+                                                {% capture img_tag_start %}{{ page.content | split: '<img' | last }}{% endcapture %}
+                                                {% capture img_tag_end %}{{ img_tag_start | split: '>' | first }}{% endcapture %}
+                                                {% assign page_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
+                                                <img src="{{ page_image_src }}" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                            {% else %}
+                                                <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                            {% endif %}
+
+                                        {% comment %} Check if it's a collection URL {% endcomment %}
+                                        {% elsif collection and collection.image %}
+                                            <img src="{{ collection.image | img_url }}" alt="{{ collection.title | escape }}" class="collection-image" />
+
+                                        {% comment %} Fallback to collection product image {% endcomment %}
+                                        {% elsif collection and collection.products.first %}
+                                            <img src="{{ collection.products.first | img_url: 'medium' }}" alt="{{ collection.products.first.title | escape }}" class="collection-image" />
+
+                                        {% comment %} Final fallback {% endcomment %}
+                                        {% else %}
+                                            <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                        {% endif %}
+                                    </span>
+                                    <span class="text{% if childlink.current %} list-menu__item--active active-child-nav-title{% endif %}">{{ childlink.title | escape }}</span>
+                                </span>
+                            </a>
+
+                        {%- else -%}
+                            <div class="site-nav-list-dropdown">
+                                 <a {% if childlink.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ childlink.url }}"{% endif %} 
+                                    class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} active-child-nav-link{% endif %}"
+                                    {% if childlink.current %} aria-current="page"{% endif %}
+                                    data-url="{{ childlink.url | split: '/' | last | url_decode }}">
+                                    <span class="image-text-container">
+                                        <span class="image-container-site-nav">
+                                           {% assign collection_handle = childlink.url | split: '/' | last | url_decode %}
+                                        {% assign collection = collections[collection_handle] %}
+                                        {% assign page_handle = childlink.url | split: '/' | last | url_decode %}
+                                        {% assign page = pages[page_handle] %}
+
+                                    {% comment %} Check if it's a page URL first {% endcomment %}
+                                    {% if childlink.url contains '/pages/' and page %}
+                                        {% if page.content contains '<img' %}
+                                            {% capture img_tag_start %}{{ page.content | split: '<img' | last }}{% endcapture %}
+                                            {% capture img_tag_end %}{{ img_tag_start | split: '>' | first }}{% endcapture %}
+                                            {% assign page_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
+                                            <img src="{{ page_image_src }}" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                        {% else %}
+                                            <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                        {% endif %}
+
+                                    {% comment %} Check if it's a collection URL {% endcomment %}
+                                    {% elsif collection and collection.image %}
+                                        <img src="{{ collection.image | img_url }}" alt="{{ collection.title | escape }}" class="collection-image" />
+
+                                    {% comment %} Fallback to collection product image {% endcomment %}
+                                    {% elsif collection and collection.products.first %}
+                                        <img src="{{ collection.products.first | img_url: 'medium' }}" alt="{{ collection.products.first.title | escape }}" class="collection-image" />
+
+                                    {% comment %} Final fallback {% endcomment %}
+                                    {% else %}
+                                        <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/Foxx_leaf_icon-01.jpg?v=1725454184" alt="{{ childlink.title | escape }}" class="collection-image" />
+                                    {% endif %}
+                                        </span>
+                                        <span class="text{% if childlink.current %} list-menu__item--active{% endif %}">{{ childlink.title | escape }}</span>
+                                    </span>
+                                    <span class="icon-dropdown" data-toggle-menu-mb="">{% render 'icon-caret-right' %} </span>
+                                </a>
+
+                                <ul class="header__submenu list-menu--disclosure list-menu--disclosure-2 list-menu motion-reduce">
+                                    <div class="bg_white">
+                                        <div class="nav-title-mobile text-center">
+                                            <span class="icon-dropdown">{% render 'icon-arrow-nav' %}</span>{{ link.title | escape }}
+                                        </div>
+
+                                        <ul class="grandchild-links-container" style="max-height: 300px; overflow-y: auto;">
+                                            <!-- Initial visible grandchild links (limit 10) -->
+                                            {%- for grandchildlink in childlink.links limit: 10 -%}
+                                                {% assign grandchildtitle = grandchildlink.title | escape | downcase | handle %}
+                                                <li class="menu-lv-item menu-lv-3 text-left{% if sale_item_lv3 contains grandchildtitle %} menu-sale{% endif %}">
+                                                    <a {% if grandchildlink.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ grandchildlink.url }}"{% endif %} class="menu-lv-3__action header__menu-item list-menu__item link link--text focus-inset caption-large"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                        <span class="image-text-container">
+                                                            <span class="image-container-site-nav">
+                                                                {% assign grandchild_collection_handle = grandchildlink.url | split: '/' | last | url_decode %}
+                                                                {% assign grandchild_collection = collections[grandchild_collection_handle] %}
+                                                                {% assign grandchild_page_handle = grandchildlink.url | split: '/' | last | url_decode %}
+                                                                {% assign grandchild_page = pages[grandchild_page_handle] %}
+
+                                                                {% if grandchild_page and grandchild_page.content contains '<img' %}
+                                                                    {% capture img_tag_start %}{{ grandchild_page.content | split: '<img' | last }}{% endcapture %}
+                                                                    {% capture img_tag_end %}{{ img_tag_start | split: '>' | first }}{% endcapture %}
+                                                                    {% assign grandchild_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
+                                                                    <img src="{{ grandchild_image_src }}" alt="{{ grandchildlink.title | escape }}" class="collection-image" />
+                                                                {% elsif grandchild_collection and grandchild_collection.image %}
+                                                                    <img src="{{ grandchild_collection.image | img_url }}" alt="{{ grandchild_collection.title | escape }}" class="collection-image" />
+                                                                {% elsif grandchild_collection and grandchild_collection.products.first %}
+                                                                    <img src="{{ grandchild_collection.products.first | img_url: 'medium' }}" alt="{{ grandchild_collection.products.first.title | escape }}" class="collection-image" />
+                                                                {% else %}
+                                                                    <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/logo_header-section-home-page.png?v=1725547287" alt="{{ grandchildlink.title | escape }}" class="collection-image" />
+                                                                {% endif %}
+                                                            </span>
+                                                            <span class="image-container-site-nav-text text{% if grandchildlink.current %} site-nav-active{% endif %} p-relative">{{ grandchildlink.title | escape }}</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {%- endfor -%}
+
+                                            <!-- Hidden grandchild links initially -->
+                                            <ul class="hidden-links" style="display: none;">
+                                                {%- for grandchildlink in childlink.links offset: 10 -%}
+                                                    {% assign grandchildtitle = grandchildlink.title | escape | downcase | handle %}
+                                                    <li class="menu-lv-item menu-lv-3 text-left{% if sale_item_lv3 contains grandchildtitle %} menu-sale{% endif %}">
+                                                        <a {% if grandchildlink.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ grandchildlink.url }}"{% endif %} class="menu-lv-3__action header__menu-item list-menu__item link link--text focus-inset caption-large"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                            <span class="image-text-container">
+                                                                <span class="image-container-site-nav">
+                                                                    {% assign grandchild_collection_handle = grandchildlink.url | split: '/' | last | url_decode %}
+                                                                    {% assign grandchild_collection = collections[grandchild_collection_handle] %}
+                                                                    {% assign grandchild_page_handle = grandchildlink.url | split: '/' | last | url_decode %}
+                                                                    {% assign grandchild_page = pages[grandchild_page_handle] %}
+
+                                                                    {% if grandchild_page and grandchild_page.content contains '<img' %}
+                                                                        {% capture img_tag_start %}{{ grandchild_page.content | split: '<img' | last }}{% endcapture %}
+                                                                        {% capture img_tag_end %}{{ img_tag_start | split: '>' | first }}{% endcapture %}
+                                                                        {% assign grandchild_image_src = img_tag_end | split: 'src="' | last | split: '"' | first %}
+                                                                        <img src="{{ grandchild_image_src }}" alt="{{ grandchildlink.title | escape }}" class="collection-image" />
+                                                                    {% elsif grandchild_collection and grandchild_collection.image %}
+                                                                        <img src="{{ grandchild_collection.image | img_url }}" alt="{{ grandchild_collection.title | escape }}" class="collection-image" />
+                                                                    {% elsif grandchild_collection and grandchild_collection.products.first %}
+                                                                        <img src="{{ grandchild_collection.products.first | img_url: 'medium' }}" alt="{{ grandchild_collection.products.first.title | escape }}" class="collection-image" />
+                                                                    {% else %}
+                                                                        <img src="https://cdn.shopify.com/s/files/1/0621/4805/1160/files/logo_header-section-home-page.png?v=1725547287" alt="{{ grandchildlink.title | escape }}" class="collection-image" />
+                                                                    {% endif %}
+                                                                </span>
+                                                                <span class="image-container-site-nav-text text{% if grandchildlink.current %} site-nav-active{% endif %} p-relative">{{ grandchildlink.title | escape }}</span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                {%- endfor -%}
+                                            </ul>
+
+                                            <!-- Show More button -->
+                                            {% if childlink.links.size > 10 %}
+                                                <li class="site-nav-item text-left">
+                                                    <div class="button-container">
+                                                        <button class="show-more btn btn-link" onclick="toggleLinks(this)">Show More</button>
+                                                        <button class="show-less btn btn-link" onclick="toggleLinks(this)" style="display: none;">Show Less</button>
+                                                    </div>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </ul>
+                            </div>
+                        {%- endif -%}
+                    </li>
+                {%- endfor -%}
+
+                <script>
+
+                    function toggleLinks(button) {
+                        const hiddenLinks = button.closest('ul').querySelector('.hidden-links');
+                        const showMoreBtn = button.closest('.button-container').querySelector('.show-more');
+                        const showLessBtn = button.closest('.button-container').querySelector('.show-less');
+                        const childLink = button.closest('.menu-lv-item').querySelector('.menu-lv-2__action');
+
+                        if (hiddenLinks.style.display === 'block') {
+                            hiddenLinks.style.display = 'none';
+                            showMoreBtn.style.display = 'inline-block';
+                            showLessBtn.style.display = 'none';
+                            childLink.classList.remove('open'); // Remove open class
+                        } else {
+                            document.querySelectorAll('.menu-lv-2__action.open').forEach(link => {
+                                link.classList.remove('open');
+                                link.closest('ul').querySelector('.hidden-links').style.display = 'none';
+                                link.closest('ul').querySelector('.button-container .show-more').style.display = 'inline-block';
+                                link.closest('ul').querySelector('.button-container .show-less').style.display = 'none';
+                            });
+
+                            hiddenLinks.style.display = 'block';
+                            showMoreBtn.style.display = 'none';
+                            showLessBtn.style.display = 'inline-block';
+                            childLink.classList.add('open'); // Add open class to the current child link
+                        }
+                    }
+                </script>
+
+
+
+
+                {% comment %} <script>
+ document.addEventListener("DOMContentLoaded", function () {
+    // Get the UL container
+    const submenu = document.getElementById("submenu-container");
+
+    // Get all LI elements in the UL
+    const listItems = submenu.querySelectorAll("li");
+
+    // Check for more than 8 items and apply initial styles
+    if (listItems.length > 8) {
+        submenu.style.overflowY = "scroll"; // Enable scrolling by default
+        submenu.style.maxHeight = "300px"; // Set fixed height
+    }
+
+    /**
+     * Function to handle hover or active states
+     * Removes overflow styles dynamically on hover, and reapplies if needed
+     */
+    function handleHoverOrActive(isHoveredOrActive) {
+        if (isHoveredOrActive) {
+            // On hover or active, remove overflow and retain height
+            submenu.style.removeProperty("overflow"); // Completely remove overflow property
+            submenu.style.removeProperty("overflow-y"); // Just to ensure it's cleared
+            submenu.style.maxHeight = "300px"; // Keep max height visible
+        } else {
+            // After hover ends, recheck length and apply overflow if necessary
+            if (listItems.length > 8) {
+                submenu.style.overflowY = "scroll"; // Reapply scrolling for larger lists
+                submenu.style.maxHeight = "300px"; // Retain max height
+            } else {
+                // Reset all styles for smaller lists
+                submenu.style.removeProperty("overflow");
+                submenu.style.removeProperty("overflow-y");
+            }
+        }
+    }
+
+    /**
+     * Add event listeners for hover and focus on each <li>
+     */
+    listItems.forEach(item => {
+        // On hover (mouseenter or mouseleave)
+        item.addEventListener('mouseenter', function () {
+            handleHoverOrActive(true); // User hovered
+        });
+
+        item.addEventListener('mouseleave', function () {
+            handleHoverOrActive(false); // User stopped hovering
+        });
+
+        // Handle keyboard navigation (focus = active state)
+        item.addEventListener('focus', function () {
+            item.classList.add('active'); // Add active class for styling
+            handleHoverOrActive(true); // Treat focus as hover
+        });
+
+        item.addEventListener('blur', function () {
+            item.classList.remove('active'); // Remove active class
+            handleHoverOrActive(false); // Treat blur as leaving hover
+        });
+    });
+});
+
+
+
+                </script> {% endcomment %}
+                <style>
+                    .menu-lv-item.menu-lv-2.hovered .menu-lv-2__action {
+                        background-color: rgba(173, 216, 230, 0.5); /* Light blue background on hover */
+                        font-weight: bold; /* Bold text on hover */
+                        padding-left: 4px; /* Add left padding */
+                        padding-right: 4px; /* Add right padding */
+                    }
+
+                    .menu-lv-item.menu-lv-2:hover .menu-lv-2__action {
+                        background-color: rgba(173, 216, 230, 0.8); /* Varied shade for direct hover */
+                        padding-left: 4px; /* Maintain left padding */
+                        padding-right: 4px; /* Maintain right padding */
+                        font-weight: bold; /* Ensure text is bold on hover */
+                    }
+
+                    .menu-lv-2__action.open {
+                        background-color: rgba(173, 216, 230, 0.8); /* Keeping background active */
+                        padding-left: 4px; /* Keep left padding when open */
+                        padding-right: 4px; /* Keep right padding when open */
+                    }
+
+                    .menu-lv-item.menu-lv-3 {
+                        transition: background-color 0.3s; /* Transition for grandchild link */
+                    }
+
+                    .menu-lv-item.menu-lv-3:hover {
+                        background-color: rgba(173, 216, 230, 0.5); /* Light blue background on hover for grandchild */
+
+                    }
+
+                    .menu-lv-item.menu-lv-3:hover .menu-lv-3__action {
+                     font-weight: bold;
+
+                    }
+                </style>
+
+
+
+
+                <style>
+                    .grandchild-links-container {
+                        max-height: 300px; /* Set maximum height */
+                        padding-left:0px!important;
+                        overflow-y: auto;  /* Enable vertical scrolling */
+                        overflow-x: hidden; /* Disable horizontal scrolling */
+                    }
+
+                    .show-more, .show-less {
+                        background-color: transparent !important;
+                        color: #095ea7 !important; /* Button text color */
+                        border: none !important; /* Remove default border */
+                        border-radius: 5px !important; /* Optional: rounded corners */
+                        cursor: pointer !important;
+                    }
+
+                    .button-container {
+                        text-align: center !important; /* Center the button within its container */
+                    }
+
+                    .grandchild-links-container::-webkit-scrollbar {
+                        width: 8px; /* Scrollbar width */
+                    }
+
+                    .grandchild-links-container::-webkit-scrollbar-thumb {
+                        background-color: darkgrey;
+                        border-radius: 6px;
+                    }
+
+                    .grandchild-links-container::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+                </style>
+
+<style>
+
+    .image-text-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically within the container */
+}
+
+.image-container-site-nav {
+    margin-right: 10px; /* Space between image and text */
+}
+
+.collection-image {
+    width: 40px; /* Set a uniform width for images */
+    height: 40px; /* Set a uniform height for images */
+    object-fit: contain; /* Maintain aspect ratio of images */
+}
+
+</style>                
+            </div>
+        </ul>
+    {%- else -%}
+        <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-1__action header__menu-item header__menu-item list-menu__item link link--text focus-inset link-effect"{% if link.current %} aria-current="page"{% endif %}>
+            {% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}
+            <span class="icon-img">
+                <img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';">
+            </span>
+            <span class="text p-relative{%- if link.current %} header__active-menu-item{% endif %}">{{ link.title | escape }}</span>
+        </a>
+    {%- endif -%}
+</li>
+
+<script></script>
