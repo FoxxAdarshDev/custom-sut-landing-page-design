@@ -31,13 +31,9 @@
         assign money_price = 'products.product.price.from_price_html' | t: price: money_price
     endif
 
-    comment
-    Check for percentage discount tag in product tags or variant SKU
-    endcomment
     assign percent_tag = ''
     assign has_discount = false
     
-    comment Check product tags first endcomment
     for tag in product.tags
         if tag contains 'percent_'
             assign percent_tag = tag | remove: 'percent_'
@@ -46,7 +42,6 @@
         endif
     endfor
     
-    comment If no discount in product tags, check variant SKU endcomment
     if has_discount == false and target.sku != blank
         if target.sku contains 'percent_'
             assign sku_parts = target.sku | split: 'percent_'
@@ -59,7 +54,6 @@
 -%}
 
 {%- if has_discount and percent_tag != '' -%}
-    {%- comment -%} Discount pricing logic {%- endcomment -%}
     {%- assign discount_percentage = percent_tag | plus: 0 -%}
     {%- assign price_discount = price | times: discount_percentage | divided_by: 100.0 -%}
     {%- assign discounted_price = price | minus: price_discount -%}
@@ -79,14 +73,12 @@
     <div class="price price--discount-active {{ price_class }}
         {%- if available == false %} price--sold-out {% endif -%}">
         
-        {%- comment -%} Discount Badge {%- endcomment -%}
         <div class="price__discount-badge">
             <span class="discount-percentage">{{ discount_percentage }}% OFF</span>
             <span class="discount-label">SPECIAL DISCOUNT</span>
         </div>
 
         <dl class="price__discount-container">
-            {%- comment -%} Original Price (Strikethrough) {%- endcomment -%}
             <div class="price__original">
                 <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
                 <dd class="price__original-value">
@@ -95,7 +87,6 @@
                 </dd>
             </div>
 
-            {%- comment -%} Sale Price (Current Price with strikethrough) {%- endcomment -%}
             <div class="price__sale-price">
                 <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
                 <dd class="price__sale-value">
@@ -104,7 +95,6 @@
                 </dd>
             </div>
 
-            {%- comment -%} Final Discounted Price (Prominent) {%- endcomment -%}
             <div class="price__final">
                 <dt class="visually-hidden">{{ 'products.product.price.final_price' | t }}</dt>
                 <dd class="price__final-value">
@@ -113,12 +103,10 @@
                 </dd>
             </div>
 
-            {%- comment -%} Savings Display {%- endcomment -%}
             <div class="price__savings">
                 <span class="savings-badge">You Save {{ savings_money }}!</span>
             </div>
 
-            {%- comment -%} Learn More Button {%- endcomment -%}
             <div class="price__learn-more">
                 <button class="learn-more-btn" onclick="openDiscountPopup('{{ product.id }}', '{{ discount_percentage }}', '{{ original_money_price }}', '{{ money_price }}', '{{ discounted_money_price }}', '{{ savings_money }}')">
                     <span class="learn-more-icon">💡</span>
@@ -129,39 +117,17 @@
     </div>
 
 {%- else -%}
-    {%- comment -%} Default pricing (no discount) {%- endcomment -%}
     <div class="price
         {%- if price_class %} {{ price_class }}{% endif -%}
         {%- if available == false %} price--sold-out {% endif -%}
         {%- if compare_at_price > price %} price--on-sale {% endif -%}
         {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}">
         <dl>
-            {%- comment -%}
-              Explanation of description list:
-                - div.price__regular: Displayed when there are no variants on sale
-                - div.price__sale: Displayed when a variant is a sale
-                - div.price__availability: Displayed when the product is sold out
-            {%- endcomment -%}
             <div class="price__regular">
-                {%- comment -%}
-                    <dt>
-                        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-                    </dt>
-                {%- endcomment -%}
                 <dd class="price__last"><span class="price-item price-item--regular">{{ money_price }}</span></dd>
             </div>
             <div class="price__sale">
-                {%- comment -%}
-                    <dt class="price__compare">
-                        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-                    </dt>
-                {%- endcomment -%}
                 <dd class="price__compare"><s class="price-item price-item--regular">{% if settings.currency_format_enable %}{{ compare_at_price | money_with_currency }}{% else %}{{ compare_at_price | money }}{% endif %}</s></dd>
-                {%- comment -%}
-                    <dt>
-                        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-                    </dt>
-                {%- endcomment -%}
                 <dd class="price__last"><span class="price-item price-item--sale">{{ money_price }}</span></dd>
                 {%- if settings.show_saved_price and price != nil and price != blank and compare_at_price != nil and compare_at_price != blank -%}
                     {%- assign saved_price = compare_at_price | minus: price | money -%}
