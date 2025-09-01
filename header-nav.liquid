@@ -11,7 +11,23 @@
         <a class="menu-lv-1__action header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect" href="{{ link.url }}">{% if check_vertical == true %}{% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}<span class="icon-img"><img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';"></span>{% endif %}
             <span class="text{% if link.child_active %} header__active-menu-item{% endif %} p-relative">{{ link.title | escape }}</span>
             <span class="icon-dropdown" data-toggle-menu-mb="">{% render 'icon-caret-right' %}</span>
-            {%- if new_label_1 contains title -%}
+            {%- if link.title contains 'Labour Day Sale' or link.title contains 'Labor Day Sale' -%}
+                <div class="labour-day-sale-badge">
+                    <div class="sale-banner">
+                        <div class="flag-icon">🇺🇸</div>
+                        <span class="sale-text">FLAT 20% OFF</span>
+                        <div class="flag-icon">🇺🇸</div>
+                    </div>
+                    <div class="countdown-mini">
+                        <span class="countdown-label">ENDS:</span>
+                        <div class="countdown-units">
+                            <span class="time-unit"><span id="nav-days">30</span>D</span>
+                            <span class="time-unit"><span id="nav-hours">22</span>H</span>
+                            <span class="time-unit"><span id="nav-mins">48</span>M</span>
+                        </div>
+                    </div>
+                </div>
+            {%- elsif new_label_1 contains title -%}
                 <span class="label new-label">{{ 'general.navigation.new_label' | t }}</span>
             {%- elsif sale_label_1 contains title -%}
                 <span class="label sale-label">{{ 'general.navigation.sale_label' | t }}</span>
@@ -19,6 +35,155 @@
                 <span class="label hot-label">{{ 'general.navigation.hot_label' | t }}</span>
             {%- endif -%}
         </a>
+
+        {% comment %} Labour Day Sale Menu Styles {% endcomment %}
+        <style>
+        .labour-day-sale-badge {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 50%, #1e3a8a 100%);
+            border-radius: 12px;
+            padding: 8px 12px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            z-index: 1000;
+            min-width: 180px;
+            border: 2px solid #ffd700;
+            animation: patrioticGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes patrioticGlow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
+            50% { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6); }
+        }
+
+        .sale-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .flag-icon {
+            font-size: 14px;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .sale-text {
+            color: #ffd700;
+            font-weight: 900;
+            font-size: 12px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .countdown-mini {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .countdown-label {
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown-units {
+            display: flex;
+            gap: 4px;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1e3a8a;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+
+        .time-unit span {
+            color: #dc2626;
+            font-weight: 900;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .labour-day-sale-badge {
+                top: -40px;
+                min-width: 160px;
+                padding: 6px 10px;
+            }
+            
+            .sale-text {
+                font-size: 10px;
+            }
+            
+            .countdown-label {
+                font-size: 8px;
+            }
+            
+            .time-unit {
+                font-size: 7px;
+                padding: 1px 3px;
+                min-width: 18px;
+            }
+        }
+
+        /* Hover effects */
+        .menu-lv-item:hover .labour-day-sale-badge {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+        }
+        </style>
+
+        <script>
+        // Labour Day Sale Countdown Timer for Navigation
+        function updateNavCountdown() {
+            const countDownDate = new Date('2025-09-30T23:59:59').getTime();
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                const navDaysEl = document.getElementById("nav-days");
+                const navHoursEl = document.getElementById("nav-hours");
+                const navMinsEl = document.getElementById("nav-mins");
+
+                if (navDaysEl) navDaysEl.textContent = String(days).padStart(2, '0');
+                if (navHoursEl) navHoursEl.textContent = String(hours).padStart(2, '0');
+                if (navMinsEl) navMinsEl.textContent = String(minutes).padStart(2, '0');
+            } else {
+                // Reset timer if expired
+                ["nav-days", "nav-hours", "nav-mins"].forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = "00";
+                });
+            }
+        }
+
+        // Start countdown for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavCountdown();
+            setInterval(updateNavCountdown, 60000); // Update every minute
+        });
+        </script>
 
         {%- if block_style == "megamenu_style_1" -%}
             <div class="menu-dropdown custom-scrollbar {{block_style}} p-absolute top-auto left-0 w-100 zi-10 o-x-hidden o-y-auto text-left opacity-0">
