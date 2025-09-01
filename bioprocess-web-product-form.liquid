@@ -90,16 +90,8 @@
             <div class="price__sale-price">
                 <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
                 <dd class="price__sale-value">
-                    <s class="price-item price-item--sale">{{ money_price }}</s>
+                    <span class="price-item price-item--sale">{{ discounted_money_price }}</span>
                     <span class="price-label">Sale Price</span>
-                </dd>
-            </div>
-
-            <div class="price__final">
-                <dt class="visually-hidden">{{ 'products.product.price.final_price' | t }}</dt>
-                <dd class="price__final-value">
-                    <span class="price-item price-item--final">{{ discounted_money_price }}</span>
-                    <span class="price-label">Your Final Price</span>
                 </dd>
             </div>
 
@@ -159,7 +151,6 @@
     </div>
 {%- endif -%}
 
-{%- comment -%} Discount Popup Modal {%- endcomment -%}
 <div id="discount-popup-overlay" class="discount-popup-overlay" onclick="closeDiscountPopup()">
     <div class="discount-popup-modal" onclick="event.stopPropagation()">
         <div class="discount-popup-header">
@@ -279,44 +270,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
+    padding: 12px 16px;
+    background: #f5f5f7;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #e1e1e6;
 }
 
-.price__original .price-item,
+.price__original .price-item {
+    font-size: 18px;
+    color: #86868b;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
 .price__sale-price .price-item {
-    font-size: 16px;
-    color: #666;
+    font-size: 24px;
+    color: #1d1d1f;
+    font-weight: 600;
 }
 
 .price-label {
-    font-size: 12px;
-    color: #888;
-    font-weight: 500;
-}
-
-.price__final {
-    background: linear-gradient(135deg, #51cf66 0%, #69db7c 100%);
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(81, 207, 102, 0.3);
-}
-
-.price__final .price-item {
-    font-size: 32px;
-    font-weight: 900;
-    display: block;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.price__final .price-label {
-    color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
-    margin-top: 5px;
-    display: block;
+    color: #86868b;
+    font-weight: 400;
 }
 
 .price__savings {
@@ -375,15 +352,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
     display: none;
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.3s ease;
+}
+
+.discount-popup-overlay.show {
+    display: flex !important;
 }
 
 .discount-popup-modal {
@@ -641,7 +623,7 @@ function openDiscountPopup(productId, discountPercent, originalPrice, salePrice,
     // Populate popup with data
     document.getElementById('popup-discount-percent').textContent = discountPercent + '%';
     document.getElementById('popup-original-price').textContent = originalPrice;
-    document.getElementById('popup-sale-price').textContent = salePrice;
+    document.getElementById('popup-sale-price').textContent = finalPrice;
     document.getElementById('popup-final-price').textContent = finalPrice;
     document.getElementById('popup-total-savings').textContent = savings;
     
@@ -651,14 +633,19 @@ function openDiscountPopup(productId, discountPercent, originalPrice, salePrice,
     const discountAmount = originalAmount - finalAmount;
     document.getElementById('popup-discount-amount').textContent = '-$' + discountAmount.toFixed(2);
     
-    // Show popup
+    // Show popup with proper display
     const overlay = document.getElementById('discount-popup-overlay');
+    overlay.classList.add('show');
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    
+    // Force reflow to ensure centering
+    overlay.offsetHeight;
 }
 
 function closeDiscountPopup() {
     const overlay = document.getElementById('discount-popup-overlay');
+    overlay.classList.remove('show');
     overlay.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
