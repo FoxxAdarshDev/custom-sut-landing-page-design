@@ -8,6 +8,29 @@
         {%- elsif hot_label_1 contains title -%}
             <span class="label hot-label">{{ 'general.navigation.hot_label' | t }}</span>
         {%- endif -%}
+    {%- if link.title contains "Labour Day Sale" -%}
+            <span class="label sale-label">{{ 'general.navigation.sale_label' | t }}</span>
+            <div class="countdown-container">
+                <div class="countdown-timer">
+                    <div class="time-unit">
+                        <span id="days">30</span>
+                        <label>DAYS</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="hours">22</span>
+                        <label>HOURS</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="minutes">48</span>
+                        <label>MIN</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="seconds">15</span>
+                        <label>SEC</label>
+                    </div>
+                </div>
+            </div>
+        {%- endif -%}
     </a>
     <ul class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list" >
         <div class="nav-title-mobile text-center"><span class="icon-dropdown">{% render 'icon-arrow-nav' %}</span>{{ link.title | escape }}</div>
