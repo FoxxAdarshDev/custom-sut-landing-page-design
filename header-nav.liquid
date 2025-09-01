@@ -38,20 +38,68 @@
     display: block;
 }
 
+/* New styles for Labour Day Sale */
+.menu-lv-item.menu-sale .menu-lv-1__action {
+    background-color: #2196F3 !important; /* Blue background */
+    border-radius: 20px !important; /* Rounded corners */
+    padding: 10px 20px !important;
+}
+
+.menu-lv-item.menu-sale .menu-lv-1__action .labour-day-sale-label {
+    background-color: #ffd700;
+    color: #002868;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.menu-lv-item.menu-sale .countdown-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    margin-top: 0;
+}
+
+.menu-lv-item.menu-sale .countdown-timer {
+    justify-content: flex-start;
+}
+
+.menu-lv-item.menu-sale .time-unit {
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    backdrop-filter: none;
+}
+
+.menu-lv-item.menu-sale .time-unit span {
+    font-size: 0.7rem; /* Smaller font size */
+    color: white;
+    text-shadow: none;
+}
+
+.menu-lv-item.menu-sale .time-unit label {
+    font-size: 0.5rem; /* Even smaller label */
+    color: white;
+    margin-top: 1px;
+}
+
 @media (max-width: 768px) {
     .countdown-timer {
         gap: 5px;
     }
-    
+
     .time-unit {
         min-width: 35px;
         padding: 6px 4px;
     }
-    
+
     .time-unit span {
         font-size: 0.9rem;
     }
-    
+
     .time-unit label {
         font-size: 0.5rem;
     }
@@ -101,24 +149,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="label hot-label">{{ 'general.navigation.hot_label' | t }}</span>
         {%- endif -%}
     {%- if link.title contains "Labour Day Sale" -%}
-            <span class="label sale-label">{{ 'general.navigation.sale_label' | t }}</span>
+            <span class="labour-day-sale-label">SALE</span>
             <div class="countdown-container">
                 <div class="countdown-timer">
                     <div class="time-unit">
                         <span id="days">30</span>
-                        <label>DAYS</label>
+                        <label>D</label>
                     </div>
                     <div class="time-unit">
                         <span id="hours">22</span>
-                        <label>HOURS</label>
+                        <label>H</label>
                     </div>
                     <div class="time-unit">
                         <span id="minutes">48</span>
-                        <label>MIN</label>
+                        <label>M</label>
                     </div>
                     <div class="time-unit">
                         <span id="seconds">15</span>
-                        <label>SEC</label>
+                        <label>S</label>
                     </div>
                 </div>
             </div>
@@ -183,24 +231,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="label hot-label">{{ 'general.navigation.hot_label' | t }}</span>
         {%- endif -%}
         {%- if link.title contains "Labour Day Sale" -%}
-            <span class="label sale-label">{{ 'general.navigation.sale_label' | t }}</span>
+            <span class="labour-day-sale-label">SALE</span>
             <div class="countdown-container">
                 <div class="countdown-timer">
                     <div class="time-unit">
                         <span id="days">30</span>
-                        <label>DAYS</label>
+                        <label>D</label>
                     </div>
                     <div class="time-unit">
                         <span id="hours">22</span>
-                        <label>HOURS</label>
+                        <label>H</label>
                     </div>
                     <div class="time-unit">
                         <span id="minutes">48</span>
-                        <label>MIN</label>
+                        <label>M</label>
                     </div>
                     <div class="time-unit">
                         <span id="seconds">15</span>
-                        <label>SEC</label>
+                        <label>S</label>
                     </div>
                 </div>
             </div>
