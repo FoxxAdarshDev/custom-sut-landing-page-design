@@ -31,13 +31,13 @@
         assign money_price = 'products.product.price.from_price_html' | t: price: money_price
     endif
 
-    comment
+    {%- comment -%}
     Check for percentage discount tag in product tags or variant SKU
-    endcomment
+    {%- endcomment -%}
     assign percent_tag = ''
     assign has_discount = false
     
-    comment Check product tags first endcomment
+    {%- comment -%} Check product tags first {%- endcomment -%}
     for tag in product.tags
         if tag contains 'percent_'
             assign percent_tag = tag | remove: 'percent_'
@@ -46,7 +46,7 @@
         endif
     endfor
     
-    comment If no discount in product tags, check variant SKU endcomment
+    {%- comment -%} If no discount in product tags, check variant SKU {%- endcomment -%}
     if has_discount == false and target.sku != blank
         if target.sku contains 'percent_'
             assign sku_parts = target.sku | split: 'percent_'
