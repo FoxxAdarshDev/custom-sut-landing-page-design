@@ -1212,19 +1212,19 @@
 .popup-original-price-bioprocess {
   text-decoration: line-through;
   color: #999;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .popup-sale-price-bioprocess {
   color: #0071ce;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: line-through;
 }
 
 .popup-final-price-bioprocess {
   color: #dc3545;
-  font-size: 1.6rem;
+  font-size: 26px;
   font-weight: 700;
 }
 
@@ -2581,7 +2581,7 @@
             <div class="popup-product-sku-bioprocess">SKU: <span id="popupProductSKU"></span></div>
 
             <div class="popup-product-price-bioprocess">
-                 {% comment %} Add the original price in popup {% endcomment %}
+                 {% comment %} Add the original price to the popup {% endcomment %}
                 <span class="popup-original-price-bioprocess" id="popupOriginalPrice" style="display: none;">$0.00</span>
                 <span class="popup-sale-price-bioprocess">${{ product.price | money_without_currency }}<span id="popupSalePrice"></span></span>
 
