@@ -1,55 +1,5 @@
-<li class="menu-lv-item menu-lv-1 text-left no-megamenu {% if link.links != blank %}dropdown {% endif %} {% if sale_item_lv1 contains title %} menu-sale{% endif %} {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}labour-day-sale-menu{% endif %}">
-    {%- if link.links != blank -%}
-        <a class="menu-lv-1__action  header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
-
-            {% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}
-            <span class="icon-img">
-                <img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';">
-            </span>
-
-            <span class="text p-relative{%- if link.child_active %} header__active-menu-item{% endif %}">
-                {{ link.title | escape }}
-                {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}
-                    <span class="labour-day-badge">NEW</span>
-                    <div class="labour-day-countdown" id="labour-day-countdown">
-                        <span id="countdown-text"></span>
-                    </div>
-                {% endif %}
-            </span>
-            <span class="icon-dropdown" data-toggle-menu-mb="">
-                {% render 'icon-caret-right' %}
-            </span>
-            {%- if new_label contains title -%}
-                <span class="label new-label">
-                    {{ 'general.navigation.new_label' | t }}
-                </span>
-            {%- elsif sale_label contains title -%}
-                <span class="label sale-label">
-                    {{ 'general.navigation.sale_label' | t }}
-                </span>
-            {%- elsif hot_label contains title -%}
-                <span class="label hot-label">
-                    {{ 'general.navigation.hot_label' | t }}
-                </span>
-            {%- endif -%}
-        </a></old_str>
-        <ul  id="submenu-container" class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list">
-            <div class="bg_white">
-                <div class="nav-title-mobile text-center">
-                    <span class="icon-dropdown">
-                        {% render 'icon-arrow-nav' %}
-                    </span>
-                    {{ link.title | escape }}
-                </div>
-                <li class="menu-lv-item menu-lv-2 text-left navigation_all_mobile d-none">
-                    <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large"{% if childlink.current %} aria-current="page"{% endif %}>
-                        <span class="text{%- if link.child_active %} header__active-menu-item{% endif %}">
-                            {{ 'general.navigation.go_to' | t }} {{ link.title | escape }}
-                        </span>
-                    </a>
-                </li>
-                <style>
-                    /* Labour Day Sale Menu Highlighting */
+<style>
+/* Labour Day Sale Menu Highlighting - Top Level */
 .labour-day-sale-menu {
     position: relative;
 }
@@ -121,7 +71,59 @@
         display: none !important;
     }
 }
+</style>
 
+<li class="menu-lv-item menu-lv-1 text-left no-megamenu {% if link.links != blank %}dropdown {% endif %} {% if sale_item_lv1 contains title %} menu-sale{% endif %} {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}labour-day-sale-menu{% endif %}">
+    {%- if link.links != blank -%}
+        <a class="menu-lv-1__action  header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
+
+            {% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}
+            <span class="icon-img">
+                <img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';">
+            </span>
+
+            <span class="text p-relative{%- if link.child_active %} header__active-menu-item{% endif %}">
+                {{ link.title | escape }}
+                {% if link.title contains 'Labour Day' or link.title contains 'Labor Day' %}
+                    <span class="labour-day-badge">NEW</span>
+                    <div class="labour-day-countdown" id="labour-day-countdown">
+                        <span id="countdown-text"></span>
+                    </div>
+                {% endif %}
+            </span>
+            <span class="icon-dropdown" data-toggle-menu-mb="">
+                {% render 'icon-caret-right' %}
+            </span>
+            {%- if new_label contains title -%}
+                <span class="label new-label">
+                    {{ 'general.navigation.new_label' | t }}
+                </span>
+            {%- elsif sale_label contains title -%}
+                <span class="label sale-label">
+                    {{ 'general.navigation.sale_label' | t }}
+                </span>
+            {%- elsif hot_label contains title -%}
+                <span class="label hot-label">
+                    {{ 'general.navigation.hot_label' | t }}
+                </span>
+            {%- endif -%}
+        </a></old_str>
+        <ul  id="submenu-container" class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list">
+            <div class="bg_white">
+                <div class="nav-title-mobile text-center">
+                    <span class="icon-dropdown">
+                        {% render 'icon-arrow-nav' %}
+                    </span>
+                    {{ link.title | escape }}
+                </div>
+                <li class="menu-lv-item menu-lv-2 text-left navigation_all_mobile d-none">
+                    <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large"{% if childlink.current %} aria-current="page"{% endif %}>
+                        <span class="text{%- if link.child_active %} header__active-menu-item{% endif %}">
+                            {{ 'general.navigation.go_to' | t }} {{ link.title | escape }}
+                        </span>
+                    </a>
+                </li>
+                <style>
                     /* Active child navigation link styling */
 .active-child-nav-link {
     background: linear-gradient(135deg, #095ea7 0%, #0d7dd1 100%) !important;
