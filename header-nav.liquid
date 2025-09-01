@@ -1,3 +1,95 @@
+<style>
+.countdown-container {
+    margin-top: 10px;
+    position: relative;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    padding: 8px 6px;
+    min-width: 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.time-unit span {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 1px 1px 0 #002868;
+}
+
+.time-unit label {
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin-top: 2px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .countdown-timer {
+        gap: 5px;
+    }
+    
+    .time-unit {
+        min-width: 35px;
+        padding: 6px 4px;
+    }
+    
+    .time-unit span {
+        font-size: 0.9rem;
+    }
+    
+    .time-unit label {
+        font-size: 0.5rem;
+    }
+}
+</style>
+
+<script>
+function updateLabourDayCountdown() {
+    const targetDate = new Date('2024-09-02T23:59:59').getTime();
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    if (timeLeft > 0) {
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        // Update all countdown timers
+        const daysElements = document.querySelectorAll('#days');
+        const hoursElements = document.querySelectorAll('#hours');
+        const minutesElements = document.querySelectorAll('#minutes');
+        const secondsElements = document.querySelectorAll('#seconds');
+
+        daysElements.forEach(el => el.textContent = days.toString().padStart(2, '0'));
+        hoursElements.forEach(el => el.textContent = hours.toString().padStart(2, '0'));
+        minutesElements.forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
+        secondsElements.forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
+    }
+}
+
+// Initialize countdown
+document.addEventListener('DOMContentLoaded', function() {
+    updateLabourDayCountdown();
+    setInterval(updateLabourDayCountdown, 1000);
+});
+</script>
+
 <li class="menu-lv-item menu-lv-1 text-left no-megamenu{% if link.links != blank %} dropdown{% endif %}{% if sale_item_lv1 contains title %} menu-sale{% endif %}">
 {%- if link.links != blank -%}<a class="menu-lv-1__action  header__menu-item list-menu__item link focus-inset menu_mobile_link link-effect"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}><span class="text{%- if link.child_active %} header__active-menu-item{% endif %} p-relative">{{ link.title | escape }}</span>
         <span class="icon-dropdown" data-toggle-menu-mb="">{% render 'icon-caret-right' %}</span>
