@@ -178,31 +178,11 @@ document.addEventListener('DOMContentLoaded', function() {
         {%- endif -%}
     {%- if link.title contains "Labour Day Sale" -%}
             <span class="labour-day-sale-label">SALE</span>
-            <div class="countdown-container">
-                <div class="countdown-timer">
-                    <div class="time-unit">
-                        <span id="days">30</span>
-                        <label>D</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="hours">22</span>
-                        <label>H</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="minutes">48</span>
-                        <label>M</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="seconds">15</span>
-                        <label>S</label>
-                    </div>
-                </div>
-            </div>
         {%- endif -%}
     </a>
     <ul class="header__submenu list-menu list-menu--disclosure list-menu--disclosure-1 caption-large motion-reduce" role="list" >
         <div class="nav-title-mobile text-center"><span class="icon-dropdown">{% render 'icon-arrow-nav' %}</span>{{ link.title | escape }}</div>
-        <li class="menu-lv-item menu-lv-2 text-left navigation_all_mobile d-none"><a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large link-effect"{% if childlink.current %} aria-current="page"{% endif %}><span class="text{%- if link.child_active %} header__active-menu-item{% endif %} p-relative">{{ 'general.navigation.go_to' | t }} {{ link.title | escape }}</span></a></li>
+        <li class="menu-lv-item menu-lv-2 text-left navigation_all_mobile d-none"><a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="menu-lv-2__action header__menu-item list-menu__item link link--text focus-inset caption-large link-effect"{% if childlink.current %} aria-current="page"{% endif %}><span class="text{% if childlink.current %} list-menu__item--active{% endif %} p-relative">{{ 'general.navigation.go_to' | t }} {{ link.title | escape }}</span></a></li>
         {%- for childlink in link.links -%}
             {% assign childtitle = childlink.title | escape | downcase | handle %}
             <li class="menu-lv-item menu-lv-2 text-left {% if childlink.links != blank %} dropdown{% endif %} {% if sale_item_lv2 contains childtitle %} menu-sale{% endif %}{% if show_label_blink %} menu-lv-blink{% endif %}">
@@ -260,26 +240,6 @@ document.addEventListener('DOMContentLoaded', function() {
         {%- endif -%}
         {%- if link.title contains "Labour Day Sale" -%}
             <span class="labour-day-sale-label">SALE</span>
-            <div class="countdown-container">
-                <div class="countdown-timer">
-                    <div class="time-unit">
-                        <span id="days">30</span>
-                        <label>D</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="hours">22</span>
-                        <label>H</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="minutes">48</span>
-                        <label>M</label>
-                    </div>
-                    <div class="time-unit">
-                        <span id="seconds">15</span>
-                        <label>S</label>
-                    </div>
-                </div>
-            </div>
         {%- endif -%}
     </a>
 {%- endif -%}
