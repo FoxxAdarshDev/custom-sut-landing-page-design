@@ -1,0 +1,296 @@
+{% comment %}
+  List out your main-menu linklist (default)
+
+  More info on linklists:
+    - http://docs.shopify.com/themes/liquid-variables/linklists
+{% endcomment %}
+<ul class="site-nav" id="AccessibleNav">
+ 
+    <style>
+
+ a.sale-badge-labor-day {
+    background: linear-gradient(135deg, #b22234 0%, #3c3b6e 100%);
+    color: white;
+    padding: 16px 10px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 6px 20px rgba(178, 34, 52, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sale-badge-labor-day::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.8s ease;
+  }
+
+  .sale-badge-labor-day:hover::before {
+    left: 100%;
+  }
+
+
+a.black-friday-sale-menu-link-desktop:hover, a.black-friday-sale-menu-link-desktop:active {
+  color:#ffff!important
+}
+@keyframes movingBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%; 
+  }
+}
+
+/* Modern 2030 Foxx Bioprocess Menu Highlight Styles */
+.foxx-bioprocess-highlight {
+  position: relative;
+  overflow: visible;
+}
+
+.foxx-bioprocess-link {
+  position: relative;
+  background: linear-gradient(135deg, #0071b9 0%, #005a94 50%, #0071b9 100%);
+  background-size: 200% 200%;
+  color: #ffffff !important;
+  padding: 10px;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 8px 25px rgba(0, 113, 185, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  animation: foxxGradientShift 6s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.foxx-bioprocess-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(0, 113, 185, 0.4),
+    0 5px 15px rgba(0, 90, 148, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  animation-duration: 3s;
+}
+
+.foxx-new-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  color: #333;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 12px;
+  text-shadow: none;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+  animation: foxxPulse 2s ease-in-out 1;
+  z-index: 10;
+}
+
+.foxx-bioprocess-dropdown {
+  background: #ffffff !important;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  margin-top: 5px;
+  min-width: 200px;
+}
+
+.foxx-bioprocess-dropdown li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.foxx-bioprocess-dropdown li a {
+  display: block;
+  padding: 12px 20px;
+  color: #333 !important;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border-radius: 0;
+}
+
+.foxx-bioprocess-dropdown li a:hover {
+  background: #f8f9fa !important;
+  color: #0071b9 !important;
+  padding-left: 25px;
+}
+
+/* Fix dropdown hover behavior */
+.site-nav--has-dropdown {
+  position: relative;
+}
+
+.site-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  margin-top: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-nav--has-dropdown:hover .site-nav__dropdown {
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure dropdown stays visible when hovering over it */
+.site-nav--has-dropdown:hover .site-nav__dropdown,
+.site-nav__dropdown:hover {
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Submenu labels styling */
+.submenu-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.submenu-label.standard-sut {
+  background: #e8f5e8;
+  color: #2d6930;
+}
+
+.submenu-label.mto {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.submenu-label.custom-sut {
+  background: #e7f3ff;
+  color: #0056b3;
+}
+
+@keyframes foxxGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes foxxPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .foxx-bioprocess-link {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+  
+  .foxx-new-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+/* Ensure consistent dropdown styling */
+.foxx-bioprocess-dropdown {
+  background: #ffffff !important;
+  border-color: #e1e5e9 !important;
+}
+
+.foxx-bioprocess-dropdown li a {
+  background: transparent !important;
+}
+    </style>
+     {% assign page_id = page.id %}
+  {% if page_id != 112695541915 %}
+<a href="/pages/labour-day-lab-essentials-sale-flat-20-off-bioprocess-components-bottles-carboys" target="_blank" follow="no-follow" class="sale-badge-labor-day">Labour Day Sale</a> 
+    
+  {% endif %}  
+ {% comment %} <a href="/pages/us-independence-day-sale-25" style="
+   background: linear-gradient(45deg, #0071ce 0%, #dc3545 50%, #0071ce 100%);
+    color: #ffffff;
+    padding-inline: 10px;
+    font-weight: 500!important;
+    border-radius:10px;
+    letter-spacing: 0.5px;position: relative;
+    padding: 10px 10px;">Biggest Patriotic Sale</a>  {% endcomment %}
+  {% for link in linklists.new-main-menu.links %}
+    {% comment %}
+      Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+      More info on dropdowns:
+        - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+    {% endcomment %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if linklists[child_list_handle].links != blank %}
+      <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-highlight{% endif %}" aria-haspopup="true">
+        <a href="{{ link.url }}" class="site-nav__link{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-link{% endif %}" target="{% if link.url contains 'foxxbioprocess' %}_blank{% endif %}">
+          {{ link.title }}
+          {% if link.url contains 'foxxbioprocess' %}
+            <span class="foxx-new-badge">NEW</span>
+          {% endif %}
+          <span class="icon-fallback-text">
+            <span class="icon icon-arrow-down" aria-hidden="true"></span>
+          </span>
+        </a>
+        <ul class="site-nav__dropdown{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-dropdown{% endif %}">
+          {% for childlink in linklists[child_list_handle].links %}
+            <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+              <a href="{{ childlink.url }}" class="site-nav__link" target="{% if childlink.url contains 'foxxbioprocess' %}_blank{% endif %}">
+                {{ childlink.title | escape }}
+                {% if link.url contains 'foxxbioprocess' %}
+                  {% if childlink.title contains 'STANDARD SUT' %}
+                    <span class="submenu-label standard-sut">Ships in 24-48 Hours</span>
+                  {% elsif childlink.title contains 'MADE TO ORDER' or childlink.title contains 'MTO' %}
+                    <span class="submenu-label mto">Shipped in 4–6 weeks</span>
+                  {% elsif childlink.title contains 'CUSTOM SUT' %}
+                    <span class="submenu-label custom-sut">World's First Custom SUT Library</span>
+                  {% endif %}
+                {% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li {% if link.active %}class="site-nav--active"{% endif %}{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-highlight{% endif %}>
+        <a href="{{ link.url }}" class="site-nav__link{% if link.url contains 'foxxbioprocess' %} foxx-bioprocess-link{% endif %}" target="{% if link.url contains 'foxxbioprocess' %}_blank{% endif %}">
+          {{ link.title }}
+          {% if link.url contains 'foxxbioprocess' %}
+            <span class="foxx-new-badge">NEW</span>
+          {% endif %}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
