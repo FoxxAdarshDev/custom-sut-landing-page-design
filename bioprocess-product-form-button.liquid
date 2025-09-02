@@ -21,8 +21,48 @@
       if block.settings.show_gift_card_recipient and product.gift_card?
         assign gift_card_recipient_feature_active = true
       endif
+
+    # Automatic 20% discount logic
+    assign discount_percentage = 20
+    assign original_price = current_variant.price
+    assign discount_amount = original_price | times: discount_percentage | divided_by: 100
+    assign discounted_price = original_price | minus: discount_amount
+    assign savings_amount = discount_amount
+    
+    if settings.currency_format_enable
+        assign original_money_price = original_price | money_with_currency
+        assign discounted_money_price = discounted_price | money_with_currency
+        assign savings_money = savings_amount | money_with_currency
+    else
+        assign original_money_price = original_price | money
+        assign discounted_money_price = discounted_price | money
+        assign savings_money = savings_amount | money
+    endif
 -%}
 <div class="productView-buttons">
+    {%- comment -%} Display 20% Discount Information {%- endcomment -%}
+    <div class="discount-info-section">
+        <div class="discount-badge">
+            <span class="discount-percentage">{{ discount_percentage }}% OFF</span>
+            <span class="discount-label">SPECIAL DISCOUNT</span>
+        </div>
+        
+        <div class="pricing-breakdown">
+            <div class="original-price">
+                <span class="price-label">{{ 'products.product.price.regular_price' | t }}:</span>
+                <span class="price-value">{{ original_money_price }}</span>
+            </div>
+            
+            <div class="sale-price">
+                <span class="price-label">{{ 'products.product.price.sale_price' | t }}:</span>
+                <span class="price-value sale-highlight">{{ discounted_money_price }}</span>
+            </div>
+        </div>
+        
+        <div class="savings-info">
+            <span class="savings-text">{{ 'products.product.save' | t }} {{ savings_money }}!</span>
+        </div>
+    </div>
     {%- if gift_card_recipient_feature_active -%}
       {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
     {%- endif -%}
@@ -76,10 +116,9 @@
                                             {%- if first_inventory > 0 -%}
                                                 {%- if show_subtotal_text and subtotal_style == '2' -%}
                                                     {%- assign subtotal = subtotal | strip_html -%}
-
                                                     {{ 'products.product.sub_total' | t : value : subtotal }}
                                                 {%- else -%}
-                                                    {{ 'products.product.add_to_cart' | t}}
+                                                    {{ 'products.product.add_to_cart' | t}} - {{ discounted_money_price }}
                                                 {%- endif -%}
                                             {%- else -%}
                                                 {{ 'products.product.pre_order' | t }}
@@ -91,7 +130,7 @@
                                                 {%- assign subtotal = subtotal | strip_html -%}
                                                 {{ 'products.product.sub_total' | t : value : subtotal }}
                                             {%- else -%}
-                                                {{ 'products.product.add_to_cart' | t}}
+                                                {{ 'products.product.add_to_cart' | t}} - {{ discounted_money_price }}
                                             {%- endif -%}
                                         </button>
                                     {%- endif -%}
