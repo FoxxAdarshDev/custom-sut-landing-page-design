@@ -21,6 +21,18 @@
     if block.settings.show_gift_card_recipient and product.gift_card?
       assign gift_card_recipient_feature_active = true
     endif
+
+  // Discount logic
+  assign current_variant = product.selected_or_first_available_variant
+  assign discount_percentage = 0
+  assign sale_price = current_variant.price
+  assign original_price = current_variant.price
+
+  if current_variant.compare_at_price
+    assign original_price = current_variant.compare_at_price
+    assign discount_percentage = (1 - (current_variant.price / original_price)) * 100 | round
+    assign sale_price = current_variant.price
+  endif
 -%}
 <div class="productView-buttons">
   {%- if gift_card_recipient_feature_active -%}
@@ -30,6 +42,12 @@
   {%- assign product_form_installment_id = 'product-form-installment-' | append: product.id -%}
   {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
       <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {%- if discount_percentage > 0 -%}
+        <div class="installment-discount-info">
+          {{ 'products.product.discount_applied' | t: discount: discount_percentage }}
+          <small>{{ 'products.product.sale_price' | t }}: {{ sale_price | money }}</small>
+        </div>
+      {%- endif -%}
       {{ form | payment_terms }}
   {%- endform -%}
   {%- assign product_form_id = 'product-form-' | append: product.id -%}
@@ -62,7 +80,7 @@
                                       {%- assign first_inventory = current_variant.inventory_quantity -%}
                                       {%- liquid
                                          if current_variant.available and first_inventory == 0
-                                           assign allowOutStockSale = true 
+                                           assign allowOutStockSale = true
                                          else
                                            assign allowOutStockSale = false
                                          endif
@@ -74,6 +92,9 @@
 
                                                   {{ 'products.product.sub_total' | t : value : subtotal }}
                                               {%- else -%}
+                                                  {%- if discount_percentage > 0 -%}
+                                                    <span class="button-discount-info">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</span>
+                                                  {%- endif -%}
                                                   {{ 'products.product.add_to_cart' | t}}
                                               {%- endif -%}
                                           {%- else -%}
@@ -86,6 +107,9 @@
                                               {%- assign subtotal = subtotal | strip_html -%}
                                               {{ 'products.product.sub_total' | t : value : subtotal }}
                                           {%- else -%}
+                                              {%- if discount_percentage > 0 -%}
+                                                <span class="button-discount-info">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</span>
+                                              {%- endif -%}
                                               {{ 'products.product.add_to_cart' | t}}
                                           {%- endif -%}
                                       </button>
@@ -121,7 +145,10 @@
                           </div>
                       {%- endif -%}
                       <div class="productView-groupItem">
-                          <div class="productView-payment" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="product-checkout-{{ product.id }}" style="--bin-color: {{ bin_color }};--bin-bg-color: {% if bin_bg_color_gradient != blank %}{{ bin_bg_color_gradient }}{% else %}{{ bin_bg_color }}{% endif %};--bin-border-color: {{ bin_border_color }};--bin-color-hover: {{ bin_color_hover }};--bin-bg-color-hover: {% if bin_bg_color_hover_gradient != blank %}{{ bin_bg_color_hover_gradient }}{% else %}{{ bin_bg_color_hover }}{% endif %};--bin-border-color-hover: {{ bin_border_color_hover }}"> 
+                          <div class="productView-payment" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="product-checkout-{{ product.id }}" style="--bin-color: {{ bin_color }};--bin-bg-color: {% if bin_bg_color_gradient != blank %}{{ bin_bg_color_gradient }}{% else %}{{ bin_bg_color }}{% endif %};--bin-border-color: {{ bin_border_color }};--bin-color-hover: {{ bin_color_hover }};--bin-bg-color-hover: {% if bin_bg_color_hover_gradient != blank %}{{ bin_bg_color_hover_gradient }}{% else %}{{ bin_bg_color_hover }}{% endif %};--bin-border-color-hover: {{ bin_border_color_hover }}">
+                              {%- if discount_percentage > 0 -%}
+                                <div class="payment-discount-banner">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</div>
+                              {%- endif -%}
                               {{ form | payment_button }}
                           </div>
                       </div>
@@ -136,3 +163,88 @@
       </div>
   {%- endif -%}
 </div>
+
+<style>
+.button-discount-info {
+    font-size: 12px;
+    color: #28a745;
+    font-weight: 600;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.installment-discount-info {
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 3px solid #28a745;
+}
+
+.installment-discount-info small {
+    color: #495057;
+    font-weight: 500;
+}
+
+.product-form__submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for dynamic checkout with discount */
+.productView-payment.discount-active {
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
+}
+
+.productView-payment.discount-active::before {
+    content: '💰 Discount Applied!';
+    display: block;
+    background: #28a745;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: -10px -10px 10px -10px;
+}
+
+.payment-discount-banner {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .payment-discount-banner {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .button-discount-info {
+        font-size: 11px;
+    }
+}
+</style>
