@@ -62,12 +62,17 @@
                                         {%- assign first_inventory = current_variant.inventory_quantity -%}
                                         {%- liquid
                                            if current_variant.available and first_inventory == 0
-                                             assign allowOutStockSale = true 
+                                             assign allowOutStockSale = true
                                            else
                                              assign allowOutStockSale = false
                                            endif
                                         -%}
                                         <button type="submit" name="add" data-btn-addToCart data-inventory-quantity="{{ current_variant.inventory_quantity }}" data-available="{{ allowOutStockSale }}" class="product-form__submit button button--primary an-{{ atc_animation }}{% if first_inventory == 0 %} button-text-change{% else %}{% if show_subtotal_text %} button-text-change{% endif %}{% endif %}" id="product-add-to-cart">
+                                            {%- comment -%}
+                                                Logic to display discounted price and original price if a discount is active (e.g., LABOURDAYSALE20)
+                                                This part needs to be integrated with Shopify's automatic discount detection.
+                                                For now, we'll just display the default text.
+                                            {%- endcomment -%}
                                             {%- if first_inventory > 0 -%}
                                                 {%- if show_subtotal_text and subtotal_style == '2' -%}
                                                     {%- assign subtotal = subtotal | strip_html -%}
@@ -121,7 +126,7 @@
                             </div>
                         {%- endif -%}
                         <div class="productView-groupItem">
-                            <div class="productView-payment" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="product-checkout-{{ product.id }}" style="--bin-color: {{ bin_color }};--bin-bg-color: {% if bin_bg_color_gradient != blank %}{{ bin_bg_color_gradient }}{% else %}{{ bin_bg_color }}{% endif %};--bin-border-color: {{ bin_border_color }};--bin-color-hover: {{ bin_color_hover }};--bin-bg-color-hover: {% if bin_bg_color_hover_gradient != blank %}{{ bin_bg_color_hover_gradient }}{% else %}{{ bin_bg_color_hover }}{% endif %};--bin-border-color-hover: {{ bin_border_color_hover }}"> 
+                            <div class="productView-payment" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="product-checkout-{{ product.id }}" style="--bin-color: {{ bin_color }};--bin-bg-color: {% if bin_bg_color_gradient != blank %}{{ bin_bg_color_gradient }}{% else %}{{ bin_bg_color }}{% endif %};--bin-border-color: {{ bin_border_color }};--bin-color-hover: {{ bin_color_hover }};--bin-bg-color-hover: {% if bin_bg_color_hover_gradient != blank %}{{ bin_bg_color_hover_gradient }}{% else %}{{ bin_bg_color_hover }}{% endif %};--bin-border-color-hover: {{ bin_border_color_hover }}">
                                 {{ form | payment_button }}
                             </div>
                         </div>
@@ -136,3 +141,113 @@
         </div>
     {%- endif -%}
 </div>
+
+<style>
+/* Discount Info Section Styles */
+.discount-info-section {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+    border: 2px solid #BF0A30;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(191, 10, 48, 0.2);
+}
+
+.discount-badge {
+    background: linear-gradient(135deg, #BF0A30 0%, #ff4757 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: pulse-discount 2s infinite;
+}
+
+.discount-percentage {
+    display: block;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.discount-label {
+    display: block;
+    font-size: 10px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pricing-breakdown {
+    display: grid;
+    gap: 8px;
+}
+
+.original-price, .sale-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.original-price .price-value {
+    color: #6c757d;
+    text-decoration: line-through;
+}
+
+.sale-price .price-value.sale-highlight {
+    color: #BF0A30;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.savings-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.savings-text {
+    background: linear-gradient(45deg, #ff8a80, #BF0A30);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.installment-discount-note {
+    margin: 8px 0;
+    color: #6c757d;
+    font-style: italic;
+}
+
+@keyframes pulse-discount {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .discount-info-section {
+        padding: 12px;
+        margin: 10px 0;
+    }
+
+    .pricing-breakdown {
+        gap: 6px;
+    }
+
+    .original-price, .sale-price {
+        padding: 6px 10px;
+    }
+
+    .sale-price .price-value.sale-highlight {
+        font-size: 16px;
+    }
+}
+</style>
