@@ -22,7 +22,7 @@
       assign gift_card_recipient_feature_active = true
     endif
 
-  // Discount logic
+  {%- comment -%} Discount logic {%- endcomment -%}
   assign current_variant = product.selected_or_first_available_variant
   assign discount_percentage = 0
   assign sale_price = current_variant.price
