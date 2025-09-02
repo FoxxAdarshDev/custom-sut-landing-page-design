@@ -70,38 +70,58 @@
         {%- assign savings_money = total_savings | money -%}
     {%- endif -%}
 
-    <div class="price price--discount-active {{ price_class }}
-        {%- if available == false %} price--sold-out {% endif -%}">
-        
-        <div class="price__discount-badge">
-            <span class="discount-percentage">{{ discount_percentage }}% OFF</span>
-            <span class="discount-label">SPECIAL DISCOUNT</span>
+    {%- comment -%} Check if we're in recently viewed section - if so, show simple pricing {%- endcomment -%}
+    {%- assign is_recently_viewed = false -%}
+    {%- if price_class contains 'recently-viewed' or price_class contains 'recentlyViewed' -%}
+        {%- assign is_recently_viewed = true -%}
+    {%- endif -%}
+
+    {%- if is_recently_viewed -%}
+        {%- comment -%} Simple pricing for recently viewed products {%- endcomment -%}
+        <div class="price {{ price_class }}
+            {%- if available == false %} price--sold-out {% endif -%}">
+            <dl>
+                <div class="price__sale">
+                    <dd class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></dd>
+                    <dd class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></dd>
+                </div>
+            </dl>
         </div>
-
-        <dl class="price__discount-container">
-            <div class="price__original">
-                <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                <dd class="price__original-value">
-                    <s class="price-item price-item--original">{{ original_money_price }}</s>
-                    <span class="price-label">Original Price</span>
-                </dd>
-            </div>
-
-            <div class="price__sale-price">
-                <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                <dd class="price__sale-value">
-                    <span class="price-item price-item--sale">{{ discounted_money_price }}</span>
-                    <span class="price-label">Sale Price</span>
-                </dd>
-            </div>
-
-            <div class="price__savings">
-                <span class="savings-badge">You Save {{ savings_money }}!</span>
-            </div>
-
+    {%- else -%}
+        {%- comment -%} Full discount styling for product pages {%- endcomment -%}
+        <div class="price price--discount-active {{ price_class }}
+            {%- if available == false %} price--sold-out {% endif -%}">
             
-        </dl>
-    </div>
+            <div class="price__discount-badge">
+                <span class="discount-percentage">{{ discount_percentage }}% OFF</span>
+                <span class="discount-label">SPECIAL DISCOUNT</span>
+            </div>
+
+            <dl class="price__discount-container">
+                <div class="price__original">
+                    <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
+                    <dd class="price__original-value">
+                        <s class="price-item price-item--original">{{ original_money_price }}</s>
+                        <span class="price-label">Original Price</span>
+                    </dd>
+                </div>
+
+                <div class="price__sale-price">
+                    <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
+                    <dd class="price__sale-value">
+                        <span class="price-item price-item--sale">{{ discounted_money_price }}</span>
+                        <span class="price-label">Sale Price</span>
+                    </dd>
+                </div>
+
+                <div class="price__savings">
+                    <span class="savings-badge">You Save {{ savings_money }}!</span>
+                </div>
+
+                
+            </dl>
+        </div>
+    {%- endif -%}
 
 {%- else -%}
     <div class="price
