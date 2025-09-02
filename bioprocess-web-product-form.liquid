@@ -354,14 +354,16 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 99999;
     display: none;
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.3s ease;
+    /* Ensure proper centering */
+    flex-direction: column;
 }
 
 .discount-popup-overlay.show {
@@ -377,6 +379,10 @@
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.3s ease;
+    /* Ensure modal is centered */
+    margin: auto;
+    position: relative;
+    transform: translateZ(0); /* Force hardware acceleration */
 }
 
 @keyframes fadeIn {
@@ -620,45 +626,89 @@
 <script>
 // Discount Popup Functions
 function openDiscountPopup(productId, discountPercent, originalPrice, salePrice, finalPrice, savings) {
-    // Populate popup with data
-    document.getElementById('popup-discount-percent').textContent = discountPercent + '%';
-    document.getElementById('popup-original-price').textContent = originalPrice;
-    document.getElementById('popup-sale-price').textContent = finalPrice;
-    document.getElementById('popup-final-price').textContent = finalPrice;
-    document.getElementById('popup-total-savings').textContent = savings;
+    console.log('Opening discount popup with data:', {
+        productId, discountPercent, originalPrice, salePrice, finalPrice, savings
+    });
+    
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            openDiscountPopup(productId, discountPercent, originalPrice, salePrice, finalPrice, savings);
+        });
+        return;
+    }
+    
+    // Check if elements exist before populating
+    const elements = {
+        'popup-discount-percent': discountPercent + '%',
+        'popup-original-price': originalPrice,
+        'popup-sale-price': salePrice,
+        'popup-final-price': finalPrice,
+        'popup-total-savings': savings
+    };
+    
+    for (const [id, value] of Object.entries(elements)) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = value;
+        } else {
+            console.warn(`Element with ID '${id}' not found`);
+        }
+    }
     
     // Calculate discount amount
-    const originalAmount = parseFloat(originalPrice.replace(/[^0-9.]/g, ''));
-    const finalAmount = parseFloat(finalPrice.replace(/[^0-9.]/g, ''));
-    const discountAmount = originalAmount - finalAmount;
-    document.getElementById('popup-discount-amount').textContent = '-$' + discountAmount.toFixed(2);
+    try {
+        const originalAmount = parseFloat(originalPrice.replace(/[^0-9.]/g, ''));
+        const finalAmount = parseFloat(finalPrice.replace(/[^0-9.]/g, ''));
+        const discountAmount = originalAmount - finalAmount;
+        const discountElement = document.getElementById('popup-discount-amount');
+        if (discountElement) {
+            discountElement.textContent = '-$' + discountAmount.toFixed(2);
+        }
+    } catch (error) {
+        console.error('Error calculating discount amount:', error);
+    }
     
     // Show popup with proper display
     const overlay = document.getElementById('discount-popup-overlay');
-    overlay.classList.add('show');
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    
-    // Force reflow to ensure centering
-    overlay.offsetHeight;
+    if (overlay) {
+        overlay.classList.add('show');
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Force reflow to ensure centering
+        overlay.offsetHeight;
+        console.log('Popup should now be visible');
+    } else {
+        console.error('Popup overlay element not found');
+    }
 }
 
 function closeDiscountPopup() {
     const overlay = document.getElementById('discount-popup-overlay');
-    overlay.classList.remove('show');
-    overlay.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    if (overlay) {
+        overlay.classList.remove('show');
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        console.log('Popup closed');
+    }
 }
 
-// Close popup when clicking outside
+// Initialize popup functionality when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing popup functionality');
+    
     const overlay = document.getElementById('discount-popup-overlay');
     if (overlay) {
+        // Close popup when clicking outside
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay) {
                 closeDiscountPopup();
             }
         });
+        console.log('Popup overlay click listener added');
+    } else {
+        console.warn('Popup overlay not found during initialization');
     }
     
     // Close popup with Escape key
@@ -668,4 +718,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Also ensure popup works if script loads after DOM
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    console.log('DOM already loaded, initializing popup functionality immediately');
+    const overlay = document.getElementById('discount-popup-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeDiscountPopup();
+            }
+        });
+    }
+}
 </script>
