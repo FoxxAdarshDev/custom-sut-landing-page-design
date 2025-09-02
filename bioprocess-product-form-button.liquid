@@ -45,8 +45,8 @@
       <input type="hidden" name="id" value="{{ current_variant.id }}">
       {%- if discount_percentage > 0 -%}
         <div class="installment-discount-info">
-          {{ 'products.product.discount_applied' | t: discount: discount_percentage }}
-          <small>{{ 'products.product.sale_price' | t }}: {{ sale_price | money }}</small>
+          Save {{ discount_percentage }}% - Special Discount Applied!
+          <small>Sale Price: {{ sale_price | money }}</small>
         </div>
       {%- endif -%}
       {{ form | payment_terms }}
@@ -94,7 +94,7 @@
                                                   {{ 'products.product.sub_total' | t : value : subtotal }}
                                               {%- else -%}
                                                   {%- if discount_percentage > 0 -%}
-                                                    <span class="button-discount-info">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</span>
+                                                    <span class="button-discount-info">Save {{ discount_percentage }}%!</span>
                                                   {%- endif -%}
                                                   {{ 'products.product.add_to_cart' | t}}
                                               {%- endif -%}
@@ -109,7 +109,7 @@
                                               {{ 'products.product.sub_total' | t : value : subtotal }}
                                           {%- else -%}
                                               {%- if discount_percentage > 0 -%}
-                                                <span class="button-discount-info">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</span>
+                                                <span class="button-discount-info">Save {{ discount_percentage }}%!</span>
                                               {%- endif -%}
                                               {{ 'products.product.add_to_cart' | t}}
                                           {%- endif -%}
@@ -148,7 +148,7 @@
                       <div class="productView-groupItem">
                           <div class="productView-payment" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="product-checkout-{{ product.id }}" style="--bin-color: {{ bin_color }};--bin-bg-color: {% if bin_bg_color_gradient != blank %}{{ bin_bg_color_gradient }}{% else %}{{ bin_bg_color }}{% endif %};--bin-border-color: {{ bin_border_color }};--bin-color-hover: {{ bin_color_hover }};--bin-bg-color-hover: {% if bin_bg_color_hover_gradient != blank %}{{ bin_bg_color_hover_gradient }}{% else %}{{ bin_bg_color_hover }}{% endif %};--bin-border-color-hover: {{ bin_border_color_hover }}">
                               {%- if discount_percentage > 0 -%}
-                                <div class="payment-discount-banner">{{ 'products.product.discount_applied' | t: discount: discount_percentage }}</div>
+                                <div class="payment-discount-banner">🎉 {{ discount_percentage }}% OFF - Limited Time!</div>
                               {%- endif -%}
                               {{ form | payment_button }}
                           </div>
