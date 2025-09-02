@@ -30,7 +30,8 @@
 
   if current_variant.compare_at_price
     assign original_price = current_variant.compare_at_price
-    assign discount_percentage = (1 - (current_variant.price / original_price)) * 100 | round
+    assign price_ratio = current_variant.price | divided_by: original_price
+    assign discount_percentage = 1 | minus: price_ratio | times: 100 | round
     assign sale_price = current_variant.price
   endif
 -%}
