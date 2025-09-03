@@ -72,12 +72,29 @@
 
     {%- comment -%} Check if we're in recently viewed section - if so, show simple pricing {%- endcomment -%}
     {%- assign is_recently_viewed = false -%}
-    {%- if price_class contains 'recently-viewed' or price_class contains 'recentlyViewed' or price_class contains 'recentlyViewed-row' -%}
+    {%- assign current_template = template | default: '' -%}
+    {%- assign current_section = section.id | default: '' -%}
+    {%- assign request_path = request.path | default: '' -%}
+    
+    {%- comment -%} Check multiple conditions for recently viewed context {%- endcomment -%}
+    {%- if price_class contains 'recently-viewed' 
+        or price_class contains 'recentlyViewed' 
+        or price_class contains 'recentlyViewed-row'
+        or current_template contains 'recently' 
+        or current_section contains 'recently' 
+        or template.suffix contains 'recently'
+        or request_path contains 'recently'
+        or request.page_type == 'recently_viewed'
+        or price_class contains 'carousel'
+        or price_class contains 'slider'
+        or price_class contains 'swiper'
+    -%}
         {%- assign is_recently_viewed = true -%}
     {%- endif -%}
 
-    {%- if is_recently_viewed -%}
-        {%- comment -%} Simple pricing for recently viewed products {%- endcomment -%}
+    {%- comment -%} Force simple pricing for grid/carousel contexts or if no specific context detected {%- endcomment -%}
+    {%- if is_recently_viewed or price_class == blank or price_class == null or price_class == '' -%}
+        {%- comment -%} Simple pricing for recently viewed products or generic contexts {%- endcomment -%}
         <div class="price {{ price_class }}
             {%- if available == false %} price--sold-out {% endif -%}">
             <dl>
