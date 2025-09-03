@@ -336,16 +336,29 @@
 
 /* Specific styling for recently viewed rows */
 .recentlyViewed-row .price--discount-simple {
-    background: rgba(255, 249, 230, 0.8);
-    border: 1px solid #ffd700;
-    border-radius: 8px;
-    padding: 8px;
-    margin: 5px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
 .recentlyViewed-row .savings-badge-simple {
     font-size: 11px;
     padding: 3px 8px;
+}
+
+/* Ensure full width layout for recently viewed discount pricing */
+.recentlyViewed-row .price--discount-simple .price__sale {
+    width: 100%;
+}
+
+.recentlyViewed-row .price--discount-simple .price__compare,
+.recentlyViewed-row .price--discount-simple .price__last,
+.recentlyViewed-row .price--discount-simple .price__savings-simple {
+    width: 100%;
+    display: block;
 }
 
 
