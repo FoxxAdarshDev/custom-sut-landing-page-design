@@ -96,12 +96,14 @@
     <div class="price price--discount-simple {{ price_class }}
         {%- if available == false %} price--sold-out {% endif -%}">
         <dl>
-            <div class="price__sale">
-                <dd class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></dd>
-                <dd class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></dd>
-                <dd class="price__savings-simple">
+            <div class="price__sale price__sale--inline">
+                <div class="price-row">
+                    <span class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></span>
+                    <span class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></span>
+                </div>
+                <div class="price__savings-simple">
                     <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
-                </dd>
+                </div>
             </div>
         </dl>
     </div>
@@ -274,6 +276,33 @@
 .price__savings-simple {
     text-align: left;
     margin-top: 5px;
+}
+
+/* Inline price display styles */
+.price__sale--inline .price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.price__sale--inline .price__compare {
+    margin: 0;
+}
+
+.price__sale--inline .price__last {
+    margin: 0;
+}
+
+.price__sale--inline .price-item--regular {
+    font-size: 14px;
+    color: #999;
+}
+
+.price__sale--inline .price-item--sale {
+    font-size: 18px;
+    color: #1d1d1f;
+    font-weight: 600;
 }
 
 /* Ensure discount pricing is visible in product cards */
