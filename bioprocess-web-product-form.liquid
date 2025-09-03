@@ -100,9 +100,9 @@
                 <div class="price-row">
                     <span class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></span>
                     <span class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></span>
-                </div>
-                <div class="price__savings-simple">
-                    <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
+                    <span class="price__savings-simple">
+                        <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
+                    </span>
                 </div>
             </div>
         </dl>
@@ -326,9 +326,10 @@
 }
 
 .price__sale--inline .price__savings-simple {
-    margin-top: 0;
+    margin: 0;
     margin-left: 10px;
     display: inline-block;
+    vertical-align: baseline;
 }
 
 /* Ensure discount pricing is visible in product cards */
