@@ -95,7 +95,7 @@
     {%- comment -%} Force simple pricing for grid/carousel contexts or if no specific context detected {%- endcomment -%}
     {%- if is_recently_viewed or price_class == blank or price_class == null or price_class == '' -%}
         {%- comment -%} Simple pricing for recently viewed products or generic contexts {%- endcomment -%}
-        <div class="price {{ price_class }}
+        <div class="price price--discount-simple {{ price_class }}
             {%- if available == false %} price--sold-out {% endif -%}">
             <dl>
                 <div class="price__sale">
@@ -311,6 +311,41 @@
 .price__savings-simple {
     text-align: left;
     margin-top: 5px;
+}
+
+/* Ensure discount pricing is visible in product cards */
+.price--discount-simple {
+    position: relative;
+}
+
+.price--discount-simple .price__sale {
+    display: block !important;
+}
+
+.price--discount-simple .price__compare {
+    margin-bottom: 4px;
+}
+
+.price--discount-simple .price__last {
+    margin-bottom: 4px;
+}
+
+.price--discount-simple .price__savings-simple {
+    display: block !important;
+}
+
+/* Specific styling for recently viewed rows */
+.recentlyViewed-row .price--discount-simple {
+    background: rgba(255, 249, 230, 0.8);
+    border: 1px solid #ffd700;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.recentlyViewed-row .savings-badge-simple {
+    font-size: 11px;
+    padding: 3px 8px;
 }
 
 
