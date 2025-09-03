@@ -92,56 +92,19 @@
         {%- assign is_recently_viewed = true -%}
     {%- endif -%}
 
-    {%- comment -%} Force simple pricing for grid/carousel contexts or if no specific context detected {%- endcomment -%}
-    {%- if is_recently_viewed or price_class == blank or price_class == null or price_class == '' -%}
-        {%- comment -%} Simple pricing for recently viewed products or generic contexts {%- endcomment -%}
-        <div class="price price--discount-simple {{ price_class }}
-            {%- if available == false %} price--sold-out {% endif -%}">
-            <dl>
-                <div class="price__sale">
-                    <dd class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></dd>
-                    <dd class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></dd>
-                    <dd class="price__savings-simple">
-                        <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
-                    </dd>
-                </div>
-            </dl>
-        </div>
-    {%- else -%}
-        {%- comment -%} Full discount styling for product pages {%- endcomment -%}
-        <div class="price price--discount-active {{ price_class }}
-            {%- if available == false %} price--sold-out {% endif -%}">
-            
-            <div class="price__discount-badge">
-                <span class="discount-percentage">{{ discount_percentage }}% OFF</span>
-                <span class="discount-label">SPECIAL DISCOUNT</span>
+    {%- comment -%} Always show simple discount pricing for all contexts {%- endcomment -%}
+    <div class="price price--discount-simple {{ price_class }}
+        {%- if available == false %} price--sold-out {% endif -%}">
+        <dl>
+            <div class="price__sale">
+                <dd class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></dd>
+                <dd class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></dd>
+                <dd class="price__savings-simple">
+                    <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
+                </dd>
             </div>
-
-            <dl class="price__discount-container">
-                <div class="price__original">
-                    <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                    <dd class="price__original-value">
-                        <s class="price-item price-item--original">{{ original_money_price }}</s>
-                        <span class="price-label">Original Price</span>
-                    </dd>
-                </div>
-
-                <div class="price__sale-price">
-                    <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                    <dd class="price__sale-value">
-                        <span class="price-item price-item--sale">{{ discounted_money_price }}</span>
-                        <span class="price-label">Sale Price</span>
-                    </dd>
-                </div>
-
-                <div class="price__savings">
-                    <span class="savings-badge">You Save {{ savings_money }}!</span>
-                </div>
-
-                
-            </dl>
-        </div>
-    {%- endif -%}
+        </dl>
+    </div>
 
 {%- else -%}
     <div class="price
