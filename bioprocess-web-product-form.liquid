@@ -72,7 +72,7 @@
 
     {%- comment -%} Check if we're in recently viewed section - if so, show simple pricing {%- endcomment -%}
     {%- assign is_recently_viewed = false -%}
-    {%- if price_class contains 'recently-viewed' or price_class contains 'recentlyViewed' -%}
+    {%- if price_class contains 'recently-viewed' or price_class contains 'recentlyViewed' or price_class contains 'recentlyViewed-row' -%}
         {%- assign is_recently_viewed = true -%}
     {%- endif -%}
 
