@@ -101,6 +101,9 @@
                 <div class="price__sale">
                     <dd class="price__compare"><s class="price-item price-item--regular">{{ original_money_price }}</s></dd>
                     <dd class="price__last"><span class="price-item price-item--sale">{{ discounted_money_price }}</span></dd>
+                    <dd class="price__savings-simple">
+                        <span class="savings-badge-simple">{{ discount_percentage }}% OFF</span>
+                    </dd>
                 </div>
             </dl>
         </div>
@@ -292,6 +295,22 @@
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
+}
+
+.savings-badge-simple {
+    background: linear-gradient(45deg, #ff8a80, #ff5722);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.price__savings-simple {
+    text-align: left;
+    margin-top: 5px;
 }
 
 
