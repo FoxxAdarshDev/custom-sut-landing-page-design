@@ -279,6 +279,13 @@
 }
 
 /* Inline price display styles */
+.price__sale--inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .price__sale--inline .price-row {
     display: flex;
     align-items: baseline;
@@ -289,12 +296,12 @@
 
 .price__sale--inline .price__compare {
     margin: 0;
-    order: 1;
+    display: inline-block;
 }
 
 .price__sale--inline .price__last {
     margin: 0;
-    order: 3;
+    display: inline-block;
 }
 
 .price__sale--inline .price__compare::after {
@@ -304,7 +311,6 @@
     color: #666;
     font-size: 14px;
     font-weight: normal;
-    order: 2;
 }
 
 .price__sale--inline .price-item--regular {
@@ -315,8 +321,14 @@
 
 .price__sale--inline .price-item--sale {
     font-size: 18px;
-    color: #D12442;
+    color: #D12442 !important;
     font-weight: 600;
+}
+
+.price__sale--inline .price__savings-simple {
+    margin-top: 0;
+    margin-left: 10px;
+    display: inline-block;
 }
 
 /* Ensure discount pricing is visible in product cards */
