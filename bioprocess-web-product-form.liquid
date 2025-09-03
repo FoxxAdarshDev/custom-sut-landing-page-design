@@ -281,27 +281,41 @@
 /* Inline price display styles */
 .price__sale--inline .price-row {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .price__sale--inline .price__compare {
     margin: 0;
+    order: 1;
 }
 
 .price__sale--inline .price__last {
     margin: 0;
+    order: 3;
+}
+
+.price__sale--inline .price__compare::after {
+    content: "From";
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+    order: 2;
 }
 
 .price__sale--inline .price-item--regular {
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
+    text-decoration: line-through;
 }
 
 .price__sale--inline .price-item--sale {
     font-size: 18px;
-    color: #1d1d1f;
+    color: #D12442;
     font-weight: 600;
 }
 
